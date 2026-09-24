@@ -1,0 +1,86 @@
+# Secretos y entornos reales; los ejemplos solo pueden contener valores ficticios.
+.env
+.env.*
+*.env
+*.env.*
+!.env.example
+!.env.*.example
+!*.env.example
+!*.env.*.example
+.envrc
+.secrets/
+secrets/
+credentials/
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+credentials.json
+service-account*.json
+
+# Dependencias y caches de herramientas.
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/install-state.gz
+.pnp.*
+.vite/
+.cache/
+__pycache__/
+.venv/
+
+# Compilaciones, cobertura y resultados locales.
+dist/
+build/
+coverage/
+*.tsbuildinfo
+test-results/
+playwright-report/
+artifacts/
+load-test-results/
+*.log
+logs/
+
+# Grabaciones, segmentos HLS generados y respaldos.
+recordings/
+grabaciones/
+backups/
+respaldos/
+*.mp4
+*.mkv
+*.mov
+*.flv
+*.webm
+*.m4s
+*.dump
+*.backup
+*.bak
+*.sql.gz
+*.sql.zip
+/storage/hls/
+/public/hls/
+
+# Datos y volúmenes locales; conservar migraciones y fixtures de prueba.
+/data/
+/volumes/
+/storage/
+/uploads/
+*.sqlite
+*.sqlite3
+
+# Estado del equipo y archivos temporales.
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+/tmp/
+/temp/
+/.codex/
+
+# No excluir .specify/, .agents/skills/, docs/, specs/ ni archivos de bloqueo.
+# .specify/.gitignore ya excluye su estado local por equipo.

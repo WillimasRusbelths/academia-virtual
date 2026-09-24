@@ -1,50 +1,184 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Informe de impacto de sincronización (temporal; retirar antes del commit).
+Versión: plantilla sin ratificar → 1.0.0 (primera adopción).
+Principios: los cinco espacios de la plantilla se sustituyen por once principios:
+I. Desarrollo por funcionalidades; II. Autorización en el backend;
+III. Precios y totales confiables; IV. Integridad de cupos y matrículas;
+V. Confirmación de pagos; VI. Idempotencia de pagos; VII. Pruebas de pagos separadas;
+VIII. Acceso protegido al video; IX. Separación de entornos;
+X. Operación recuperable; XI. Capacidad demostrable.
+Secciones concretadas: Restricciones y orientación del proyecto;
+Flujo de trabajo y validación; Gobernanza.
+Secciones eliminadas: ninguna sección de gobierno previamente adoptada.
+Se conserva la jerarquía de la plantilla y se traducen sus títulos al español.
+Plantillas y comandos dependientes: sin modificaciones; leen la constitución al ejecutarse.
+Marcadores pendientes: ninguno. Decisiones de producto y viabilidad pendientes
+registradas en docs/decisiones-pendientes.md; no son garantías de implementación.
+-->
 
-## Core Principles
+# Constitución de academia-virtual
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+## Principios fundamentales
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### I. Desarrollo por funcionalidades pequeñas
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Cada funcionalidad DEBE recorrer especificación, aclaraciones, plan, tareas,
+implementación y verificación mediante Spec Kit. Si no necesita aclaraciones, se DEBE
+registrar esa conclusión. El alcance y los criterios de aceptación DEBEN existir antes
+de implementar. La documentación del proyecto DEBE escribirse en español y distinguir
+lo propuesto, lo implementado y lo verificado. Esto permite entregar un trabajo evaluable
+dentro del plazo académico.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Autorización en el backend
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+El backend DEBE verificar permisos según rol, pertenencia y matrícula cuando corresponda
+en cada operación protegida, incluido el acceso al chat por clase. Los roles son
+administrador, docente y alumno. Las restricciones visuales del frontend NO constituyen
+autorización. La verificación DEBE incluir accesos permitidos y denegados, especialmente
+intentos de acceder a recursos de otro alumno, grupo o curso.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### III. Precios y totales confiables
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+El servidor DEBE obtener los precios válidos, calcular los conceptos y el total de la
+orden y conservar el detalle utilizado para cobrar. Los importes recibidos del cliente
+NO DEBEN ser la fuente de verdad. El importe y la moneda confirmados por el proveedor
+DEBEN corresponder a la orden antes de reconocer su pago.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### IV. Integridad de cupos y matrículas
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+La asignación de cupos y la creación de matrículas DEBEN impedir sobreventa y duplicados
+mediante transacciones y restricciones de base de datos. La especificación DEBE definir
+la identidad de una matrícula y el momento en que se ocupa o libera un cupo. Las pruebas
+DEBEN cubrir competencia por el último cupo y solicitudes repetidas, verificando el estado
+final persistido. La política de reservas queda pendiente de definición explícita.
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+### V. Confirmación de pagos
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Una matrícula pagada SOLO DEBE activarse tras verificar el pago con el proveedor mediante
+su mecanismo de autenticidad y confirmación, vinculándolo a la orden correcta. Una pantalla
+de éxito o una redirección del navegador NO son evidencia suficiente. La integración DEBE
+probar confirmaciones válidas, inválidas y pagos no confirmados.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### VI. Idempotencia de pagos
+
+Los reintentos y las notificaciones de pago DEBEN procesarse de forma idempotente, incluso
+si llegan simultáneamente o fuera de orden. Se DEBEN persistir identificadores y transiciones
+de estado que eviten repetir efectos sobre órdenes, cupos y matrículas. Las pruebas DEBEN
+demostrar que una confirmación repetida no duplica matrículas ni consume cupos adicionales.
+
+### VII. Pruebas de pagos separadas
+
+Las pruebas de carga DEBEN utilizar pagos simulados y cuentas de prueba. La integración
+real DEBE validarse por separado en el sandbox de la pasarela seleccionada. NO se DEBEN
+realizar cobros reales ni someter la pasarela a la carga del sistema. Culqi es únicamente
+una candidata pendiente de decisión. Una simulación exitosa NO valida la integración real.
+
+### VIII. Acceso protegido al video
+
+El acceso a manifiestos y segmentos HLS DEBE exigir autorización acorde con la clase y
+la matrícula aplicable, también al solicitar directamente sus URL. Ocultar enlaces NO es
+control de acceso. Se DEBEN probar solicitudes autorizadas, no autorizadas y con autorización
+vencida, según el mecanismo elegido. NO se DEBE prometer impedir grabaciones de pantalla.
+
+### IX. Separación de entornos
+
+Configuración, secretos y datos de desarrollo, demo y producción DEBEN mantenerse separados.
+NO se DEBEN versionar credenciales ni archivos de entorno reales; los ejemplos compartidos
+DEBEN carecer de credenciales. Las pruebas DEBEN usar datos de prueba. Esta separación NO
+exige servidores permanentes por entorno: el desarrollo es local y los demás entornos
+pueden habilitarse temporalmente dentro del presupuesto.
+
+### X. Operación recuperable
+
+Los cambios de base de datos DEBEN realizarse con migraciones controladas y versionadas.
+Antes de una demo con datos persistentes o un despliegue público, DEBEN existir copias de
+seguridad y evidencia de restauración, registros de errores sin secretos y un procedimiento
+de actualización y recuperación. El procedimiento DEBE indicar cómo recuperar datos y
+servicio ante una actualización fallida, sin asumir que toda migración es reversible.
+
+### XI. Capacidad demostrable
+
+Soportar 1000 usuarios concurrentes es un objetivo por validar. NO se DEBE afirmar que se
+alcanza hasta disponer de resultados reproducibles para un escenario definido y criterios
+de aceptación acordados con la rúbrica del profesor. Las conclusiones DEBEN limitarse a la
+versión, infraestructura, duración y carga realmente medidas. El número de alumnos
+registrados NO demuestra concurrencia y los usuarios virtuales NO equivalen automáticamente
+a solicitudes por segundo.
+
+## Restricciones y orientación del proyecto
+
+- El proyecto es un trabajo final de curso con un plazo de cuatro meses. El presupuesto
+  de infraestructura y servicios es **S/300 en total**, reservado para despliegue y pruebas
+  necesarias; NO es un presupuesto mensual ni garantiza operación permanente.
+- La población prevista es de aproximadamente 1000 estudiantes, con grupos de 40 a 50
+  alumnos por curso. El diseño DEBE permitir evolución posterior sin construir ahora
+  infraestructura para 10 000 usuarios.
+- El MVP comprende autenticación y roles; cursos, grupos, horarios y cupos; selección de
+  varios cursos con órdenes desglosadas; matrículas; materiales; clases emitidas por el
+  docente con participación de alumnos solo mediante chat; y paneles básicos por rol.
+- Un pago por el total de la orden y una matrícula por cada curso adquirido constituyen
+  una **propuesta pendiente de validación**, no una regla ya aprobada.
+- La base técnica propuesta es React, TypeScript y Vite; NestJS y TypeScript como monolito
+  modular; PostgreSQL con Prisma; Socket.IO autorizado por clase; OBS → SRS → HLS con
+  HLS.js o reproducción nativa; Docker Compose local; y Nginx con HTTPS para publicación.
+  Estas tecnologías DEBEN evaluarse en los planes; su registro NO acredita instalación
+  ni viabilidad. Los cambios DEBEN justificar su relación con alcance, costo y evidencia.
+- La viabilidad del video, su autorización, ancho de banda y costo DEBEN someterse a una
+  prueba temprana antes de considerarse resueltos o comprometer alojamiento.
+- NO se DEBEN incorporar microservicios, Kubernetes, Redis ni balanceadores sin una
+  necesidad comprobada y una justificación documentada compatible con plazo y presupuesto.
+
+El alcance detallado se registra en `docs/alcance-mvp.md` y las decisiones abiertas en
+`docs/decisiones-pendientes.md`. Las decisiones que afecten una funcionalidad DEBEN resolverse
+o delimitarse explícitamente antes de su implementación.
+
+## Flujo de trabajo y validación
+
+Cada funcionalidad DEBE producir una especificación verificable, resolver sus ambigüedades,
+documentar un plan compatible con esta constitución y ordenar tareas antes de implementarse.
+El flujo utiliza `$speckit-specify`, `$speckit-clarify`, `$speckit-plan`, `$speckit-tasks` y
+`$speckit-implement`, con revisión de consistencia mediante `$speckit-analyze` antes de
+implementar. La verificación DEBE aportar evidencia de aceptación y de los principios
+aplicables; ejecutar un comando NO equivale a aprobar sus resultados.
+
+La validación de capacidad DEBE documentar por separado:
+
+- **Matrícula:** operaciones de aplicación con k6, cuentas diferentes, pagos simulados,
+  órdenes de varios cursos y competencia por cupos; comprobar precios, matrículas únicas
+  y ausencia de sobreventa al terminar.
+- **Chat:** conexiones autorizadas por clase, distribución por grupos, frecuencia de
+  mensajes, duración y reconexiones. La herramienta y el cliente de prueba DEBEN hablar
+  el protocolo Socket.IO utilizado; una conexión WebSocket aislada no basta para validarlo.
+- **Video:** consumidores que descarguen realmente manifiestos y segmentos HLS durante
+  el período de medición, con la autorización prevista. Abrir 1000 páginas NO demuestra
+  1000 reproducciones. Registrar tasa de descarga, calidad/bitrate, emisiones simultáneas,
+  tráfico y fallos; distinguir descarga de segmentos de reproducción fluida en navegador.
+
+Cada informe DEBE registrar versión del código, configuración y scripts reproducibles sin
+secretos, infraestructura, duración, patrón y carga alcanzada, concurrencia, solicitudes
+por segundo cuando corresponda, latencia, errores, recursos y consistencia de matrículas.
+DEBE distinguir el consumo del generador de carga del sistema evaluado. Los criterios
+definitivos, incluida la distribución de los 1000 usuarios entre actividades y las
+condiciones de aprobación, DEBEN alinearse con la rúbrica del profesor antes de concluir
+que el objetivo se cumple. Una prueba aislada NO acredita un escenario combinado no medido.
+
+## Gobernanza
+
+Esta constitución rige las especificaciones, planes, tareas, revisiones y entregas del
+proyecto. Toda revisión DEBE comprobar los principios aplicables y enlazar su evidencia
+o registrar un incumplimiento pendiente. Un trabajo que incumpla un principio obligatorio
+NO DEBE presentarse como terminado. Las propuestas técnicas NO tienen el mismo estado
+que las reglas obligatorias.
+
+Una enmienda DEBE documentar motivo, texto anterior y propuesto, impacto en artefactos y
+adaptaciones necesarias. La persona responsable del proyecto DEBE aprobarla antes de su
+adopción; si cambia criterios de evaluación, DEBE validarlos con el profesor. La versión
+y la fecha de última modificación DEBEN actualizarse manteniendo la fecha de ratificación.
+El informe temporal de sincronización DEBE revisarse y retirarse antes del commit.
+
+Se utiliza versionado semántico: MAJOR para eliminar o redefinir principios de forma
+incompatible; MINOR para añadir principios o ampliar materialmente las obligaciones;
+PATCH para aclaraciones y correcciones sin cambio de obligaciones. La versión 1.0.0
+corresponde a la primera adopción, en sustitución de una plantilla sin ratificar.
+
+**Versión**: 1.0.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-09-22
