@@ -16,6 +16,9 @@ y pruebas necesarias, no a financiar una operación permanente. Se prevén aprox
 - [Constitución del proyecto](.specify/memory/constitution.md): principios y gobernanza.
 - [Alcance del MVP](docs/alcance-mvp.md): funcionalidades previstas, exclusiones y propuesta técnica.
 - [Decisiones pendientes](docs/decisiones-pendientes.md): reglas y riesgos por resolver.
+- [Identidad, autenticación y acceso por roles](specs/001-identidad-acceso-roles/spec.md):
+  primera especificación revisada, con correo verificado, recuperación por correo, un rol
+  por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
 
 ## MVP previsto
 
@@ -24,7 +27,12 @@ Autenticación para administrador, docente y alumno; cursos, grupos, horarios y 
 clases emitidas por el docente con chat para alumnos; y paneles básicos por rol.
 
 Se propone un pago por el total de cada orden y una matrícula por cada curso adquirido.
-Esta regla requiere validación. Culqi es una candidata a pasarela, todavía no seleccionada.
+Esta regla requiere validación. **Izipay es la pasarela elegida para el MVP** desde el
+2026-09-23 y sustituye a Culqi, que figuraba como candidata inicial. La integración no está
+implementada; siguen pendientes tarifas finales, límites, acceso al entorno de pruebas y
+habilitación de Yape para la modalidad contratada. No se asume capacidad ilimitada.
+La integración del proveedor debe permanecer separada de las reglas de órdenes y matrículas
+para permitir cambiar de pasarela posteriormente.
 
 ## Base técnica propuesta
 
@@ -51,7 +59,7 @@ Para cada funcionalidad pequeña:
 4. Generar tareas con `$speckit-tasks` y revisar consistencia con `$speckit-analyze`.
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
-La primera funcionalidad propuesta es **autenticación y autorización por roles**. La
+La primera funcionalidad en especificación es **identidad, autenticación y acceso por roles**. La
 viabilidad del video y la rúbrica de evaluación se investigarán al inicio del proyecto.
 Todavía no existen instrucciones de arranque de la aplicación ni pruebas de capacidad.
 

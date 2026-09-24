@@ -1,19 +1,16 @@
 <!--
 Informe de impacto de sincronización (temporal; retirar antes del commit).
-Versión: plantilla sin ratificar → 1.0.0 (primera adopción).
-Principios: los cinco espacios de la plantilla se sustituyen por once principios:
-I. Desarrollo por funcionalidades; II. Autorización en el backend;
-III. Precios y totales confiables; IV. Integridad de cupos y matrículas;
-V. Confirmación de pagos; VI. Idempotencia de pagos; VII. Pruebas de pagos separadas;
-VIII. Acceso protegido al video; IX. Separación de entornos;
-X. Operación recuperable; XI. Capacidad demostrable.
-Secciones concretadas: Restricciones y orientación del proyecto;
-Flujo de trabajo y validación; Gobernanza.
-Secciones eliminadas: ninguna sección de gobierno previamente adoptada.
-Se conserva la jerarquía de la plantilla y se traducen sus títulos al español.
-Plantillas y comandos dependientes: sin modificaciones; leen la constitución al ejecutarse.
-Marcadores pendientes: ninguno. Decisiones de producto y viabilidad pendientes
-registradas en docs/decisiones-pendientes.md; no son garantías de implementación.
+Versión: 1.0.0 → 1.1.0 (2026-09-23).
+Motivo: elección de Izipay por el responsable del proyecto y nueva obligación
+de separar la integración del proveedor de las reglas de órdenes y matrículas.
+Principio actualizado: VII. Pruebas de pagos separadas (sin cambio de título).
+Sección ampliada: Restricciones y orientación del proyecto.
+Secciones añadidas/eliminadas: ninguna. Ratificación original conservada.
+Impacto: README.md, docs/alcance-mvp.md y docs/decisiones-pendientes.md sincronizados.
+No se modifican plantillas ni comandos; no se implementa la integración.
+Adaptación futura: los planes de pagos deberán cumplir la separación del proveedor.
+Marcadores pendientes: ninguno. Siguen pendientes tarifas finales, límites,
+acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada (D02).
 -->
 
 # Constitución de academia-virtual
@@ -70,8 +67,11 @@ demostrar que una confirmación repetida no duplica matrículas ni consume cupos
 
 Las pruebas de carga DEBEN utilizar pagos simulados y cuentas de prueba. La integración
 real DEBE validarse por separado en el sandbox de la pasarela seleccionada. NO se DEBEN
-realizar cobros reales ni someter la pasarela a la carga del sistema. Culqi es únicamente
-una candidata pendiente de decisión. Una simulación exitosa NO valida la integración real.
+realizar cobros reales ni someter la pasarela a la carga del sistema. Izipay es la pasarela
+elegida para el MVP desde el 2026-09-23; sustituye a Culqi, candidata inicial no integrada.
+Su integración NO está implementada. Siguen pendientes tarifas finales, límites, acceso
+al entorno de pruebas y habilitación de Yape para la modalidad contratada. NO se DEBE
+presentar el servicio como ilimitado. Una simulación exitosa NO valida la integración real.
 
 ### VIII. Acceso protegido al video
 
@@ -118,6 +118,9 @@ a solicitudes por segundo.
   docente con participación de alumnos solo mediante chat; y paneles básicos por rol.
 - Un pago por el total de la orden y una matrícula por cada curso adquirido constituyen
   una **propuesta pendiente de validación**, no una regla ya aprobada.
+- La integración de Izipay DEBE permanecer separada de las reglas de órdenes y matrículas,
+  para permitir cambiar de pasarela sin redefinir esas reglas. La elección del proveedor
+  NO resuelve las decisiones de reservas, vigencia, reembolsos ni confirmación de pagos.
 - La base técnica propuesta es React, TypeScript y Vite; NestJS y TypeScript como monolito
   modular; PostgreSQL con Prisma; Socket.IO autorizado por clase; OBS → SRS → HLS con
   HLS.js o reproducción nativa; Docker Compose local; y Nginx con HTTPS para publicación.
@@ -181,4 +184,4 @@ incompatible; MINOR para añadir principios o ampliar materialmente las obligaci
 PATCH para aclaraciones y correcciones sin cambio de obligaciones. La versión 1.0.0
 corresponde a la primera adopción, en sustitución de una plantilla sin ratificar.
 
-**Versión**: 1.0.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-09-22
+**Versión**: 1.1.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-09-23

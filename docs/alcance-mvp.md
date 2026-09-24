@@ -1,6 +1,6 @@
 # Alcance del MVP de academia-virtual
 
-Estado al 2026-09-22: documentación inicial. La aplicación no está implementada y su
+Estado al 2026-09-23: documentación y primera especificación. La aplicación no está implementada y su
 capacidad no está validada. Este alcance está sujeto a la
 [constitución](../.specify/memory/constitution.md).
 
@@ -20,10 +20,10 @@ gratuitos ni precios todavía no comprobados.
 
 | Área | Alcance previsto | Pendiente de definir |
 | --- | --- | --- |
-| Identidad | Autenticación y roles administrador, docente y alumno; permisos en backend. | Alta de cuentas, sesiones, recuperación y asignación de roles. |
+| Identidad | Registro de alumnos, correo verificado, sesiones, recuperación por correo, un rol por cuenta y gestión administrativa; permisos en backend. | Plan e implementación de la especificación de identidad; viabilidad y costo del envío de correo. |
 | Oferta académica | Cursos, grupos, horarios y cupos; grupos de 40 a 50 alumnos. | Cambios de grupo, reglas de horarios y reservas. |
 | Orden y matrícula | Selección de varios cursos, precio por curso, conceptos y total calculados por servidor. | Regla definitiva de pago, vigencia y momento de asignación de cupos. |
-| Pago | Propuesta: un pago por el total de la orden y matrícula por cada curso adquirido. | Validación de la propuesta y selección de pasarela; Culqi es candidata. |
+| Pago | Propuesta: un pago por el total de la orden y matrícula por cada curso adquirido. Izipay elegida para el MVP; integración no implementada. | Validación de la regla de pago, tarifas finales, límites, acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada. |
 | Materiales | Acceso a materiales por curso sujeto a autorización. | Formatos, límites, almacenamiento y reglas de publicación. |
 | Clase en vivo | Emisión del docente; alumnos como espectadores con participación solo por chat. | Calidad, latencia, simultaneidad, costo y mecanismo de autorización HLS. |
 | Paneles | Vistas básicas para cada rol según sus operaciones autorizadas. | Acciones y datos mínimos por panel. |
@@ -57,6 +57,11 @@ como parte de la aplicación.
 | Entorno local | Docker Compose. | Arranque reproducible y configuración sin secretos versionados. |
 | Publicación | Nginx y HTTPS. | Alojamiento, costo total y controles de acceso de extremo a extremo. |
 
+La elección de Izipay del 2026-09-23 sustituye a Culqi, candidata inicial; no acredita
+contratación ni capacidad ilimitada. La integración del proveedor debe quedar separada
+de las reglas de órdenes y matrículas para permitir sustituirlo. Los pendientes y el
+contexto de esta decisión se registran en D02 de decisiones pendientes.
+
 El diseño debe conservar límites de módulos que permitan evolucionar sin anticipar
 infraestructura distribuida. La viabilidad del video exige una prueba temprana: una
 emisión autorizada, reproducción real, solicitudes directas sin permiso y medición del
@@ -81,7 +86,8 @@ medirla. La integración de pagos se validará aparte en el sandbox de la pasare
 
 ## Orden inicial de trabajo
 
-La primera funcionalidad a especificar es **autenticación y autorización por roles**:
+La primera funcionalidad en especificación es
+[identidad, autenticación y acceso por roles](../specs/001-identidad-acceso-roles/spec.md):
 acceso de administrador, docente y alumno, sesión y denegación de operaciones ajenas al rol.
 La pertenencia a cursos y la matrícula se incorporarán cuando se especifiquen esos dominios.
 
