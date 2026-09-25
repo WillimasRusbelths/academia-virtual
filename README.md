@@ -19,6 +19,9 @@ y pruebas necesarias, no a financiar una operación permanente. Se prevén aprox
 - [Identidad, autenticación y acceso por roles](specs/001-identidad-acceso-roles/spec.md):
   primera especificación revisada, con correo verificado, recuperación por correo, un rol
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
+- [Plan técnico de identidad](specs/001-identidad-acceso-roles/plan.md): decisiones, datos,
+  contratos y [guía local planificada](specs/001-identidad-acceso-roles/quickstart.md), con
+  prerrequisitos comprobados y bloqueos de Docker/WSL. La aplicación sigue sin implementar.
 
 ## MVP previsto
 
@@ -61,7 +64,8 @@ Para cada funcionalidad pequeña:
 
 La primera funcionalidad en especificación es **identidad, autenticación y acceso por roles**. La
 viabilidad del video y la rúbrica de evaluación se investigarán al inicio del proyecto.
-Todavía no existen instrucciones de arranque de la aplicación ni pruebas de capacidad.
+La guía local describe el arranque futuro; sus scripts de aplicación todavía no existen.
+No se han ejecutado pruebas de capacidad.
 
 ## Archivos compartidos y configuración local
 
