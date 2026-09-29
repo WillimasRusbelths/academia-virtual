@@ -1,104 +1,16 @@
 # Guía de ejecución local y recuperación
 
-Fecha: 2026-09-23. **Guía planificada, no aplicación ejecutable todavía.** Solo existen
-documentación y Spec Kit. No existen `package.json`, workspaces de aplicación, Compose,
-esquema Prisma, comandos npm de producto ni pruebas de aplicación. Los comandos de las
-secciones de arranque serán ejecutables después de implementarlos y generar el lockfile.
+**Actualización R12 — 2026-09-27:** desarrollo nativo Windows con Node, PostgreSQL 16.14 y Mailpit. Docker/WSL pendientes, fuera de la ruta crítica local; causa del incidente de arranque no determinada. Docker en Linux se conserva para despliegue futuro. V00-L se verifica temprano, tras V00 y antes de US1/T031 (checkpoint T030), sin contratar servicios. Procedimiento vigente: [native.md](../../ops/local/native.md); resultados: [compatibility.md](../../ops/local/compatibility.md). No se modifica el alcance funcional ni se afirma capacidad demostrada.
 
-Revisión documental: 2026-09-24. La evidencia del equipo corresponde al 2026-09-23; no se
-ha reconfigurado Windows ni se ha ejecutado la aplicación durante esta revisión.
+## Entorno vigente y arranque V00
 
-## Comprobaciones realizadas en esta máquina
-
-| Comprobación de solo lectura | Resultado observado |
-| --- | --- |
-| Git | 2.51.1.windows.1; rama `feat/001-identidad-acceso-roles`; árbol limpio al comenzar |
-| Node / npm | Node v22.23.1; `npm.cmd` 10.9.8 |
-| PowerShell | Windows PowerShell 5.1.26100.9168; `pwsh` no localizado |
-| Windows | Windows 11 Pro, build 26200; WSL informa 10.0.26200.9168 |
-| RAM / CPU | 15.4 GiB utilizables según CIM; SLAT true y VirtualizationFirmwareEnabled true |
-| Hipervisor | HypervisorPresent false |
-| WSL | 2.7.10.0 instalado; versión predeterminada 2; sin distribuciones de usuario |
-| `wsl --status` | WSL2 no puede iniciar por virtualización no habilitada; pide revisar Plataforma de máquina virtual y firmware |
-| Docker | No encontrado en PATH, rutas habituales de Desktop/bin ni servicio com.docker.service |
-| Compose / daemon / contenedores | No verificables sin Docker disponible; ningún contenedor arrancado |
-| Spec Kit | `setup-plan.ps1 -Json` resuelve la funcionalidad y copia plantilla; ejecución con política Bypass solo para ese proceso |
-
-Las consultas WSL/CIM fallaron inicialmente por permisos del entorno del agente; se repitieron
-como consultas autorizadas de solo lectura. Los datos posteriores muestran firmware habilitado,
-pero hipervisor inactivo. No se atribuye el fallo exclusivamente a BIOS. No se instalaron
-componentes, habilitaron características, reiniciaron servicios ni descargaron imágenes.
-
-## Prerrequisitos que debe resolver la implementación
-
-1. Revisar características de Windows para WSL2/Plataforma de máquina virtual y el arranque
-   del hipervisor, con el responsable del equipo; reiniciar si la habilitación lo exige.
-   Confirmar que `wsl --status` ya no informa imposibilidad de iniciar WSL2.
-2. Instalar/configurar Docker Desktop con contenedores Linux y backend WSL2, verificando
-   licencia aplicable y requisitos de su [documentación oficial](https://docs.docker.com/desktop/setup/install/windows-install/).
-   No es necesario instalar una distribución de usuario aparte si Docker gestiona su backend.
-3. Validar `docker version` con secciones Client **y Server**, `docker compose version` y
-   `docker info`; tener solo el ejecutable no demuestra que el motor funcione.
-4. Mantener Node/npm indicados en [investigación](research.md). Verificar dependencias nativas
-   de Argon2 y Visual C++ Redistributable requerido por herramientas elegidas. Fijar versiones
-   en lockfile y comprobar build en Windows; no se ha hecho esa instalación en esta etapa.
-5. Disponer de los puertos locales 5173, 3000, 5432, 1025 y 8025 y espacio para imágenes/BD.
-   k6 y navegadores Playwright se instalan al preparar sus pruebas, no se suponen disponibles.
-
-Comprobaciones repetibles de solo lectura desde PowerShell:
-
-```powershell
-node --version
-npm.cmd --version
-git --version
-wsl --version
-wsl --status
-docker version
-docker compose version
-docker info
-```
-
-## Disposición local prevista
-
-Desde la raíz del repositorio, npm workspaces ejecuta frontend/backend en Windows. Compose
-levanta únicamente `db` (PostgreSQL 17-bookworm) y `mailpit`. Fijar parche/digest en el futuro
-archivo `compose.local.yml`; bind de todos sus puertos solo a `127.0.0.1`, volumen nombrado
-para `/var/lib/postgresql/data` de PostgreSQL 17 y healthcheck de BD. Mailpit sin relay,
-forwarding, release SMTP ni credenciales reales. No usar imágenes `latest`.
-
-Frontend: `http://localhost:5173`, proxy `/api` a `127.0.0.1:3000` conservando Origin.
-API se liga solo a loopback local; frontend usa rutas relativas. Mailpit UI:
-`http://localhost:8025`. En producción futura Nginx sirve frontend/API bajo un único HTTPS;
-la topología publicada no queda instalada ni desplegada aquí.
-
-## Primera tarea futura: validar instalación, compilación y conexión a PostgreSQL
-
-**Pendiente, no ejecutada.** Debe ser el primer bloque de trabajo al descomponer este plan,
-antes de implementar reglas de identidad. Docker/WSL bloquea su parte de conexión mediante
-Compose; no impide redactar el plan ni generar `tasks.md` posteriormente.
-
-1. Comprobar los mínimos y dependencias de la tabla R01 de [research.md](research.md),
-   elegir parches concretos y crear únicamente el esqueleto de los dos workspaces con las
-   versiones candidatas. Instalar sin ignorar `engines` ni conflictos de peer dependencies.
-   Esta primera instalación genera `package-lock.json`; después comprobar `npm.cmd ci`.
-2. Compilar TypeScript y build de Vite y Nest, ejecutar una prueba mínima del runner del
-   backend que construya un provider/controlador con metadatos de decoradores y una prueba
-   de componente React. Usar scripts obligatorios: su ausencia es fallo, no un éxito vacío.
-   Si ESM, TypeScript 6, el cliente Prisma o los tipos no encajan, documentar el error y
-   ajustar la combinación antes de iniciar la funcionalidad.
-3. Con Docker/WSL operativo, iniciar PostgreSQL 17 y Mailpit según Compose previsto.
-   Generar el cliente Prisma con adapter-pg, aplicar una migración mínima de ensayo en BD
-   aislada y realizar lectura/escritura seguida de rollback. Confirmar conexión desde Nest
-   y cierre del pool. Esto comprueba conexión y transacción, no las reglas de identidad.
-4. Probar un hash y verificación Argon2id en Windows con los parámetros propuestos y una
-   captura SMTP en Mailpit sin relay. Esas comprobaciones revelan dependencias nativas y
-   problemas de red local sin contratar ni enviar correo a destinatarios reales.
-5. Guardar informe sin secretos: versiones instaladas, SO, lockfile/digests, comandos,
-   resultados de instalación/build/pruebas/conexión y cambios de versión justificados.
-   La combinación pasa a validada solo cuando todo lo anterior tenga evidencia reproducible.
-
-Esta tarea aún no existe en un `tasks.md` ni se ha ejecutado como parte de la revisión.
-El escenario completo de aceptación y los 1000 usuarios siguen pendientes después de ella.
+Seguir [ops/local/native.md](../../ops/local/native.md): instalación reproducible,
+aprovisionamiento SQL interactivo con contraseña oculta, roles distintos para migración/runtime,
+base separada de ensayo, Mailpit sin relay y comandos reales de V00.
+Evidencia actual: [environment.md](../../ops/local/environment.md). La consulta SQL del
+usuario se distingue de las verificaciones del agente en [compatibility.md](../../ops/local/compatibility.md).
+No hay historias de identidad implementadas. Los scripts de producto siguientes siguen
+siendo futuros; no ejecutarlos como parte de V00. No cambiar Windows para desbloquearlos.
 
 ## Variables y ejemplos sin credenciales
 
@@ -113,7 +25,7 @@ que el directorio actual sea `apps/api`. Vite solo recibe configuración públic
 | APP_ENV | development, test, demo o production | Guardas de fixtures y operaciones |
 | APP_ORIGIN | `http://localhost:5173` | Coincidencia exacta; HTTPS obligatorio en producción |
 | API_HOST / API_PORT | `127.0.0.1` / 3000 | No publicar directamente en producción |
-| POSTGRES_USER / POSTGRES_DB | academia / academia_dev | Identificadores locales, no secretos |
+| POSTGRES_USER / POSTGRES_DB | academia_runtime / academia_dev | Identificadores locales, no secretos |
 | POSTGRES_PASSWORD | Vacío en ejemplo; generado localmente | Nunca valor real versionado |
 | DATABASE_URL | Vacío en ejemplo; conexión local con contraseña privada | BD separada por entorno; URL nunca en logs |
 | DB_POOL_MAX | 10 inicial | Medir; no aumentar conexiones sin revisar memoria/carga |
@@ -147,8 +59,8 @@ if (-not (Test-Path -LiteralPath .env)) {
 }
 # Completar .env en editor local con valores privados antes de continuar.
 npm.cmd ci
-docker compose --env-file .env -f compose.local.yml up -d db mailpit
-docker compose --env-file .env -f compose.local.yml ps
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ops/local/start-mailpit.ps1
+# PostgreSQL nativo y roles/bases ya preparados; no arrancar ni reconfigurar el servicio global.
 npm.cmd run db:generate --workspace @academia/api
 npm.cmd run db:migrate:deploy --workspace @academia/api
 npm.cmd run dev --workspace @academia/api
@@ -222,7 +134,7 @@ Antes de demo persistente o publicación, comprobar este procedimiento con datos
 
 1. Registrar revisión anterior/nueva, lockfile y versiones; detener escrituras y worker de
    correo en ventana de mantenimiento. No migrar mientras se consumen tokens o cambian roles.
-2. Crear backup lógico consistente con cliente PostgreSQL 17, verificar código de salida y
+2. Crear backup lógico consistente con cliente PostgreSQL 16 (misma major que servidor), verificar código de salida y
    tamaño, calcular hash y guardar copia cifrada fuera del repositorio. Retener revisión y
    configuración anterior en ubicación privada; nunca adjuntar secretos al informe.
 3. Restaurar el backup en una BD separada; verificar schema, cantidades y lectura. Una copia
@@ -247,11 +159,11 @@ Ejemplo **futuro** de backup/restauración de comprobación local, desde raíz y
 `backups` privado ya preparado. No usar redirección binaria de PowerShell 5.1 para `pg_dump`:
 
 ```powershell
-docker compose --env-file .env -f compose.local.yml exec -T db pg_dump -U academia -d academia_dev -Fc -f /tmp/academia-before.dump
-docker compose --env-file .env -f compose.local.yml cp db:/tmp/academia-before.dump backups/academia-before.dump
+& 'C:\Program Files\PostgreSQL\16\bin\pg_dump.exe' -W -h 127.0.0.1 -U academia_owner -d academia_dev -Fc -f backups/academia-before.dump
 Get-FileHash -LiteralPath backups/academia-before.dump -Algorithm SHA256
-docker compose --env-file .env -f compose.local.yml exec -T db createdb -U academia academia_restore_check
-docker compose --env-file .env -f compose.local.yml exec -T db pg_restore -U academia -d academia_restore_check --exit-on-error /tmp/academia-before.dump
+# Un operador autorizado crea primero academia_restore_check con rol propietario exclusivo.
+# academia_owner no tiene CREATEDB; no elevar privilegios del runtime.
+& 'C:\Program Files\PostgreSQL\16\bin\pg_restore.exe' -W -h 127.0.0.1 -U academia_restore_owner -d academia_restore_check --exit-on-error backups/academia-before.dump
 ```
 
 El ejemplo supone que `academia_restore_check` no existe; elegir otra BD de ensayo si ya
@@ -261,8 +173,9 @@ separado y no se mezclan con dumps; al recuperar no se reenvían payloads antigu
 
 ## Producción y bloqueos restantes
 
-- **Local:** Docker no disponible y WSL2 no operativo; bloquean levantar Compose y ejecutar
-  integración/carga. Hay que resolverlos y repetir las comprobaciones; no se instaló nada.
+- **Local:** ruta nativa Windows; roles y credenciales SQL exclusivos deben verificarse.
+  Docker/WSL quedan pendientes, sin bloquear integración nativa. V00-L Linux temprano
+  se exige antes de US1 y producción. No se considera probado por funcionar en Windows.
 - **Publicación:** SMTP real, dominio/remitente, TLS/DNS, cuotas y precio aún no elegidos;
   alojamiento y respaldos deben caber junto con pruebas/video en S/300 totales. Este plan
   define cómo cambiar adaptador/configuración, no contrata ni verifica un proveedor real.

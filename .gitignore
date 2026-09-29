@@ -21,6 +21,7 @@ service-account*.json
 
 # Dependencias y caches de herramientas.
 node_modules/
+/apps/api/generated/
 .npm/
 .pnpm-store/
 .yarn/cache/

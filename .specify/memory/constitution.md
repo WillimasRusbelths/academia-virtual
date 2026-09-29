@@ -1,18 +1,3 @@
-<!--
-Informe de impacto de sincronización (temporal; retirar antes del commit).
-Versión: 1.0.0 → 1.1.0 (2026-09-23).
-Motivo: elección de Izipay por el responsable del proyecto y nueva obligación
-de separar la integración del proveedor de las reglas de órdenes y matrículas.
-Principio actualizado: VII. Pruebas de pagos separadas (sin cambio de título).
-Sección ampliada: Restricciones y orientación del proyecto.
-Secciones añadidas/eliminadas: ninguna. Ratificación original conservada.
-Impacto: README.md, docs/alcance-mvp.md y docs/decisiones-pendientes.md sincronizados.
-No se modifican plantillas ni comandos; no se implementa la integración.
-Adaptación futura: los planes de pagos deberán cumplir la separación del proveedor.
-Marcadores pendientes: ninguno. Siguen pendientes tarifas finales, límites,
-acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada (D02).
--->
-
 # Constitución de academia-virtual
 
 ## Principios fundamentales

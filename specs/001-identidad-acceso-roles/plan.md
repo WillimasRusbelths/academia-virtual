@@ -7,9 +7,9 @@
 **Entrada**: `specs/001-identidad-acceso-roles/spec.md`, 33 requisitos, 7 historias y
 checklist de especificación con 16/16 criterios documentales satisfechos.
 
-**Estado**: fases 0 y 1 completadas documentalmente. Listo para descomposición en tareas;
-la ejecución local está bloqueada por Docker no disponible y WSL2 no operativo. No hay
-código, migraciones, Compose ni pruebas de producto implementadas o ejecutadas.
+**Actualización R12 — 2026-09-27:** desarrollo nativo Windows con Node, PostgreSQL 16.14 y Mailpit. Docker/WSL pendientes, fuera de la ruta crítica local; causa del incidente de arranque no determinada. Docker en Linux se conserva para despliegue futuro. V00-L se verifica temprano, tras V00 y antes de US1/T031 (checkpoint T030), sin contratar servicios. Procedimiento vigente: [native.md](../../ops/local/native.md); resultados: [compatibility.md](../../ops/local/compatibility.md). No se modifica el alcance funcional ni se afirma capacidad demostrada.
+
+**Estado**: diseño aprobado; V00 nativo aprobado (evidencia en ops/local/compatibility.md); V00-L Linux pendiente. No se han implementado historias de identidad.
 
 El script instalado `setup-plan.ps1 -Json` resolvió FEATURE_SPEC, IMPL_PLAN y FEATURE_DIR en
 esta carpeta. Su campo BRANCH fue `001-identidad-acceso-roles`, derivado del directorio por
@@ -42,15 +42,15 @@ fueron observados el 2026-09-23; la combinación completa aún requiere validaci
 Argon2id, Nodemailer. Fijar parches y lockfile al implementar; no asumir compatibilidad
 verificada mediante instalación. Investigación y fuentes: [research.md](research.md).
 
-**Persistencia**: PostgreSQL 17-bookworm, única BD por entorno con separación explícita.
+**Persistencia**: PostgreSQL 16.14 nativo (Linux futuro: misma major 16), única BD por entorno con separación explícita.
 Sesiones y límites persistidos; sin estado de autorización exclusivo de la memoria del proceso.
 
 **Pruebas**: Vitest para dominio/componentes, Supertest+PostgreSQL para integración/contratos,
 Playwright para navegador y k6 para carga de identidad. Configuración de test del backend
 preserva decoradores/metadatos de Nest; el primer build y smoke comprobarán compatibilidad.
 
-**Plataforma objetivo**: desarrollo Windows 11 con API/SPA en Node local y Docker Compose
-para PostgreSQL/Mailpit. Navegadores de celular/computadora. Publicación futura bajo un único
+**Plataforma objetivo**: desarrollo Windows 11 con API/SPA en Node y PostgreSQL/Mailpit nativos. Docker Linux
+se valida separadamente mediante V00-L. Navegadores de celular/computadora. Publicación futura bajo un único
 HTTPS con Nginx, sin preparar despliegue en esta etapa.
 
 **Tipo de proyecto**: aplicación web con dos workspaces y un backend desplegable como monolito.
@@ -148,7 +148,7 @@ ops/
   local/                          # Instrucciones/configuración auxiliar sin secretos
   recovery/                       # Procedimientos y comandos operativos futuros
 load-tests/identity/               # k6; fixtures privados fuera de Git
-compose.local.yml                 # Solo PostgreSQL y Mailpit locales
+compose.linux.yml                 # Futuro V00-L: PostgreSQL 16/Mailpit en Linux
 .env.example                      # Campos secretos vacíos
 .env.test.example
 package.json                      # Workspaces npm, scripts coordinados
@@ -230,9 +230,9 @@ runtime, sesiones, CSRF/cookies, contraseñas, concurrencia, enlaces, SMTP, rein
 límites, pruebas y entorno real. Las fuentes son documentación oficial/OWASP; se realizó
 investigación independiente de seguridad y runtime/correo según la habilidad instalada.
 
-Las decisiones de diseño están expresadas; las versiones son candidatas y solo se aceptarán
-como combinación reproducible después de la comprobación práctica inicial. Dependencias externas:
-Docker/WSL para ejecutar, proveedor SMTP para publicar, rúbrica para aceptar la carga y
+Las decisiones de diseño están expresadas; la combinación fijada en el lockfile fue
+verificada para V00 nativo el 2026-09-28. Linux requiere V00-L. Dependencias externas:
+credenciales y roles locales para integración, Linux/Docker para V00-L, proveedor SMTP para publicar, rúbrica para aceptar la carga y
 viabilidad del video para el proyecto. No se convierten en hechos comprobados.
 
 ## Fase 1 — Diseño y contratos
@@ -288,19 +288,21 @@ ni evalúa matrícula/chat/video. SC-001/010 requieren observación con personas
 
 ## Dependencias, riesgos y secuencia para futuras tareas
 
-**Primera tarea futura: validación práctica de compatibilidad (V00), aún no ejecutada.**
+**Validación práctica de compatibilidad (V00): aprobada en Windows el 2026-09-28.**
+La descripción siguiente conserva el procedimiento del plan inicial; su evidencia actual
+está en ops/local/compatibility.md. La repetición Linux V00-L sigue pendiente.
 Instalar y fijar paquetes candidatos sin forzar dependencias, compilar ambos workspaces,
 comprobar metadatos de Nest/runner y componentes, generar cliente Prisma, aplicar migración
 de ensayo y probar lectura/escritura con rollback en PostgreSQL. Añadir hash Argon2 y captura
 SMTP local. Conservar evidencia y ajustar versiones si falla, antes de implementar identidad.
 El procedimiento y criterio de cierre están en [quickstart.md](quickstart.md); este bloque
-documenta la futura tarea y no crea `tasks.md`. Docker/WSL es dependencia de ejecución de
-la parte Compose, no condición para completar el plan o descomponerlo en tareas.
+documentó la tarea inicial, ahora cerrada como T003–T008. Docker/WSL local queda pendiente sin bloquear V00 nativo. La verificación Linux V00-L
+se ejecuta tras V00 y antes de US1; no se afirma portabilidad todavía.
 
 | Elemento | Estado y condición de salida |
 | --- | --- |
-| Docker/WSL2 | Bloqueo real para ejecutar Compose: Docker no localizado e hipervisor no activo. Resolver según quickstart y comprobar Client/Server, Compose y servicios sanos. |
-| Instalación/build | No ejecutada; fijar lockfile/digests y verificar Node/TypeScript/Nest/Prisma/Argon2 en Windows antes de avanzar sobre un entorno reproducible. |
+| Entorno local / Linux | Windows nativo según R12; conexión y permisos de ensayo verificados en V00. Docker/WSL local sigue pendiente. V00-L Linux/Docker antes de US1 y producción. |
+| Instalación/build | Instalación reproducible/builds/Prisma/Argon2 verificados en Windows; Linux y digests de contenedores pendientes. |
 | SMTP de producción | Pendiente elección, acceso, límites, TLS/remitente y precio; Mailpit permite desarrollar. Bloquea publicación con usuarios reales, no tareas. |
 | Presupuesto | No se ha gastado ni cotizado servicio. S/300 cubren el proyecto completo; confirmar costos antes de contratar. |
 | Carga | Sin resultados ni rúbrica final; medir pool/Argon2/escrituras de sesión, no introducir Redis por anticipación. |

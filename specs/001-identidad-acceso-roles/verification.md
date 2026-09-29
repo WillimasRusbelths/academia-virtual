@@ -1,6 +1,7 @@
 # Estrategia de verificación de identidad
 
-Estado: escenarios y criterios propuestos; ninguno se ha ejecutado contra una aplicación.
+Estado: V00 nativo aprobado; V00-L y escenarios funcionales V01–V16 pendientes.
+Evidencia: [compatibility.md](../../ops/local/compatibility.md).
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
@@ -10,14 +11,21 @@ V00; no se la considera ejecutada por haber contrastado documentación oficial.
 Precisión documental 2026-09-25: cierre de escritura de pruebas, desglose de V04, canales
 de auditoría/operación y protocolo temporal. Ningún escenario se ejecutó con esta revisión.
 
+**Actualización R12 — 2026-09-27:** desarrollo nativo Windows con Node, PostgreSQL 16.14 y Mailpit. Docker/WSL pendientes, fuera de la ruta crítica local; causa del incidente de arranque no determinada. Docker en Linux se conserva para despliegue futuro. V00-L se verifica temprano, tras V00 y antes de US1/T031 (checkpoint T030), sin contratar servicios. Procedimiento vigente: [native.md](../../ops/local/native.md); resultados: [compatibility.md](../../ops/local/compatibility.md). No se modifica el alcance funcional ni se afirma capacidad demostrada.
+
 ## Comprobaciones previas para la implementación futura
 
 **V00 — Compatibilidad práctica:** ejecutar primero la tarea futura descrita en quickstart:
 instalación sin conflictos, lockfile, compilación frontend/backend, prueba de metadatos de
 Nest y componentes, cliente Prisma generado, migración de ensayo y lectura/escritura con
 rollback en PostgreSQL real. Incluir Argon2 y captura SMTP local. Sin esos resultados, la
-combinación de versiones permanece candidata. Docker/WSL bloquea ejecutar la parte Compose,
-no completar este documento o generar tareas.
+combinación de versiones permanece candidata. V00 usa PostgreSQL 16.14/Mailpit nativos. Docker/WSL Windows sigue pendiente y no
+bloquea este ensayo. El resultado SQL aportado por el usuario no sustituye Prisma/rollback.
+
+**V00-L — Linux temprano:** después de V00 y antes de US1/T031, checkpoint T030,
+repetir instalación/build/smoke/Prisma/transacción/Argon2/SMTP en Linux con Docker, versiones
+fijadas y bases nuevas. Registrar diferencias de rutas, binarios nativos y configuración.
+Pendiente separado; no es capacidad ni despliegue. Procedimiento: ops/local/native.md.
 
 **VA — Capas del monolito:** revisar dependencias según plan.md. Controladores/guards HTTP
 no consultan Prisma ni implementan reglas de rol, último administrador, vigencia o consumo;

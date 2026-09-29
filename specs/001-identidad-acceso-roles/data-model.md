@@ -1,6 +1,6 @@
 # Modelo de datos de identidad
 
-Fecha: 2026-09-23. Diseño para PostgreSQL 17 y Prisma 7; no hay esquema ni migraciones
+Fecha: 2026-09-23. Diseño para PostgreSQL 16 (R12: local 16.14) y Prisma 7; no hay esquema ni migraciones
 implementados. Requisitos: [spec.md](spec.md); decisiones: [research.md](research.md).
 Revisión: 2026-09-24. Ambas versiones son candidatas hasta la comprobación práctica inicial.
 Todas las fechas son `timestamptz` en UTC; los límites temporales usan el reloj de la BD.

@@ -1,0 +1,10 @@
+node_modules/
+.git/
+.env*
+.npm/
+.cache/
+dist/
+coverage/
+*.log
+backups/
+data/

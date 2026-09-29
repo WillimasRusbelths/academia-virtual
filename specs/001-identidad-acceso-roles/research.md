@@ -6,13 +6,15 @@ Entrada: [especificación](spec.md), checklist revisado y constitución 1.1.0.
 Las fuentes oficiales se consultaron en esta fecha; los parámetros del proyecto que se
 indican a continuación son decisiones propias y deberán verificarse en implementación.
 
+**Actualización R12 — 2026-09-27:** desarrollo nativo Windows con Node, PostgreSQL 16.14 y Mailpit. Docker/WSL pendientes, fuera de la ruta crítica local; causa del incidente de arranque no determinada. Docker en Linux se conserva para despliegue futuro. V00-L se verifica temprano, tras V00 y antes de US1/T031 (checkpoint T030), sin contratar servicios. Procedimiento vigente: [native.md](../../ops/local/native.md); resultados: [compatibility.md](../../ops/local/compatibility.md). No se modifica el alcance funcional ni se afirma capacidad demostrada.
+
 ## R01 — Runtime y estructura para una sola persona
 
 **Decisión de estructura y versiones candidatas:** monorepositorio con npm workspaces:
 `apps/web` y `apps/api`, monolito modular con las capas internas descritas en [plan.md](plan.md).
 React 19, Vite 8,
 NestJS 12 con adaptador Express, TypeScript 6 en modo estricto y ESM; Prisma 7 con
-`@prisma/adapter-pg` y `pg`; PostgreSQL 17. Usar Node 22.23.1 y npm 10.9.8, presentes en el
+`@prisma/adapter-pg` y `pg`; PostgreSQL 16.14 nativo según R12. Usar Node 22.23.1 y npm 10.9.8, presentes en el
 equipo, como línea base inicial. Mantener coherentes las versiones de Prisma CLI/client/adapter.
 Fijar parches concretos en `package-lock.json` y digests de imágenes al implementar, después
 de verificar instalación/build/test en Windows. No se ejecutan generadores ni instalaciones aquí.
@@ -42,7 +44,7 @@ Fuentes: [Nest: requisitos](https://docs.nestjs.com/first-steps),
 | React 19 / Vite 8 | La [página de versiones de React](https://react.dev/versions) documenta React 19; [Vite](https://vite.dev/guide/) exige Node 20.19+ o 22.12+ y advierte que las plantillas pueden elevar el requisito. React/react-dom y el plugin React de Vite deben validarse en la instalación concreta. |
 | TypeScript 6 | Las [notas oficiales](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-6-0.html) documentan cambios de resolución y tipos. Probar `NodeNext` en backend y resolución `bundler` en frontend, tipos explícitos y metadatos de decoradores con el runner; no se considera validado por fijar la major. |
 | Prisma 7 / adapter-pg / pg | La [migración oficial a v7](https://docs.prisma.io/docs/orm/v6/more/upgrades/to-v7) declara Node mínimo 20.19 y TypeScript mínimo 5.4, recomienda 5.9 y exige revisar ESM, adaptadores y configuración. Ese mínimo no certifica TypeScript 6 con el cliente generado. Fijar y probar CLI/client/adapter de la misma versión compatible. |
-| PostgreSQL 17-bookworm | La [política oficial](https://www.postgresql.org/support/versioning/) mantiene la rama 17; fijar parche/digest y [directorio de datos de su imagen](https://hub.docker.com/_/postgres). La conexión mediante el adaptador elegido sigue pendiente. |
+| PostgreSQL 16.14 nativo / 16 en Linux futuro | La [política oficial](https://www.postgresql.org/support/versioning/) mantiene la rama 16; verificar cliente/servidor local y fijar después parche/digest Linux y [directorio de datos de su imagen](https://hub.docker.com/_/postgres). La conexión mediante el adaptador elegido sigue pendiente. |
 
 Los mínimos documentados son restricciones individuales, no una matriz de compatibilidad
 probada. Los otros paquetes (Argon2, Nodemailer, Vitest, Supertest, Playwright y herramientas
@@ -254,15 +256,34 @@ Windows/arranque, no asumir que basta cambiar BIOS. No hay distribuciones WSL in
 una distribución de usuario no es requisito independiente si Docker gestiona su backend.
 Evidencia completa y comprobaciones de salida en [quickstart](quickstart.md).
 
-**Alternativas:** instalar PostgreSQL/SMTP nativos evitaría Docker, pero duplicaría el camino
-de operación. Se mantiene Compose como opción acordada; su habilitación bloquea ejecutar
-pruebas locales, no la generación de tareas del plan.
+**Decisión histórica sustituida por R12:** Compose era el camino local; ahora PostgreSQL y
+Mailpit nativos desbloquean el desarrollo autorizado. No se concluye incompatibilidad de
+Docker/WSL con el hardware ni se vuelve a modificar Windows.
 
 Se mantiene una investigación temprana independiente de video (D07–D09), antes de cerrar
 alojamiento y antes de terminar identidad. Medir emisión, autorización HLS, ancho de banda,
 costo y limitar conclusiones al escenario medido. Este plan no contrata ni implementa video.
 
 Fuente: [Docker Desktop en Windows](https://docs.docker.com/desktop/setup/install/windows-install/).
+
+## R12 — Windows nativo y validación Linux temprana
+
+El usuario autoriza PostgreSQL 16.14 ya instalado, Node 22 y Mailpit portátil. Se evita
+intervenir de nuevo en el arranque y no se añade costo de servicios. Prisma soporta
+PostgreSQL 16; su conexión/transacción real sigue siendo requisito V00. Se mantienen
+ESM, capas del monolito y separación de entornos. Bases academia_dev/academia_v00_test,
+propietario de migración y runtime restringido distintos por base; nunca postgres en runtime.
+T001/T002 conservan sus IDs y casillas pendientes, diferidas fuera de la ruta local.
+T003 puede comenzar con Node/npm disponibles; T005 y T007 son independientes de las
+credenciales SQL. T006/T008 siguen requiriendo PostgreSQL real y toda la evidencia.
+
+Docker en Linux permanece como camino futuro, con V00-L inmediatamente tras V00 local
+y antes de US1/T031, registrado en T030. Usar misma major PostgreSQL 16 para reducir
+diferencias; ninguna prueba Windows acredita contenedores Linux. No contratar alojamiento.
+Fuentes: [PostgreSQL soportado por Prisma](https://www.prisma.io/docs/orm/reference/supported-databases),
+[Mailpit nativo](https://mailpit.axllent.org/docs/install/),
+[opciones Mailpit](https://mailpit.axllent.org/docs/configuration/runtime-options/).
+Procedimientos y evidencia en ops/local/native.md, environment.md y compatibility.md.
 
 ## Cierre de investigación
 

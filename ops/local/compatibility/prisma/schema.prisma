@@ -1,0 +1,11 @@
+generator client {
+  provider = "prisma-client"
+  output = "../../../../apps/api/generated/probe"
+}
+datasource db {
+  provider = "postgresql"
+}
+model CompatibilityProbe {
+  id String @id @db.Uuid
+  value String
+}
