@@ -78,3 +78,25 @@ autenticaron. El agente ejecutó verify:v00 completo con exit 0: builds, cinco p
 generación/migración Prisma, permisos y rollback real. El 28P01 anterior queda resuelto.
 No se editó .env.test ni se restablecieron claves/recrearon objetos. T003–T008 completadas;
 T001/T002 y V00-L pendientes. Alertas npm conservadas en compatibility.md.
+
+## Actualización Docker — 2026-10-01
+
+El responsable confirma que **Docker ya funciona en su computadora**. Esto actualiza
+el estado del equipo informado anteriormente; no demuestra que Academia Virtual haya
+sido ejecutada o validada en contenedores. Se mantiene la ruta nativa Windows elegida
+en R12 hasta una decisión explícita de cambiar el entorno de desarrollo.
+
+En esta revisión se detectaron Docker CLI **29.8.1** y Compose **v5.5.1**.
+`docker version` y `docker ps -a` no pudieron conectar con el pipe de
+`dockerDesktopLinuxEngine`; por tanto, no se comprobó el servidor activo ni se obtuvo
+un inventario de contenedores. No se atribuye ese resultado a incompatibilidad, ni
+se contradice la ejecución previa informada por el responsable.
+
+`docker compose -f compose.linux.yml config --quiet` terminó con código 0 usando
+`V00_PROJECT=academia-review-config` solo para esa comprobación. Valida configuración,
+no descarga imágenes ni arranca servicios. El Compose define PostgreSQL y Mailpit,
+sin imágenes/servicios de la API o web; no hay Dockerfile de aplicación en el repositorio.
+No se ejecutaron pull, up, despliegue, pruebas de aplicación con Docker ni el workflow
+Linux. **V00-L continúa pendiente**, al igual que la evidencia completa de T001/T002;
+no se marcan tareas por la sola disponibilidad de Docker. Tampoco hay pruebas de carga
+que demuestren 1000 concurrentes.

@@ -2,10 +2,21 @@
   "name": "academia-virtual",
   "private": true,
   "type": "module",
-  "workspaces": ["apps/api", "apps/web"],
-  "engines": {"node": ">=22.23.1 <23", "npm": ">=10.9.8 <11"},
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=22.23.1 <23",
+    "npm": ">=10.9.8 <11"
+  },
   "scripts": {
+    "lint": "npm run lint --workspaces",
     "build": "npm run build --workspaces",
+    "test": "npm run lint && npm run build && npm run test:unit && npm run test:integration && npm run test:e2e",
+    "test:unit": "npm run test:unit --workspaces",
+    "test:integration": "npm run probe:generate && npm run test:integration --workspace @academia/api",
+    "test:e2e": "npm run test:e2e --workspace @academia/web",
     "test:smoke": "npm run test:smoke --workspaces",
     "test:crypto-mail": "npm run test:crypto-mail --workspace @academia/api",
     "test:postgres": "npm run test:postgres --workspace @academia/api",
@@ -14,5 +25,13 @@
     "probe:check": "node ops/local/compatibility/check-database.mjs",
     "verify:v00": "npm run build && npm run test:smoke && npm run probe:generate && npm run probe:check && npm run probe:migrate && npm run test:postgres && npm run test:crypto-mail"
   },
-  "devDependencies": {"typescript": "6.0.3", "prisma": "7.10.0", "vitest": "5.0.2", "@types/node": "^22.0.0"}
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "^22.0.0",
+    "eslint": "10.11.0",
+    "prisma": "7.10.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0",
+    "vitest": "5.0.2"
+  }
 }

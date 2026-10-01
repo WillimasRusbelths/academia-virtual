@@ -1,8 +1,11 @@
 {
   "name": "@academia/api", "private": true, "type": "module",
   "scripts": {
+    "lint": "eslint src tests eslint.config.js",
     "build": "tsc -p tsconfig.json",
     "dev": "npm run build && node dist/src/main.js",
+    "test:unit": "vitest run tests/architecture",
+    "test:integration": "vitest run tests/compatibility/runtime.spec.ts tests/compatibility/postgres.spec.ts tests/integration",
     "test:smoke": "vitest run tests/compatibility/runtime.spec.ts",
     "test:crypto-mail": "vitest run tests/compatibility/crypto-mail.spec.ts",
     "test:postgres": "vitest run tests/compatibility/postgres.spec.ts"

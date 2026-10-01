@@ -11,17 +11,26 @@ Windows; Docker y los contenedores se ejecutan exclusivamente en Linux. No abrir
 de BD/correo a Internet, no instalar un runner en la laptop ni cambiar WSL/Windows.
 No se ha proporcionado host/acceso ni se ha abierto una sesión remota en esta revisión.
 
-Alternativa: runner estándar `ubuntu-24.04` de GitHub Actions con ejecución manual
-`workflow_dispatch`, permisos `contents: read`, timeout 20 minutos y sin despliegue.
+Alternativa preparada: [`.github/workflows/v00-linux.yml`](../../.github/workflows/v00-linux.yml)
+usa un runner estándar `ubuntu-24.04` con ejecución exclusivamente manual
+`workflow_dispatch`, permisos `contents: read`, timeout 20 minutos y sin despliegue ni caché
+de npm. El workflow valida Docker/Compose, resuelve los digests usados, aprovisiona bases y
+roles efímeros con `ops/linux/provision-ci.mjs`, ejecuta V00-L y detiene solo su proyecto.
 Los repositorios públicos tienen runners estándar gratuitos; los privados consumen
 cuota incluida. Antes de habilitarlo, el responsable debe comprobar visibilidad, saldo
 gratuito y bloqueo de gasto adicional. No usar runners grandes, Codespaces facturable,
 pruebas gratuitas con tarjeta ni subir artefactos/cachés de secretos.
 [Condiciones oficiales de Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
-No se verificó la cuota de esta cuenta ni se promete costo cero sin esa comprobación.
-Esta alternativa requiere adaptar el aprovisionamiento interactivo a secretos efímeros
-generados y enmascarados por job; no reutilizar claves Windows ni ejecutar provision.sql
-sin atender sus prompts. No se creó ni disparó workflow automático.
+No se verificó la visibilidad ni la cuota de la cuenta y el workflow **no se ejecutó**. Antes
+de dispararlo, el responsable debe revisar en GitHub la visibilidad y los minutos disponibles;
+si no hay gratuidad comprobada, no ejecutarlo. El checkout efímero genera sus propias claves,
+no reutiliza claves Windows ni publica artefactos. Preparar el archivo no acredita V00-L.
+
+Cuando el workflow esté disponible en el remoto con autorización posterior, abrir Actions,
+seleccionar «V00-L Linux manual» y usar «Run workflow» sobre la revisión que se desea probar.
+Conservar como evidencia el SHA, enlace de la ejecución, resumen con digests y resultados; no
+copiar logs con valores privados. Solo un job satisfactorio permite registrar V00-L y cerrar
+la parte Linux del checkpoint T030.
 
 ## Ensayo en Linux existente (manual, futuro)
 

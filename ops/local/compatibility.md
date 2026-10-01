@@ -90,7 +90,7 @@ añadió transacción/rollback y repitió las comprobaciones. No acredita Linux 
 
 ## Auditoría npm — pendiente explícito
 
-`npm audit --json --offline=false` del 2026-09-28 informa cuatro paquetes altos:
+`npm audit --json` repetido el 2026-09-29, después del nuevo `npm ci`, informa cuatro paquetes altos:
 prisma, @prisma/config, deepmerge-ts y mysql2. No son cuatro vulnerabilidades independientes.
 `npm explain` muestra las cadenas:
 
@@ -106,9 +106,12 @@ prisma, @prisma/config, deepmerge-ts y mysql2. No son cuatro vulnerabilidades in
 Prisma CLI está declarado como herramienta de desarrollo; la instalación incluye estos
 paquetes transitivos. No se ha verificado todavía su exclusión del artefacto Linux final.
 El arreglo automático sugerido por audit cambia Prisma a 6.19.3 (major distinta): **no se
-aplicó**. Tampoco se añadieron overrides ni se usó `audit fix --force`. Revisar actualización
-compatible oficial de Prisma 7 o proponer cambio justificado al responsable; cualquier major
-requiere consulta previa. Reauditar y verificar el artefacto antes de producción. Estos avisos
+aplicó**. `mysql2@3.24.4` corrige ambos rangos publicados, pero Prisma 7.10.0 fija exactamente
+3.15.3; no existe una actualización transitiva normal y no se añadió un override. Para
+`deepmerge-ts`, la corrección publicada es 8.0.0 y `@prisma/config` fija 7.1.5. La opción
+preferida es una versión oficial y coherente de Prisma que actualice esas dependencias; un
+cambio major exige aprobación y repetir generate, migración, V00 nativo, V00-L y auditoría.
+Tampoco se usó `audit fix --force`. Reauditar y verificar el artefacto antes de producción. Estos avisos
 no se ocultan con omisiones del informe ni se confunden con el bloqueo de autenticación.
 
 ## Reintento final y precedencia de configuración
@@ -135,10 +138,12 @@ es la base aislada de V00. No queda intervención de autenticación pendiente pa
 
 ## Estado de tareas
 
-- **Completadas con evidencia:** T003–T008 (seis tareas de la ruta nativa).
-  En este reintento se cierran T004, T006 y T008; T003/T005/T007 ya estaban verificadas.
+- **Completadas con evidencia:** T003–T010 (ocho tareas).
+  T009/T010 añadieron límites de importación, scripts obligatorios, aislamiento por esquema,
+  soporte Mailpit y Playwright; evidencia del 2026-09-29 en `architecture.md` y
+  `test-harness.md`.
 - **V00 nativo aprobado**, sin equivaler a auditoría limpia ni aprobación de producción.
 - **Diferidas y sin marcar:** T001/T002 Docker/WSL Windows. Compose tampoco se declara
   realizado. V00-L Linux queda pendiente según R12, temprano y antes de US1/producción.
-- T009 en adelante e historias funcionales no iniciadas. Izipay, video y pruebas de carga
+- T011 en adelante e historias funcionales no iniciadas. Izipay, video y pruebas de carga
   fuera de este bloque; se conserva investigación temprana de video independiente.

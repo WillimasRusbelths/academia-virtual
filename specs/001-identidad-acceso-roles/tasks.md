@@ -12,7 +12,7 @@ description: "Tareas de implementación de identidad, autenticación y acceso po
 [quickstart.md](quickstart.md), [verification.md](verification.md) y
 [constitución 1.1.0](../../.specify/memory/constitution.md).
 
-**Estado vigente (2026-09-28)**: V00 nativo aprobado; T003–T008 verificadas. T001/T002 diferidas y V00-L pendiente. Evidencia en ops/local/compatibility.md. Historias sin implementar.
+**Estado vigente (2026-10-01)**: V00 nativo aprobado; T003–T010 verificadas según evidencia del 2026-09-29. El responsable confirma Docker operativo en su computadora; la comprobación completa de T001/T002 y V00-L sigue pendiente, sin ejecución de la aplicación con Docker acreditada. Véanse [compatibilidad](../../ops/local/compatibility.md) y [actualización del entorno](../../ops/local/environment.md#actualización-docker--2026-10-01). Historias sin implementar.
 **Registro histórico de generación**: no había aplicación, dependencias instaladas ni pruebas superadas. Se conservaron README y los siete documentos de planificación
 existentes. No había tasks.md. `setup-tasks.ps1 -Json` resolvió esta carpeta y la plantilla
 instalada; no se encontraron AGENTS.md aplicables ni `.specify/extensions.yml` con hooks.
@@ -84,11 +84,11 @@ y pruebas de compatibilidad en esta fase; no se añaden reglas de negocio.
 - [x] T006 Verificar V00 con `ops/local/compatibility/prisma/schema.prisma`, `ops/local/compatibility/prisma/migrations/0001_probe/migration.sql`, `ops/local/compatibility/prisma.config.ts` y `apps/api/tests/compatibility/postgres.spec.ts`: generar Prisma CLI/client/adapter coherentes, migrar una BD de ensayo aislada y hacer escritura/lectura/rollback desde Nest con cierre de pool. El modelo de ensayo no pasa al esquema de identidad. Dep.: T005 y T004 para roles/base aislada (R12).
 - [x] T007 Comprobar hash/verificación Argon2id m=19456 KiB, t=2, p=1 y captura SMTP exclusivamente Mailpit en `apps/api/tests/compatibility/crypto-mail.spec.ts`; registrar cualquier prerrequisito nativo faltante y resultados en `ops/local/compatibility.md`. No usar buzones reales. Dep.: T003 y Mailpit verificado de T004; puede comprobarse sin T006 (R12).
 - [x] T008 Cerrar V00 ejecutando instalación reproducible npm ci, builds y pruebas de T005–T007; fijar versiones realmente utilizadas en `package-lock.json` y SHA256 del binario Mailpit en `ops/local/native.md`; digests Linux quedan para V00-L, y guardar versiones/SO/comandos/resultados sin secretos en `ops/local/compatibility.md`. Ante incompatibilidad, ajustar y repetir el bloque afectado antes de avanzar; no marcar V00 aprobado parcialmente. Dep.: T004, T005, T006, T007.
-- [ ] T009 Configurar composición modular mínima y límites de importación en `apps/api/src/app.module.ts`, `apps/api/eslint.config.js` y `apps/web/eslint.config.js`; registrar decisiones de ensamblaje en `ops/local/architecture.md`. Crear archivos/capas solo al necesitarlos; no scaffolding de cursos/pagos ni paquetes shared genéricos. Dep.: T008.
-- [ ] T010 Preparar harness de pruebas y scripts obligatorios en `apps/api/tests/support/test-environment.ts`, `apps/api/tests/support/mailpit.ts`, `apps/web/playwright.config.ts`, `apps/api/package.json`, `apps/web/package.json` y `package.json`; instalar/verificar navegador de prueba y runners compatibles, con BD aislada por suite y fallos si faltan scripts, sin if-present. Dep.: T009.
+- [x] T009 Configurar composición modular mínima y límites de importación en `apps/api/src/app.module.ts`, `apps/api/eslint.config.js` y `apps/web/eslint.config.js`; registrar decisiones de ensamblaje en `ops/local/architecture.md`. Crear archivos/capas solo al necesitarlos; no scaffolding de cursos/pagos ni paquetes shared genéricos. Dep.: T008.
+- [x] T010 Preparar harness de pruebas y scripts obligatorios en `apps/api/tests/support/test-environment.ts`, `apps/api/tests/support/mailpit.ts`, `apps/web/playwright.config.ts`, `apps/api/package.json`, `apps/web/package.json` y `package.json`; instalar/verificar navegador de prueba y runners compatibles, con BD aislada por suite y fallos si faltan scripts, sin if-present. Dep.: T009.
 
 **Checkpoint**: T008 documenta instalación, compilación, PostgreSQL real, Argon2 y SMTP local;
-T009–T010 quedan fuera del bloque actual. Docker/WSL local no bloquea V00 nativo;
+T009–T010 añaden límites comprobados y harness reproducible. Docker/WSL local no bloquea V00 nativo;
 T001/T002 permanecen pendientes sin casillas de éxito. V00-L Linux se exige en T030 antes de US1. No iniciar T011 ni ninguna historia sin V00 aprobado.
 
 ## Fase 2: Fundamentos compartidos
@@ -355,7 +355,7 @@ aprobado de antemano; un ensayo ejecutado con fallos deja pendiente su criterio 
 | 8 · US5 P1 | T082–T088 | 7 | Todos los flujos P1 para auditar permisos y secretos de extremo a extremo |
 | 9 · US3 P2 | T089–T094 | 6 | /me/inicio de US1 y rutas previas para comprobar todos los flujos accesibles |
 | 10 · Cierre transversal | T095–T108 | 14 | Historias listas; operación, carga, observación y evidencia integral |
-| **Total** | **T001–T108** | **108** | **64 de historias + 44 compartidas/transversales; 6 completadas (T003–T008), 102 pendientes** |
+| **Total** | **T001–T108** | **108** | **64 de historias + 44 compartidas/transversales; 8 completadas (T003–T010), 100 pendientes** |
 
 ```mermaid
 flowchart TD

@@ -37,6 +37,7 @@ test('Prisma desde Nest usa rol restringido y rollback real, con cierre del pool
   } catch (error) {
     const code = error && typeof error === 'object' && 'code' in error ? String(error.code) : '';
     const safeCode = /^(P\d{4}|[0-9A-Z]{5})$/.test(code) ? ` (${code})` : '';
+    // eslint-disable-next-line preserve-caught-error -- la causa del driver puede contener la URL privada
     throw new Error(`V00 PostgreSQL falló en ${stage}${safeCode}; detalles privados omitidos.`);
   } finally { await db.$disconnect(); await module.close(); }
 });

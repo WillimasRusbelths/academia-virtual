@@ -3,7 +3,7 @@
 name: ${V00_PROJECT:?Definir un nombre exclusivo para este ensayo}
 services:
   db:
-    image: postgres:16.14-bookworm
+    image: ${V00_POSTGRES_IMAGE:-postgres:16.14-bookworm}
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/pg_password
     secrets:
@@ -19,7 +19,7 @@ services:
       timeout: 3s
       retries: 20
   mailpit:
-    image: axllent/mailpit:v1.31.3
+    image: ${V00_MAILPIT_IMAGE:-axllent/mailpit:v1.31.3}
     command:
       - --disable-version-check
       - --smtp-disable-rdns

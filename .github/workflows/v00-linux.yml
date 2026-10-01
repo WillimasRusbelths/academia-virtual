@@ -1,0 +1,63 @@
+name: V00-L Linux manual
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v00-linux-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Compatibilidad Linux
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      V00_PROJECT: academia-v00-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.23.1
+      - name: Instalar desde lockfile
+        run: npm ci
+      - name: Preparar secreto efímero
+        run: node ops/linux/prepare-secret.mjs
+      - name: Validar Compose y descargar imágenes candidatas
+        run: |
+          docker version
+          docker compose version
+          docker compose -f compose.linux.yml config --quiet
+          docker compose -f compose.linux.yml pull
+      - name: Resolver digests para esta ejecución
+        shell: bash
+        run: |
+          postgres_digest="$(docker image inspect postgres:16.14-bookworm --format '{{index .RepoDigests 0}}')"
+          mailpit_digest="$(docker image inspect axllent/mailpit:v1.31.3 --format '{{index .RepoDigests 0}}')"
+          test -n "$postgres_digest"
+          test -n "$mailpit_digest"
+          echo "V00_POSTGRES_IMAGE=$postgres_digest" >> "$GITHUB_ENV"
+          echo "V00_MAILPIT_IMAGE=$mailpit_digest" >> "$GITHUB_ENV"
+          printf 'PostgreSQL: `%s`\nMailpit: `%s`\n' "$postgres_digest" "$mailpit_digest" >> "$GITHUB_STEP_SUMMARY"
+      - name: Levantar servicios por digest
+        run: docker compose -f compose.linux.yml up -d --wait
+      - name: Aprovisionar bases y roles efímeros
+        run: node ops/linux/provision-ci.mjs
+      - name: Ejecutar V00-L completo
+        run: npm run verify:v00
+      - name: Auditar dependencias por separado
+        continue-on-error: true
+        run: npm audit --json
+      - name: Registrar plataforma
+        shell: bash
+        run: |
+          node --version >> "$GITHUB_STEP_SUMMARY"
+          npm --version >> "$GITHUB_STEP_SUMMARY"
+          uname -a >> "$GITHUB_STEP_SUMMARY"
+          sha256sum package-lock.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Detener solo el proyecto efímero
+        if: always()
+        run: docker compose -f compose.linux.yml stop
