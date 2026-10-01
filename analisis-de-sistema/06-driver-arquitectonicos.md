@@ -1,6 +1,6 @@
 # 06. Drivers arquitectónicos
 
-Revisión AS-002: 2026-10-01. Un driver se prioriza por cuánto condiciona la estructura,
+Un driver se prioriza por cuánto condiciona la estructura,
 las dependencias o la viabilidad del proyecto, no por ser una funcionalidad visible.
 Los orígenes remiten a [RF](03-requisitos-funcionales.md),
 [atributos AC](04-atributos-de-calidad.md) y [restricciones RT](05-restricciones.md).
