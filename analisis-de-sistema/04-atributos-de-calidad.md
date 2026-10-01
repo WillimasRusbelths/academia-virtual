@@ -1,6 +1,6 @@
 # 04. Atributos de calidad
 
-Revisión AS-002: 2026-10-01. Los escenarios son metas verificables, no resultados.
+Los escenarios son metas verificables, no resultados.
 **Soportar 1000 usuarios concurrentes sigue siendo un requisito por validar mediante
 pruebas de carga.** No hay evidencia de carga ejecutada; 1000 estudiantes previstos no
 equivalen a 1000 sesiones, matrículas, conexiones de chat o reproducciones simultáneas.
