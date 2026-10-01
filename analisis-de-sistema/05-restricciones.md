@@ -1,6 +1,6 @@
 # 05. Restricciones
 
-Revisión AS-002: 2026-10-01. Se distinguen obligaciones del proyecto, decisiones
+Se distinguen obligaciones del proyecto, decisiones
 técnicas vigentes y propuestas aún sujetas a validación. Fuentes principales:
 [constitución 1.1.0](../.specify/memory/constitution.md),
 [alcance](../docs/alcance-mvp.md), [decisiones](../docs/decisiones-pendientes.md),
