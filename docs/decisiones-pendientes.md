@@ -1,5 +1,13 @@
 # Decisiones pendientes
 
+> **Nota de vigencia — 2026-10-01:** se conserva este registro de decisiones del
+> 2026-09-23. D11 ya tiene [plan y decisiones de diseño](../specs/001-identidad-acceso-roles/plan.md)
+> y [tareas](../specs/001-identidad-acceso-roles/tasks.md); «lista para planificar» es
+> histórico. V00 nativo y T009/T010 tienen evidencia, pero las historias siguen sin
+> implementar. Para entorno y estado usar R12 y el
+> [inventario actualizado](../arquitectura/arquitectura-inicial.md). Esta entrega AS-002
+> no cierra decisiones comerciales, académicas ni de aceptación aquí pendientes.
+
 Estado al 2026-09-23: decisiones abiertas o parcialmente resueltas según cada fila.
 La elección de Izipay está resuelta; sus condiciones e integración siguen pendientes.
 Una propuesta no equivale a una regla aprobada, una contratación ni una capacidad demostrada.

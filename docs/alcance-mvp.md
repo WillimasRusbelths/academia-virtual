@@ -1,5 +1,15 @@
 # Alcance del MVP de academia-virtual
 
+> **Nota de vigencia — 2026-10-01:** se conserva el alcance funcional de este documento.
+> Las menciones siguientes a «esta etapa» y a tecnologías aún no instaladas describen
+> el estado histórico del 2026-09-23. Ya existe una base técnica con V00 nativo y T009/T010
+> documentados, sin historias de negocio implementadas. R12 establece Windows nativo,
+> PostgreSQL 16.14 y Mailpit. El responsable confirma Docker operativo en su computadora;
+> la ejecución/validación de la aplicación con Docker y V00-L siguen sin evidencia. Véanse el
+> [inventario y decisiones vigentes](../arquitectura/arquitectura-inicial.md) y la
+> [evidencia local](../ops/local/compatibility.md). Esta nota no aprueba reglas pendientes
+> ni acredita integraciones o capacidad de 1000 concurrentes.
+
 Estado al 2026-09-23: documentación y primera especificación. La aplicación no está implementada y su
 capacidad no está validada. Este alcance está sujeto a la
 [constitución](../.specify/memory/constitution.md).
