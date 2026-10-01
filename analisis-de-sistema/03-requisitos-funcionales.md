@@ -1,6 +1,6 @@
 # 03. Requisitos funcionales
 
-Revisión AS-002: 2026-10-01. RF01–RF19 son requisitos de síntesis del MVP. Los
+RF01–RF19 son requisitos de síntesis del MVP. Los
 FR-001–FR-033 de la [especificación de identidad](../specs/001-identidad-acceso-roles/spec.md)
 conservan sus IDs, detalles, límites y criterios de aceptación; no se renumeran.
 Ningún RF de esta tabla está implementado como flujo de negocio. La base técnica y las
