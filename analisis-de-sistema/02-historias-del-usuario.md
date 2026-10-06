@@ -1,6 +1,6 @@
 # 02. Historias de usuario
 
-Revisión AS-002: 2026-10-01. Estas HU organizan el
+Revisión: 2026-10-01. Estas HU organizan el
 [alcance vigente](../docs/alcance-mvp.md); no sustituyen los criterios de aceptación de
 [identidad](../specs/001-identidad-acceso-roles/spec.md). Los IDs HU01–HU17 pertenecen
 a esta síntesis de todo el MVP; US1–US7 (nombres usados por plan/tareas para las historias

@@ -14,6 +14,7 @@
     "lint": "npm run lint --workspaces",
     "build": "npm run build --workspaces",
     "test": "npm run lint && npm run build && npm run test:unit && npm run test:integration && npm run test:e2e",
+    "test:docker": "npm run lint && npm run build && npm run test:unit && npm run probe:migrate && npm run probe:check && npm run test:integration && npm run test:crypto-mail",
     "test:unit": "npm run test:unit --workspaces",
     "test:integration": "npm run probe:generate && npm run test:integration --workspace @academia/api",
     "test:e2e": "npm run test:e2e --workspace @academia/web",

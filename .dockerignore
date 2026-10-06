@@ -1,6 +1,9 @@
 **/node_modules/
 .git/
 .env*
+**/.env
+**/.env.*
+**/*.env
 !.env.example
 !.env.*.example
 **/.npm/
@@ -13,6 +16,8 @@
 **/load-test-results/
 apps/api/generated/
 .codex/
+.aws/
+compose.override.yml
 .secrets/
 secrets/
 credentials/

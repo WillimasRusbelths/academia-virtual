@@ -4,7 +4,8 @@ Fecha: 2026-09-29. Implementación mínima previa a módulos funcionales.
 
 `AppModule` es la raíz de composición del único proceso Nest. Por ahora ensambla únicamente
 el módulo Probe de compatibilidad; no se crearon módulos, controladores, repositorios ni
-interfaces vacías de identidad. `main.ts` solo crea el proceso y escucha en loopback.
+interfaces vacías de identidad. `main.ts` crea el proceso y usa `API_HOST=0.0.0.0`
+en Compose; su puerto se publica solo en loopback del host.
 
 Los módulos futuros viven en `src/modules/<módulo>/`. La regla ESLint comprobada aplica:
 
@@ -24,5 +25,6 @@ Comprobación real del 2026-09-29: `npm run lint` terminó con exit 0 y
 `npm run test:unit` aprobó los tres casos de arquitectura más el smoke unitario web.
 La suite prueba importaciones permitidas y rechaza dominio→Nest, dominio→infraestructura,
 aplicación→internos de otro módulo y dependencias laterales entre features. T009 queda
-completada con esa evidencia. V00-L permanece pendiente y no se deriva del lint. Izipay y
+completada con esa evidencia. La comprobación Linux está en
+[verificación Docker](../docker/verification.md); no se deriva del lint. Izipay y
 dominios académicos no se ensamblan aquí.

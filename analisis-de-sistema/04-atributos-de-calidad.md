@@ -1,6 +1,6 @@
 # 04. Atributos de calidad
 
-Revisión AS-002: 2026-10-01. Los escenarios son metas verificables, no resultados.
+Revisión: 2026-10-01. Los escenarios son metas verificables, no resultados.
 **Soportar 1000 usuarios concurrentes sigue siendo un requisito por validar mediante
 pruebas de carga.** No hay evidencia de carga ejecutada; 1000 estudiantes previstos no
 equivalen a 1000 sesiones, matrículas, conexiones de chat o reproducciones simultáneas.
@@ -17,12 +17,12 @@ equivalen a 1000 sesiones, matrículas, conexiones de chat o reproducciones simu
 
 ## Evidencia existente y pruebas pendientes
 
-La [compatibilidad V00](../ops/local/compatibility.md) registra builds, pruebas mínimas
+La [compatibilidad V00](../ops/docker/compatibility.md) registra builds, pruebas mínimas
 de Nest/React, transacción/rollback PostgreSQL y Argon2/SMTP local. Los informes
-[T009](../ops/local/architecture.md) y [T010](../ops/local/test-harness.md), del 2026-09-29,
-registran límites de importación y pruebas unitarias, integración y navegador sobre
-el esqueleto. Son resultados históricos documentados, no nuevas ejecuciones AS-002
-ni aceptación funcional de estos escenarios. Persisten avisos de auditoría de dependencias.
+[T009](../ops/local/architecture.md) y [T010](../ops/docker/test-harness.md)
+describen los límites de importación y el soporte de pruebas del esqueleto.
+No constituyen aceptación funcional de estos escenarios. Los resultados actuales están en
+[verificación Docker](../ops/docker/verification.md). Persisten avisos de auditoría de dependencias.
 
 Reutilizar [verification.md](../specs/001-identidad-acceso-roles/verification.md) para
 ID-LOAD-01/02 y V01–V16. ID-LOAD-02 mide por separado el costo de autenticación con

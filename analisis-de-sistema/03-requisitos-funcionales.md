@@ -1,6 +1,6 @@
 # 03. Requisitos funcionales
 
-Revisión AS-002: 2026-10-01. RF01–RF19 son requisitos de síntesis del MVP. Los
+Revisión: 2026-10-01. RF01–RF19 son requisitos de síntesis del MVP. Los
 FR-001–FR-033 de la [especificación de identidad](../specs/001-identidad-acceso-roles/spec.md)
 conservan sus IDs, detalles, límites y criterios de aceptación; no se renumeran.
 Ningún RF de esta tabla está implementado como flujo de negocio. La base técnica y las
@@ -62,7 +62,7 @@ Las 17 HU y los 19 RF describen el MVP general; las siete historias y los 33 FR 
 solo identidad. La relación es de refinamiento y puede ser de varios a varios: no deben
 sumarse ni esperarse cantidades iguales. US1–US7 son los nombres de plan/tareas para
 las historias numeradas 1–7 de spec.md; allí también se usan referencias de aceptación
-como HU1.1, distintas de los IDs HU01–HU17 de AS-002.
+como HU1.1, distintas de los IDs HU01–HU17 del análisis.
 
 | Historia detallada de identidad | HU general correspondiente | RF generales principales |
 | --- | --- | --- |

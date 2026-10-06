@@ -1,0 +1,15 @@
+# Copiar a compose.override.yml solo cuando la red use una CA local confiada.
+# El certificado público no se copia a las imágenes ni al repositorio.
+services:
+  api:
+    build:
+      secrets: [npm_ca]
+  web:
+    build:
+      secrets: [npm_ca]
+  browser-tests:
+    build:
+      secrets: [npm_ca]
+secrets:
+  npm_ca:
+    file: ./.cache/docker/npm-ca.crt

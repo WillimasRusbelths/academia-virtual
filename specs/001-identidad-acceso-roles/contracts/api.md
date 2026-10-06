@@ -12,7 +12,7 @@ invariantes y la infraestructura garantiza su persistencia atómica. Véanse las
 ## Transporte, sesión y seguridad
 
 - SPA/API del mismo origen. Local: `http://localhost:5173`, con proxy Vite a Nest en
-  `127.0.0.1:3000`; producción futura: un único origen HTTPS configurado en `APP_ORIGIN`.
+  `http://api:3000` dentro de Compose; producción futura: un único origen HTTPS configurado en `APP_ORIGIN`.
   No admitir intercambiar `localhost` y `127.0.0.1` como orígenes equivalentes.
 - Toda mutación exige `Content-Type: application/json`, `X-CSRF-Protection: 1` y `Origin`
   exacto de APP_ORIGIN. Se rechazan ausente/null/ajeno y `Sec-Fetch-Site: cross-site`.

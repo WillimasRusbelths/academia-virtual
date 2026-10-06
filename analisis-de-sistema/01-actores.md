@@ -1,6 +1,6 @@
 # 01. Actores de Academia Virtual
 
-Revisión AS-002: 2026-10-01. Análisis del proyecto existente, no una aplicación nueva.
+Revisión: 2026-10-01. Análisis del proyecto existente, no una aplicación nueva.
 El [alcance del MVP](../docs/alcance-mvp.md) y la
 [especificación de identidad](../specs/001-identidad-acceso-roles/spec.md) conservan
 las reglas detalladas. El [inventario y estado comprobado](../arquitectura/arquitectura-inicial.md#inventario-y-estado-del-repositorio)
@@ -28,10 +28,10 @@ se conserva la denegación por defecto hasta especificarlos.
 | --- | --- | --- | --- |
 | E01 | Izipay | El módulo de pagos inicia la operación y verifica autenticidad, orden, importe y moneda de la confirmación mediante un adaptador. | Elegida el 2026-09-23; sustituye a Culqi. Sin integración ni contratación acreditada. D02: sandbox, tarifas, límites y Yape pendientes. |
 | E02 | Servicio SMTP de producción | El módulo de correo entrega enlaces de verificación/recuperación solicitados por identidad. | Proveedor sin elegir/contratar; TLS, remitente, DNS, cuota y costo pendientes. Nodemailer está instalado y probado solo en compatibilidad local. |
-| E03 | Mailpit local | Recibe y permite inspeccionar correos ficticios en desarrollo/pruebas, sustituyendo al SMTP externo. | Captura local comprobada en V00; no implica envío real ni flujos de identidad implementados. Ruta actual nativa Windows. |
+| E03 | Mailpit local | Recibe y permite inspeccionar correos ficticios en desarrollo/pruebas, sustituyendo al SMTP externo. | Captura local comprobada en V00; no implica envío real ni flujos de identidad implementados. Ruta actual Docker Compose. |
 | E04 | OBS del docente y servidor SRS/HLS | OBS emite; SRS distribuye HLS. El módulo de clases/video debe coordinar permisos para emisión y reproducción; el navegador reproduce HLS. | Cadena técnica propuesta, no integrada. Autorización de manifiestos/segmentos, calidad, latencia, simultaneidad y costo pendientes D07–D08. SRS es infraestructura de medios prevista, no proveedor comercial contratado. |
 
 Fuentes: [decisiones D01–D13](../docs/decisiones-pendientes.md),
 [plan de identidad](../specs/001-identidad-acceso-roles/plan.md),
-[compatibilidad local](../ops/local/compatibility.md). PostgreSQL es la persistencia
+[compatibilidad local](../ops/docker/compatibility.md). PostgreSQL es la persistencia
 interna del sistema; no se modela como actor humano ni como pasarela de integraciones.

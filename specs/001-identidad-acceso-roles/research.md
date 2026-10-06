@@ -6,7 +6,7 @@ Entrada: [especificación](spec.md), checklist revisado y constitución 1.1.0.
 Las fuentes oficiales se consultaron en esta fecha; los parámetros del proyecto que se
 indican a continuación son decisiones propias y deberán verificarse en implementación.
 
-**Actualización R12 — 2026-09-27:** desarrollo nativo Windows con Node, PostgreSQL 16.14 y Mailpit. Docker/WSL pendientes, fuera de la ruta crítica local; causa del incidente de arranque no determinada. Docker en Linux se conserva para despliegue futuro. V00-L se verifica temprano, tras V00 y antes de US1/T031 (checkpoint T030), sin contratar servicios. Procedimiento vigente: [native.md](../../ops/local/native.md); resultados: [compatibility.md](../../ops/local/compatibility.md). No se modifica el alcance funcional ni se afirma capacidad demostrada.
+**Entorno vigente — 2026-10-06:** Docker Compose con PostgreSQL 16.14, Mailpit 1.31.3, API NestJS y web React/Vite en contenedores Linux. Procedimiento: [entorno Docker](../../ops/docker/README.md). Resultados: [verificación](../../ops/docker/verification.md). No cambia el alcance funcional ni se afirma capacidad demostrada.
 
 ## R01 — Runtime y estructura para una sola persona
 
@@ -14,7 +14,7 @@ indican a continuación son decisiones propias y deberán verificarse en impleme
 `apps/web` y `apps/api`, monolito modular con las capas internas descritas en [plan.md](plan.md).
 React 19, Vite 8,
 NestJS 12 con adaptador Express, TypeScript 6 en modo estricto y ESM; Prisma 7 con
-`@prisma/adapter-pg` y `pg`; PostgreSQL 16.14 nativo según R12. Usar Node 22.23.1 y npm 10.9.8, presentes en el
+`@prisma/adapter-pg` y `pg`; PostgreSQL 16.14 en Compose. Usar Node 22.23.1 y npm 10.9.8, presentes en el
 equipo, como línea base inicial. Mantener coherentes las versiones de Prisma CLI/client/adapter.
 Fijar parches concretos en `package-lock.json` y digests de imágenes al implementar, después
 de verificar instalación/build/test en Windows. No se ejecutan generadores ni instalaciones aquí.
@@ -44,7 +44,7 @@ Fuentes: [Nest: requisitos](https://docs.nestjs.com/first-steps),
 | React 19 / Vite 8 | La [página de versiones de React](https://react.dev/versions) documenta React 19; [Vite](https://vite.dev/guide/) exige Node 20.19+ o 22.12+ y advierte que las plantillas pueden elevar el requisito. React/react-dom y el plugin React de Vite deben validarse en la instalación concreta. |
 | TypeScript 6 | Las [notas oficiales](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-6-0.html) documentan cambios de resolución y tipos. Probar `NodeNext` en backend y resolución `bundler` en frontend, tipos explícitos y metadatos de decoradores con el runner; no se considera validado por fijar la major. |
 | Prisma 7 / adapter-pg / pg | La [migración oficial a v7](https://docs.prisma.io/docs/orm/v6/more/upgrades/to-v7) declara Node mínimo 20.19 y TypeScript mínimo 5.4, recomienda 5.9 y exige revisar ESM, adaptadores y configuración. Ese mínimo no certifica TypeScript 6 con el cliente generado. Fijar y probar CLI/client/adapter de la misma versión compatible. |
-| PostgreSQL 16.14 nativo / 16 en Linux futuro | La [política oficial](https://www.postgresql.org/support/versioning/) mantiene la rama 16; verificar cliente/servidor local y fijar después parche/digest Linux y [directorio de datos de su imagen](https://hub.docker.com/_/postgres). La conexión mediante el adaptador elegido sigue pendiente. |
+| PostgreSQL 16.14 en Docker Linux | Se conserva la rama 16 y el [directorio de datos de su imagen](https://hub.docker.com/_/postgres). Versión, digest y conexión mediante el adaptador pg comprobados en [verificación Docker](../../ops/docker/verification.md); no acredita funcionalidades de identidad. |
 
 Los mínimos documentados son restricciones individuales, no una matriz de compatibilidad
 probada. Los otros paquetes (Argon2, Nodemailer, Vitest, Supertest, Playwright y herramientas
@@ -246,48 +246,24 @@ Fuentes: [k6 escenarios](https://grafana.com/docs/k6/latest/using-k6/scenarios/)
 ID-LOAD-01 requiere `noCookiesReset: true` para representar una sesión continua por VU;
 el valor por defecto reinicia las cookies al terminar cada iteración.
 
-## R11 — Disponibilidad real del entorno y continuidad del proyecto
+## R11 — Disponibilidad del entorno
 
-**Decisión:** no instalar ni habilitar componentes en esta etapa. Node/npm/Git existen;
-Docker CLI/Desktop/servicio no se encontraron. WSL 2.7.10.0 está instalado, pero informa
-que WSL2 no puede arrancar por virtualización no habilitada. CIM informa firmware virtualizado
-y SLAT disponibles, pero hipervisor no presente: hace falta revisar los componentes de
-Windows/arranque, no asumir que basta cambiar BIOS. No hay distribuciones WSL instaladas;
-una distribución de usuario no es requisito independiente si Docker gestiona su backend.
-Evidencia completa y comprobaciones de salida en [quickstart](quickstart.md).
+Docker Desktop, WSL2 y Compose están operativos. La ejecución principal está documentada
+en [ops/docker/README.md](../../ops/docker/README.md), con resultados en
+[verification.md](../../ops/docker/verification.md). No se requiere instalar PostgreSQL
+ni Mailpit en el host.
 
-**Decisión histórica sustituida por R12:** Compose era el camino local; ahora PostgreSQL y
-Mailpit nativos desbloquean el desarrollo autorizado. No se concluye incompatibilidad de
-Docker/WSL con el hardware ni se vuelve a modificar Windows.
+## R12 — Ejecución local
 
-Se mantiene una investigación temprana independiente de video (D07–D09), antes de cerrar
-alojamiento y antes de terminar identidad. Medir emisión, autorización HLS, ancho de banda,
-costo y limitar conclusiones al escenario medido. Este plan no contrata ni implementa video.
-
-Fuente: [Docker Desktop en Windows](https://docs.docker.com/desktop/setup/install/windows-install/).
-
-## R12 — Windows nativo y validación Linux temprana
-
-El usuario autoriza PostgreSQL 16.14 ya instalado, Node 22 y Mailpit portátil. Se evita
-intervenir de nuevo en el arranque y no se añade costo de servicios. Prisma soporta
-PostgreSQL 16; su conexión/transacción real sigue siendo requisito V00. Se mantienen
-ESM, capas del monolito y separación de entornos. Bases academia_dev/academia_v00_test,
-propietario de migración y runtime restringido distintos por base; nunca postgres en runtime.
-T001/T002 conservan sus IDs y casillas pendientes, diferidas fuera de la ruta local.
-T003 puede comenzar con Node/npm disponibles; T005 y T007 son independientes de las
-credenciales SQL. T006/T008 siguen requiriendo PostgreSQL real y toda la evidencia.
-
-Docker en Linux permanece como camino futuro, con V00-L inmediatamente tras V00 local
-y antes de US1/T031, registrado en T030. Usar misma major PostgreSQL 16 para reducir
-diferencias; ninguna prueba Windows acredita contenedores Linux. No contratar alojamiento.
-Fuentes: [PostgreSQL soportado por Prisma](https://www.prisma.io/docs/orm/reference/supported-databases),
-[Mailpit nativo](https://mailpit.axllent.org/docs/install/),
-[opciones Mailpit](https://mailpit.axllent.org/docs/configuration/runtime-options/).
-Procedimientos y evidencia en ops/local/native.md, environment.md y compatibility.md.
+El entorno principal usa cuatro servicios Linux con Compose, PostgreSQL 16.14 y Mailpit
+1.31.3. Se conservan Node 22.23.1, npm 10.9.8 y el lockfile, roles restringidos separados
+para academia_dev/academia_v00_test, y pruebas reales de Prisma, rollback y SMTP. La
+validación de este entorno no acredita funcionalidades ni ejecución remota de CI.
+La investigación de video D07–D09 sigue independiente, sin contratar alojamiento.
 
 ## Cierre de investigación
 
 Las decisiones de diseño para la fase 1 están expresadas. La combinación de versiones
-queda como candidata hasta la primera comprobación práctica, que todavía no se ha ejecutado.
+se verifica para el entorno documentado en ops/docker/verification.md; no acredita producción.
 No se repiten Q1–Q3. Los pendientes externos tienen un camino de resolución y criterios de desbloqueo;
 no se presentan como servicios instalados, pruebas superadas o costos confirmados.
