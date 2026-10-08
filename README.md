@@ -10,6 +10,8 @@ La configuración por entorno y el esquema de identidad con cuatro migraciones c
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
 están comprobadas como fundamentos; aún no habilitan registro o login.
+Las [sesiones, autorización y protecciones HTTP](specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md)
+añaden infraestructura y controles compartidos, sin habilitar todavía las historias funcionales.
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
 de carga reproducibles; no es una capacidad garantizada.
 

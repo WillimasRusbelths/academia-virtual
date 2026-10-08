@@ -6,6 +6,8 @@ T011–T016 añaden pruebas de configuración y persistencia; resultados y lími
 [fundamentos de configuración y persistencia](evidence/fundamentos-datos.md). No cierran V01–V16.
 T017–T020 añaden [reglas, credenciales y límites persistidos](evidence/reglas-credenciales-limites.md)
 comprobados; tampoco completan las historias ni el protocolo temporal HTTP de T087.
+T021–T023 añaden [sesiones, autorización y transporte HTTP](evidence/sesiones-autorizacion-http.md).
+Sus pruebas de fundamentos no cierran V01–V16 ni sustituyen la aceptación con las rutas y UI definitivas.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

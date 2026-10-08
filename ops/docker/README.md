@@ -74,6 +74,12 @@ permitir hosts arbitrarios.
 Los endpoints de identidad previstos aún no existen. El endpoint de salud actual se
 consulta directamente en el puerto API. Las páginas usan `localhost` de forma consistente.
 
+T023 añade `/health/ready`: responde 200 si el pool puede consultar PostgreSQL y 503 ante
+fallo, con configuración esencial validada al iniciar. No consulta SMTP; Mailpit no condiciona
+la disponibilidad del transporte de sesiones. `/health/live` sigue indicando proceso vivo.
+Ninguna ruta de salud renueva actividad de sesión. Evidencia del bloque en
+[sesiones, autorización y transporte](../../specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md).
+
 La API espera a PostgreSQL y Mailpit saludables; la web espera a la API saludable.
 El health check de la API demuestra que el proceso HTTP responde, no prueba por sí
 solo acceso a datos o SMTP. Esas conexiones se verifican con las pruebas indicadas abajo.
