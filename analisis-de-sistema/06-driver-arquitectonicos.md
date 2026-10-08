@@ -5,6 +5,8 @@ estructura, las dependencias y la viabilidad del sistema. Sus orígenes se encue
 los [requisitos funcionales RF](03-requisitos-funcionales.md),
 los [atributos de calidad AC](04-atributos-de-calidad.md) y las
 [restricciones RT](05-restricciones.md).
+Un driver se prioriza por cuánto condiciona la estructura, las dependencias o la
+viabilidad del proyecto, no por ser una funcionalidad visible.
 
 El estilo arquitectónico es un **monolito por capas, organizado en módulos**. El
 enfoque interno es **Clean Architecture**, con dependencias dirigidas hacia los casos

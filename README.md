@@ -79,8 +79,9 @@ imágenes Linux de API/web con `npm ci` y conserva los datos de PostgreSQL en un
 La API solo ensambla Probe y la web
 muestra «En preparación»; no hay flujos de negocio completos.
 
-Socket.IO autorizado por clase y OBS → SRS → HLS con HLS.js o reproducción nativa siguen
-propuestos. Docker Desktop y WSL2 están operativos; la configuración de Compose incluye
+Socket.IO autorizado por clase sigue propuesto. YouTube Live con OBS es la elección
+de video del MVP según DA03 y DEC01; integración y control de acceso pendientes.
+Docker Desktop y WSL2 están operativos; la configuración de Compose incluye
 PostgreSQL, Mailpit, API y web. Nginx y HTTPS corresponden a publicación futura.
 El video, el ancho de banda y el costo requieren una prueba temprana. No se añadirán
 microservicios, Kubernetes, Redis ni balanceadores sin una necesidad comprobada.

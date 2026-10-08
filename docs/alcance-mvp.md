@@ -31,7 +31,7 @@ gratuitos ni precios todavía no comprobados.
 | Orden y matrícula | Selección de varios cursos, precio por curso, conceptos y total calculados por servidor. | Regla definitiva de pago, vigencia y momento de asignación de cupos. |
 | Pago | Propuesta: un pago por el total de la orden y matrícula por cada curso adquirido. Izipay elegida para el MVP; integración no implementada. | Validación de la regla de pago, tarifas finales, límites, acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada. |
 | Materiales | Acceso a materiales por curso sujeto a autorización. | Formatos, límites, almacenamiento y reglas de publicación. |
-| Clase en vivo | Emisión del docente; alumnos como espectadores con participación solo por chat. | Calidad, latencia, simultaneidad, costo y mecanismo de autorización HLS. |
+| Clase en vivo | Emisión del docente con OBS hacia YouTube Live; alumnos como espectadores con participación solo por chat. | Calidad, latencia, simultaneidad, costo y compatibilidad del control de acceso con RF16. |
 | Paneles | Vistas básicas para cada rol según sus operaciones autorizadas. | Acciones y datos mínimos por panel. |
 
 ## Exclusiones de esta etapa y del MVP
@@ -50,8 +50,9 @@ Quedan fuera del MVP, salvo modificación explícita del alcance:
 
 ## Propuesta técnica inicial
 
-Todas las opciones siguientes están propuestas; todavía no se han instalado ni validado
-como parte de la aplicación.
+Las elecciones siguientes distinguen base técnica e implementación funcional.
+Docker Compose y los servicios locales cuentan con validación registrada; los flujos
+de negocio y las integraciones externas permanecen pendientes.
 
 | Componente | Propuesta | Validación necesaria |
 | --- | --- | --- |
@@ -59,8 +60,8 @@ como parte de la aplicación.
 | Backend | NestJS y TypeScript; monolito modular. | Límites de módulos, autorización y comportamiento concurrente. |
 | Datos | PostgreSQL y Prisma. | Transacciones, restricciones, migraciones y restauración. |
 | Chat | Socket.IO con autorización por clase. | Aislamiento de clases, reconexión y carga definida. |
-| Video | OBS del docente → SRS → HLS → HLS.js o reproducción nativa. | Autorización de manifiestos y segmentos, latencia, consumo y costo. |
-| Entorno local | Docker Compose. | Arranque reproducible y configuración sin secretos versionados. |
+| Video | OBS del docente → YouTube Live, elección DA03/DEC01 para el MVP. | Integración, acceso directo, permisos vencidos y compatibilidad con RF16; latencia, consumo y costo. |
+| Entorno local | Docker Compose con PostgreSQL, Mailpit, API y web. | Arranque y verificaciones locales comprobados en `47c8338`; no acredita funcionalidades ni producción. |
 | Publicación | Nginx y HTTPS. | Alojamiento, costo total y controles de acceso de extremo a extremo. |
 
 La elección de Izipay del 2026-09-23 sustituye a Culqi, candidata inicial; no acredita
@@ -79,7 +80,7 @@ tráfico. Esa prueba no demuestra por sí sola 1000 espectadores.
 | --- | --- | --- |
 | Matrícula | Cuentas diferentes, selección de cursos, órdenes y pagos simulados con k6. | Latencia, errores, cupos finales, matrículas únicas y totales correctos. |
 | Chat | Clases/grupos, conexiones, mensajes y reconexiones con cliente compatible con Socket.IO. | Autorización, entregas, latencia, errores y recursos consumidos. |
-| Video | Emisiones simultáneas, calidad, bitrate y consumidores descargando segmentos HLS. | Tráfico, segmentos recibidos, fallos y observaciones de reproducción real. |
+| Video | Emisiones simultáneas con OBS y reproducción real de YouTube Live; calidad, consumidores y protocolo de prueba por validar. | Tráfico observable, fallos, reproducción y controles de acceso; sin extrapolar un ensayo aislado a 1000 concurrentes. |
 
 Cada informe debe registrar versión del código, infraestructura, scripts/configuración,
 duración, carga alcanzada, latencia, errores, consumo de recursos y consistencia de matrículas

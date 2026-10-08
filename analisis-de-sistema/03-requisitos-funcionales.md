@@ -1,6 +1,6 @@
 # 03. Requisitos funcionales
 
-Revisión: 2026-10-01. RF01–RF19 son requisitos de síntesis del MVP. Los
+RF01–RF19 son requisitos de síntesis del MVP. Los
 FR-001–FR-033 de la [especificación de identidad](../specs/001-identidad-acceso-roles/spec.md)
 conservan sus IDs, detalles, límites y criterios de aceptación; no se renumeran.
 Ningún RF de esta tabla está implementado como flujo de negocio. La base técnica y las
@@ -23,7 +23,7 @@ pruebas auxiliares existentes no equivalen a su cumplimiento.
 | RF13 | Activar matrículas pagadas únicamente tras pago verificado y garantizar ausencia de duplicados y sobreventa en matrículas/asignación de cupos mediante transacciones y restricciones persistentes. | Constitución IV–VI; previsto. D01–D06 deben fijar atomicidad de la orden, identidad/vigencia de matrícula, momento de reserva/asignación, pago tardío y cancelaciones antes de implementar. |
 | RF14 | Permitir al alumno acceder a materiales solo con la autorización académica vigente. | Alcance y constitución II; previsto, D03/D12. |
 | RF15 | Permitir publicar materiales a los responsables autorizados de cada curso. | Área materiales; descomposición propuesta HU13. Docente y reglas exactas de publicación por validar en D12; no se aprueban formatos/límites nuevos. |
-| RF16 | Habilitar la emisión de clases por el docente autorizado y la reproducción por alumnos habilitados, comprobando acceso a manifiestos y segmentos HLS incluso por URL directa o con permiso vencido. | Alcance, constitución VIII; previsto, D03/D07–D08. |
+| RF16 | Habilitar la emisión de clases por el docente autorizado y la reproducción por alumnos habilitados, comprobando acceso a manifiestos y segmentos HLS incluso por URL directa o con permiso vencido. | Alcance, constitución VIII; previsto, D03/D07–D08. YouTube Live con OBS es la elección DEC01; la compatibilidad de estos controles con el proveedor sigue pendiente de validación. |
 | RF17 | Habilitar chat autorizado por clase para alumnos con acceso vigente y aislar los mensajes entre clases/grupos. | Alcance y constitución II; previsto, Socket.IO propuesto; no incluye participación audiovisual del alumno. |
 | RF18 | Mostrar paneles básicos por rol con las acciones y datos autorizados que se definan para el MVP. | Alcance; previsto, mínimos pendientes D12; no presume métricas académicas/financieras. |
 | RF19 | Permitir ejecutar migraciones controladas, respaldar/restaurar datos y recuperar el servicio mediante procedimientos operativos verificables antes de demo persistente o publicación. | Constitución X, plan y V16; previsto. No es una pantalla nueva; responsables y objetivos de recuperación pendientes D13. |

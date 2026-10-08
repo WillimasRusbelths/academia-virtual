@@ -1,6 +1,6 @@
 # 05. Restricciones
 
-Revisión: 2026-10-01. Se distinguen obligaciones del proyecto, decisiones
+Se distinguen obligaciones del proyecto, decisiones
 técnicas vigentes y propuestas aún sujetas a validación. Fuentes principales:
 [constitución 1.1.0](../.specify/memory/constitution.md),
 [alcance](../docs/alcance-mvp.md), [decisiones](../docs/decisiones-pendientes.md),
@@ -15,7 +15,7 @@ técnicas vigentes y propuestas aún sujetas a validación. Fuentes principales:
 | RT05 | Complejidad | No añadir microservicios, Kubernetes, Redis o balanceadores sin necesidad comprobada. No dimensionar ahora para 10 000 usuarios. | Constitución y plan: proceso Nest único, persistencia común por entorno y ejecutor interno para correo. |
 | RT06 | Pago externo | Izipay elegida desde 2026-09-23; separar adaptador del proveedor de órdenes/matrículas. Probar carga con pagos simulados y la integración aparte en sandbox, sin cobros reales. | Constitución V–VII y D02. Tarifas, límites, sandbox y Yape pendientes; no se supone integración, disponibilidad ilimitada ni modalidad comercial. |
 | RT07 | Correo | Captura local con Mailpit sin envío real; futura salida SMTP por configuración con TLS/remitente/DNS y cuota verificados. | Plan/research R07–R08, con ejecución local mediante Compose. No hay proveedor contratado ni gratuidad garantizada. |
-| RT08 | Video y participación | Emite el docente; alumnos espectadores con chat, sin audio/cámara/pantalla. OBS → SRS → HLS con HLS.js o reproducción nativa es propuesta sujeta a viabilidad. | Alcance y D07–D08. Autorizar manifiestos y segmentos; no prometer protección contra grabaciones. Grabaciones automáticas fuera del MVP. |
+| RT08 | Video y participación | Emite el docente mediante OBS hacia YouTube Live; alumnos espectadores con chat, sin audio/cámara/pantalla. YouTube Live es la elección para el MVP. | DA03 y DEC01; integración y compatibilidad con los controles de RF16 pendientes D07–D08. Deben probarse acceso directo y permisos vencidos; no prometer protección contra grabaciones. Grabaciones automáticas fuera del MVP. |
 | RT09 | Entornos y datos | Separar configuración, secretos y datos de desarrollo, demo y producción; no versionar credenciales; usar datos ficticios y migraciones controladas. | Constitución IX–X. No obliga a mantener servidores permanentes por entorno. Restauración demostrada requerida antes de demo persistente/publicación. |
 | RT10 | Alcance y reglas pendientes | Aproximadamente 1000 estudiantes y grupos de 40–50; un rol por cuenta. Sin exámenes, certificados ni apps nativas. Un pago por orden y matrícula por curso siguen siendo propuestas. | Alcance, identidad y D01–D06/D12. No implementar reservas, reembolsos, vigencia o permisos académicos sin especificarlos; ninguna población prevista acredita concurrencia. |
 | RT11 | Aceptación y evidencia | 1000 usuarios concurrentes es requisito por validar con escenarios reproducibles, criterios y duración acordados con el profesor. | Constitución XI y D10. No se sustituyen pruebas de carga por builds, arranque Docker, páginas abiertas o ensayos de compatibilidad. |

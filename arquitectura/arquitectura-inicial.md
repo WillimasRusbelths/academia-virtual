@@ -9,9 +9,9 @@ el monolito modular del [plan de identidad](../specs/001-identidad-acceso-roles/
 
 | Material revisado | Qué aporta | Estado que permite afirmar |
 | --- | --- | --- |
-| [README](../README.md) | Nombre, propósito, presupuesto y navegación. | Tenía referencias a una etapa sin código; se actualizan en esta entrega. |
+| [README](../README.md) | Nombre, propósito, presupuesto y navegación. | Distingue base técnica, diseño y funcionalidades pendientes. |
 | [Constitución 1.1.0](../.specify/memory/constitution.md) | Seguridad, precios, integridad, pagos, video, entornos, recuperación, capacidad y gobernanza. | Obligaciones del proyecto; no pruebas superadas. |
-| [Alcance MVP](../docs/alcance-mvp.md) y [decisiones D01–D13](../docs/decisiones-pendientes.md) | Áreas funcionales, exclusiones, presupuesto e integraciones. | Fuente del alcance general. Su estado del 2026-09-23 es histórico; se añaden notas de vigencia sin sustituir reglas pendientes. |
+| [Alcance MVP](../docs/alcance-mvp.md) y [decisiones D01–D13](../docs/decisiones-pendientes.md) | Áreas funcionales, exclusiones, presupuesto e integraciones. | Fuente del alcance general; las reglas pendientes conservan sus identificadores y condiciones de cierre. |
 | [Spec de identidad](../specs/001-identidad-acceso-roles/spec.md) y [checklist](../specs/001-identidad-acceso-roles/checklists/requirements.md) | 7 historias, 33 FR, 10 criterios de éxito, roles y flujos definidos. | Calidad documental revisada; sin historias implementadas. |
 | [Plan](../specs/001-identidad-acceso-roles/plan.md) y [research](../specs/001-identidad-acceso-roles/research.md) | Monolito modular, sesiones opacas, correo persistido, decisiones R01–R12. | Diseño aprobado; Ejecución local mediante Docker Compose con PostgreSQL 16.14. |
 | [Modelo de datos](../specs/001-identidad-acceso-roles/data-model.md), [API](../specs/001-identidad-acceso-roles/contracts/api.md) y [UI](../specs/001-identidad-acceso-roles/contracts/ui.md) | Entidades/invariantes, contratos HTTP y pantallas de identidad. | Diseños de destino; no tablas/endpoints/pantallas funcionales existentes. |
@@ -39,113 +39,19 @@ Una lista de tareas futuras no cuenta como implementación.
 | Estado de tareas de entorno | T001–T010 completadas según la evidencia local; las historias y el resto de T030 siguen pendientes. |
 | Culqi aparece como candidata histórica. | Izipay elegida desde 2026-09-23 según D02 y constitución; sin integración. La regla de un pago por orden sigue pendiente independiente de la pasarela. |
 | Plan describe entradas/aplicación/dominio/infraestructura; la vista general muestra tres capas. | Son niveles de detalle compatibles: presentación = web/entradas; negocio = aplicación/dominio; datos = persistencia. Adaptadores externos quedan en el límite del módulo que los usa; no son una cuarta capa de negocio ni parten de PostgreSQL. |
+| Selección y protección de video | YouTube Live con OBS es la elección vigente según DA03 y DEC01. La compatibilidad con los controles de RF16, el acceso directo y los permisos vencidos permanece pendiente; no se considera suficiente ocultar enlaces. |
 
 ## Vista propuesta de tres capas
 
-Los módulos y conexiones siguientes describen el **diseño previsto del MVP**. Solo
-existen el esqueleto web/API, el ensayo PostgreSQL/Mailpit y los controles de estructura
-indicados arriba; no se presenta este diagrama como vista de funcionalidades desplegadas.
+El [diagrama de arquitectura](diagrama-arquitectura.md) presenta los actores, las tres
+capas, los grupos de módulos y los servicios externos. Es una vista del diseño previsto,
+no de funcionalidades desplegadas. Mantenerla separada permite consultar esta
+síntesis sin duplicar el diagrama.
 
-```mermaid
-flowchart TB
-    alumno["Alumno / visitante"]
-    docente["Docente"]
-    admin["Administrador"]
-    operador["Responsable del entorno"]
-
-    subgraph presentacion["Capa 1 · Presentación y entradas"]
-        web["Aplicación web · React / TypeScript / Vite"]
-        api["API REST · entradas HTTP NestJS"]
-        gateway["Entrada de chat · Socket.IO previsto"]
-        cli["CLI operativa restringida · prevista"]
-    end
-
-    subgraph negocio["Capa 2 · Lógica de negocio · monolito modular NestJS"]
-        identidad["Identidad y usuarios · acceso, cuentas, perfil e inicio"]
-        permisos["Autorización · rol, propiedad y matrícula"]
-        oferta["Oferta académica · cursos, grupos, horarios y cupos"]
-        ordenes["Órdenes · precios, conceptos y total"]
-        pagos["Pagos · verificación, idempotencia y adaptador Izipay"]
-        matriculas["Matrículas · activación y consistencia de cupos"]
-        materiales["Materiales · publicación y acceso"]
-        clases["Clases y video · permisos y coordinación de medios"]
-        chat["Chat · autorización y aislamiento por clase"]
-        paneles["Paneles básicos · consultas por rol"]
-        correo["Correo · entregas y adaptador SMTP"]
-        auditoria["Auditoría · eventos permitidos sin secretos"]
-    end
-
-    subgraph datos["Capa 3 · Datos y persistencia"]
-        persistencia["Adaptadores Prisma/pg · consultas, transacciones y restricciones"]
-        bd[("PostgreSQL 16 · datos por entorno")]
-        archivos["Almacenamiento de materiales · por definir D12"]
-    end
-
-    subgraph externos["Sistemas externos / infraestructura de medios prevista"]
-        izipay["Izipay · integración pendiente"]
-        smtp["SMTP de producción · proveedor pendiente"]
-        mailpit["Mailpit · captura local comprobada"]
-        obs["OBS del docente · previsto"]
-        srs["SRS / HLS · distribución y autorización por validar"]
-    end
-
-    alumno --> web
-    docente --> web
-    admin --> web
-    operador --> cli
-    web -->|"HTTPS / JSON"| api
-    web --> gateway
-    cli --> identidad
-    api --> identidad
-    api --> permisos
-    api --> oferta
-    api --> ordenes
-    api --> pagos
-    api --> matriculas
-    api --> materiales
-    api --> clases
-    api --> paneles
-    gateway --> chat
-    identidad --> permisos
-    identidad --> correo
-    identidad --> auditoria
-    ordenes --> oferta
-    pagos --> ordenes
-    pagos --> matriculas
-    matriculas --> oferta
-    materiales --> permisos
-    clases --> permisos
-    chat --> permisos
-    paneles --> permisos
-    paneles --> oferta
-    paneles --> matriculas
-    identidad --> persistencia
-    permisos --> persistencia
-    oferta --> persistencia
-    ordenes --> persistencia
-    pagos --> persistencia
-    matriculas --> persistencia
-    materiales --> persistencia
-    materiales --> archivos
-    clases --> persistencia
-    correo --> persistencia
-    auditoria --> persistencia
-    persistencia --> bd
-    pagos <-->|"operación y confirmación verificada"| izipay
-    correo -->|"SMTP futuro"| smtp
-    correo -->|"SMTP local de prueba"| mailpit
-    clases -.->|"contrato de autorización por definir"| srs
-    docente --> obs
-    obs -->|"emisión prevista"| srs
-    srs -->|"HLS autorizado: manifiestos y segmentos"| web
-```
-
-Las flechas muestran colaboración/flujo lógico, no un grafo de imports de código.
-Los accesos a integraciones nacen de pagos, correo y clases; la BD no invoca proveedores.
-SMTP real y Mailpit son alternativas según el entorno. OBS y la entrega HLS representan
-el tráfico de medios; **no se propone hacer circular segmentos por PostgreSQL ni por
-la API REST**. La conexión clases–SRS señala un contrato por definir en D08, no una
-integración disponible. El almacenamiento de materiales también sigue abierto.
+El [estilo arquitectónico](estilo-arquitectonico.md) documenta el monolito por capas;
+el [enfoque arquitectónico](enfoque-arquitectonico.md) detalla Clean Architecture.
+La decisión R01 conserva una sola aplicación backend con módulos internos; Docker
+Compose es el entorno local validado, no un estilo ni una división en microservicios.
 
 ## Responsabilidades y dependencias
 
@@ -169,23 +75,16 @@ Argon2id y entregas persistidas son decisiones de diseño; solo las bibliotecas/
 auxiliares tienen evidencia. Los módulos académicos del gráfico pertenecen al MVP
 posterior y todavía no tienen especificaciones equivalentes.
 
-## Cobertura del análisis y pendientes
+## Decisiones y validaciones pendientes
 
-| Entregable | Material que ya cubría la necesidad | Organización añadida |
-| --- | --- | --- |
-| [Actores](../analisis-de-sistema/01-actores.md) | Roles de identidad y servicios del alcance/plan. | Catálogo humano/externo con necesidades, límites y estado. |
-| [Historias](../analisis-de-sistema/02-historias-del-usuario.md) | Siete historias detalladas de identidad y áreas del MVP. | HU01–HU17 del conjunto del MVP con origen y propuestas explícitas. |
-| [Requisitos funcionales](../analisis-de-sistema/03-requisitos-funcionales.md) | 33 FR de identidad, constitución y alcance académico. | RF01–RF19 de síntesis y matriz HU ↔ RF; preservación de FR originales. |
-| [Calidad](../analisis-de-sistema/04-atributos-de-calidad.md) | Seguridad, operación y carga detalladas en constitución/verification. | AC01–AC07 como escenarios de estímulo, respuesta, medida y evidencia. |
-| [Restricciones](../analisis-de-sistema/05-restricciones.md) | Plazo, presupuesto, stack, integraciones y exclusiones. | RT01–RT11 con estado vigente y fuente. |
-| [Drivers](../analisis-de-sistema/06-driver-arquitectonicos.md) | Decisiones y principios arquitectónicos dispersos. | DA01–DA08 priorizados y trazados a RF/AC/RT. |
-| Arquitectura inicial | Monolito modular y capas internas del plan de identidad. | Vista Mermaid de tres capas para el MVP, responsabilidades, integraciones, inventario y resolución de discrepancias. |
+Los [drivers DA01–DA10](../analisis-de-sistema/06-driver-arquitectonicos.md) y las
+[decisiones arquitectónicas](../analisis-de-sistema/07-decisiones-arquitectonicas.md)
+relacionan el diseño con seguridad, integridad, mantenibilidad y operación.
+Se conservan HU01–HU17 y RF01–RF19 como síntesis del MVP, diferenciados de las siete
+historias y los 33 FR del detalle de identidad.
 
-Permanecen abiertos D01–D10/D12–D13 según
-[decisiones-pendientes.md](../docs/decisiones-pendientes.md): reglas de pago/reserva,
-vigencia/reembolsos/horarios; condiciones de Izipay/Yape; video, permisos HLS y costo;
-alojamiento; rúbrica y carga; materiales/paneles; objetivos y operación de recuperación.
-D11 tiene comportamiento y diseño definidos, sin implementación funcional. La asignación
-detallada de gestión académica/publicación también debe validarse al especificar esos módulos.
-SMTP de producción y auditoría de dependencias siguen pendientes. Estos pendientes
-no se convierten en reglas aprobadas mediante esta entrega documental.
+D01–D06 mantienen reglas de pagos y matrículas pendientes; D07–D08, validación de
+video y control de acceso; D09–D10, alojamiento y criterios de carga; D12–D13,
+materiales, paneles y recuperación. D11 tiene comportamiento definido sin aceptación
+funcional. Izipay, correo externo, YouTube Live y recuperación requieren implementación
+y validación. Los **1000 usuarios concurrentes siguen siendo un objetivo no demostrado**.

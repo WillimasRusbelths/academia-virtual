@@ -1,6 +1,6 @@
 # 04. Atributos de calidad
 
-Revisión: 2026-10-01. Los escenarios son metas verificables, no resultados.
+Los escenarios son metas verificables, no resultados.
 **Soportar 1000 usuarios concurrentes sigue siendo un requisito por validar mediante
 pruebas de carga.** No hay evidencia de carga ejecutada; 1000 estudiantes previstos no
 equivalen a 1000 sesiones, matrículas, conexiones de chat o reproducciones simultáneas.
@@ -34,4 +34,7 @@ exige ensayos diferenciados de matrícula, Socket.IO y consumo real de segmentos
 Cada informe debe incluir revisión de código y cambios locales, configuración/scripts,
 infraestructura, generador, duración, concurrencia real, RPS cuando aplique, percentiles,
 errores, recursos y consistencia. Un escenario combinado requiere su propia medición.
-Las metas finales se acuerdan con el profesor en D10; no se declaran aprobadas por esta guía.
+La elección vigente de video es YouTube Live con OBS (DEC01). Los controles de acceso
+y escenarios de consumo de medios deben validar su compatibilidad con el proveedor;
+no se acredita autorización del video por autenticar la página o esconder un enlace.
+Las metas finales se acuerdan con el profesor en D10 y permanecen pendientes de validación.

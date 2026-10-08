@@ -1,6 +1,7 @@
-# 01. Actores de Academia Virtual
+# Actores del sistema
 
-Revisión: 2026-10-01. Análisis del proyecto existente, no una aplicación nueva.
+La plataforma Academia Virtual considera actores humanos y servicios externos que
+apoyan procesos de correo, pagos y transmisión de clases en vivo.
 El [alcance del MVP](../docs/alcance-mvp.md) y la
 [especificación de identidad](../specs/001-identidad-acceso-roles/spec.md) conservan
 las reglas detalladas. El [inventario y estado comprobado](../arquitectura/arquitectura-inicial.md#inventario-y-estado-del-repositorio)
@@ -9,29 +10,43 @@ los flujos de negocio descritos aquí.
 
 ## Actores humanos
 
-| ID | Actor | Necesidades e interacción prevista | Límites y origen |
-| --- | --- | --- | --- |
-| A01 | Visitante / futuro alumno | Registrarse como alumno, verificar su correo y acceder a su cuenta. | No puede elegir un rol privilegiado; identidad US2, FR-001–004/029–031. No se presupone un catálogo público. |
-| A02 | Alumno | Acceder/cerrar sesión, recuperar contraseña y consultar perfil; consultar cursos, grupos, horarios y cupos, seleccionar cursos y pagar su orden; acceder a materiales, video y chat autorizados. | Un rol por cuenta. Las funciones académicas son MVP previsto; vigencia de matrícula y reservas pendientes D01–D06. Participa en clase solo por chat, sin cámara, audio ni pantalla. |
-| A03 | Docente | Acceder a su perfil e inicio; emitir clases de los grupos que le correspondan y disponer de las operaciones autorizadas de materiales y chat. | No administra cuentas ni perfiles privados ajenos. Asignación de grupos y permisos de publicación/moderación aún deben especificarse; alcance, D07–D08/D12. |
-| A04 | Administrador | Crear y consultar cuentas, corregir nombres, asignar un único rol y activar/desactivar con auditoría; administrar la oferta académica y consultar sus operaciones desde un panel básico. | Identidad US4: revocación de sesiones y protección del último administrador. La gestión de oferta se propone para este actor y requiere matriz detallada; no se le atribuyen reembolsos ni lectura de secretos. |
-| A05 | Responsable del entorno (operador local) | Inicializar una sola vez al primer administrador mediante procedimiento restringido; preparar configuración, migraciones, respaldo y recuperación. | Actor operativo, no cuarto rol de aplicación. Identidad US6, plan y verificación V16. No existe alta pública de administradores. |
+| ID | Equivalencia | Actor | Descripción | Necesidades principales y límites |
+| --- | --- | --- | --- | --- |
+| A01 | ACT01 | Visitante | Persona sin sesión o cuenta habilitada. | Registrarse solo como alumno, verificar correo e iniciar sesión. La consulta pública de cursos requiere especificación; no se presupone un catálogo público aprobado. |
+| A02 | ACT02 | Alumno | Usuario matriculado o interesado en matricularse. | Gestionar perfil, consultar cursos, grupos, horarios y cupos, seleccionar cursos y pagar su orden; acceder a materiales, video y chat autorizados. Vigencia y reservas pendientes D01–D06. Participa solo por chat, sin audio, cámara ni pantalla. |
+| A03 | ACT03 | Docente | Responsable de actividades académicas de sus cursos. | Consultar sus cursos, emitir clases, publicar materiales y comunicarse por chat bajo permisos autorizados. Asignación de grupos y permisos de publicación/moderación pendientes de especificación; no administra cuentas ajenas. |
+| A04 | ACT04 | Administrador | Responsable de administración de cuentas y oferta académica. | Gestionar usuarios, asignar un único rol y activar/desactivar con auditoría y revocación de sesiones, protegiendo al último administrador. Gestión de cursos, matrículas y paneles sujeta a la matriz académica pendiente; no se le atribuyen reembolsos ni lectura de secretos. |
+| A05 | — | Responsable del entorno | Operador local; no es un cuarto rol de la aplicación. | Inicializar una sola vez al primer administrador mediante procedimiento restringido; gestionar configuración, migraciones, respaldos y recuperación según HU06, RF19 y V16. |
 
-Las cuentas de alumno, docente y administrador comparten acceso, verificación, recuperación
-y perfil. La distinción visitante/cuenta no habilitada permite describir los flujos previos
-a la sesión sin crear otro rol persistente. Para permisos académicos todavía no aprobados,
-se conserva la denegación por defecto hasta especificarlos.
+Los identificadores A01–A05 se conservan para la trazabilidad; ACT01–ACT04 son sus
+equivalencias en el catálogo de actores. Alumno, docente y administrador comparten
+acceso, verificación, recuperación y perfil. Los permisos académicos no especificados
+mantienen denegación por defecto.
 
-## Sistemas y herramientas externos
+## Sistemas externos
 
-| ID | Sistema / herramienta | Interacción prevista y módulo responsable | Estado respaldado |
-| --- | --- | --- | --- |
-| E01 | Izipay | El módulo de pagos inicia la operación y verifica autenticidad, orden, importe y moneda de la confirmación mediante un adaptador. | Elegida el 2026-09-23; sustituye a Culqi. Sin integración ni contratación acreditada. D02: sandbox, tarifas, límites y Yape pendientes. |
-| E02 | Servicio SMTP de producción | El módulo de correo entrega enlaces de verificación/recuperación solicitados por identidad. | Proveedor sin elegir/contratar; TLS, remitente, DNS, cuota y costo pendientes. Nodemailer está instalado y probado solo en compatibilidad local. |
-| E03 | Mailpit local | Recibe y permite inspeccionar correos ficticios en desarrollo/pruebas, sustituyendo al SMTP externo. | Captura local comprobada en V00; no implica envío real ni flujos de identidad implementados. Ruta actual Docker Compose. |
-| E04 | OBS del docente y servidor SRS/HLS | OBS emite; SRS distribuye HLS. El módulo de clases/video debe coordinar permisos para emisión y reproducción; el navegador reproduce HLS. | Cadena técnica propuesta, no integrada. Autorización de manifiestos/segmentos, calidad, latencia, simultaneidad y costo pendientes D07–D08. SRS es infraestructura de medios prevista, no proveedor comercial contratado. |
+| ID | Equivalencia | Sistema externo | Interacción prevista y módulo responsable | Estado |
+| --- | --- | --- | --- | --- |
+| E02 / E03 | SE01 | Correo electrónico | El módulo de correo entrega enlaces de verificación y recuperación; Mailpit sustituye al SMTP externo en desarrollo y pruebas. | Mailpit validado en Docker Compose; no acredita flujos de identidad ni entrega real. SMTP de producción pendiente de proveedor, TLS, remitente, DNS, cuotas y costo. E02 identifica salida externa y E03 captura local. |
+| E01 | SE02 | Izipay | Pagos inicia la operación y verifica autenticidad, orden, importe y moneda mediante un adaptador. | Pasarela seleccionada; integración pendiente. D02 mantiene tarifas, límites, acceso a pruebas y Yape por confirmar. |
+| E04 | SE03 | YouTube Live con OBS | El docente emite con OBS hacia YouTube Live; clases coordina el acceso previsto y la web reproduce el video. | Elección DA03/DEC01 para el MVP; integración y control de acceso pendientes. Autenticar una página u ocultar un enlace no demuestra protección del video. |
 
-Fuentes: [decisiones D01–D13](../docs/decisiones-pendientes.md),
-[plan de identidad](../specs/001-identidad-acceso-roles/plan.md),
-[compatibilidad local](../ops/docker/compatibility.md). PostgreSQL es la persistencia
-interna del sistema; no se modela como actor humano ni como pasarela de integraciones.
+## Relaciones principales
+
+| Actor | Interacción principal |
+|---|---|
+| Visitante | Se registra, verifica su correo electrónico e inicia sesión. |
+| Alumno | Consulta cursos, se matricula, realiza pagos y accede al contenido académico. |
+| Docente | Gestiona materiales e información académica de sus cursos. |
+| Administrador | Administra usuarios, roles, cursos y matrículas. |
+| Responsable del entorno | Inicializa el acceso administrativo y prepara la operación y recuperación. |
+| Servicio de correo electrónico | Entrega mensajes de verificación y recuperación de acceso. |
+| Izipay | Procesa y comunica el resultado de los pagos. |
+| YouTube Live | Transmite las clases en vivo vinculadas a los cursos. |
+
+Estas relaciones describen necesidades, no operaciones ya disponibles. Fuentes:
+[decisiones pendientes](../docs/decisiones-pendientes.md),
+[decisiones arquitectónicas](07-decisiones-arquitectonicas.md),
+[plan de identidad](../specs/001-identidad-acceso-roles/plan.md) y
+[verificación Docker](../ops/docker/verification.md). PostgreSQL es persistencia
+interna; no es un actor ni una pasarela hacia servicios externos.
