@@ -4,7 +4,9 @@
 
 Academia Virtual emplea una arquitectura de tres capas: presentación, lógica de negocio y datos. Esta separación permite distribuir las responsabilidades del sistema, facilitar su mantenimiento y evitar que las interfaces de usuario accedan directamente a la base de datos.
 
-La solución se plantea como un monolito modular. El frontend utiliza React, TypeScript y Vite, mientras que el backend emplea NestJS y expone una API REST. La información se almacena en PostgreSQL mediante adaptadores de persistencia.
+La solución se plantea como un monolito por capas organizado en módulos. El frontend utiliza React, TypeScript y Vite, mientras que el backend emplea NestJS y expone una API REST. Los módulos se ejecutan dentro de una misma aplicación; Clean Architecture orienta sus dependencias internas según R01. La información se almacenará en PostgreSQL mediante adaptadores de persistencia.
+
+El diagrama representa el **diseño previsto**, no funcionalidades ya desplegadas. La base web/API y el entorno PostgreSQL/Mailpit están comprobados; los módulos de negocio, el gateway de chat y los adaptadores funcionales siguen pendientes. Docker Compose organiza la ejecución local y no convierte los contenedores en microservicios.
 
 ## Diagrama de arquitectura
 
@@ -21,7 +23,7 @@ flowchart TB
         direction LR
         web["Aplicación web<br/>React, TypeScript y Vite"]
         api["API REST<br/>NestJS"]
-        gateway["Gateway de chat<br/>Socket.IO"]
+        gateway["Gateway de chat<br/>Socket.IO previsto"]
     end
 
     subgraph negocio["Capa de lógica de negocio"]
@@ -31,21 +33,22 @@ flowchart TB
         matriculas["Matrículas y pagos"]
         aula["Clases en vivo y chat"]
         administracion["Administración y paneles"]
+        entregas["Correo · módulo previsto"]
     end
 
     subgraph datos["Capa de datos"]
         direction LR
-        persistencia["Persistencia<br/>Prisma"]
+        persistencia["Persistencia prevista<br/>Prisma/pg"]
         postgres[("PostgreSQL")]
-        archivos["Almacenamiento de materiales"]
+        archivos["Materiales<br/>Almacenamiento por definir"]
     end
 
     subgraph externos["Servicios externos"]
         direction LR
-        izipay["Izipay"]
-        correo["Servicio de correo<br/>SMTP / Mailpit"]
-        youtube["YouTube Live"]
-        obs["OBS Studio"]
+        izipay["Izipay<br/>Integración pendiente"]
+        correo["Servicio de correo<br/>SMTP pendiente / Mailpit local validado"]
+        youtube["YouTube Live<br/>Acceso por validar"]
+        obs["OBS Studio<br/>Emisión prevista"]
     end
 
     alumno --> web
@@ -67,11 +70,13 @@ flowchart TB
     matriculas --> persistencia
     aula --> persistencia
     administracion --> persistencia
+    entregas --> persistencia
 
     persistencia --> postgres
     academico --> archivos
 
-    identidad -.->|"verificación y recuperación"| correo
+    identidad -->|"programa entregas"| entregas
+    entregas -.->|"adaptador SMTP"| correo
     matriculas -.->|"procesamiento de pagos"| izipay
     aula -.->|"acceso a la transmisión"| youtube
     docente -.->|"emisión de video"| obs
@@ -96,27 +101,30 @@ flowchart TB
 | Matrículas y pagos | Creación de matrículas, cálculo de importes, confirmación de pagos y habilitación del acceso a los cursos. |
 | Clases en vivo y chat | Control de acceso a las clases, publicación de enlaces y comunicación en tiempo real entre los participantes. |
 | Administración y paneles | Gestión de usuarios, roles, cursos, matrículas y consultas correspondientes a cada tipo de usuario. |
+| Correo | Entregas persistidas, reintentos y adaptación SMTP solicitados por identidad; implementación pendiente. |
+
+Estos grupos resumen capacidades del MVP, no sustituyen los módulos detallados del plan de identidad ni crean unidades de despliegue independientes. La inicialización y recuperación del operador se describen en la arquitectura inicial y en el plan; no se representan como pantallas adicionales en esta vista.
 
 ## Servicios externos
 
 | Servicio | Función dentro del sistema | Situación |
 |---|---|---|
 | Izipay | Procesar los pagos de las matrículas y comunicar el resultado de cada operación. | Servicio seleccionado; integración pendiente de implementación y validación. |
-| Mailpit | Capturar los correos enviados durante el desarrollo y las pruebas locales. | Disponible para el entorno de desarrollo. |
+| Mailpit | Capturar los correos enviados durante el desarrollo y las pruebas locales. | Servicio local validado con Docker Compose; los flujos funcionales de correo siguen pendientes. |
 | Servicio SMTP | Enviar correos de verificación y recuperación de contraseña en producción. | Proveedor pendiente de selección y configuración. |
-| YouTube Live | Transmitir las clases en vivo y proporcionar el reproductor de video. | Servicio seleccionado para el MVP; reglas de acceso pendientes de validación. |
+| YouTube Live | Transmitir las clases en vivo y proporcionar el reproductor de video. | Elección DA03/DEC01 para el MVP con OBS; integración y compatibilidad con el control de acceso RF16 pendientes de validación. |
 | OBS Studio | Permitir que el docente emita audio y video desde su computadora. | Herramienta prevista para la transmisión de las clases. |
 | Almacenamiento de materiales | Conservar los archivos académicos publicados por los docentes. | Alternativa tecnológica pendiente de selección. |
 
 ## Dependencias
 
-La aplicación web se comunica con la API REST mediante HTTPS y utiliza una conexión en tiempo real para el chat. La API dirige cada solicitud al módulo de negocio correspondiente.
+En el diseño previsto, la aplicación web se comunicará con la API REST mediante HTTP/JSON, con HTTPS en publicación, y utilizará una conexión en tiempo real para el chat. La API dirigirá cada solicitud al módulo de negocio correspondiente.
 
 Los módulos utilizan contratos de persistencia para almacenar y consultar información. Los adaptadores implementan estos contratos mediante Prisma y PostgreSQL. De esta manera, las reglas del negocio no dependen directamente de una tecnología de base de datos.
 
 Las integraciones externas se realizan desde el módulo que las necesita:
 
-- Identidad y usuarios utiliza el servicio de correo.
+- Identidad y usuarios solicita entregas al módulo de correo, que utiliza su adaptador SMTP.
 - Matrículas y pagos utiliza Izipay.
 - Clases en vivo utiliza YouTube Live.
 - El docente utiliza OBS Studio para emitir la transmisión.
@@ -126,9 +134,11 @@ PostgreSQL conserva los datos del sistema, pero no se comunica directamente con 
 
 ## Estado de la arquitectura
 
-El proyecto cuenta con la estructura inicial del frontend, la API, PostgreSQL y Mailpit para desarrollo. Los módulos funcionales se implementarán progresivamente de acuerdo con las historias de usuario y los requisitos establecidos.
+El proyecto cuenta con la estructura inicial del frontend y la API: React muestra «En preparación» y NestJS compone ProbeModule para `GET /health/live`. PostgreSQL, Mailpit, API y web funcionan en el entorno local Docker Compose validado en el commit `47c8338`, según la [evidencia registrada](../ops/docker/verification.md). Los módulos funcionales se implementarán progresivamente de acuerdo con las historias y requisitos.
 
 La capacidad para soportar 1000 usuarios concurrentes deberá comprobarse mediante pruebas de carga. Las integraciones con Izipay, correo de producción, YouTube Live y almacenamiento de materiales también requieren implementación y validación.
+
+La protección de video exige comprobar acceso directo y permisos vencidos. Una página autenticada o un enlace oculto no demuestran ese control; la compatibilidad con las condiciones de RF16 permanece pendiente. La operación local tampoco demuestra disponibilidad de producción ni restauración de respaldos.
 
 ## Documentos relacionados
 
@@ -138,3 +148,7 @@ La capacidad para soportar 1000 usuarios concurrentes deberá comprobarse median
 - [Atributos de calidad](../analisis-de-sistema/04-atributos-de-calidad.md)
 - [Restricciones](../analisis-de-sistema/05-restricciones.md)
 - [Drivers arquitectónicos](../analisis-de-sistema/06-driver-arquitectonicos.md)
+- [Decisiones arquitectónicas](../analisis-de-sistema/07-decisiones-arquitectonicas.md)
+- [Arquitectura inicial](arquitectura-inicial.md)
+- [Estilo arquitectónico](estilo-arquitectonico.md)
+- [Enfoque arquitectónico](enfoque-arquitectonico.md)

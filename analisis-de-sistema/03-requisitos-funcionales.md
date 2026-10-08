@@ -23,7 +23,7 @@ pruebas auxiliares existentes no equivalen a su cumplimiento.
 | RF13 | Activar matrículas pagadas únicamente tras pago verificado y garantizar ausencia de duplicados y sobreventa en matrículas/asignación de cupos mediante transacciones y restricciones persistentes. | Constitución IV–VI; previsto. D01–D06 deben fijar atomicidad de la orden, identidad/vigencia de matrícula, momento de reserva/asignación, pago tardío y cancelaciones antes de implementar. |
 | RF14 | Permitir al alumno acceder a materiales solo con la autorización académica vigente. | Alcance y constitución II; previsto, D03/D12. |
 | RF15 | Permitir publicar materiales a los responsables autorizados de cada curso. | Área materiales; descomposición propuesta HU13. Docente y reglas exactas de publicación por validar en D12; no se aprueban formatos/límites nuevos. |
-| RF16 | Habilitar la emisión de clases por el docente autorizado y la reproducción por alumnos habilitados, comprobando acceso a manifiestos y segmentos HLS incluso por URL directa o con permiso vencido. | Alcance, constitución VIII; previsto, D03/D07–D08. |
+| RF16 | Habilitar la emisión de clases por el docente autorizado y la reproducción por alumnos habilitados, comprobando acceso a manifiestos y segmentos HLS incluso por URL directa o con permiso vencido. | Alcance, constitución VIII; previsto, D03/D07–D08. YouTube Live con OBS es la elección DEC01; la compatibilidad de estos controles con el proveedor sigue pendiente de validación. |
 | RF17 | Habilitar chat autorizado por clase para alumnos con acceso vigente y aislar los mensajes entre clases/grupos. | Alcance y constitución II; previsto, Socket.IO propuesto; no incluye participación audiovisual del alumno. |
 | RF18 | Mostrar paneles básicos por rol con las acciones y datos autorizados que se definan para el MVP. | Alcance; previsto, mínimos pendientes D12; no presume métricas académicas/financieras. |
 | RF19 | Permitir ejecutar migraciones controladas, respaldar/restaurar datos y recuperar el servicio mediante procedimientos operativos verificables antes de demo persistente o publicación. | Constitución X, plan y V16; previsto. No es una pantalla nueva; responsables y objetivos de recuperación pendientes D13. |
@@ -62,7 +62,7 @@ Las 17 HU y los 19 RF describen el MVP general; las siete historias y los 33 FR 
 solo identidad. La relación es de refinamiento y puede ser de varios a varios: no deben
 sumarse ni esperarse cantidades iguales. US1–US7 son los nombres de plan/tareas para
 las historias numeradas 1–7 de spec.md; allí también se usan referencias de aceptación
-como HU1.1, distintas de los IDs HU01–HU17 de AS-002.
+como HU1.1, distintas de los IDs HU01–HU17 del análisis.
 
 | Historia detallada de identidad | HU general correspondiente | RF generales principales |
 | --- | --- | --- |

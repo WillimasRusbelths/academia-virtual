@@ -1,4 +1,4 @@
-name: V00-L Linux manual
+name: Docker Compose manual
 
 on:
   workflow_dispatch:
@@ -12,52 +12,48 @@ concurrency:
 
 jobs:
   validate:
-    name: Compatibilidad Linux
+    name: Entorno local Linux
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
-      V00_PROJECT: academia-v00-${{ github.run_id }}-${{ github.run_attempt }}
+      COMPOSE_PROJECT_NAME: academia-ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: 22.23.1
-      - name: Instalar desde lockfile
-        run: npm ci
-      - name: Preparar secreto efímero
-        run: node ops/linux/prepare-secret.mjs
-      - name: Validar Compose y descargar imágenes candidatas
+      - name: Preparar configuración efímera
+        run: node ops/docker/configure.mjs
+      - name: Validar Compose
         run: |
           docker version
           docker compose version
-          docker compose -f compose.linux.yml config --quiet
-          docker compose -f compose.linux.yml pull
-      - name: Resolver digests para esta ejecución
-        shell: bash
+          docker compose config --quiet
+      - name: Construir
+        run: docker compose build
+      - name: Iniciar los cuatro servicios
+        run: docker compose up -d --wait
+      - name: Estado y logs
         run: |
-          postgres_digest="$(docker image inspect postgres:16.14-bookworm --format '{{index .RepoDigests 0}}')"
-          mailpit_digest="$(docker image inspect axllent/mailpit:v1.31.3 --format '{{index .RepoDigests 0}}')"
-          test -n "$postgres_digest"
-          test -n "$mailpit_digest"
-          echo "V00_POSTGRES_IMAGE=$postgres_digest" >> "$GITHUB_ENV"
-          echo "V00_MAILPIT_IMAGE=$mailpit_digest" >> "$GITHUB_ENV"
-          printf 'PostgreSQL: `%s`\nMailpit: `%s`\n' "$postgres_digest" "$mailpit_digest" >> "$GITHUB_STEP_SUMMARY"
-      - name: Levantar servicios por digest
-        run: docker compose -f compose.linux.yml up -d --wait
-      - name: Aprovisionar bases y roles efímeros
-        run: node ops/linux/provision-ci.mjs
-      - name: Ejecutar V00-L completo
-        run: npm run verify:v00
+          docker compose ps
+          docker compose logs --tail=100 db mailpit api web
+      - name: Migraciones y pruebas
+        run: docker compose exec -T api npm run test:docker
+      - name: Navegador
+        run: |
+          docker compose --profile tests build browser-tests
+          docker compose --profile tests run --rm browser-tests
       - name: Auditar dependencias por separado
         continue-on-error: true
-        run: npm audit --json
+        run: docker compose exec -T api npm audit --json
       - name: Registrar plataforma
         shell: bash
         run: |
-          node --version >> "$GITHUB_STEP_SUMMARY"
-          npm --version >> "$GITHUB_STEP_SUMMARY"
+          docker compose exec -T api node --version >> "$GITHUB_STEP_SUMMARY"
+          docker compose exec -T api npm --version >> "$GITHUB_STEP_SUMMARY"
           uname -a >> "$GITHUB_STEP_SUMMARY"
           sha256sum package-lock.json >> "$GITHUB_STEP_SUMMARY"
+          docker image inspect node:22.23.1-bookworm-slim postgres:16.14-bookworm axllent/mailpit:v1.31.3 --format '{{json .RepoDigests}}' >> "$GITHUB_STEP_SUMMARY"
       - name: Detener solo el proyecto efímero
         if: always()
-        run: docker compose -f compose.linux.yml stop
+        run: docker compose down

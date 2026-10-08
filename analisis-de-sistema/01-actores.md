@@ -1,23 +1,35 @@
 # Actores del sistema
 
-La plataforma Academia Virtual considera actores humanos que utilizan sus funcionalidades y servicios externos que apoyan procesos específicos, como el envío de correos, los pagos y la transmisión de clases en vivo.
+La plataforma Academia Virtual considera actores humanos y servicios externos que
+apoyan procesos de correo, pagos y transmisión de clases en vivo.
+El [alcance del MVP](../docs/alcance-mvp.md) y la
+[especificación de identidad](../specs/001-identidad-acceso-roles/spec.md) conservan
+las reglas detalladas. El [inventario y estado comprobado](../arquitectura/arquitectura-inicial.md#inventario-y-estado-del-repositorio)
+separa base técnica, diseño y funciones pendientes. Ningún actor dispone todavía de
+los flujos de negocio descritos aquí.
 
 ## Actores humanos
 
-| ID | Actor | Descripción | Necesidades principales |
-|---|---|---|---|
-| ACT01 | Visitante | Persona que todavía no ha iniciado sesión o no posee una cuenta en la plataforma. | Consultar información pública de los cursos, registrarse, verificar su correo electrónico e iniciar sesión. |
-| ACT02 | Alumno | Usuario matriculado o interesado en matricularse en los cursos de la academia. | Gestionar su perfil, consultar cursos, realizar el proceso de matrícula, efectuar pagos, acceder a materiales, participar en el chat y asistir a clases en vivo. |
-| ACT03 | Docente | Usuario responsable de desarrollar y administrar las actividades académicas de uno o más cursos. | Consultar sus cursos, publicar materiales, compartir información de las clases en vivo y comunicarse con los alumnos. |
-| ACT04 | Administrador | Usuario encargado de la configuración y administración general de la plataforma. | Gestionar usuarios, asignar roles, administrar cursos, supervisar matrículas y controlar el acceso a las funciones del sistema. |
+| ID | Equivalencia | Actor | Descripción | Necesidades principales y límites |
+| --- | --- | --- | --- | --- |
+| A01 | ACT01 | Visitante | Persona sin sesión o cuenta habilitada. | Registrarse solo como alumno, verificar correo e iniciar sesión. La consulta pública de cursos requiere especificación; no se presupone un catálogo público aprobado. |
+| A02 | ACT02 | Alumno | Usuario matriculado o interesado en matricularse. | Gestionar perfil, consultar cursos, grupos, horarios y cupos, seleccionar cursos y pagar su orden; acceder a materiales, video y chat autorizados. Vigencia y reservas pendientes D01–D06. Participa solo por chat, sin audio, cámara ni pantalla. |
+| A03 | ACT03 | Docente | Responsable de actividades académicas de sus cursos. | Consultar sus cursos, emitir clases, publicar materiales y comunicarse por chat bajo permisos autorizados. Asignación de grupos y permisos de publicación/moderación pendientes de especificación; no administra cuentas ajenas. |
+| A04 | ACT04 | Administrador | Responsable de administración de cuentas y oferta académica. | Gestionar usuarios, asignar un único rol y activar/desactivar con auditoría y revocación de sesiones, protegiendo al último administrador. Gestión de cursos, matrículas y paneles sujeta a la matriz académica pendiente; no se le atribuyen reembolsos ni lectura de secretos. |
+| A05 | — | Responsable del entorno | Operador local; no es un cuarto rol de la aplicación. | Inicializar una sola vez al primer administrador mediante procedimiento restringido; gestionar configuración, migraciones, respaldos y recuperación según HU06, RF19 y V16. |
+
+Los identificadores A01–A05 se conservan para la trazabilidad; ACT01–ACT04 son sus
+equivalencias en el catálogo de actores. Alumno, docente y administrador comparten
+acceso, verificación, recuperación y perfil. Los permisos académicos no especificados
+mantienen denegación por defecto.
 
 ## Sistemas externos
 
-| ID | Sistema externo | Interacción con Academia Virtual | Estado |
-|---|---|---|---|
-| SE01 | Servicio de correo electrónico | Envía mensajes para verificar cuentas y recuperar contraseñas mediante enlaces de un solo uso. | Mailpit se utiliza en desarrollo. El servicio para producción está pendiente de selección y configuración. |
-| SE02 | Izipay | Procesará los pagos correspondientes a la matrícula de los alumnos en los cursos. | Pasarela seleccionada; integración pendiente de implementación y validación. |
-| SE03 | YouTube Live | Proporcionará la transmisión de video de las clases en vivo mediante enlaces asociados a los cursos. | Servicio seleccionado para el MVP; integración y reglas de acceso pendientes de validación. |
+| ID | Equivalencia | Sistema externo | Interacción prevista y módulo responsable | Estado |
+| --- | --- | --- | --- | --- |
+| E02 / E03 | SE01 | Correo electrónico | El módulo de correo entrega enlaces de verificación y recuperación; Mailpit sustituye al SMTP externo en desarrollo y pruebas. | Mailpit validado en Docker Compose; no acredita flujos de identidad ni entrega real. SMTP de producción pendiente de proveedor, TLS, remitente, DNS, cuotas y costo. E02 identifica salida externa y E03 captura local. |
+| E01 | SE02 | Izipay | Pagos inicia la operación y verifica autenticidad, orden, importe y moneda mediante un adaptador. | Pasarela seleccionada; integración pendiente. D02 mantiene tarifas, límites, acceso a pruebas y Yape por confirmar. |
+| E04 | SE03 | YouTube Live con OBS | El docente emite con OBS hacia YouTube Live; clases coordina el acceso previsto y la web reproduce el video. | Elección DA03/DEC01 para el MVP; integración y control de acceso pendientes. Autenticar una página u ocultar un enlace no demuestra protección del video. |
 
 ## Relaciones principales
 
@@ -27,6 +39,14 @@ La plataforma Academia Virtual considera actores humanos que utilizan sus funcio
 | Alumno | Consulta cursos, se matricula, realiza pagos y accede al contenido académico. |
 | Docente | Gestiona materiales e información académica de sus cursos. |
 | Administrador | Administra usuarios, roles, cursos y matrículas. |
+| Responsable del entorno | Inicializa el acceso administrativo y prepara la operación y recuperación. |
 | Servicio de correo electrónico | Entrega mensajes de verificación y recuperación de acceso. |
 | Izipay | Procesa y comunica el resultado de los pagos. |
 | YouTube Live | Transmite las clases en vivo vinculadas a los cursos. |
+
+Estas relaciones describen necesidades, no operaciones ya disponibles. Fuentes:
+[decisiones pendientes](../docs/decisiones-pendientes.md),
+[decisiones arquitectónicas](07-decisiones-arquitectonicas.md),
+[plan de identidad](../specs/001-identidad-acceso-roles/plan.md) y
+[verificación Docker](../ops/docker/verification.md). PostgreSQL es persistencia
+interna; no es un actor ni una pasarela hacia servicios externos.

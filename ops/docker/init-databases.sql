@@ -1,21 +1,14 @@
 \set ON_ERROR_STOP on
--- Ejecutar interactivamente con psql -X -W. Nunca incluir contraseñas en argumentos.
--- Abortar ante colisiones; no reutilizar/modificar usuarios ni bases existentes.
-DO $$ BEGIN
-  IF EXISTS (SELECT FROM pg_roles WHERE rolname IN
-    ('academia_owner','academia_runtime','academia_v00_owner','academia_v00_runtime'))
-    OR EXISTS (SELECT FROM pg_database WHERE datname IN ('academia_dev','academia_v00_test')) THEN
-    RAISE EXCEPTION 'Nombre ya existente: detener y revisar; no sobrescribir ni borrar';
-  END IF;
-END $$;
-CREATE ROLE academia_owner LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
-CREATE ROLE academia_runtime LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
-CREATE ROLE academia_v00_owner LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
-CREATE ROLE academia_v00_runtime LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
-\password academia_owner
-\password academia_runtime
-\password academia_v00_owner
-\password academia_v00_runtime
+-- Solo se ejecuta al inicializar un volumen nuevo de PostgreSQL.
+-- Las claves vienen de .env mediante Compose y nunca se imprimen.
+\getenv owner_password ACADEMIA_OWNER_PASSWORD
+\getenv runtime_password ACADEMIA_RUNTIME_PASSWORD
+\getenv probe_owner_password PROBE_OWNER_PASSWORD
+\getenv probe_runtime_password PROBE_RUNTIME_PASSWORD
+CREATE ROLE academia_owner LOGIN PASSWORD :'owner_password' NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
+CREATE ROLE academia_runtime LOGIN PASSWORD :'runtime_password' NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
+CREATE ROLE academia_v00_owner LOGIN PASSWORD :'probe_owner_password' NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
+CREATE ROLE academia_v00_runtime LOGIN PASSWORD :'probe_runtime_password' NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
 CREATE DATABASE academia_dev OWNER academia_owner;
 CREATE DATABASE academia_v00_test OWNER academia_v00_owner;
 REVOKE ALL ON DATABASE academia_dev FROM PUBLIC;

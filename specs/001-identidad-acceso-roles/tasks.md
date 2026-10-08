@@ -5,14 +5,14 @@ description: "Tareas de implementación de identidad, autenticación y acceso po
 # Tareas: Identidad, autenticación y acceso por roles
 
 **Fecha**: 2026-09-24 · **Rama real**: `feat/001-identidad-acceso-roles`.
-**Corrección documental**: 2026-09-25, I1/I2/U1/U2. Adaptación R12: 2026-09-27; se conservan los 108 IDs.
+**Corrección documental**: 2026-09-25, I1/I2/U1/U2. Entorno Docker: 2026-10-06; se conservan los 108 IDs.
 
 **Entrada**: [spec.md](spec.md), [plan.md](plan.md), [research.md](research.md),
 [data-model.md](data-model.md), [API](contracts/api.md), [UI](contracts/ui.md),
 [quickstart.md](quickstart.md), [verification.md](verification.md) y
 [constitución 1.1.0](../../.specify/memory/constitution.md).
 
-**Estado vigente (2026-10-01)**: V00 nativo aprobado; T003–T010 verificadas según evidencia del 2026-09-29. El responsable confirma Docker operativo en su computadora; la comprobación completa de T001/T002 y V00-L sigue pendiente, sin ejecución de la aplicación con Docker acreditada. Véanse [compatibilidad](../../ops/local/compatibility.md) y [actualización del entorno](../../ops/local/environment.md#actualización-docker--2026-10-01). Historias sin implementar.
+**Estado vigente (2026-10-06)**: Docker Compose validado con cuatro servicios Linux; T001–T010 completadas. Las historias de identidad siguen sin implementar. Evidencia en [verificación Docker](../../ops/docker/verification.md).
 **Registro histórico de generación**: no había aplicación, dependencias instaladas ni pruebas superadas. Se conservaron README y los siete documentos de planificación
 existentes. No había tasks.md. `setup-tasks.ps1 -Json` resolvió esta carpeta y la plantilla
 instalada; no se encontraron AGENTS.md aplicables ni `.specify/extensions.yml` con hooks.
@@ -68,7 +68,7 @@ En estos grupos, `Dep.:` de la implementación significa **escritura completada*
 previa de la funcionalidad. Las demás tareas que implementan y prueban juntas, así como V00,
 retención, recuperación y carga, conservan sus propios resultados satisfactorios de cierre.
 
-**Actualización R12 — 2026-09-27:** desarrollo nativo Windows con Node, PostgreSQL 16.14 y Mailpit. Docker/WSL pendientes, fuera de la ruta crítica local; causa del incidente de arranque no determinada. Docker en Linux se conserva para despliegue futuro. V00-L se verifica temprano, tras V00 y antes de US1/T031 (checkpoint T030), sin contratar servicios. Procedimiento vigente: [native.md](../../ops/local/native.md); resultados: [compatibility.md](../../ops/local/compatibility.md). No se modifica el alcance funcional ni se afirma capacidad demostrada.
+**Entorno vigente — 2026-10-06:** Docker Compose con PostgreSQL 16.14, Mailpit 1.31.3, API NestJS y web React/Vite en contenedores Linux. Procedimiento: [entorno Docker](../../ops/docker/README.md). Resultados: [verificación](../../ops/docker/verification.md). No cambia el alcance funcional ni se afirma capacidad demostrada.
 
 ## Fase 1: Preparación del entorno y V00
 
@@ -76,20 +76,21 @@ retención, recuperación y carga, conservan sus propios resultados satisfactori
 y versiones candidatas de R01 no equivalen a compatibilidad probada. Solo se crea un esqueleto
 y pruebas de compatibilidad en esta fase; no se añaden reglas de negocio.
 
-- [ ] T001 MANUAL DIFERIDA (no completada, fuera de ruta nativa) — Revisar WSL2, Plataforma de máquina virtual y arranque del hipervisor con el responsable del equipo según `specs/001-identidad-acceso-roles/quickstart.md`; resolver prerrequisitos y reinicio si corresponde, y registrar evidencia sin secretos en `ops/local/environment.md`. Salida: WSL2 puede iniciar; no atribuir el problema solo a BIOS. Dep.: ninguna.
-- [ ] T002 MANUAL DIFERIDA (no completada, fuera de ruta nativa) — Instalar/configurar Docker Desktop con backend WSL2 y contenedores Linux tras revisar requisitos/licencia; comprobar Client y Server con docker version, Compose y docker info, puertos 5173/3000/5432/1025/8025 y espacio disponible; documentar en `ops/local/environment.md`. No exigir una distribución WSL de usuario adicional. Dep.: T001.
-- [x] T003 Crear el esqueleto npm workspaces en `package.json`, `apps/api/package.json` y `apps/web/package.json`; elegir parches compatibles de los candidatos R01, comprobar engines/peers y dependencias nativas de Windows e instalar para generar `package-lock.json`, sin force/legacy-peer-deps. Registrar cambios justificados de versión en `ops/local/compatibility.md`. Dep.: Node/npm comprobados en environment.md (R12 sustituye la dependencia local de T002).
-- [x] T004 Preparar servicios nativos según `ops/local/native.md`: `ops/local/provision.sql` crea exclusivamente bases academia_dev/academia_v00_test y roles propietario/runtime por base, sin superusuario en aplicación; credenciales solo locales. `.env.example`, `.env.test.example` y `.gitignore` protegen secretos. Descargar/verificar SHA256 e iniciar Mailpit mediante `ops/local/start-mailpit.ps1`, solo loopback y sin relay. Comprobar conexión con roles exclusivos, aislamiento y captura. Compose original queda pendiente para V00-L; no se marca realizado. Dep.: T003; credenciales manuales locales para SQL.
-- [x] T005 Configurar y compilar los esqueletos ESM/TypeScript estricto en `apps/api/tsconfig.json`, `apps/api/src/main.ts`, `apps/api/vitest.config.ts`, `apps/web/tsconfig.json`, `apps/web/vite.config.ts` y `apps/web/src/main.tsx`; Vite localhost:5173 proxifica /api a 127.0.0.1:3000 conservando Origin. Añadir smoke de provider/controlador con metadatos Nest en `apps/api/tests/compatibility/runtime.spec.ts` y componente React en `apps/web/src/app/runtime.test.tsx`. Dep.: T003; build/smoke no requiere conexión SQL (R12).
+- [x] T001 Comprobar WSL2 operativo y motor Linux disponible mediante Docker Desktop. Evidencia en `ops/docker/verification.md`; sin modificar virtualización ni el sistema operativo. Dep.: ninguna.
+- [x] T002 Validar Docker/Compose, los cuatro servicios, health checks, red, puertos publicados y volumen persistente según `ops/docker/README.md`. Evidencia en `ops/docker/verification.md`. Dep.: T001.
+- [x] T003 Crear el esqueleto npm workspaces en `package.json`, `apps/api/package.json` y `apps/web/package.json`; elegir parches compatibles de los candidatos R01, comprobar engines/peers y dependencias de la plataforma Linux e instalar para generar `package-lock.json`, sin force/legacy-peer-deps. Registrar cambios justificados de versión en `ops/docker/compatibility.md`. Dep.: T002; Node/npm incluidos en las imágenes.
+- [x] T004 Preparar PostgreSQL y Mailpit con `compose.yml` y `ops/docker/init-databases.sql`: bases academia_dev/academia_v00_test, propietarios/runtime separados y restringidos, claves locales desde `.env`, volumen persistente y Mailpit sin relay. Las plantillas no contienen claves. Dep.: T003.
+- [x] T005 Configurar y compilar los esqueletos ESM/TypeScript estricto en `apps/api/tsconfig.json`, `apps/api/src/main.ts`, `apps/api/vitest.config.ts`, `apps/web/tsconfig.json`, `apps/web/vite.config.ts` y `apps/web/src/main.tsx`; Vite localhost:5173 proxifica /api a http://api:3000 conservando Origin. Añadir smoke de provider/controlador con metadatos Nest en `apps/api/tests/compatibility/runtime.spec.ts` y componente React en `apps/web/src/app/runtime.test.tsx`. Dep.: T003; build/smoke no requiere conexión SQL (R12).
 - [x] T006 Verificar V00 con `ops/local/compatibility/prisma/schema.prisma`, `ops/local/compatibility/prisma/migrations/0001_probe/migration.sql`, `ops/local/compatibility/prisma.config.ts` y `apps/api/tests/compatibility/postgres.spec.ts`: generar Prisma CLI/client/adapter coherentes, migrar una BD de ensayo aislada y hacer escritura/lectura/rollback desde Nest con cierre de pool. El modelo de ensayo no pasa al esquema de identidad. Dep.: T005 y T004 para roles/base aislada (R12).
-- [x] T007 Comprobar hash/verificación Argon2id m=19456 KiB, t=2, p=1 y captura SMTP exclusivamente Mailpit en `apps/api/tests/compatibility/crypto-mail.spec.ts`; registrar cualquier prerrequisito nativo faltante y resultados en `ops/local/compatibility.md`. No usar buzones reales. Dep.: T003 y Mailpit verificado de T004; puede comprobarse sin T006 (R12).
-- [x] T008 Cerrar V00 ejecutando instalación reproducible npm ci, builds y pruebas de T005–T007; fijar versiones realmente utilizadas en `package-lock.json` y SHA256 del binario Mailpit en `ops/local/native.md`; digests Linux quedan para V00-L, y guardar versiones/SO/comandos/resultados sin secretos en `ops/local/compatibility.md`. Ante incompatibilidad, ajustar y repetir el bloque afectado antes de avanzar; no marcar V00 aprobado parcialmente. Dep.: T004, T005, T006, T007.
+- [x] T007 Comprobar hash/verificación Argon2id m=19456 KiB, t=2, p=1 y captura SMTP exclusivamente Mailpit en `apps/api/tests/compatibility/crypto-mail.spec.ts`; registrar cualquier prerrequisito nativo faltante y resultados en `ops/docker/compatibility.md`. No usar buzones reales. Dep.: T003 y Mailpit verificado de T004; puede comprobarse sin T006 (R12).
+- [x] T008 Cerrar V00 ejecutando instalación reproducible npm ci, builds y pruebas de T005–T007; fijar versiones realmente utilizadas en `package-lock.json` y versiones/digests de imágenes Linux en `ops/docker/verification.md`, y guardar versiones/SO/comandos/resultados sin secretos en `ops/docker/compatibility.md`. Ante incompatibilidad, ajustar y repetir el bloque afectado antes de avanzar; no marcar V00 aprobado parcialmente. Dep.: T004, T005, T006, T007.
 - [x] T009 Configurar composición modular mínima y límites de importación en `apps/api/src/app.module.ts`, `apps/api/eslint.config.js` y `apps/web/eslint.config.js`; registrar decisiones de ensamblaje en `ops/local/architecture.md`. Crear archivos/capas solo al necesitarlos; no scaffolding de cursos/pagos ni paquetes shared genéricos. Dep.: T008.
 - [x] T010 Preparar harness de pruebas y scripts obligatorios en `apps/api/tests/support/test-environment.ts`, `apps/api/tests/support/mailpit.ts`, `apps/web/playwright.config.ts`, `apps/api/package.json`, `apps/web/package.json` y `package.json`; instalar/verificar navegador de prueba y runners compatibles, con BD aislada por suite y fallos si faltan scripts, sin if-present. Dep.: T009.
 
 **Checkpoint**: T008 documenta instalación, compilación, PostgreSQL real, Argon2 y SMTP local;
-T009–T010 añaden límites comprobados y harness reproducible. Docker/WSL local no bloquea V00 nativo;
-T001/T002 permanecen pendientes sin casillas de éxito. V00-L Linux se exige en T030 antes de US1. No iniciar T011 ni ninguna historia sin V00 aprobado.
+T009–T010 añaden límites comprobados y harness reproducible. La validación Docker se
+registra en ops/docker/verification.md; no completa las historias ni las demás obligaciones
+de T030. No iniciar historias sin los fundamentos correspondientes.
 
 ## Fase 2: Fundamentos compartidos
 
@@ -139,7 +140,7 @@ T014/T028; su comando y flujo operable se completan en US6 antes de gestionar cu
 - [ ] T027 Implementar AuditEvent de operaciones aceptadas en `apps/api/src/modules/audit/domain/audit-event.ts` y `apps/api/src/modules/audit/infrastructure/audit-writer.ts`, y registros privados estructurados de seguridad/operación en `apps/api/src/infrastructure/logging/security-events.ts`; probar en `apps/api/tests/integration/audit.spec.ts` las listas y actores/destinos U1 de data-model.md. Éxitos de cuenta comparten commit; denegaciones tras rollback usan referencias sin FK ni lookup de existencia, operadores locales usan alias/alcance global y no usuarios ficticios. Fallo de log no cambia 401/403; fallo de AuditEvent revierte mutación. Sin endpoint, broker ni callbacks. Dep.: T026.
 - [ ] T028 Preparar y probar operación atómica de bootstrap en `apps/api/src/modules/identity/application/identity-store.ts`, `apps/api/src/modules/identity/infrastructure/bootstrap-store.ts` y `apps/api/tests/integration/bootstrap-store.spec.ts`: lock SystemState, ausencia de cualquier ADMIN y marca previa, insertar cuenta provisional/auditoría y token/entrega cuando haya cuota en un commit, marca permanente. Dos inicializaciones producen máximo un ADMIN; no hash/SMTP dentro del lock. Es la base del primer administrador; US6 añade entrada operativa y flujo de activación. Dep.: T027.
 - [ ] T029 Crear fixtures y CLI restringida en `apps/api/tests/support/identity-fixtures.ts`, `apps/api/src/cli/fixtures-identity.ts` y `apps/api/tests/integration/fixture-safety.spec.ts`: APP_ENV=test, BD *_test y destinos loopback/capture obligatorios, cuentas de todos los roles/estados, secretos aleatorios en archivo privado ignorado, dos sesiones cuando haga falta y limpieza dirigida solo a fixtures. No administrador predeterminado, contraseña en stdout ni bypass HTTP de autorización. Dep.: T028.
-- [ ] T030 Preparar cliente relativo, router y UI común en `apps/web/src/app/http.ts`, `apps/web/src/app/router.tsx`, `apps/web/src/shared/ui/form-field.tsx` y `apps/web/src/shared/ui/feedback.tsx`; probar errores y ausencia de persistencia secreta en `apps/web/src/app/http.test.ts`. JSON/cabecera CSRF/cookies del navegador, 429 Retry-After, 503 reintento manual, 401 de sesión limpia datos sin replay; separar errores públicos de credenciales de expiración. Dep.: T029. Añadir evidencia de V00-L Linux/Docker según `ops/local/native.md` antes de cerrar este checkpoint y comenzar US1; no sustituir por pruebas Windows.
+- [ ] T030 Preparar cliente relativo, router y UI común en `apps/web/src/app/http.ts`, `apps/web/src/app/router.tsx`, `apps/web/src/shared/ui/form-field.tsx` y `apps/web/src/shared/ui/feedback.tsx`; probar errores y ausencia de persistencia secreta en `apps/web/src/app/http.test.ts`. JSON/cabecera CSRF/cookies del navegador, 429 Retry-After, 503 reintento manual, 401 de sesión limpia datos sin replay; separar errores públicos de credenciales de expiración. Dep.: T029. Añadir evidencia de V00-L Linux/Docker según `ops/docker/README.md` antes de cerrar este checkpoint y comenzar US1; no sustituir por pruebas Windows.
 
 **Checkpoint**: migraciones y adaptadores mínimos probados, bootstrap atómico disponible,
 fixtures seguros y transporte preparado. Usar funciones/tipos cuando basten. Identidad posee
@@ -326,7 +327,7 @@ aprobado de antemano; un ensayo ejecutado con fallos deja pendiente su criterio 
 
 - [ ] T095 Implementar y probar limpieza por lotes reanudable en `apps/api/src/modules/identity/infrastructure/retention.ts`, `apps/api/src/modules/mail/infrastructure/retention.ts` y `apps/api/tests/integration/retention.spec.ts`: sesiones expiradas/revocadas y tokens terminales tras 24 h, mail metadata 7 días, auditoría 30 días, RateEvent máximo 24 h/buckets inactivos sin reservas/bloqueos; cancelar entregas activas antes de purgar token, FK SET NULL conserva mail, borrar payload terminal, nunca User/SystemState. Configurar/probar también rotación privada de registros SECURITY/OPERATION a máximo 30 días en `ops/local/logging.md`, sin servicio externo ni logs versionados. Dep.: T094.
 - [ ] T096 Escribir pruebas e implementar comando restringido security:invalidate-restored-state en `apps/api/tests/integration/restored-state.spec.ts`, `apps/api/src/cli/invalidate-restored-state.ts` y `apps/api/package.json`: revocar sesiones/tokens no consumidos, cancelar mail restaurado/limpiar payload sin doble marca, preservar singleton. Validar operatorRef y emitir OPERATION/LOCAL_OPERATOR/IDENTITY_SCOPE con correlación y resultado seguro según U1; no insertar AuditEvent con actor/destino ficticio. Comprobar exclusión de secretos y registro global antes de reabrir tráfico. Dep.: T095.
-- [ ] T097 Preparar procedimiento/scripts locales de mantenimiento, backup cifrado y restauración a BD nueva en `ops/recovery/README.md`, `ops/recovery/backup.ps1` y `ops/recovery/restore-check.ps1`: pg_dump17 -Fc a archivo sin redirección binaria PS5.1, hash/códigos salida, claves aparte, pausa de escrituras/worker, revisión compatible, corrección hacia adelante y migrate resolve solo tras revisión manual. Nunca borrar/sobrescribir una BD existente por defecto. Dep.: T096.
+- [ ] T097 Preparar procedimiento/scripts locales de mantenimiento, backup cifrado y restauración a BD nueva en `ops/recovery/README.md`, `ops/recovery/backup.ps1` y `ops/recovery/restore-check.ps1`: pg_dump -Fc del contenedor PostgreSQL 16 a archivo sin redirección binaria PS5.1, hash/códigos salida, claves aparte, pausa de escrituras/worker, revisión compatible, corrección hacia adelante y migrate resolve solo tras revisión manual. Nunca borrar/sobrescribir una BD existente por defecto. Dep.: T096.
 - [ ] T098 Ejecutar V16 con actualización fallida y restauración de datos ficticios en BD separada, comprobando schema/cantidades/constraints, invalidación T096, permisos y reinicio seguro; registrar revisión anterior/nueva, pérdida potencial de cambios, tiempos/RPO/RTO medidos y evidencia en `specs/001-identidad-acceso-roles/evidence/recovery.md`. Retención prevista de siete copias cifradas más preactualización; no afirmar respaldo verificado antes del ensayo. Dep.: T097.
 - [ ] T099 Preparar herramienta k6 compatible y fixtures de carga en `load-tests/identity/prepare.ts`, `load-tests/identity/cleanup.ts` y `load-tests/identity/README.md`, reutilizando guardas T029: 1000 cuentas distintas más 20 de calentamiento y conjunto separado de 100 para login, secretos privados ignorados, sin correos reales; verificar versión de k6 y limpieza dirigida de sesiones sobrantes. Dep.: T098.
 - [ ] T100 Implementar ID-LOAD-01 en `load-tests/identity/sessions.js`: VU distinto por execution.vu.idInTest, login único por VU, noCookiesReset=true, /me cada 5–10 s, encabezados reales, calentamiento 20/1 min separado, rampas 0→100/1 min→500/2 min→1000/2 min, meseta 10 min y descenso 2 min. Comprobar 1000 sesiones válidas distintas, no solo VU configurados; registrar logout normal posible y limpiar sobrantes aparte sin usarlo como evidencia de revocación en meseta. Dep.: T099.
@@ -345,7 +346,7 @@ aprobado de antemano; un ensayo ejecutado con fallos deja pendiente su criterio 
 
 | Fase | Tareas | Cantidad | Entrada y salida |
 | --- | --- | ---: | --- |
-| 1 · Entorno/V00 | T001–T010 | 10 | R12: nativo → compatibilidad; Docker/WSL diferidos → herramientas |
+| 1 · Entorno/V00 | T001–T010 | 10 | Compose → compatibilidad Linux → herramientas |
 | 2 · Fundamentos | T011–T030 | 20 | V00 cerrado; datos, invariantes/bootstrap atómico, sesiones, guard, correo y UI base |
 | 3 · US1 P1 | T031–T039 | 9 | Fundamentos; acceso independiente con fixtures |
 | 4 · US2 P1 | T040–T049 | 10 | US1 para completar registro/verificación/login por navegador |
@@ -355,7 +356,7 @@ aprobado de antemano; un ensayo ejecutado con fallos deja pendiente su criterio 
 | 8 · US5 P1 | T082–T088 | 7 | Todos los flujos P1 para auditar permisos y secretos de extremo a extremo |
 | 9 · US3 P2 | T089–T094 | 6 | /me/inicio de US1 y rutas previas para comprobar todos los flujos accesibles |
 | 10 · Cierre transversal | T095–T108 | 14 | Historias listas; operación, carga, observación y evidencia integral |
-| **Total** | **T001–T108** | **108** | **64 de historias + 44 compartidas/transversales; 8 completadas (T003–T010), 100 pendientes** |
+| **Total** | **T001–T108** | **108** | **64 de historias + 44 compartidas/transversales; 10 completadas (T001–T010), 98 pendientes** |
 
 ```mermaid
 flowchart TD
@@ -405,12 +406,10 @@ que requieren endpoints aún ausentes se escriben primero y solo pasan después 
 
 ### Bloqueos y trabajo independiente
 
-- **Entorno**: ruta nativa Windows autorizada; T001/T002 permanecen diferidas, sin concluir
-  incompatibilidad. Conexión y permisos de ensayo,
-  transacción y V00 nativo aprobados; V00-L temprano sigue pendiente en T030.
-- **Versiones**: React 19/Vite 8/Nest 12/TS 6/Prisma 7/PostgreSQL 16.14 fueron probados
-  en V00 nativo con el lockfile documentado. V00-L y auditoría permanecen pendientes;
-  cambios futuros exigen repetir lo afectado, sin force ni ignorar peers.
+- **Entorno**: Docker Compose validado; comprobar evidencia en ops/docker/verification.md
+  antes de cerrar la parte de infraestructura de T030. Las historias siguen pendientes.
+- **Versiones**: se conserva React 19/Vite 8/Nest 12/TS 6/Prisma 7/PostgreSQL 16.14 y el
+  lockfile. La auditoría documentada sigue pendiente; cambios futuros exigen repetir lo afectado.
 - **Publicación**: SMTP real, dominio/remitente, DNS/TLS, cuota, tarifa y alojamiento siguen
   pendientes; no bloquean historias con Mailpit. No se promete correo gratis ni operación
   permanente con S/300. Izipay está fuera de tareas; conservar pendientes D02 y su aislamiento
@@ -477,7 +476,7 @@ pendiente; sin Redis, colas externas ni servicios contratados.
 
 1. Revisar consistencia con `$speckit-analyze` antes de implementar, sin que la generación
    de estas tareas dispare automáticamente otro comando.
-2. Primer bloque concreto: equivalente nativo T003–T008 según R12; T001/T002 diferidos. Detener el avance hacia
+2. Primer bloque concreto: T001–T010 y validación Docker según ops/docker/verification.md. Detener el avance hacia
    funcionalidades si instalación/build/conexión/hash/SMTP no tienen evidencia satisfactoria.
 3. T009–T030 preparan fundamentos reutilizados, incluido bootstrap atómico. No desarrollar
    interfaces o infraestructura sin consumidor en alguna de las siete historias.

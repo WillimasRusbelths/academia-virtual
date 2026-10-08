@@ -1,4 +1,5 @@
-const mailpitOrigin = 'http://127.0.0.1:8025';
+export const mailpitOrigin = process.env.MAILPIT_URL;
+if (mailpitOrigin !== 'http://mailpit:8025') throw new Error('Mailpit debe ser el servicio local de Compose.');
 
 export async function assertMailpitAvailable() {
   const response = await fetch(`${mailpitOrigin}/api/v1/info`, { signal: AbortSignal.timeout(3000) });

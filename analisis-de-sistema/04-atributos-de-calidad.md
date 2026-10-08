@@ -17,12 +17,12 @@ equivalen a 1000 sesiones, matrículas, conexiones de chat o reproducciones simu
 
 ## Evidencia existente y pruebas pendientes
 
-La [compatibilidad V00](../ops/local/compatibility.md) registra builds, pruebas mínimas
+La [compatibilidad V00](../ops/docker/compatibility.md) registra builds, pruebas mínimas
 de Nest/React, transacción/rollback PostgreSQL y Argon2/SMTP local. Los informes
-[T009](../ops/local/architecture.md) y [T010](../ops/local/test-harness.md), del 2026-09-29,
-registran límites de importación y pruebas unitarias, integración y navegador sobre
-el esqueleto. Son resultados históricos documentados, no nuevas ejecuciones AS-002
-ni aceptación funcional de estos escenarios. Persisten avisos de auditoría de dependencias.
+[T009](../ops/local/architecture.md) y [T010](../ops/docker/test-harness.md)
+describen los límites de importación y el soporte de pruebas del esqueleto.
+No constituyen aceptación funcional de estos escenarios. Los resultados actuales están en
+[verificación Docker](../ops/docker/verification.md). Persisten avisos de auditoría de dependencias.
 
 Reutilizar [verification.md](../specs/001-identidad-acceso-roles/verification.md) para
 ID-LOAD-01/02 y V01–V16. ID-LOAD-02 mide por separado el costo de autenticación con
@@ -34,4 +34,7 @@ exige ensayos diferenciados de matrícula, Socket.IO y consumo real de segmentos
 Cada informe debe incluir revisión de código y cambios locales, configuración/scripts,
 infraestructura, generador, duración, concurrencia real, RPS cuando aplique, percentiles,
 errores, recursos y consistencia. Un escenario combinado requiere su propia medición.
-Las metas finales se acuerdan con el profesor en D10; no se declaran aprobadas por esta guía.
+La elección vigente de video es YouTube Live con OBS (DEC01). Los controles de acceso
+y escenarios de consumo de medios deben validar su compatibilidad con el proveedor;
+no se acredita autorización del video por autenticar la página o esconder un enlace.
+Las metas finales se acuerdan con el profesor en D10 y permanecen pendientes de validación.

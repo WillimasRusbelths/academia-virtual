@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { expect, test } from 'vitest';
 import { hash, verify, argon2id } from 'argon2';
 import nodemailer from 'nodemailer';
+import { mailpitOrigin } from '../support/mailpit.js';
 
 test('Argon2id nativo aplica parámetros y rechaza una clave diferente', async () => {
   const password = randomUUID();
@@ -17,11 +18,14 @@ test('Argon2id nativo aplica parámetros y rechaza una clave diferente', async (
 
 test('SMTP local captura exclusivamente un mensaje ficticio en Mailpit', async () => {
   const subject = `V00-${randomUUID()}`;
-  const transporter = nodemailer.createTransport({ host: '127.0.0.1', port: 1025, secure: false,
+  if (process.env.SMTP_HOST !== 'mailpit' || process.env.SMTP_PORT !== '1025') {
+    throw new Error('SMTP de pruebas debe ser mailpit:1025.');
+  }
+  const transporter = nodemailer.createTransport({ host: process.env.SMTP_HOST, port: 1025, secure: false,
     ignoreTLS: true, connectionTimeout: 3000, socketTimeout: 5000, logger: false, debug: false });
   try {
     await transporter.sendMail({ from: 'academia@example.test', to: 'v00@example.test', subject, text: 'Prueba local sin secretos.' });
-    const response = await fetch(`http://127.0.0.1:8025/api/v1/search?query=${encodeURIComponent(`subject:${subject}`)}`);
+    const response = await fetch(`${mailpitOrigin}/api/v1/search?query=${encodeURIComponent(`subject:${subject}`)}`);
     expect(response.ok).toBe(true);
     const result = await response.json();
     expect(result.messages.some((message: {Subject:string}) => message.Subject === subject)).toBe(true);

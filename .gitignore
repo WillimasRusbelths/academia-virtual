@@ -82,6 +82,7 @@ Desktop.ini
 /tmp/
 /temp/
 /.codex/
+/compose.override.yml
 
 # No excluir .specify/, .agents/skills/, docs/, specs/ ni archivos de bloqueo.
 # .specify/.gitignore ya excluye su estado local por equipo.

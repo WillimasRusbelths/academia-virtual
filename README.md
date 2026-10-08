@@ -3,8 +3,8 @@
 Proyecto de academia virtual para un trabajo final de curso, con cuatro meses de plazo
 y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-01:** documentación y base técnica local React/NestJS con pruebas de
-compatibilidad y soporte de pruebas. Las historias de identidad y las funciones académicas
+**Estado al 2026-10-06:** base técnica React/NestJS con Docker Compose como entorno local
+principal. Las historias de identidad y las funciones académicas
 aún no están implementadas; no hay integración de pagos/video ni despliegue acreditado.
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
 de carga reproducibles; no es una capacidad garantizada.
@@ -12,6 +12,23 @@ de carga reproducibles; no es una capacidad garantizada.
 El presupuesto de infraestructura y servicios es **S/300 en total**, destinado a despliegue
 y pruebas necesarias, no a financiar una operación permanente. Se prevén aproximadamente
 1000 estudiantes, con grupos de 40 a 50 alumnos por curso.
+
+## Ejecución local
+
+Iniciar Docker Desktop con motor Linux. Crear `.env` a partir de `.env.example` con cinco
+claves locales independientes, o generarlo sin sobrescribir archivos mediante el comando
+documentado en [ops/docker/README.md](ops/docker/README.md).
+
+```sh
+docker compose up -d --build
+docker compose ps
+```
+
+Web: `http://localhost:5173`; API: `http://localhost:3000/health/live`;
+Mailpit: `http://localhost:18025`. PostgreSQL se publica en `127.0.0.1:55432` y SMTP
+en `127.0.0.1:11025`. Las conexiones entre servicios usan `db` y `mailpit`.
+Consultar [la guía Docker](ops/docker/README.md) para migraciones, pruebas, logs,
+persistencia y solución de problemas. Detener con `docker compose down`, sin `-v`.
 
 ## Documentación
 
@@ -23,9 +40,9 @@ y pruebas necesarias, no a financiar una operación permanente. Se prevén aprox
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
 - [Plan técnico de identidad](specs/001-identidad-acceso-roles/plan.md): decisiones, datos,
   contratos y [guía local planificada](specs/001-identidad-acceso-roles/quickstart.md), con
-  desarrollo nativo Windows vigente y validación Linux pendiente. Las historias siguen sin implementar.
+  ejecución mediante Docker Compose. Las historias siguen sin implementar.
 
-## Entregables de la Guía AS-002
+## Análisis del sistema
 
 - [Actores](analisis-de-sistema/01-actores.md) e [historias de usuario](analisis-de-sistema/02-historias-del-usuario.md).
 - [Requisitos funcionales y relación HU ↔ RF](analisis-de-sistema/03-requisitos-funcionales.md).
@@ -35,7 +52,7 @@ y pruebas necesarias, no a financiar una operación permanente. Se prevén aprox
   inventario, evidencia, discrepancias y pendientes. Esta síntesis enlaza el detalle existente
   en `docs/` y `specs/`, que conserva el alcance y sus criterios de aceptación.
 
-AS-002 reúne **17 historias HU y 19 requisitos RF generales del MVP**. Identidad desarrolla
+El análisis reúne **17 historias HU y 19 requisitos RF generales del MVP**. Identidad desarrolla
 una parte de ese alcance mediante **7 historias US y 33 requisitos FR detallados**; son
 niveles distintos de descripción, no cifras alternativas del mismo catálogo. Véase la
 [correspondencia de identidad](analisis-de-sistema/03-requisitos-funcionales.md#correspondencia-con-el-detalle-de-identidad).
@@ -57,19 +74,15 @@ para permitir cambiar de pasarela posteriormente.
 ## Base técnica y componentes previstos
 
 React, TypeScript y Vite para el frontend; NestJS como monolito modular con TypeScript;
-PostgreSQL 16.14 y Prisma. La base nativa Windows con Node y Mailpit tiene
-[evidencia de compatibilidad](ops/local/compatibility.md) y
-[pruebas del esqueleto](ops/local/test-harness.md). La API solo ensambla Probe y la web
+PostgreSQL 16.14 y Prisma, con Mailpit 1.31.3 para correo local. Compose construye las
+imágenes Linux de API/web con `npm ci` y conserva los datos de PostgreSQL en un volumen.
+La API solo ensambla Probe y la web
 muestra «En preparación»; no hay flujos de negocio completos.
 
-Socket.IO autorizado por clase y OBS → SRS → HLS con HLS.js o reproducción nativa siguen
-propuestos. El responsable confirma que **Docker ya funciona en su computadora**. Esto
-actualiza el estado del equipo informado en R12, pero no acredita ejecución de la aplicación
-con Docker. En la revisión del 2026-10-01 se detectaron cliente/Compose y se validó la
-configuración Compose; el daemon no estuvo accesible. [Docker Linux/V00-L](ops/linux/README.md)
-sigue sin ejecución acreditada; el Compose actual solo define PostgreSQL y Mailpit.
-El [registro de entorno](ops/local/environment.md#actualización-docker--2026-10-01)
-separa estas evidencias. Nginx y HTTPS corresponden a publicación futura.
+Socket.IO autorizado por clase sigue propuesto. YouTube Live con OBS es la elección
+de video del MVP según DA03 y DEC01; integración y control de acceso pendientes.
+Docker Desktop y WSL2 están operativos; la configuración de Compose incluye
+PostgreSQL, Mailpit, API y web. Nginx y HTTPS corresponden a publicación futura.
 El video, el ancho de banda y el costo requieren una prueba temprana. No se añadirán
 microservicios, Kubernetes, Redis ni balanceadores sin una necesidad comprobada.
 
@@ -89,8 +102,8 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. Las tareas T003–T010 preparan la base técnica; sus historias aún no están
-implementadas. Para ejecutar el entorno actual, seguir la [guía nativa](ops/local/native.md);
+por roles**. Las tareas T001–T010 preparan y validan el entorno y la base técnica; sus historias aún no están
+implementadas. Para ejecutar el entorno actual, seguir la [guía Docker](ops/docker/README.md);
 los procedimientos de producto del quickstart siguen siendo futuros. La viabilidad del
 video y la rúbrica de evaluación permanecen pendientes. No se han ejecutado pruebas de capacidad.
 
@@ -104,8 +117,8 @@ pueden compartirse únicamente con valores ficticios, sin credenciales.
 Se conservan `.agents/skills/`, `.specify/` y el workflow manual de `.github/workflows/`,
 que forman parte del proceso y las validaciones previstas. `.vscode/settings.json` solo
 oculta dependencias, cachés npm/locales y reportes de pruebas en el explorador; no los
-elimina ni oculta código, pruebas o documentación. El [registro de revisión](ops/local/repository-review.md)
-detalla los archivos conservados, las exclusiones y las comprobaciones de preparación.
+elimina ni oculta código, pruebas o documentación. Los ejemplos de entorno no contienen
+credenciales y `.env`/`.env.test` permanecen fuera de Git y de las imágenes.
 
 Desarrollo, demo y producción deben separar configuración, secretos y datos; no requieren
 servidores permanentes por entorno. Las pruebas de carga usarán cuentas diferentes y pagos

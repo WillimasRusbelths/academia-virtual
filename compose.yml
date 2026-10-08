@@ -1,0 +1,104 @@
+name: academia-local
+services:
+  db:
+    image: postgres:16.14-bookworm
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Completar .env}
+      ACADEMIA_OWNER_PASSWORD: ${ACADEMIA_OWNER_PASSWORD:?Completar .env}
+      ACADEMIA_RUNTIME_PASSWORD: ${ACADEMIA_RUNTIME_PASSWORD:?Completar .env}
+      PROBE_OWNER_PASSWORD: ${PROBE_OWNER_PASSWORD:?Completar .env}
+      PROBE_RUNTIME_PASSWORD: ${PROBE_RUNTIME_PASSWORD:?Completar .env}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./ops/docker/init-databases.sql:/docker-entrypoint-initdb.d/01-academia.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    networks: [local, access]
+  mailpit:
+    image: axllent/mailpit:v1.31.3
+    command:
+      - --disable-version-check
+      - --smtp-disable-rdns
+      - --smtp-allowed-recipients=@example[.]test$$
+      - --block-remote-css-and-fonts
+      - --quiet
+      - --max=0
+    ports:
+      - "127.0.0.1:${MAILPIT_SMTP_PORT:-11025}:1025"
+      - "127.0.0.1:${MAILPIT_HTTP_PORT:-18025}:8025"
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [local, access]
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      API_HOST: 0.0.0.0
+      DATABASE_URL: postgresql://academia_runtime:${ACADEMIA_RUNTIME_PASSWORD:?Completar .env}@db:5432/academia_dev
+      PROBE_MIGRATION_URL: postgresql://academia_v00_owner:${PROBE_OWNER_PASSWORD:?Completar .env}@db:5432/academia_v00_test
+      PROBE_DATABASE_URL: postgresql://academia_v00_runtime:${PROBE_RUNTIME_PASSWORD:?Completar .env}@db:5432/academia_v00_test
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+      MAILPIT_URL: http://mailpit:8025
+    ports:
+      - "127.0.0.1:${API_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health/live').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [local, access]
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: local
+    environment:
+      API_PROXY_TARGET: http://api:3000
+      __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS: web
+    ports:
+      - "127.0.0.1:${WEB_PORT:-5173}:5173"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:5173').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [local, access]
+  browser-tests:
+    profiles: [tests]
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: browser-tests
+    environment:
+      PLAYWRIGHT_BASE_URL: http://web:5173
+    depends_on:
+      web:
+        condition: service_healthy
+    shm_size: 1gb
+    networks: [local]
+networks:
+  local:
+    internal: true
+  access:
+    driver: bridge
+volumes:
+  postgres_data:
