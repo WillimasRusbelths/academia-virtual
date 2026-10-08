@@ -8,7 +8,10 @@
     "test:integration": "vitest run tests/compatibility/runtime.spec.ts tests/compatibility/postgres.spec.ts tests/integration",
     "test:smoke": "vitest run tests/compatibility/runtime.spec.ts",
     "test:crypto-mail": "vitest run tests/compatibility/crypto-mail.spec.ts",
-    "test:postgres": "vitest run tests/compatibility/postgres.spec.ts"
+    "test:postgres": "vitest run tests/compatibility/postgres.spec.ts",
+    "db:generate": "node scripts/database.mjs generate",
+    "db:migrate:dev": "node scripts/database.mjs dev",
+    "db:migrate:deploy": "node scripts/database.mjs deploy"
   },
   "dependencies": {
     "@nestjs/common": "12.1.0", "@nestjs/core": "12.1.0", "@nestjs/platform-express": "12.1.0",

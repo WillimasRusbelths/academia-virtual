@@ -11,9 +11,11 @@ sin implementar; los comandos de producto descritos más adelante son futuros.
 
 ## Variables y ejemplos sin credenciales
 
-Los ejemplos actuales de Compose existen; la tabla siguiente describe configuración de producto futura.
-Los archivos reales `.env`/`.env.test` quedan ignorados. Un único cargador explícito en API,
-Prisma CLI y comandos operativos leerá el archivo indicado desde la raíz, sin depender de
+Los ejemplos y el cargador de T011 ya existen. `APP_ENV` se selecciona explícitamente;
+desarrollo lee `.env`, test solo `.env.test` y demo/producción solo variables inyectadas.
+En Compose no se montan archivos privados: las variables llegan al contenedor desde `.env`.
+Los archivos reales `.env`/`.env.test` quedan ignorados. El cargador compartido por API y
+Prisma CLI lee el archivo indicado desde la raíz, sin depender de
 que el directorio actual sea `apps/api`. Vite solo recibe configuración pública y usa `/api`.
 
 | Variable | Local previsto / significado | Regla |
@@ -25,6 +27,9 @@ que el directorio actual sea `apps/api`. Vite solo recibe configuración públic
 | POSTGRES_USER / POSTGRES_DB | academia_runtime / academia_dev | Identificadores locales, no secretos |
 | POSTGRES_PASSWORD | Vacío en ejemplo; generado localmente | Nunca valor real versionado |
 | DATABASE_URL | Vacío en ejemplo; conexión local con contraseña privada | BD separada por entorno; URL nunca en logs |
+| MIGRATION_DATABASE_URL | Conexión del propietario al mismo destino | Usuario y contraseña diferentes del runtime |
+| TEST_DATABASE_URL / TEST_MIGRATION_DATABASE_URL | `academia_v00_test`; runtime y propietario de prueba | Solo se seleccionan con APP_ENV=test |
+| TEST_MAIL_PAYLOAD_KEY / TEST_RATE_HMAC_KEY | Dos claves de prueba de 32 bytes en base64 | Distintas de las claves de desarrollo |
 | DB_POOL_MAX | 10 inicial | Medir; no aumentar conexiones sin revisar memoria/carga |
 | MAIL_MODE | capture en desarrollo/test, smtp en producción | Producción rechaza capture; local rechaza SMTP externo |
 | SMTP_HOST / SMTP_PORT | `mailpit` / 1025 | Solo Mailpit en capture |
@@ -43,18 +48,23 @@ no contendrán cuenta administrativa, contraseña provisional ni claves comparti
 Para crear claves al implementar puede usarse una herramienta criptográfica local; nunca
 se generan dentro del documento ni se pegan en archivos versionados.
 
-## Arranque futuro, después de implementar los archivos
+## Generación y migraciones de identidad
 
-Todos los comandos siguientes son **contratos de scripts por crear**. No se han ejecutado.
-Suponen completada la tarea inicial anterior y un lockfile generado; `npm ci` no lo crea.
-Cuando existan los scripts de producto, se ejecutarán dentro de `api`:
+`db:generate` y `db:migrate:deploy` existen y se comprobaron en Docker: generación offline
+y aplicación a esquemas aislados de prueba. El segundo comando siguiente aplica las
+migraciones a desarrollo; revisar SQL y respaldos antes de usarlo sobre datos persistentes:
 
 ```sh
 docker compose exec -T api npm run db:generate --workspace @academia/api
 docker compose exec -T api npm run db:migrate:deploy --workspace @academia/api
 ```
 
-Actualmente solo existen las migraciones de ensayo `probe:generate` y `probe:migrate`.
+Hay tres migraciones de identidad y, por separado, las de ensayo `probe:generate` y
+`probe:migrate`. Los ensayos no migraron desarrollo. `db:migrate:dev` solo acepta desarrollo,
+usa `--create-only` y requiere una BD sombra con permisos para Prisma; ese flujo no se
+comprobó. Los CHECKs, triggers y el índice parcial requieren conservar y revisar su SQL.
+Evidencia: [T011–T016](evidence/fundamentos-datos.md). Los comandos de bootstrap,
+retención y recuperación de las secciones siguientes permanecen previstos.
 El endpoint existente es `/health/live`; no se afirma implementación de `/health/ready`.
 No usar `db push` como sustituto de migraciones.
 

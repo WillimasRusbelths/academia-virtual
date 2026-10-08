@@ -3,9 +3,11 @@
 Proyecto de academia virtual para un trabajo final de curso, con cuatro meses de plazo
 y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-06:** base técnica React/NestJS con Docker Compose como entorno local
+**Estado al 2026-10-07:** base técnica React/NestJS con Docker Compose como entorno local
 principal. Las historias de identidad y las funciones académicas
 aún no están implementadas; no hay integración de pagos/video ni despliegue acreditado.
+La configuración por entorno y el esquema de identidad con tres migraciones cuentan con
+[pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
 de carga reproducibles; no es una capacidad garantizada.
 
@@ -16,7 +18,7 @@ y pruebas necesarias, no a financiar una operación permanente. Se prevén aprox
 ## Ejecución local
 
 Iniciar Docker Desktop con motor Linux. Crear `.env` a partir de `.env.example` con cinco
-claves locales independientes, o generarlo sin sobrescribir archivos mediante el comando
+contraseñas locales y cuatro claves de identidad independientes, o generarlo sin sobrescribir archivos mediante el comando
 documentado en [ops/docker/README.md](ops/docker/README.md).
 
 ```sh

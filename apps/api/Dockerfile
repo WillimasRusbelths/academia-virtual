@@ -11,8 +11,10 @@ RUN --mount=type=secret,id=npm_ca,required=false \
 COPY apps ./apps
 COPY ops/local/compatibility ./ops/local/compatibility
 COPY ops/lint ./ops/lint
+COPY ops/docker/configure.mjs ./ops/docker/configure.mjs
+COPY .env.example .env.test.example ./
 ENV NPM_CONFIG_CACHE=/tmp/npm-cache
-RUN npm run probe:generate && npm run build --workspace @academia/api \
+RUN npm run probe:generate && npm run db:generate && npm run build --workspace @academia/api \
     && mkdir -p /workspace/node_modules/.vite-temp /workspace/node_modules/.vite \
     && chown -R node:node /workspace/apps /workspace/node_modules/.vite-temp /workspace/node_modules/.vite
 USER node

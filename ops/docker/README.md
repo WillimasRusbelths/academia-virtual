@@ -20,6 +20,15 @@ valores aleatorios independientes, hexadecimales de 64 caracteres. No usar contr
 reales de otros sistemas ni compartir `.env`. Las URL se construyen dentro de Compose
 con nombres de servicio; no se deben pegar las conexiones del host en contenedores.
 
+Además, completar `MAIL_PAYLOAD_KEY`, `RATE_HMAC_KEY`, `TEST_MAIL_PAYLOAD_KEY` y
+`TEST_RATE_HMAC_KEY` con cuatro claves independientes de 32 bytes en base64. El generador
+crea también estas claves. Si `.env` ya existe, conservar sus contraseñas y añadir solo
+las claves de identidad faltantes:
+
+```powershell
+docker run --rm --mount "type=bind,source=$PWD,target=/workspace" -w /workspace node:22.23.1-bookworm-slim node ops/docker/configure.mjs --identity-keys
+```
+
 Alternativamente, este comando genera `.env` y rechaza sobrescribirlo (PowerShell):
 
 ```powershell
@@ -77,8 +86,8 @@ El volumen `postgres_data` persiste con `docker compose down`. PostgreSQL ejecut
 pueden conectarse a desarrollo ni crear objetos con el runtime. No se importa, elimina
 ni modifica la instalación PostgreSQL del host.
 
-El modelo actual de ensayo contiene únicamente CompatibilityProbe. No hay migraciones
-de identidad. Generar y aplicar la migración existente dentro de `api`:
+El modelo de ensayo `CompatibilityProbe` permanece separado del esquema de identidad.
+Generar y aplicar la migración de compatibilidad dentro de `api`:
 
 ```sh
 docker compose exec -T api npm run probe:generate
@@ -87,6 +96,19 @@ docker compose exec -T api npm run probe:check
 ```
 
 Las guardas exigen `db:5432`, `academia_v00_test` y los roles exclusivos de ensayo.
+
+El esquema de identidad contiene ocho modelos y tres migraciones revisadas. La imagen
+genera el cliente con `db:generate`, sin conexión a la BD. `db:migrate:deploy` aplica solo
+migraciones versionadas al entorno explícito: desarrollo por defecto en Compose o prueba
+mediante `-e APP_ENV=test`. No se ejecuta automáticamente al iniciar la API. Revisar SQL
+y respaldos antes de aplicarlo sobre datos persistentes. `db:migrate:dev` está restringido
+a desarrollo y solicita solo crear la migración; necesita una BD sombra con permisos
+adecuados para Prisma. No se otorgó CREATEDB al propietario ni se validó ese flujo aquí.
+
+Las pruebas de integración migran esquemas vacíos aislados de `academia_v00_test`,
+verifican una copia ficticia incremental y eliminan exclusivamente sus propios esquemas.
+Los resultados de T011–T016 están en [fundamentos de configuración y persistencia](../../specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
+
 No usar `db push`, reset ni ejecutar el inicializador de bases sobre un volumen existente.
 Cambiar contraseñas en `.env` no cambia las almacenadas: para una rotación hay que
 actualizar los roles mediante un procedimiento controlado y conservar los datos.

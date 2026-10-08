@@ -1,8 +1,10 @@
 # Modelo de datos de identidad
 
-Fecha: 2026-09-23. Diseño para PostgreSQL 16 (R12: local 16.14) y Prisma 7; no hay esquema ni migraciones
-implementados. Requisitos: [spec.md](spec.md); decisiones: [research.md](research.md).
-Revisión: 2026-09-24. Ambas versiones son candidatas hasta la comprobación práctica inicial.
+Fecha de diseño: 2026-09-23; revisión: 2026-09-24. PostgreSQL 16.14 y Prisma 7.10.0
+cuentan con validación Docker. Al 2026-10-07, el esquema y tres migraciones implementan
+las estructuras y restricciones de T012–T015; [evidencia de persistencia](evidence/fundamentos-datos.md).
+Los casos de uso y flujos de identidad siguen pendientes. Requisitos: [spec.md](spec.md);
+decisiones: [research.md](research.md).
 Todas las fechas son `timestamptz` en UTC; los límites temporales usan el reloj de la BD.
 Los identificadores de entidades son UUID aleatorios; no sustituyen comprobaciones de permisos.
 
