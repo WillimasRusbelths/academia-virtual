@@ -10,7 +10,7 @@ import { createIsolatedTestEnvironment, type IsolatedTestEnvironment } from '../
 let isolated: IsolatedTestEnvironment;
 let database: ReturnType<typeof createDatabase>;
 const root = repositoryRoot();
-const migrationNames = ['0001_identity_users', '0002_identity_access', '0003_identity_mail_limits'];
+const migrationNames = ['0001_identity_users', '0002_identity_access', '0003_identity_mail_limits', '0004_identity_argon2_format'];
 // Datos ficticios: formato de hash, no una contraseña ni una credencial funcional.
 const hash = `$argon2id$v=19$m=19456,t=2,p=1$${randomBytes(16).toString('base64').replaceAll('=', '')}$${randomBytes(32).toString('base64').replaceAll('=', '')}`;
 
@@ -59,7 +59,7 @@ async function token(userId: string, purpose = 'VERIFY_EMAIL', created = new Dat
   return id;
 }
 
-test('Prisma deploy en esquema vacío crea ocho tablas, tres migraciones y singleton sin usuarios', async () => {
+test('Prisma deploy en esquema vacío crea ocho tablas, cuatro migraciones y singleton sin usuarios', async () => {
   expect(await database.prisma.user.count()).toBe(0);
   const result = await database.pool.query('SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name');
   expect(result.rows.map(row => row.migration_name)).toEqual(migrationNames);
@@ -75,10 +75,12 @@ test('aplicar SQL incremental sobre copia ficticia conserva usuarios y datos', a
   try {
     const sql = (name: string) => readFileSync(path.join(root, 'apps/api/prisma/migrations', name, 'migration.sql'), 'utf8');
     await copy.ownerQuery(sql(migrationNames[0]));
-    await copy.ownerQuery(`INSERT INTO "User" (name,email,"emailCanonical",role,"mustSetPassword") VALUES ('Copia ficticia','copy@example.test','copy@example.test','STUDENT',true)`);
+    await copy.ownerQuery(`INSERT INTO "User" (name,email,"emailCanonical",role,"mustSetPassword","passwordHash") VALUES ('Copia ficticia','copy@example.test','copy@example.test','STUDENT',true,'${hash}')`);
     for (const name of migrationNames.slice(1)) await copy.ownerQuery(sql(name));
     const result = await copy.runtimeQuery<{ name: string }>('SELECT name FROM "User"');
     expect(result.rows).toEqual([{ name: 'Copia ficticia' }]);
+    const kept = await copy.runtimeQuery<{ passwordHash: string }>('SELECT "passwordHash" FROM "User"');
+    expect(kept.rows[0].passwordHash === hash).toBe(true);
   } finally { await copy.cleanup(); }
 });
 
@@ -87,7 +89,7 @@ test('migraciones son idempotentes mediante el historial de Prisma y no reinicia
   deploy(isolated.schema);
   expect(await database.prisma.user.findUnique({ where: { id: account.id } })).not.toBeNull();
   const result = await database.pool.query('SELECT count(*)::int AS count FROM "_prisma_migrations"');
-  expect(result.rows[0].count).toBe(3);
+  expect(result.rows[0].count).toBe(migrationNames.length);
 }, 120000); // Incluye arranque de la CLI de Prisma; no mide latencia de la aplicación.
 
 test('restricciones de cuenta: Unicode, trim, correo canónico, enum, versión y credenciales', async () => {

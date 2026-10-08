@@ -4,7 +4,7 @@
     "lint": "eslint src tests eslint.config.js",
     "build": "tsc -p tsconfig.json",
     "dev": "npm run build && node dist/src/main.js",
-    "test:unit": "vitest run tests/architecture",
+    "test:unit": "vitest run tests/architecture src/modules",
     "test:integration": "vitest run tests/compatibility/runtime.spec.ts tests/compatibility/postgres.spec.ts tests/integration",
     "test:smoke": "vitest run tests/compatibility/runtime.spec.ts",
     "test:crypto-mail": "vitest run tests/compatibility/crypto-mail.spec.ts",

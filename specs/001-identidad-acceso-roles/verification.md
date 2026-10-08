@@ -4,6 +4,8 @@ Estado: compatibilidad del entorno Docker comprobada; escenarios funcionales V01
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
 T011–T016 añaden pruebas de configuración y persistencia; resultados y límites en
 [fundamentos de configuración y persistencia](evidence/fundamentos-datos.md). No cierran V01–V16.
+T017–T020 añaden [reglas, credenciales y límites persistidos](evidence/reglas-credenciales-limites.md)
+comprobados; tampoco completan las historias ni el protocolo temporal HTTP de T087.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

@@ -6,8 +6,10 @@ y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 **Estado al 2026-10-07:** base técnica React/NestJS con Docker Compose como entorno local
 principal. Las historias de identidad y las funciones académicas
 aún no están implementadas; no hay integración de pagos/video ni despliegue acreditado.
-La configuración por entorno y el esquema de identidad con tres migraciones cuentan con
+La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
+Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
+están comprobadas como fundamentos; aún no habilitan registro o login.
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
 de carga reproducibles; no es una capacidad garantizada.
 

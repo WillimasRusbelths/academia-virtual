@@ -97,7 +97,7 @@ docker compose exec -T api npm run probe:check
 
 Las guardas exigen `db:5432`, `academia_v00_test` y los roles exclusivos de ensayo.
 
-El esquema de identidad contiene ocho modelos y tres migraciones revisadas. La imagen
+El esquema de identidad contiene ocho modelos y cuatro migraciones revisadas. La imagen
 genera el cliente con `db:generate`, sin conexión a la BD. `db:migrate:deploy` aplica solo
 migraciones versionadas al entorno explícito: desarrollo por defecto en Compose o prueba
 mediante `-e APP_ENV=test`. No se ejecuta automáticamente al iniciar la API. Revisar SQL
@@ -108,6 +108,8 @@ adecuados para Prisma. No se otorgó CREATEDB al propietario ni se validó ese f
 Las pruebas de integración migran esquemas vacíos aislados de `academia_v00_test`,
 verifican una copia ficticia incremental y eliminan exclusivamente sus propios esquemas.
 Los resultados de T011–T016 están en [fundamentos de configuración y persistencia](../../specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
+T017–T020 y la corrección incremental del formato PHC están en
+[reglas, credenciales y límites](../../specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md).
 
 No usar `db push`, reset ni ejecutar el inicializador de bases sobre un volumen existente.
 Cambiar contraseñas en `.env` no cambia las almacenadas: para una rotación hay que

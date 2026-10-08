@@ -16,4 +16,5 @@ export default tseslint.config(
       'no-console': ['error', { allow: ['warn', 'error'] }],
     },
   },
+  { files: ['src/**/*.test.ts'], rules: { 'architecture/api-layers': 'off' } },
 );

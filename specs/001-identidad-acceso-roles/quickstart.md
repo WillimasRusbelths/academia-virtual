@@ -59,12 +59,14 @@ docker compose exec -T api npm run db:generate --workspace @academia/api
 docker compose exec -T api npm run db:migrate:deploy --workspace @academia/api
 ```
 
-Hay tres migraciones de identidad y, por separado, las de ensayo `probe:generate` y
+Hay cuatro migraciones de identidad y, por separado, las de ensayo `probe:generate` y
 `probe:migrate`. Los ensayos no migraron desarrollo. `db:migrate:dev` solo acepta desarrollo,
 usa `--create-only` y requiere una BD sombra con permisos para Prisma; ese flujo no se
 comprobó. Los CHECKs, triggers y el índice parcial requieren conservar y revisar su SQL.
 Evidencia: [T011–T016](evidence/fundamentos-datos.md). Los comandos de bootstrap,
 retención y recuperación de las secciones siguientes permanecen previstos.
+El incremento [T017–T020](evidence/reglas-credenciales-limites.md) añade reglas, credenciales,
+cuotas y compatibilidad del formato PHC; no habilita todavía los endpoints de identidad.
 El endpoint existente es `/health/live`; no se afirma implementación de `/health/ready`.
 No usar `db push` como sustituto de migraciones.
 
