@@ -13,6 +13,7 @@ description: "Tareas de implementación de identidad, autenticación y acceso po
 [constitución 1.1.0](../../.specify/memory/constitution.md).
 
 **Estado vigente (2026-10-07)**: Docker Compose validado con cuatro servicios Linux; T001–T023 completadas. T011–T016 aportan configuración y persistencia; [evidencia](evidence/fundamentos-datos.md). T017–T020 añaden reglas puras, credenciales y cuotas persistidas; [evidencia](evidence/reglas-credenciales-limites.md). T021–T023 incorporan sesiones, autorización y transporte HTTP; [evidencia](evidence/sesiones-autorizacion-http.md). T024–T030 y las historias de identidad siguen pendientes. Evidencia del entorno en [verificación Docker](../../ops/docker/verification.md).
+**Seguimiento auditado (2026-10-07)**: criterios y procedencia contrastados en [auditoría del seguimiento](evidence/auditoria-seguimiento.md). Se sincronizan casillas, referencias Docker y totales: 23 completadas y 85 pendientes; no se cierran historias ni escenarios V01–V16.
 **Registro histórico de generación**: no había aplicación, dependencias instaladas ni pruebas superadas. Se conservaron README y los siete documentos de planificación
 existentes. No había tasks.md. `setup-tasks.ps1 -Json` resolvió esta carpeta y la plantilla
 instalada; no se encontraron AGENTS.md aplicables ni `.specify/extensions.yml` con hooks.
@@ -40,7 +41,8 @@ abajo nombres deterministas para identificar su contenido antes de generarlas.
   Si una prueba cubre conducta ya implementada, puede pasar desde el inicio; no forzar un
   fallo artificial. Las tareas de **aceptación** y sus checkpoints sí exigen que las pruebas
   aplicables pasen con implementación real, sin omitir casos pendientes. Esta distinción
-  se aplica a todos los grupos de la tabla de cierre siguiente. Ninguna tarea se marca aquí.
+  se aplica a todos los grupos de la tabla de cierre siguiente. Las casillas solo se marcan
+  después de comprobar todos los criterios de la tarea y registrar su evidencia.
   No reemplazar PostgreSQL por SQLite/mocks para demostrar transacciones; conservar evidencia.
 - Las restricciones citadas bajo T012–T015 forman parte de sus descripciones y se copian
   literalmente del modelo para evitar decisiones implícitas durante implementación.
@@ -51,6 +53,8 @@ abajo nombres deterministas para identificar su contenido antes de generarlas.
   casos de uso, ciclos entre módulos, repositorios genéricos ni interfaces sin una necesidad real.
 - Ninguna entrega parcial omite autorización, validación o protección de secretos. US5
   verifica transversalmente controles ya integrados desde fundamentos y en cada endpoint.
+- Antes de informar un bloque completo, actualizar casillas y totales, enlazar evidencia y
+  comprobar que los IDs marcados en tasks.md y en el staging coinciden con el informe final.
 - Este documento no ordena commits, push, merge, contratación ni despliegue. La generación
   actual no ejecuta ninguna tarea. Antes de implementar corresponde `$speckit-analyze`.
 
@@ -76,8 +80,8 @@ retención, recuperación y carga, conservan sus propios resultados satisfactori
 y versiones candidatas de R01 no equivalen a compatibilidad probada. Solo se crea un esqueleto
 y pruebas de compatibilidad en esta fase; no se añaden reglas de negocio.
 
-- [x] T001 Comprobar WSL2 operativo y motor Linux disponible mediante Docker Desktop. Evidencia en `ops/docker/verification.md`; sin modificar virtualización ni el sistema operativo. Dep.: ninguna.
-- [x] T002 Validar Docker/Compose, los cuatro servicios, health checks, red, puertos publicados y volumen persistente según `ops/docker/README.md`. Evidencia en `ops/docker/verification.md`. Dep.: T001.
+- [x] T001 Comprobar WSL2 operativo, VirtualMachinePlatform instalada, hipervisor activo y motor Linux disponible mediante Docker Desktop. Evidencia en `ops/docker/verification.md` y `specs/001-identidad-acceso-roles/evidence/auditoria-seguimiento.md`; sin modificar virtualización ni el sistema operativo. Dep.: ninguna.
+- [x] T002 Validar Docker Client/Server y Compose, los cuatro servicios, health checks, red, espacio disponible, puertos publicados 5173/3000/55432/11025/18025 y volumen persistente según `ops/docker/README.md`. Evidencia en `ops/docker/verification.md` y `specs/001-identidad-acceso-roles/evidence/auditoria-seguimiento.md`; se reutiliza la instalación existente, sin reinstalar ni reconfigurar. Dep.: T001.
 - [x] T003 Crear el esqueleto npm workspaces en `package.json`, `apps/api/package.json` y `apps/web/package.json`; elegir parches compatibles de los candidatos R01, comprobar engines/peers y dependencias de la plataforma Linux e instalar para generar `package-lock.json`, sin force/legacy-peer-deps. Registrar cambios justificados de versión en `ops/docker/compatibility.md`. Dep.: T002; Node/npm incluidos en las imágenes.
 - [x] T004 Preparar PostgreSQL y Mailpit con `compose.yml` y `ops/docker/init-databases.sql`: bases academia_dev/academia_v00_test, propietarios/runtime separados y restringidos, claves locales desde `.env`, volumen persistente y Mailpit sin relay. Las plantillas no contienen claves. Dep.: T003.
 - [x] T005 Configurar y compilar los esqueletos ESM/TypeScript estricto en `apps/api/tsconfig.json`, `apps/api/src/main.ts`, `apps/api/vitest.config.ts`, `apps/web/tsconfig.json`, `apps/web/vite.config.ts` y `apps/web/src/main.tsx`; Vite localhost:5173 proxifica /api a http://api:3000 conservando Origin. Añadir smoke de provider/controlador con metadatos Nest en `apps/api/tests/compatibility/runtime.spec.ts` y componente React en `apps/web/src/app/runtime.test.tsx`. Dep.: T003; build/smoke no requiere conexión SQL (R12).
@@ -356,7 +360,7 @@ aprobado de antemano; un ensayo ejecutado con fallos deja pendiente su criterio 
 | 8 · US5 P1 | T082–T088 | 7 | Todos los flujos P1 para auditar permisos y secretos de extremo a extremo |
 | 9 · US3 P2 | T089–T094 | 6 | /me/inicio de US1 y rutas previas para comprobar todos los flujos accesibles |
 | 10 · Cierre transversal | T095–T108 | 14 | Historias listas; operación, carga, observación y evidencia integral |
-| **Total** | **T001–T108** | **108** | **64 de historias + 44 compartidas/transversales; 10 completadas (T001–T010), 98 pendientes** |
+| **Total** | **T001–T108** | **108** | **64 de historias + 44 compartidas/transversales; 23 completadas (T001–T023), 85 pendientes** |
 
 ```mermaid
 flowchart TD
