@@ -50,18 +50,18 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 
 ## Análisis del sistema
 
-- [Actores](analisis-de-sistema/01-actores.md) e [historias de usuario](analisis-de-sistema/02-historias-del-usuario.md).
-- [Requisitos funcionales y relación HU ↔ RF](analisis-de-sistema/03-requisitos-funcionales.md).
-- [Atributos de calidad](analisis-de-sistema/04-atributos-de-calidad.md) y [restricciones](analisis-de-sistema/05-restricciones.md).
-- [Drivers arquitectónicos](analisis-de-sistema/06-driver-arquitectonicos.md).
-- [Arquitectura inicial de tres capas](arquitectura/arquitectura-inicial.md): diagrama Mermaid,
+- [Actores](docs/01-analisis-de-sistema/01-actores.md) e [historias de usuario](docs/01-analisis-de-sistema/02-historias-del-usuario.md).
+- [Requisitos funcionales y relación HU ↔ RF](docs/01-analisis-de-sistema/03-requisitos-funcionales.md).
+- [Atributos de calidad](docs/01-analisis-de-sistema/04-atributos-de-calidad.md) y [restricciones](docs/01-analisis-de-sistema/05-restricciones.md).
+- [Drivers arquitectónicos](docs/01-analisis-de-sistema/06-driver-arquitectonicos.md).
+- [Arquitectura inicial de tres capas](docs/02-arquitectura-software/arquitectura-inicial.md): diagrama Mermaid,
   inventario, evidencia, discrepancias y pendientes. Esta síntesis enlaza el detalle existente
   en `docs/` y `specs/`, que conserva el alcance y sus criterios de aceptación.
 
 El análisis reúne **17 historias HU y 19 requisitos RF generales del MVP**. Identidad desarrolla
 una parte de ese alcance mediante **7 historias US y 33 requisitos FR detallados**; son
 niveles distintos de descripción, no cifras alternativas del mismo catálogo. Véase la
-[correspondencia de identidad](analisis-de-sistema/03-requisitos-funcionales.md#correspondencia-con-el-detalle-de-identidad).
+[correspondencia de identidad](docs/01-analisis-de-sistema/03-requisitos-funcionales.md#correspondencia-con-el-detalle-de-identidad).
 
 ## MVP previsto
 

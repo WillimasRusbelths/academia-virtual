@@ -2,9 +2,9 @@
 
 ## 1. Estilo seleccionado
 
-Academia Virtual adopta un **monolito por capas, organizado internamente en módulos**, conforme a R01 de las [decisiones arquitectónicas](../analisis-de-sistema/07-decisiones-arquitectonicas.md). El backend NestJS constituye una sola aplicación: sus módulos se componen y ejecutan dentro del mismo proceso, con colaboración interna mediante interfaces públicas. Los módulos no son servicios desplegados de forma independiente.
+Academia Virtual adopta un **monolito por capas, organizado internamente en módulos**, conforme a R01 de las [decisiones arquitectónicas](../01-analisis-de-sistema/07-decisiones-arquitectonicas.md). El backend NestJS constituye una sola aplicación: sus módulos se componen y ejecutan dentro del mismo proceso, con colaboración interna mediante interfaces públicas. Los módulos no son servicios desplegados de forma independiente.
 
-La vista general separa tres capas lógicas: presentación, lógica de negocio y datos. Esta separación expresa responsabilidades; no exige tres servidores ni tres carpetas globales. Dentro de cada módulo se organizan las responsabilidades que necesite, según el [plan de identidad](../specs/001-identidad-acceso-roles/plan.md).
+La vista general separa tres capas lógicas: presentación, lógica de negocio y datos. Esta separación expresa responsabilidades; no exige tres servidores ni tres carpetas globales. Dentro de cada módulo se organizan las responsabilidades que necesite, según el [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md).
 
 React/Vite proporciona la aplicación web; NestJS recibe solicitudes mediante la API REST; PostgreSQL proporciona persistencia. **Clean Architecture** es el enfoque interno relacionado que orienta las dependencias hacia los casos de uso y el dominio. Su desarrollo detallado corresponde a una vista distinta del estilo.
 
@@ -12,7 +12,7 @@ Docker Compose organiza el entorno local de ejecución de PostgreSQL, Mailpit, A
 
 ## 2. Justificación y trazabilidad
 
-La elección responde a los [drivers vigentes](../analisis-de-sistema/06-driver-arquitectonicos.md) y conserva los identificadores del registro de decisiones.
+La elección responde a los [drivers vigentes](../01-analisis-de-sistema/06-driver-arquitectonicos.md) y conserva los identificadores del registro de decisiones.
 
 | Drivers | Decisiones relacionadas | Justificación del estilo |
 | --- | --- | --- |
@@ -29,13 +29,13 @@ La [arquitectura inicial](arquitectura-inicial.md) aporta la vista general del a
 
 | Componente | Ubicación o referencia | Estado |
 | --- | --- | --- |
-| Aplicación web React/Vite | [apps/web/src/app/App.tsx](../apps/web/src/app/App.tsx) y [entrada web](../apps/web/src/main.tsx) | Base implementada; muestra «En preparación». Pantallas y flujos por rol pendientes. |
-| Aplicación NestJS | [AppModule](../apps/api/src/app.module.ts), [ProbeModule](../apps/api/src/probe.module.ts) y [arranque](../apps/api/src/main.ts) | Composición implementada con Probe y `GET /health/live`. API REST funcional de negocio pendiente. |
-| Identidad, usuarios, autorización, correo y auditoría | [Plan de identidad](../specs/001-identidad-acceso-roles/plan.md) | Módulos diseñados; no implementados como funcionalidades. |
-| Oferta académica, órdenes, pagos, matrículas, materiales, clases, chat y paneles | [Alcance vigente](../docs/alcance-mvp.md) | Módulos previstos para el conjunto del sistema; requieren especificación e implementación. |
-| Persistencia PostgreSQL y adaptadores Prisma/pg | [Modelo previsto](../specs/001-identidad-acceso-roles/data-model.md) y [ensayo de compatibilidad](../ops/local/compatibility/prisma/schema.prisma) | PostgreSQL y ensayo técnico comprobados; el ensayo contiene CompatibilityProbe, no las entidades funcionales de identidad o académicas. |
+| Aplicación web React/Vite | [apps/web/src/app/App.tsx](../../apps/web/src/app/App.tsx) y [entrada web](../../apps/web/src/main.tsx) | Base implementada; muestra «En preparación». Pantallas y flujos por rol pendientes. |
+| Aplicación NestJS | [AppModule](../../apps/api/src/app.module.ts), [ProbeModule](../../apps/api/src/probe.module.ts) y [arranque](../../apps/api/src/main.ts) | Composición implementada con Probe y `GET /health/live`. API REST funcional de negocio pendiente. |
+| Identidad, usuarios, autorización, correo y auditoría | [Plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) | Módulos diseñados; no implementados como funcionalidades. |
+| Oferta académica, órdenes, pagos, matrículas, materiales, clases, chat y paneles | [Alcance vigente](../alcance-mvp.md) | Módulos previstos para el conjunto del sistema; requieren especificación e implementación. |
+| Persistencia PostgreSQL y adaptadores Prisma/pg | [Modelo previsto](../../specs/001-identidad-acceso-roles/data-model.md) y [ensayo de compatibilidad](../../ops/local/compatibility/prisma/schema.prisma) | PostgreSQL y ensayo técnico comprobados; el ensayo contiene CompatibilityProbe, no las entidades funcionales de identidad o académicas. |
 | Izipay, correo externo y YouTube Live con OBS | D02, R07 y DEC01 del registro de decisiones | Integraciones funcionales pendientes. Mailpit funciona como servicio de captura local; no demuestra entrega externa. |
-| Entorno Docker Compose | [Verificación local](../ops/docker/verification.md) | PostgreSQL, Mailpit, API y web validados en el commit `47c8338`. |
+| Entorno Docker Compose | [Verificación local](../../ops/docker/verification.md) | PostgreSQL, Mailpit, API y web validados en el commit `47c8338`. |
 
 Los paquetes instalados y las pruebas de compatibilidad no equivalen a funcionalidades implementadas. Identidad, pagos, video, recuperación y la prueba de 1000 concurrentes permanecen pendientes de aceptación funcional.
 
@@ -51,7 +51,7 @@ Los adaptadores de servicios externos pertenecen a la infraestructura del módul
 
 ## 5. Comunicación entre componentes
 
-La aplicación web enviará solicitudes a la API REST mediante HTTP/JSON y rutas relativas bajo el mismo origen, según R03 y el [contrato de identidad](../specs/001-identidad-acceso-roles/contracts/api.md). HTTPS corresponde al despliegue público previsto; la validación local de Docker no acredita ese despliegue.
+La aplicación web enviará solicitudes a la API REST mediante HTTP/JSON y rutas relativas bajo el mismo origen, según R03 y el [contrato de identidad](../../specs/001-identidad-acceso-roles/contracts/api.md). HTTPS corresponde al despliegue público previsto; la validación local de Docker no acredita ese despliegue.
 
 Las entradas NestJS invocarán casos de uso. Los módulos colaborarán dentro del mismo proceso mediante interfaces públicas, sin llamadas HTTP entre módulos ni acceso a sus archivos internos. Los casos de uso utilizarán adaptadores inyectados para acceder a PostgreSQL y servicios externos; el dominio no dependerá de Prisma, SMTP ni DTO de transporte.
 

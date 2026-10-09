@@ -134,7 +134,7 @@ PostgreSQL conserva los datos del sistema, pero no se comunica directamente con 
 
 ## Estado de la arquitectura
 
-El proyecto cuenta con la estructura inicial del frontend y la API: React muestra «En preparación» y NestJS compone ProbeModule para `GET /health/live`. PostgreSQL, Mailpit, API y web funcionan en el entorno local Docker Compose validado en el commit `47c8338`, según la [evidencia registrada](../ops/docker/verification.md). Los módulos funcionales se implementarán progresivamente de acuerdo con las historias y requisitos.
+El proyecto cuenta con la estructura inicial del frontend y la API: React muestra «En preparación» y NestJS compone ProbeModule para `GET /health/live`. PostgreSQL, Mailpit, API y web funcionan en el entorno local Docker Compose validado en el commit `47c8338`, según la [evidencia registrada](../../ops/docker/verification.md). Los módulos funcionales se implementarán progresivamente de acuerdo con las historias y requisitos.
 
 La capacidad para soportar 1000 usuarios concurrentes deberá comprobarse mediante pruebas de carga. Las integraciones con Izipay, correo de producción, YouTube Live y almacenamiento de materiales también requieren implementación y validación.
 
@@ -142,13 +142,13 @@ La protección de video exige comprobar acceso directo y permisos vencidos. Una 
 
 ## Documentos relacionados
 
-- [Actores del sistema](../analisis-de-sistema/01-actores.md)
-- [Historias de usuario](../analisis-de-sistema/02-historias-del-usuario.md)
-- [Requisitos funcionales](../analisis-de-sistema/03-requisitos-funcionales.md)
-- [Atributos de calidad](../analisis-de-sistema/04-atributos-de-calidad.md)
-- [Restricciones](../analisis-de-sistema/05-restricciones.md)
-- [Drivers arquitectónicos](../analisis-de-sistema/06-driver-arquitectonicos.md)
-- [Decisiones arquitectónicas](../analisis-de-sistema/07-decisiones-arquitectonicas.md)
+- [Actores del sistema](../01-analisis-de-sistema/01-actores.md)
+- [Historias de usuario](../01-analisis-de-sistema/02-historias-del-usuario.md)
+- [Requisitos funcionales](../01-analisis-de-sistema/03-requisitos-funcionales.md)
+- [Atributos de calidad](../01-analisis-de-sistema/04-atributos-de-calidad.md)
+- [Restricciones](../01-analisis-de-sistema/05-restricciones.md)
+- [Drivers arquitectónicos](../01-analisis-de-sistema/06-driver-arquitectonicos.md)
+- [Decisiones arquitectónicas](../01-analisis-de-sistema/07-decisiones-arquitectonicas.md)
 - [Arquitectura inicial](arquitectura-inicial.md)
 - [Estilo arquitectónico](estilo-arquitectonico.md)
 - [Enfoque arquitectónico](enfoque-arquitectonico.md)

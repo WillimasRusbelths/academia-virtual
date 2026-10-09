@@ -17,19 +17,19 @@ equivalen a 1000 sesiones, matrículas, conexiones de chat o reproducciones simu
 
 ## Evidencia existente y pruebas pendientes
 
-La [compatibilidad V00](../ops/docker/compatibility.md) registra builds, pruebas mínimas
+La [compatibilidad V00](../../ops/docker/compatibility.md) registra builds, pruebas mínimas
 de Nest/React, transacción/rollback PostgreSQL y Argon2/SMTP local. Los informes
-[T009](../ops/local/architecture.md) y [T010](../ops/docker/test-harness.md)
+[T009](../../ops/local/architecture.md) y [T010](../../ops/docker/test-harness.md)
 describen los límites de importación y el soporte de pruebas del esqueleto.
 No constituyen aceptación funcional de estos escenarios. Los resultados actuales están en
-[verificación Docker](../ops/docker/verification.md). Persisten avisos de auditoría de dependencias.
+[verificación Docker](../../ops/docker/verification.md). Persisten avisos de auditoría de dependencias.
 
-Reutilizar [verification.md](../specs/001-identidad-acceso-roles/verification.md) para
+Reutilizar [verification.md](../../specs/001-identidad-acceso-roles/verification.md) para
 ID-LOAD-01/02 y V01–V16. ID-LOAD-02 mide por separado el costo de autenticación con
 10/25/50/100 usuarios virtuales; no exige 1000 logins simultáneos. SC-008 mide 19 de
 20 accesos secuenciales con inicio visible en menos de 3 s; tampoco demuestra concurrencia.
 
-Para el MVP completo, el [alcance](../docs/alcance-mvp.md#evidencia-requerida-para-la-capacidad)
+Para el MVP completo, el [alcance](../alcance-mvp.md#evidencia-requerida-para-la-capacidad)
 exige ensayos diferenciados de matrícula, Socket.IO y consumo real de segmentos HLS.
 Cada informe debe incluir revisión de código y cambios locales, configuración/scripts,
 infraestructura, generador, duración, concurrencia real, RPS cuando aplique, percentiles,

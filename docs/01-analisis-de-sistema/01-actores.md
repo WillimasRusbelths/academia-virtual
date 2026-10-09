@@ -2,9 +2,9 @@
 
 La plataforma Academia Virtual considera actores humanos y servicios externos que
 apoyan procesos de correo, pagos y transmisión de clases en vivo.
-El [alcance del MVP](../docs/alcance-mvp.md) y la
-[especificación de identidad](../specs/001-identidad-acceso-roles/spec.md) conservan
-las reglas detalladas. El [inventario y estado comprobado](../arquitectura/arquitectura-inicial.md#inventario-y-estado-del-repositorio)
+El [alcance del MVP](../alcance-mvp.md) y la
+[especificación de identidad](../../specs/001-identidad-acceso-roles/spec.md) conservan
+las reglas detalladas. El [inventario y estado comprobado](../02-arquitectura-software/arquitectura-inicial.md#inventario-y-estado-del-repositorio)
 separa base técnica, diseño y funciones pendientes. Ningún actor dispone todavía de
 los flujos de negocio descritos aquí.
 
@@ -45,8 +45,8 @@ mantienen denegación por defecto.
 | YouTube Live | Transmite las clases en vivo vinculadas a los cursos. |
 
 Estas relaciones describen necesidades, no operaciones ya disponibles. Fuentes:
-[decisiones pendientes](../docs/decisiones-pendientes.md),
+[decisiones pendientes](../decisiones-pendientes.md),
 [decisiones arquitectónicas](07-decisiones-arquitectonicas.md),
-[plan de identidad](../specs/001-identidad-acceso-roles/plan.md) y
-[verificación Docker](../ops/docker/verification.md). PostgreSQL es persistencia
+[plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) y
+[verificación Docker](../../ops/docker/verification.md). PostgreSQL es persistencia
 interna; no es un actor ni una pasarela hacia servicios externos.

@@ -2,16 +2,16 @@
 
 Se distinguen obligaciones del proyecto, decisiones
 técnicas vigentes y propuestas aún sujetas a validación. Fuentes principales:
-[constitución 1.1.0](../.specify/memory/constitution.md),
-[alcance](../docs/alcance-mvp.md), [decisiones](../docs/decisiones-pendientes.md),
-[plan de identidad](../specs/001-identidad-acceso-roles/plan.md) y su actualización R12.
+[constitución 1.1.0](../../.specify/memory/constitution.md),
+[alcance](../alcance-mvp.md), [decisiones](../decisiones-pendientes.md),
+[plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) y su actualización R12.
 
 | ID | Tipo | Restricción / decisión respaldada | Estado y consecuencia |
 | --- | --- | --- | --- |
 | RT01 | Curso y proceso | Trabajo final de cuatro meses, desarrollado por una persona; avanzar por funcionalidades pequeñas mediante Spec Kit, con documentos en español y aceptación verificable. | Constitución I y plan. La rúbrica completa sigue pendiente D10. |
 | RT02 | Presupuesto | S/300 **en total** para infraestructura, despliegue y pruebas necesarias; no presupuesto mensual ni financiación de operación permanente. | Constitución y D09. Alojamiento, correo y transferencia de video necesitan estimación sustentada antes de contratar. |
 | RT03 | Tecnología y estructura | React/TypeScript/Vite; NestJS/TypeScript como monolito modular; npm workspaces; PostgreSQL 16 y Prisma. | Plan, manifests/lockfile y verificación Docker. Base instalada/probada, sin funciones de negocio. No cambiar de motor ni introducir un proyecto nuevo. |
-| RT04 | Entorno y despliegue | Docker Compose como entorno principal con PostgreSQL 16.14, Mailpit, API y web Linux. Publicación futura con Nginx/HTTPS. | Motor Linux y pruebas locales en [verificación Docker](../ops/docker/verification.md). No acredita producción ni ejecución del workflow remoto. |
+| RT04 | Entorno y despliegue | Docker Compose como entorno principal con PostgreSQL 16.14, Mailpit, API y web Linux. Publicación futura con Nginx/HTTPS. | Motor Linux y pruebas locales en [verificación Docker](../../ops/docker/verification.md). No acredita producción ni ejecución del workflow remoto. |
 | RT05 | Complejidad | No añadir microservicios, Kubernetes, Redis o balanceadores sin necesidad comprobada. No dimensionar ahora para 10 000 usuarios. | Constitución y plan: proceso Nest único, persistencia común por entorno y ejecutor interno para correo. |
 | RT06 | Pago externo | Izipay elegida desde 2026-09-23; separar adaptador del proveedor de órdenes/matrículas. Probar carga con pagos simulados y la integración aparte en sandbox, sin cobros reales. | Constitución V–VII y D02. Tarifas, límites, sandbox y Yape pendientes; no se supone integración, disponibilidad ilimitada ni modalidad comercial. |
 | RT07 | Correo | Captura local con Mailpit sin envío real; futura salida SMTP por configuración con TLS/remitente/DNS y cuota verificados. | Plan/research R07–R08, con ejecución local mediante Compose. No hay proveedor contratado ni gratuidad garantizada. |
@@ -21,6 +21,6 @@ técnicas vigentes y propuestas aún sujetas a validación. Fuentes principales:
 | RT11 | Aceptación y evidencia | 1000 usuarios concurrentes es requisito por validar con escenarios reproducibles, criterios y duración acordados con el profesor. | Constitución XI y D10. No se sustituyen pruebas de carga por builds, arranque Docker, páginas abiertas o ensayos de compatibilidad. |
 
 Las versiones puntuales y resultados del entorno se mantienen en
-[compatibility.md](../ops/docker/compatibility.md) y el lockfile. Este documento no fija
+[compatibility.md](../../ops/docker/compatibility.md) y el lockfile. Este documento no fija
 versiones diferentes ni declara resueltas la auditoría de dependencias, la
 operación recuperable o las condiciones comerciales de las integraciones.

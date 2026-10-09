@@ -2,7 +2,7 @@
 
 Clean Architecture organiza las responsabilidades y dependencias internas de Academia Virtual. Complementa el [estilo monolítico por capas](estilo-arquitectonico.md): los módulos del backend permanecen dentro de una misma aplicación NestJS. Se conservan React/Vite, PostgreSQL y Docker Compose; el enfoque no exige cambiar esas tecnologías ni dividir el sistema en servicios independientes.
 
-La elección responde a **DA07**, mantenibilidad y evolución modular, y a **R01**, estructura y dependencias internas, del [registro de decisiones arquitectónicas](../analisis-de-sistema/07-decisiones-arquitectonicas.md). Según los [drivers vigentes](../analisis-de-sistema/06-driver-arquitectonicos.md), modificar una funcionalidad debe afectar solo a los módulos necesarios. El [plan de identidad](../specs/001-identidad-acceso-roles/plan.md) concreta los límites que permiten mantener reglas de negocio independientes del transporte, la persistencia y los proveedores.
+La elección responde a **DA07**, mantenibilidad y evolución modular, y a **R01**, estructura y dependencias internas, del [registro de decisiones arquitectónicas](../01-analisis-de-sistema/07-decisiones-arquitectonicas.md). Según los [drivers vigentes](../01-analisis-de-sistema/06-driver-arquitectonicos.md), modificar una funcionalidad debe afectar solo a los módulos necesarios. El [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) concreta los límites que permiten mantener reglas de negocio independientes del transporte, la persistencia y los proveedores.
 
 ## Síntesis del enfoque
 
@@ -20,7 +20,7 @@ La elección responde a **DA07**, mantenibilidad y evolución modular, y a **R01
 
 ### Dominio
 
-Contiene entidades, objetos de valor y reglas de negocio independientes de tecnología. Para identidad, el [modelo previsto](../specs/001-identidad-acceso-roles/data-model.md) describe conceptos como User, Session y ActionToken, junto con reglas de rol, elegibilidad, vencimiento y uso único. Su representación en dominio no debe confundirse con modelos generados por Prisma.
+Contiene entidades, objetos de valor y reglas de negocio independientes de tecnología. Para identidad, el [modelo previsto](../../specs/001-identidad-acceso-roles/data-model.md) describe conceptos como User, Session y ActionToken, junto con reglas de rol, elegibilidad, vencimiento y uso único. Su representación en dominio no debe confundirse con modelos generados por Prisma.
 
 El dominio no depende de NestJS, Prisma, HTTP, PostgreSQL ni servicios externos. Recibe el estado y el tiempo necesarios para evaluar reglas, sin realizar entrada o salida. Puede utilizar funciones y tipos puros; no es obligatorio crear una clase por entidad u objeto de valor.
 
@@ -34,7 +34,7 @@ Recibe comandos y datos del actor, y devuelve resultados o errores tipados. No c
 
 Incluye controladores REST, DTO de transporte y adaptación de solicitudes y respuestas. Los controladores validan la forma de la entrada, adaptan cookies y controles de transporte, invocan casos de uso y traducen sus resultados al contrato HTTP. No sustituyen la autorización definitiva ni las invariantes del caso de uso.
 
-La web React/Vite consumirá la API mediante su contrato público; no accede directamente a PostgreSQL ni reutiliza entidades Prisma. Esta comunicación entre aplicaciones no es una importación del dominio del backend. El [contrato REST de identidad](../specs/001-identidad-acceso-roles/contracts/api.md) describe operaciones previstas, todavía pendientes de implementación funcional.
+La web React/Vite consumirá la API mediante su contrato público; no accede directamente a PostgreSQL ni reutiliza entidades Prisma. Esta comunicación entre aplicaciones no es una importación del dominio del backend. El [contrato REST de identidad](../../specs/001-identidad-acceso-roles/contracts/api.md) describe operaciones previstas, todavía pendientes de implementación funcional.
 
 ### Infraestructura
 
@@ -88,10 +88,10 @@ La implementación de ese contrato pertenece a infraestructura y realiza la tran
 
 ## Estructura existente y organización propuesta
 
-En el código actual, [AppModule](../apps/api/src/app.module.ts) compone únicamente [ProbeModule](../apps/api/src/probe.module.ts), que contiene controlador y servicio para `GET /health/live`. El [arranque de la API](../apps/api/src/main.ts) utiliza NestJS y la [web](../apps/web/src/app/App.tsx) muestra «En preparación». Esto comprueba una base técnica, no la implementación de las capas funcionales de identidad.
+En el código actual, [AppModule](../../apps/api/src/app.module.ts) compone únicamente [ProbeModule](../../apps/api/src/probe.module.ts), que contiene controlador y servicio para `GET /health/live`. El [arranque de la API](../../apps/api/src/main.ts) utiliza NestJS y la [web](../../apps/web/src/app/App.tsx) muestra «En preparación». Esto comprueba una base técnica, no la implementación de las capas funcionales de identidad.
 
 El plan propone módulos de identidad, usuarios, autorización, correo y auditoría con responsabilidades de entrada, aplicación, dominio e infraestructura. Ese árbol es un destino de implementación; no se afirma que sus directorios o clases ya existan. Los módulos pequeños solo incorporarán las piezas necesarias, sin archivos vacíos para completar una estructura.
 
-Las [pruebas de límites de importación](../apps/api/tests/architecture/import-boundaries.spec.ts) utilizan fragmentos y nombres de archivo de ensayo para comprobar reglas. Esos nombres no acreditan módulos funcionales creados. La [revisión de arquitectura](../ops/local/architecture.md) aporta los controles existentes y la [verificación de identidad](../specs/001-identidad-acceso-roles/verification.md) mantiene pendientes los escenarios funcionales.
+Las [pruebas de límites de importación](../../apps/api/tests/architecture/import-boundaries.spec.ts) utilizan fragmentos y nombres de archivo de ensayo para comprobar reglas. Esos nombres no acreditan módulos funcionales creados. La [revisión de arquitectura](../../ops/local/architecture.md) aporta los controles existentes y la [verificación de identidad](../../specs/001-identidad-acceso-roles/verification.md) mantiene pendientes los escenarios funcionales.
 
-Docker Compose tiene [validación local registrada](../ops/docker/verification.md) para PostgreSQL, Mailpit, API y web en el commit `47c8338`. Esta evidencia no demuestra la aplicación completa del enfoque ni las integraciones funcionales. La mantenibilidad de los módulos futuros deberá comprobarse al implementarlos; los 1000 usuarios concurrentes continúan como objetivo pendiente de pruebas de carga.
+Docker Compose tiene [validación local registrada](../../ops/docker/verification.md) para PostgreSQL, Mailpit, API y web en el commit `47c8338`. Esta evidencia no demuestra la aplicación completa del enfoque ni las integraciones funcionales. La mantenibilidad de los módulos futuros deberá comprobarse al implementarlos; los 1000 usuarios concurrentes continúan como objetivo pendiente de pruebas de carga.

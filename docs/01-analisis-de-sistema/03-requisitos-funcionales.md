@@ -1,7 +1,7 @@
 # 03. Requisitos funcionales
 
 RF01–RF19 son requisitos de síntesis del MVP. Los
-FR-001–FR-033 de la [especificación de identidad](../specs/001-identidad-acceso-roles/spec.md)
+FR-001–FR-033 de la [especificación de identidad](../../specs/001-identidad-acceso-roles/spec.md)
 conservan sus IDs, detalles, límites y criterios de aceptación; no se renumeran.
 Ningún RF de esta tabla está implementado como flujo de negocio. La base técnica y las
 pruebas auxiliares existentes no equivalen a su cumplimiento.
@@ -90,5 +90,5 @@ La unión cubre los 33 FR sin eliminarlos ni cambiar sus condiciones. RF10–RF1
 corresponden al alcance académico futuro; no se les atribuyen FR de identidad inexistentes.
 RF08 se ampliará con permisos académicos. RF19 procede de la constitución y del plan
 operativo/V16, no de un supuesto FR-034. El detalle de aceptación permanece en
-[spec.md](../specs/001-identidad-acceso-roles/spec.md) y
-[verification.md](../specs/001-identidad-acceso-roles/verification.md).
+[spec.md](../../specs/001-identidad-acceso-roles/spec.md) y
+[verification.md](../../specs/001-identidad-acceso-roles/verification.md).

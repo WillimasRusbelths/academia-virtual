@@ -48,13 +48,13 @@ en el incremento de identidad.
 | DA09 | Acoplamiento de la web con persistencia, reglas de negocio o proveedores. | API REST NestJS en presentación, con contratos JSON y rutas relativas; los casos de uso conservan las reglas. El contrato de identidad define DTO, cookies, origen y errores; los endpoints funcionales siguen pendientes. |
 | DA10 | Diferencias de ejecución y pruebas entre equipos, o pérdida de datos al detener el entorno. | Docker Compose con PostgreSQL, Mailpit, API y web, health checks y espera de dependencias saludables; npm ci con lockfile, nombres de servicio y volumen persistente. Entorno local validado en 47c8338; no equivale a publicación ni prueba de carga. |
 
-El [plan de identidad](../specs/001-identidad-acceso-roles/plan.md) y la
-[vista de arquitectura](../arquitectura/arquitectura-inicial.md#responsabilidades-y-dependencias)
+El [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) y la
+[vista de arquitectura](../02-arquitectura-software/arquitectura-inicial.md#responsabilidades-y-dependencias)
 describen las capas y responsabilidades. El
-[contrato HTTP](../specs/001-identidad-acceso-roles/contracts/api.md) sustenta DA09;
-los [límites de importación](../ops/local/architecture.md) concretan DA07 y la
-[verificación del entorno](../ops/docker/verification.md) respalda DA10.
-Las [decisiones pendientes](../docs/decisiones-pendientes.md) conservan D01–D06,
-D10 y D13; la [estrategia de verificación](../specs/001-identidad-acceso-roles/verification.md)
+[contrato HTTP](../../specs/001-identidad-acceso-roles/contracts/api.md) sustenta DA09;
+los [límites de importación](../../ops/local/architecture.md) concretan DA07 y la
+[verificación del entorno](../../ops/docker/verification.md) respalda DA10.
+Las [decisiones pendientes](../decisiones-pendientes.md) conservan D01–D06,
+D10 y D13; la [estrategia de verificación](../../specs/001-identidad-acceso-roles/verification.md)
 define los escenarios de carga y V16. Ningún driver ni decisión de diseño demuestra
 por sí solo el cumplimiento de los requisitos de origen.

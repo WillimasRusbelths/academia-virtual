@@ -2,7 +2,7 @@
 
 Las decisiones responden a los [drivers arquitectónicos](06-driver-arquitectonicos.md) y establecen cómo organizar el sistema, proteger sus operaciones y verificar su comportamiento. Una decisión aceptada orienta el diseño; no demuestra por sí misma que la funcionalidad esté implementada.
 
-Se conservan los identificadores R01–R12 de la [investigación de identidad](../specs/001-identidad-acceso-roles/research.md) y D02 y D13 del [registro de decisiones pendientes](../docs/decisiones-pendientes.md). R11 y R12 se presentan conjuntamente por tratar el mismo entorno local. DEC01 identifica la elección de video vigente en DA03. Los estados se contrastan con la [verificación de identidad](../specs/001-identidad-acceso-roles/verification.md) y la [validación de Docker](../ops/docker/verification.md).
+Se conservan los identificadores R01–R12 de la [investigación de identidad](../../specs/001-identidad-acceso-roles/research.md) y D02 y D13 del [registro de decisiones pendientes](../decisiones-pendientes.md). R11 y R12 se presentan conjuntamente por tratar el mismo entorno local. DEC01 identifica la elección de video vigente en DA03. Los estados se contrastan con la [verificación de identidad](../../specs/001-identidad-acceso-roles/verification.md) y la [validación de Docker](../../ops/docker/verification.md).
 
 | ID | Decisión arquitectónica | Driver relacionado | Justificación | Resultado |
 | --- | --- | --- | --- | --- |
@@ -27,7 +27,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** mantener un monolito por capas organizado en módulos. Aplicar Clean Architecture: presentación invoca aplicación; aplicación depende del dominio; infraestructura implementa sus interfaces y la raíz de composición conecta adaptadores. Se mantienen las tecnologías vigentes.
 - **Justificación:** la modularidad y las dependencias hacia el dominio permiten modificar funcionalidades sin afectar innecesariamente otros módulos, con contratos públicos y separación de responsabilidades.
 - **Consecuencias y limitaciones:** cada módulo debe evitar acceso a detalles internos de otros y dependencias circulares. Clean Architecture es el enfoque interno; Docker no determina el estilo arquitectónico.
-- **Estado:** decisión aceptada en el [plan de identidad](../specs/001-identidad-acceso-roles/plan.md) y la [arquitectura inicial](../arquitectura/arquitectura-inicial.md); módulos funcionales pendientes.
+- **Estado:** decisión aceptada en el [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) y la [arquitectura inicial](../02-arquitectura-software/arquitectura-inicial.md); módulos funcionales pendientes.
 
 ## R02 — Autenticación, autorización y sesiones
 
@@ -43,7 +43,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** exponer API REST bajo `/api/v1`, con JSON y rutas relativas bajo el mismo origen. Usar cookies de sesión y controles de origen y CSRF en operaciones de escritura; el adaptador HTTP traduce solicitudes, respuestas y errores.
 - **Justificación:** separar el contrato HTTP del dominio facilita pruebas y evolución de la presentación.
 - **Consecuencias y limitaciones:** HTTPS y cookies seguras son necesarios en producción. La configuración de desarrollo no demuestra protección de un despliegue público.
-- **Estado:** decisión aceptada y [contrato de identidad](../specs/001-identidad-acceso-roles/contracts/api.md) definido; endpoints funcionales pendientes.
+- **Estado:** decisión aceptada y [contrato de identidad](../../specs/001-identidad-acceso-roles/contracts/api.md) definido; endpoints funcionales pendientes.
 
 ## R04 — Protección de contraseñas y recursos
 

@@ -5,7 +5,7 @@
 > y [tareas](../specs/001-identidad-acceso-roles/tasks.md); «lista para planificar» es
 > histórico. La base técnica y T009/T010 tienen evidencia, pero las historias siguen sin
 > implementar. Para entorno y estado usar Compose y el
-> [inventario actualizado](../arquitectura/arquitectura-inicial.md). Esta revisión documental
+> [inventario actualizado](02-arquitectura-software/arquitectura-inicial.md). Esta revisión documental
 > no cierra decisiones comerciales, académicas ni de aceptación aquí pendientes.
 
 Estado al 2026-09-23: decisiones abiertas o parcialmente resueltas según cada fila.
