@@ -59,6 +59,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
   inventario, evidencia, discrepancias y pendientes. Esta síntesis enlaza el detalle existente
   en `docs/` y `specs/`, que conserva el alcance y sus criterios de aceptación.
 - [Catálogo de componentes arquitectónicos](docs/02-arquitectura-software/componentes-arquitectonicos.md): responsabilidades, interfaces, estados y relaciones del backend.
+- [Diseño interno de módulos](docs/03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md): organización de identidad por capas, contratos, adaptadores y diseño académico previsto.
 
 El análisis reúne **17 historias HU y 19 requisitos RF generales del MVP**. Identidad desarrolla
 una parte de ese alcance mediante **7 historias US y 33 requisitos FR detallados**; son
