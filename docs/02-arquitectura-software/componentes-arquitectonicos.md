@@ -8,6 +8,12 @@ La frontera del futuro diagrama de componentes será **el servidor backend NestJ
 
 React/Vite es la tecnología de APP01, PostgreSQL es AL01 y Docker Compose configura la ejecución local. No son módulos de negocio. Los servicios Compose `web`, `api`, `db` y `mailpit` son unidades de ejecución, no las capas ni los componentes internos. El entorno local está validado; los 1000 usuarios concurrentes siguen pendientes de pruebas de carga, con matrícula y clases diferenciadas.
 
+## Diagrama de componentes
+
+![Componentes arquitectónicos de Academia Virtual: frontera del backend, componentes, almacenes, sistemas externos y estados](../diagramas/imagenes/componentes-arquitectonicos.png)
+
+[Abrir el diagrama editable en Draw.io](../diagramas/componentes-arquitectonicos.drawio).
+
 ## Fuentes y estados
 
 - [Actores](../01-analisis-de-sistema/01-actores.md), [historias HU](../01-analisis-de-sistema/02-historias-del-usuario.md) y [requisitos RF](../01-analisis-de-sistema/03-requisitos-funcionales.md) definen la síntesis del MVP. Las [restricciones](../01-analisis-de-sistema/05-restricciones.md) y el [alcance](../alcance-mvp.md) delimitan los módulos futuros.
