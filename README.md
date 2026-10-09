@@ -53,6 +53,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Actores](docs/01-analisis-de-sistema/01-actores.md) e [historias de usuario](docs/01-analisis-de-sistema/02-historias-del-usuario.md).
 - [Requisitos funcionales y relación HU ↔ RF](docs/01-analisis-de-sistema/03-requisitos-funcionales.md).
 - [Atributos de calidad](docs/01-analisis-de-sistema/04-atributos-de-calidad.md) y [restricciones](docs/01-analisis-de-sistema/05-restricciones.md).
+- [Escenarios de atributos de calidad](docs/01-analisis-de-sistema/08-escenarios-atributos-calidad.md): medidas, trazabilidad y evidencia disponible.
 - [Drivers arquitectónicos](docs/01-analisis-de-sistema/06-driver-arquitectonicos.md).
 - [Arquitectura inicial de tres capas](docs/02-arquitectura-software/arquitectura-inicial.md): diagrama Mermaid,
   inventario, evidencia, discrepancias y pendientes. Esta síntesis enlaza el detalle existente
