@@ -58,6 +58,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Arquitectura inicial de tres capas](docs/02-arquitectura-software/arquitectura-inicial.md): diagrama Mermaid,
   inventario, evidencia, discrepancias y pendientes. Esta síntesis enlaza el detalle existente
   en `docs/` y `specs/`, que conserva el alcance y sus criterios de aceptación.
+- [Catálogo de componentes arquitectónicos](docs/02-arquitectura-software/componentes-arquitectonicos.md): responsabilidades, interfaces, estados y relaciones del backend.
 
 El análisis reúne **17 historias HU y 19 requisitos RF generales del MVP**. Identidad desarrolla
 una parte de ese alcance mediante **7 historias US y 33 requisitos FR detallados**; son
