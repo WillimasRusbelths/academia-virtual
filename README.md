@@ -62,6 +62,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Diseño interno de módulos](docs/03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md): organización de identidad por capas, contratos, adaptadores y diseño académico previsto.
 - [Patrones de diseño](docs/03-diseno-de-software/diseno-interno/patrones-de-diseno.md): adaptadores existentes y previstos, entrega diferida transaccional y límites de su implementación.
 - [Principios de diseño](docs/03-diseno-de-software/diseno-interno/principios-de-diseno.md): aplicaciones de SOLID, evidencia disponible y límites de los contratos y dependencias actuales.
+- [Contexto del sistema C1](docs/04-modelo-c4/01-contexto-del-sistema.md): propósito, personas, sistemas externos, relaciones previstas e incertidumbres.
 
 El análisis reúne **17 historias HU y 19 requisitos RF generales del MVP**. Identidad desarrolla
 una parte de ese alcance mediante **7 historias US y 33 requisitos FR detallados**; son
