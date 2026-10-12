@@ -65,6 +65,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Contexto del sistema C1](docs/04-modelo-c4/01-contexto-del-sistema.md): propósito, personas, sistemas externos, relaciones previstas e incertidumbres.
 - [Contenedores C2](docs/04-modelo-c4/02-contenedores.md): aplicaciones, persistencia, comunicaciones y decisiones pendientes.
 - [Componentes C3 del backend](docs/04-modelo-c4/03-componentes.md): responsabilidades, colaboraciones y estados dentro de APP02.
+- [Código C4 de sesiones](docs/04-modelo-c4/04-codigo.md): contratos, reglas, adaptador persistido y relaciones estructurales reales.
 
 El análisis reúne **17 historias HU y 19 requisitos RF generales del MVP**. Identidad desarrolla
 una parte de ese alcance mediante **7 historias US y 33 requisitos FR detallados**; son
