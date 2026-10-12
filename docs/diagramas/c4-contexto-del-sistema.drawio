@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" compressed="false">
+  <diagram id="c1-mvp" name="C1 - Contexto funcional del MVP">
+    <mxGraphModel dx="1600" dy="1420" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1420" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;Academia Virtual | Contexto C1&lt;/b&gt;" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=30;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="35" width="1470" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Vista funcional del MVP previsto. Un solo sistema; relaciones de uso y servicios externos." style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=19;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="85" width="1470" height="50" />
+        </mxCell>
+        <mxCell id="destinatarios-identidad" value="&lt;b&gt;Personas usuarias · A01–A04&lt;/b&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=4;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=18;spacingTop=8;fontSize=16;fillColor=#ffffff;strokeColor=#cbd5e1;dashed=1;dashPattern=3 3;" vertex="1" parent="1" catalogId="A01 A02 A03 A04" semanticType="recipient-group">
+          <mxGeometry as="geometry" x="50" y="160" width="1500" height="220" />
+        </mxCell>
+        <mxCell id="A01" value="&lt;b&gt;A01 / ACT01 · Visitante&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Persona sin acceso habilitado&lt;/span&gt;&lt;br&gt;&lt;br&gt;Registro como alumno,&lt;br&gt;verificación y acceso." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#eef3fa;strokeColor=#526a89;strokeWidth=2;" vertex="1" parent="destinatarios-identidad" catalogId="A01">
+          <mxGeometry as="geometry" x="20" y="40" width="280" height="150" />
+        </mxCell>
+        <mxCell id="A02" value="&lt;b&gt;A02 / ACT02 · Alumno&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Persona / rol de cuenta&lt;/span&gt;&lt;br&gt;&lt;br&gt;Adquiere cursos y utiliza&lt;br&gt;recursos autorizados." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#eef3fa;strokeColor=#526a89;strokeWidth=2;" vertex="1" parent="destinatarios-identidad" catalogId="A02">
+          <mxGeometry as="geometry" x="380" y="40" width="280" height="150" />
+        </mxCell>
+        <mxCell id="A03" value="&lt;b&gt;A03 / ACT03 · Docente&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Persona / rol de cuenta&lt;/span&gt;&lt;br&gt;&lt;br&gt;Publica materiales&lt;br&gt;y emite sus clases." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#eef3fa;strokeColor=#526a89;strokeWidth=2;" vertex="1" parent="destinatarios-identidad" catalogId="A03">
+          <mxGeometry as="geometry" x="770" y="40" width="280" height="150" />
+        </mxCell>
+        <mxCell id="A04" value="&lt;b&gt;A04 / ACT04 · Administrador&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Persona / rol de cuenta&lt;/span&gt;&lt;br&gt;&lt;br&gt;Administra cuentas y oferta&lt;br&gt;según permisos definidos." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#eef3fa;strokeColor=#526a89;strokeWidth=2;" vertex="1" parent="destinatarios-identidad" catalogId="A04">
+          <mxGeometry as="geometry" x="1180" y="40" width="280" height="150" />
+        </mxCell>
+        <mxCell id="academia-virtual" value="&lt;b&gt;Academia Virtual&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Sistema de software&lt;/span&gt;&lt;br&gt;&lt;br&gt;Gestiona identidad, oferta y adquisición&lt;br&gt;de cursos, matrículas y acceso a&lt;br&gt;materiales, clases y chat." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#e6effa;strokeColor=#234e78;strokeWidth=2;" vertex="1" parent="1" catalogId="academia-virtual">
+          <mxGeometry as="geometry" x="560" y="700" width="480" height="190" />
+        </mxCell>
+        <mxCell id="E04" value="&lt;b&gt;E04 / SE03 · YouTube Live&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Sistema externo de video&lt;/span&gt;&lt;br&gt;&lt;br&gt;Distribuye la emisión del docente.&lt;br&gt;Acceso restringido por validar." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#f4f5f7;strokeColor=#64748b;strokeWidth=2;" vertex="1" parent="1" catalogId="E04">
+          <mxGeometry as="geometry" x="780" y="450" width="310" height="150" />
+        </mxCell>
+        <mxCell id="E01" value="&lt;b&gt;E01 / SE02 · Izipay&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Sistema externo de pagos&lt;/span&gt;&lt;br&gt;&lt;br&gt;Procesa pagos; integración&lt;br&gt;y modalidad por definir." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#f4f5f7;strokeColor=#64748b;strokeWidth=2;" vertex="1" parent="1" catalogId="E01">
+          <mxGeometry as="geometry" x="1240" y="735" width="280" height="160" />
+        </mxCell>
+        <mxCell id="E02" value="&lt;b&gt;E02 / SE01 · Correo externo&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Servicio externo previsto&lt;/span&gt;&lt;br&gt;&lt;br&gt;Entrega verificación y recuperación.&lt;br&gt;Proveedor por seleccionar." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#f4f5f7;strokeColor=#64748b;strokeWidth=2;" vertex="1" parent="1" catalogId="E02">
+          <mxGeometry as="geometry" x="70" y="1000" width="300" height="160" />
+        </mxCell>
+        <mxCell id="uso-A01" value="Registro, verificación&lt;br&gt;y acceso&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.2631579;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="A01" target="academia-virtual" relationState="prevista" sourceRef="A01; HU01-HU03; RF01-RF04">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="210" y="750" />
+            </Array>
+            <mxPoint as="offset" x="0.0" y="-175.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uso-A02" value="Perfil, oferta y&lt;br&gt;recursos académicos&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.2083333;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="A02" target="academia-virtual" relationState="prevista" sourceRef="A02; HU04/HU08/HU10-HU12/HU15-HU17">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="570" y="625" />
+              <mxPoint x="660" y="625" />
+            </Array>
+            <mxPoint as="offset" x="0.0" y="-60.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uso-A03" value="Materiales y clases&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.8333333;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="A03" target="academia-virtual" relationState="prevista" sourceRef="A03; HU13/HU14/HU17; RF15/RF16/RF18">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1140" y="275" />
+              <mxPoint x="1140" y="675" />
+              <mxPoint x="960" y="675" />
+            </Array>
+            <mxPoint as="offset" x="0.0" y="82.5" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uso-A04" value="Administración&lt;br&gt;autorizada&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.1052632;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="A04" target="academia-virtual" relationState="prevista" sourceRef="A04; HU05/HU09/HU17">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1370" y="720" />
+            </Array>
+            <mxPoint as="offset" x="0.0" y="-165.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pago-solicitud" value="Solicita / verifica pago&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.4736842;exitDx=0;exitDy=0;entryX=0;entryY=0.34375;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="academia-virtual" target="E01" relationState="prevista" sourceRef="RF12/RF13; D02">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0.0" y="-12.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pago-resultado" value="Comunica resultado&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.71875;exitDx=0;exitDy=0;entryX=1;entryY=0.7894737;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="E01" target="academia-virtual" relationState="prevista" sourceRef="RF12/RF13; D02">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0.0" y="5.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="correo-solicitud" value="Solicita entrega&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.7368421;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="academia-virtual" target="E02" relationState="prevista" sourceRef="RF02/RF04; R07/R08">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="460" y="840" />
+              <mxPoint x="460" y="1080" />
+            </Array>
+            <mxPoint as="offset" x="5.0" y="-5.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="correo-destinatarios" value="Entrega mensajes&lt;br&gt;a A01–A04&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.04;entryY=1;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="E02" target="destinatarios-identidad" relationState="prevista" sourceRef="RF02/RF04; personas destinatarias de identidad">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="220" y="960" />
+              <mxPoint x="110" y="960" />
+            </Array>
+            <mxPoint as="offset" x="95.0" y="145.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="video-emision" value="Emite mediante OBS&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5806452;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="A03" target="E04" relationState="prevista" sourceRef="A03; RF16; DEC01; D07/D08">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="-0.0" y="0.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="video-reproduccion" value="Reproduce clases&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="A02" target="E04" relationState="prevista" sourceRef="A02; HU15; RF16; DEC01; D07/D08">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="710" y="525" />
+            </Array>
+            <mxPoint as="offset" x="5.0" y="-58.5" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="context-limits" value="&lt;b&gt;Alcance y validación&lt;/b&gt;&lt;br&gt;Flujos funcionales e integraciones pendientes.&lt;br&gt;Pago: modalidad por definir; video: acceso directo y permisos vencidos por validar.&lt;br&gt;No hay conexión de control con YouTube ni procesamiento de tarjetas atribuido al sistema." style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=17;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="590" y="1000" width="920" height="125" />
+        </mxCell>
+        <mxCell id="mvp-legend-title" value="&lt;b&gt;Estado de las relaciones&lt;/b&gt;" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=18;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="75" y="1210" width="1450" height="35" />
+        </mxCell>
+        <mxCell id="mvp-legend-dash" value="" style="shape=line;strokeColor=#475569;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="90" y="1263" width="90" height="1" />
+        </mxCell>
+        <mxCell id="mvp-legend-planned" value="Prevista: sin flujo funcional validado" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="195" y="1245" width="400" height="40" />
+        </mxCell>
+        <mxCell id="mvp-legend-solid" value="" style="shape=line;strokeColor=#2f7545;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="660" y="1263" width="90" height="1" />
+        </mxCell>
+        <mxCell id="mvp-legend-tested" value="Comprobada: solo el alcance rotulado" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="765" y="1245" width="755" height="48" />
+        </mxCell>
+        <mxCell id="source-note" value="Fuente: docs/04-modelo-c4/01-contexto-del-sistema.md&lt;br&gt;La entrega de correo se agrupa por destinatarios, sin crear otro actor. 1000 concurrentes: objetivo pendiente de carga." style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="75" y="1320" width="1450" height="65" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="c1-apoyo" name="C1 - Apoyo operativo y local">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="op-title" value="&lt;b&gt;Academia Virtual | Apoyo operativo y local&lt;/b&gt;" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=29;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="60" y="35" width="1080" height="45" />
+        </mxCell>
+        <mxCell id="op-subtitle" value="Vista secundaria del mismo sistema. No representa servicios de producción ni nuevas funciones disponibles." style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=18;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="60" y="85" width="1080" height="55" />
+        </mxCell>
+        <mxCell id="A05" value="&lt;b&gt;A05 · Responsable del entorno&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Persona / actor operativo&lt;/span&gt;&lt;br&gt;&lt;br&gt;Inicialización administrativa&lt;br&gt;y recuperación restringidas.&lt;br&gt;No es un cuarto rol." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#eef3fa;strokeColor=#526a89;strokeWidth=2;" vertex="1" parent="1" catalogId="A05">
+          <mxGeometry as="geometry" x="65" y="250" width="280" height="170" />
+        </mxCell>
+        <mxCell id="academia-virtual" value="&lt;b&gt;Academia Virtual&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Mismo sistema de software&lt;/span&gt;&lt;br&gt;&lt;br&gt;Flujos funcionales y operaciones&lt;br&gt;restringidas pendientes." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#e6effa;strokeColor=#234e78;strokeWidth=2;" vertex="1" parent="1" catalogId="academia-virtual">
+          <mxGeometry as="geometry" x="470" y="250" width="300" height="170" />
+        </mxCell>
+        <mxCell id="E03" value="&lt;b&gt;E03 / SE01 · Mailpit local&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;Herramienta de ensayo&lt;/span&gt;&lt;br&gt;&lt;br&gt;Captura mensajes de pruebas.&lt;br&gt;Sin entrega a destinatarios reales." style="fontFamily=Arial;html=1;rounded=1;arcSize=12;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=19;fillColor=#edf7f0;strokeColor=#45825a;strokeWidth=2;" vertex="1" parent="1" catalogId="E03">
+          <mxGeometry as="geometry" x="895" y="250" width="260" height="170" />
+        </mxCell>
+        <mxCell id="operacion-A05" value="Inicializa / recupera&lt;br&gt;Prevista" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="A05" target="academia-virtual" relationState="prevista" sourceRef="A05; HU06; RF07/RF19; D13">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="-0.5" y="-130.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="captura-E03" value="Captura de ensayo&lt;br&gt;Comprobada técnicamente" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#2f7545;strokeWidth=2;fontSize=16;fontColor=#2f7545;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;" edge="1" parent="1" source="academia-virtual" target="E03" relationState="comprobada-tecnica" sourceRef="E03; R07; evidencia/reglas-credenciales-limites.md">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="-0.5" y="-130.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="op-limits" value="&lt;b&gt;Límite de la evidencia&lt;/b&gt;&lt;br&gt;La conexión comprobada corresponde a captura SMTP en pruebas técnicas; no a correos funcionales de identidad.&lt;br&gt;La inicialización administrativa y recuperación no tienen aceptación completa.&lt;br&gt;Mailpit sustituye al correo externo en ensayos; no es proveedor de producción." style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=17;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="465" width="1090" height="125" />
+        </mxCell>
+        <mxCell id="op-legend-title" value="&lt;b&gt;Estado de las relaciones&lt;/b&gt;" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=18;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="75" y="625" width="1050" height="35" />
+        </mxCell>
+        <mxCell id="op-legend-dash" value="" style="shape=line;strokeColor=#475569;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="90" y="678" width="90" height="1" />
+        </mxCell>
+        <mxCell id="op-legend-planned" value="Prevista: sin flujo funcional validado" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="195" y="660" width="400" height="40" />
+        </mxCell>
+        <mxCell id="op-legend-solid" value="" style="shape=line;strokeColor=#2f7545;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="660" y="678" width="90" height="1" />
+        </mxCell>
+        <mxCell id="op-legend-tested" value="Comprobada: solo el alcance rotulado" style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="765" y="660" width="355" height="48" />
+        </mxCell>
+        <mxCell id="op-source" value="Fuente: docs/04-modelo-c4/01-contexto-del-sistema.md. La leyenda califica relaciones, no la finalización del sistema." style="fontFamily=Arial;html=1;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=15;fontColor=#1e293b;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="725" width="1090" height="40" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

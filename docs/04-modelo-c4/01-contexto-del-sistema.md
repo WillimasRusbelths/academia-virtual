@@ -10,8 +10,6 @@ Academia Virtual es un único sistema para gestionar acceso y perfiles, ofrecer 
 
 [Editar el diagrama en Draw.io](../diagramas/c4-contexto-del-sistema.drawio)
 
-**Imagen pendiente de reexportación:** el PNG conserva el nombre anterior del grupo, el correo junto al borde y la flecha de reproducción invertida respecto del editable actualizado.
-
 El editable distingue contexto funcional y apoyo operativo/local. Docente → YouTube significa «Emite mediante OBS»; Alumno → YouTube, «Reproduce clases». Son acciones de uso, sin conexión de control del sistema con YouTube ni control remoto de OBS. La entrega de correo agrupa a A01–A04; el chat de clase pertenece a Academia Virtual, no se presupone el de YouTube.
 
 ## Personas
