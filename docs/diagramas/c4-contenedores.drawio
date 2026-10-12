@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" compressed="false">
+  <diagram id="c2-mvp" name="C2 - Contenedores del MVP">
+    <mxGraphModel dx="1900" dy="1750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1750" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;Academia Virtual | Contenedores C2&lt;/b&gt;" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=30;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="30" width="1620" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tres contenedores internos; integraciones externas previstas. El navegador y el backend tienen comunicaciones distintas." style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=18;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="78" width="1620" height="44" />
+        </mxCell>
+        <mxCell id="A01" value="&lt;b&gt;A01 / ACT01 · Visitante&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Persona&lt;/span&gt;&lt;br&gt;&lt;br&gt;Registro y acceso." style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#f0f3f9;strokeColor=#627795;strokeWidth=2;" vertex="1" parent="1" catalogId="A01">
+          <mxGeometry as="geometry" x="220.0" y="140" width="270" height="140" />
+        </mxCell>
+        <mxCell id="A02" value="&lt;b&gt;A02 / ACT02 · Alumno&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Persona&lt;/span&gt;&lt;br&gt;&lt;br&gt;Adquisición y acceso a cursos." style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#f0f3f9;strokeColor=#627795;strokeWidth=2;" vertex="1" parent="1" catalogId="A02">
+          <mxGeometry as="geometry" x="540.0" y="140" width="270" height="140" />
+        </mxCell>
+        <mxCell id="A03" value="&lt;b&gt;A03 / ACT03 · Docente&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Persona&lt;/span&gt;&lt;br&gt;&lt;br&gt;Materiales y emisión de clases." style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#f0f3f9;strokeColor=#627795;strokeWidth=2;" vertex="1" parent="1" catalogId="A03">
+          <mxGeometry as="geometry" x="1180" y="140" width="270" height="140" />
+        </mxCell>
+        <mxCell id="A04" value="&lt;b&gt;A04 / ACT04 · Administrador&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Persona&lt;/span&gt;&lt;br&gt;&lt;br&gt;Cuentas y oferta autorizada." style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#f0f3f9;strokeColor=#627795;strokeWidth=2;" vertex="1" parent="1" catalogId="A04">
+          <mxGeometry as="geometry" x="860" y="140" width="270" height="140" />
+        </mxCell>
+        <mxCell id="academia-virtual" value="&lt;b&gt;Academia Virtual&lt;/b&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=3;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=18;spacingTop=14;fontSize=23;fontColor=#234e78;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=2;dashed=1;dashPattern=4 4;" vertex="1" parent="1" semanticType="system-boundary">
+          <mxGeometry as="geometry" x="490.0" y="525.0" width="710" height="995" />
+        </mxCell>
+        <mxCell id="APP01" value="&lt;b&gt;APP01 · Aplicación web&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;TypeScript · React · Vite | Navegador&lt;/span&gt;&lt;br&gt;&lt;br&gt;Presenta operaciones por rol,&lt;br&gt;clases y chat.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Parcial: interfaz en preparación&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#e7effa;strokeColor=#31587e;strokeWidth=2;" vertex="1" parent="academia-virtual" catalogId="APP01">
+          <mxGeometry as="geometry" x="90" y="75" width="400" height="180" />
+        </mxCell>
+        <mxCell id="APP02" value="&lt;b&gt;APP02 · Backend monolítico&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;TypeScript · Node.js · NestJS/Express&#10;Prisma 7 · pg&lt;/span&gt;&lt;br&gt;&lt;br&gt;Aplica permisos y coordina operaciones&lt;br&gt;y persistencia.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Parcial: fundamentos de identidad&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#e7effa;strokeColor=#31587e;strokeWidth=2;" vertex="1" parent="academia-virtual" catalogId="APP02">
+          <mxGeometry as="geometry" x="90" y="405" width="400" height="200" />
+        </mxCell>
+        <mxCell id="AL01" value="&lt;b&gt;AL01 · PostgreSQL&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;PostgreSQL 16.14&lt;/span&gt;&lt;br&gt;&lt;br&gt;Persiste datos y garantiza transacciones.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Servicio y esquema de identidad locales comprobados&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;shape=cylinder3;size=15;boundedLbl=1;whiteSpace=wrap;align=center;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#eef7f0;strokeColor=#397849;strokeWidth=2;verticalAlign=top;spacingTop=42;spacingBottom=24;" vertex="1" parent="academia-virtual" catalogId="AL01">
+          <mxGeometry as="geometry" x="100" y="725" width="380" height="240" />
+        </mxCell>
+        <mxCell id="E04" value="&lt;b&gt;E04 / SE03 · YouTube Live&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Sistema externo de video&lt;/span&gt;&lt;br&gt;&lt;br&gt;Distribuye la emisión del docente.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Integración y acceso por validar&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#f4f5f7;strokeColor=#64748b;strokeWidth=2;" vertex="1" parent="1" catalogId="E04">
+          <mxGeometry as="geometry" x="1420.0" y="570.0" width="330" height="170" />
+        </mxCell>
+        <mxCell id="E01" value="&lt;b&gt;E01 / SE02 · Izipay&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Sistema externo de pagos&lt;/span&gt;&lt;br&gt;&lt;br&gt;Procesa pagos y comunica resultados.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Integración / modalidad pendientes&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#f4f5f7;strokeColor=#64748b;strokeWidth=2;" vertex="1" parent="1" catalogId="E01">
+          <mxGeometry as="geometry" x="1420.0" y="950.0" width="330" height="170" />
+        </mxCell>
+        <mxCell id="E02" value="&lt;b&gt;E02 / SE01 · Correo externo&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Servicio SMTP de producción previsto&lt;/span&gt;&lt;br&gt;&lt;br&gt;Entrega verificación y recuperación.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Proveedor e integración pendientes&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#f4f5f7;strokeColor=#64748b;strokeWidth=2;" vertex="1" parent="1" catalogId="E02">
+          <mxGeometry as="geometry" x="145.0" y="960.0" width="300" height="180" />
+        </mxCell>
+        <mxCell id="uso-A01" value="Utiliza interfaz&lt;br&gt;HTTP local; HTTPS previsto" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitDx=0;exitDy=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;exitX=0.5;exitY=1;entryX=0.15;entryY=0;" edge="1" parent="1" source="A01" target="APP01" relationState="prevista" sourceRef="C2: A01-A04 -&gt; APP01">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="355" y="390" />
+              <mxPoint x="640" y="390" />
+            </Array>
+            <mxPoint as="offset" x="-192.5" y="-50.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uso-A02" value="Utiliza interfaz&lt;br&gt;HTTP local; HTTPS previsto" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitDx=0;exitDy=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;exitX=0.5;exitY=1;entryX=0.45;entryY=0;" edge="1" parent="1" source="A02" target="APP01" relationState="prevista" sourceRef="C2: A01-A04 -&gt; APP01">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="675" y="420" />
+              <mxPoint x="760" y="420" />
+            </Array>
+            <mxPoint as="offset" x="-62.5" y="-80.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uso-A03" value="Utiliza interfaz&lt;br&gt;HTTP local; HTTPS previsto" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitDx=0;exitDy=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;exitX=0.2;exitY=1;entryX=0.9;entryY=0;" edge="1" parent="1" source="A03" target="APP01" relationState="prevista" sourceRef="C2: A01-A04 -&gt; APP01">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1234" y="480" />
+              <mxPoint x="940" y="480" />
+            </Array>
+            <mxPoint as="offset" x="88.0" y="-65.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uso-A04" value="Utiliza interfaz&lt;br&gt;HTTP local; HTTPS previsto" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitDx=0;exitDy=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="A04" target="APP01" relationState="prevista" sourceRef="C2: A01-A04 -&gt; APP01">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="995" y="450" />
+              <mxPoint x="880" y="450" />
+            </Array>
+            <mxPoint as="offset" x="47.5" y="-110.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rest-web-api" value="Operaciones REST / JSON&lt;br&gt;HTTP local; HTTPS previsto&lt;br&gt;Negocio pendiente" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="APP01" target="APP02" relationState="prevista" sourceRef="C2: APP01 -&gt; APP02; R03">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0.0" y="0.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chat-web-api" value="Chat de clase&lt;br&gt;Socket.IO propuesto" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.56;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="APP01" target="APP02" relationState="prevista" sourceRef="C2: APP01 -&gt; APP02; chat propuesto">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1130.0" y="700.8" />
+              <mxPoint x="1130.0" y="1030.0" />
+            </Array>
+            <mxPoint as="offset" x="-5.0" y="-15.4" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="api-datos" value="Consulta / persistencia&lt;br&gt;Protocolo PostgreSQL&lt;br&gt;Conexión comprobada" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#2f7545;strokeWidth=2;fontSize=16;fontColor=#2f7545;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;" edge="1" parent="1" source="APP02" target="AL01" relationState="comprobada" sourceRef="C2: APP02 -&gt; AL01">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0.0" y="20.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pago-solicitud" value="Solicita / verifica pago&lt;br&gt;Protocolo pendiente" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.6470588;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="APP02" target="E01" relationState="prevista" sourceRef="C2: APP02 -&gt; E01; D02">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="30.0" y="-13.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pago-resultado" value="Comunica resultado&lt;br&gt;Contrato pendiente" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.8823529;exitDx=0;exitDy=0;entryX=1;entryY=0.85;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="E01" target="APP02" relationState="prevista" sourceRef="C2: E01 -&gt; APP02; D02">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="30.0" y="10.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="correo-solicitud" value="Envía enlaces&lt;br&gt;SMTP previsto" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3888889;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="APP02" target="E02" relationState="prevista" sourceRef="C2: APP02 -&gt; E02; R07/R08">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="-3.5" y="-2.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="video-reproduccion" value="Reproduce clases (alumno)&lt;br&gt;Mecanismo por validar" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.2222222;exitDx=0;exitDy=0;entryX=0;entryY=0.4117647;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="APP01" target="E04" relationState="prevista" sourceRef="C2: APP01 navegador -&gt; E04; C1 alumno -&gt; YouTube">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0.0" y="-5.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="video-emision" value="Emite mediante OBS&lt;br&gt;Protocolo por validar" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitDx=0;exitDy=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#475569;strokeWidth=2;fontSize=16;fontColor=#475569;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;dashed=1;dashPattern=7 5;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="A03" target="E04" relationState="prevista" sourceRef="C2: A03 mediante OBS -&gt; E04">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1700" y="210" />
+              <mxPoint x="1700" y="515" />
+              <mxPoint x="1585" y="515" />
+            </Array>
+            <mxPoint as="offset" x="-70.0" y="67.5" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="main-legend-title" value="&lt;b&gt;Relaciones&lt;/b&gt;" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=18;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="70" y="1550.0" width="1610" height="30" />
+        </mxCell>
+        <mxCell id="main-legend-dash" value="" style="shape=line;strokeColor=#475569;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="1602.0" width="90" height="1" />
+        </mxCell>
+        <mxCell id="main-legend-planned" value="Prevista / propuesta: flujo pendiente" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=16;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="185" y="1582.0" width="430" height="42" />
+        </mxCell>
+        <mxCell id="main-legend-solid" value="" style="shape=line;strokeColor=#2f7545;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="680" y="1602.0" width="90" height="1" />
+        </mxCell>
+        <mxCell id="main-legend-verified" value="Comprobada solo en el alcance indicado" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=16;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="785" y="1582.0" width="885" height="42" />
+        </mxCell>
+        <mxCell id="limits" value="Estados dentro de las cajas: alcance de cada contenedor, sin historias completas. No hay worker separado.&#10;Fuente: docs/04-modelo-c4/02-contenedores.md. Video restringido y 1000 concurrentes: pendientes de validación." style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=16;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="70" y="1640.0" width="1610" height="55" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="c2-apoyo" name="C2 - Apoyo local">
+    <mxGraphModel dx="1300" dy="730" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="730" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="local-title" value="&lt;b&gt;Academia Virtual | Apoyo local C2&lt;/b&gt;" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=29;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="30" width="1170" height="45" />
+        </mxCell>
+        <mxCell id="local-subtitle" value="Detalle parcial del mismo sistema: captura de correo en ensayos, fuera del contexto de producción." style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=18;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="82" width="1170" height="52" />
+        </mxCell>
+        <mxCell id="academia-virtual" value="&lt;b&gt;Academia Virtual&lt;/b&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=3;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=18;spacingTop=14;fontSize=23;fontColor=#234e78;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=2;dashed=1;dashPattern=4 4;" vertex="1" parent="1" semanticType="system-boundary">
+          <mxGeometry as="geometry" x="70" y="195" width="430" height="285" />
+        </mxCell>
+        <mxCell id="APP02" value="&lt;b&gt;APP02 · Backend monolítico&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;TypeScript · Node.js · NestJS/Express&#10;Prisma 7 · pg&lt;/span&gt;&lt;br&gt;&lt;br&gt;Coordina operaciones y sus&lt;br&gt;integraciones previstas.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Parcial: fundamentos de identidad&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#e7effa;strokeColor=#31587e;strokeWidth=2;" vertex="1" parent="academia-virtual" catalogId="APP02">
+          <mxGeometry as="geometry" x="30" y="60" width="360" height="200" />
+        </mxCell>
+        <mxCell id="E03" value="&lt;b&gt;E03 / SE01 · Mailpit local&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Herramienta de ensayo SMTP&lt;/span&gt;&lt;br&gt;&lt;br&gt;Captura mensajes sin entrega&lt;br&gt;a destinatarios reales.&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;&lt;b&gt;Captura técnica comprobada&lt;/b&gt;&lt;/span&gt;" style="fontFamily=Arial;html=1;rounded=1;arcSize=10;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=14;fontSize=18;fontColor=#1e293b;fillColor=#eef7f0;strokeColor=#397849;strokeWidth=2;" vertex="1" parent="1" catalogId="E03">
+          <mxGeometry as="geometry" x="880" y="255" width="330" height="200" />
+        </mxCell>
+        <mxCell id="captura-mailpit" value="Captura SMTP de ensayo&lt;br&gt;Comprobada en pruebas&lt;br&gt;Envío funcional pendiente" style="fontFamily=Arial;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;strokeColor=#2f7545;strokeWidth=2;fontSize=16;fontColor=#2f7545;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;" edge="1" parent="1" source="APP02" target="E03" relationState="comprobada-tecnica" sourceRef="C2: APP02 -&gt; E03; R07">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0.0" y="0.0" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="local-note" value="Mailpit sustituye al correo externo en ensayos; no es proveedor de producción ni completa el flujo de identidad." style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=17;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="75" y="510" width="1150" height="45" />
+        </mxCell>
+        <mxCell id="local-legend-title" value="&lt;b&gt;Relaciones&lt;/b&gt;" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=18;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="70" y="580" width="1160" height="30" />
+        </mxCell>
+        <mxCell id="local-legend-dash" value="" style="shape=line;strokeColor=#475569;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="632" width="90" height="1" />
+        </mxCell>
+        <mxCell id="local-legend-planned" value="Prevista / propuesta: flujo pendiente" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=16;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="185" y="612" width="430" height="42" />
+        </mxCell>
+        <mxCell id="local-legend-solid" value="" style="shape=line;strokeColor=#2f7545;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="680" y="632" width="90" height="1" />
+        </mxCell>
+        <mxCell id="local-legend-verified" value="Comprobada solo en el alcance indicado" style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=16;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="785" y="612" width="435" height="42" />
+        </mxCell>
+        <mxCell id="local-source" value="Fuente: docs/04-modelo-c4/02-contenedores.md. La segunda página no añade contenedores internos al sistema." style="fontFamily=Arial;html=1;text;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=15;fontColor=#1e293b;fillColor=none;strokeColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="75" y="675" width="1150" height="30" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

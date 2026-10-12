@@ -4,6 +4,12 @@
 
 Academia Virtual comprende una aplicación web, un backend monolítico por capas organizado en módulos con Clean Architecture y un almacén de datos. Se conservan los identificadores del catálogo. Un contenedor C4 es una aplicación o almacén de datos, no necesariamente un contenedor Docker. Esta vista amplía [C1](01-contexto-del-sistema.md) y distingue fundamentos comprobados de funcionalidades previstas.
 
+## Diagrama de contenedores C2
+
+![Contenedores C2 de Academia Virtual](../diagramas/imagenes/c4-contenedores.png)
+
+[Editar el diagrama en Draw.io](../diagramas/c4-contenedores.drawio)
+
 ## Contenedores
 
 | ID | Nombre | Responsabilidad | Tecnología | Estado |
