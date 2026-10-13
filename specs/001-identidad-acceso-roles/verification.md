@@ -15,6 +15,8 @@ Sus pruebas de fundamentos no cierran V13: todavía faltan emisión/reenvío y c
 en las historias, además de retención/purga e integración funcional.
 T027 añade [auditoría transaccional y privacidad de logs/errores](evidence/auditoria-privacidad.md).
 Comprueba U1 como fundamento; no completa los flujos administrativos, bootstrap ni V12/V16.
+T028 añade [bootstrap atómico persistido](evidence/bootstrap-atomico.md): inicialización única,
+concurrencia y rollback comprobados. La CLI y activación de US6 y la aceptación V08 siguen pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

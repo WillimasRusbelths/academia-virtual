@@ -7,12 +7,8 @@ export interface MailPayload {
   readonly template: MailTemplate;
 }
 
-export interface EncryptedMailPayload {
-  readonly encryptedPayload: Uint8Array;
-  readonly nonce: Uint8Array;
-  readonly authTag: Uint8Array;
-  readonly keyId: string;
-}
+import type { EncryptedMailPayload } from '../public/delivery.js';
+export type { EncryptedMailPayload } from '../public/delivery.js';
 
 export interface PayloadCipher {
   encrypt(payload: MailPayload): EncryptedMailPayload;
