@@ -5,6 +5,8 @@ import { AuthorizationFailure, SessionStoreUnavailable } from '../modules/author
 import { AccountValidationError } from '../modules/users/public/account.js';
 import { CredentialOverload, CredentialUnavailable } from '../modules/identity/application/credentials.js';
 import { RateStoreUnavailable } from '../infrastructure/limits/rate-store.js';
+import { securityEvents } from '../infrastructure/logging/security-events.js';
+import type { SecurityEvents } from '../infrastructure/logging/security-events.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -15,6 +17,8 @@ export interface HttpRequest {
   headers: Record<string, string | string[] | undefined>;
   method: string;
   requestId?: string;
+  actor?: { userId: string };
+  params?: Record<string, unknown>;
 }
 export interface HttpResponse {
   statusCode: number;
@@ -28,10 +32,17 @@ const messages: Record<number, string> = {
   404: 'Recurso no encontrado.', 413: 'El cuerpo supera el tamaño permitido.',
   415: 'Se requiere contenido JSON.', 503: 'Servicio temporalmente no disponible.',
 };
+const codes: Record<number, readonly string[]> = {
+  400:['VALIDATION_ERROR','INVALID_ACTION_LINK'],401:['AUTH_REQUIRED','INVALID_CREDENTIALS'],
+  403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],409:['ACCOUNT_CONFLICT','ADMIN_INVARIANT'],
+  413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE'],
+};
+const fieldNames=['name','email','password','provisionalPassword','newPassword','role','status','token'];
 
 /** Lista permitida de salida: jamás serializa causas, cuerpos o mensajes de adaptadores. */
 @Catch()
 export class SafeErrorFilter implements ExceptionFilter {
+  constructor(private readonly logs: Pick<SecurityEvents,'record'> = securityEvents) {}
   catch(error: unknown, host: ArgumentsHost): void {
     const http = host.switchToHttp();
     const request = http.getRequest<HttpRequest>();
@@ -51,7 +62,24 @@ export class SafeErrorFilter implements ExceptionFilter {
     } else if (error instanceof HttpException && error.getStatus() === 404) {
       status = 404; code = 'NOT_FOUND';
     }
-    const requestId = request.requestId ?? randomUUID();
+    if (!codes[status]?.includes(code)) { status=503;code='TEMPORARILY_UNAVAILABLE'; }
+    if (fields) fields=Array.isArray(fields)?fields.filter(field => field && typeof field.field==='string' && fieldNames.includes(field.field))
+      .map(field => ({field:field.field,message:'Campo inválido.'})):undefined;
+    const requestId = typeof request.requestId==='string'
+      && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(request.requestId)
+      ?request.requestId:randomUUID();
+    if ([401,403,503].includes(status)) {
+      const authentication = status===401 && code==='INVALID_CREDENTIALS';
+      try {
+        this.logs.record({category:status===503?'OPERATION':'SECURITY',
+          action:status===503?'RUNTIME_FAILURE':authentication?'AUTHENTICATION_FAILED':'ACCESS_DENIED',
+          result:status===503?'FAILED':'DENIED',reasonCode:code,
+          actorKind:request.actor && !authentication?'ACCOUNT':'ANONYMOUS',
+          ...(request.actor && !authentication?{actorUserId:request.actor.userId}:{}),
+          targetKind:request.params?.id!==undefined?'USER_REFERENCE':'NONE',
+          ...(request.params?.id!==undefined?{requestedTargetId:request.params.id}:{})},requestId);
+      } catch { /* El canal privado nunca cambia la respuesta pública. */ }
+    }
     response.setHeader('Cache-Control', 'no-store');
     response.setHeader('Referrer-Policy', 'no-referrer');
     response.status(status).json({ error: { code, message: messages[status] ?? 'Solicitud no aceptada.',

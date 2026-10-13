@@ -2,6 +2,8 @@ import { randomUUID } from 'node:crypto';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import type { Environment } from '../infrastructure/config/environment.js';
 import { SafeErrorFilter, TransportFailure, type HttpRequest, type HttpResponse } from './error.filter.js';
+import { securityEvents } from '../infrastructure/logging/security-events.js';
+import type { SecurityEvents } from '../infrastructure/logging/security-events.js';
 
 /** Valida forma y tipos, sin convertir valores ni contener reglas del negocio. */
 export function strictDto(body: unknown, schema: Record<string, (value: unknown) => boolean>): Record<string, unknown> {
@@ -16,10 +18,11 @@ export function strictDto(body: unknown, schema: Record<string, (value: unknown)
 
 /** Crear Nest con bodyParser:false; no habilita CORS ni registra solicitudes. */
 export function configureTransport(app: NestExpressApplication,
-  environment: Pick<Environment, 'appOrigin' | 'trustedProxy'>): void {
+  environment: Pick<Environment, 'appOrigin' | 'trustedProxy'>,
+  logs: Pick<SecurityEvents,'record'> = securityEvents): void {
   app.useLogger(false);
   app.getHttpAdapter().getInstance().set('trust proxy', environment.trustedProxy);
-  app.useGlobalFilters(new SafeErrorFilter());
+  app.useGlobalFilters(new SafeErrorFilter(logs));
   app.use((request: HttpRequest, response: HttpResponse, next: (error?: unknown) => void) => {
     request.requestId = randomUUID();
     response.setHeader('Cache-Control', 'no-store');

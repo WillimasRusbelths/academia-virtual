@@ -13,6 +13,8 @@ Mailpit y servidores TLS locales. No completa el ejecutor de entregas ni V13.
 T025–T026 añaden [entregas persistidas y recuperación del ejecutor](evidence/entregas-persistidas.md).
 Sus pruebas de fundamentos no cierran V13: todavía faltan emisión/reenvío y consumo de enlaces
 en las historias, además de retención/purga e integración funcional.
+T027 añade [auditoría transaccional y privacidad de logs/errores](evidence/auditoria-privacidad.md).
+Comprueba U1 como fundamento; no completa los flujos administrativos, bootstrap ni V12/V16.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

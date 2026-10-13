@@ -13,6 +13,7 @@ import { PostgresDeliveryStore } from './modules/mail/infrastructure/delivery-st
 import { DeliveryScheduler } from './modules/mail/infrastructure/delivery-scheduler.js';
 import { createPayloadCipher } from './modules/mail/infrastructure/payload-cipher.js';
 import { createSmtpTransport } from './modules/mail/infrastructure/smtp-transport.js';
+import { securityEvents } from './infrastructure/logging/security-events.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
@@ -24,6 +25,7 @@ export class AppModule {
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(new PostgresSessionStore(database.pool), new SessionCookie(environment))],
       controllers: [HealthController], providers: [
+        { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
         { provide: 'MAIL_DELIVERY_SCHEDULER', useValue: new DeliveryScheduler(deliveries) },
         { provide: READINESS, useValue: { async check() { await database.pool.query('SELECT 1'); } } },
         { provide: 'DATABASE_LIFECYCLE', useValue: { onApplicationShutdown: () => database.close() } },

@@ -12,9 +12,10 @@ import { SessionCookie } from '../../dist/src/http/session-cookie.js';
 import { configureTransport, strictDto } from '../../dist/src/http/transport.js';
 import { TransportFailure } from '../../dist/src/http/error.filter.js';
 import { HealthController, READINESS } from '../../dist/src/http/health.controller.js';
+import type { SecurityEvents } from '../../dist/src/infrastructure/logging/security-events.js';
 
 /** Controladores exclusivos de prueba; nunca importados por AppModule ni por la imagen en ejecución. */
-export async function sessionHttp(context: IdentityTestDatabase) {
+export async function sessionHttp(context: IdentityTestDatabase, logs?: Pick<SecurityEvents,'record'>) {
   const store = new PostgresSessionStore(context.database.pool);
   const cookie = new SessionCookie(context.environment);
   const controls: { reads: number; beforeMutation?: () => Promise<void>; readyFails: boolean } = { reads: 0, readyFails: false };
@@ -67,7 +68,7 @@ export async function sessionHttp(context: IdentityTestDatabase) {
       },
     } }] }).compile();
   const app = module.createNestApplication<NestExpressApplication>({ logger: ['error', 'warn', 'debug', 'verbose'], bodyParser: false });
-  configureTransport(app, context.environment);
+  configureTransport(app, context.environment, logs);
   await app.listen(0, '127.0.0.1');
   const url = await app.getUrl();
   return { app, store, cookie, controls, url,

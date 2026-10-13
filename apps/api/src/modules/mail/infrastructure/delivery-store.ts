@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { Pool, PoolClient } from 'pg';
 import type { PostgresRateStore } from '../../../infrastructure/limits/rate-store.js';
 import type { DeliveryCandidate, DeliveryClaim, DeliveryFailure, DeliveryStore } from '../application/deliver-pending.js';
+import { securityEvents, newCorrelationId } from '../../../infrastructure/logging/security-events.js';
 
 export class DeliveryStoreUnavailable extends Error {
   constructor() { super('Persistencia de correo no disponible. Detalles omitidos.'); }
@@ -124,7 +125,7 @@ export class PostgresDeliveryStore implements DeliveryStore {
   }
 
   async finish(claim: DeliveryClaim, failure: DeliveryFailure | null): Promise<boolean> {
-    return this.transaction(async client => {
+    const saved = await this.transaction(async client => {
       const row = (await client.query<{ attempts: number; expiresAt: Date; now: Date; eligible: boolean }>(`SELECT
         d.attempts,${expires} AS "expiresAt",clock_timestamp() AS now,${eligible} AS eligible
         FROM "MailDelivery" d ${joins} WHERE d.id=$1 AND d.status='SENDING' AND d."claimId"=$2
@@ -147,5 +148,8 @@ export class PostgresDeliveryStore implements DeliveryStore {
       [claim.id,claim.claimId,status,next,errorClass,terminal?row.now:null,status==='SENT'?row.now:null,terminal]);
       return result.rowCount===1;
     });
+    if (saved && failure!==null) securityEvents.record({category:'OPERATION',action:'MAIL_DELIVERY_FAILED',
+      result:'FAILED',reasonCode:'SMTP_FAILURE',actorKind:'SYSTEM',targetKind:'IDENTITY_SCOPE'},newCorrelationId());
+    return saved;
   }
 }
