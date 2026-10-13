@@ -8,6 +8,8 @@ T017–T020 añaden [reglas, credenciales y límites persistidos](evidence/regla
 comprobados; tampoco completan las historias ni el protocolo temporal HTTP de T087.
 T021–T023 añaden [sesiones, autorización y transporte HTTP](evidence/sesiones-autorizacion-http.md).
 Sus pruebas de fundamentos no cierran V01–V16 ni sustituyen la aceptación con las rutas y UI definitivas.
+T024 añade [contratos y adaptadores de correo](evidence/adaptadores-correo.md), comprobados con
+Mailpit y servidores TLS locales. No completa el ejecutor de entregas ni V13.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
