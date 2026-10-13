@@ -21,13 +21,10 @@ export interface PayloadCipher {
 
 export interface Mailer {
   /** Éxito significa aceptación SMTP, no entrega final ni lectura. */
-  send(payload: MailPayload): Promise<void>;
+  send(payload: MailPayload, signal?: AbortSignal): Promise<void>;
 }
 
-/** El adaptador de identidad se implementa con el ejecutor, no en el módulo mail. */
-export interface DeliveryEligibility {
-  check(tokenId: string): Promise<'ELIGIBLE' | 'EXPIRED' | 'OBSOLETE'>;
-}
+export type { DeliveryEligibility } from '../public/delivery.js';
 
 export class MailPayloadInvalid extends Error {
   constructor() { super('Contenido de correo inválido. Valores omitidos.'); }

@@ -10,6 +10,9 @@ T021–T023 añaden [sesiones, autorización y transporte HTTP](evidence/sesione
 Sus pruebas de fundamentos no cierran V01–V16 ni sustituyen la aceptación con las rutas y UI definitivas.
 T024 añade [contratos y adaptadores de correo](evidence/adaptadores-correo.md), comprobados con
 Mailpit y servidores TLS locales. No completa el ejecutor de entregas ni V13.
+T025–T026 añaden [entregas persistidas y recuperación del ejecutor](evidence/entregas-persistidas.md).
+Sus pruebas de fundamentos no cierran V13: todavía faltan emisión/reenvío y consumo de enlaces
+en las historias, además de retención/purga e integración funcional.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

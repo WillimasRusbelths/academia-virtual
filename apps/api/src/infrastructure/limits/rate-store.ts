@@ -122,22 +122,44 @@ export class PostgresRateStore {
   }
 
   async admitMail(email: string, purpose: TokenPurpose, origin: string, phase: MailLimitPhase) {
+    const { recipientKey, originKey } = this.mailKeys(email, purpose, origin, phase);
+    return this.transaction(client => this.admitMailKeys(client, recipientKey, originKey, phase, randomUUID()));
+  }
+
+  /** Las entregas conservan solo estas huellas SMTP; no necesitan persistir IP ni correo. */
+  mailKeys(email: string, purpose: TokenPurpose, origin: string, phase: MailLimitPhase = 'SMTP') {
     if (!['VERIFY_EMAIL', 'RESET_PASSWORD'].includes(purpose) || !['ADMISSION', 'SMTP'].includes(phase)) {
       throw new Error('Ámbito de cuota inválido.');
     }
     const recipient = this.bucket('MAIL_RECIPIENT_PURPOSE', phase, [normalizeEmail(email).emailCanonical, purpose]);
     const sender = this.bucket('MAIL_ORIGIN', phase, [originKeyInput(origin)]);
-    return this.transaction(async client => {
+    return { recipientKey: recipient.key, originKey: sender.key };
+  }
+
+  /** Reserva y claim se confirman juntos, sin locks de cuentas ni IO SMTP. */
+  reserveSmtp(client: PoolClient, recipientKey: string, originKey: string, attemptId: string) {
+    return this.admitMailKeys(client, recipientKey, originKey, 'SMTP', attemptId);
+  }
+
+  private async admitMailKeys(client: PoolClient, recipientKey: string, originKey: string, phase: MailLimitPhase, attempt: string) {
+      if (![recipientKey, originKey].every(key => /^[a-f0-9]{64}$/.test(key)) || recipientKey === originKey) {
+        throw new RateStoreUnavailable();
+      }
+      const recipient: Bucket = { key: recipientKey, scope: 'MAIL_RECIPIENT_PURPOSE', phase };
+      const sender: Bucket = { key: originKey, scope: 'MAIL_ORIGIN', phase };
       await this.lockBuckets(client, [recipient, sender]);
+      const buckets = (await client.query<{ key: string; phase: string; scope: string }>(
+        'SELECT key,phase,scope FROM "RateBucket" WHERE key=ANY($1::text[])', [[recipientKey, originKey]])).rows;
+      if (buckets.some(bucket => bucket.phase !== phase || bucket.scope !== (bucket.key === recipientKey ? recipient.scope : sender.scope))) {
+        throw new RateStoreUnavailable();
+      }
       const now = await this.now(client);
       const times = async (key: string): Promise<number[]> => (await client.query<{ occurredAt: Date }>(`SELECT "occurredAt" FROM "RateEvent"
         WHERE "bucketKey"=$1 AND "occurredAt" > $2`, [key, new Date(now.getTime() - MAIL_WINDOW_MS)])).rows.map(row => row.occurredAt.getTime());
       const decision = mailLimit(await times(recipient.key), await times(sender.key), now.getTime());
       if (decision.allowed) {
-        const attempt = randomUUID();
         for (const bucket of [recipient, sender]) await client.query(`INSERT INTO "RateEvent"("bucketKey","occurredAt",status,"attemptId") VALUES ($1,$2,'ACCEPTED',$3)`, [bucket.key, now, attempt]);
       }
       return decision;
-    });
   }
 }

@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { Socket } from 'node:net';
 import type SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
 import { ConfigurationError } from '../../../infrastructure/config/environment.js';
 import type { Environment } from '../../../infrastructure/config/environment.js';
@@ -33,13 +34,21 @@ function failure(error: unknown): MailTransportFailure {
 export function createSmtpTransport(environment: Environment): Mailer {
   const options = smtpOptions(environment);
   return {
-    async send(payload) {
+    async send(payload, signal) {
       const data = validateMailPayload(payload, environment.appOrigin);
       if (environment.mailMode === 'capture' && !data.recipient.endsWith('@example.test')) {
         throw new ConfigurationError('destinatario de captura');
       }
       // Una conexión por envío: sin pool ni mensajes en memoria tras la operación.
-      const transport = nodemailer.createTransport(options);
+      if (signal?.aborted) throw new MailTransportFailure('TIMEOUT');
+      // Socket propio, aún sin conectar: Nodemailer conserva DNS, STARTTLS y TLS validado.
+      // Destruirlo cancela también la conexión TLS construida sobre este mismo socket.
+      const socket = new Socket();
+      socket.on('error', () => undefined);
+      const abort = () => socket.destroy();
+      signal?.addEventListener('abort', abort, { once: true });
+      const transportOptions = { ...options, socket };
+      const transport = nodemailer.createTransport(transportOptions);
       try {
         const verification = data.template === 'VERIFY_EMAIL';
         const result = await transport.sendMail({ from: environment.smtp.from, to: data.recipient,
@@ -48,9 +57,10 @@ export function createSmtpTransport(environment: Environment): Mailer {
           disableFileAccess: true, disableUrlAccess: true });
         if (result.accepted.length !== 1 || result.rejected.length !== 0) throw new MailTransportFailure('PERMANENT');
       } catch (error) {
+        if (signal?.aborted) throw new MailTransportFailure('TIMEOUT');
         if (error instanceof MailTransportFailure) throw error;
         throw failure(error);
-      } finally { transport.close(); }
+      } finally { signal?.removeEventListener('abort', abort); socket.destroy(); transport.close(); }
     },
   };
 }
