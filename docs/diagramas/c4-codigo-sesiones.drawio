@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="c4-sesiones" name="C4 de sesiones">
+    <mxGraphModel dx="2600" dy="1720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2600" pageHeight="1720" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;C4 de sesiones&lt;/b&gt; &amp;middot; APP02 → C03 Identidad y acceso → sesiones" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=26;fontFamily=Arial;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="260.0" y="35" width="2240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Estructura implementada seleccionada: contratos, referencias conservadas y dependencias de uso. No representa un flujo HTTP completo." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontFamily=Arial;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="260.0" y="85" width="2240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SessionLookup" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;clase&amp;raquo; &amp;middot; C05 Autorización&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;SessionLookup&lt;/b&gt;&lt;hr&gt;- sessions: SessionRepository (readonly)&lt;br&gt;+ constructor(sessions: SessionRepository)&lt;br&gt;+ authorize(secret: string | null,&lt;br&gt;  permission: Permission): Promise&amp;lt;SessionActor&amp;gt;&lt;br&gt;+ accepted(actor: SessionActor): Promise&amp;lt;void&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#F0FDF4;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/authorization/application/session-lookup.ts">
+          <mxGeometry x="260.0" y="150" width="540" height="245" as="geometry" />
+        </mxCell>
+        <mxCell id="SessionRepository" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;interface&amp;raquo; &amp;middot; C05 Autorización&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;SessionRepository&lt;/b&gt;&lt;hr&gt;lookup(secret: string): Promise&amp;lt;SessionActor | null&amp;gt;&lt;br&gt;accept(actor: SessionActor): Promise&amp;lt;boolean&amp;gt;&lt;br&gt;revoke(secret: string): Promise&amp;lt;void&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#F0FDF4;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/authorization/public/session.ts">
+          <mxGeometry x="260.0" y="495" width="540" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="SessionActor" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;interface de datos&amp;raquo; &amp;middot; C05 Autorización&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;SessionActor&lt;/b&gt;&lt;hr&gt;readonly sessionId: string&lt;br&gt;readonly userId: string&lt;br&gt;readonly authVersion: bigint&lt;br&gt;readonly role: Role" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#F0FDF4;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/authorization/public/session.ts">
+          <mxGeometry x="260.0" y="830" width="420" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="permits" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;función&amp;raquo; &amp;middot; C05 Autorización&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;permits&lt;/b&gt;&lt;hr&gt;(role: Role, permission: Permission): boolean" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#F0FDF4;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/authorization/domain/permissions.ts">
+          <mxGeometry x="260.0" y="1120" width="540" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="PostgresSessionStore" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;clase&amp;raquo; &amp;middot; C03 Infraestructura&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;PostgresSessionStore&lt;/b&gt;&lt;hr&gt;- pool: Pool (readonly)&lt;br&gt;+ constructor(pool: Pool)&lt;br&gt;+ lookup(secret: string): Promise&amp;lt;SessionActor | null&amp;gt;&lt;br&gt;+ accept(actor: SessionActor): Promise&amp;lt;boolean&amp;gt;&lt;br&gt;+ revoke(secret: string): Promise&amp;lt;void&amp;gt;&lt;br&gt;+ revalidateInTransaction(client: PoolClient,&lt;br&gt;  actor: SessionActor, permission: Permission):&lt;br&gt;  Promise&amp;lt;void&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#EFF6FF;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/identity/infrastructure/session-store.ts">
+          <mxGeometry x="1260.0" y="150" width="650" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="Pool" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;tipo de biblioteca&amp;raquo; &amp;middot; pg · compartido por C09&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;Pool&lt;/b&gt;&lt;hr&gt;Referencia conservada por el adaptador.&lt;br&gt;Ensamblado fuera del dominio." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#F8FAFC;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/infrastructure/database/database.ts">
+          <mxGeometry x="2130.0" y="150" width="370" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="PoolClient" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;tipo de biblioteca&amp;raquo; &amp;middot; pg · infraestructura&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;PoolClient&lt;/b&gt;&lt;hr&gt;Parámetro de revalidateInTransaction.&lt;br&gt;Exige una transacción abierta." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#F8FAFC;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/identity/infrastructure/session-store.ts">
+          <mxGeometry x="2130.0" y="390" width="370" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="digest" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;función de objeto&amp;raquo; &amp;middot; C03 Infraestructura&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;accessSecrets.digest&lt;/b&gt;&lt;hr&gt;(secret: string): Uint8Array | null&lt;br&gt;Firma conforme a AccessSecrets;&lt;br&gt;no es una clase ni un implements." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#EFF6FF;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/identity/infrastructure/credentials.ts">
+          <mxGeometry x="2130.0" y="620" width="370" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="canUseSession" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;función&amp;raquo; &amp;middot; C03 Dominio&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;canUseSession&lt;/b&gt;&lt;hr&gt;(account: AccountAccess, session: SessionAccess,&lt;br&gt;  now: Date): boolean&lt;br&gt;Cuenta, versión, revocación y caducidad." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#EFF6FF;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/identity/domain/access.ts">
+          <mxGeometry x="1260.0" y="830" width="650" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="canAccessApplication" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;función&amp;raquo; &amp;middot; C03 Dominio&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;canAccessApplication&lt;/b&gt;&lt;hr&gt;(account: AccountAccess): boolean&lt;br&gt;Comprueba habilitación de cuenta." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#EFF6FF;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/identity/domain/access.ts">
+          <mxGeometry x="1260.0" y="1120" width="650" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="AccountAccess" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;interface de datos&amp;raquo; &amp;middot; C03 Dominio · selección&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;AccountAccess&lt;/b&gt;&lt;hr&gt;status: AccountStatus&lt;br&gt;emailVerifiedAt: Date | null&lt;br&gt;mustSetPassword: boolean&lt;br&gt;passwordHash: string | null&lt;br&gt;authVersion: bigint" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#EFF6FF;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/identity/domain/access.ts">
+          <mxGeometry x="1260.0" y="1360" width="530" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="SessionAccess" value="&lt;span style=&quot;font-size:16px&quot;&gt;&amp;laquo;interface de datos&amp;raquo; &amp;middot; C03 Dominio&lt;/span&gt;&lt;br&gt;&lt;b style=&quot;font-size:19px&quot;&gt;SessionAccess&lt;/b&gt;&lt;hr&gt;authVersion: bigint&lt;br&gt;createdAt: Date&lt;br&gt;lastAcceptedAt: Date&lt;br&gt;absoluteExpiresAt: Date&lt;br&gt;revokedAt: Date | null" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fontSize=16;fontFamily=Arial;strokeWidth=1.5;fillColor=#EFF6FF;strokeColor=#475569;" vertex="1" parent="1" link="../../apps/api/src/modules/identity/domain/access.ts">
+          <mxGeometry x="1970.0" y="1060" width="530" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-sessions" value="sessions (readonly)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=0;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="SessionLookup" target="SessionRepository">
+          <mxGeometry relative="1" as="geometry" x="0.0" y="0">
+            <mxPoint x="97.0" y="0.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="realizes" value="implements" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=block;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="PostgresSessionStore" target="SessionRepository">
+          <mxGeometry relative="1" as="geometry" x="0.5936139332365749" y="0">
+            <Array as="points">
+              <mxPoint x="1080" y="320" />
+              <mxPoint x="1080" y="549" />
+            </Array>
+            <mxPoint x="0.0" y="-20.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="assoc-pool" value="pool (readonly)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=0;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.18;exitDx=0;exitDy=0;entryX=0;entryY=0.41;entryDx=0;entryDy=0;" edge="1" parent="1" source="PostgresSessionStore" target="Pool">
+          <mxGeometry relative="1" as="geometry" x="-0.0002646689293346327" y="0">
+            <mxPoint x="0.029113582226727885" y="-21.34996029966058" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-client" value="parámetro" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.18;entryDx=0;entryDy=0;" edge="1" parent="1" source="PostgresSessionStore" target="PoolClient">
+          <mxGeometry relative="1" as="geometry" x="0.5582329317269077" y="0">
+            <Array as="points">
+              <mxPoint x="2030.0" y="388" />
+              <mxPoint x="2030.0" y="417" />
+            </Array>
+            <mxPoint x="0.0" y="23.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-digest" value="utiliza" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.9;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PostgresSessionStore" target="digest">
+          <mxGeometry relative="1" as="geometry" x="0.019189765458422103" y="0">
+            <Array as="points">
+              <mxPoint x="2010.0" y="456" />
+              <mxPoint x="2010.0" y="705" />
+            </Array>
+            <mxPoint x="40.0" y="0.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-rule" value="utiliza mediante eligible" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.51;exitY=1;exitDx=0;exitDy=0;entryX=0.51;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PostgresSessionStore" target="canUseSession">
+          <mxGeometry relative="1" as="geometry" x="-0.05882352941176472" y="0">
+            <mxPoint x="98.5" y="0.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-lookup-actor" value="resultado / parámetro" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="SessionLookup" target="SessionActor">
+          <mxGeometry relative="1" as="geometry" x="0.38434163701067625" y="0">
+            <Array as="points">
+              <mxPoint x="180" y="333.75" />
+              <mxPoint x="180" y="876.25" />
+            </Array>
+            <mxPoint x="0.0" y="0.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-lookup-permits" value="utiliza" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.98;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="SessionLookup" target="permits">
+          <mxGeometry relative="1" as="geometry" x="0.9163919688342823" y="0">
+            <Array as="points">
+              <mxPoint x="341" y="435" />
+              <mxPoint x="870" y="435" />
+              <mxPoint x="870" y="1090" />
+              <mxPoint x="789.2" y="1090" />
+            </Array>
+            <mxPoint x="0.0" y="-20.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-store-actor" value="resultado / parámetro" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.85;exitDx=0;exitDy=0;entryX=1;entryY=0.6;entryDx=0;entryDy=0;" edge="1" parent="1" source="PostgresSessionStore" target="SessionActor">
+          <mxGeometry relative="1" as="geometry" x="0.7916666666666667" y="0">
+            <Array as="points">
+              <mxPoint x="980" y="439" />
+              <mxPoint x="980" y="941" />
+            </Array>
+            <mxPoint x="0" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-store-permits" value="revalidación" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.98;exitDx=0;exitDy=0;entryX=1;entryY=0.8;entryDx=0;entryDy=0;" edge="1" parent="1" source="PostgresSessionStore" target="permits">
+          <mxGeometry relative="1" as="geometry" x="0.7352746525479814" y="0">
+            <Array as="points">
+              <mxPoint x="1110" y="483.2" />
+              <mxPoint x="1110" y="1232" />
+            </Array>
+            <mxPoint x="0.0" y="-20.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-rule-account" value="parámetro" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="canUseSession" target="AccountAccess">
+          <mxGeometry relative="1" as="geometry" x="0.8869143780290791" y="0">
+            <Array as="points">
+              <mxPoint x="1190" y="947" />
+              <mxPoint x="1190" y="1426" />
+            </Array>
+            <mxPoint x="0.0" y="-20.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-rule-session" value="parámetro" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="canUseSession" target="SessionAccess">
+          <mxGeometry relative="1" as="geometry" x="-0.022556390977443663" y="0">
+            <Array as="points">
+              <mxPoint x="1940.0" y="920" />
+              <mxPoint x="1940.0" y="1126" />
+            </Array>
+            <mxPoint x="45.0" y="0.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-rule-access" value="invoca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.65;exitY=1;exitDx=0;exitDy=0;entryX=0.65;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="canUseSession" target="canAccessApplication">
+          <mxGeometry relative="1" as="geometry" x="0.0" y="0">
+            <mxPoint x="47.5" y="0.0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-access-account" value="parámetro" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;dashPattern=8 5;endArrow=open;endFill=0;fontSize=14;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.37;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="canAccessApplication" target="AccountAccess">
+          <mxGeometry relative="1" as="geometry" x="0.007578083051950069" y="0">
+            <mxPoint x="34.4458320543215" y="-0.3789041525974426" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;Convenciones UML&lt;/b&gt;&lt;br&gt;Línea discontinua + triángulo hueco: realización explícita.&lt;br&gt;Línea continua + flecha: asociación dirigida (referencia conservada).&lt;br&gt;Línea discontinua + flecha: dependencia de uso o de tipo.&lt;br&gt;&amp;laquo;función&amp;raquo; y &amp;laquo;interface de datos&amp;raquo; son etiquetas descriptivas.&lt;br&gt;Sin herencia ni composición en esta selección." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=16;fontFamily=Arial;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="260.0" y="1370" width="610" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="type-note" value="&lt;b&gt;Tipos y límites&lt;/b&gt;&lt;br&gt;Role y AccountStatus: C04 Usuarios.&lt;br&gt;Permission: C05 (profile:read | users:manage).&lt;br&gt;AccountAccess muestra solo campos usados en esta vista.&lt;br&gt;Compatibilidad estructural no equivale a implements.&lt;br&gt;Funciones y datos del dominio no dependen de pg." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=16;fontFamily=Arial;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="1870.0" y="1370" width="630" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="reference" value="Fuente: docs/04-modelo-c4/04-codigo.md y código enlazado. Fundamentos implementados; login/logout completos pendientes. Cajas enlazadas al código." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=16;fontFamily=Arial;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="260.0" y="1630" width="2240" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

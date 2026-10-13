@@ -2,7 +2,15 @@
 
 ## Propósito y alcance
 
-La selección amplía **APP02 → C03 Identidad y acceso → sesiones**, según el catálogo y C3. Describe el adaptador persistido y sus reglas, con colaboradores indispensables de C05 Autorización y C09 Acceso compartido a datos. Prepara un futuro UML de código, sin desarrollar transporte HTTP, login ni otros dominios.
+La selección amplía **APP02 → C03 Identidad y acceso → sesiones**, según el catálogo y C3. Describe el adaptador persistido y sus reglas, con colaboradores indispensables de C05 Autorización y C09 Acceso compartido a datos.
+
+## Diagrama C4 de sesiones
+
+![Detalle de código de sesiones](../diagramas/imagenes/c4-codigo-sesiones.png)
+
+[Editar el diagrama en Draw.io](../diagramas/c4-codigo-sesiones.drawio)
+
+Muestra una selección del código de sesiones y sus colaboradores, no todo el sistema ni un flujo completo de inicio y cierre de sesión.
 
 ## Elementos principales
 
