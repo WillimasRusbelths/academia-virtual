@@ -49,6 +49,9 @@ T056–T058 completan pantalla inicial, documentación operativa y [checkpoint U
 T050–T052 originales aprobadas y recorrido CLI → Mailpit → activación → acceso comprobado.
 La recuperación tras provisional vencida espera T081; V08 no está completo hasta verificar
 gestión/último ADMIN en US4. No se anticipan retención/purga ni observación humana finales.
+T059–T061 completan la [escritura de pruebas US4](evidence/us4-pruebas.md): controles reales
+aprobados y fallos esperados por rutas/pantallas administrativas ausentes. V04-B queda escrito,
+sin aceptación funcional; T071 exige resultados satisfactorios tras implementar T062–T070.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
