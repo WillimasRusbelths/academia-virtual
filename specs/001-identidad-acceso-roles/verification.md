@@ -1,8 +1,9 @@
 # Estrategia de verificación de identidad
 
-Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md) aprobado.
-V03 funcional, V04-A y parte login de V10 comprobados; V04-B, comparación temporal T087
-y el resto de los escenarios V01–V16 permanecen pendientes.
+Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md) y
+[checkpoint funcional US2](evidence/us2.md) aprobados. V01/V02 funcionales, V03 funcional,
+V04-A y partes de V10/V13 comprobados. V04-B, comparación temporal T087, retención/purga,
+aceptación transversal y el resto de V01–V16 permanecen pendientes según sus criterios.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
 T011–T016 añaden pruebas de configuración y persistencia; resultados y límites en
@@ -32,6 +33,11 @@ como casos de uso y controladores en composición de pruebas. Su montaje product
 la UI T038 siguen pendientes; las suites originales todavía no aceptan US1.
 T037–T039 integran rutas y UI y completan la [aceptación funcional US1](evidence/us1.md):
 T031/T032 y los recorridos originales T033 pasan sin omisiones. No cierra V04-B, T087 ni SC-002 completo.
+T040–T042 completan la [escritura de pruebas US2](evidence/us2-pruebas.md).
+T043–T045 añaden [emisión atómica, registro y confirmación](evidence/us2-implementacion.md).
+T046–T049 incorporan reenvío, UI y el [checkpoint funcional US2](evidence/us2.md): registro
+público → Mailpit → confirmación → login, con cuotas, consumo único y fallo SMTP real aislado.
+No completan retención/purga de V13, protocolo temporal T087 ni observación humana SC-001.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

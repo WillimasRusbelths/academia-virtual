@@ -23,7 +23,11 @@ export const test=base.extend<{fresh:undefined},{identity:Us2Dataset&{pauseMail(
         if(ready)break;await pause(100);}
       if(!ready)throw new Error('Vite del ensayo US2 no disponible. Valores omitidos.');
       expect((await fetch(`${server.url}/health/ready`)).status).toBe(200);
-      await use({...data,pauseMail:()=>server!.app.get<{beforeApplicationShutdown():Promise<void>}>('MAIL_DELIVERY_SCHEDULER').beforeApplicationShutdown()});
+      const scheduler=server.app.get<{beforeApplicationShutdown():Promise<void>;onApplicationBootstrap():void}>('MAIL_DELIVERY_SCHEDULER');
+      await use({...data,async reset(){
+        // Cada caso recupera el scheduler detenido por ensayos de fallo y evita resetear bajo un envío activo.
+        await scheduler.beforeApplicationShutdown();await data.reset();scheduler.onApplicationBootstrap();
+      },pauseMail:()=>scheduler.beforeApplicationShutdown()});
     }finally{
       if(vite && vite.exitCode===null){const exited=new Promise<void>(resolve=>vite!.once('exit',()=>resolve()));vite.kill('SIGTERM');await exited;}
       await server?.close();await data.cleanup();
@@ -34,7 +38,7 @@ export const test=base.extend<{fresh:undefined},{identity:Us2Dataset&{pauseMail(
 export {expect};
 
 /** Buzón local: solo consultar el destinatario ficticio del ensayo; nunca imprimir el mensaje. */
-export async function verificationLink(email:string,origin:string) {
+export async function verificationLink(email:string,origin:string,accept:(link:string)=>boolean=()=>true) {
   if(!email.endsWith('@example.test') || origin!=='http://localhost:5173')throw new Error('Buzón de ensayo no permitido.');
   for(let i=0;i<120;i++) {
     const response=await fetch(`${mailpitOrigin}/api/v1/search?query=${encodeURIComponent(`to:${email}`)}`);
@@ -43,7 +47,7 @@ export async function verificationLink(email:string,origin:string) {
     for(const item of result.messages) {
       const message=await fetch(`${mailpitOrigin}/api/v1/message/${encodeURIComponent(item.ID)}`).then(value=>value.json()) as {Text?:string};
       const match=message.Text?.match(/http:\/\/localhost:5173\/verificar-correo#[A-Za-z0-9_-]{43}/);
-      if(match)return match[0];
+      if(match&&accept(match[0]))return match[0];
     }
     await pause(100);
   }

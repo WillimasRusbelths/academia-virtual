@@ -9,6 +9,7 @@ import { MailTransportFailure } from '../../../api/src/modules/mail/application/
 import { PostgresDeliveryStore } from '../../../api/src/modules/mail/infrastructure/delivery-store.js';
 import { createPayloadCipher } from '../../../api/src/modules/mail/infrastructure/payload-cipher.js';
 import { PostgresDeliveryEligibility } from '../../../api/src/modules/identity/infrastructure/delivery-eligibility.js';
+import { accessSecrets } from '../../../api/src/modules/identity/infrastructure/credentials.js';
 
 test.afterEach(async({page})=>{await page.locator('input[type="password"]').evaluateAll(inputs=>{
   for(const input of inputs)(input as HTMLInputElement).value='';
@@ -121,4 +122,52 @@ test('202 y fallo temporal controlado del envío conservan pendiente sin promete
     && rows[0].status==='PENDING' && rows[0].lastErrorClass==='TEMPORARY' && rows[0].attempts===1).toBe(true);
   await expect(page.getByText(/correo (fue |ha sido )?entregado|mensaje (fue |ha sido )?enviado con éxito/i)).toHaveCount(0);
   await expect(page.getByRole('link',{name:/reenviar|verificar|nuevo envío/i})).toBeVisible();await privateState(page);
+});
+
+test('reenvío desde navegador sustituye el enlace anterior y permite confirmar el capturado en Mailpit',async({page,identity})=>{
+  const old=await seedAction(identity);await page.goto('/verificar-correo');
+  try{await page.getByLabel(/correo/i).fill(old.account.email);}catch{throw new Error('No se pudo completar el reenvío. Valores omitidos.');}
+  const resend=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/verification/request'));
+  await page.getByRole('button',{name:/solicitar.*envío/i}).click();expect((await resend).status()).toBe(202);
+  await expect(page.getByText(/Si la cuenta cumple las condiciones/)).toBeVisible();
+  expect((await tokenState(identity,old.id)).revokedAt!==null).toBe(true);
+  const current=(await identity.context.database.pool.query(`SELECT "tokenHash" FROM "ActionToken"
+    WHERE "userId"=$1 AND purpose='VERIFY_EMAIL' AND "revokedAt" IS NULL AND "consumedAt" IS NULL`,[old.account.id])).rows;
+  expect(current.length).toBe(1);
+  // El buzón compartido conserva mensajes de casos anteriores: seleccionar la emisión vigente, sin borrarlos.
+  const link=await verificationLink(old.account.email,identity.context.environment.appOrigin,value=>{
+    const digest=accessSecrets.digest(value.slice(value.indexOf('#')+1));
+    return digest!==null&&Buffer.from(digest).equals(current[0].tokenHash);
+  });
+  await cleanFragment(page,old.link);
+  let response=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/verification/confirm'));
+  await page.getByRole('button',{name:/confirmar correo/i}).click();expect((await response).status()).toBe(400);
+  await expect(page.getByRole('alert')).toBeVisible();
+  await cleanFragment(page,link);response=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/verification/confirm'));
+  await page.getByRole('button',{name:/confirmar correo/i}).click();expect((await response).status()).toBe(204);
+  await expect(page.getByRole('link',{name:/iniciar sesión/i})).toBeVisible();await privateState(page);
+  // Un segundo uso vuelve al mismo error público y no modifica la verificación.
+  await cleanFragment(page,link);response=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/verification/confirm'));
+  await page.getByRole('button',{name:/confirmar correo/i}).click();expect((await response).status()).toBe(400);
+});
+
+test('enlace vencido muestra error y ofrece reenvío sin consumir ni crear sesión',async({page,context,identity})=>{
+  const f=await seedAction(identity);await identity.clock!.set(f.expiresAt);await cleanFragment(page,f.link);
+  const response=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/verification/confirm'));
+  await page.getByRole('button',{name:/confirmar correo/i}).click();expect((await response).status()).toBe(400);
+  await expect(page.getByRole('alert')).toBeVisible();await expect(page.getByRole('button',{name:/solicitar.*envío/i})).toBeVisible();
+  expect((await tokenState(identity,f.id)).consumedAt).toBeNull();
+  expect((await context.cookies()).some(cookie=>cookie.name==='av_session_dev')).toBe(false);await privateState(page);
+});
+
+test('reenvío genérico para desconocido, desactivado y verificado sin generar entregas',async({page,identity})=>{
+  const emails=[`ausente-${randomUUID()}@example.test`,identity.account('STUDENT','DISABLED').email,identity.account().email];
+  for(const email of emails){
+    await page.goto('/verificar-correo');
+    try{await page.getByLabel(/correo/i).fill(email);}catch{throw new Error('No se pudo completar el reenvío. Valores omitidos.');}
+    const response=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/verification/request'));
+    await page.getByRole('button',{name:/solicitar.*envío/i}).click();expect((await response).status()).toBe(202);
+    await expect(page.getByText(/Si la cuenta cumple las condiciones/)).toBeVisible();await privateState(page);
+  }
+  expect((await identity.context.database.pool.query('SELECT id FROM "MailDelivery"')).rowCount).toBe(0);
 });

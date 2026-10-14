@@ -141,7 +141,7 @@ reset 30 min, un único token vigente por cuenta/propósito. Emisión nueva revo
 reintento SMTP reutiliza el mismo token. Consumir y modificar cuenta son una sola transacción.
 Una contraseña inválida no consume el token; reset invalida sesiones y credencial inicial.
 
-URL de la SPA con fragmento `#token=...`, generado desde `APP_ORIGIN`, nunca desde `Host`.
+URL de la SPA con fragmento `#` seguido del secreto base64url de 43 caracteres, generado desde `APP_ORIGIN`, nunca desde `Host`.
 Leer fragmento en memoria, limpiar URL, confirmar con POST; GET no consume enlaces, evitando
 que un escáner de correo realice acciones. `Referrer-Policy: no-referrer`, sin analítica en
 esas pantallas. La credencial provisional se recibe por canal privado, se guarda solo como

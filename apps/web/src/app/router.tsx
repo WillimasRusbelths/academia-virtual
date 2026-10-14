@@ -1,7 +1,15 @@
-import { useSyncExternalStore } from 'react';
+import { Fragment,useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 
 export interface AppRoute { readonly path:string; readonly element:ReactNode }
+let fragmentRevision=0;
+function subscribeFragment(listener:()=>void) {
+  // Un nuevo enlace puede abrirse sobre la misma pantalla, sin recargar el documento.
+  // La revisión no conserva el fragmento; una nueva instancia lo captura y retira.
+  const changed=()=>{fragmentRevision++;listener();};
+  window.addEventListener('hashchange',changed);
+  return ()=>window.removeEventListener('hashchange',changed);
+}
 function subscribe(listener:()=>void) {
   window.addEventListener('popstate',listener);window.addEventListener('av:navigation',listener);
   return () => { window.removeEventListener('popstate',listener);window.removeEventListener('av:navigation',listener); };
@@ -14,6 +22,7 @@ export function navigate(path:string,replace = false):void {
 }
 export function AppRouter({routes}: {readonly routes:readonly AppRoute[]}) {
   const location = useLocation();
-  return routes.find(route => route.path===location)?.element??<main><h1>Página no disponible</h1><p>Revisa la dirección o vuelve al inicio.</p></main>;
+  const revision=useSyncExternalStore(subscribeFragment,()=>fragmentRevision,()=>0);
+  return <Fragment key={`${location}:${revision}`}>{routes.find(route => route.path===location)?.element??<main><h1>Página no disponible</h1><p>Revisa la dirección o vuelve al inicio.</p></main>}</Fragment>;
 }
 export function useLocation():string {return useSyncExternalStore(subscribe,() => window.location.pathname,() => '/');}

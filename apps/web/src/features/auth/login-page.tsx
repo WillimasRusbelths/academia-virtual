@@ -31,6 +31,6 @@ export function LoginPage({onLogin,notice}:{readonly onLogin:(email:string,passw
       <button type="submit" disabled={sending}>{sending?'Accediendo…':'Iniciar sesión'}</button>
     </form>
     <Feedback error={error} onRetry={()=>credential.current?.focus()}/>
-    <p><a href="/recuperar">Recuperar contraseña</a> · <a href="/verificar-correo">Verificar correo</a></p>
+    <p><a href="/registro">Crear cuenta</a> · <a href="/recuperar">Recuperar contraseña</a> · <a href="/verificar-correo">Verificar correo</a></p>
   </main>;
 }

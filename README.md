@@ -6,12 +6,14 @@ y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 **Estado al 2026-10-14:** React/NestJS con Docker Compose como entorno local principal.
 [US1: acceso y cierre de sesión](specs/001-identidad-acceso-roles/evidence/us1.md) está implementada
 y verificada con cuentas de prueba de los tres roles: login, consulta propia, recarga y logout.
-Registro, recuperación, administración y funciones académicas siguen pendientes;
+[US2: registro y verificación](specs/001-identidad-acceso-roles/evidence/us2.md) está implementada
+y verificada mediante registro público, Mailpit, confirmación explícita, reenvío y login.
+Recuperación, administración y funciones académicas siguen pendientes;
 no hay integración de pagos/video ni despliegue acreditado.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
-se reutilizan en US1; el registro público todavía está pendiente.
+se reutilizan en US1 y US2.
 Las [sesiones, autorización y protecciones HTTP](specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md)
 respaldan la integración de acceso; los demás flujos de identidad siguen pendientes.
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
@@ -48,7 +50,8 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
 - [Plan técnico de identidad](specs/001-identidad-acceso-roles/plan.md): decisiones, datos,
   contratos y [guía local planificada](specs/001-identidad-acceso-roles/quickstart.md), con
-  ejecución mediante Docker Compose. Las historias siguen sin implementar.
+  ejecución mediante Docker Compose. Los checkpoints funcionales US1 y US2 están verificados;
+  las demás historias y la aceptación transversal siguen pendientes.
 
 ## Análisis del sistema
 
@@ -93,8 +96,8 @@ para permitir cambiar de pasarela posteriormente.
 React, TypeScript y Vite para el frontend; NestJS como monolito modular con TypeScript;
 PostgreSQL 16.14 y Prisma, con Mailpit 1.31.3 para correo local. Compose construye las
 imágenes Linux de API/web con `npm ci` y conserva los datos de PostgreSQL en un volumen.
-La API solo ensambla Probe y la web
-muestra «En preparación»; no hay flujos de negocio completos.
+La API y la web incorporan los flujos de acceso/cierre y registro/verificación de identidad;
+las funciones académicas permanecen previstas.
 
 Socket.IO autorizado por clase sigue propuesto. YouTube Live con OBS es la elección
 de video del MVP según DA03 y DEC01; integración y control de acceso pendientes.
@@ -119,9 +122,10 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. Las tareas T001–T010 preparan y validan el entorno y la base técnica; sus historias aún no están
-implementadas. Para ejecutar el entorno actual, seguir la [guía Docker](ops/docker/README.md);
-los procedimientos de producto del quickstart siguen siendo futuros. La viabilidad del
+por roles**. T001–T049 están completadas, incluidos los checkpoints US1 y US2;
+el resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
+el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
+incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del
 video y la rúbrica de evaluación permanecen pendientes. No se han ejecutado pruebas de capacidad.
 
 ## Archivos compartidos y configuración local
