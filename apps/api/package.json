@@ -11,7 +11,8 @@
     "test:postgres": "vitest run tests/compatibility/postgres.spec.ts",
     "db:generate": "node scripts/database.mjs generate",
     "db:migrate:dev": "node scripts/database.mjs dev",
-    "db:migrate:deploy": "node scripts/database.mjs deploy"
+    "db:migrate:deploy": "node scripts/database.mjs deploy",
+    "fixtures:identity": "node dist/src/cli/fixtures-identity.js"
   },
   "dependencies": {
     "@nestjs/common": "12.1.0", "@nestjs/core": "12.1.0", "@nestjs/platform-express": "12.1.0",

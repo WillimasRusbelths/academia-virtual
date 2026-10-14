@@ -17,6 +17,8 @@ T027 añade [auditoría transaccional y privacidad de logs/errores](evidence/aud
 Comprueba U1 como fundamento; no completa los flujos administrativos, bootstrap ni V12/V16.
 T028 añade [bootstrap atómico persistido](evidence/bootstrap-atomico.md): inicialización única,
 concurrencia y rollback comprobados. La CLI y activación de US6 y la aceptación V08 siguen pendientes.
+T029 añade [fixtures y CLI de ensayo seguros](evidence/fixtures-seguros.md), con persistencia,
+secretos privados y limpieza dirigida comprobados; no ofrece rutas privilegiadas ni cierra historias.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
