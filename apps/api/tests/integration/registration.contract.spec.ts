@@ -70,6 +70,8 @@ describe('T040 · contratos públicos US2, HTTP y persistencia reales',()=>{
   test('202 equivalente en alta nueva y duplicada; sin overwrite ni token nuevo desde registro',async()=>{
     const body=valid();const first=await generic202(await http.post('/auth/register',body),[body.password,body.email]);
     const before=await counts();const user=(await data.context.database.pool.query('SELECT * FROM "User" WHERE "emailCanonical"=$1',[body.email])).rows[0];
+    // Comparar dos admisiones permitidas; sin cuota un duplicado debe producir el mismo 429.
+    await data.clock!.advance(60000);
     const repeated=await generic202(await http.post('/auth/register',{...body,name:'Otro nombre',email:' '+body.email.toUpperCase()+' ',password:data.account('TEACHER').password}));
     expect(JSON.stringify(first)===JSON.stringify(repeated)).toBe(true);expect(await counts()===before).toBe(true);
     expect(JSON.stringify((await data.context.database.pool.query('SELECT * FROM "User" WHERE id=$1',[user.id])).rows[0])===JSON.stringify(user)).toBe(true);

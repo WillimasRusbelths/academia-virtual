@@ -8,6 +8,8 @@ import { RateStoreUnavailable } from '../infrastructure/limits/rate-store.js';
 import { securityEvents } from '../infrastructure/logging/security-events.js';
 import type { SecurityEvents } from '../infrastructure/logging/security-events.js';
 import { InvalidCredentials, LoginLimited } from '../modules/identity/application/login.js';
+import { MailAdmissionLimited } from '../modules/identity/application/issue-action-link.js';
+import { InvalidActionLink } from '../modules/identity/application/verify-email.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -54,8 +56,10 @@ export class SafeErrorFilter implements ExceptionFilter {
     let fields: { field: string; message: string }[] | undefined;
     if(error instanceof InvalidCredentials) {
       status=401;code='INVALID_CREDENTIALS';
-    }else if(error instanceof LoginLimited) {
+    }else if(error instanceof LoginLimited || error instanceof MailAdmissionLimited) {
       status=429;code='RATE_LIMITED';response.setHeader('Retry-After',String(error.retryAfterSeconds));
+    }else if(error instanceof InvalidActionLink) {
+      status=400;code='INVALID_ACTION_LINK';
     }else if (error instanceof AuthorizationFailure) {
       status = error.code === 'AUTH_REQUIRED' ? 401 : 403; code = error.code;
     } else if (error instanceof TransportFailure) {

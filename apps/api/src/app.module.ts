@@ -18,6 +18,11 @@ import { IdentityModule } from './modules/identity/identity.module.js';
 import { PostgresLoginStore } from './modules/identity/infrastructure/login-store.js';
 import { UsersModule } from './modules/users/users.module.js';
 import { PostgresUserQueries } from './modules/users/infrastructure/user-queries.js';
+import { IssueActionLink } from './modules/identity/application/issue-action-link.js';
+import { accessSecrets } from './modules/identity/infrastructure/credentials.js';
+import { PostgresActionTokenStore } from './modules/identity/infrastructure/action-token-store.js';
+import { PostgresRegistrationStore } from './modules/identity/infrastructure/registration-store.js';
+import { PostgresVerificationStore } from './modules/identity/infrastructure/verification-store.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
@@ -25,11 +30,14 @@ export class AppModule {
   static forRoot(environment: Environment, database: ReturnType<typeof createDatabase>): DynamicModule {
     const rates = new PostgresRateStore(database.pool, environment.rateHmacKey);
     const sessions=new PostgresSessionStore(database.pool);const cookie=new SessionCookie(environment);
+    const cipher=createPayloadCipher(environment);
+    const links=new IssueActionLink(new PostgresActionTokenStore(database.pool),rates,accessSecrets,cipher,environment.appOrigin);
     const deliveries = new DeliverPending(new PostgresDeliveryStore(database.pool, rates),
-      new PostgresDeliveryEligibility(database.pool), createPayloadCipher(environment), createSmtpTransport(environment));
+      new PostgresDeliveryEligibility(database.pool), cipher, createSmtpTransport(environment));
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(sessions,cookie),
-        IdentityModule.forRoot(new PostgresLoginStore(database.pool),rates,sessions,cookie),
+        IdentityModule.forRoot(new PostgresLoginStore(database.pool),rates,sessions,cookie,
+          new PostgresRegistrationStore(database.pool),links,new PostgresVerificationStore(database.pool)),
         UsersModule.forRoot(new PostgresUserQueries(database.pool))],
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },

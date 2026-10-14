@@ -1,6 +1,8 @@
 # Escritura de pruebas de registro y verificación — T040–T042
 
 Fecha: 2026-10-14. Rama: `feat/001-identidad-acceso-roles`.
+Registro histórico de escritura del commit `b7e5413`; resultados posteriores en
+[implementación T043–T045](us2-implementacion.md).
 Dependencia: [checkpoint US1 T039](us1.md) aprobado. Este bloque escribe y ejecuta
 pruebas antes de implementar US2; no añade casos de uso, rutas ni pantallas de registro.
 Las casillas corresponden a la regla de escritura de [tasks.md](../tasks.md), no a
