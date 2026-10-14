@@ -8,6 +8,8 @@ y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 y verificada con cuentas de prueba de los tres roles: login, consulta propia, recarga y logout.
 [US2: registro y verificación](specs/001-identidad-acceso-roles/evidence/us2.md) está implementada
 y verificada mediante registro público, Mailpit, confirmación explícita, reenvío y login.
+[US6: primer administrador](specs/001-identidad-acceso-roles/evidence/us6.md) cuenta con CLI
+restringida y activación mediante contraseña propia y correo verificado, comprobadas en un entorno aislado.
 Recuperación, administración y funciones académicas siguen pendientes;
 no hay integración de pagos/video ni despliegue acreditado.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
@@ -122,10 +124,8 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T055 están completadas, incluidos los checkpoints US1 y US2, la
-[escritura de pruebas US6](specs/001-identidad-acceso-roles/evidence/us6-pruebas.md) y el
-[bootstrap operativo y sustitución inicial en API](specs/001-identidad-acceso-roles/evidence/us6-implementacion.md).
-US6 mantiene pendientes su pantalla, documentación operativa y checkpoint;
+por roles**. T001–T058 están completadas, incluidos los checkpoints US1, US2 y
+[US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 el resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del

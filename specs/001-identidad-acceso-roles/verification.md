@@ -1,8 +1,9 @@
 # Estrategia de verificación de identidad
 
 Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md) y
-[checkpoint funcional US2](evidence/us2.md) aprobados. V01/V02 funcionales, V03 funcional,
-V04-A y partes de V10/V13 comprobados. V04-B, comparación temporal T087, retención/purga,
+[checkpoint funcional US2](evidence/us2.md) y [checkpoint funcional US6](evidence/us6.md)
+aprobados. V01/V02 funcionales, V03 funcional, V04-A y partes de V06/V08/V10/V12/V13
+comprobadas. V04-B, comparación temporal T087, retención/purga,
 aceptación transversal y el resto de V01–V16 permanecen pendientes según sus criterios.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
@@ -44,6 +45,10 @@ Los fallos funcionales esperados no aceptan US6; T058 requiere resolverlos tras 
 T053–T055 añaden [bootstrap operativo y sustitución inicial en API](evidence/us6-implementacion.md):
 CLI y API originales aprobadas, con concurrencia, caducidad, rollback y correlación privada.
 T052 conserva ocho fallos esperados por la pantalla pendiente T056; no se cierra US6/V08.
+T056–T058 completan pantalla inicial, documentación operativa y [checkpoint US6](evidence/us6.md):
+T050–T052 originales aprobadas y recorrido CLI → Mailpit → activación → acceso comprobado.
+La recuperación tras provisional vencida espera T081; V08 no está completo hasta verificar
+gestión/último ADMIN en US4. No se anticipan retención/purga ni observación humana finales.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

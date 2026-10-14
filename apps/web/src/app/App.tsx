@@ -6,6 +6,7 @@ import { LoginPage } from '../features/auth/login-page';
 import { HomePage } from '../features/profile/home-page';
 import { RegisterPage } from '../features/auth/register-page';
 import { VerifyEmailPage } from '../features/auth/verify-email-page';
+import { InitialPasswordPage } from '../features/auth/initial-password-page';
 export function App() {
   return <SessionProvider><SessionRoutes/></SessionProvider>;
 }
@@ -17,6 +18,7 @@ function SessionRoutes() {
     {path:'/login',element:<LoginPage onLogin={session.login} notice={session.notice}/>},
     {path:'/registro',element:<RegisterPage api={publicApi}/>},
     {path:'/verificar-correo',element:<VerifyEmailPage api={publicApi}/>},
+    {path:'/establecer-contrasena',element:<InitialPasswordPage api={publicApi}/>},
     {path:'/inicio',element:<HomePage user={session.user} loading={session.loading} error={session.error}
       onLogout={session.logout} onRefresh={session.refresh}/>},
   ]}/>;

@@ -6,8 +6,8 @@
 
 Seguir [ops/docker/README.md](../../ops/docker/README.md) para configurar `.env`, iniciar
 los cuatro servicios, aplicar la migración de ensayo y ejecutar pruebas. Resultados en
-[verification.md](../../ops/docker/verification.md). Las historias de identidad siguen
-sin implementar; los comandos de producto descritos más adelante son futuros.
+[verification.md](../../ops/docker/verification.md). US1, US2 y el checkpoint de US6 cuentan
+con evidencia funcional; las demás historias y verificaciones finales siguen pendientes.
 
 ## Variables y ejemplos sin credenciales
 
@@ -63,11 +63,11 @@ Hay cuatro migraciones de identidad y, por separado, las de ensayo `probe:genera
 `probe:migrate`. Los ensayos no migraron desarrollo. `db:migrate:dev` solo acepta desarrollo,
 usa `--create-only` y requiere una BD sombra con permisos para Prisma; ese flujo no se
 comprobó. Los CHECKs, triggers y el índice parcial requieren conservar y revisar su SQL.
-Evidencia: [T011–T016](evidence/fundamentos-datos.md). Los comandos de bootstrap,
-retención y recuperación de las secciones siguientes permanecen previstos.
-El incremento [T017–T020](evidence/reglas-credenciales-limites.md) añade reglas, credenciales,
-cuotas y compatibilidad del formato PHC; no habilita todavía los endpoints de identidad.
-El endpoint existente es `/health/live`; no se afirma implementación de `/health/ready`.
+Evidencia: [T011–T016](evidence/fundamentos-datos.md). Retención/purga y recuperación
+operativa mantienen sus dependencias y comprobaciones finales pendientes.
+El incremento [T017–T020](evidence/reglas-credenciales-limites.md) aporta reglas, credenciales,
+cuotas y compatibilidad PHC reutilizadas por las historias implementadas.
+`/health/live` y `/health/ready` existen; sus respuestas no acreditan entrega de correo.
 No usar `db push` como sustituto de migraciones.
 
 ### Primer administrador
@@ -76,23 +76,22 @@ No usar `db push` como sustituto de migraciones.
 docker compose exec api npm run admin:bootstrap --workspace @academia/api
 ```
 
-Comando futuro interactivo: solicitar nombre, correo propio del operador y credencial
-provisional con entrada oculta, sin argumentos con secretos. No imprimir esa credencial ni
-registrar entrada. Operador con acceso local restringido a BD y configuración; la aplicación
-web no puede invocar el comando. SystemState hace la acción única incluso en paralelo.
-Verificar el correo en Mailpit, establecer contraseña propia y acceder. Repetir debe fallar
-sin cambiar ninguna cuenta. No se incluye administrador predeterminado en seeds.
+CLI implementada: requiere imagen actual, migraciones de identidad, terminal interactivo
+y acceso local a configuración/BD del destino; no usar `-T` ni ejecutarla sobre el esquema
+manual de US1. Solicita `operatorRef` ASCII de 1–64 caracteres sin valor predeterminado,
+nombre, correo y provisional con entrada oculta. No recibe secretos por argumentos ni
+los imprime. Éxito: código 0 e ID/correo; repetición: error seguro, sin cambios.
 
-Precisión U1 (2026-09-25): bootstrap y `security:invalidate-restored-state` solicitan al
-responsable un `operatorRef` no secreto, sin valor por defecto, con 1–64 caracteres
-ASCII `[A-Za-z0-9_-]`. Es un alias operativo declarado, no cuenta ni método de autenticación;
-el acceso al equipo/configuración/BD sigue restringido. No usar correo, nombre de Windows
-o hostname como alias automático. Cada ejecución genera su correlación y eventos privados
-de inicio/resultado, sin secretos; la invalidación usa destino global, sin FK a User.
-AuditEvent de bootstrap solo se escribe junto con la cuenta creada. Véanse listas permitidas
-en [data-model.md](data-model.md#registros-operativos-y-de-seguridad-sin-tabla-de-cuentas-ni-fk).
-Los registros estructurados se capturan en un destino privado fuera del repositorio, con
-rotación y retención máxima de 30 días, sin contratar un servicio adicional.
+Confirmar el correo capturado en Mailpit y sustituir la provisional en
+`http://localhost:5173/establecer-contrasena`, en cualquier orden; ambas condiciones son
+obligatorias antes de iniciar sesión. No hay seed privilegiado ni endpoint bootstrap.
+Antes de retirar al primero debe existir un segundo ADMIN habilitado; su gestión espera US4.
+La recuperación tras provisional vencida espera US7/T081, sin eludir la verificación.
+Prerrequisitos, entrega privada, reenvío, errores y continuidad en
+[operación del primer administrador](../../ops/local/first-admin.md).
+Resultados: [US6](evidence/us6.md). Auditoría y registros privados:
+[modelo/U1](data-model.md#registros-operativos-y-de-seguridad-sin-tabla-de-cuentas-ni-fk).
+La invalidación operativa tras restaurar sigue pendiente de T096.
 
 ### Datos y escenarios de prueba
 

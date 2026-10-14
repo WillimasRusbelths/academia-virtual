@@ -34,7 +34,8 @@ export function VerifyEmailPage({api}:{readonly api:ApiClient}) {
   }
   return <main style={{maxWidth:'32rem',margin:'2rem auto',padding:'0 1rem',overflowWrap:'anywhere'}}>
     <h1>Verificar correo</h1>
-    {verified?<><Feedback message="Correo verificado. Ya puedes iniciar sesión."/><p><a href="/login">Iniciar sesión</a></p></>
+    {verified?<><Feedback message="Correo verificado. Si recibiste una credencial provisional, establece tu contraseña propia antes de iniciar sesión."/>
+      <p><a href="/login">Iniciar sesión</a> · <a href="/establecer-contrasena">Establecer contraseña propia</a></p></>
       :token?<><p>Confirma para verificar tu correo. Abrir esta página no completa la acción.</p>
         <button type="button" disabled={sending} onClick={()=>void confirm()}>{sending?'Confirmando…':'Confirmar correo'}</button></>
       :<><p>Vuelve a abrir el enlace de tu correo o solicita un nuevo envío.</p>
