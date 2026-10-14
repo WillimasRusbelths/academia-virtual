@@ -38,6 +38,9 @@ T043–T045 añaden [emisión atómica, registro y confirmación](evidence/us2-i
 T046–T049 incorporan reenvío, UI y el [checkpoint funcional US2](evidence/us2.md): registro
 público → Mailpit → confirmación → login, con cuotas, consumo único y fallo SMTP real aislado.
 No completan retención/purga de V13, protocolo temporal T087 ni observación humana SC-001.
+T050–T052 completan la [escritura de pruebas US6](evidence/us6-pruebas.md): controles de
+bootstrap/PTY/fixtures y Mailpit aprobados; CLI, ruta inicial y pantalla aún ausentes.
+Los fallos funcionales esperados no aceptan US6; T058 requiere resolverlos tras T053–T057.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

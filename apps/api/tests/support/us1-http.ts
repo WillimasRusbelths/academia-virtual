@@ -74,7 +74,7 @@ async function installClock(context:Awaited<ReturnType<typeof identityDatabase>>
 }
 
 /** Composición real: el ensayo no añade controladores login/logout/me ni accesos privilegiados. */
-export async function us1Http(dataset:Us1Dataset,origin = dataset.context.environment.appOrigin) {
+export async function us1Http(dataset:Pick<Us1Dataset,'context'|'clock'>,origin = dataset.context.environment.appOrigin) {
   const environment = {...dataset.context.environment,appOrigin:origin};
   const database = createDatabase(environment);
   dataset.clock?.configure(database.pool);
