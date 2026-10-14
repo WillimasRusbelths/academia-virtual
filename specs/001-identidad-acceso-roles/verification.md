@@ -21,6 +21,9 @@ T029 añade [fixtures y CLI de ensayo seguros](evidence/fixtures-seguros.md), co
 secretos privados y limpieza dirigida comprobados; no ofrece rutas privilegiadas ni cierra historias.
 T030 añade [cliente, router, UI comunes y verificación V00-L](evidence/transporte-ui.md).
 Los fundamentos están comprobados; login/logout/perfil funcionales y V01–V16 siguen pendientes.
+T031–T033 completan la [escritura de pruebas US1](evidence/us1-pruebas.md): suites ejecutables
+con fallos esperados por rutas y pantalla de acceso ausentes. No aceptan los flujos funcionales;
+T039 exige aprobarlas tras T034–T038. V04-B y la comprobación temporal de T087 siguen pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

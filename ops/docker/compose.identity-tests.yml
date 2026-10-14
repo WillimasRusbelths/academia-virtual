@@ -1,0 +1,20 @@
+# Ensayos US1: mismo origen localhost y datos aislados; no cambia servicios de desarrollo.
+services:
+  browser-tests:
+    environment:
+      APP_ENV: test
+      APP_ORIGIN: http://localhost:5173
+      MAIL_MODE: capture
+      MAIL_FROM: academia@example.test
+      MAIL_KEY_ID: local-v1
+      TEST_MAIL_PAYLOAD_KEY: ${TEST_MAIL_PAYLOAD_KEY:?Completar clave de test en .env}
+      TEST_RATE_HMAC_KEY: ${TEST_RATE_HMAC_KEY:?Completar clave de test en .env}
+      DB_POOL_MAX: "10"
+      TRUSTED_PROXY: ""
+      TEST_DATABASE_URL: postgresql://academia_v00_runtime:${PROBE_RUNTIME_PASSWORD:?Completar .env}@db:5432/academia_v00_test
+      TEST_MIGRATION_DATABASE_URL: postgresql://academia_v00_owner:${PROBE_OWNER_PASSWORD:?Completar .env}@db:5432/academia_v00_test
+      PROBE_MIGRATION_URL: postgresql://academia_v00_owner:${PROBE_OWNER_PASSWORD:?Completar .env}@db:5432/academia_v00_test
+      PROBE_DATABASE_URL: postgresql://academia_v00_runtime:${PROBE_RUNTIME_PASSWORD:?Completar .env}@db:5432/academia_v00_test
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+      MAILPIT_URL: http://mailpit:8025
