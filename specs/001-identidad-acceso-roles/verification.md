@@ -41,6 +41,9 @@ No completan retención/purga de V13, protocolo temporal T087 ni observación hu
 T050–T052 completan la [escritura de pruebas US6](evidence/us6-pruebas.md): controles de
 bootstrap/PTY/fixtures y Mailpit aprobados; CLI, ruta inicial y pantalla aún ausentes.
 Los fallos funcionales esperados no aceptan US6; T058 requiere resolverlos tras T053–T057.
+T053–T055 añaden [bootstrap operativo y sustitución inicial en API](evidence/us6-implementacion.md):
+CLI y API originales aprobadas, con concurrencia, caducidad, rollback y correlación privada.
+T052 conserva ocho fallos esperados por la pantalla pendiente T056; no se cierra US6/V08.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

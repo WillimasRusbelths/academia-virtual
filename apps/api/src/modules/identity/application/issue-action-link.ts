@@ -39,6 +39,15 @@ export class IssueActionLink {
   constructor(private readonly store:ActionLinkStore,private readonly limits:ActionLinkLimits,
     private readonly secrets:AccessSecrets,private readonly cipher:ActionLinkCipher,private readonly appOrigin:string){}
 
+  /** Preparación común sin persistencia; bootstrap la ejecuta antes de tomar SystemState. */
+  prepareMessage(email:unknown,purpose:TokenPurpose):{tokenHash:Uint8Array;payload:EncryptedMailPayload} {
+    const {email:recipient}=normalizeEmail(email);
+    if(purpose!=='VERIFY_EMAIL'&&purpose!=='RESET_PASSWORD')throw new ActionLinkUnavailable();
+    const issued=this.secrets.issue();const route=purpose==='VERIFY_EMAIL'?'/verificar-correo':'/restablecer';
+    return {tokenHash:issued.digest,payload:this.cipher.encrypt({recipient,template:purpose,
+      link:`${this.appOrigin}${route}#${issued.secret}`})};
+  }
+
   async admit(input:{email:unknown;purpose:TokenPurpose;origin:string}):Promise<ActionLinkAdmission> {
     const {emailCanonical}=normalizeEmail(input.email);
     try {
@@ -47,11 +56,8 @@ export class IssueActionLink {
       const keys=this.limits.mailKeys(emailCanonical,input.purpose,input.origin,'SMTP');
       return {allowed:true,retryAfterSeconds:0,prepare:(account,now)=>{
         if(account.emailCanonical!==emailCanonical || !canIssueAction(account,input.purpose))return null;
-        const issued=this.secrets.issue();
-        const route=input.purpose==='VERIFY_EMAIL'?'/verificar-correo':'/restablecer';
-        const payload=this.cipher.encrypt({recipient:account.email,template:input.purpose,
-          link:`${this.appOrigin}${route}#${issued.secret}`});
-        return {purpose:input.purpose,tokenHash:issued.digest,expiresAt:actionExpiresAt(input.purpose,now),payload,...keys};
+        const prepared=this.prepareMessage(account.email,input.purpose);
+        return {purpose:input.purpose,...prepared,expiresAt:actionExpiresAt(input.purpose,now),...keys};
       }};
     }catch{throw new ActionLinkUnavailable();}
   }

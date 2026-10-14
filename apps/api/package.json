@@ -12,7 +12,8 @@
     "db:generate": "node scripts/database.mjs generate",
     "db:migrate:dev": "node scripts/database.mjs dev",
     "db:migrate:deploy": "node scripts/database.mjs deploy",
-    "fixtures:identity": "node dist/src/cli/fixtures-identity.js"
+    "fixtures:identity": "node dist/src/cli/fixtures-identity.js",
+    "admin:bootstrap": "node dist/src/cli/bootstrap-admin.js"
   },
   "dependencies": {
     "@nestjs/common": "12.1.0", "@nestjs/core": "12.1.0", "@nestjs/platform-express": "12.1.0",

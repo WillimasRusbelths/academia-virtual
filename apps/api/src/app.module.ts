@@ -23,6 +23,7 @@ import { accessSecrets } from './modules/identity/infrastructure/credentials.js'
 import { PostgresActionTokenStore } from './modules/identity/infrastructure/action-token-store.js';
 import { PostgresRegistrationStore } from './modules/identity/infrastructure/registration-store.js';
 import { PostgresVerificationStore } from './modules/identity/infrastructure/verification-store.js';
+import { PostgresInitialPasswordStore } from './modules/identity/infrastructure/initial-password-store.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
@@ -37,7 +38,7 @@ export class AppModule {
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(sessions,cookie),
         IdentityModule.forRoot(new PostgresLoginStore(database.pool),rates,sessions,cookie,
-          new PostgresRegistrationStore(database.pool),links,new PostgresVerificationStore(database.pool)),
+          new PostgresRegistrationStore(database.pool),links,new PostgresVerificationStore(database.pool),new PostgresInitialPasswordStore(database.pool)),
         UsersModule.forRoot(new PostgresUserQueries(database.pool))],
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
