@@ -15,7 +15,7 @@ export async function userView(response:Response,account:FixtureAccount) {
     && Number.isFinite(Date.parse(body.data.createdAt))).toBe(true);
   expect(response.headers.get('cache-control')).toBe('no-store');
 }
-export function cookieAttributes(value:string|null,http:Us1Http,cleared = false) {
+export function cookieAttributes(value:string|null,http:Pick<Us1Http,'cookie'|'origin'>,cleared = false) {
   expect(value!==null).toBe(true);
   const header=value!;
   expect(header.startsWith(`${http.cookie.name}=`)).toBe(true);

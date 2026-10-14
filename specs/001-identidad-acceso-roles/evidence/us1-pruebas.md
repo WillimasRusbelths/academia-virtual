@@ -1,6 +1,8 @@
 # Escritura de pruebas de acceso y sesiones — T031–T033
 
 Fecha: 2026-10-14. Rama: `feat/001-identidad-acceso-roles`.
+Registro de escritura T031–T033 del commit `f9c41ad`; se conservan sus resultados históricos.
+Avance posterior: [implementación parcial T034–T036](us1-implementacion.md).
 Alcance: pruebas antes de implementar US1. No añade login, logout, perfil ni pantallas
 funcionales. Según la regla de cierre de [tasks.md](../tasks.md), completar la escritura
 no exige aprobar una conducta pendiente; sí exige ejecutar la suite y distinguir sus fallos.

@@ -3,11 +3,11 @@ import type { CanActivate, ExecutionContext, NestInterceptor, CallHandler } from
 import { Reflector } from '@nestjs/core';
 import { concatMap } from 'rxjs';
 import { SESSION_LOOKUP, type SessionLookup } from '../../application/session-lookup.js';
-import { AuthorizationFailure, type Permission, type SessionActor } from '../../public/session.js';
+import { ACCESS_POLICY, AuthorizationFailure, type Permission, type SessionActor } from '../../public/session.js';
 import { SessionCookie } from '../../../../http/session-cookie.js';
 import type { HttpRequest, HttpResponse } from '../../../../http/error.filter.js';
 
-const POLICY = 'academia.access-policy';
+const POLICY = ACCESS_POLICY;
 type Policy = Permission | 'public';
 export const Access = (policy: Policy) => SetMetadata(POLICY, policy);
 interface AuthorizedRequest extends HttpRequest { actor?: SessionActor }

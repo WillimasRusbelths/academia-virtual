@@ -1,5 +1,6 @@
 import type { Role } from '../../users/public/account.js';
 export { permits, type Permission } from '../domain/permissions.js';
+export const ACCESS_POLICY='academia.access-policy';
 
 /** Datos internos de autorización, nunca una vista pública ni una credencial del cliente. */
 export interface SessionActor {
