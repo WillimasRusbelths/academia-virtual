@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 import { test, expect } from '../support/us1-fixture';
 import type { FixtureAccount } from '../../../api/tests/support/identity-fixtures.js';
+import { restrictRead } from '../../../api/tests/support/us1-http.js';
 
 test.afterEach(async({page})=>{
   await page.locator('input[type="password"]').evaluateAll(inputs=>{
@@ -18,6 +19,60 @@ async function login(page:Page,account:FixtureAccount,password=account.password)
   await page.getByRole('button',{name:/iniciar sesión|acceder|entrar/i}).click();
   return response;
 }
+for(const variant of ['DISABLED','UNVERIFIED','PROVISIONAL'] as const)test(`cuenta ${variant} no concede sesión ni muestra identidad`,async({page,context,identity})=>{
+  const account=identity.account('STUDENT',variant);expect((await login(page,account)).status()).toBe(401);
+  await expect(page.getByRole('alert')).toContainText('credenciales');await expect(page).toHaveURL(/\/login$/);
+  await expect(page.getByText(account.name,{exact:true})).toHaveCount(0);
+  expect((await context.cookies()).some(cookie=>cookie.name==='av_session_dev')).toBe(false);
+  expect((await page.getByLabel(/contraseña/i).inputValue()).length).toBe(0);
+});
+test('correo inexistente mantiene error genérico y no crea cookie',async({page,context,identity})=>{
+  const account={...identity.account(),email:'inexistente@example.test'};expect((await login(page,account)).status()).toBe(401);
+  await expect(page.getByRole('alert')).toContainText('credenciales');expect((await context.cookies()).some(cookie=>cookie.name==='av_session_dev')).toBe(false);
+});
+test('cuota 429 en UI, sin replay; acceso manual después de los quince minutos',async({page,identity})=>{
+  let calls=0;page.on('request',request=>{if(request.url().endsWith('/api/v1/auth/login'))calls++;});
+  for(let i=0;i<5;i++)expect((await login(page,identity.account(),'contraseña-incorrecta-sintética')).status()).toBe(401);
+  const limited=await login(page,identity.account());expect(limited.status()).toBe(429);expect(limited.headers()['retry-after']).toBe('900');
+  await expect(page.getByRole('alert')).toContainText('900 segundos');expect(calls).toBe(6);
+  expect((await page.getByLabel(/contraseña/i).inputValue()).length).toBe(0);
+  await identity.clock!.advance(900000);expect((await login(page,identity.account())).status()).toBe(200);
+  await expect(page).toHaveURL(/\/inicio$/);expect(calls).toBe(7);
+});
+test('fallo SQL de login produce 503 seguro; no afirma éxito ni reintenta; recuperación manual',async({page,identity})=>{
+  let calls=0;page.on('request',request=>{if(request.url().endsWith('/api/v1/auth/login'))calls++;});
+  await restrictRead(identity,'User',false);
+  try {expect((await login(page,identity.account())).status()).toBe(503);
+    await expect(page.getByRole('alert')).toContainText('temporalmente');await expect(page).toHaveURL(/\/login$/);
+    await expect(page.getByText(identity.account().name,{exact:true})).toHaveCount(0);
+    expect((await page.getByLabel(/contraseña/i).inputValue()).length).toBe(0);expect(calls).toBe(1);
+  }finally{await restrictRead(identity,'User',true);}
+  expect((await login(page,identity.account())).status()).toBe(200);await expect(page).toHaveURL(/\/inicio$/);expect(calls).toBe(2);
+});
+test('logout fallido conserva el aviso y solo cierra al reintentar explícitamente',async({page,context,identity})=>{
+  expect((await login(page,identity.account())).status()).toBe(200);await expect(page).toHaveURL(/\/inicio$/);
+  await restrictRead(identity,'Session',false);
+  try {
+    const response=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/logout'));
+    await page.getByRole('button',{name:'Cerrar sesión'}).click();expect((await response).status()).toBe(503);
+    await expect(page.getByRole('alert')).toContainText('temporalmente');await expect(page).toHaveURL(/\/inicio$/);
+    expect((await context.cookies()).some(cookie=>cookie.name==='av_session_dev')).toBe(true);
+  }finally{await restrictRead(identity,'Session',true);}
+  const retry=page.waitForResponse(value=>value.url().endsWith('/api/v1/auth/logout'));
+  await page.getByRole('button',{name:'Reintentar'}).click();expect((await retry).status()).toBe(204);
+  await expect(page).toHaveURL(/\/login$/);expect((await page.request.get('/api/v1/me')).status()).toBe(401);
+});
+test('hidratación 503 oculta identidad y recupera /me solo por acción manual',async({page,identity})=>{
+  expect((await login(page,identity.account())).status()).toBe(200);await expect(page).toHaveURL(/\/inicio$/);
+  await restrictRead(identity,'User',false);
+  try {
+    const response=page.waitForResponse(value=>value.url().endsWith('/api/v1/me'));await page.reload();expect((await response).status()).toBe(503);
+    await expect(page.getByRole('alert')).toContainText('temporalmente');await expect(page.getByText(identity.account().name,{exact:true})).toHaveCount(0);
+  }finally{await restrictRead(identity,'User',true);}
+  const retry=page.waitForResponse(value=>value.url().endsWith('/api/v1/me'));
+  await page.getByRole('button',{name:'Reintentar'}).click();expect((await retry).status()).toBe(200);
+  await expect(page.getByText(identity.account().name,{exact:true})).toBeVisible();await noPrivateStorage(page);
+});
 async function noPrivateStorage(page:Page) {
   expect(await page.evaluate(()=>localStorage.length+sessionStorage.length)).toBe(0);
   expect(await page.evaluate(()=>history.state)).toBeNull();

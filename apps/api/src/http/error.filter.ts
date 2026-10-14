@@ -7,6 +7,7 @@ import { CredentialOverload, CredentialUnavailable } from '../modules/identity/a
 import { RateStoreUnavailable } from '../infrastructure/limits/rate-store.js';
 import { securityEvents } from '../infrastructure/logging/security-events.js';
 import type { SecurityEvents } from '../infrastructure/logging/security-events.js';
+import { InvalidCredentials, LoginLimited } from '../modules/identity/application/login.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -31,6 +32,7 @@ const messages: Record<number, string> = {
   400: 'Solicitud inválida.', 401: 'Debes iniciar sesión.', 403: 'Acceso no permitido.',
   404: 'Recurso no encontrado.', 413: 'El cuerpo supera el tamaño permitido.',
   415: 'Se requiere contenido JSON.', 503: 'Servicio temporalmente no disponible.',
+  429: 'Espera antes de volver a intentarlo.',
 };
 const codes: Record<number, readonly string[]> = {
   400:['VALIDATION_ERROR','INVALID_ACTION_LINK'],401:['AUTH_REQUIRED','INVALID_CREDENTIALS'],
@@ -50,7 +52,11 @@ export class SafeErrorFilter implements ExceptionFilter {
     let status = 503;
     let code = 'TEMPORARILY_UNAVAILABLE';
     let fields: { field: string; message: string }[] | undefined;
-    if (error instanceof AuthorizationFailure) {
+    if(error instanceof InvalidCredentials) {
+      status=401;code='INVALID_CREDENTIALS';
+    }else if(error instanceof LoginLimited) {
+      status=429;code='RATE_LIMITED';response.setHeader('Retry-After',String(error.retryAfterSeconds));
+    }else if (error instanceof AuthorizationFailure) {
       status = error.code === 'AUTH_REQUIRED' ? 401 : 403; code = error.code;
     } else if (error instanceof TransportFailure) {
       status = error.status; code = error.code; fields = error.fields;
@@ -68,7 +74,7 @@ export class SafeErrorFilter implements ExceptionFilter {
     const requestId = typeof request.requestId==='string'
       && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(request.requestId)
       ?request.requestId:randomUUID();
-    if ([401,403,503].includes(status)) {
+    if ([401,403,429,503].includes(status)) {
       const authentication = status===401 && code==='INVALID_CREDENTIALS';
       try {
         this.logs.record({category:status===503?'OPERATION':'SECURITY',

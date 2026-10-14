@@ -137,7 +137,7 @@ test('salud no renueva sesiones; ready consulta BD, error 503 seguro y live perm
   expect((await activity(context, fixture.sessionId)).lastAcceptedAt.getTime()).toBe(before.lastAcceptedAt.getTime());
 });
 
-test('composición productiva: ready usa pool real, BD caída da 503 y rutas de login aún no existen', async () => {
+test('composición productiva: ready usa pool real, login rechaza DTO vacío y BD caída da 503', async () => {
   const isolated = await identityDatabase('app_readiness');
   let app: NestExpressApplication | undefined;
   try {
@@ -147,7 +147,8 @@ test('composición productiva: ready usa pool real, BD caída da 503 y rutas de 
     await app.listen(0, '127.0.0.1');
     const url = await app.getUrl();
     expect((await fetch(url + '/health/ready')).status).toBe(200);
-    expect((await fetch(url + '/api/v1/auth/login', { method: 'POST', headers: http.headers(), body: '{}' })).status).toBe(404);
+    const invalidLogin=await fetch(url + '/api/v1/auth/login', { method: 'POST', headers: http.headers(), body: '{}' });
+    expect(invalidLogin.status).toBe(400);expect((await invalidLogin.json()).error.code).toBe('VALIDATION_ERROR');
     await isolated.database.close();
     const response = await fetch(url + '/health/ready');
     expect(response.status).toBe(503);

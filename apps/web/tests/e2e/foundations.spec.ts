@@ -13,11 +13,13 @@ for (const size of [{width:360,height:800},{width:1366,height:768}]) {
       const apiPath='/src/shared/api-client.ts';
       const [reactModule,domModule,field,feedback,api]=await Promise.all([import(reactPath),import(domPath),import(fieldPath),import(feedbackPath),import(apiPath)]);
       const react=reactModule.default??reactModule;const dom=domModule.default??domModule;
-      const container=document.createElement('div');document.body.appendChild(container);
+      const container=document.createElement('div');container.tabIndex=-1;document.body.appendChild(container);
       dom.createRoot(container).render(react.createElement('main',{style:{maxWidth:'32rem',margin:'1rem auto'}},
         react.createElement(field.FormField,{id:'email',label:'Correo',type:'email',error:'Revisa el correo.'}),
         react.createElement(field.FormField,{id:'password',label:'Contraseña',type:'password',autoComplete:'off'}),
         react.createElement(feedback.Feedback,{error:new api.ApiFailure(429,'RATE_LIMITED','Espera antes de volver a intentarlo.',60)})));
+      // Comenzar el recorrido de teclado en el montaje aislado, después de los enlaces de la aplicación.
+      container.focus();
     });
     await expect(page.getByLabel('Correo')).toHaveAttribute('aria-describedby','email-error');
     await expect(page.getByRole('alert')).toContainText('60 segundos');

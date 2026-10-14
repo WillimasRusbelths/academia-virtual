@@ -14,16 +14,23 @@ import { DeliveryScheduler } from './modules/mail/infrastructure/delivery-schedu
 import { createPayloadCipher } from './modules/mail/infrastructure/payload-cipher.js';
 import { createSmtpTransport } from './modules/mail/infrastructure/smtp-transport.js';
 import { securityEvents } from './infrastructure/logging/security-events.js';
+import { IdentityModule } from './modules/identity/identity.module.js';
+import { PostgresLoginStore } from './modules/identity/infrastructure/login-store.js';
+import { UsersModule } from './modules/users/users.module.js';
+import { PostgresUserQueries } from './modules/users/infrastructure/user-queries.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
 export class AppModule {
   static forRoot(environment: Environment, database: ReturnType<typeof createDatabase>): DynamicModule {
     const rates = new PostgresRateStore(database.pool, environment.rateHmacKey);
+    const sessions=new PostgresSessionStore(database.pool);const cookie=new SessionCookie(environment);
     const deliveries = new DeliverPending(new PostgresDeliveryStore(database.pool, rates),
       new PostgresDeliveryEligibility(database.pool), createPayloadCipher(environment), createSmtpTransport(environment));
     return { module: AppModule,
-      imports: [AuthorizationModule.forRoot(new PostgresSessionStore(database.pool), new SessionCookie(environment))],
+      imports: [AuthorizationModule.forRoot(sessions,cookie),
+        IdentityModule.forRoot(new PostgresLoginStore(database.pool),rates,sessions,cookie),
+        UsersModule.forRoot(new PostgresUserQueries(database.pool))],
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
         { provide: 'MAIL_DELIVERY_SCHEDULER', useValue: new DeliveryScheduler(deliveries) },

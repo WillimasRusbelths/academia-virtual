@@ -1,6 +1,7 @@
 # Implementación parcial de acceso y sesiones — T034–T036
 
 Fecha: 2026-10-14. Rama: `feat/001-identidad-acceso-roles`.
+Registro del bloque T034–T036. Estado posterior: [checkpoint funcional US1](us1.md).
 Prerrequisitos: T031–T033 y T030 completados; [escritura de pruebas](us1-pruebas.md).
 No se detectaron decisiones funcionales pendientes que bloqueen estos casos de uso.
 

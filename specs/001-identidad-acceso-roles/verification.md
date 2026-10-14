@@ -1,6 +1,9 @@
 # Estrategia de verificación de identidad
 
-Estado: compatibilidad del entorno Docker comprobada; escenarios funcionales V01–V16 pendientes.
+Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md) aprobado.
+V03 funcional, V04-A y parte login de V10 comprobados; V04-B, comparación temporal T087
+y el resto de los escenarios V01–V16 permanecen pendientes.
+El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
 T011–T016 añaden pruebas de configuración y persistencia; resultados y límites en
 [fundamentos de configuración y persistencia](evidence/fundamentos-datos.md). No cierran V01–V16.
@@ -27,6 +30,8 @@ T039 exige aprobarlas tras T034–T038. V04-B y la comprobación temporal de T08
 T034–T036 añaden [login, logout y consulta propia](evidence/us1-implementacion.md) comprobados
 como casos de uso y controladores en composición de pruebas. Su montaje productivo T037 y
 la UI T038 siguen pendientes; las suites originales todavía no aceptan US1.
+T037–T039 integran rutas y UI y completan la [aceptación funcional US1](evidence/us1.md):
+T031/T032 y los recorridos originales T033 pasan sin omisiones. No cierra V04-B, T087 ni SC-002 completo.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

@@ -13,6 +13,7 @@ export function navigate(path:string,replace = false):void {
   window.dispatchEvent(new Event('av:navigation'));
 }
 export function AppRouter({routes}: {readonly routes:readonly AppRoute[]}) {
-  const location = useSyncExternalStore(subscribe,() => window.location.pathname,() => '/');
+  const location = useLocation();
   return routes.find(route => route.path===location)?.element??<main><h1>Página no disponible</h1><p>Revisa la dirección o vuelve al inicio.</p></main>;
 }
+export function useLocation():string {return useSyncExternalStore(subscribe,() => window.location.pathname,() => '/');}

@@ -3,15 +3,17 @@
 Proyecto de academia virtual para un trabajo final de curso, con cuatro meses de plazo
 y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-07:** base técnica React/NestJS con Docker Compose como entorno local
-principal. Las historias de identidad y las funciones académicas
-aún no están implementadas; no hay integración de pagos/video ni despliegue acreditado.
+**Estado al 2026-10-14:** React/NestJS con Docker Compose como entorno local principal.
+[US1: acceso y cierre de sesión](specs/001-identidad-acceso-roles/evidence/us1.md) está implementada
+y verificada con cuentas de prueba de los tres roles: login, consulta propia, recarga y logout.
+Registro, recuperación, administración y funciones académicas siguen pendientes;
+no hay integración de pagos/video ni despliegue acreditado.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
-están comprobadas como fundamentos; aún no habilitan registro o login.
+se reutilizan en US1; el registro público todavía está pendiente.
 Las [sesiones, autorización y protecciones HTTP](specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md)
-añaden infraestructura y controles compartidos, sin habilitar todavía las historias funcionales.
+respaldan la integración de acceso; los demás flujos de identidad siguen pendientes.
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
 de carga reproducibles; no es una capacidad garantizada.
 
