@@ -19,6 +19,8 @@ T028 añade [bootstrap atómico persistido](evidence/bootstrap-atomico.md): inic
 concurrencia y rollback comprobados. La CLI y activación de US6 y la aceptación V08 siguen pendientes.
 T029 añade [fixtures y CLI de ensayo seguros](evidence/fixtures-seguros.md), con persistencia,
 secretos privados y limpieza dirigida comprobados; no ofrece rutas privilegiadas ni cierra historias.
+T030 añade [cliente, router, UI comunes y verificación V00-L](evidence/transporte-ui.md).
+Los fundamentos están comprobados; login/logout/perfil funcionales y V01–V16 siguen pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
