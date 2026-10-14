@@ -2,16 +2,16 @@
 
 Los patrones descritos se identifican por las colaboraciones del código y por el diseño explícito del [plan de identidad](../../../specs/001-identidad-acceso-roles/plan.md). Complementan el [diseño interno de módulos](diseno-interno-de-modulos.md) sin introducir nuevas decisiones. El backend conserva el estilo monolito por capas y Clean Architecture como enfoque para sus dependencias internas.
 
-Se distingue el patrón estructural Adaptador de la entrega diferida transaccional, un patrón de integración. **Implementado** indica que los elementos y su comportamiento tienen código y evidencia; **parcial** indica que solo una parte existe; **previsto** identifica diseño respaldado sin implementación funcional. Estos estados no acreditan historias completas de identidad.
+Se distingue Adaptador, patrón estructural, de la entrega diferida transaccional, patrón de integración. Estados contrastados hasta T058: **implementado** en el alcance delimitado, **parcial** si quedan funciones pendientes y **previsto** sin implementación funcional. Los checkpoints US1/US2/US6 no equivalen a identidad completa.
 
 ## Resumen
 
 | Patrón | Aplicación en el proyecto | Estado | Trazabilidad principal |
 | --- | --- | --- | --- |
-| Adaptador (Adapter) | Contratos de credenciales y secretos implementados con Argon2 y criptografía de Node | Implementado como fundamento; registro y login pendientes | RF01, RF03; FR-006, FR-026; R04, R07; DA01, DA07 |
-| Adaptador (Adapter) | Contrato público de sesiones implementado mediante PostgreSQL | Implementado como fundamento; endpoints funcionales pendientes | RF03, RF08; FR-007–FR-009, FR-018–FR-020; R02, R05, R07; DA01, DA07 |
-| Adaptador (Adapter) | Transporte, cifrado y elegibilidad de correo; integración futura de Izipay | Previsto | RF02, RF04, RF12; FR-029–FR-031; R07, D02; DA02, DA06, DA07 |
-| Entrega diferida transaccional (Transactional Outbox) | Registro atómico de token/entrega y procesamiento interno fuera de HTTP | Parcial: modelo persistente implementado; coordinación transaccional y ejecutor previstos | RF02, RF04; FR-029–FR-031; R08; DA06, DA08 |
+| Adaptador (Adapter) | Credenciales/secretos mediante Argon2 y criptografía Node | Implementado; utilizado en US1/US2/US6 | RF01, RF03; FR-006, FR-026; R04, R07; DA01, DA07 |
+| Adaptador (Adapter) | SessionRepository mediante PostgreSQL | Implementado; login/logout y autorización comprobados en US1 | RF03, RF08; FR-007–FR-009, FR-018–FR-020; R02, R05, R07; DA01, DA07 |
+| Adaptador (Adapter) | Transporte, cifrado y elegibilidad de correo; Izipay futuro | Correo implementado localmente; producción y pagos previstos | RF02, RF04, RF12; FR-029–FR-031; R07, D02; DA02, DA06, DA07 |
+| Entrega diferida transaccional (Transactional Outbox) | Token/entrega atómicos y ejecutor interno | Implementada en verificación US2/US6; reset y purga integral pendientes | RF02, RF04; FR-029–FR-031; R08; DA06, DA08 |
 
 Los RF generales se consultan en los [requisitos del sistema](../../01-analisis-de-sistema/03-requisitos-funcionales.md); los FR detallados, en la [especificación de identidad](../../../specs/001-identidad-acceso-roles/spec.md). R04, R07, R08 y D02 conservan sus identificadores en las [decisiones arquitectónicas](../../01-analisis-de-sistema/07-decisiones-arquitectonicas.md); DA identifica los [drivers](../../01-analisis-de-sistema/06-driver-arquitectonicos.md).
 
@@ -31,7 +31,7 @@ Los RF generales se consultan en los [requisitos del sistema](../../01-analisis-
 
 **Requisitos y decisiones.** RF01/RF03 y FR-006/FR-026 motivan la protección de credenciales; R04 fija Argon2id y sus límites. R07 respalda el aislamiento de la tecnología y R01 las dependencias hacia el núcleo. DA01 y DA07 relacionan seguridad y mantenibilidad.
 
-**Estado y evidencia.** Implementado y probado como fundamento T018. [credentials.spec.ts](../../../apps/api/tests/integration/credentials.spec.ts) verifica Argon2 real, aceptación/rechazo, trabajo ficticio, límites y secretos; los resultados están en la [evidencia de credenciales y límites](../../../specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md). La aplicación de producto todavía no ensambla un flujo de registro o login.
+**Estado y evidencia.** Fundamento T018 comprobado en [credenciales y límites](../../../specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md), integrado en los checkpoints [US1](../../../specs/001-identidad-acceso-roles/evidence/us1.md), [US2](../../../specs/001-identidad-acceso-roles/evidence/us2.md) y [US6](../../../specs/001-identidad-acceso-roles/evidence/us6.md). Recuperación y administración siguen pendientes.
 
 **Límites y costos.** El contrato no elimina el costo de Argon2 ni sustituye los controles de cuenta. El límite de cómputo es por proceso; no es una cuota persistida por usuario. La posibilidad de inyectar un motor de ensayo permite probar saturación, pero no implica selección de algoritmos alternativos en producción ni justifica llamar Strategy a esta interfaz. La equivalencia de trabajo criptográfico no demuestra ausencia de canales temporales en el flujo HTTP completo.
 
@@ -53,26 +53,26 @@ Los RF generales se consultan en los [requisitos del sistema](../../01-analisis-
 
 **Requisitos y decisiones.** RF03/RF08 y FR-007–FR-009/FR-018–FR-020 requieren caducidad, revocación y autorización vigentes. R02/R05 respaldan persistencia y revalidación transaccional; R01/R07 respaldan el contrato y adaptador. Se relaciona con DA01 y DA07.
 
-**Estado y evidencia.** Implementado en T021/T022, con pruebas en [session-store.spec.ts](../../../apps/api/tests/integration/session-store.spec.ts) y [access-guard.spec.ts](../../../apps/api/tests/integration/access-guard.spec.ts). La [evidencia de sesiones y autorización](../../../specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md) registra consultas con PostgreSQL real, revocación, expiración, permisos y concurrencia. Las rutas protegidas de ensayo no son endpoints funcionales publicados.
+**Estado y evidencia.** Fundamento T021/T022 comprobado en [sesiones/autorización](../../../specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md) e integrado en login/logout y /me del checkpoint US1. La revocación por administración/reset y aceptación transversal no están completas.
 
 **Límites y costos.** Cada operación depende de la base primaria y añade consultas; un contrato pequeño no elimina esa dependencia operativa. Las futuras mutaciones deben revalidar dentro de su transacción y no apoyarse solo en el guard.
 
-El nombre **SessionRepository** no basta para afirmar el patrón Repository entendido como colección de entidades o agregados de dominio. Este contrato expone capacidades de acceso y actividad y devuelve una proyección de actor, sin una colección ni operaciones de almacenamiento de agregados. Se documenta como puerto específico y adaptador de persistencia. Tampoco [PostgresRateStore](../../../apps/api/src/infrastructure/limits/rate-store.ts), PrismaClient o el pool se clasifican como Repository: el primero implementa cuotas mediante SQL sin un contrato independiente del núcleo; los otros son herramientas de acceso a datos. El plan descarta repositorios CRUD genéricos.
+El nombre **SessionRepository** no basta para afirmar Repository como colección de entidades o agregados: ofrece acceso/actividad y proyección de actor. Se mantiene como puerto específico y adaptador. [PostgresRateStore](../../../apps/api/src/infrastructure/limits/rate-store.ts) ofrece cuotas, compatible con LoginLimits/ActionLinkLimits, sin colección de agregados; PrismaClient y el pool son herramientas de datos. No se añaden Repository ni repositorios CRUD genéricos por la sola existencia de SQL o interfaces.
 
-## Adaptadores previstos: correo y pagos
+## Adaptadores de correo implementados y pagos previstos
 
-**Problema y justificación.** Las reglas de identidad no deben depender de Nodemailer ni de un proveedor SMTP; mail tampoco debe importar los internos de identity para decidir si un enlace sigue vigente. En el MVP, las reglas de órdenes y matrículas deben permanecer independientes de Izipay. R07 y D02 prevén contratos y adaptadores para estos límites; no existe todavía una integración funcional.
+**Problema y justificación.** Identidad no depende de Nodemailer; mail obtiene elegibilidad sin importar internos de identity. Contratos y adaptadores de correo implementan esa separación R07. Izipay conserva su diseño previsto D02 y no está integrado.
 
-| Límite previsto | Participantes y funcionamiento previsto | Estado y fuente |
+| Límite | Participantes y funcionamiento | Estado y fuente |
 | --- | --- | --- |
-| Transporte de correo | El ejecutor consumirá el contrato de transporte; un adaptador traducirá la solicitud a SMTP con Nodemailer, captura local en Mailpit y condiciones seguras por entorno | Previsto, T024; el [plan](../../../specs/001-identidad-acceso-roles/plan.md) y [R07 de investigación](../../../specs/001-identidad-acceso-roles/research.md#r07--correo-local-y-futura-salida-smtp) describen la separación |
-| Cifrado del contenido pendiente | Contrato para proteger/recuperar payload; implementación con AES-256-GCM y claves externas a BD | Previsto, T024; modelo y R08. No existe aún el adaptador funcional |
-| Elegibilidad de entrega | Mail consumirá un contrato; un adaptador de identity comprobará vigencia de cuenta/token. La composición conectará ambos, sin importar identity desde mail | Previsto, T024/T025; plan y [tareas](../../../specs/001-identidad-acceso-roles/tasks.md) |
+| Transporte de correo | DeliverPending consume Mailer.send; [createSmtpTransport](../../../apps/api/src/modules/mail/infrastructure/smtp-transport.ts) adapta payload/fallos a Nodemailer/SMTP | Implementado T024; captura local comprobada en US2/US6, producción pendiente |
+| Cifrado del contenido pendiente | PayloadCipher.encrypt/decrypt; [createPayloadCipher](../../../apps/api/src/modules/mail/infrastructure/payload-cipher.ts) adapta AES-256-GCM con claves externas a BD | Implementado T024; comprobación de integridad y errores seguros |
+| Elegibilidad de entrega | [DeliveryEligibility.check](../../../apps/api/src/modules/mail/public/delivery.ts) y [PostgresDeliveryEligibility](../../../apps/api/src/modules/identity/infrastructure/delivery-eligibility.ts) traducen cuenta/token a ELIGIBLE/EXPIRED/OBSOLETE | Implementado; composición conecta identity con el contrato público de mail sin llamada inversa |
 | Pagos | El módulo de pagos adaptará mensajes de Izipay a sus capacidades internas; órdenes/matrículas conservarán sus reglas y persistencia | Previsto, D02/R07; RF12 y [catálogo de componentes](../../02-arquitectura-software/componentes-arquitectonicos.md). No se han definido aquí clases ni contratos nuevos |
 
-T024/T025 señalan como destinos `mail/application/delivery-ports.ts`, `mail/infrastructure/smtp-transport.ts`, `mail/infrastructure/payload-cipher.ts` e `identity/infrastructure/delivery-eligibility.ts`, dentro de `apps/api/src/modules/`. Son rutas previstas, no archivos implementados. El nombre `Mailer` aparece en la investigación como puerto propuesto; no es una interfaz existente. RF02/RF04 y FR-029–FR-031 respaldan el correo; DA06/DA07 su aislamiento. RF12 y DA02 respaldan pagos.
+[delivery-ports.ts](../../../apps/api/src/modules/mail/application/delivery-ports.ts) define Mailer y PayloadCipher; el contrato público de mail define DeliveryEligibility. Los adaptadores SMTP/cifrado devuelven objetos compatibles; PostgresDeliveryEligibility declara implementación explícita. [T024](../../../specs/001-identidad-acceso-roles/evidence/adaptadores-correo.md) respalda su comportamiento; RF02/RF04 y FR-029–031, con DA06/DA07, motivan la separación.
 
-**Límites y costos.** Los contratos requieren definir errores, timeouts y condiciones de seguridad, además de probar cada adaptador. Cambiar proveedor no elimina diferencias de cuotas o comportamiento. Mailpit operativo y las pruebas de compatibilidad SMTP no acreditan el ejecutor ni los correos funcionales. No hay pagos implementados.
+**Límites y costos.** Contratos, errores y timeouts están implementados, pero no garantizan compatibilidad con cualquier proveedor. Mailpit comprueba captura funcional de verificación; SMTP de producción, recuperación US7 y pagos siguen pendientes.
 
 ## Entrega diferida transaccional: correo
 
@@ -80,20 +80,20 @@ T024/T025 señalan como destinos `mail/application/delivery-ports.ts`, `mail/inf
 
 | Participante | Responsabilidad y estado |
 | --- | --- |
-| Infraestructura de identity | Coordinará la escritura atómica de cuenta/token/entrega según el caso de uso; flujos pendientes |
+| Infraestructura de identity | PostgresRegistrationStore, PostgresActionTokenStore y PostgresBootstrapStore escriben cuenta/token/entrega según cada operación; no invocan SMTP en el commit |
 | ActionToken y MailDelivery | Modelos reales en [schema.prisma](../../../apps/api/prisma/schema.prisma); vínculo único de entrega por token, estados, agenda, lease y claimId persistidos |
 | Restricciones e índices | [Migración 0003](../../../apps/api/prisma/migrations/0003_identity_mail_limits/migration.sql); exige token/payload en estados activos y prepara consulta de entregas |
-| Ejecutor interno y almacenamiento | Previsto en T025: reclamación y recuperación de trabajos sin sostener la transacción durante SMTP |
-| Transporte, cifrado y elegibilidad | Adaptadores previstos en T024/T025; preservan vigencia y protección del contenido sin acoplar mail a identity |
-| Cuotas | `PostgresRateStore.admitMail` y reglas de [delivery-policy.ts](../../../apps/api/src/modules/mail/domain/delivery-policy.ts) están implementados; su uso por el ejecutor sigue pendiente |
+| Ejecutor interno y almacenamiento | [DeliverPending](../../../apps/api/src/modules/mail/application/deliver-pending.ts), [PostgresDeliveryStore](../../../apps/api/src/modules/mail/infrastructure/delivery-store.ts) y DeliveryScheduler implementados en T025–T026; recuperan leases sin transacción durante SMTP |
+| Transporte, cifrado y elegibilidad | Adaptadores T024/T025 implementados y conectados por AppModule, sin imports de identity desde mail |
+| Cuotas | PostgresRateStore.admitMail y reglas de delivery-policy.ts utilizados por admisión/emisión y ejecutor SMTP |
 
-**Funcionamiento previsto.** La transacción de negocio registra el token y MailDelivery; al confirmar, deja trabajo durable. El ejecutor interno consulta cada 5 s, reclama hasta dos entregas con `SKIP LOCKED` y lease de 60 s identificado por claimId. Comprueba elegibilidad y reserva cuota SMTP; si falta cuota, pospone sin gastar intento. Envía fuera de la transacción, con timeout total de 20 s y tres intentos como máximo, con esperas de 60 y 300 s tras fallos transitorios. Recupera leases vencidos al reiniciar. Cancela trabajos obsoletos y borra payload terminal, sin prolongar el token ni generar otro secreto en cada reintento.
+**Funcionamiento actual.** La transacción de negocio registra token y MailDelivery. El ejecutor interno consulta cada 5 s y reclama hasta dos entregas con SKIP LOCKED, lease de 60 s y claimId. Revalida elegibilidad y cuota SMTP, posponiendo sin gastar intento cuando falta cuota. Envía fuera de la transacción, con timeout total de 20 s, tres intentos y esperas +60/+300 s por fallos transitorios. Recupera leases vencidos, cancela trabajo obsoleto y limpia payload terminal, sin renovar token ni secreto.
 
 **Requisitos y decisiones.** RF02/RF04 y FR-029–FR-031 requieren verificación, recuperación y límites de correo. R08 respalda la entrega durable; R06 el token de un solo uso y R09 las cuotas. DA06/DA08 relacionan integración y tolerancia a fallos. Los [escenarios de calidad](../../01-analisis-de-sistema/08-escenarios-atributos-calidad.md) mantienen la verificación de correo y disponibilidad separada de la salud del entorno.
 
-**Estado y evidencia.** Parcial: T015 prueba el modelo y sus restricciones, según [fundamentos de datos](../../../specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md). Las reglas de entrega y cuotas cuentan con la evidencia T017–T020. La coordinación atómica de los flujos, adaptadores y ejecutor siguen previstos; T024–T026 permanecen pendientes. La existencia de MailDelivery no demuestra un outbox operativo ni recuperación de envíos tras reinicio.
+**Estado y evidencia.** Fundamentos y ejecución interna comprobados en [T025–T026](../../../specs/001-identidad-acceso-roles/evidence/entregas-persistidas.md); escritura transaccional/consumo y captura SMTP funcional comprobados en US2/US6. El patrón es operativo en verificación; emisión/reset de US7, purga integral T095 y aceptación V13 completa permanecen pendientes.
 
-**Límites y costos.** Añade almacenamiento sensible cifrado, agenda, reclamaciones, limpieza y manejo de fallos. Una caída después de aceptación SMTP puede ocasionar entrega duplicada: no hay garantía de envío exactamente una vez. El consumo único corresponde al token y requiere su implementación funcional. `sentAt` representa aceptación SMTP, no lectura o entrega final al destinatario. No se introduce broker ni proceso de microservicio.
+**Límites y costos.** Añade almacenamiento cifrado, agenda, reclamaciones y manejo de fallos. SMTP y su registro en BD son pasos distintos: una interrupción puede duplicar mensajes y no hay envío exactamente una vez. VERIFY_EMAIL tiene consumo único comprobado; el flujo RESET_PASSWORD está pendiente. sentAt indica aceptación SMTP, no recepción final ni lectura. Sin broker ni otro proceso servidor.
 
 ## Distinción respecto de otros mecanismos y enfoques
 
