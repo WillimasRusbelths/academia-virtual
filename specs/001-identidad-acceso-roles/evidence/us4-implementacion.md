@@ -4,6 +4,9 @@ Fecha: 2026-10-14. Rama `feat/001-identidad-acceso-roles`; base `79168ac`.
 Dependencias T059–T061 cumplidas como [escritura ejecutada](us4-pruebas.md), no aceptación.
 Checklist documental 16/16; sin AGENTS.md aplicable ni hooks de implementación.
 
+Este registro conserva el alcance T062–T064. La exposición del alta y los cambios de rol/estado
+posteriores se documentan en [comandos y cambios de acceso](us4-cambios-acceso.md).
+
 | Tarea | Comportamiento comprobado | Estado y límite |
 | --- | --- | --- |
 | T062 | [ListUsers](../../../apps/api/src/modules/users/application/list-users.ts), [GetUser](../../../apps/api/src/modules/users/application/get-user.ts) y [consultas PostgreSQL](../../../apps/api/src/modules/users/infrastructure/user-queries.ts), montados mediante [controlador](../../../apps/api/src/modules/users/entrypoints/http/admin-queries.controller.ts): ADMIN, UserView cerrado, q hasta 254, comodines literales, filtros enum, página/tamaño y orden createdAt,id. Listado y total comparten una sentencia SQL. | Completa; GET listado/detalle reales, 401/403 anteriores al lookup del destino y 404 después de autorizar. |

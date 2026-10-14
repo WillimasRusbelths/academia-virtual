@@ -26,6 +26,8 @@ import { PostgresVerificationStore } from './modules/identity/infrastructure/ver
 import { PostgresInitialPasswordStore } from './modules/identity/infrastructure/initial-password-store.js';
 import { PostgresNameStore } from './modules/users/infrastructure/name-store.js';
 import { PostgresAuditWriter } from './modules/audit/infrastructure/audit-writer.js';
+import { PostgresAccountCreationStore } from './modules/identity/infrastructure/account-creation-store.js';
+import { PostgresAccessChangeStore } from './modules/identity/infrastructure/access-change-store.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
@@ -33,6 +35,7 @@ export class AppModule {
   static forRoot(environment: Environment, database: ReturnType<typeof createDatabase>): DynamicModule {
     const rates = new PostgresRateStore(database.pool, environment.rateHmacKey);
     const sessions=new PostgresSessionStore(database.pool);const cookie=new SessionCookie(environment);
+    const mutations={authorization:sessions,audit:new PostgresAuditWriter()};
     const cipher=createPayloadCipher(environment);
     const links=new IssueActionLink(new PostgresActionTokenStore(database.pool),rates,accessSecrets,cipher,environment.appOrigin);
     const deliveries = new DeliverPending(new PostgresDeliveryStore(database.pool, rates),
@@ -40,9 +43,10 @@ export class AppModule {
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(sessions,cookie),
         IdentityModule.forRoot(new PostgresLoginStore(database.pool),rates,sessions,cookie,
-          new PostgresRegistrationStore(database.pool),links,new PostgresVerificationStore(database.pool),new PostgresInitialPasswordStore(database.pool)),
+          new PostgresRegistrationStore(database.pool),links,new PostgresVerificationStore(database.pool),new PostgresInitialPasswordStore(database.pool),
+          new PostgresAccountCreationStore(database.pool,mutations),new PostgresAccessChangeStore(database.pool,mutations)),
         UsersModule.forRoot(new PostgresUserQueries(database.pool),
-          new PostgresNameStore(database.pool,{authorization:sessions,audit:new PostgresAuditWriter()}))],
+          new PostgresNameStore(database.pool,mutations))],
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
         { provide: 'MAIL_DELIVERY_SCHEDULER', useValue: new DeliveryScheduler(deliveries) },

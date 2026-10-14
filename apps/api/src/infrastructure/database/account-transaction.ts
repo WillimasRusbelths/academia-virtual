@@ -22,7 +22,9 @@ export async function accountTransaction<T>(pool:Pool,operation:(client:PoolClie
     }catch(error){
       if(client){try{await client.query('ROLLBACK');rolledBack=true;}catch{broken=true;}}
       if(rolledBack&&preserve(error))throw error;
-      const aborted=error!==null&&typeof error==='object'&&'code'in error&&['40001','40P01'].includes(String(error.code));
+      const aborted=error!==null&&typeof error==='object'&&
+        (('code'in error&&['40001','40P01'].includes(String(error.code)))
+          ||('transactionAborted'in error&&error.transactionAborted===true));
       if(attempt>=2||!rolledBack||!aborted)throw unavailable();
     }finally{if(client){client.release(broken);client.removeListener('error',onError);}}
     await pause(randomInt(5,26));

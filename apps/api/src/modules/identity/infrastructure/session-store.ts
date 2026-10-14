@@ -13,7 +13,9 @@ interface Row {
   now: Date;
 }
 
-class TransientSessionFailure extends SessionStoreUnavailable {}
+class TransientSessionFailure extends SessionStoreUnavailable {
+  constructor(){super(true);}
+}
 function transient(error: unknown): boolean {
   return error instanceof TransientSessionFailure || (typeof error === 'object' && error !== null
     && 'code' in error && ['40001', '40P01'].includes(String(error.code)));

@@ -24,5 +24,5 @@ export class AuthorizationFailure extends Error {
 
 export class SessionStoreUnavailable extends Error {
   readonly code = 'TEMPORARILY_UNAVAILABLE';
-  constructor() { super('Servicio temporalmente no disponible.'); }
+  constructor(readonly transactionAborted=false) { super('Servicio temporalmente no disponible.'); }
 }

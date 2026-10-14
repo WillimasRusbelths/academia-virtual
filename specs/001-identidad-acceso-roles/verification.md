@@ -55,6 +55,9 @@ sin aceptación funcional; T071 exige resultados satisfactorios tras implementar
 T062–T064 incorporan [consultas, nombre y alta administrativa](evidence/us4-implementacion.md):
 GET/PATCH administrativos y alta transaccional directa comprobados; POST alta, rol/estado,
 UI y checkpoint US4/V04-B siguen pendientes. No se anticipan verificaciones finales.
+T065–T067 incorporan [cambios de acceso y comandos HTTP](evidence/us4-cambios-acceso.md):
+T059/T060 originales aprobadas y revocación/rollback comprobados. T061 conserva fallos
+esperados por UI administrativa ausente; US4, T070/T071 y V04-B permanecen pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

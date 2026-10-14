@@ -21,20 +21,28 @@ import { RequestVerificationController } from './entrypoints/http/request-verifi
 import { SET_INITIAL_PASSWORD,SetInitialPassword } from './application/set-initial-password.js';
 import type { InitialPasswordStore } from './application/set-initial-password.js';
 import { InitialPasswordController } from './entrypoints/http/initial-password.controller.js';
+import { CREATE_ACCOUNT, CreateAccount } from './application/create-account.js';
+import type { AccountCreationStore } from './application/create-account.js';
+import { CHANGE_ACCESS, ChangeAccess } from './application/change-access.js';
+import type { AccessChangeStore } from './application/change-access.js';
+import { AdminCommandsController } from './entrypoints/http/admin-commands.controller.js';
 
 const PASSWORD_CREDENTIALS=Symbol('PasswordCredentials');
 
 @Module({})
 export class IdentityModule {
   static forRoot(store:LoginStore,limits:LoginLimits,sessions:SessionRepository,cookie:SessionCookie,
-    registration:RegistrationStore,links:IssueActionLink,verification:VerificationStore,initial:InitialPasswordStore):DynamicModule {
-    return {module:IdentityModule,controllers:[LoginController,LogoutController,RegisterController,VerifyEmailController,RequestVerificationController,InitialPasswordController],providers:[
+    registration:RegistrationStore,links:IssueActionLink,verification:VerificationStore,initial:InitialPasswordStore,
+    creation:AccountCreationStore,changes:AccessChangeStore):DynamicModule {
+    return {module:IdentityModule,controllers:[LoginController,LogoutController,RegisterController,VerifyEmailController,RequestVerificationController,InitialPasswordController,AdminCommandsController],providers:[
       {provide:PASSWORD_CREDENTIALS,useFactory:()=>createPasswordCredentials()},
       {provide:LOGIN,useFactory:(credentials:PasswordCredentials)=>new Login(store,credentials,accessSecrets,limits),inject:[PASSWORD_CREDENTIALS]},
       {provide:REGISTER_STUDENT,useFactory:(credentials:PasswordCredentials)=>new RegisterStudent(registration,credentials,links),inject:[PASSWORD_CREDENTIALS]},
       {provide:VERIFY_EMAIL,useValue:new VerifyEmail(verification,accessSecrets)},
       {provide:REQUEST_VERIFICATION,useValue:new RequestVerification(links)},
       {provide:SET_INITIAL_PASSWORD,useFactory:(credentials:PasswordCredentials)=>new SetInitialPassword(initial,credentials,limits),inject:[PASSWORD_CREDENTIALS]},
+      {provide:CREATE_ACCOUNT,useFactory:(credentials:PasswordCredentials)=>new CreateAccount(creation,credentials,links),inject:[PASSWORD_CREDENTIALS]},
+      {provide:CHANGE_ACCESS,useValue:new ChangeAccess(changes)},
       {provide:LOGOUT,useValue:new Logout(sessions)},{provide:SessionCookie,useValue:cookie},
     ]};
   }

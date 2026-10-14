@@ -11,6 +11,9 @@ import { InvalidCredentials, LoginLimited } from '../modules/identity/applicatio
 import { MailAdmissionLimited } from '../modules/identity/application/issue-action-link.js';
 import { InvalidActionLink } from '../modules/identity/application/verify-email.js';
 import { UserNotFound, UserQueryInvalid } from '../modules/users/application/list-users.js';
+import { AccountConflict } from '../modules/identity/application/create-account.js';
+import { AdminInvariant } from '../modules/identity/domain/account-administration.js';
+import { AccessTargetMissing, AccessCommandInvalid } from '../modules/identity/application/change-access.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -61,9 +64,11 @@ export class SafeErrorFilter implements ExceptionFilter {
       status=429;code='RATE_LIMITED';response.setHeader('Retry-After',String(error.retryAfterSeconds));
     }else if(error instanceof InvalidActionLink) {
       status=400;code='INVALID_ACTION_LINK';
-    }else if(error instanceof UserNotFound) {
+    }else if(error instanceof AccountConflict||error instanceof AdminInvariant) {
+      status=409;code=error.code;
+    }else if(error instanceof UserNotFound||error instanceof AccessTargetMissing) {
       status=404;code='NOT_FOUND';
-    }else if(error instanceof UserQueryInvalid) {
+    }else if(error instanceof UserQueryInvalid||error instanceof AccessCommandInvalid) {
       status=400;code='VALIDATION_ERROR';
     }else if (error instanceof AuthorizationFailure) {
       status = error.code === 'AUTH_REQUIRED' ? 401 : 403; code = error.code;

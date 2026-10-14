@@ -1,6 +1,6 @@
 import { AuthorizationFailure, permits } from '../../authorization/public/session.js';
 import type { SessionActor } from '../../authorization/public/session.js';
-import { requireRole, requireStatus } from '../public/account.js';
+import { requireRole, requireStatus, isAccountId } from '../public/account.js';
 import type { Role, AccountStatus, UserView } from '../public/account.js';
 
 export const LIST_USERS=Symbol('ListUsers');
@@ -19,7 +19,7 @@ export class UserNotFound extends Error {
   constructor(){super('Cuenta no encontrada.');}
 }
 export function requireUserId(id:string):string {
-  if(typeof id!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id))throw new UserQueryInvalid();
+  if(!isAccountId(id))throw new UserQueryInvalid();
   return id;
 }
 export class ListUsers {

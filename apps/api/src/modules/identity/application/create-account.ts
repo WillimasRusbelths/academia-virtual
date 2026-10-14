@@ -6,6 +6,8 @@ import { hashNewPassword } from './credentials.js';
 import type { PasswordCredentials } from './credentials.js';
 import type { ActionLinkAdmission, IssueActionLink } from './issue-action-link.js';
 
+export const CREATE_ACCOUNT=Symbol('CreateAccount');
+
 export interface AccountCreationStore {
   create(actor:SessionActor,input:{name:string;email:string;emailCanonical:string;role:Role;provisionalPasswordHash:string;requestId:string},
     admission:ActionLinkAdmission):Promise<UserView>;

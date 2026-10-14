@@ -1,6 +1,10 @@
 export type Role = 'STUDENT' | 'TEACHER' | 'ADMIN';
 export type AccountStatus = 'ACTIVE' | 'DISABLED';
 
+export function isAccountId(id:unknown):id is string {
+  return typeof id==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
+}
+
 export class AccountValidationError extends Error {
   readonly code = 'VALIDATION_ERROR';
   constructor(readonly field: 'name' | 'email' | 'password' | 'role' | 'status') {
