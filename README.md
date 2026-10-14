@@ -124,9 +124,11 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T061 están completadas, incluidos los checkpoints US1, US2 y
+por roles**. T001–T064 están completadas, incluidos los checkpoints US1, US2 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
-T059–T061 corresponden solo a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md), sin administración funcional.
+T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
+T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
+El alta aún no se expone por HTTP; cambios de acceso, UI y checkpoint US4 siguen pendientes.
 El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del

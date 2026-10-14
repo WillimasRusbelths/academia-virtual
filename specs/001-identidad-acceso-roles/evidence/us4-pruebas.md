@@ -4,6 +4,9 @@ Fecha: 2026-10-14. Rama `feat/001-identidad-acceso-roles`; base `f72f94d`.
 Dependencia T058 comprobada en [US6](us6.md); checklist documental 16/16, sin AGENTS.md
 aplicable ni hooks. **Escritura completa; US4 no funcional ni checkpoint aceptado.**
 
+Este registro conserva los resultados anteriores a la implementación. El avance T062–T064
+se documenta en [consultas, nombre y alta administrativa](us4-implementacion.md).
+
 | Tarea | Criterios preparados | Ejecución Docker |
 | --- | --- | --- |
 | T059 | [Contratos HTTP](../../../apps/api/tests/integration/admin-users.contract.spec.ts): seis rutas, UserView cerrado, paginación/defaults/orden, búsqueda por nombre/correo y comodines literales, filtros enum, validación/Unicode/campos extra y obligatorios, 201 pendiente sin secretos, cuota de correo, 409 duplicado sin overwrite, nombre auditado y 401/403 conocido/desconocido sin efectos. | 62 casos: 2 aprobados (control y rechazo de JSON null por el transporte existente), 60 fallos esperados por 404 de rutas administrativas ausentes. |

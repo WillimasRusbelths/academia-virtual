@@ -52,6 +52,9 @@ gestión/último ADMIN en US4. No se anticipan retención/purga ni observación 
 T059–T061 completan la [escritura de pruebas US4](evidence/us4-pruebas.md): controles reales
 aprobados y fallos esperados por rutas/pantallas administrativas ausentes. V04-B queda escrito,
 sin aceptación funcional; T071 exige resultados satisfactorios tras implementar T062–T070.
+T062–T064 incorporan [consultas, nombre y alta administrativa](evidence/us4-implementacion.md):
+GET/PATCH administrativos y alta transaccional directa comprobados; POST alta, rol/estado,
+UI y checkpoint US4/V04-B siguen pendientes. No se anticipan verificaciones finales.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

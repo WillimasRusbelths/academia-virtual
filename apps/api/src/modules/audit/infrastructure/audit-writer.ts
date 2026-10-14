@@ -2,7 +2,7 @@ import type { PoolClient } from 'pg';
 import { auditEvent } from '../domain/audit-event.js';
 
 export class AuditWriteUnavailable extends Error {
-  constructor() { super('La operación auditada no pudo confirmarse. Detalles omitidos.'); }
+  constructor(readonly code?:'40001'|'40P01') { super('La operación auditada no pudo confirmarse. Detalles omitidos.'); }
 }
 
 /** Requiere la misma transacción de la mutación; no hace commit ni acepta callbacks. */
@@ -18,10 +18,12 @@ export class PostgresAuditWriter {
       [event.actorKind,event.actorUserId,event.targetUserId,event.action,event.result,event.requestId,
         event.oldRole,event.newRole,event.oldStatus,event.newStatus]);
       await client.query('RELEASE SAVEPOINT account_audit');
-    } catch {
+    } catch (error) {
       // Incluso validación fallida tras una mutación fuerza rollback completo.
       await client.query('ROLLBACK').catch(() => undefined);
-      throw new AuditWriteUnavailable();
+      // Solo conservar la señal de aborto para el protocolo de reintentos; nunca SQL/cause.
+      const code=error!==null&&typeof error==='object'&&'code'in error?error.code:undefined;
+      throw new AuditWriteUnavailable(code==='40001'||code==='40P01'?code:undefined);
     }
   }
 }

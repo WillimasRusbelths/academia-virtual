@@ -10,6 +10,7 @@ import type { SecurityEvents } from '../infrastructure/logging/security-events.j
 import { InvalidCredentials, LoginLimited } from '../modules/identity/application/login.js';
 import { MailAdmissionLimited } from '../modules/identity/application/issue-action-link.js';
 import { InvalidActionLink } from '../modules/identity/application/verify-email.js';
+import { UserNotFound, UserQueryInvalid } from '../modules/users/application/list-users.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -60,6 +61,10 @@ export class SafeErrorFilter implements ExceptionFilter {
       status=429;code='RATE_LIMITED';response.setHeader('Retry-After',String(error.retryAfterSeconds));
     }else if(error instanceof InvalidActionLink) {
       status=400;code='INVALID_ACTION_LINK';
+    }else if(error instanceof UserNotFound) {
+      status=404;code='NOT_FOUND';
+    }else if(error instanceof UserQueryInvalid) {
+      status=400;code='VALIDATION_ERROR';
     }else if (error instanceof AuthorizationFailure) {
       status = error.code === 'AUTH_REQUIRED' ? 401 : 403; code = error.code;
     } else if (error instanceof TransportFailure) {
