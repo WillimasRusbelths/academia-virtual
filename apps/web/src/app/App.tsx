@@ -7,6 +7,8 @@ import { HomePage } from '../features/profile/home-page';
 import { RegisterPage } from '../features/auth/register-page';
 import { VerifyEmailPage } from '../features/auth/verify-email-page';
 import { InitialPasswordPage } from '../features/auth/initial-password-page';
+import { ForgotPasswordPage } from '../features/auth/forgot-password-page';
+import { ResetPasswordPage } from '../features/auth/reset-password-page';
 import { AccountsPage } from '../features/admin-users/accounts-page';
 import { AccountDetailPage } from '../features/admin-users/account-detail-page';
 export function App() {
@@ -21,6 +23,8 @@ function SessionRoutes() {
     {path:'/registro',element:<RegisterPage api={publicApi}/>},
     {path:'/verificar-correo',element:<VerifyEmailPage api={publicApi}/>},
     {path:'/establecer-contrasena',element:<InitialPasswordPage api={publicApi}/>},
+    {path:'/recuperar',element:<ForgotPasswordPage api={publicApi}/>},
+    {path:'/restablecer',element:<ResetPasswordPage api={publicApi}/>},
     {path:'/inicio',element:<HomePage user={session.user} loading={session.loading} error={session.error}
       onLogout={session.logout} onRefresh={session.refresh}/>},
     {path:'/admin/cuentas',element:<AccountsPage api={session.api}/>},

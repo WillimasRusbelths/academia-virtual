@@ -1,10 +1,11 @@
 # Estrategia de verificación de identidad
 
 Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md),
-[checkpoint funcional US2](evidence/us2.md), [checkpoint funcional US6](evidence/us6.md) y
-[checkpoint funcional US4](evidence/us4.md) aprobados. V01/V02 funcionales, V03 funcional,
-V04-A/B, V06–V08 y partes de V10/V12/V13/V15 comprobadas en esos checkpoints.
-Comparación temporal T087, carreras de recuperación de V15, retención/purga,
+[checkpoint funcional US2](evidence/us2.md), [checkpoint funcional US6](evidence/us6.md),
+[checkpoint funcional US4](evidence/us4.md) y [checkpoint funcional US7](evidence/us7.md)
+aprobados en su alcance técnico. V01/V02 funcionales, V03 funcional, V04-A/B, V06–V08,
+V11/V15 y partes de V10/V12/V13 comprobadas en esos checkpoints.
+Comparación temporal T087, retención/purga,
 aceptación transversal y el resto de V01–V16 permanecen pendientes según sus criterios.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
@@ -75,6 +76,11 @@ T075–T077 incorporan [recuperación mediante API](evidence/us7-implementacion.
 45/45, cuatro comprobaciones adicionales de persistencia/credenciales/cookie y regresiones
 aprobadas. T074 conserva doce fallos por pantallas ausentes. US7/V11 completo y las carreras
 de T080 siguen pendientes; no se acepta el checkpoint T081.
+T078–T081 completan [pantallas, carreras y checkpoint US7](evidence/us7.md): originales
+T072–T074 y T080 aprobadas; recuperación tras provisional vencida de docente y primer
+administrador comprobada en móvil/escritorio. V11 y las carreras de recuperación de V15
+quedan verificadas junto con la regresión de US4. No se anticipan retención/purga de V13,
+comparación temporal T087 ni aceptación humana T104/SC-010.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
