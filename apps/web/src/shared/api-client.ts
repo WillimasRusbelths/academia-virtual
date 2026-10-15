@@ -13,6 +13,7 @@ export interface ApiRequest {
   readonly method?:'GET' | 'POST' | 'PATCH' | 'PUT';
   readonly body?:Readonly<Record<string,unknown>>;
   readonly signal?:AbortSignal;
+  readonly query?:Readonly<Record<string,string|number|undefined>>;
 }
 /** Las features reciben esta capacidad desde app, sin importar su implementación. */
 export interface ApiClient {

@@ -1,7 +1,16 @@
 import { Fragment,useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 
-export interface AppRoute { readonly path:string; readonly element:ReactNode }
+export interface AppRoute { readonly path:string; readonly element?:ReactNode;readonly render?:(params:Readonly<Record<string,string>>)=>ReactNode }
+export function matchRoute(pattern:string,path:string):Readonly<Record<string,string>>|null {
+  const parts=pattern.split('/');const actual=path.split('/');const parameters:Record<string,string>={};
+  if(parts.length!==actual.length)return null;
+  for(let index=0;index<parts.length;index++) {
+    if(parts[index].startsWith(':')) {if(!/^[A-Za-z0-9_-]+$/.test(actual[index]))return null;parameters[parts[index].slice(1)]=actual[index];}
+    else if(parts[index]!==actual[index])return null;
+  }
+  return parameters;
+}
 let fragmentRevision=0;
 function subscribeFragment(listener:()=>void) {
   // Un nuevo enlace puede abrirse sobre la misma pantalla, sin recargar el documento.
@@ -23,6 +32,8 @@ export function navigate(path:string,replace = false):void {
 export function AppRouter({routes}: {readonly routes:readonly AppRoute[]}) {
   const location = useLocation();
   const revision=useSyncExternalStore(subscribeFragment,()=>fragmentRevision,()=>0);
-  return <Fragment key={`${location}:${revision}`}>{routes.find(route => route.path===location)?.element??<main><h1>Página no disponible</h1><p>Revisa la dirección o vuelve al inicio.</p></main>}</Fragment>;
+  const route=routes.find(candidate=>matchRoute(candidate.path,location)!==null);
+  const element=route?.render?route.render(matchRoute(route.path,location)!):route?.element;
+  return <Fragment key={`${location}:${revision}`}>{element??<main><h1>Página no disponible</h1><p>Revisa la dirección o vuelve al inicio.</p></main>}</Fragment>;
 }
 export function useLocation():string {return useSyncExternalStore(subscribe,() => window.location.pathname,() => '/');}

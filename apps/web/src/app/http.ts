@@ -41,6 +41,16 @@ export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch 
   return {
     async request<T>(path:string,options:ApiRequest = {}):Promise<T|undefined> {
       if (!/^\/[A-Za-z0-9/_-]+$/.test(path) || path.includes('//')) throw unavailable();
+      const query=new URLSearchParams();
+      if(options.query) {
+        if(path!=='/admin/users'||(options.method??'GET')!=='GET')throw unavailable();
+        for(const [key,value] of Object.entries(options.query)) {
+          if(!['q','role','status','page','pageSize'].includes(key))throw unavailable();
+          if(value===undefined)continue;
+          if(typeof value!=='string'&&(typeof value!=='number'||!Number.isFinite(value)))throw unavailable();
+          query.set(key,String(value));
+        }
+      }
       const started = generation;const controller = new AbortController();pending.add(controller);
       const abort = () => controller.abort();
       options.signal?.addEventListener('abort',abort,{once:true});
@@ -48,7 +58,7 @@ export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch 
       try {
         if (controller.signal.aborted) throw new RequestCancelled();
         const method = options.method??'GET';
-        const response = await transport(`/api/v1${path}`,{method,credentials:'same-origin',mode:'same-origin',redirect:'error',cache:'no-store',
+        const response = await transport(`/api/v1${path}${query.size?'?'+query.toString():''}`,{method,credentials:'same-origin',mode:'same-origin',redirect:'error',cache:'no-store',
           headers:method==='GET'?{Accept:'application/json'}:{Accept:'application/json','Content-Type':'application/json','X-CSRF-Protection':'1'},
           ...(method==='GET'?{}:{body:JSON.stringify(options.body??{})}),signal:controller.signal});
         if (controller.signal.aborted || generation!==started) throw new RequestCancelled();

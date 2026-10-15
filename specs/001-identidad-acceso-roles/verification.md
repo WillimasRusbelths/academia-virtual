@@ -58,6 +58,9 @@ UI y checkpoint US4/V04-B siguen pendientes. No se anticipan verificaciones fina
 T065–T067 incorporan [cambios de acceso y comandos HTTP](evidence/us4-cambios-acceso.md):
 T059/T060 originales aprobadas y revocación/rollback comprobados. T061 conserva fallos
 esperados por UI administrativa ausente; US4, T070/T071 y V04-B permanecen pendientes.
+T068–T069 añaden [pantallas administrativas](evidence/us4-ui.md): T061 y ocho casos de UI
+adicionales aprobados. Sus resultados técnicos no aceptan US4/V04-B; T070 y T071 siguen
+pendientes, sin adelantar sus carreras ni el checkpoint.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

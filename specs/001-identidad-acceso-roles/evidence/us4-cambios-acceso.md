@@ -2,6 +2,7 @@
 
 Fecha: 2026-10-14. Rama `feat/001-identidad-acceso-roles`; base `0805def`.
 Dependencia T064 respaldada por [consultas/nombre/alta](us4-implementacion.md).
+Resultados posteriores de las pantallas: [UI administrativa T068–T069](us4-ui.md).
 Checklist documental 16/16; sin AGENTS.md aplicable, operación Git pendiente ni hooks.
 
 | Tarea | Comportamiento comprobado | Límite |

@@ -7,6 +7,8 @@ import { HomePage } from '../features/profile/home-page';
 import { RegisterPage } from '../features/auth/register-page';
 import { VerifyEmailPage } from '../features/auth/verify-email-page';
 import { InitialPasswordPage } from '../features/auth/initial-password-page';
+import { AccountsPage } from '../features/admin-users/accounts-page';
+import { AccountDetailPage } from '../features/admin-users/account-detail-page';
 export function App() {
   return <SessionProvider><SessionRoutes/></SessionProvider>;
 }
@@ -21,5 +23,7 @@ function SessionRoutes() {
     {path:'/establecer-contrasena',element:<InitialPasswordPage api={publicApi}/>},
     {path:'/inicio',element:<HomePage user={session.user} loading={session.loading} error={session.error}
       onLogout={session.logout} onRefresh={session.refresh}/>},
+    {path:'/admin/cuentas',element:<AccountsPage api={session.api}/>},
+    {path:'/admin/cuentas/:id',render:params=><AccountDetailPage api={session.api} id={params.id}/>},
   ]}/>;
 }

@@ -6,6 +6,7 @@ import { ApiFailure, RequestCancelled } from '../shared/api-client';
 import { FormField } from '../shared/ui/form-field';
 import { Feedback } from '../shared/ui/feedback';
 import { navigate } from './router';
+import { matchRoute } from './router';
 
 afterEach(() => { vi.restoreAllMocks();vi.unstubAllGlobals(); });
 function response(status:number,code?:string,headers?:HeadersInit) {
@@ -117,4 +118,19 @@ test('router usa historial sin datos sensibles, reemplaza al expirar y rechaza d
   expect(pushState).toHaveBeenCalledWith(null,'','/inicio');expect(replaceState).toHaveBeenCalledWith(null,'','/login');
   expect(() => navigate('//remote.invalid')).toThrow('Destino de navegación inválido.');
   expect(() => navigate('/login?password=secret')).toThrow('Destino de navegación inválido.');
+});
+test('filtros administrativos se codifican en GET; no se aceptan secretos ni consultas arbitrarias',async()=>{
+  const transport=vi.fn<typeof fetch>().mockResolvedValue(response(200));const api=createApiClient(vi.fn(),transport);
+  await api.request('/admin/users',{query:{q:'%_\\ &+@example.test',page:2,pageSize:20}});
+  const url=new URL(String(transport.mock.calls[0][0]),'http://localhost');
+  expect(url.searchParams.get('q')).toBe('%_\\ &+@example.test');expect(url.searchParams.get('page')).toBe('2');
+  await expect(api.request('/me',{query:{q:'dato'}})).rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});
+  await expect(api.request('/admin/users',{query:{token:'dato'}})).rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});
+  await expect(api.request('/admin/users',{method:'POST',query:{q:'dato'}})).rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});
+  expect(transport).toHaveBeenCalledTimes(1);
+});
+test('router reconoce detalle sin aceptar subrutas ni valores externos',()=>{
+  expect(matchRoute('/admin/cuentas/:id','/admin/cuentas/identificador')).toEqual({id:'identificador'});
+  expect(matchRoute('/admin/cuentas/:id','/admin/cuentas/identificador/name')).toBeNull();
+  expect(matchRoute('/admin/cuentas/:id','/admin/cuentas/https:%2Fexterno')).toBeNull();
 });

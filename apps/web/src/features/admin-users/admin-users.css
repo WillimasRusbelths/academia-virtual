@@ -1,0 +1,13 @@
+.admin-page { box-sizing: border-box; max-width: 64rem; margin: 2rem auto; padding: 0 1rem; overflow-wrap: anywhere; }
+.admin-page form, .admin-page section { margin-block: 1.25rem; min-width: 0; }
+.admin-page input, .admin-page select, .admin-page button { font: inherit; max-width: 100%; box-sizing: border-box; }
+.admin-page button { margin: .25rem .5rem .25rem 0; white-space: normal; }
+.admin-page :focus-visible { outline: 3px solid #2457a6; outline-offset: 3px; }
+.admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 1rem; }
+.admin-grid label { display: flex; flex-direction: column; gap: .25rem; }
+.account-list { list-style: none; padding: 0; }
+.account-list li { border: 1px solid #777; border-radius: .25rem; margin-block: 1rem; padding: 1rem; min-width: 0; }
+.account-facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: .5rem; }
+.account-facts dt { font-weight: bold; }
+.account-facts dd { margin: 0; min-width: 0; }
+.admin-confirmation { border: 2px solid #555; padding: 1rem; }
