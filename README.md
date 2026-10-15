@@ -126,7 +126,7 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T071 están completadas, incluidos los checkpoints US1, US2, US4 y
+por roles**. T001–T074 están completadas, incluidos los checkpoints US1, US2, US4 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
 T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
@@ -134,6 +134,8 @@ T065–T067 añaden [cambios de acceso y comandos HTTP](specs/001-identidad-acce
 T068–T069 incorporan las [pantallas administrativas](specs/001-identidad-acceso-roles/evidence/us4-ui.md).
 T070–T071 completan las [carreras y el checkpoint US4/V04-B](specs/001-identidad-acceso-roles/evidence/us4.md);
 V04 reúne las evidencias A/B, sin anticipar el protocolo temporal T087 ni el cierre transversal.
+T072–T074 añaden [pruebas de recuperación US7](specs/001-identidad-acceso-roles/evidence/us7-pruebas.md),
+ejecutadas con fallos esperados por rutas/pantallas todavía ausentes; US7 no está funcional.
 El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del

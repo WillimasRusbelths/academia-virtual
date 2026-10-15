@@ -67,6 +67,10 @@ aprobadas, V04-B comprobado con formularios reales y V04 reunido con V04-A de T0
 y su regresión actual. V06–V08 comprobados junto con la evidencia de US6; V15 solo
 en rol/desactivación/confirmación, sin anticipar reset de US7. SC-002 completo,
 aceptación humana y demás verificaciones transversales conservan sus dependencias.
+T072–T074 incorporan [escritura de pruebas US7](evidence/us7-pruebas.md): seis controles
+API y dos de navegador aprobados; 39 fallos HTTP y 12 de UI por rutas/pantallas ausentes,
+sin errores inesperados tras corregir el fixture temporal. No se acepta US7 ni V11;
+T075–T081 deben implementar y comprobar las aserciones funcionales pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

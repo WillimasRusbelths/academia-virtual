@@ -38,7 +38,8 @@ export const test=base.extend<{fresh:undefined},{identity:Us2Dataset&{pauseMail(
 export {expect};
 
 /** Buzón local: solo consultar el destinatario ficticio del ensayo; nunca imprimir el mensaje. */
-export async function verificationLink(email:string,origin:string,accept:(link:string)=>boolean=()=>true) {
+export async function verificationLink(email:string,origin:string,accept:(link:string)=>boolean=()=>true,
+  purpose:'VERIFY_EMAIL'|'RESET_PASSWORD'='VERIFY_EMAIL') {
   if(!email.endsWith('@example.test') || origin!=='http://localhost:5173')throw new Error('Buzón de ensayo no permitido.');
   for(let i=0;i<120;i++) {
     const response=await fetch(`${mailpitOrigin}/api/v1/search?query=${encodeURIComponent(`to:${email}`)}`);
@@ -46,10 +47,12 @@ export async function verificationLink(email:string,origin:string,accept:(link:s
     const result=await response.json() as {messages:{ID:string}[]};
     for(const item of result.messages) {
       const message=await fetch(`${mailpitOrigin}/api/v1/message/${encodeURIComponent(item.ID)}`).then(value=>value.json()) as {Text?:string};
-      const match=message.Text?.match(/http:\/\/localhost:5173\/verificar-correo#[A-Za-z0-9_-]{43}/);
+      const match=message.Text?.match(purpose==='VERIFY_EMAIL'?/http:\/\/localhost:5173\/verificar-correo#[A-Za-z0-9_-]{43}/
+        :/http:\/\/localhost:5173\/restablecer#[A-Za-z0-9_-]{43}/);
       if(match&&accept(match[0]))return match[0];
     }
     await pause(100);
   }
   throw new Error('El buzón local no capturó el enlace dentro del plazo. Valores omitidos.');
 }
+export const passwordResetLink=(email:string,origin:string,accept?:(link:string)=>boolean)=>verificationLink(email,origin,accept,'RESET_PASSWORD');
