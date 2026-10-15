@@ -51,6 +51,7 @@ export const apiLayersRule = {
       external: 'La capa {{layer}} no puede importar {{source}}; usa un contrato o la raíz de composición.',
       layer: '{{from}} no puede depender de {{to}} dentro del módulo.',
       module: 'Los módulos solo consumen la superficie public de otro módulo.',
+      escape: 'La capa {{layer}} no puede escapar hacia {{source}} fuera del núcleo del módulo.',
     },
   },
   create(context) {
@@ -68,7 +69,13 @@ export const apiLayersRule = {
         return;
       }
       const target = importedPath(filename, source)?.match(apiPattern);
-      if (!target) return;
+      if (!target) {
+        if (['application', 'domain', 'public'].includes(fromLayer)
+            || (fromLayer === 'entrypoints' && /\/(?:infrastructure|generated)\//.test(importedPath(filename, source)))) {
+          context.report({ node, messageId: 'escape', data: { layer: fromLayer, source } });
+        }
+        return;
+      }
       const [, targetModule, targetLayer] = target;
       if (fromModule !== targetModule && targetLayer !== 'public') {
         context.report({ node, messageId: 'module' });

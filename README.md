@@ -128,7 +128,7 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T084 están completadas, incluidos los checkpoints US1, US2, US4, US7 y
+por roles**. T001–T086 están completadas, incluidos los checkpoints US1, US2, US4, US7 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
 T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
@@ -142,7 +142,9 @@ en T075–T077. T078–T081 completan [pantallas, carreras y checkpoint US7](spe
 las suites originales pasan en API y navegador, con provisional vencida de docente y primer administrador.
 La aceptación con participantes permanece pendiente en T104; el checkpoint técnico no la sustituye.
 T082–T084 añaden [pruebas de protección y privacidad US5](specs/001-identidad-acceso-roles/evidence/us5-pruebas.md):
-matriz y privacidad aprobadas; CORS del proxy Vite conserva fallos funcionales esperados. US5 sigue pendiente.
+matriz y privacidad aprobadas. T085–T086 completan la [revisión de capas y protección web](specs/001-identidad-acceso-roles/evidence/us5-integracion.md):
+guardas, limpieza tras 401 y CSP comprobadas, con los fallos previos de CORS corregidos.
+US5 sigue pendiente de T087–T088; no se anticipa su aceptación transversal.
 El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del

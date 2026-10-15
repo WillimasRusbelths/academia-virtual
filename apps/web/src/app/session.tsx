@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { createApiClient } from './http';
-import { navigate, useLocation } from './router';
+import { isProtectedPath, navigate, useLocation } from './router';
 import { ApiFailure, RequestCancelled } from '../shared/api-client';
 import { readUserView } from '../shared/user-view';
 import type { UserView } from '../shared/user-view';
@@ -18,7 +18,7 @@ function safeFailure(error:unknown):ApiFailure {
 }
 export function SessionProvider({children}:{readonly children:ReactNode}) {
   const [user,setUser]=useState<UserView|null>(null);const current=useRef<UserView|null>(null);
-  const [loading,setLoading]=useState(()=>typeof window!=='undefined'&&window.location.pathname==='/inicio');
+  const [loading,setLoading]=useState(()=>typeof window!=='undefined'&&isProtectedPath(window.location.pathname));
   const [error,setError]=useState<ApiFailure>();const [notice,setNotice]=useState<string>();
   const generation=useRef(0);const path=useLocation();
   const [api]=useState(()=>createApiClient(()=>{
@@ -47,7 +47,7 @@ export function SessionProvider({children}:{readonly children:ReactNode}) {
   }
   const refreshRef=useRef(refresh);refreshRef.current=refresh;
   useEffect(()=>{
-    if(path==='/inicio'&&current.current===null)void refreshRef.current();
+    if(isProtectedPath(path)&&current.current===null)void refreshRef.current();
     // La hidratación se inicia por navegación, no por cambios de error ni reintentos automáticos.
   },[path]);
   return <SessionContext.Provider value={{api,user,loading,error,notice,login,logout,refresh}}>{children}</SessionContext.Provider>;

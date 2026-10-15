@@ -5,6 +5,8 @@ Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md),
 [checkpoint funcional US4](evidence/us4.md) y [checkpoint funcional US7](evidence/us7.md)
 aprobados en su alcance técnico. V01/V02 funcionales, V03 funcional, V04-A/B, V06–V08,
 V11/V15 y partes de V10/V12/V13 comprobadas en esos checkpoints.
+T085–T086 añaden VA y controles de navegación/contenido y CORS de V14 comprobados;
+el cierre transversal US5 permanece en T088, después del protocolo temporal T087.
 Comparación temporal T087, retención/purga,
 aceptación transversal y el resto de V01–V16 permanecen pendientes según sus criterios.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
@@ -86,6 +88,12 @@ de flujos P1 aprobadas, con controles de auditoría/U1. La ruta directa de la AP
 el proxy Vite añade cabeceras y resuelve preflight de forma incompatible con V14.
 La suite de navegador conserva fallos funcionales esperados; no se acepta US5 ni V14
 completo. T085–T088 e invalidación global T096/T098 mantienen sus verificaciones pendientes.
+T085–T086 completan la [revisión VA e integración de seguridad web](evidence/us5-integracion.md):
+reglas/grafo de dependencias y atomicidad revisados, guardas/limpieza tras 401, texto escapado
+y CSP comprobados. Las 16 pruebas originales de T084 pasan tras cerrar CORS del proxy;
+12 nuevas pruebas de navegador y las regresiones de los cinco checkpoints también pasan.
+T087–T088, invalidación global T096/T098 y aceptación humana T104 conservan su alcance;
+la incidencia CLI no reproducida en las repeticiones queda registrada en la evidencia.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

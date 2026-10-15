@@ -16,5 +16,15 @@ export default tseslint.config(
       'no-console': ['error', { allow: ['warn', 'error'] }],
     },
   },
+  {
+    files: ['src/modules/*/application/**/*.ts', 'src/modules/*/domain/**/*.ts', 'src/modules/*/public/**/*.ts'],
+    rules: {
+      'no-restricted-globals': ['error', 'process', 'fetch', 'XMLHttpRequest', 'WebSocket', 'require'],
+      'no-restricted-syntax': ['error', {
+        selector: 'ImportExpression[source.type!="Literal"]',
+        message: 'El núcleo usa dependencias estáticas verificables, no carga dinámica calculada.',
+      }],
+    },
+  },
   { files: ['src/**/*.test.ts'], rules: { 'architecture/api-layers': 'off' } },
 );

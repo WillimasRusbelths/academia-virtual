@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AppRouter,navigate } from './router';
 import { createApiClient } from './http';
 import { SessionProvider, useSession } from './session';
+import { ProtectedRoute } from './protected-route';
 import { LoginPage } from '../features/auth/login-page';
 import { HomePage } from '../features/profile/home-page';
 import { RegisterPage } from '../features/auth/register-page';
@@ -17,7 +18,7 @@ export function App() {
 function SessionRoutes() {
   const session=useSession();
   const [publicApi]=useState(()=>createApiClient(()=>navigate('/login',true)));
-  return <AppRouter routes={[
+  return <AppRouter protect={(element,access)=><ProtectedRoute access={access}>{element}</ProtectedRoute>} routes={[
     {path:'/',element:<main><h1>Academia virtual</h1><p><a href="/login">Iniciar sesión</a></p></main>},
     {path:'/login',element:<LoginPage onLogin={session.login} notice={session.notice}/>},
     {path:'/registro',element:<RegisterPage api={publicApi}/>},
@@ -25,9 +26,9 @@ function SessionRoutes() {
     {path:'/establecer-contrasena',element:<InitialPasswordPage api={publicApi}/>},
     {path:'/recuperar',element:<ForgotPasswordPage api={publicApi}/>},
     {path:'/restablecer',element:<ResetPasswordPage api={publicApi}/>},
-    {path:'/inicio',element:<HomePage user={session.user} loading={session.loading} error={session.error}
+    {path:'/inicio',access:'authenticated',element:<HomePage user={session.user} loading={session.loading} error={session.error}
       onLogout={session.logout} onRefresh={session.refresh}/>},
-    {path:'/admin/cuentas',element:<AccountsPage api={session.api}/>},
-    {path:'/admin/cuentas/:id',render:params=><AccountDetailPage api={session.api} id={params.id}/>},
+    {path:'/admin/cuentas',access:'admin',element:<AccountsPage api={session.api}/>},
+    {path:'/admin/cuentas/:id',access:'admin',render:params=><AccountDetailPage api={session.api} id={params.id}/>},
   ]}/>;
 }
