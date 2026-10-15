@@ -4,6 +4,9 @@ Fecha: 2026-10-15. Rama `feat/001-identidad-acceso-roles`; base `46a2ad3`.
 T072–T074 completadas como **escritura y ejecución de pruebas**, no como aceptación
 funcional. T075–T081 y el checkpoint US7 permanecen pendientes.
 
+Este registro conserva el resultado del bloque de escritura. El avance posterior de
+[T075–T077](us7-implementacion.md) deja T072/T073 aprobadas; UI y checkpoint siguen pendientes.
+
 ## Dependencias y alcance
 
 [US4/T070–T071](us4.md) está aprobada en gestión mínima, incluido V04-B y la reunión de

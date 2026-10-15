@@ -12,7 +12,8 @@ y verificada mediante registro público, Mailpit, confirmación explícita, reen
 restringida y activación mediante contraseña propia y correo verificado, comprobadas en un entorno aislado.
 [US4: gestión mínima de cuentas](specs/001-identidad-acceso-roles/evidence/us4.md) tiene su
 checkpoint funcional comprobado, incluidas revocación, carreras administrativas y V04-B.
-Recuperación y funciones académicas siguen pendientes;
+[Recuperación por API](specs/001-identidad-acceso-roles/evidence/us7-implementacion.md) permite solicitar
+y restablecer credenciales; faltan sus pantallas y el checkpoint US7. Las funciones académicas siguen pendientes;
 no hay integración de pagos/video ni despliegue acreditado.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
@@ -126,7 +127,7 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T074 están completadas, incluidos los checkpoints US1, US2, US4 y
+por roles**. T001–T077 están completadas, incluidos los checkpoints US1, US2, US4 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
 T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
@@ -135,7 +136,9 @@ T068–T069 incorporan las [pantallas administrativas](specs/001-identidad-acces
 T070–T071 completan las [carreras y el checkpoint US4/V04-B](specs/001-identidad-acceso-roles/evidence/us4.md);
 V04 reúne las evidencias A/B, sin anticipar el protocolo temporal T087 ni el cierre transversal.
 T072–T074 añaden [pruebas de recuperación US7](specs/001-identidad-acceso-roles/evidence/us7-pruebas.md),
-ejecutadas con fallos esperados por rutas/pantallas todavía ausentes; US7 no está funcional.
+seguidas por [solicitud y restablecimiento en API](specs/001-identidad-acceso-roles/evidence/us7-implementacion.md)
+en T075–T077: las suites API pasan; T074 conserva doce fallos esperados por pantallas pendientes.
+US7 no está completa; faltan T078–T081 y su checkpoint.
 El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del

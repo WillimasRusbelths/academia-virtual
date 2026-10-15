@@ -28,6 +28,7 @@ import { PostgresNameStore } from './modules/users/infrastructure/name-store.js'
 import { PostgresAuditWriter } from './modules/audit/infrastructure/audit-writer.js';
 import { PostgresAccountCreationStore } from './modules/identity/infrastructure/account-creation-store.js';
 import { PostgresAccessChangeStore } from './modules/identity/infrastructure/access-change-store.js';
+import { PostgresPasswordResetStore } from './modules/identity/infrastructure/password-reset-store.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
@@ -44,7 +45,8 @@ export class AppModule {
       imports: [AuthorizationModule.forRoot(sessions,cookie),
         IdentityModule.forRoot(new PostgresLoginStore(database.pool),rates,sessions,cookie,
           new PostgresRegistrationStore(database.pool),links,new PostgresVerificationStore(database.pool),new PostgresInitialPasswordStore(database.pool),
-          new PostgresAccountCreationStore(database.pool,mutations),new PostgresAccessChangeStore(database.pool,mutations)),
+          new PostgresAccountCreationStore(database.pool,mutations),new PostgresAccessChangeStore(database.pool,mutations),
+          new PostgresPasswordResetStore(database.pool)),
         UsersModule.forRoot(new PostgresUserQueries(database.pool),
           new PostgresNameStore(database.pool,mutations))],
       controllers: [HealthController], providers: [

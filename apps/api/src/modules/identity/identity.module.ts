@@ -26,6 +26,10 @@ import type { AccountCreationStore } from './application/create-account.js';
 import { CHANGE_ACCESS, ChangeAccess } from './application/change-access.js';
 import type { AccessChangeStore } from './application/change-access.js';
 import { AdminCommandsController } from './entrypoints/http/admin-commands.controller.js';
+import { REQUEST_PASSWORD_RESET,RequestPasswordReset } from './application/request-password-reset.js';
+import { RESET_PASSWORD,ResetPassword } from './application/reset-password.js';
+import type { PasswordResetStore } from './application/reset-password.js';
+import { PasswordResetController } from './entrypoints/http/password-reset.controller.js';
 
 const PASSWORD_CREDENTIALS=Symbol('PasswordCredentials');
 
@@ -33,8 +37,8 @@ const PASSWORD_CREDENTIALS=Symbol('PasswordCredentials');
 export class IdentityModule {
   static forRoot(store:LoginStore,limits:LoginLimits,sessions:SessionRepository,cookie:SessionCookie,
     registration:RegistrationStore,links:IssueActionLink,verification:VerificationStore,initial:InitialPasswordStore,
-    creation:AccountCreationStore,changes:AccessChangeStore):DynamicModule {
-    return {module:IdentityModule,controllers:[LoginController,LogoutController,RegisterController,VerifyEmailController,RequestVerificationController,InitialPasswordController,AdminCommandsController],providers:[
+    creation:AccountCreationStore,changes:AccessChangeStore,passwordReset:PasswordResetStore):DynamicModule {
+    return {module:IdentityModule,controllers:[LoginController,LogoutController,RegisterController,VerifyEmailController,RequestVerificationController,InitialPasswordController,AdminCommandsController,PasswordResetController],providers:[
       {provide:PASSWORD_CREDENTIALS,useFactory:()=>createPasswordCredentials()},
       {provide:LOGIN,useFactory:(credentials:PasswordCredentials)=>new Login(store,credentials,accessSecrets,limits),inject:[PASSWORD_CREDENTIALS]},
       {provide:REGISTER_STUDENT,useFactory:(credentials:PasswordCredentials)=>new RegisterStudent(registration,credentials,links),inject:[PASSWORD_CREDENTIALS]},
@@ -43,6 +47,8 @@ export class IdentityModule {
       {provide:SET_INITIAL_PASSWORD,useFactory:(credentials:PasswordCredentials)=>new SetInitialPassword(initial,credentials,limits),inject:[PASSWORD_CREDENTIALS]},
       {provide:CREATE_ACCOUNT,useFactory:(credentials:PasswordCredentials)=>new CreateAccount(creation,credentials,links),inject:[PASSWORD_CREDENTIALS]},
       {provide:CHANGE_ACCESS,useValue:new ChangeAccess(changes)},
+      {provide:REQUEST_PASSWORD_RESET,useValue:new RequestPasswordReset(links)},
+      {provide:RESET_PASSWORD,useFactory:(credentials:PasswordCredentials)=>new ResetPassword(passwordReset,credentials,accessSecrets),inject:[PASSWORD_CREDENTIALS]},
       {provide:LOGOUT,useValue:new Logout(sessions)},{provide:SessionCookie,useValue:cookie},
     ]};
   }

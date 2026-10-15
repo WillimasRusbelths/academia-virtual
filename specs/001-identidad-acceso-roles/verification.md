@@ -71,6 +71,10 @@ T072–T074 incorporan [escritura de pruebas US7](evidence/us7-pruebas.md): seis
 API y dos de navegador aprobados; 39 fallos HTTP y 12 de UI por rutas/pantallas ausentes,
 sin errores inesperados tras corregir el fixture temporal. No se acepta US7 ni V11;
 T075–T081 deben implementar y comprobar las aserciones funcionales pendientes.
+T075–T077 incorporan [recuperación mediante API](evidence/us7-implementacion.md): T072/T073
+45/45, cuatro comprobaciones adicionales de persistencia/credenciales/cookie y regresiones
+aprobadas. T074 conserva doce fallos por pantallas ausentes. US7/V11 completo y las carreras
+de T080 siguen pendientes; no se acepta el checkpoint T081.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
