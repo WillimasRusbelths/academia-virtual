@@ -128,7 +128,7 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T090 están completadas, incluidos los checkpoints US1, US2, US4, US5, US7 y
+por roles**. T001–T093 están completadas, incluidos los checkpoints US1, US2, US4, US5, US7 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
 T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
@@ -148,8 +148,9 @@ T087–T088 completan la [verificación técnica US5](specs/001-identidad-acceso
 con [comparación temporal U2](specs/001-identidad-acceso-roles/evidence/enumeration.md) sin señal detectada
 bajo ese protocolo. El hallazgo intermitente CLI conserva su causa no confirmada para T106.
 T089–T090 añaden [pruebas de perfil, inicio y accesibilidad US3](specs/001-identidad-acceso-roles/evidence/us3-pruebas.md):
-contrato `/me` aprobado y 56 casos de interfaz con 42 aprobados y 14 fallos esperados de perfil/inicio;
-US3 sigue pendiente de implementación y aceptación.
+contrato `/me` aprobado y una ejecución inicial con 42 casos de interfaz aprobados y 14 fallos esperados.
+T091–T093 implementan [perfil propio, inicio y presentación accesible](specs/001-identidad-acceso-roles/evidence/us3-implementacion.md):
+los 56 casos originales pasan en móvil y escritorio. El checkpoint de US3 sigue pendiente de T094.
 El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del

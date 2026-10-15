@@ -41,7 +41,7 @@ export function AccountsPage({api}:{api:ApiClient}) {
         onResolve={email=>{setCreate(false);setError(undefined);setData(undefined);setLoading(true);const next={...initial,q:email};setDraft(next);setFilter(next);}}/>}
       {loading&&<p role="status">Consultando cuentas…</p>}
       {data&&<><p role="status">{data.total} cuentas · Página {data.page} de {Math.max(1,Math.ceil(data.total/data.pageSize))}</p>
-        {data.items.length===0?<p>No hay cuentas que coincidan.</p>:<ul className="account-list">{data.items.map(user=><li key={user.id}><a href={`/admin/cuentas/${user.id}`}>{user.name}</a><p>{user.email}</p><p>{roleLabels[user.role]} · {statusLabels[user.status]}</p></li>)}</ul>}
+        {data.items.length===0?<p>No hay cuentas que coincidan.</p>:<ul className="account-list" aria-label="Cuentas encontradas">{data.items.map(user=><li key={user.id}><a href={`/admin/cuentas/${user.id}`}>{user.name}</a><p>{user.email}</p><p>{roleLabels[user.role]} · {statusLabels[user.status]}</p></li>)}</ul>}
         <nav aria-label="Paginación de cuentas"><button type="button" disabled={loading||data.page<=1} onClick={()=>page(data.page-1)}>Anterior</button>
           <button type="button" disabled={loading||data.page*data.pageSize>=data.total} onClick={()=>page(data.page+1)}>Siguiente</button></nav></>}
     </>}

@@ -107,6 +107,11 @@ perfil/protección y enlace desde inicio pendientes de T091–T092. El arnés qu
 tras revisar navegación, coordenadas subpíxel y descripción accesible de errores, sin
 errores de pruebas o infraestructura. Las regresiones API y navegador permanecen aprobadas.
 No se acepta US3, V05 ni SC-005 hasta T094. El hallazgo CLI conserva su causa no confirmada.
+T091–T093 implementan [perfil, inicio y presentación accesible](evidence/us3-implementacion.md):
+T089 pasa 18/18 y T090 pasa 56/56, resolviendo sus 14 fallos previos sin modificar aserciones.
+Ocho comprobaciones adicionales de perfil cubren caducidad/revocación, fallo SQL y recuperación
+manual, texto largo y cierre por teclado en ambas resoluciones. Estos resultados preparan
+T094; su aceptación de US3/V05/SC-005 y la observación humana permanecen pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

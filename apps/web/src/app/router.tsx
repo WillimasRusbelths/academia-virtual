@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 export type RouteAccess='authenticated'|'admin';
 export interface AppRoute { readonly path:string; readonly access?:RouteAccess;readonly element?:ReactNode;readonly render?:(params:Readonly<Record<string,string>>)=>ReactNode }
 export function isProtectedPath(path:string):boolean {
-  return path==='/inicio'||path==='/admin/cuentas'||matchRoute('/admin/cuentas/:id',path)!==null;
+  return path==='/inicio'||path==='/perfil'||path==='/admin/cuentas'||matchRoute('/admin/cuentas/:id',path)!==null;
 }
 export function matchRoute(pattern:string,path:string):Readonly<Record<string,string>>|null {
   const parts=pattern.split('/');const actual=path.split('/');const parameters:Record<string,string>={};

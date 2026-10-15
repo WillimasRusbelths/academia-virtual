@@ -8,8 +8,13 @@ export function HomePage({user,loading,error,onLogout,onRefresh}:{readonly user:
   return <main style={{maxWidth:'40rem',margin:'2rem auto',padding:'0 1rem',overflowWrap:'anywhere'}}>
     <h1>Inicio</h1>
     {loading&&<p role="status">Consultando sesión…</p>}
-    {user&&<><p>{user.name}</p><p>{labels[user.role]}</p><button type="button" disabled={loading} onClick={()=>void onLogout()}>Cerrar sesión</button></>}
-    {user?.role==='ADMIN'&&<p><a href="/admin/cuentas">Gestionar cuentas</a></p>}
+    {user&&<><p>{user.name}</p><p>{labels[user.role]}</p>
+      <nav aria-label="Navegación de inicio">
+        <p><a href="/perfil">Mi perfil</a></p>
+        {user.role==='ADMIN'&&<p><a href="/admin/cuentas">Gestionar cuentas</a></p>}
+      </nav>
+      <button type="button" disabled={loading} onClick={()=>void onLogout()}>Cerrar sesión</button>
+    </>}
     <Feedback error={error} onRetry={()=>void(user?onLogout():onRefresh())}/>
   </main>;
 }

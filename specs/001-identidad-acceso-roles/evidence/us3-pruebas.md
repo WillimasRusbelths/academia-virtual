@@ -160,3 +160,7 @@ lector de pantalla ni una auditoría completa de accesibilidad. No se repite el 
 temporal de T087: no cambió el código productivo. Retención, restauración, carga de 1000
 usuarios y aceptación humana siguen en sus tareas. El siguiente bloque de implementación
 es T091–T093, seguido de la aceptación T094.
+
+Seguimiento: [implementación y resultados de T091–T093](us3-implementacion.md).
+Este registro conserva la ejecución previa a la implementación; el estado vigente está
+en [tasks.md](../tasks.md). T094 mantiene su aceptación independiente.

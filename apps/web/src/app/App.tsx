@@ -5,6 +5,7 @@ import { SessionProvider, useSession } from './session';
 import { ProtectedRoute } from './protected-route';
 import { LoginPage } from '../features/auth/login-page';
 import { HomePage } from '../features/profile/home-page';
+import { ProfilePage } from '../features/profile/profile-page';
 import { RegisterPage } from '../features/auth/register-page';
 import { VerifyEmailPage } from '../features/auth/verify-email-page';
 import { InitialPasswordPage } from '../features/auth/initial-password-page';
@@ -27,6 +28,8 @@ function SessionRoutes() {
     {path:'/recuperar',element:<ForgotPasswordPage api={publicApi}/>},
     {path:'/restablecer',element:<ResetPasswordPage api={publicApi}/>},
     {path:'/inicio',access:'authenticated',element:<HomePage user={session.user} loading={session.loading} error={session.error}
+      onLogout={session.logout} onRefresh={session.refresh}/>},
+    {path:'/perfil',access:'authenticated',element:<ProfilePage user={session.user} loading={session.loading} error={session.error}
       onLogout={session.logout} onRefresh={session.refresh}/>},
     {path:'/admin/cuentas',access:'admin',element:<AccountsPage api={session.api}/>},
     {path:'/admin/cuentas/:id',access:'admin',render:params=><AccountDetailPage api={session.api} id={params.id}/>},

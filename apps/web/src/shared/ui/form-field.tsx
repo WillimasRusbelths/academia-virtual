@@ -6,10 +6,10 @@ export interface FormFieldProps extends Omit<ComponentProps<'input'>,'id'> {
 }
 export function FormField({id,label,error,...input}:FormFieldProps) {
   const describedBy = [input['aria-describedby'],error?`${id}-error`:undefined].filter(Boolean).join(' ') || undefined;
-  return <div style={{display:'flex',flexDirection:'column',gap:'0.25rem',maxWidth:'100%',marginBottom:'1rem'}}>
+  return <div className="form-field">
     <label htmlFor={id}>{label}</label>
     <input {...input} id={id} aria-describedby={describedBy} aria-invalid={error?true:undefined}
       style={{boxSizing:'border-box',maxWidth:'100%',font:'inherit',...input.style}} />
-    {error && <p id={`${id}-error`} style={{margin:0,overflowWrap:'anywhere'}}>{error}</p>}
+    {error && <p id={`${id}-error`} className="field-error">{error}</p>}
   </div>;
 }
