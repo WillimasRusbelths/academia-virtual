@@ -8,7 +8,7 @@ import { us1Http } from '../../../api/tests/support/us1-http.js';
 import { repositoryRoot } from '../../../api/src/infrastructure/config/environment.js';
 import { assertMailpitAvailable,mailpitOrigin } from '../../../api/tests/support/mailpit.js';
 
-export const test=base.extend<{fresh:undefined},{identity:Us2Dataset&{pauseMail():Promise<void>}}>({
+export const test=base.extend<{fresh:undefined},{identity:Us2Dataset&{pauseMail():Promise<void>;backendUrl:string}}>({
   // eslint-disable-next-line no-empty-pattern
   identity:[async({},use)=>{
     const data=await us2Dataset('us2_browser');let server:Awaited<ReturnType<typeof us1Http>>|undefined;
@@ -24,7 +24,7 @@ export const test=base.extend<{fresh:undefined},{identity:Us2Dataset&{pauseMail(
       if(!ready)throw new Error('Vite del ensayo US2 no disponible. Valores omitidos.');
       expect((await fetch(`${server.url}/health/ready`)).status).toBe(200);
       const scheduler=server.app.get<{beforeApplicationShutdown():Promise<void>;onApplicationBootstrap():void}>('MAIL_DELIVERY_SCHEDULER');
-      await use({...data,async reset(){
+      await use({...data,backendUrl:server.url,async reset(){
         // Cada caso recupera el scheduler detenido por ensayos de fallo y evita resetear bajo un envío activo.
         await scheduler.beforeApplicationShutdown();await data.reset();scheduler.onApplicationBootstrap();
       },pauseMail:()=>scheduler.beforeApplicationShutdown()});

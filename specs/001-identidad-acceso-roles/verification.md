@@ -81,6 +81,11 @@ T072–T074 y T080 aprobadas; recuperación tras provisional vencida de docente 
 administrador comprobada en móvil/escritorio. V11 y las carreras de recuperación de V15
 quedan verificadas junto con la regresión de US4. No se anticipan retención/purga de V13,
 comparación temporal T087 ni aceptación humana T104/SC-010.
+T082–T084 añaden [escritura de pruebas US5](evidence/us5-pruebas.md): matriz V09 y privacidad
+de flujos P1 aprobadas, con controles de auditoría/U1. La ruta directa de la API cierra CORS;
+el proxy Vite añade cabeceras y resuelve preflight de forma incompatible con V14.
+La suite de navegador conserva fallos funcionales esperados; no se acepta US5 ni V14
+completo. T085–T088 e invalidación global T096/T098 mantienen sus verificaciones pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
