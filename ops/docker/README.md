@@ -68,6 +68,11 @@ publica en loopback. La red `local` tiene `internal: true` para la comunicación
 servicios. La red adicional `access` permite publicar puertos en el host: este motor
 no publica los de contenedores conectados únicamente a una red interna. Es una red
 bridge con salida posible; la aplicación no necesita Internet en ejecución.
+
+El ensayo manual existente utiliza un override específico con PostgreSQL publicado en
+55532 para evitar una reserva de Windows sobre 55432. Conserva los datos y `db:5432`:
+consultar [el comando de reanudación](../local/manual-us1.md). El puerto general de esta
+tabla y los registros históricos permanecen como referencia del entorno predeterminado.
 Vite dirige `/api` a `http://api:3000`, conservando la ruta;
 se autoriza explícitamente el host `web` para la prueba interna de Chromium, sin
 permitir hosts arbitrarios.

@@ -1,0 +1,5 @@
+# Solo para el ensayo manual; conservar db:5432 entre contenedores.
+services:
+  db:
+    ports: !override
+      - "127.0.0.1:${MANUAL_POSTGRES_PORT:-55532}:5432"
