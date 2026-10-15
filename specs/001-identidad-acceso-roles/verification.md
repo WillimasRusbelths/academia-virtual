@@ -101,6 +101,12 @@ CSRF/CORS y capas aprobados; 17 endpoints con política explícita y
 bajo ese protocolo. Las regresiones API y navegador pasan sin omisiones. El diagnóstico
 CLI conserva el hallazgo de causa no confirmada para T106, sin declararlo resuelto.
 La invalidación global T096/T098 y aceptación humana T104 continúan pendientes.
+T089–T090 añaden [escritura de pruebas US3](evidence/us3-pruebas.md): contrato propio 18/18;
+56 casos de interfaz en ambas resoluciones, 42 aprobados y 14 fallos esperados por
+perfil/protección y enlace desde inicio pendientes de T091–T092. El arnés quedó comprobado
+tras revisar navegación, coordenadas subpíxel y descripción accesible de errores, sin
+errores de pruebas o infraestructura. Las regresiones API y navegador permanecen aprobadas.
+No se acepta US3, V05 ni SC-005 hasta T094. El hallazgo CLI conserva su causa no confirmada.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 
