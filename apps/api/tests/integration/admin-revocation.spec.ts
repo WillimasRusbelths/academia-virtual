@@ -7,6 +7,12 @@ import { adminRequest,adminData,adminError,adminSnapshot } from '../support/us4.
 import { PostgresSessionStore } from '../../src/modules/identity/infrastructure/session-store.js';
 import { createPayloadCipher } from '../../src/modules/mail/infrastructure/payload-cipher.js';
 import { PostgresRateStore } from '../../src/infrastructure/limits/rate-store.js';
+import type { Pool } from 'pg';
+import { Login } from '../../src/modules/identity/application/login.js';
+import { VerifyEmail } from '../../src/modules/identity/application/verify-email.js';
+import { PostgresLoginStore } from '../../src/modules/identity/infrastructure/login-store.js';
+import { PostgresVerificationStore } from '../../src/modules/identity/infrastructure/verification-store.js';
+import { accessSecrets,createPasswordCredentials } from '../../src/modules/identity/infrastructure/credentials.js';
 
 let data:Us2Dataset;let http:Us1Http;
 beforeAll(async()=>{data=await us2Dataset('us4_revocation');},120000);
@@ -99,4 +105,97 @@ for(const change of ['sesión','rol','estado'] as const)test(`actor pierde ${cha
     expect(JSON.stringify(await row(target.id))===before).toBe(true);
     expect((await data.context.database.pool.query('SELECT count(*)::int AS n FROM "AuditEvent"')).rows[0].n).toBe(auditBefore);
   }finally{await holder.query('ROLLBACK').catch(()=>undefined);holder.release();await pending;}
+});
+
+function signal(){let resolve!:()=>void;const promise=new Promise<void>(done=>{resolve=done;});return {promise,resolve};}
+// Barrera exclusivamente de prueba: conserva las consultas, locks y transacciones reales.
+function verificationBarrier(pool:Pool,point:'before-lock'|'before-commit'){
+  const reached=signal();const release=signal();let backendPid=0;
+  const paused=new Proxy(pool,{get(target,key){
+    if(key==='connect')return async()=>{
+      const client=await target.connect();backendPid=(await client.query('SELECT pg_backend_pid() AS pid')).rows[0].pid;
+      return new Proxy(client,{get(connection,property){
+        if(property==='query')return async(...args:unknown[])=>{
+          const sql=args[0];
+          if(typeof sql==='string'&&(point==='before-lock'?sql==='SELECT * FROM "User" WHERE id=$1 FOR UPDATE':sql==='COMMIT')){
+            reached.resolve();await release.promise;
+          }
+          return Reflect.apply(connection.query,connection,args);
+        };
+        const value=Reflect.get(connection,property);return typeof value==='function'?value.bind(connection):value;
+      }});
+    };
+    const value=Reflect.get(target,key);return typeof value==='function'?value.bind(target):value;
+  }});
+  return {pool:paused,reached:reached.promise,release:release.resolve,get pid(){return backendPid;}};
+}
+for(const fields of [['role','role'],['status','status'],['role','status']] as const)
+test(`dos últimos ADMIN se retiran simultáneamente (${fields.join('/')}): permanece exactamente uno`,async()=>{
+  const a=data.account('ADMIN');const b=data.account('TEACHER');const db=data.context.database.pool;
+  await db.query(`UPDATE "User" SET role='STUDENT' WHERE role='ADMIN' AND id<>$1`,[a.id]);
+  await db.query(`UPDATE "User" SET role='ADMIN' WHERE id=$1`,[b.id]);
+  const holder=await db.connect();let pending:Promise<Response>[]=[];
+  try{
+    await holder.query('BEGIN');await holder.query('SELECT id FROM "SystemState" WHERE id=1 FOR UPDATE');
+    const pid=(await holder.query('SELECT pg_backend_pid() AS pid')).rows[0].pid;
+    pending=[command(b.id,fields[0],fields[0]==='role'?'STUDENT':'DISABLED',a.sessions[0].secret),
+      command(a.id,fields[1],fields[1]==='role'?'STUDENT':'DISABLED',b.sessions[0].secret)];
+    // Observar fuera de la transacción evita su snapshot de actividad. La cola puede ser transitiva.
+    await expect.poll(async()=>Number((await db.query(`WITH RECURSIVE blocked(pid) AS (
+      SELECT pid FROM pg_stat_activity WHERE $1=ANY(pg_blocking_pids(pid))
+      UNION SELECT activity.pid FROM pg_stat_activity activity JOIN blocked ON blocked.pid=ANY(pg_blocking_pids(activity.pid)))
+      SELECT count(*)::int AS n FROM blocked`,[pid])).rows[0].n),{timeout:2500}).toBe(2);
+    await holder.query('COMMIT');const responses=await Promise.all(pending);
+    expect(responses.map(response=>response.status).sort()).toEqual([200,401]);
+    const winner=responses.findIndex(response=>response.status===200);await adminData(responses[winner]);
+    await adminError(responses[1-winner],401,'AUTH_REQUIRED');
+    const retired=winner===0?b:a;const survivor=winner===0?a:b;
+    expect((await db.query(`SELECT count(*)::int AS n FROM "User" WHERE role='ADMIN' AND status='ACTIVE'`)).rows[0].n).toBe(1);
+    expect(BigInt((await row(retired.id)).authVersion)===1n&&BigInt((await row(survivor.id)).authVersion)===0n).toBe(true);
+    const events=(await db.query('SELECT * FROM "AuditEvent"')).rows;
+    expect(events.length===1&&events[0].result==='APPLIED'&&events[0].actorUserId===survivor.id&&events[0].targetUserId===retired.id).toBe(true);
+    for(const session of retired.sessions)await adminError(await http.get('/me',session.secret),401,'AUTH_REQUIRED');
+    for(const session of survivor.sessions)expect((await http.get('/me',session.secret)).status).toBe(200);
+  }finally{await holder.query('ROLLBACK').catch(()=>undefined);holder.release();await Promise.all(pending);}
+});
+for(const field of ['role','status'] as const)test(`login pausado al verificar hash frente a ${field}: no confirma sesión con versión antigua`,async()=>{
+  const f=data.account();const db=data.context.database.pool;const credentials=await createPasswordCredentials();
+  const reached=signal();const release=signal();
+  const login=new Login(new PostgresLoginStore(db),{hash:credentials.hash,async verify(password,hash){
+    const valid=await credentials.verify(password,hash);reached.resolve();await release.promise;return valid;
+  }},accessSecrets,new PostgresRateStore(db,data.context.environment.rateHmacKey));
+  const pending=login.execute({email:f.email,password:f.password,origin:'127.0.0.1'}).then(()=> 'UNEXPECTED_SUCCESS',error=>error.code);
+  try{
+    await reached.promise;
+    await adminData(await command(f.id,field,field==='role'?'TEACHER':'DISABLED'));
+    release.resolve();expect(await pending).toBe('INVALID_CREDENTIALS');
+    const sessions=(await db.query('SELECT id,"revokedAt","authVersion" FROM "Session" WHERE "userId"=$1',[f.id])).rows;
+    expect(sessions.length===2&&sessions.every(session=>session.revokedAt!==null&&BigInt(session.authVersion)===0n)).toBe(true);
+    expect(BigInt((await row(f.id)).authVersion)===1n).toBe(true);
+    expect((await db.query('SELECT count(*)::int AS n FROM "AuditEvent"')).rows[0].n).toBe(1);
+    for(const session of f.sessions)await adminError(await http.get('/me',session.secret),401,'AUTH_REQUIRED');
+  }finally{release.resolve();await pending;}
+});
+for(const point of ['before-lock','before-commit'] as const)test(`confirmación frente a desactivación (${point}): nunca reactiva ni rescata enlace`,async()=>{
+  const fixture=await seedAction(data,'VERIFY_EMAIL',true);const db=data.context.database.pool;
+  const barrier=verificationBarrier(db,point);
+  const confirm=new VerifyEmail(new PostgresVerificationStore(barrier.pool),accessSecrets);
+  const pending=confirm.execute({token:fixture.secret}).then(()=> 'CONFIRMED',error=>error.code);
+  let disabling:Promise<Response>|undefined;
+  try{
+    await barrier.reached;
+    disabling=command(fixture.account.id,'status','DISABLED');
+    if(point==='before-lock')await adminData(await disabling);
+    else await expect.poll(async()=>Number((await db.query(`SELECT count(*)::int AS n FROM pg_stat_activity
+      WHERE $1=ANY(pg_blocking_pids(pid))`,[barrier.pid])).rows[0].n),{timeout:2500}).toBe(1);
+    barrier.release();expect(await pending).toBe(point==='before-lock'?'INVALID_ACTION_LINK':'CONFIRMED');
+    if(point==='before-commit')await adminData(await disabling);
+    const user=await row(fixture.account.id);expect(user.status==='DISABLED'&&BigInt(user.authVersion)===1n).toBe(true);
+    expect(user.emailVerifiedAt!==null).toBe(point==='before-commit');
+    const token=(await db.query('SELECT "revokedAt","consumedAt" FROM "ActionToken" WHERE id=$1',[fixture.id])).rows[0];
+    expect((token.revokedAt!==null)!==(token.consumedAt!==null)).toBe(true);
+    expect((await db.query('SELECT count(*)::int AS n FROM "Session" WHERE "userId"=$1',[fixture.account.id])).rows[0].n).toBe(0);
+    expect((await http.post('/auth/verification/confirm',{token:fixture.secret})).status).toBe(400);
+    expect((await db.query('SELECT count(*)::int AS n FROM "AuditEvent"')).rows[0].n).toBe(1);
+  }finally{barrier.release();await pending;await disabling;}
 });

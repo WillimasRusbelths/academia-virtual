@@ -3,14 +3,16 @@
 Proyecto de academia virtual para un trabajo final de curso, con cuatro meses de plazo
 y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-14:** React/NestJS con Docker Compose como entorno local principal.
+**Estado al 2026-10-15:** React/NestJS con Docker Compose como entorno local principal.
 [US1: acceso y cierre de sesión](specs/001-identidad-acceso-roles/evidence/us1.md) está implementada
 y verificada con cuentas de prueba de los tres roles: login, consulta propia, recarga y logout.
 [US2: registro y verificación](specs/001-identidad-acceso-roles/evidence/us2.md) está implementada
 y verificada mediante registro público, Mailpit, confirmación explícita, reenvío y login.
 [US6: primer administrador](specs/001-identidad-acceso-roles/evidence/us6.md) cuenta con CLI
 restringida y activación mediante contraseña propia y correo verificado, comprobadas en un entorno aislado.
-Recuperación, administración y funciones académicas siguen pendientes;
+[US4: gestión mínima de cuentas](specs/001-identidad-acceso-roles/evidence/us4.md) tiene su
+checkpoint funcional comprobado, incluidas revocación, carreras administrativas y V04-B.
+Recuperación y funciones académicas siguen pendientes;
 no hay integración de pagos/video ni despliegue acreditado.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
@@ -52,7 +54,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
 - [Plan técnico de identidad](specs/001-identidad-acceso-roles/plan.md): decisiones, datos,
   contratos y [guía local planificada](specs/001-identidad-acceso-roles/quickstart.md), con
-  ejecución mediante Docker Compose. Los checkpoints funcionales US1 y US2 están verificados;
+  ejecución mediante Docker Compose. Los checkpoints funcionales US1, US2, US4 y US6 están verificados;
   las demás historias y la aceptación transversal siguen pendientes.
 
 ## Análisis del sistema
@@ -124,13 +126,14 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T069 están completadas, incluidos los checkpoints US1, US2 y
+por roles**. T001–T071 están completadas, incluidos los checkpoints US1, US2, US4 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
 T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
 T065–T067 añaden [cambios de acceso y comandos HTTP](specs/001-identidad-acceso-roles/evidence/us4-cambios-acceso.md);
 T068–T069 incorporan las [pantallas administrativas](specs/001-identidad-acceso-roles/evidence/us4-ui.md).
-T070–T071 y la aceptación del checkpoint US4/V04-B siguen pendientes.
+T070–T071 completan las [carreras y el checkpoint US4/V04-B](specs/001-identidad-acceso-roles/evidence/us4.md);
+V04 reúne las evidencias A/B, sin anticipar el protocolo temporal T087 ni el cierre transversal.
 El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del

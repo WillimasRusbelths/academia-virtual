@@ -88,11 +88,11 @@ export class SafeErrorFilter implements ExceptionFilter {
     const requestId = typeof request.requestId==='string'
       && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(request.requestId)
       ?request.requestId:randomUUID();
-    if ([401,403,429,503].includes(status)) {
+    if ([401,403,429,503].includes(status) || status===409) {
       const authentication = status===401 && code==='INVALID_CREDENTIALS';
       try {
         this.logs.record({category:status===503?'OPERATION':'SECURITY',
-          action:status===503?'RUNTIME_FAILURE':authentication?'AUTHENTICATION_FAILED':'ACCESS_DENIED',
+          action:status===503?'RUNTIME_FAILURE':status===409?'ADMIN_COMMAND_REJECTED':authentication?'AUTHENTICATION_FAILED':'ACCESS_DENIED',
           result:status===503?'FAILED':'DENIED',reasonCode:code,
           actorKind:request.actor && !authentication?'ACCOUNT':'ANONYMOUS',
           ...(request.actor && !authentication?{actorUserId:request.actor.userId}:{}),

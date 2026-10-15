@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync, statSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { afterAll, afterEach, beforeAll, expect, test, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 import { auditEvent, AuditEventInvalid } from '../../src/modules/audit/domain/audit-event.js';
 import { PostgresAuditWriter, AuditWriteUnavailable } from '../../src/modules/audit/infrastructure/audit-writer.js';
 import { PostgresSessionStore } from '../../src/modules/identity/infrastructure/session-store.js';
@@ -14,6 +14,11 @@ import { identityDatabase } from '../support/identity-database.js';
 import { sessionFixture } from '../support/session-fixture.js';
 import type { IdentityTestDatabase } from '../support/session-fixture.js';
 import { sessionHttp } from '../support/session-http.js';
+import { us2Dataset,seedAction } from '../support/us2.js';
+import type { Us2Dataset } from '../support/us2.js';
+import { us1Http } from '../support/us1-http.js';
+import type { Us1Http } from '../support/us1-http.js';
+import { adminRequest,adminData,adminError,adminSnapshot } from '../support/us4.js';
 
 let context: IdentityTestDatabase;
 const directory=mkdtempSync(path.join(tmpdir(),'identity-audit-'));
@@ -220,4 +225,109 @@ test('errores y fallo del aviso local no serializan mensajes, códigos, campos o
     expect(JSON.stringify(holder.result()).includes(marker)).toBe(false);
     expect([400,403,503].includes(holder.result().status)).toBe(true);
   }
+});
+
+describe('T070 · auditoría y denegaciones en las rutas administrativas reales',()=>{
+  let data:Us2Dataset;let http:Us1Http|undefined;
+  beforeAll(async()=>{data=await us2Dataset('us4_audit');},120000);
+  beforeEach(async()=>{await data.reset();});
+  afterEach(async()=>{await http?.close();http=undefined;});
+  afterAll(async()=>{await data?.cleanup();});
+  async function start(logs:Pick<SecurityEvents,'record'>){
+    http=await us1Http(data,data.context.environment.appOrigin,logs);
+    await http.app.get<{beforeApplicationShutdown():Promise<void>}>('MAIL_DELIVERY_SCHEDULER').beforeApplicationShutdown();
+    return http;
+  }
+  for(const broken of [false,true])for(const role of ['STUDENT','TEACHER'] as const)
+  for(const operation of ['detail','name','role','status'] as const)
+  test(`${role}/${operation}, logger ${broken?'fallido':'operativo'}: UUID existente y desconocido indistinguibles sin lookup/FK`,async()=>{
+    const output=logging();const marker=randomUUID();
+    const record=vi.fn((input:unknown,id:string)=>{if(broken)throw new Error(marker);return output.logs.record(input,id);});
+    const transport=await start({record});const target=data.account('STUDENT','UNVERIFIED');const unknown=randomUUID();
+    const actor=data.account(role);const before=await adminSnapshot(data);
+    const reads=vi.spyOn(transport.database.pool,'query');const connections=vi.spyOn(transport.database.pool,'connect');
+    const bodies:Record<string,unknown>[]=[];const queries:string[][]=[];
+    for(const id of [target.id,unknown]){
+      const at=reads.mock.calls.length;
+      const field=operation==='detail'?'':`/${operation}`;
+      const body=operation==='name'?{name:'No permitido'}:operation==='role'?{role:'ADMIN'}:{status:'DISABLED'};
+      const response=await adminRequest(transport,operation==='detail'?'GET':operation==='name'?'PATCH':'PUT',
+        `/admin/users/${id}${field}`,actor.sessions[0].secret,operation==='detail'?undefined:body);
+      const value=await adminError(response,403,'FORBIDDEN',[actor.password,actor.sessions[0].secret,marker,target.email]);
+      bodies.push(value);
+      const calls=reads.mock.calls.slice(at);
+      expect(calls.every(args=>!JSON.stringify(args).includes(id))).toBe(true);
+      queries.push(calls.map(args=>String(args[0])));
+    }
+    expect(bodies[0]).toEqual(bodies[1]);expect(queries[0]).toEqual(queries[1]);
+    // La autorización solo consulta la sesión; nunca inicia la transacción del destino.
+    expect(connections.mock.calls.length).toBe(reads.mock.calls.length);expect(queries[0].length).toBeGreaterThan(0);
+    expect(await adminSnapshot(data)===before).toBe(true);
+    expect(record.mock.calls.length).toBe(2);
+    expect(record.mock.calls.every(([input])=>{
+      const value=input as Record<string,unknown>;
+      return value.action==='ACCESS_DENIED'&&value.reasonCode==='FORBIDDEN'&&value.targetKind==='USER_REFERENCE';
+    })).toBe(true);
+    const serialized=JSON.stringify(record.mock.calls);
+    expect([actor.password,actor.sessions[0].secret,target.email,marker].every(secret=>!serialized.includes(secret))).toBe(true);
+    const saved=records(output.location);expect(saved.length).toBe(broken?0:2);
+    if(!broken){
+      const safe=(event:Record<string,unknown>)=>({...event,eventId:undefined,correlationId:undefined,occurredAt:undefined,requestedTargetId:undefined});
+      expect(safe(saved[0])).toEqual(safe(saved[1]));
+      expect(saved[0].requestedTargetId===target.id&&saved[1].requestedTargetId===unknown).toBe(true);
+    }
+    expect((await data.context.database.pool.query('SELECT count(*)::int AS n FROM "AuditEvent"')).rows[0].n).toBe(0);
+  });
+  test('mutaciones HTTP aceptadas: auditoría atribuible, proyección cerrada y no-op sin valores personales',async()=>{
+    const transport=await start(logging().logs);const actor=data.account('ADMIN');const target=data.account();
+    const secret=actor.sessions[0].secret;const email=`audit-${randomUUID()}@example.test`;
+    const created=await adminData(await adminRequest(transport,'POST','/admin/users',secret,
+      {name:'Alta privada',email,role:'TEACHER',provisionalPassword:target.password}),201);
+    await adminData(await adminRequest(transport,'PATCH',`/admin/users/${target.id}/name`,secret,{name:'Nombre privado'}));
+    await adminData(await adminRequest(transport,'PUT',`/admin/users/${target.id}/role`,secret,{role:'TEACHER'}));
+    await adminData(await adminRequest(transport,'PUT',`/admin/users/${target.id}/status`,secret,{status:'DISABLED'}));
+    await adminData(await adminRequest(transport,'PUT',`/admin/users/${target.id}/status`,secret,{status:'DISABLED'}));
+    const events=(await data.context.database.pool.query('SELECT * FROM "AuditEvent"')).rows;
+    expect(events.length===5&&events.every(event=>event.actorKind==='ACCOUNT'&&event.actorUserId===actor.id&&
+      [created.id,target.id].includes(event.targetUserId)&&/^[0-9a-f-]{36}$/.test(event.requestId))).toBe(true);
+    expect(new Set(events.map(event=>event.requestId)).size).toBe(5);
+    expect(events.map(event=>event.action).sort()).toEqual(['ACCOUNT_CREATED','NAME_CHANGED','ROLE_CHANGED','STATUS_CHANGED','STATUS_CHANGED']);
+    const noop=events.find(event=>event.result==='NO_CHANGE');
+    expect(!!noop&&[noop.oldRole,noop.newRole,noop.oldStatus,noop.newStatus].every(value=>value===null)).toBe(true);
+    const serialized=JSON.stringify(events);
+    expect([email,target.password,secret,'Alta privada','Nombre privado'].every(value=>!serialized.includes(value))).toBe(true);
+    expect(events.every(event=>Object.keys(event).sort().join(',')===
+      ['id','actorKind','actorUserId','targetUserId','action','result','occurredAt','requestId','oldRole','newRole','oldStatus','newStatus'].sort().join(','))).toBe(true);
+  });
+  test('invariante 409: registra denegación privada y no AuditEvent; logger roto conserva respuesta y estado',async()=>{
+    const output=logging();let broken=false;const marker=randomUUID();
+    const transport=await start({record(input,id){if(broken)throw new Error(marker);return output.logs.record(input,id);}});
+    const actor=data.account('ADMIN');
+    await adminData(await adminRequest(transport,'PATCH',`/admin/users/${data.account().id}/name`,actor.sessions[0].secret,
+      {name:'Cambio previamente confirmado'}));
+    const before=await adminSnapshot(data);
+    for(const failure of [false,true]){
+      broken=failure;
+      await adminError(await adminRequest(transport,'PUT',`/admin/users/${actor.id}/role`,actor.sessions[0].secret,
+        {role:'STUDENT'}),409,'ADMIN_INVARIANT',[marker,actor.password,actor.sessions[0].secret]);
+      expect(await adminSnapshot(data)===before).toBe(true);
+    }
+    const saved=records(output.location);
+    expect(saved.length===1&&saved[0].action==='ADMIN_COMMAND_REJECTED'&&saved[0].reasonCode==='ADMIN_INVARIANT'&&
+      saved[0].actorKind==='ACCOUNT'&&saved[0].actorUserId===actor.id&&saved[0].requestedTargetId===actor.id).toBe(true);
+  });
+  test('fallo de AuditEvent en HTTP revierte cuenta, versión, sesiones, tokens y entregas',async()=>{
+    const output=logging();const transport=await start(output.logs);const actor=data.account('ADMIN');const target=data.account();
+    await seedAction(data,'RESET_PASSWORD',true);
+    const before=await adminSnapshot(data);
+    await data.context.isolated.ownerQuery(`CREATE FUNCTION fail_us4_audit() RETURNS trigger LANGUAGE plpgsql AS
+      $$ BEGIN RAISE EXCEPTION 'Fallo privado de prueba'; END $$;
+      CREATE TRIGGER fail_us4_audit BEFORE INSERT ON "AuditEvent" FOR EACH ROW EXECUTE FUNCTION fail_us4_audit();`);
+    try{
+      await adminError(await adminRequest(transport,'PUT',`/admin/users/${target.id}/status`,actor.sessions[0].secret,
+        {status:'DISABLED'}),503,'TEMPORARILY_UNAVAILABLE');
+      expect(await adminSnapshot(data)===before).toBe(true);
+      const saved=records(output.location);expect(saved.length===1&&saved[0].action==='RUNTIME_FAILURE').toBe(true);
+    }finally{await data.context.isolated.ownerQuery('DROP TRIGGER fail_us4_audit ON "AuditEvent"; DROP FUNCTION fail_us4_audit();');}
+  });
 });

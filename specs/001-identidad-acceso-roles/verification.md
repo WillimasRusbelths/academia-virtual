@@ -1,9 +1,10 @@
 # Estrategia de verificación de identidad
 
-Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md) y
-[checkpoint funcional US2](evidence/us2.md) y [checkpoint funcional US6](evidence/us6.md)
-aprobados. V01/V02 funcionales, V03 funcional, V04-A y partes de V06/V08/V10/V12/V13
-comprobadas. V04-B, comparación temporal T087, retención/purga,
+Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md),
+[checkpoint funcional US2](evidence/us2.md), [checkpoint funcional US6](evidence/us6.md) y
+[checkpoint funcional US4](evidence/us4.md) aprobados. V01/V02 funcionales, V03 funcional,
+V04-A/B, V06–V08 y partes de V10/V12/V13/V15 comprobadas en esos checkpoints.
+Comparación temporal T087, carreras de recuperación de V15, retención/purga,
 aceptación transversal y el resto de V01–V16 permanecen pendientes según sus criterios.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
@@ -61,6 +62,11 @@ esperados por UI administrativa ausente; US4, T070/T071 y V04-B permanecen pendi
 T068–T069 añaden [pantallas administrativas](evidence/us4-ui.md): T061 y ocho casos de UI
 adicionales aprobados. Sus resultados técnicos no aceptan US4/V04-B; T070 y T071 siguen
 pendientes, sin adelantar sus carreras ni el checkpoint.
+T070–T071 completan las [carreras y el checkpoint US4](evidence/us4.md): T059–T061
+aprobadas, V04-B comprobado con formularios reales y V04 reunido con V04-A de T039
+y su regresión actual. V06–V08 comprobados junto con la evidencia de US6; V15 solo
+en rol/desactivación/confirmación, sin anticipar reset de US7. SC-002 completo,
+aceptación humana y demás verificaciones transversales conservan sus dependencias.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

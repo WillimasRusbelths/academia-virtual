@@ -16,6 +16,7 @@ import { createIdentityFixtures, readFixtureManifest } from './identity-fixtures
 import type { FixtureAccount } from './identity-fixtures.js';
 import { accessSecrets } from '../../src/modules/identity/infrastructure/credentials.js';
 import type { Role } from '../../src/modules/users/public/account.js';
+import type { SecurityEvents } from '../../src/infrastructure/logging/security-events.js';
 
 export async function us1Dataset(suite:string,frozen = false) {
   const context = await identityDatabase(suite);
@@ -74,7 +75,8 @@ async function installClock(context:Awaited<ReturnType<typeof identityDatabase>>
 }
 
 /** Composición real: el ensayo no añade controladores login/logout/me ni accesos privilegiados. */
-export async function us1Http(dataset:Pick<Us1Dataset,'context'|'clock'>,origin = dataset.context.environment.appOrigin) {
+export async function us1Http(dataset:Pick<Us1Dataset,'context'|'clock'>,origin = dataset.context.environment.appOrigin,
+  logs?:Pick<SecurityEvents,'record'>) {
   const environment = {...dataset.context.environment,appOrigin:origin};
   const database = createDatabase(environment);
   dataset.clock?.configure(database.pool);
@@ -82,7 +84,7 @@ export async function us1Http(dataset:Pick<Us1Dataset,'context'|'clock'>,origin 
   try {
     const module = await Test.createTestingModule({imports:[AppModule.forRoot(environment,database)]}).compile();
     app = module.createNestApplication<NestExpressApplication>({logger:false,bodyParser:false});
-    configureTransport(app,environment);
+    configureTransport(app,environment,logs);
     await app.listen(0,'127.0.0.1');
     const url = await app.getUrl();const cookie = new SessionCookie(environment);
     const ready = await fetch(`${url}/health/ready`);
