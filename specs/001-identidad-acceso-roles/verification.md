@@ -5,10 +5,11 @@ Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md),
 [checkpoint funcional US4](evidence/us4.md) y [checkpoint funcional US7](evidence/us7.md)
 aprobados en su alcance técnico. V01/V02 funcionales, V03 funcional, V04-A/B, V06–V08,
 V11/V15 y partes de V10/V12/V13 comprobadas en esos checkpoints.
-T085–T086 añaden VA y controles de navegación/contenido y CORS de V14 comprobados;
-el cierre transversal US5 permanece en T088, después del protocolo temporal T087.
-Comparación temporal T087, retención/purga,
-aceptación transversal y el resto de V01–V16 permanecen pendientes según sus criterios.
+El [checkpoint técnico US5](evidence/us5.md) añade V09/V12/V14/VA y la
+[comparación temporal T087](evidence/enumeration.md) comprobadas en los flujos P1 actuales.
+Retención/purga, recuperación operativa, carga, aceptación humana y el resto de V01–V16
+permanecen pendientes según sus criterios. El hallazgo intermitente CLI sigue abierto,
+con causa no confirmada; no equivale a un fallo reproducido en este bloque.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
 T011–T016 añaden pruebas de configuración y persistencia; resultados y límites en
@@ -94,6 +95,12 @@ y CSP comprobados. Las 16 pruebas originales de T084 pasan tras cerrar CORS del 
 12 nuevas pruebas de navegador y las regresiones de los cinco checkpoints también pasan.
 T087–T088, invalidación global T096/T098 y aceptación humana T104 conservan su alcance;
 la incidencia CLI no reproducida en las repeticiones queda registrada en la evidencia.
+T087–T088 completan el [checkpoint técnico US5](evidence/us5.md): matriz, privacidad,
+CSRF/CORS y capas aprobados; 17 endpoints con política explícita y
+[U2](evidence/enumeration.md) con 8700 muestras + 870 calentamientos, sin señal detectada
+bajo ese protocolo. Las regresiones API y navegador pasan sin omisiones. El diagnóstico
+CLI conserva el hallazgo de causa no confirmada para T106, sin declararlo resuelto.
+La invalidación global T096/T098 y aceptación humana T104 continúan pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

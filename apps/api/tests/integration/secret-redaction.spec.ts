@@ -195,7 +195,7 @@ test('bootstrap real: operador local correlacionado, sin usuario ficticio ni sec
   const cli=await identityDatabase('us5_bootstrap_private');
   try{
     const f=profile();personal.push(f.name,f.email);const input={name:f.name,email:f.email,provisional:f.password,operatorRef:'op_'+randomUUID().replaceAll('-','')};
-    const result=await runBootstrapDialogue(cli.environment,input);expect(result.code).toBe(0);
+    const result=await runBootstrapDialogue(cli.environment,input);expect(result.code,JSON.stringify(result.diagnostics)).toBe(0);
     const user=(await cli.database.pool.query('SELECT * FROM "User"')).rows[0];secret(user.provisionalPasswordHash);
     const row=(await cli.database.pool.query('SELECT * FROM "MailDelivery"')).rows[0];
     const payload=createPayloadCipher(cli.environment).decrypt(row);secrets.push(payload.link,payload.link.split('#')[1],row.encryptedPayload.toString('base64'));

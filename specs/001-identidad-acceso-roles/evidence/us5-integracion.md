@@ -99,3 +99,7 @@ cierre final mantienen sus dependencias. Retención/purga, restauración, capaci
 reproducida queda registrada para contrastarla al ejecutar la suite transversal T088.
 No se modifican diagramas, requisitos, contratos, Docker ni datos manuales.
 T085 y T086 quedan completas; seguimiento actualizado: **86 tareas completas y 22 pendientes**.
+
+Seguimiento posterior: [T087–T088](us5.md) registra la comparación temporal y la regresión
+transversal. Amplía el diagnóstico saneado de la incidencia CLI, cuya causa sigue sin
+confirmarse; conserva los resultados y límites históricos de este bloque.

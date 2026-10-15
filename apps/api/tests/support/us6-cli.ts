@@ -21,9 +21,12 @@ export async function runBootstrapDialogue(environment:Environment,input:Bootstr
   const args=['--quiet','--return','--echo','always','--command',command,'/dev/null'];
   const child=spawn('script',args,{cwd:repositoryRoot(),stdio:['pipe','pipe','pipe'],env:{...process.env,
     APP_ENV:'test',TEST_DATABASE_URL:environment.databaseUrl,TEST_MIGRATION_DATABASE_URL:environment.migrationUrl,TERM:'dumb'}});
-  const answers=[{pattern:/operatorRef|operador|alias/i,value:input.operatorRef},
-    {pattern:/nombre/i,value:input.name},{pattern:/correo|email/i,value:input.email},
-    {pattern:/provisional|credencial|contrase(?:ñ|n)a/i,value:input.provisional}];
+  const started=performance.now();
+  const answers=[{field:'operator',pattern:/operatorRef|operador|alias/i,value:input.operatorRef},
+    {field:'name',pattern:/nombre/i,value:input.name},{field:'email',pattern:/correo|email/i,value:input.email},
+    {field:'credential',pattern:/provisional|credencial|contrase(?:ñ|n)a/i,value:input.provisional}];
+  const answered:string[]=[];let signal:NodeJS.Signals|null=null;
+  child.once('exit',(_code,value)=>{signal=value;});
   let output='';let error=false;let timedOut=false;
   const pending=new Set<ReturnType<typeof setTimeout>>();
   child.on('error',()=>{error=true;});
@@ -31,7 +34,7 @@ export async function runBootstrapDialogue(environment:Environment,input:Bootstr
     const text=String(chunk);output+=text;
     for(const answer of answers)if(answer.pattern.test(text)){
       // Enviar después de recibir el prompt, nunca por argumentos ni antes del modo oculto.
-      const timer=setTimeout(()=>{pending.delete(timer);child.stdin.write(answer.value+'\n');},10);
+      const timer=setTimeout(()=>{pending.delete(timer);answered.push(answer.field);child.stdin.write(answer.value+'\n');},10);
       pending.add(timer);answer.pattern=/(?!)/;
     }
   });
@@ -39,6 +42,7 @@ export async function runBootstrapDialogue(environment:Environment,input:Bootstr
   const timer=setTimeout(()=>{timedOut=true;child.kill('SIGTERM');},12000);
   const code=await new Promise<number|null>(resolve=>child.once('close',resolve));
   clearTimeout(timer);for(const entry of pending)clearTimeout(entry);
-  if(error||timedOut)throw new Error('Diálogo CLI no finalizado. Valores omitidos.');
-  return {code,output,args}; // Solo memoria de tests; las aserciones comparan booleanos, sin imprimir output.
+  const diagnostics={elapsedMs:Math.round(performance.now()-started),answered,signal,spawnError:error,timedOut,outputBytes:Buffer.byteLength(output)};
+  if(error||timedOut)throw new Error('Diálogo CLI no finalizado. Diagnóstico sin valores: '+JSON.stringify(diagnostics));
+  return {code,output,args,diagnostics}; // Output/args solo en memoria; diagnostics no contiene entradas ni salida.
 }
