@@ -1,6 +1,13 @@
 import { test,expect } from 'vitest';
 import { identityDatabase } from '../../apps/api/tests/support/identity-database.js';
 import { Diagnostics } from './diagnostics.ts';
+test('modo de latencia HTTP sin instalar trazas no publica SQL ni pool como cero',async()=>{
+  const diagnostic=new Diagnostics('wall-only-controls');
+  await diagnostic.operation('me',async()=>{await new Promise(resolve=>setTimeout(resolve,5));});
+  const result=diagnostic.write();expect(result.sqlTracing).toBe(false);
+  expect(result.metrics['me/wall']?.count).toBe(1);
+  for(const key of ['me/queries','me/sqlTotal','me/poolTotal'])expect(result.metrics).not.toHaveProperty(key);
+});
 test('telemetría conserva promesas/callbacks, correlación concurrente y omite SQL/valores',async()=>{
   const context=await identityDatabase('diagnostics');
   try{

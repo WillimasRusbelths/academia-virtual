@@ -27,6 +27,7 @@ export class Diagnostics {
   private scope=new AsyncLocalStorage<Context|undefined>();
   private clients=new WeakSet<PoolClient>();
   private values=new Map<string,number[]>();
+  private tracing=false;
   private lag=monitorEventLoopDelay({resolution:20});
   private initialCpu=cpuStat();
   private initialUsage=process.cpuUsage();
@@ -53,6 +54,7 @@ export class Diagnostics {
     } as typeof client.query;
   }
   install(pool:Pool){
+    this.tracing=true;
     const original=pool.connect,current=()=>this.scope.getStore(),resume=(ctx:Context|undefined,cb:()=>unknown)=>this.scope.run(ctx,cb);
     const acquired=(ctx:Context|undefined,start:number,client:PoolClient)=>{this.wrapClient(client);const elapsed=performance.now()-start;this.add((ctx?.route??'background')+'/pool',elapsed);if(ctx)ctx.poolWaitMs+=elapsed;};
     pool.connect=function(this:Pool,...args:unknown[]){
@@ -63,12 +65,15 @@ export class Diagnostics {
     } as typeof pool.connect;
   }
   private context(route:string){return {route,queries:0,queryMs:0,poolWaitMs:0};}
-  private finish(ctx:Context,start:number){for(const [key,value] of Object.entries({wall:performance.now()-start,queries:ctx.queries,sqlTotal:ctx.queryMs,poolTotal:ctx.poolWaitMs}))this.add(ctx.route+'/'+key,value);}
+  private finish(ctx:Context,start:number){
+    this.add(ctx.route+'/wall',performance.now()-start);
+    if(this.tracing)for(const [key,value] of Object.entries({queries:ctx.queries,sqlTotal:ctx.queryMs,poolTotal:ctx.poolWaitMs}))this.add(ctx.route+'/'+key,value);
+  }
   middleware(request:Request,response:Response,next:NextFunction){
     const route=request.path==='/api/v1/me'?'me':request.path==='/api/v1/auth/login'?'login':request.path==='/api/v1/auth/logout'?'logout':'other';
     const ctx=this.context(route),start=performance.now();response.once('finish',()=>this.finish(ctx,start));this.scope.run(ctx,next);
   }
   async operation<T>(route:string,work:()=>Promise<T>){const ctx=this.context(route),start=performance.now();try{return await this.scope.run(ctx,work);}finally{this.finish(ctx,start);}}
   sample(){const lag={meanMs:Number.isFinite(this.lag.mean)?this.lag.mean/1e6:0,p99Ms:this.lag.percentile(99)/1e6,maxMs:this.lag.max/1e6};this.lag.reset();const wallMs=Date.now()-this.initialWall,monotonicMs=performance.now()-this.initialMonotonic;return {clock:{wallMs,monotonicMs,driftMs:wallMs-monotonicMs},lag,cpu:cpuStat(),usage:process.cpuUsage(this.initialUsage),eventLoopUtilization:performance.eventLoopUtilization()};}
-  write(){this.lag.disable();const result={name:this.name,initialCpu:this.initialCpu,final:this.sample(),metrics:Object.fromEntries([...this.values].map(([key,values])=>[key,stats(values)]))};writeFileSync('/load-private/'+this.name+'-diagnostics.json',JSON.stringify(result),{mode:0o600});return result;}
+  write(){this.lag.disable();const result={name:this.name,sqlTracing:this.tracing,initialCpu:this.initialCpu,final:this.sample(),metrics:Object.fromEntries([...this.values].map(([key,values])=>[key,stats(values)]))};writeFileSync('/load-private/'+this.name+'-diagnostics.json',JSON.stringify(result),{mode:0o600});return result;}
 }

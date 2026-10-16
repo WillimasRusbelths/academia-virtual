@@ -109,6 +109,23 @@ de capacidad); un descenso real sigue impidiendo comparar. Sus dos controles pas
 Intentos de shell sin política de ejecución y salida Compose mezclada con JSON se
 conservan como fallos de postprocesado; no se repitió por ello el ensayo físico.
 
+## Smoke de instrumentación
+
+`smoke-sessions-6a33832d`, revisión b34b7ee: 2 VU, 10 solicitudes/8 válidas,
+dos logouts y dos rechazos de cookie anterior, cero errores; 1120 cuentas/singleton
+intactos y limpieza 0/0. Generador 20.301 s, ventana externa completa 47.732 s;
+perfil V8 privado producido con nombre correcto. No acredita carga ni recuperación automática.
+API registró salto civil/monotónico de unos 75 s **antes** de startedAt; durante
+la ventana completa civil=47732.3 ms/Stopwatch=47736.2 ms, sin ese salto; rango
+de diferencia API 75001.8–75017.4 ms. Se conservan muestras anteriores y posteriores.
+No se desplaza ni recorta la futura meseta por esa observación.
+
+El modo HTTP/CPU inicial publicaba ceros de SQL/pool sin instalar su traza.
+Esos valores del smoke significan **no medidos**. Se corrige antes del perfil:
+sqlTracing=false y campos SQL/pool omitidos; se conserva latencia HTTP. Dos pruebas
+de diagnóstico Docker y lint, más ambos chequeos TypeScript Windows, aprobados.
+No se sobrescriben los archivos del smoke ni se llama cero al dato desconocido.
+
 ## Estado
 
 La instrumentación corregida/validada justifica una sola repetición diagnóstica
