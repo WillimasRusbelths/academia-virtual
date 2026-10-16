@@ -33,6 +33,32 @@ vigente; no se cambió el algoritmo/costo ni se contó el fallo como aprobado.
 La primera invocación del reportero carecía de su montaje; se leyó el resultado real
 y se repitieron las pruebas necesarias con el archivo correcto.
 
-T099 completa. Los detalles y resultados de T100–T102 se registran al verificar
-sus perfiles, guardas y captura. Se conservan T104, bootstrap/T106 y D13 pendientes;
-no se activa programación de purga de T095 ni se aprueba un SLA.
+## T100 — implementación ID-LOAD-01
+
+[sessions.js](../../../load-tests/identity/sessions.js),
+[cliente HTTP](../../../load-tests/identity/client.js) y
+[perfiles](../../../load-tests/identity/profiles.js). `k6 inspect --execution-requirements`
+real acepta 1000 VU máximos, 17 min de escenario + hasta 15 s de gracia y
+noCookiesReset=true; warmup independiente 20 VU/1 min + hasta 15 s de gracia.
+Las cinco etapas son exactamente 100/1 min, 500/2 min, 1000/2 min, 1000/10 min y 0/2 min.
+
+Asignación por idInTest sin módulo ni cuentas compartidas; login una sola vez por VU,
+/me con identidad/rol esperados y pausa 5–10 s. Error de login/identidad aborta, no
+abandona silenciosamente la muestra. Se mide un slot por VU realmente validado;
+el contador BD distingue sesiones/usuarios/hashes/actividad reciente y detecta duplicados.
+La prueba sintética de 1000 filas valida ese contador, **no acredita carga de 1000**.
+El cierre confirma rechazo reutilizando la cookie previa; está fuera de la meseta
+y separado de errores del tráfico válido. Se registra logout completado y limpieza
+dirigida posterior por separado.
+
+Los controles del runner con dobles HTTP/reloj verifican asignación 1..1000, cohortes
+disjuntas, fronteras de fase, cookies persistentes, login único, pausas, headers,
+aborto por error/cruce y revocación con cookie anterior. Smoke real independiente:
+2 VU, dos iteraciones por VU, 10 solicitudes, dos sesiones distintas y dos logouts;
+errores/cruces/503/revocaciones aceptadas: cero. Las métricas finales se incorporan
+con T102. No se reducen muestras/duraciones de los perfiles completos para aprobarlos.
+
+T099 y T100 completas como preparación/implementación. La ejecución completa y la
+condición de 1000 sesiones activas por diez minutos siguen en T103. T101/T102 aún
+requieren cerrar su evidencia; T104, bootstrap/T106 y D13 se conservan pendientes.
+No se activa programación de purga de T095 ni se aprueba un SLA.
