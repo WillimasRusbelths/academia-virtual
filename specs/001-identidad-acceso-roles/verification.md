@@ -129,7 +129,15 @@ de purgar tokens, FK SET NULL con metadata durante siete días desde finishedAt,
 concurrencia, rollback y datos vigentes preservados. Las 12 cuentas originales, las 15 del
 ensayo manual, SystemState y archivo privado mantienen sus huellas. CLI explícita y
 rotación existente verificadas en aislamiento; no se activa purga en desarrollo/manual.
-T096–T108 y el hallazgo intermitente de bootstrap para T106 conservan sus pendientes.
+Al cierre de T095, T096–T108 conservaban sus pendientes.
+T096 completa la [invalidación atribuible de estado restaurado](evidence/restored-state.md):
+17/17 nuevas, registro global seguro y fallo cerrado antes de reabrir tráfico.
+T097–T098 completan [procedimiento cifrado y ensayo V16](evidence/recovery.md), con
+migración fallida real, restauración a BD nueva, comparación de schema/datos/permisos,
+migración correctiva, invalidación y reinicio en otro proceso Node. RPO conservador
+≤23.875 s y RTO local 27.147 s, sin SLA aprobado por D13. Se preservan las 15 cuentas
+manuales y credenciales; T095 continúa sin programación de purga. T099–T108 siguen
+pendientes; T104 requiere participantes y el hallazgo de bootstrap sigue abierto para T106.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

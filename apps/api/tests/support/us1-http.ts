@@ -75,7 +75,7 @@ async function installClock(context:Awaited<ReturnType<typeof identityDatabase>>
 }
 
 /** Composición real: el ensayo no añade controladores login/logout/me ni accesos privilegiados. */
-export async function us1Http(dataset:Pick<Us1Dataset,'context'|'clock'>,origin = dataset.context.environment.appOrigin,
+export async function us1Http(dataset:{context:Pick<Us1Dataset['context'],'environment'>;clock?:Us1Dataset['clock']},origin = dataset.context.environment.appOrigin,
   logs?:Pick<SecurityEvents,'record'>) {
   const environment = {...dataset.context.environment,appOrigin:origin};
   const database = createDatabase(environment);
@@ -114,7 +114,7 @@ export async function restrictRead(dataset:Us1Dataset,table:'User'|'Session',all
   await dataset.context.isolated.ownerQuery(`${allowed?'GRANT SELECT':'REVOKE SELECT'} ON "${table}" ${allowed?'TO':'FROM'} "${role}"`);
 }
 
-export async function us1Process(dataset:Us1Dataset) {
+export async function us1Process(dataset:{context:Pick<Us1Dataset['context'],'environment'>}) {
   const environment=dataset.context.environment;
   const child=fork(fileURLToPath(new URL('./us1-process.mjs',import.meta.url)),[],{stdio:['ignore','ignore','ignore','ipc'],
     env:{...process.env,APP_ENV:'test',APP_ORIGIN:environment.appOrigin,

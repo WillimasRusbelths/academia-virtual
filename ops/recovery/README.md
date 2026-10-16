@@ -102,6 +102,32 @@ solo un respaldo funcional verificado. Mantener las claves aparte y probar su
 recuperación. El ensayo local no acredita resistencia a pérdida del equipo, siete
 días de operación real, ni aceptación con participantes (T104).
 
+## Reproducir V16 sin tocar el entorno manual
+
+Con Docker Desktop activo y la imagen local de API construida según el quickstart:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ops/recovery/rehearse.ps1
+```
+
+[rehearse.ps1](rehearse.ps1) crea un proyecto con nombre aleatorio, red interna sin
+puertos publicados, volumen PostgreSQL nuevo y credenciales/claves exclusivas en
+`.cache/recovery-*` con ACL privada. No usa Compose/volúmenes del entorno manual.
+La [prueba por fases](../../apps/api/tests/recovery/rehearsal.spec.ts) exige el marcador
+de BD aislada antes de escribir: prepara doce fixtures, pausa el worker, crea backup,
+hace un cambio ficticio posterior y ejecuta una migración deliberadamente fallida.
+Restaura en otra BD, compara schema/datos, aplica una migración correctiva en una
+copia temporal de Prisma, invalida mediante T096 y verifica acceso/reinicio.
+No edita migraciones del repositorio ni ejecuta migrate resolve.
+
+Los JSON de prueba, logs y credenciales quedan privados. `summary.json`,
+`guards-summary.json` y `restore-summary.json` contienen el resumen saneado;
+**handoff.json contiene secretos** y no debe publicarse. Los servicios nuevos se
+detienen en finally, sin `down -v`; archivos y volumen se conservan para inspección.
+Los fallos se informan sin volcar URLs/secretos. El reporte detallado de Vitest también
+es privado. Una ejecución fallida no cuenta como aceptación. No ejecutar la suite
+de fases directamente contra desarrollo/manual ni reutilizar sus cuentas.
+
 Referencias oficiales: [pg_dump 16](https://www.postgresql.org/docs/16/app-pgdump.html),
 [pg_restore 16](https://www.postgresql.org/docs/16/app-pgrestore.html),
 [crypto de Node](https://nodejs.org/docs/latest-v22.x/api/crypto.html).

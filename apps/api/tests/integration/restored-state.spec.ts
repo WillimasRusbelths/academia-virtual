@@ -24,6 +24,8 @@ test('revoca todas las sesiones y tokens abiertos, incluso vencidos; preserva co
   const revoked=await seedAction(data);
   await pool().query('UPDATE "ActionToken" SET "revokedAt"=clock_timestamp() WHERE id=$1',[revoked.id]);
   const open=await seedAction(data);const reset=await seedAction(data,'RESET_PASSWORD');
+  await pool().query(`UPDATE "ActionToken" SET "createdAt"=clock_timestamp()-interval '25 hours',
+    "expiresAt"=clock_timestamp()-interval '1 hour' WHERE id=$1`,[open.id]);
   const before=(await pool().query('SELECT * FROM "ActionToken" WHERE id=ANY($1::uuid[]) ORDER BY id',[[consumed.id,revoked.id]])).rows;
   const count=Number((await pool().query('SELECT count(*) FROM "Session" WHERE "revokedAt" IS NULL')).rows[0].count);
   const result=await state.invalidate();expect(result).toEqual({sessions:count,tokens:2,mail:0});

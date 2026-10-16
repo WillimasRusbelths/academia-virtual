@@ -45,7 +45,8 @@ y demás escritores durante restauración/invalidación y comprobar SUCCEEDED an
 de abrir tráfico. No se puede retirar un correo ya enviado a SMTP por otro proceso.
 El alias atribuye la acción; el acceso local y las credenciales BD la autorizan.
 No se ha restaurado desarrollo ni el ensayo manual. La huella privada previa
-confirma 12 cuentas originales y 15 totales; se contrastará al terminar el bloque.
+confirma 12 cuentas originales y 15 totales. Al terminar el bloque T096–T098,
+las huellas de cuentas, singleton y archivo privado coinciden antes/después.
 
 T096 completa. T097/T098 requieren su propio ensayo; T104 sigue reservada para
 participantes reales. El hallazgo intermitente de bootstrap permanece abierto en
