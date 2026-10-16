@@ -18,6 +18,8 @@ x-runner: &runner
     DB_POOL_MAX: '10'
     API_HOST: 0.0.0.0
     TRUSTED_PROXY: ''
+    LOAD_DIAGNOSTICS: ${LOAD_DIAGNOSTICS:-0}
+    LOAD_DIAGNOSTICS_NAME: ${LOAD_DIAGNOSTICS_NAME:-disabled}
   volumes:
     - ../../apps/api/src:/workspace/apps/api/src:ro
     - ../../apps/api/tests:/workspace/apps/api/tests:ro
@@ -54,6 +56,12 @@ services:
     command: [--disable-version-check, --smtp-disable-rdns, '--smtp-allowed-recipients=@example[.]test$$', --quiet]
   runner:
     <<: *runner
+    entrypoint: sh
+  diagnostic-bench:
+    <<: *runner
+    profiles: [diagnostics]
+    cpus: 2
+    mem_limit: 1g
     entrypoint: sh
   api:
     <<: *runner

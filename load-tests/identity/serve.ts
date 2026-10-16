@@ -10,15 +10,18 @@ import { createDatabase } from '../../apps/api/dist/src/infrastructure/database/
 import { credentialMetrics, ARGON2_PARAMETERS, HASH_CONCURRENCY, HASH_QUEUE_MAX, HASH_WAIT_MS } from '../../apps/api/dist/src/modules/identity/infrastructure/credentials.js';
 import { assertLoadTarget,readManifest } from './fixtures.ts';
 import { sessionCounts,stopReason,databaseActivity } from './observe.ts';
+import { Diagnostics } from './diagnostics.ts';
 
 const environment=loadEnvironment(),database=createDatabase(environment);await assertLoadTarget(environment,database.pool);
 const manifest=readManifest('/load-private/fixtures',environment);
+const diagnostic=process.env.LOAD_DIAGNOSTICS==='1'?new Diagnostics(process.env.LOAD_DIAGNOSTICS_NAME??'invalid'):null;
+diagnostic?.install(database.pool);
 const app=await NestFactory.create(AppModule.forRoot(environment,database),{logger:false,bodyParser:false});
 let inFlight=0,peakInFlight=0;
 app.use((request:Request,response:Response,next:NextFunction)=>{
   if(request.path.startsWith('/api/v1/')){inFlight++;peakInFlight=Math.max(peakInFlight,inFlight);let done=false;
     const finish=()=>{if(!done){done=true;inFlight--;}};response.once('finish',finish);response.once('close',finish);}
-  next();
+  if(diagnostic)diagnostic.middleware(request,response,next);else next();
 });
 configureTransport(app,environment);await app.listen(3000,'0.0.0.0');
 writeFileSync('/load-private/settings.json',JSON.stringify({node:process.version,installedLockSha256:createHash('sha256').update(readFileSync('/workspace/package-lock.json')).digest('hex'),
@@ -28,11 +31,12 @@ const timer=setInterval(()=>{if(pending||stopped)return;pending=true;void sample
   writeFileSync('/load-private/stop.json',JSON.stringify({reason:'MONITOR_UNAVAILABLE',at:new Date().toISOString()}),{mode:0o600});
 }).finally(()=>{pending=false;});},1000);
 async function sample(){
-  const groups=await sessionCounts(database.pool,manifest);
+  const groupSamples:Record<string,{statementStartedAt:Date;readFinishedAt:Date}>={};
+  const groups=await sessionCounts(database.pool,manifest,(group,times)=>{groupSamples[group]=times;});
   const activity=await databaseActivity(database.pool);
   const hash=credentialMetrics();let memoryCurrent=0,memoryLimit=0;
   if(existsSync('/sys/fs/cgroup/memory.current')){memoryCurrent=Number(readFileSync('/sys/fs/cgroup/memory.current','utf8'));memoryLimit=Number(readFileSync('/sys/fs/cgroup/memory.max','utf8'));}
-  const event={at:new Date().toISOString(),hash,http:{active:inFlight,peak:peakInFlight},pool:{total:database.pool.totalCount,idle:database.pool.idleCount,waiting:database.pool.waitingCount},groups,activity,memoryCurrent,memoryLimit};
+  const event={at:new Date().toISOString(),hash,http:{active:inFlight,peak:peakInFlight},pool:{total:database.pool.totalCount,idle:database.pool.idleCount,waiting:database.pool.waitingCount},groups,groupSamples,activity,memoryCurrent,memoryLimit,diagnostics:diagnostic?.sample()};
   appendFileSync('/load-private/server.jsonl',JSON.stringify(event)+'\n',{mode:0o600});
   const reason=stopReason(hash.waitMaxMs,memoryCurrent,memoryLimit);
   if(reason){
@@ -40,6 +44,6 @@ async function sample(){
     stopped=true;await app.close();
   }
 }
-async function shutdown(){stopped=true;clearInterval(timer);while(pending)await new Promise(resolve=>setTimeout(resolve,25));await app.close();await database.close();}
+async function shutdown(){stopped=true;clearInterval(timer);while(pending)await new Promise(resolve=>setTimeout(resolve,25));await app.close();diagnostic?.write();await database.close();}
 process.once('SIGTERM',()=>{void shutdown().finally(()=>{process.exitCode=0;});});
 process.once('SIGINT',()=>{void shutdown().finally(()=>{process.exitCode=0;});});

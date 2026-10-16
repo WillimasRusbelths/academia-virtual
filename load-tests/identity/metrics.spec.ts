@@ -1,7 +1,20 @@
 import { test,expect } from 'vitest';
 import { identityDatabase } from '../../apps/api/tests/support/identity-database.js';
 import { sessionFixture } from '../../apps/api/tests/support/session-fixture.js';
-import { databaseActivity } from './observe.ts';
+import { databaseActivity,sessionCounts } from './observe.ts';
+import type { LoadManifest } from './fixtures.ts';
+
+test('conteo conserva su forma y separa lectura PostgreSQL de publicación',async()=>{
+  const context=await identityDatabase('sample_times');
+  try{
+    const times:Date[]=[];
+    const counts=await sessionCounts(context.database.pool,{accounts:[]} as unknown as LoadManifest,(_group,t)=>{
+      expect(t.statementStartedAt instanceof Date).toBe(true);expect(t.readFinishedAt>=t.statementStartedAt).toBe(true);
+      times.push(t.readFinishedAt);
+    });
+    expect(times).toHaveLength(3);expect(counts.sessions).toEqual({sessions:0,users:0,secrets:0,recent:0});
+  }finally{await context.cleanup();}
+},120000);
 test('cuenta bloqueo real por transacción, incluso cuando pg_locks.database es NULL',async()=>{
   const context=await identityDatabase('load_metrics');const pool=context.database.pool;
   const fixture=await sessionFixture(context);const holder=await pool.connect(),waiter=await pool.connect();

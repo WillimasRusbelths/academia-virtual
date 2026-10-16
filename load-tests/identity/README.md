@@ -175,3 +175,31 @@ Referencias oficiales: [opciones y cookies k6](https://grafana.com/docs/k6/lates
 [TypeScript Node 22](https://nodejs.org/download/release/v22.23.1/docs/api/typescript.html).
 T104 requiere participantes; bootstrap permanece abierto para T106. T095 sigue CLI
 sin programación de purga; D13 conserva custodia/objetivos pendientes, sin SLA aprobado.
+
+## Investigación posterior de T103
+
+`measure.ps1 -Diagnostics` conserva perfiles, pausas, cuotas y umbrales originales;
+añade cgroup CPU para API/BD/k6 y diagnóstico dentro del proceso API. Guarda
+`<ejecucion>-diagnostics.json`: espera de adquisición de conexión, tiempo de sentencias
+visto desde pg (incluye red/backend), número de sentencias, tiempo por ruta y event loop.
+Solo cantidades/estadísticos; nunca SQL, parámetros, resultados, cookies o identidades.
+La instrumentación consume CPU/RAM y sus muestras comparten pool: declarar ese costo.
+Los conteos incluyen timestamps de lectura PostgreSQL separados del timestamp publicado;
+no se desplaza por ello el inicio de la meseta.
+
+Ensayo dirigido antes/después, **sin afirmar capacidad HTTP**:
+
+```powershell
+docker @dc run --rm --no-deps -e LOAD_BENCH_NAME=<nombre-unico> diagnostic-bench -c 'npm run build --workspace apps/api && npx vitest run --config apps/api/vitest.config.ts load-tests/identity/session-benchmark.spec.ts --maxWorkers=1'
+docker @dc run --rm --no-deps runner -c 'npm run build --workspace apps/api && node --experimental-strip-types load-tests/identity/continuity-audit.ts <nombre-ejecucion-sesiones>'
+docker @dc run --rm --no-deps -e RESULT_NAME=<nombre-unico> generator run --out json=/load-private/<nombre-unico>-raw.jsonl /scripts/clock.js
+```
+
+El benchmark usa otro schema de test, 100 pares cuenta/sesión sintéticos del fixture
+existente, 50 recorridos secuenciales y 2000 a concurrencia 100; verifica identidad y
+renovación con las clases reales. API/driver 2 CPU/1 GiB y pool 10; BD 1 CPU/512 MiB.
+No inicia sesión HTTP, no mide Argon2 y no sustituye las cohortes reales de k6.
+La calibración de reloj usa 1000 VU/30 s, sleep 5 s, sin HTTP: cuantifica deriva en
+esa carga mínima, no la precisión bajo el perfil HTTP completo. La auditoría de
+continuidad es solo lectura; no reconstruye actividad reciente a partir de la
+última marca de sesión. Usar nombres nuevos y conservar todos los resultados.
