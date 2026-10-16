@@ -114,7 +114,26 @@ una reproducción de falta de RAM ni una medición de saturación.
 Crudos/resúmenes en volumen privado `/load-private`; metadatos, diff y recursos externos
 en el directorio `.cache` privado del contexto. No copiar fixtures.json ni logs crudos
 a evidencia compartida. [summarize.mjs](summarize.mjs) produce solo agregados y conserva
-exit code, abortos, huecos y si fue smoke/perfil completo. Usar la
+exit code, abortos y huecos. `executionComplete`/`completeProfile` comprueban duración
+completa y ausencia de interrupción; `thresholdsPassed` informa los umbrales aparte.
+Una salida k6 99 puede significar duración completa con umbrales incumplidos.
+[details.mjs](details.mjs) desglosa estados HTTP, latencias por operación/escalón y
+duplicados observados, leyendo exclusivamente los crudos después del ensayo:
+
+```powershell
+docker @dc run --rm --no-deps runner -c 'node --experimental-strip-types load-tests/identity/details.mjs <nombre-ejecucion>'
+docker @dc run --rm --no-deps runner -c 'node --experimental-strip-types load-tests/identity/audit-run.ts <nombre-ejecucion>'
+```
+
+Los snapshots incluyen cantidades de MailDelivery por estado (sin destinatarios).
+[audit-run.ts](audit-run.ts) contrasta sesiones creadas/usuarios/secretos distintos en
+la ventana del ensayo, sin leer credenciales ni modificar datos; cuenta también
+MailDelivery y mensajes capturados por Mailpit. El estado revocado consultado después
+incluye la limpieza dirigida; no acredita revocación durante meseta.
+En T103, copiar solo los archivos de ejecuciones elegidas y telemetría numérica a
+`load-test-results/identity/`, con ACL privada y manifiesto SHA-256; conservar también
+el volumen original. No copiar fixtures.json ni private.env al paquete de resultados.
+Usar la
 [plantilla](report-template.md) para T103, sin inventar resultados.
 
 ## Limpieza dirigida y comprobaciones

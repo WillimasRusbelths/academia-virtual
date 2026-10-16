@@ -10,7 +10,8 @@ try{
   const users=(await database.pool.query('SELECT * FROM "User" ORDER BY id')).rows;
   const marker=(await database.pool.query('SELECT * FROM "SystemState"')).rows;
   const result={at:new Date().toISOString(),accounts:users.length,usersDigest:createHash('sha256').update(JSON.stringify(users)).digest('hex'),
-    singletonDigest:createHash('sha256').update(JSON.stringify(marker)).digest('hex'),groups:await sessionCounts(database.pool,manifest)};
+    singletonDigest:createHash('sha256').update(JSON.stringify(marker)).digest('hex'),groups:await sessionCounts(database.pool,manifest),
+    mailQueue:(await database.pool.query('SELECT status,count(*)::int AS count FROM "MailDelivery" GROUP BY status')).rows};
   const name=process.argv[2];if(!name||!/^[a-z0-9_-]+$/.test(name))throw new Error('Nombre inválido.');
   writeFileSync(`/load-private/${name}.json`,JSON.stringify(result),{mode:0o600});process.stdout.write(JSON.stringify(result)+'\n');
 }finally{await database.close();}

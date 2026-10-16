@@ -11,7 +11,7 @@ $name=$Scenario+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)
 $generator=$context.project+'-generator-'+[guid]::NewGuid().ToString('N').Substring(0,8)
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $revision=(& git -C $repo rev-parse HEAD).Trim()
-$diff=& git -C $repo diff HEAD --binary
+$diff=@(& git -C $repo diff HEAD --binary)
 [IO.File]::WriteAllLines((Join-Path $context.directory ($name+'-diff.patch')),[string[]]$diff,[Text.UTF8Encoding]::new($false))
 $sourceHashes=Get-ChildItem -LiteralPath $PSScriptRoot -File | ForEach-Object {[ordered]@{name=$_.Name;sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()}}
 $os=Get-CimInstance Win32_OperatingSystem

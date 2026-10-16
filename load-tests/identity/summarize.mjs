@@ -26,10 +26,14 @@ if(existsSync('/load-private/server.jsonl'))for await(const line of createInterf
   hashWorkMaxMs=Math.max(hashWorkMaxMs,sample.hash.workMaxMs);peakHashQueue=Math.max(peakHashQueue,sample.hash.peakQueued);peakPoolWait=Math.max(peakPoolWait,sample.pool.waiting);
   peakSessions=Math.max(peakSessions,sample.groups.sessions.sessions);peakUsers=Math.max(peakUsers,sample.groups.sessions.users);peakRecent=Math.max(peakRecent,sample.groups.sessions.recent);
   for(const group of Object.keys(peakSessionsByGroup))peakSessionsByGroup[group]=Math.max(peakSessionsByGroup[group],sample.groups[group].sessions);
-  const elapsed=(time-(scenarioEpoch??started))/1000;if(elapsed>=300&&elapsed<900){plateauSamples++;plateauFirst??=sample.at;plateauLast=sample.at;if(fullPlateau(sample.groups.sessions))fullSamples++;}
+  const elapsed=(time-(scenarioEpoch??started))/1000;if(metadata.scenario==='sessions'&&elapsed>=300&&elapsed<900){plateauSamples++;plateauFirst??=sample.at;plateauLast=sample.at;if(fullPlateau(sample.groups.sessions))fullSamples++;}
 }
 const before=JSON.parse(readFileSync(file('-before.json'),'utf8')),after=JSON.parse(readFileSync(file('-after.json'),'utf8'));
 const cleanup=JSON.parse(readFileSync(file('-cleanup.json'),'utf8'));
+const requiredDurationSeconds={'sessions-warmup':60,sessions:1020,authentication:480}[metadata.scenario]??null;
+const executionComplete=requiredDurationSeconds!==null&&[0,99].includes(metadata.exitCode)&&!metadata.stopReason&&!!k6
+  &&k6.state.testRunDurationMs>=requiredDurationSeconds*1000;
+const thresholdsPassed=k6?Object.values(k6.metrics).every(metric=>Object.values(metric.thresholds??{}).every(threshold=>threshold.ok)):null;
 const result={kind:metadata.scenario,exitCode:metadata.exitCode,apiExitCode:metadata.apiExitCode,durationSeconds:(finished-started)/1000,generatorDurationSeconds:k6?.state?.testRunDurationMs/1000,peakVUs,
   requests:values('http_reqs'),validTraffic:values('identity_valid_traffic_requests'),meMs:values('identity_me_ms'),loginMs:values('identity_login_ms'),
   bytesSent:values('data_sent'),bytesReceived:values('data_received'),
@@ -41,8 +45,8 @@ const result={kind:metadata.scenario,exitCode:metadata.exitCode,apiExitCode:meta
   settings:existsSync('/load-private/settings.json')?JSON.parse(readFileSync('/load-private/settings.json','utf8')):null,
   accountsBefore:before.accounts,accountsAfter:after.accounts,accountsUnchanged:before.usersDigest===after.usersDigest,
   singletonUnchanged:before.singletonDigest===after.singletonDigest,cleanup,
-  k6SummaryPresent:!!k6,completeProfile:!metadata.scenario.startsWith('smoke-')&&metadata.exitCode===0&&!metadata.stopReason&&!!k6,
-  thousandSessionsObserved:peakSessions===1000&&peakUsers===1000&&peakRecent===1000,
+  k6SummaryPresent:!!k6,requiredDurationSeconds,executionComplete,thresholdsPassed,completeProfile:executionComplete,
+  thousandSessionsObserved:fullSamples>0,
   plateauAllSamplesFull:plateauSamples>0&&fullSamples===plateauSamples,plateauFirst,plateauLast,scenarioEpoch,
   stop:metadata.stopReason??(existsSync('/load-private/stop.json')?JSON.parse(readFileSync('/load-private/stop.json','utf8')):null)};
 writeFileSync(file('-report.json'),JSON.stringify(result,null,2),{mode:0o600});process.stdout.write(JSON.stringify(result)+'\n');
