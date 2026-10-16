@@ -11,6 +11,7 @@
     "npm": ">=10.9.8 <11"
   },
   "scripts": {
+    "load:identity:typecheck": "npm run db:generate && npm run build --workspace @academia/api && tsc -p load-tests/identity/tsconfig.json && tsc -p load-tests/identity/tsconfig.strip.json",
     "lint": "npm run lint --workspaces",
     "build": "npm run build --workspaces",
     "test": "npm run lint && npm run build && npm run test:unit && npm run test:integration && npm run test:e2e",

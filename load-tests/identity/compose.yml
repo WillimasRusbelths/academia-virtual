@@ -21,6 +21,8 @@ x-runner: &runner
     LOAD_DIAGNOSTICS: ${LOAD_DIAGNOSTICS:-0}
     LOAD_DIAGNOSTICS_NAME: ${LOAD_DIAGNOSTICS_NAME:-disabled}
   volumes:
+    - ../../package.json:/workspace/package.json:ro
+    - ../../apps/api/tsconfig.json:/workspace/apps/api/tsconfig.json:ro
     - ../../apps/api/src:/workspace/apps/api/src:ro
     - ../../apps/api/tests:/workspace/apps/api/tests:ro
     - ../../apps/api/package.json:/workspace/apps/api/package.json:ro

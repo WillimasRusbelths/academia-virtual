@@ -6,6 +6,36 @@ video o chat ni predicen producción. D10/rúbrica siguen pendientes.
 
 ## Entorno aislado y fixtures
 
+### Tipos del editor y artefactos de la API
+
+Los scripts Node 22 con `--experimental-strip-types` importan la API compilada
+(`apps/api/dist/src/**/*.js`), no sus fuentes con decoradores o propiedades de
+parámetro. TypeScript usa las declaraciones `.d.ts` que emite el mismo build.
+No se versiona ni se edita `dist/` o `apps/api/generated/`.
+
+En Windows, desde la raíz y con Node/npm de las versiones indicadas abajo:
+
+```powershell
+npm.cmd ci --no-audit --no-fund
+npm.cmd run load:identity:typecheck
+```
+
+El segundo comando genera el cliente Prisma offline (sin conectar ni migrar una
+BD), compila la API y comprueba ambos proyectos de carga. Ejecutarlo tras cambiar
+fuentes de API; un build dentro de Docker no publica esos archivos en Windows.
+Si VS Code conserva el diagnóstico, seleccionar **TypeScript: Select TypeScript
+Version → Use Workspace Version**, y **TypeScript: Restart TS Server**. Debe
+desaparecer TS2307 del import `../../apps/api/dist/src/infrastructure/testing/identity-fixtures.js`;
+no basta reiniciar el editor si aún falta el build. También deben estar instalados
+los tipos de Express del lockfile: una instalación local antigua no equivale a
+la imagen Docker.
+
+En un runner aislado usar `npm run load:identity:typecheck` antes de las pruebas;
+Compose monta los manifiestos y tsconfig vigentes. Sus artefactos quedan dentro
+del contenedor. `npm ci` y la preparación del editor no se ejecutan contra cuentas,
+datos ni volúmenes manuales.
+Diagnóstico y comprobaciones: [import de fixtures](../../specs/001-identidad-acceso-roles/evidence/load-import.md).
+
 Requiere Docker Desktop, Windows PowerShell 5.1, Node 22.23.1 y la imagen local API
 construida según [quickstart](../../specs/001-identidad-acceso-roles/quickstart.md).
 k6 está fijado a `grafana/k6:1.6.0`; comprobar `version` y digest en cada entorno.

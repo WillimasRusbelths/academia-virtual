@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { appendFileSync, readFileSync, existsSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 import type { Request,Response,NextFunction } from 'express';
 import { AppModule } from '../../apps/api/dist/src/app.module.js';
 import { configureTransport } from '../../apps/api/dist/src/http/transport.js';
@@ -16,7 +17,7 @@ const environment=loadEnvironment(),database=createDatabase(environment);await a
 const manifest=readManifest('/load-private/fixtures',environment);
 const diagnostic=process.env.LOAD_DIAGNOSTICS==='1'?new Diagnostics(process.env.LOAD_DIAGNOSTICS_NAME??'invalid'):null;
 diagnostic?.install(database.pool);
-const app=await NestFactory.create(AppModule.forRoot(environment,database),{logger:false,bodyParser:false});
+const app=await NestFactory.create<NestExpressApplication>(AppModule.forRoot(environment,database),{logger:false,bodyParser:false});
 let inFlight=0,peakInFlight=0;
 app.use((request:Request,response:Response,next:NextFunction)=>{
   if(request.path.startsWith('/api/v1/')){inFlight++;peakInFlight=Math.max(peakInFlight,inFlight);let done=false;
