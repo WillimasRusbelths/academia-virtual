@@ -21,7 +21,7 @@ La configuración por entorno y el esquema de identidad con cuatro migraciones c
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
 se reutilizan en US1 y US2.
 Las [sesiones, autorización y protecciones HTTP](specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md)
-respaldan la integración de acceso; los demás flujos de identidad siguen pendientes.
+respaldan los flujos implementados; las verificaciones finales de identidad siguen pendientes.
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
 de carga reproducibles; no es una capacidad garantizada.
 
@@ -56,8 +56,8 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
 - [Plan técnico de identidad](specs/001-identidad-acceso-roles/plan.md): decisiones, datos,
   contratos y [guía local planificada](specs/001-identidad-acceso-roles/quickstart.md), con
-  ejecución mediante Docker Compose. Los checkpoints funcionales US1, US2, US4, US6 y US7 están verificados;
-  las demás historias y la aceptación transversal siguen pendientes.
+  ejecución mediante Docker Compose. Los checkpoints de las siete historias están verificados;
+  la aceptación transversal final sigue pendiente.
 
 ## Análisis del sistema
 
@@ -128,7 +128,7 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T093 están completadas, incluidos los checkpoints US1, US2, US4, US5, US7 y
+por roles**. T001–T094 están completadas, incluidos los checkpoints US1, US2, US3, US4, US5, US7 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
 T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
@@ -150,10 +150,11 @@ bajo ese protocolo. El hallazgo intermitente CLI conserva su causa no confirmada
 T089–T090 añaden [pruebas de perfil, inicio y accesibilidad US3](specs/001-identidad-acceso-roles/evidence/us3-pruebas.md):
 contrato `/me` aprobado y una ejecución inicial con 42 casos de interfaz aprobados y 14 fallos esperados.
 T091–T093 implementan [perfil propio, inicio y presentación accesible](specs/001-identidad-acceso-roles/evidence/us3-implementacion.md):
-los 56 casos originales pasan en móvil y escritorio. La [revisión T094](specs/001-identidad-acceso-roles/evidence/us3.md)
-reúne evidencia técnica y visual, con cuentas y credenciales conservadas; falta realizar
-la validación manual con Williams. T094 y el checkpoint de US3 siguen abiertos.
-El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
+los 56 casos originales pasan en móvil y escritorio. La [aceptación T094](specs/001-identidad-acceso-roles/evidence/us3.md)
+reúne evidencia automatizada, revisión visual del agente y recorridos humanos confirmados
+por Williams en ambas resoluciones. T094, V05/SC-005 y el checkpoint US3 quedan cerrados;
+las cuentas y credenciales originales se conservan. Son 94 tareas completas y 14 pendientes.
+Las verificaciones finales T095–T108 siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del
 video y la rúbrica de evaluación permanecen pendientes. No se han ejecutado pruebas de capacidad.
