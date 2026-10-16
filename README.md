@@ -3,7 +3,7 @@
 Proyecto de academia virtual para un trabajo final de curso, con cuatro meses de plazo
 y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-15:** React/NestJS con Docker Compose como entorno local principal.
+**Estado al 2026-10-16:** React/NestJS con Docker Compose como entorno local principal.
 [US1: acceso y cierre de sesión](specs/001-identidad-acceso-roles/evidence/us1.md) está implementada
 y verificada con cuentas de prueba de los tres roles: login, consulta propia, recarga y logout.
 [US2: registro y verificación](specs/001-identidad-acceso-roles/evidence/us2.md) está implementada
@@ -128,7 +128,7 @@ Para cada funcionalidad pequeña:
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
-por roles**. T001–T094 están completadas, incluidos los checkpoints US1, US2, US3, US4, US5, US7 y
+por roles**. T001–T095 están completadas, incluidos los checkpoints US1, US2, US3, US4, US5, US7 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
 T059–T061 corresponden a [escritura de pruebas US4](specs/001-identidad-acceso-roles/evidence/us4-pruebas.md);
 T062–T064 incorporan [consultas, corrección de nombre y alta administrativa](specs/001-identidad-acceso-roles/evidence/us4-implementacion.md).
@@ -153,8 +153,11 @@ T091–T093 implementan [perfil propio, inicio y presentación accesible](specs/
 los 56 casos originales pasan en móvil y escritorio. La [aceptación T094](specs/001-identidad-acceso-roles/evidence/us3.md)
 reúne evidencia automatizada, revisión visual del agente y recorridos humanos confirmados
 por Williams en ambas resoluciones. T094, V05/SC-005 y el checkpoint US3 quedan cerrados;
-las cuentas y credenciales originales se conservan. Son 94 tareas completas y 14 pendientes.
-Las verificaciones finales T095–T108 siguen pendientes. Para ejecutar
+las cuentas y credenciales originales se conservan.
+T095 incorpora [limpieza por lotes y rotación privada](specs/001-identidad-acceso-roles/evidence/retention.md),
+con plazos por evento, reanudación/concurrencia verificadas y [operación documentada](ops/local/logging.md).
+No se activa purga en desarrollo ni el ensayo manual. Son 95 tareas completas y 13 pendientes;
+las verificaciones finales T096–T108 siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del
 video y la rúbrica de evaluación permanecen pendientes. No se han ejecutado pruebas de capacidad.

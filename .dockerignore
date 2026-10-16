@@ -25,5 +25,6 @@ credentials/
 *.key
 *.pem
 *.log
+**/logs/
 backups/
 data/

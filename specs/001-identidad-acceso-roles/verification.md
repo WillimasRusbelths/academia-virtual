@@ -7,7 +7,8 @@ aprobados en su alcance técnico. V01/V02 funcionales, V03 funcional, V04-A/B, V
 V11/V15 y partes de V10/V12/V13 comprobadas en esos checkpoints.
 El [checkpoint técnico US5](evidence/us5.md) añade V09/V12/V14/VA y la
 [comparación temporal T087](evidence/enumeration.md) comprobadas en los flujos P1 actuales.
-Retención/purga, recuperación operativa, carga, aceptación humana y el resto de V01–V16
+[T095](evidence/retention.md) completa retención/purga y rotación privada en su alcance.
+Recuperación operativa, carga, estudio de participantes y el resto de V01–V16
 permanecen pendientes según sus criterios. El hallazgo intermitente CLI sigue abierto,
 con causa no confirmada; no equivale a un fallo reproducido en este bloque.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
@@ -121,6 +122,14 @@ etiquetas y mensajes textuales. Las 12 cuentas originales y su archivo privado c
 la huella inicial. T094 y el checkpoint US3 quedan cerrados; T104/SC-001/SC-010 requieren
 su estudio separado de diez participantes. El hallazgo intermitente CLI sigue abierto
 para T106, sin atribuir resolución a la ausencia de nuevas reproducciones.
+T095 incorpora [retención por lotes y rotación privada](evidence/retention.md): 29/29 pruebas
+nuevas y 195 regresiones de integración verificadas entre lotes, más lint/build y 120
+unitarias/arquitectura. Incluye fronteras exactas por evento, cancelación de entregas antes
+de purgar tokens, FK SET NULL con metadata durante siete días desde finishedAt, reanudación,
+concurrencia, rollback y datos vigentes preservados. Las 12 cuentas originales, las 15 del
+ensayo manual, SystemState y archivo privado mantienen sus huellas. CLI explícita y
+rotación existente verificadas en aislamiento; no se activa purga en desarrollo/manual.
+T096–T108 y el hallazgo intermitente de bootstrap para T106 conservan sus pendientes.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

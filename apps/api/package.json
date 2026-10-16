@@ -13,6 +13,7 @@
     "db:migrate:dev": "node scripts/database.mjs dev",
     "db:migrate:deploy": "node scripts/database.mjs deploy",
     "fixtures:identity": "node dist/src/cli/fixtures-identity.js",
+    "maintenance:retain": "node dist/src/cli/retain-records.js",
     "admin:bootstrap": "node dist/src/cli/bootstrap-admin.js"
   },
   "dependencies": {
