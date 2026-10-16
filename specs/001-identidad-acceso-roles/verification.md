@@ -112,6 +112,11 @@ T089 pasa 18/18 y T090 pasa 56/56, resolviendo sus 14 fallos previos sin modific
 Ocho comprobaciones adicionales de perfil cubren caducidad/revocación, fallo SQL y recuperación
 manual, texto largo y cierre por teclado en ambas resoluciones. Estos resultados preparan
 T094; su aceptación de US3/V05/SC-005 y la observación humana permanecen pendientes.
+La [revisión T094](evidence/us3.md) reúne los resultados válidos anteriores y añade
+inspección visual del agente de diez capturas (dos recorridos adicionales aprobados).
+Faltan los resultados humanos de la validación manual mínima del quickstart: Williams
+confirmó que todavía no la realizó. Las cuentas y credenciales manuales conservan su huella.
+T094/US3 siguen abiertos; el estudio de participantes T104 permanece separado y no se adelanta.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

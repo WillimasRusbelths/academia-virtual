@@ -319,10 +319,12 @@ FR-010–012/021; V05. El backend /me de T036 se reutiliza, no se reimplementa.
 - [x] T091 [US3] Implementar `/perfil` de solo lectura en `apps/web/src/features/profile/profile-page.tsx` y conectar `apps/web/src/app/router.tsx`, consumiendo /me existente: nombre/correo/rol/estado, sin edición autónoma, cambio de correo o contraseña. Dep.: T089, T090. Evidencia: [implementación US3](evidence/us3-implementacion.md).
 - [x] T092 [US3] Completar inicio mínimo en `apps/web/src/features/profile/home-page.tsx`: identidad y único rol, perfil/logout para todos y gestión solo ADMIN; reutilizar sesión actual y no añadir métricas ni funciones académicas. Dep.: T091. Evidencia: [implementación US3](evidence/us3-implementacion.md).
 - [x] T093 [US3] Completar estilos accesibles y presentación móvil en `apps/web/src/shared/ui/layout.css`, `apps/web/src/shared/ui/form-field.tsx`, `apps/web/src/shared/ui/feedback.tsx`, `apps/web/src/features/admin-users/accounts-page.tsx` y formularios afectados por T090: foco visible, errores anunciables/texto, controles etiquetados y tablas adaptadas sin overflow de página. Dep.: T092. Evidencia: [implementación US3](evidence/us3-implementacion.md).
-- [ ] T094 [US3] Ejecutar T089–T090 y recorridos completos de registro/login/inicial/reset/administración/perfil; registrar V05/SC-005 en `specs/001-identidad-acceso-roles/evidence/us3.md`, sin equiparar pruebas automatizadas con usabilidad observada en personas. Dep.: T093.
+- [ ] T094 [US3] Ejecutar T089–T090 y recorridos completos de registro/login/inicial/reset/administración/perfil; registrar V05/SC-005 en `specs/001-identidad-acceso-roles/evidence/us3.md`, sin equiparar pruebas automatizadas con usabilidad observada en personas. Dep.: T093. [Revisión T094](evidence/us3.md): evidencia técnica reutilizada satisfactoria, revisión visual adicional y cuentas/credenciales conservadas; pendiente validación manual, aún no realizada por Williams. Recorridos guiados preparados, sin aceptación atribuida.
 
-**Checkpoint**: siete historias implementadas y probadas individualmente; siguen pendientes
-operación, carga y observación humana antes de declarar aceptación integral.
+**Checkpoint US3 abierto**: implementación y pruebas automatizadas satisfactorias;
+la [revisión T094](evidence/us3.md) distingue revisión visual del agente y validación
+manual pendiente. No se declara cerrada la séptima historia. Siguen pendientes operación,
+carga y observación humana antes de declarar aceptación integral; 93 completas / 15 pendientes.
 
 ## Fase 10: Verificación operativa y aspectos transversales
 

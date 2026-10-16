@@ -150,7 +150,9 @@ bajo ese protocolo. El hallazgo intermitente CLI conserva su causa no confirmada
 T089–T090 añaden [pruebas de perfil, inicio y accesibilidad US3](specs/001-identidad-acceso-roles/evidence/us3-pruebas.md):
 contrato `/me` aprobado y una ejecución inicial con 42 casos de interfaz aprobados y 14 fallos esperados.
 T091–T093 implementan [perfil propio, inicio y presentación accesible](specs/001-identidad-acceso-roles/evidence/us3-implementacion.md):
-los 56 casos originales pasan en móvil y escritorio. El checkpoint de US3 sigue pendiente de T094.
+los 56 casos originales pasan en móvil y escritorio. La [revisión T094](specs/001-identidad-acceso-roles/evidence/us3.md)
+reúne evidencia técnica y visual, con cuentas y credenciales conservadas; falta realizar
+la validación manual con Williams. T094 y el checkpoint de US3 siguen abiertos.
 El resto de las historias y las verificaciones finales siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del
