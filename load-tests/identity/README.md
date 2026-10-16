@@ -161,6 +161,7 @@ No usar down -v sobre desarrollo/manual ni hacer purgas generales.
 npm run build --workspace apps/api
 npx eslint -c load-tests/identity/eslint.config.mjs load-tests/identity
 npx tsc -p load-tests/identity/tsconfig.json
+npx tsc -p load-tests/identity/tsconfig.strip.json
 node --experimental-strip-types --experimental-vm-modules --test load-tests/identity/tooling.test.mjs
 npx vitest run --config apps/api/vitest.config.ts load-tests/identity/fixtures.spec.ts --maxWorkers=1
 ```
@@ -203,3 +204,12 @@ La calibración de reloj usa 1000 VU/30 s, sleep 5 s, sin HTTP: cuantifica deriv
 esa carga mínima, no la precisión bajo el perfil HTTP completo. La auditoría de
 continuidad es solo lectura; no reconstruye actividad reciente a partir de la
 última marca de sesión. Usar nombres nuevos y conservar todos los resultados.
+
+`LOAD_BENCH_TRACE=off` omite solo la instrumentación pg del benchmark; mantiene los
+mismos recorridos y comprobaciones de acceso. No omite controles de producto.
+[diagnostic-report.mjs](diagnostic-report.mjs) lee el directorio archivado y nombre
+de ejecución; conserva ventanas de CPU cgroup, última IO con PIDs>0 y ambas bases
+temporales de meseta. [query-plan.ts](query-plan.ts), tras el ensayo y sobre un destino
+validado, ejecuta EXPLAIN ANALYZE del lookup real y guarda solo nodos/índices/tiempos;
+omite condiciones/valores privados. Un plan en reposo no caracteriza consultas bajo carga.
+Seguimiento y límites: [investigación T103](../../specs/001-identidad-acceso-roles/evidence/load-investigation.md).

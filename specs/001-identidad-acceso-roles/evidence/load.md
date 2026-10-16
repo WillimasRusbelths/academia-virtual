@@ -236,3 +236,13 @@ acreditan capacidad general, producción, matrícula, clases, video o chat.
 T104 requiere participantes reales; siguiente bloque recomendado T104/T105 según
 disponibilidad. Bootstrap intermitente continúa abierto para T106. T095 permanece
 CLI sin programación activada; D13 no tiene SLA aprobado. T104–T108 no se adelantan.
+
+## Seguimiento posterior, conservando este resultado
+
+[Investigación de capacidad](load-investigation.md): corrección acotada y ensayos
+dirigidos/completos posteriores; ID-LOAD-01 conserva incumplimientos de latencia y
+activación tardía, mientras ID-LOAD-02 satisface las referencias en el nuevo ensayo.
+Los 1.201 s de este informe corresponden a la primera publicación completa, no a
+un instante exacto de commit. No se modifican estos valores, los crudos originales
+ni la clasificación provisional pendiente de D10. T103 sigue completa como reporte;
+la aceptación de capacidad permanece abierta.

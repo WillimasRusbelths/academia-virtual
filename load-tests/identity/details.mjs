@@ -6,11 +6,16 @@ import assert from 'node:assert/strict';
 const name=process.argv[2];
 if(!/^[a-z0-9_-]+$/.test(name))throw new Error('Nombre inválido.');
 const root='/load-private/',meta=JSON.parse(readFileSync(root+name+'-meta.json','utf8'));
-let epoch=null;const operations={},stages={},peaks={hashActive:0,duplicateSessions:0,duplicateSecrets:0};
+let epoch=null,lastLoginResponseSeconds=null,lastFirstActivitySeconds=null;const firstSlots=new Set();
+const operations={},stages={},peaks={hashActive:0,duplicateSessions:0,duplicateSecrets:0};
 const durations={};
 for await(const line of createInterface({input:createReadStream(root+name+'-raw.jsonl'),crlfDelay:Infinity})){
   const p=JSON.parse(line);if(p.type!=='Point')continue;
   if(p.metric==='identity_scenario_start_ms')epoch=p.data.value;
+  if(epoch!==null&&p.metric==='identity_sessions_started'&&p.data.value>0)lastLoginResponseSeconds=Math.max(lastLoginResponseSeconds??0,(Date.parse(p.data.time)-epoch)/1000);
+  if(epoch!==null&&p.metric==='identity_active_slot'&&!firstSlots.has(p.data.tags.slot)){
+    firstSlots.add(p.data.tags.slot);lastFirstActivitySeconds=Math.max(lastFirstActivitySeconds??0,(Date.parse(p.data.time)-epoch)/1000);
+  }
   if(p.metric!=='http_req_duration')continue;
   const {name:operation,status}=p.data.tags;
   if(!['login','me','logout','revocation-check'].includes(operation))throw new Error('Operación inesperada.');
@@ -51,6 +56,6 @@ for await(const line of createInterface({input:createReadStream(root+'server.jso
     peaks.duplicateSecrets=Math.max(peaks.duplicateSecrets,c.sessions-c.secrets);
   }
 }
-const result={name,rawCrossChecks:true,operations,authenticationStages:stages,peaks,samples,first,last};
+const result={name,rawCrossChecks:true,lastLoginResponseSeconds,lastFirstActivitySeconds,firstSlotsValidated:firstSlots.size,operations,authenticationStages:stages,peaks,samples,first,last};
 writeFileSync(root+name+'-details.json',JSON.stringify(result,null,2),{mode:0o600});
 process.stdout.write(JSON.stringify(result)+'\n');

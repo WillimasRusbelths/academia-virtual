@@ -12,7 +12,8 @@ test('diagnóstico aislado del recorrido de persistencia; no acredita capacidad 
   try{
     const fixtures=await Promise.all(Array.from({length:100},()=>sessionFixture(context)));
     const diagnostic=new Diagnostics(name!),store=new PostgresSessionStore(context.database.pool),users=new PostgresUserQueries(context.database.pool);
-    diagnostic.install(context.database.pool);
+    const tracing=process.env.LOAD_BENCH_TRACE!=='off';
+    if(tracing)diagnostic.install(context.database.pool);
     const operation=async(index:number)=>diagnostic.operation('me',async()=>{
       const fixture=fixtures[index]!,actor=await store.lookup(fixture.secret);
       expect(actor?.userId).toBe(fixture.userId);expect((await users.getOwn(actor!))?.id).toBe(fixture.userId);expect(await store.accept(actor!)).toBe(true);
@@ -22,7 +23,7 @@ test('diagnóstico aislado del recorrido de persistencia; no acredita capacidad 
     const concurrentStart=performance.now();
     await Promise.all(fixtures.map(async(_,i)=>{for(let n=0;n<20;n++)await operation(i);}));
     const concurrentMs=performance.now()-concurrentStart;
-    const result={name,startedAt,finishedAt:new Date().toISOString(),concurrency:100,operations:2000,concurrentMs,diagnostic:diagnostic.write()};
+    const result={name,tracing,startedAt,finishedAt:new Date().toISOString(),concurrency:100,operations:2000,concurrentMs,diagnostic:diagnostic.write()};
     writeFileSync('/load-private/'+name+'-benchmark.json',JSON.stringify(result),{mode:0o600});
     expect(result.diagnostic.metrics['me/wall']?.count).toBe(2050);
   }finally{await context.cleanup();}
