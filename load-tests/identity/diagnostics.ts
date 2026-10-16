@@ -14,6 +14,7 @@ function queryClass(input:unknown){
   const text=typeof input==='string'?input:typeof input==='object'&&input!==null&&'text' in input?String(input.text):'';
   const verb=text.trim().split(/\s+/)[0]?.toUpperCase()??'OTHER';
   if(['BEGIN','COMMIT','ROLLBACK','SAVEPOINT','RELEASE'].includes(verb))return verb;
+  if(/FOR UPDATE/.test(text)&&text.includes('locked_user'))return 'LOCK_BOTH';
   if(/FOR UPDATE/.test(text))return text.includes('FROM "User"')?'LOCK_USER':'LOCK_SESSION';
   if(text.includes('json_build_object'))return 'SESSION_SNAPSHOT';
   if(text.includes('"Session"'))return verb+'_SESSION';
@@ -29,6 +30,8 @@ export class Diagnostics {
   private lag=monitorEventLoopDelay({resolution:20});
   private initialCpu=cpuStat();
   private initialUsage=process.cpuUsage();
+  private initialWall=Date.now();
+  private initialMonotonic=performance.now();
   private name:string;
   constructor(name:string){this.name=name;if(!/^[a-z0-9_-]+$/.test(name))throw new Error('Nombre diagnóstico inválido.');this.lag.enable();}
   private add(key:string,value:number){let list=this.values.get(key);if(!list){list=[];this.values.set(key,list);}list.push(value);}
@@ -66,6 +69,6 @@ export class Diagnostics {
     const ctx=this.context(route),start=performance.now();response.once('finish',()=>this.finish(ctx,start));this.scope.run(ctx,next);
   }
   async operation<T>(route:string,work:()=>Promise<T>){const ctx=this.context(route),start=performance.now();try{return await this.scope.run(ctx,work);}finally{this.finish(ctx,start);}}
-  sample(){const lag={meanMs:Number.isFinite(this.lag.mean)?this.lag.mean/1e6:0,p99Ms:this.lag.percentile(99)/1e6,maxMs:this.lag.max/1e6};this.lag.reset();return {lag,cpu:cpuStat(),usage:process.cpuUsage(this.initialUsage),eventLoopUtilization:performance.eventLoopUtilization()};}
+  sample(){const lag={meanMs:Number.isFinite(this.lag.mean)?this.lag.mean/1e6:0,p99Ms:this.lag.percentile(99)/1e6,maxMs:this.lag.max/1e6};this.lag.reset();const wallMs=Date.now()-this.initialWall,monotonicMs=performance.now()-this.initialMonotonic;return {clock:{wallMs,monotonicMs,driftMs:wallMs-monotonicMs},lag,cpu:cpuStat(),usage:process.cpuUsage(this.initialUsage),eventLoopUtilization:performance.eventLoopUtilization()};}
   write(){this.lag.disable();const result={name:this.name,initialCpu:this.initialCpu,final:this.sample(),metrics:Object.fromEntries([...this.values].map(([key,values])=>[key,stats(values)]))};writeFileSync('/load-private/'+this.name+'-diagnostics.json',JSON.stringify(result),{mode:0o600});return result;}
 }

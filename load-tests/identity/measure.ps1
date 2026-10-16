@@ -2,12 +2,14 @@
 param(
   [Parameter(Mandatory=$true)][string]$ContextFile,
   [Parameter(Mandatory=$true)][ValidateSet('sessions-warmup','sessions','authentication','smoke-sessions','smoke-authentication')][string]$Scenario,
-  [switch]$Diagnostics
+  [switch]$Diagnostics,
+  [switch]$EngineDiagnostics
 )
 . (Join-Path $PSScriptRoot '../../ops/recovery/common.ps1')
 $context=Get-Content -LiteralPath $ContextFile -Raw | ConvertFrom-Json
 if($context.project -notmatch '^identity-load-[a-f0-9]{12}$'){throw 'Proyecto aislado invalido.'}
 $compose=@('compose','--project-name',$context.project,'--env-file',$context.envFile,'-f',(Join-Path $PSScriptRoot 'compose.yml'))
+if($EngineDiagnostics){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.engine.yml'))}
 $name=$Scenario+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)
 $env:LOAD_DIAGNOSTICS=if($Diagnostics){'1'}else{'0'}
 $env:LOAD_DIAGNOSTICS_NAME=$name
@@ -30,8 +32,9 @@ $imageDigests=foreach($image in @('academia-local-api:latest','postgres:16.14-bo
 $script=if($Scenario.StartsWith('smoke-')){'smoke.js'}elseif($Scenario -eq 'authentication'){'authentication.js'}else{'sessions.js'}
 $phase=if($Scenario -eq 'sessions-warmup'){'warmup'}else{'measured'}
 $kind=if($Scenario -eq 'smoke-authentication'){'authentication'}else{'sessions'}
+$elapsed=[Diagnostics.Stopwatch]::StartNew()
 $started=[DateTime]::UtcNow
-$metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
+$metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;engineDiagnostics=[bool]$EngineDiagnostics;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
   lockSha256=(Get-FileHash -LiteralPath (Join-Path $repo 'package-lock.json') -Algorithm SHA256).Hash.ToLowerInvariant();
   diffSha256=(Get-FileHash -LiteralPath (Join-Path $context.directory ($name+'-diff.patch')) -Algorithm SHA256).Hash.ToLowerInvariant();
   hardware=$hardware;containers=$images;imageDigests=$imageDigests;k6=$k6;network='Docker bridge interna, sin puertos publicados; API y generador separados';finishedAt=$null;exitCode=$null}
@@ -43,8 +46,8 @@ try{
     'generator','run','--out',('json=/load-private/'+$name+'-raw.jsonl'),('/scripts/'+$script)))
   while((Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$generator)).Trim() -eq 'true'){
     $stats=Invoke-RecoveryDocker (@('stats','--no-stream','--format','{{json .}}')+$containers+@($generator))
-    $sample=[ordered]@{at=[DateTime]::UtcNow.ToString('o');docker=($stats -split "`n" | ForEach-Object {$_|ConvertFrom-Json})}
-    if($Diagnostics){
+    $sample=[ordered]@{at=[DateTime]::UtcNow.ToString('o');elapsedMonotonicMs=$elapsed.Elapsed.TotalMilliseconds;docker=($stats -split "`n" | ForEach-Object {$_|ConvertFrom-Json})}
+    if($Diagnostics -or $EngineDiagnostics){
       $cgroups=@{}
       foreach($target in @(@{role='api';id=$containers[0]},@{role='database';id=$containers[1]},@{role='generator';id=$generator})){
         if((Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$target.id)).Trim() -eq 'true'){
@@ -81,7 +84,7 @@ try{
 }catch{$metadata['stopReason']='MONITOR_OR_DOCKER_FAILURE';throw}finally{
   $running=Invoke-RecoveryDocker @('ps','--filter',('name=^/'+$generator+'$'),'--format','{{.Names}}')
   if($running.Trim() -eq $generator){$null=Invoke-RecoveryDocker @('stop','--time','1',$generator)}
-  $metadata.finishedAt=[DateTime]::UtcNow.ToString('o');$metadata.exitCode=$exitCode
+  $metadata.finishedAt=[DateTime]::UtcNow.ToString('o');$metadata['elapsedMonotonicMs']=$elapsed.Elapsed.TotalMilliseconds;$elapsed.Stop();$metadata.exitCode=$exitCode
   $metadata['resources']=$resources;$metadata['resourceSamples']=$resourceSamples
   $logs=Invoke-RecoveryDocker @('logs',$generator)
   [IO.File]::WriteAllText((Join-Path $context.directory ($name+'-generator.log')),$logs,[Text.UTF8Encoding]::new($false))

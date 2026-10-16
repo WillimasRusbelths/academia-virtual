@@ -126,6 +126,24 @@ test.each([2, 3])('conflictos transitorios: %i fallos, máximo dos reintentos y 
   }
 });
 
+test('accept conserva User bloqueado mientras espera Session',async()=>{
+  const fixture=await sessionFixture(context),actor=(await store.lookup(fixture.secret))!;
+  const holder=await context.database.pool.connect(),probe=await context.database.pool.connect();
+  let pending:Promise<boolean>|undefined;
+  try{
+    await holder.query('BEGIN');await holder.query('SELECT id FROM "Session" WHERE id=$1 FOR UPDATE',[fixture.sessionId]);
+    pending=store.accept(actor);let blocked=false;
+    for(let i=0;i<100;i++){
+      blocked=(await context.database.pool.query(`SELECT EXISTS(SELECT 1 FROM pg_stat_activity
+        WHERE usename=current_user AND pid<>pg_backend_pid() AND wait_event_type='Lock') AS blocked`)).rows[0].blocked;
+      if(blocked)break;await new Promise(resolve=>setTimeout(resolve,10));
+    }
+    expect(blocked).toBe(true);await probe.query('BEGIN');
+    await expect(probe.query('SELECT id FROM "User" WHERE id=$1 FOR UPDATE NOWAIT',[fixture.userId])).rejects.toMatchObject({code:'55P03'});
+    await probe.query('ROLLBACK');await holder.query('ROLLBACK');expect(await pending).toBe(true);
+  }finally{await probe.query('ROLLBACK');await holder.query('ROLLBACK');probe.release();holder.release();await pending?.catch(()=>undefined);}
+});
+
 test.each(['revoke','version','role','expiry'] as const)('accept revalida después de esperar bloqueo: %s',async change=>{
   const fixture=await sessionFixture(context),actor=(await store.lookup(fixture.secret))!;
   const holder=await context.database.pool.connect();let pending:Promise<boolean>|undefined;

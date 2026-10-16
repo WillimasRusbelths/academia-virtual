@@ -11,13 +11,17 @@ export const loginMs=new Trend('identity_login_ms',true),meMs=new Trend('identit
 export const started=new Counter('identity_sessions_started'),closed=new Counter('identity_logouts_completed');
 const requests=new Counter('identity_valid_traffic_requests');
 const epoch=new Gauge('identity_scenario_start_ms');
+const loginDispatch=new Gauge('identity_login_dispatch_ms'),loginReceived=new Gauge('identity_login_received_ms');
+const wallVsRun=new Gauge('identity_wall_vs_run_ms');
 const headers={'Content-Type':'application/json',Origin:'http://localhost:5173','X-CSRF-Protection':'1'};
 export function account(group){try{return accountFor(accounts,group,exec.vu.idInTest);}catch{exec.test.abort('Falta cuenta exclusiva para VU.');}}
 export function params(name,expected=200){return {headers,tags:{name},timeout:'10s',redirects:0,responseCallback:http.expectedStatuses(expected)};}
 function result(response,valid){requests.add(1);errors.add(!valid);if(response.status===503)unavailable.add(1);return valid;}
 export function login(a){
   epoch.add(exec.scenario.startTime);
+  const slot={slot:String(exec.vu.idInTest)};loginDispatch.add(Date.now()-exec.scenario.startTime,slot);
   const response=http.post(`${base}/auth/login`,JSON.stringify({email:a.email,password:a.password}),params('login'));
+  loginReceived.add(Date.now()-exec.scenario.startTime,slot);
   loginMs.add(response.timings.duration);let data;try{data=response.json('data');}catch{data=null;}
   const matches=response.status!==200||data?.id===a.id;
   mismatch.add(matches?0:1);revocationFailures.add(0);unavailable.add(0);closed.add(0);
@@ -26,6 +30,7 @@ export function login(a){
 }
 export function me(a){
   const response=http.get(`${base}/me`,params('me'));meMs.add(response.timings.duration);
+  wallVsRun.add(Date.now()-exec.scenario.startTime-exec.instance.currentTestRunDuration);
   let data;try{data=response.json('data');}catch{data=null;}
   const matches=response.status!==200||data?.id===a.id;
   mismatch.add(matches?0:1);return result(response,response.status===200&&data?.id===a.id&&data.role==='STUDENT');

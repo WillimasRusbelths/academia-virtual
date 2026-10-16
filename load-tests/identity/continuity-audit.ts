@@ -23,8 +23,12 @@ try{
     samples.push({at:sample.at,observed:sample.groups.sessions.sessions,createdAndNotRevokedAtTimestamp:count});
   }
   const before=Date.now(),clock=(await database.pool.query('SELECT clock_timestamp() AS now')).rows[0].now as Date,after=Date.now();
+  const boundary=(await database.pool.query(`WITH cohort AS (SELECT id,ordinality::int AS slot FROM unnest($1::uuid[]) WITH ORDINALITY AS c(id,ordinality))
+    SELECT c.slot,extract(epoch FROM (s."createdAt"-$4::timestamptz))::float8 AS "createdSeconds"
+    FROM "Session" s JOIN cohort c ON c.id=s."userId" WHERE s."createdAt">=$2 AND s."createdAt"<=$3
+    ORDER BY s."createdAt" DESC LIMIT 20`,[ids,meta.startedAt,meta.finishedAt,new Date(report.scenarioEpoch)])).rows;
   const result={name,sessions:rows,lastCreatedSeconds:(new Date(rows.last).getTime()-report.scenarioEpoch)/1000,
     firstRevocationSeconds:(new Date(rows.firstRevocation).getTime()-report.scenarioEpoch)/1000,samples,
-    currentClock:{offsetMidpointMs:clock.getTime()-(before+after)/2,roundTripMs:after-before}};
-  writeFileSync(root+name+'-continuity.json',JSON.stringify(result),{mode:0o600});process.stdout.write(JSON.stringify(result)+'\n');
+    boundary,currentClock:{offsetMidpointMs:clock.getTime()-(before+after)/2,roundTripMs:after-before}};
+  writeFileSync(root+name+'-continuity.json',JSON.stringify(result),{mode:0o600,flag:'wx'});process.stdout.write(JSON.stringify(result)+'\n');
 }finally{await database.close();}

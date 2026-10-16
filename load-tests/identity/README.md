@@ -243,3 +243,46 @@ temporales de meseta. [query-plan.ts](query-plan.ts), tras el ensayo y sobre un 
 validado, ejecuta EXPLAIN ANALYZE del lookup real y guarda solo nodos/índices/tiempos;
 omite condiciones/valores privados. Un plan en reposo no caracteriza consultas bajo carga.
 Seguimiento y límites: [investigación T103](../../specs/001-identidad-acceso-roles/evidence/load-investigation.md).
+
+### Observación del motor PostgreSQL y frontera de meseta
+
+[compose.engine.yml](compose.engine.yml) habilita opcionalmente pg_stat_statements,
+planificación y tiempos I/O/WAL **solo en el proyecto aislado de carga**. Reinicia
+su BD conservando volumen, CPU/RAM, pool y durabilidad. No usar el Compose manual.
+Con API/ensayos detenidos y `$dc` definido como arriba:
+
+```powershell
+$engineDc=$dc+@('-f','load-tests/identity/compose.engine.yml')
+docker @engineDc up -d --wait db
+Get-Content -Raw load-tests/identity/prepare-engine.sql | docker @engineDc exec -T db psql -U postgres -d academia_v00_test
+docker @engineDc run --rm --no-deps -e LOAD_BENCH_NAME=<nombre-nuevo> diagnostic-bench -c 'npm run build --workspace apps/api && npx vitest run --config apps/api/vitest.config.ts load-tests/identity/session-benchmark.spec.ts --maxWorkers=1'
+powershell -NoProfile -ExecutionPolicy Bypass -File load-tests/identity/measure.ps1 -ContextFile <context.json> -Scenario sessions-warmup -EngineDiagnostics
+powershell -NoProfile -ExecutionPolicy Bypass -File load-tests/identity/measure.ps1 -ContextFile <context.json> -Scenario sessions -EngineDiagnostics
+```
+
+[prepare-engine.sql](prepare-engine.sql) exige marcador/BD aislados antes de crear
+la extensión en un schema de observación; no cambia cuentas ni privilegios de
+escritura del runtime. [engine.ts](engine.ts) exporta agregados por clase, nunca SQL,
+queryid, parámetros, resultados o identidades. El benchmark captura antes/después;
+API lo hace cada cinco muestras completas (no exactamente cinco segundos si espera
+pool). Añade event loop, CPU y comparación de reloj civil/monotónico sin envolver pg,
+salvo que también se pida `-Diagnostics`. Todo el costo de observación se declara.
+Ese modo conserva también `<ejecución>-cpu.cpuprofile` privado del proceso Node API,
+para identificar funciones que consumen CPU; no perfila los workers nativos Argon2
+ni constituye una ejecución sin sobrecosto del perfilador.
+[cpu-report.mjs](cpu-report.mjs) resume muestras por función, incluyendo idle/GC y
+los huecos del muestreo; sus porcentajes no son milisegundos CPU ni latencias HTTP.
+
+[engine-report.mjs](engine-report.mjs) calcula deltas con ventana explícita; rechaza
+reinicios de contadores. Las máximas por sentencia son acumuladas, no percentiles
+del intervalo. Estadísticas database/WAL pueden publicarse con retraso; I/O abarca
+el clúster aislado, no una operación exclusiva. No deducir espera de disco de bytes.
+Restaurar configuración base con `docker @dc up -d --wait db` solo tras detener API;
+la extensión queda en la BD aislada para reproducir observación, no en manual.
+
+Las métricas `identity_login_dispatch_ms`/`identity_login_received_ms` registran
+offsets por slot de VU antes/después de su HTTP login; no incluyen cuentas.
+`identity_wall_vs_run_ms` compara reloj civil con la duración de ejecución de
+[k6/execution](https://grafana.com/docs/k6/latest/javascript-api/k6-execution/).
+No cambian rampas, pausas, cuotas, login único ni el intervalo [300,900) de meseta.
+Una activación tardía conserva su fallo aunque todas las muestras posteriores sean 1000.

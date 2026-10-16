@@ -7,7 +7,7 @@ import { stopReason } from './observe.ts';
 const accounts=Object.entries({sessions:1000,warmup:20,authentication:100}).flatMap(([group,count])=>Array.from({length:count},(_,index)=>({group,index,id:`${group}-${index}`,email:`${group}-${index}@example.test`,password:'private-canary'})));
 async function script(file,env={},slot=1){
   const state={now:0,sleeps:[],requests:[],metrics:{},badLogin:false,badIdentity:false};
-  const execution={vu:{idInTest:slot,iterationInScenario:0},scenario:{startTime:0},test:{abort(){throw new Error('ABORT');}}};
+  const execution={instance:{get currentTestRunDuration(){return state.now;}},vu:{idInTest:slot,iterationInScenario:0},scenario:{startTime:0},test:{abort(){throw new Error('ABORT');}}};
   const response=(status,id)=>({status,timings:{duration:12},json:()=>({id,role:'STUDENT'})});
   const http={expectedStatuses:x=>x,cookieJar:()=>({cookiesForURL:()=>({sid:['cookie-canary']})}),
     post(url,body,params){state.requests.push({url,body,params});return url.endsWith('/login')?response(state.badLogin?503:200,state.badIdentity?'other':accounts.find(a=>a.email===JSON.parse(body).email).id):response(204);},
@@ -43,6 +43,8 @@ test('warmup independiente 20/1 min y cookies persistentes',async()=>{
 test('tres iteraciones mantienen un login por VU y pausa de 5–10 s',async()=>{
   const {module,state}=await script('sessions.js');for(let i=0;i<3;i++)module.default();
   assert.equal(state.requests.filter(r=>r.url.endsWith('/login')).length,1);assert.equal(state.requests.filter(r=>r.url.endsWith('/me')).length,3);
+  assert.equal(state.metrics.identity_login_dispatch_ms.length,1);assert.equal(state.metrics.identity_login_received_ms.length,1);
+  assert.equal(state.metrics.identity_login_dispatch_ms[0].tags.slot,'1');
   assert.ok(state.sleeps.every(s=>s>=5&&s<=10));
 });
 test('VU 1000 usa cuenta 1000 y headers reales',async()=>{
