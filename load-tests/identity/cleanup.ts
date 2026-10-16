@@ -26,6 +26,7 @@ export async function cleanup(environment:Environment,pool:Pool,directory:string
   }catch{await client.query('ROLLBACK');throw failure();}finally{client.release();}
 }
 if(process.argv[1]&&pathToFileURL(path.resolve(process.argv[1])).href===import.meta.url){
+  if(process.argv.length>3)throw failure();
   const mode=process.argv[2]??'sessions';if(!['sessions','accounts'].includes(mode))throw failure();
   const database=createDatabase(loadEnvironment());cleanup(loadEnvironment(),database.pool,'/load-private/fixtures',mode as 'sessions'|'accounts')
     .then(r=>process.stdout.write(JSON.stringify(r)+'\n')).catch(()=>{process.stderr.write('Limpieza no completada. Valores omitidos.\n');process.exitCode=1;}).finally(()=>database.close());

@@ -138,6 +138,12 @@ migración correctiva, invalidación y reinicio en otro proceso Node. RPO conser
 ≤23.875 s y RTO local 27.147 s, sin SLA aprobado por D13. Se preservan las 15 cuentas
 manuales y credenciales; T095 continúa sin programación de purga. T099–T108 siguen
 pendientes; T104 requiere participantes y el hallazgo de bootstrap sigue abierto para T106.
+T099–T102 completan la [preparación verificable de carga](evidence/load-preparation.md):
+k6 real y cohortes 1000+20+100, perfiles exactos inspeccionados, contadores y captura
+privada con smokes de 2 VU, controles deterministas y parada por fallo de monitor.
+Los perfiles completos, sus umbrales y las 1000 sesiones durante diez minutos todavía
+requieren T103; no se extrapolan los smokes. T104 y bootstrap/T106 siguen pendientes;
+T095 no tiene programación de purga y D13 no tiene SLA aprobado.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

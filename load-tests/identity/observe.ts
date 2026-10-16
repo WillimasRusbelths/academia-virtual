@@ -20,3 +20,6 @@ export function stopReason(waitMaxMs:number,memoryCurrent:number,memoryLimit:num
   if(Number.isFinite(memoryLimit)&&memoryLimit>0&&memoryLimit-memoryCurrent<128*1024*1024)return 'MEMORY_HEADROOM_UNDER_128M';
   return null;
 }
+export async function databaseActivity(pool:Pool){return (await pool.query(`SELECT count(*)::int AS connections,
+  (SELECT count(*)::int FROM pg_locks l JOIN pg_stat_activity a ON a.pid=l.pid WHERE a.datname=current_database() AND NOT l.granted) AS "lockWaiters",
+  count(*) FILTER(WHERE state='active')::int AS active FROM pg_stat_activity WHERE datname=current_database()`)).rows[0];}

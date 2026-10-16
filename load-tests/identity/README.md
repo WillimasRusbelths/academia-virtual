@@ -91,6 +91,9 @@ credenciales; conserva concurrencia 2, cola 50, espera 5000 ms y parámetros de 
 
 [measure.ps1](measure.ps1) guarda revisión/diff, hashes de scripts/lock, imágenes/digests,
 SO/CPU/RAM/disco, red/límites y estadísticas Docker de API/BD/generador (CPU/RAM/IO/red).
+IO/red en el resumen son la última observación de contadores Docker, no tasas; pueden
+reiniciarse al salir el contenedor. Conservar la serie cruda y bytes enviados/recibidos
+de k6. El resumen distingue el tiempo del generador del tiempo externo de orquestación.
 El intervalo externo depende de Docker/CIM; los timestamps permiten declarar huecos.
 El observador comparte CPU/pool con API: declarar ese costo. k6 registra RPS,
 p50/p95/p99 por operación, estados/503 y errores; 401 esperado de revocación va aparte.
@@ -102,6 +105,11 @@ menos de 256 MiB disponibles en Windows, OOM o fallo de monitor/Docker. Estos m�
 son de seguridad del ensayo, no umbrales de capacidad. El watchdog cierra la aplicación;
 el orquestador detiene k6 y conserva resultado parcial/fallo. No silenciar 503 ni
 reducir Argon2 para continuar. Si existe stop.json, investigar antes de otra ejecución.
+La prueba negativa usa [watchdog-fixture.ts](watchdog-fixture.ts), con
+LOAD_WATCHDOG_TEST=1 y acción inject, dentro del runner aislado mientras corre un smoke;
+debe abortar, registrar el motivo y revocar sobrantes. La acción archive solo archiva
+una señal con testInjected=true; rechaza retirar paradas reales. Esta prueba no es
+una reproducción de falta de RAM ni una medición de saturación.
 
 Crudos/resúmenes en volumen privado `/load-private`; metadatos, diff y recursos externos
 en el directorio `.cache` privado del contexto. No copiar fixtures.json ni logs crudos
@@ -112,8 +120,10 @@ exit code, abortos, huecos y si fue smoke/perfil completo. Usar la
 ## Limpieza dirigida y comprobaciones
 
 `measure.ps1` detiene API y revoca sesiones sobrantes al acabar, también tras fallo;
-informa esa limpieza separada de los logouts. Conserva las 1120 cuentas. Para limpieza
-explícita posterior:
+informa esa limpieza separada de los logouts. Conserva las 1120 cuentas.
+Una terminación forzada del host puede impedir finally; reanudar con limpieza dirigida
+antes de repetir. No se promete limpieza automática tras apagar Docker o el equipo.
+Para limpieza explícita posterior:
 
 ```powershell
 docker @dc run --rm --no-deps runner -c 'node --experimental-strip-types load-tests/identity/cleanup.ts sessions'

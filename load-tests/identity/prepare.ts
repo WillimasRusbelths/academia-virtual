@@ -26,6 +26,7 @@ export async function prepare(environment:Environment,pool:Pool,directory:string
   }catch{await client.query('ROLLBACK');throw failure();}finally{client.release();}
 }
 if(process.argv[1]&&pathToFileURL(path.resolve(process.argv[1])).href===import.meta.url){
+  if(process.argv.length!==2)throw failure();
   const database=createDatabase(loadEnvironment());
   prepare(loadEnvironment(),database.pool,'/load-private/fixtures').then(r=>process.stdout.write(JSON.stringify(r)+'\n'))
     .catch(()=>{process.stderr.write('Preparación no completada. Valores omitidos.\n');process.exitCode=1;}).finally(()=>database.close());

@@ -79,6 +79,97 @@ cola observada 0; no mide aún saturación del perfil de 100 VU. La decisión de
 por espera **>5000 ms** y margen RAM se verifica con controles de frontera; no se
 afirma haber agotado RAM real. La parada ante fallo de monitor se ensaya con T102.
 
-T099–T101 completas como preparación/implementación; T102 aún cierra captura y reporte.
-La ejecución completa y los 1000 activos por diez minutos siguen en T103. T104,
-bootstrap/T106 y D13 se conservan pendientes; no purga programada ni SLA aprobado.
+## T102 — captura y reporte comprobados
+
+[measure.ps1](../../../load-tests/identity/measure.ps1),
+[resumen](../../../load-tests/identity/summarize.mjs) y
+[plantilla](../../../load-tests/identity/report-template.md). Cada ejecución registra
+HEAD/diff privado, hashes de scripts/lock, imágenes/digests, SO/CPU/RAM/disco/red,
+límites, pool y hash; captura recursos Docker y telemetría numérica del proceso API.
+La imagen base se complementa con montaje del código actual y build: su digest solo
+no identifica el código montado. Lock instalado y host coinciden:
+`6f2c05e1f0f7fa2e0f084ac7977f4360e9260814728e0590db82bced925a6292`.
+
+Entorno medido: Windows 11 Pro, Ryzen 7 3750H, ocho hilos, 14 966 218 752 bytes RAM
+visible; Docker ocho CPU/7 236 882 432 bytes. Disco D: NTFS fijo lógico,
+322 122 543 104 bytes, aproximadamente 316 963 MB libres durante el ensayo; no se
+midió rendimiento físico de disco. API 2 CPU/1 GiB, BD 1 CPU/512 MiB y generador
+1 CPU/512 MiB, en contenedores separados pero misma laptop/VM; contención declarada,
+incluidos servicios manuales y costo del observador/pool. HTTP local sin TLS.
+
+Los dos smokes finales son programas técnicos separados, **2 VU × 2 iteraciones**;
+no sustituyen ni aprueban los perfiles completos. Duración/RPS de k6 se distingue
+del tiempo externo de preparación/consulta de Docker:
+
+| Métrica real | Sesiones `smoke-sessions-e9db9e6e` | Autenticación `smoke-authentication-a2d221cb` |
+| --- | ---: | ---: |
+| Duración del generador / orquestación | 16.733 / 20.103 s | 10.420 / 13.354 s |
+| VU activos máximos / pico de solicitudes API en vuelo | 2 / 2 | 2 / 2 |
+| Solicitudes totales / RPS total | 10 / 0.598 | 12 / 1.152 |
+| Login p50 / p95 / p99 | 152.122 / 154.645 / 154.869 ms | 162.304 / 219.477 / 220.023 ms |
+| /me p50 / p95 / p99 | 33.114 / 36.846 / 37.112 ms | 16.235 / 20.228 / 20.536 ms |
+| Sesiones distintas observadas en cohorte ID-LOAD-01 | 2 | 0; cohorte diferente, sesiones muy breves entre login/logout |
+| Logins / logouts completados | 2 / 2 | 4 / 4 |
+| Errores inesperados / 503 / cruces / revocaciones aceptadas | 0 / 0 / 0 / 0 | 0 / 0 / 0 / 0 |
+| Trabajo Argon2 máximo / espera máxima | 72.139 / 0.076 ms | 108.281 / 0.082 ms |
+| Cola hash máxima / espera pool máxima / locks esperando | 0 / 0 / 0 | 0 / 0 / 0 |
+| Pico CPU Docker API / BD / generador | 30.75 / 11.88 / 1.77 % | 26.34 / 12.85 / 2.19 % |
+| Pico memoria Docker API / BD / generador | 104.5 / 49.26 / 14.18 MiB | 143.4 / 52.92 / 14 MiB |
+| Bytes k6 enviados / recibidos | 2514 / 5052 | 3244 / 6168 |
+| Muestras servidor / recursos externos | 20 / 6 | 14 / 4 |
+| Mayor hueco entre muestras servidor | 1027 ms | 1014 ms |
+| Cuentas antes/después / cambios de User o singleton | 1120/1120 / ninguno | 1120/1120 / ninguno |
+| Limpieza posterior / salida k6 y API | 0 sobrantes / 0 y 0 | 0 sobrantes / 0 y 0 |
+
+Percentiles sobre muestras mínimas, sin conclusión de capacidad. El monitor de 1 s
+puede no observar sesiones cortas de autenticación: se conservan cuatro logins/logout
+reales y contadores k6, no se infiere ausencia de sesiones de un muestreo cero.
+Recursos externos se consultan aproximadamente cada 3–4 s; timestamps/series crudas
+conservan intervalos reales. IO/red Docker son contadores observados, no tasas; el
+valor final del generador puede reiniciarse a cero al salir. Bytes HTTP de k6 y
+series Docker quedan aparte. No se midió tráfico de otras aplicaciones del host.
+
+**Prueba negativa controlada** `smoke-sessions-c4d2a267`: señal de monitor no disponible
+con testInjected=true, sin agotar memoria ni alterar Argon2. Generador interrumpido:
+**exit 105**, 2.824 s, cuatro solicitudes, dos sesiones y **cero logouts**. La API cerró
+con 0; limpieza dirigida revocó **dos sobrantes**, sin borrar cuentas. El orquestador
+devuelve fallo y reporta MONITOR_UNAVAILABLE, completeProfile=false. No se cuenta como
+smoke exitoso ni evidencia de revocación durante meseta. Se archivó solo la señal
+marcada como fixture; una parada real no se retira por ese comando.
+Snapshot final: 1120 cuentas y cero sesiones válidas en las tres cohortes.
+
+[Prueba de locks](../../../load-tests/identity/metrics.spec.ts): 1/1, con bloqueo real
+entre dos transacciones y cero al liberar. Incluye locks de transactionid cuyo campo
+database es NULL, sin ampliar permisos. El watchdog tiene controles de frontera de
+espera 5000 ms y margen RAM; no se afirma haber provocado OOM real.
+
+## Comprobaciones, fallos conservados y límites
+
+Lint y build API/web, lint y tipos de herramientas, sintaxis PS5.1, **120/120 unitarias/
+arquitectura**, **12/12 controles del runner**, **9/9 fixtures**, **1/1 locks** y
+**26/26 regresiones credentials/login**, cero omitidas en los lotes válidos. Las siete
+de credentials se repitieron con aserciones de telemetría. No se presenta esto como la
+regresión integral/E2E de T106. Enlaces locales y git diff --check comprobados.
+
+Se conservan como fallos de preparación: orden textual del PHC, reportero sin montaje,
+primer chequeo con código web/plugin de arquitectura antiguos de la imagen (74/75 API,
+no aprobado), selección ambigua de runner con otro contenedor de regresión activo,
+propagación SIGTERM vía shell y alias SQL de locks convertido a minúsculas. Se corrigió
+el montaje/selección, exec de Node y alias; se repitieron los controles pertinentes.
+Las salidas API finales son 0; los intentos previos no se cuentan como captura aprobada.
+No se alteraron requisitos, muestras de perfiles ni umbrales para aprobar.
+
+Reproducción exacta de preparación, inspect, smokes y limpieza en el
+[runbook](../../../load-tests/identity/README.md). Crudos en volumen privado y `.cache`
+del contexto, ya ignorados junto con load-test-results por .gitignore; no se versionan
+credenciales/cookies/logs crudos. Las 1120 cuentas permanecen para T103. Huellas antes/
+después de las **15 cuentas manuales, 12 originales, credenciales y singleton idénticas**;
+no se restaura, purga ni elimina un volumen de desarrollo/manual. Servicios del ensayo
+detenidos al finalizar; volúmenes privados conservados.
+
+T099–T102 completas como preparación, implementación y captura verificadas. **T103
+sigue pendiente**: no se ejecutaron warmup completo 20/1 min, ID-LOAD-01 de 17 min ni
+ID-LOAD-02 de 8 min. No se demuestran 1000 sesiones activas ni un SLA/capacidad de
+producción, matrícula, clases, video o chat. D10/rúbrica y D13 siguen pendientes;
+T104 necesita participantes reales y el hallazgo intermitente de bootstrap queda
+abierto para T106. T095 continúa como CLI sin programación de purga. Siguiente: T103.

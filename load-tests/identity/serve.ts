@@ -9,7 +9,7 @@ import { loadEnvironment } from '../../apps/api/dist/src/infrastructure/config/e
 import { createDatabase } from '../../apps/api/dist/src/infrastructure/database/database.js';
 import { credentialMetrics, ARGON2_PARAMETERS, HASH_CONCURRENCY, HASH_QUEUE_MAX, HASH_WAIT_MS } from '../../apps/api/dist/src/modules/identity/infrastructure/credentials.js';
 import { assertLoadTarget,readManifest } from './fixtures.ts';
-import { sessionCounts,stopReason } from './observe.ts';
+import { sessionCounts,stopReason,databaseActivity } from './observe.ts';
 
 const environment=loadEnvironment(),database=createDatabase(environment);await assertLoadTarget(environment,database.pool);
 const manifest=readManifest('/load-private/fixtures',environment);
@@ -29,9 +29,7 @@ const timer=setInterval(()=>{if(pending||stopped)return;pending=true;void sample
 }).finally(()=>{pending=false;});},1000);
 async function sample(){
   const groups=await sessionCounts(database.pool,manifest);
-  const activity=(await database.pool.query(`SELECT count(*)::int AS connections,
-    (SELECT count(*)::int FROM pg_locks WHERE database=(SELECT oid FROM pg_database WHERE datname=current_database()) AND NOT granted) AS "lockWaiters",
-    count(*) FILTER(WHERE state='active')::int AS active FROM pg_stat_activity WHERE datname=current_database()`)).rows[0];
+  const activity=await databaseActivity(database.pool);
   const hash=credentialMetrics();let memoryCurrent=0,memoryLimit=0;
   if(existsSync('/sys/fs/cgroup/memory.current')){memoryCurrent=Number(readFileSync('/sys/fs/cgroup/memory.current','utf8'));memoryLimit=Number(readFileSync('/sys/fs/cgroup/memory.max','utf8'));}
   const event={at:new Date().toISOString(),hash,http:{active:inFlight,peak:peakInFlight},pool:{total:database.pool.totalCount,idle:database.pool.idleCount,waiting:database.pool.waitingCount},groups,activity,memoryCurrent,memoryLimit};
