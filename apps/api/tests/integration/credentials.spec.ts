@@ -2,7 +2,7 @@ import { createHash, randomBytes } from 'node:crypto';
 import { hash, verify } from 'argon2';
 import { afterEach, beforeAll, expect, test, vi } from 'vitest';
 import { CredentialOverload, CredentialUnavailable, hashNewPassword, verifyAccountCredential, verifyProvisionalCredential } from '../../src/modules/identity/application/credentials.js';
-import { ARGON2_PARAMETERS, HASH_QUEUE_MAX, HASH_WAIT_MS, accessSecrets, createPasswordCredentials } from '../../src/modules/identity/infrastructure/credentials.js';
+import { ARGON2_PARAMETERS, HASH_QUEUE_MAX, HASH_WAIT_MS, accessSecrets, createPasswordCredentials, credentialMetrics } from '../../src/modules/identity/infrastructure/credentials.js';
 import type { Argon2Engine } from '../../src/modules/identity/infrastructure/credentials.js';
 import type { PasswordCredentials } from '../../src/modules/identity/application/credentials.js';
 import type { AccountAccess } from '../../src/modules/identity/domain/access.js';
@@ -87,7 +87,12 @@ test('dos operaciones máximas por proceso, FIFO y cola de 50 con sobrecarga tip
   const tasks = Array.from({ length: HASH_QUEUE_MAX + 2 }, (_, index) => (index % 2 ? first : second).hash(`${password}:${index}`));
   const all = Promise.allSettled(tasks);
   await vi.waitFor(() => expect(active).toBe(2));
+  expect(credentialMetrics()).toMatchObject({active:2,queued:50,peakQueued:50});
+  const rejectedBefore=credentialMetrics().rejected;
   await expect(first.hash(password)).rejects.toBeInstanceOf(CredentialOverload);
+  expect(credentialMetrics().rejected).toBe(rejectedBefore+1);
+  expect(Object.values(credentialMetrics()).every(value=>typeof value==='number'&&Number.isFinite(value))).toBe(true);
+  expect(JSON.stringify(credentialMetrics()).includes(password)).toBe(false);
   holding = false;
   release.splice(0).forEach(resolve => resolve());
   expect((await all).every(result => result.status === 'fulfilled')).toBe(true);
@@ -112,6 +117,7 @@ test('cola caduca exactamente a 5 s; libera su capacidad y no ejecuta trabajo ve
   await vi.advanceTimersByTimeAsync(HASH_WAIT_MS - 1);
   expect(calls).toBe(3); // Hash ficticio inicial y dos activos.
   await vi.advanceTimersByTimeAsync(1);
+  expect(credentialMetrics().waitMaxMs).toBeGreaterThanOrEqual(5000);
   expect((await results).every(result => result.status === 'rejected' && result.reason instanceof CredentialOverload)).toBe(true);
   holding = false;
   const next = adapter.hash(password);

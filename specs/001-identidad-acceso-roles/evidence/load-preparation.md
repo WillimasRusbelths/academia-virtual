@@ -58,7 +58,27 @@ aborto por error/cruce y revocación con cookie anterior. Smoke real independien
 errores/cruces/503/revocaciones aceptadas: cero. Las métricas finales se incorporan
 con T102. No se reducen muestras/duraciones de los perfiles completos para aprobarlos.
 
-T099 y T100 completas como preparación/implementación. La ejecución completa y la
-condición de 1000 sesiones activas por diez minutos siguen en T103. T101/T102 aún
-requieren cerrar su evidencia; T104, bootstrap/T106 y D13 se conservan pendientes.
-No se activa programación de purga de T095 ni se aprueba un SLA.
+## T101 — implementación ID-LOAD-02 y límites observables
+
+[authentication.js](../../../load-tests/identity/authentication.js) usa las 100 cuentas
+aparte y login/me/logout/pausa 5 s. Inspección k6 real: 100 VU máximos, cuatro escalones
+constantes 10/25/50/100 de dos minutos, duración 8 min + hasta 15 s de gracia. No son
+1000 logins simultáneos. [Controles del runner](../../../load-tests/identity/tooling.test.mjs):
+12/12 con dobles HTTP/reloj para ambos escenarios y límites del watchdog.
+
+Único cambio de producto: contadores numéricos en infraestructura de credenciales;
+lectura sin IO/identidades/secretos y sin endpoint. El servidor de ensayo importa la
+misma instancia compilada del gate de la API. Conserva Argon2, concurrencia 2, cola 50
+y espera 5000 ms. [Credentials](../../../apps/api/tests/integration/credentials.spec.ts):
+7/7, reforzadas para comprobar active=2/queued=50, rechazos, espera de 5000 ms y
+salida numérica sin contraseña; no duplica la prueba de saturación ni baja su costo.
+
+Smoke real independiente: 2 VU × dos iteraciones, cuatro logins/logout y 12 solicitudes,
+errores/cruces/503: cero. Argon2 trabajo máximo 108.281 ms, espera máxima 0.082 ms,
+cola observada 0; no mide aún saturación del perfil de 100 VU. La decisión de parada
+por espera **>5000 ms** y margen RAM se verifica con controles de frontera; no se
+afirma haber agotado RAM real. La parada ante fallo de monitor se ensaya con T102.
+
+T099–T101 completas como preparación/implementación; T102 aún cierra captura y reporte.
+La ejecución completa y los 1000 activos por diez minutos siguen en T103. T104,
+bootstrap/T106 y D13 se conservan pendientes; no purga programada ni SLA aprobado.

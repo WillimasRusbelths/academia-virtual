@@ -23,26 +23,34 @@ interface WaitingHash { start(): void; expire(): void; deadline: number; timer: 
 class HashGate {
   private active = 0;
   private waiting: WaitingHash[] = [];
+  private completed=0;private rejected=0;private peakQueued=0;
+  private waitMaxMs=0;private workMaxMs=0;private workTotalMs=0;
+  snapshot(){return {active:this.active,queued:this.waiting.length,peakQueued:this.peakQueued,completed:this.completed,
+    rejected:this.rejected,waitMaxMs:this.waitMaxMs,workMaxMs:this.workMaxMs,workTotalMs:this.workTotalMs};}
 
   run<T>(operation: () => Promise<T>): Promise<T> {
+    const admitted=performance.now();
     return new Promise((resolve, reject) => {
       const start = () => {
+        this.waitMaxMs=Math.max(this.waitMaxMs,performance.now()-admitted);const started=performance.now();
         this.active++;
         void Promise.resolve().then(operation).then(resolve, reject).finally(() => {
+          const elapsed=performance.now()-started;this.completed++;this.workTotalMs+=elapsed;this.workMaxMs=Math.max(this.workMaxMs,elapsed);
           this.active--;
           this.drain();
         });
       };
       if (this.active < HASH_CONCURRENCY) { start(); return; }
-      if (this.waiting.length >= HASH_QUEUE_MAX) { reject(new CredentialOverload()); return; }
+      if (this.waiting.length >= HASH_QUEUE_MAX) { this.rejected++;reject(new CredentialOverload()); return; }
       const pending: WaitingHash = {
-        start, expire: () => reject(new CredentialOverload()), deadline: performance.now() + HASH_WAIT_MS,
+        start, expire: () => {this.rejected++;this.waitMaxMs=Math.max(this.waitMaxMs,performance.now()-admitted);reject(new CredentialOverload());}, deadline: performance.now() + HASH_WAIT_MS,
         timer: setTimeout(() => {
           const index = this.waiting.indexOf(pending);
           if (index !== -1) { this.waiting.splice(index, 1); pending.expire(); }
         }, HASH_WAIT_MS),
       };
       this.waiting.push(pending);
+      this.peakQueued=Math.max(this.peakQueued,this.waiting.length);
     });
   }
 
@@ -58,6 +66,8 @@ class HashGate {
 
 // Compartido por todos los adaptadores del proceso; no almacena autorización ni cuotas.
 const gate = new HashGate();
+/** Solo números agregados, sin credenciales; no añade rutas ni modifica límites. */
+export const credentialMetrics=()=>gate.snapshot();
 const phc = /^\$argon2id\$v=19\$([^$]+)\$([A-Za-z0-9+/]+)\$([A-Za-z0-9+/]+)$/;
 function validHash(value: string | null): value is string {
   const match = value?.match(phc);
