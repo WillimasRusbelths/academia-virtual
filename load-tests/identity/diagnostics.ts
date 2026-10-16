@@ -29,7 +29,8 @@ export class Diagnostics {
   private lag=monitorEventLoopDelay({resolution:20});
   private initialCpu=cpuStat();
   private initialUsage=process.cpuUsage();
-  constructor(private name:string){if(!/^[a-z0-9_-]+$/.test(name))throw new Error('Nombre diagnóstico inválido.');this.lag.enable();}
+  private name:string;
+  constructor(name:string){this.name=name;if(!/^[a-z0-9_-]+$/.test(name))throw new Error('Nombre diagnóstico inválido.');this.lag.enable();}
   private add(key:string,value:number){let list=this.values.get(key);if(!list){list=[];this.values.set(key,list);}list.push(value);}
   private queryDone(ctx:Context|undefined,kind:string,start:number){const elapsed=performance.now()-start;this.add((ctx?.route??'background')+'/sql/'+kind,elapsed);if(ctx){ctx.queries++;ctx.queryMs+=elapsed;}}
   private wrapClient(client:PoolClient){
