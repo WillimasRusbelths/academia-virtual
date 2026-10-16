@@ -126,6 +126,30 @@ test.each([2, 3])('conflictos transitorios: %i fallos, máximo dos reintentos y 
   }
 });
 
+test.each(['revoke','version','role','expiry'] as const)('accept revalida después de esperar bloqueo: %s',async change=>{
+  const fixture=await sessionFixture(context),actor=(await store.lookup(fixture.secret))!;
+  const holder=await context.database.pool.connect();let pending:Promise<boolean>|undefined;
+  try{
+    await holder.query('BEGIN');await holder.query('SELECT id FROM "User" WHERE id=$1 FOR UPDATE',[fixture.userId]);
+    pending=store.accept(actor);
+    let blocked=false;
+    for(let i=0;i<100;i++){
+      blocked=(await context.database.pool.query(`SELECT EXISTS(SELECT 1 FROM pg_stat_activity
+        WHERE usename=current_user AND pid<>pg_backend_pid() AND wait_event_type='Lock') AS blocked`)).rows[0].blocked;
+      if(blocked)break;await new Promise(resolve=>setTimeout(resolve,10));
+    }
+    expect(blocked).toBe(true);
+    if(change==='version')await holder.query('UPDATE "User" SET "authVersion"="authVersion"+1 WHERE id=$1',[fixture.userId]);
+    else if(change==='role')await holder.query('UPDATE "User" SET role=\'TEACHER\' WHERE id=$1',[fixture.userId]);
+    else if(change==='revoke')await holder.query('UPDATE "Session" SET "revokedAt"=clock_timestamp() WHERE id=$1',[fixture.sessionId]);
+    else await holder.query(`UPDATE "Session" SET "createdAt"=statement_timestamp()-interval '8 hours',
+      "absoluteExpiresAt"=statement_timestamp() WHERE id=$1`,[fixture.sessionId]);
+    const expected=(await holder.query('SELECT "lastAcceptedAt" FROM "Session" WHERE id=$1',[fixture.sessionId])).rows[0].lastAcceptedAt;
+    await holder.query('COMMIT');expect(await pending).toBe(false);
+    expect((await activity(context,fixture.sessionId)).lastAcceptedAt.getTime()).toBe(expected.getTime());
+  }finally{await holder.query('ROLLBACK');holder.release();await pending?.catch(()=>undefined);}
+});
+
 test('base no disponible deniega lookup, renovación y revocación con error seguro', async () => {
   const fixture = await sessionFixture(context);
   const actor = (await store.lookup(fixture.secret))!;

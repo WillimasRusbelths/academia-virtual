@@ -82,14 +82,7 @@ export class PostgresSessionStore implements SessionRepository {
     try {
       // SAVEPOINT falla fuera de BEGIN: los bloqueos no pueden liberarse antes de la escritura.
       await client.query('SAVEPOINT identity_authorization');
-      await client.query('SELECT id FROM "User" WHERE id = $1 FOR UPDATE', [actor.userId]);
-      await client.query('SELECT id FROM "Session" WHERE id = $1 AND "userId" = $2 FOR UPDATE',
-        [actor.sessionId, actor.userId]);
-      const result = await client.query<Row>(`${snapshot} WHERE s.id = $1 AND u.id = $2`,
-        [actor.sessionId, actor.userId]);
-      const current = eligible(result.rows[0]);
-      if (!current || current.authVersion !== actor.authVersion) throw new AuthorizationFailure('AUTH_REQUIRED');
-      if (current.role !== actor.role || !permits(current.role, permission)) throw new AuthorizationFailure('FORBIDDEN');
+      await this.lockedSnapshot(client, actor, permission);
       await client.query('RELEASE SAVEPOINT identity_authorization');
     } catch (error) {
       if (error instanceof AuthorizationFailure) throw error;
@@ -98,16 +91,28 @@ export class PostgresSessionStore implements SessionRepository {
     }
   }
 
+  /** Solo desde BEGIN propio o la guarda transaccional pública. El snapshot se toma
+   * después de ambos bloqueos: ninguna mutación puede cambiarlo antes del commit. */
+  private async lockedSnapshot(client: PoolClient, actor: SessionActor, permission: Permission): Promise<Row> {
+    await client.query('SELECT id FROM "User" WHERE id = $1 FOR UPDATE', [actor.userId]);
+    await client.query('SELECT id FROM "Session" WHERE id = $1 AND "userId" = $2 FOR UPDATE',
+      [actor.sessionId, actor.userId]);
+    const result = await client.query<Row>(`${snapshot} WHERE s.id = $1 AND u.id = $2`,
+      [actor.sessionId, actor.userId]);
+    const row = result.rows[0];
+    const current = eligible(row);
+    if (!current || current.authVersion !== actor.authVersion) throw new AuthorizationFailure('AUTH_REQUIRED');
+    if (current.role !== actor.role || !permits(current.role, permission)) throw new AuthorizationFailure('FORBIDDEN');
+    return row!;
+  }
+
   async accept(actor: SessionActor): Promise<boolean> {
     try {
       await this.transaction(async (client) => {
-        await this.revalidateInTransaction(client, actor, 'profile:read');
+        const row = await this.lockedSnapshot(client, actor, 'profile:read');
         // El instante validado bajo bloqueo evita cruzar la caducidad entre dos sentencias.
-        const result = await client.query<Row>(`${snapshot} WHERE s.id = $1`, [actor.sessionId]);
-        const row = result.rows[0];
-        if (!eligible(row)) throw new AuthorizationFailure('AUTH_REQUIRED');
         await client.query(`UPDATE "Session" SET "lastAcceptedAt" = GREATEST("lastAcceptedAt", $2)
-          WHERE id = $1 AND "revokedAt" IS NULL`, [actor.sessionId, row!.now]);
+          WHERE id = $1 AND "revokedAt" IS NULL`, [actor.sessionId, row.now]);
       });
       return true;
     } catch (error) {
