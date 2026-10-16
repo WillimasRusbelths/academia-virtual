@@ -126,12 +126,49 @@ sqlTracing=false y campos SQL/pool omitidos; se conserva latencia HTTP. Dos prue
 de diagnóstico Docker y lint, más ambos chequeos TypeScript Windows, aprobados.
 No se sobrescriben los archivos del smoke ni se llama cero al dato desconocido.
 
+## Repetición perfilada interrumpida
+
+`sessions-warmup-62fbd809`, revisión a110e79: 20 VU/20 sesiones/1 min completo,
+67.423 s de generador, 219 solicitudes/199 válidas; 20 logouts, errores/cruces/503=0.
+/me p95/p99=261.816/450.466 ms; **login p95=5077.182 ms**, referencia incumplida,
+exit99. Hash espera máxima2043.688 ms/cola16/trabajo máximo617.184 ms; sin parada
+de seguridad. Se conserva sin repetir hasta aprobar. El protocolo no impone que
+ese percentil sea condición de parada; se continuó solo con propósito diagnóstico.
+
+`sessions-fa658d02`, misma revisión, producto original e instrumentación/V8:
+**incompleto**, exit108 a152.174 s, dos timeouts HTTP de login de10 s que activan
+el aborto por login único fallido. No se llegó a la meseta; no es ejecución de17 min.
+403 VU observados, pico muestreado364 sesiones/usuarios/secretos recientes,
+HTTP en vuelo213, espera de pool203, conexiones10, locks0. 3226 solicitudes,
+dos errores (0.062 %), cruces/503=0. /me p95/p99 parcial4322.437/6549.859 ms;
+login p95 parcial5498.504 ms. **No comparar esos percentiles de rampa incompleta
+como si fueran otro perfil completo.** No hubo cierres/revocaciones funcionales
+en este intento: sus contadores cero no demuestran rechazo tras logout.
+
+Auditoría de ventana384 sesiones persistidas; limpieza405/0, incluyendo las creadas
+al drenar pendientes después de finishedAt. La API cerró con0, sin OOM/stop.json.
+1120 cuentas y singleton intactos. Hash espera307.937 ms/cola3/trabajo1600.871 ms,
+sin rebasar espera5 s. Picos observados CPU/RAM: API202.85 %/186.5 MiB,
+BD100.9 %/100.6 MiB, k6107.4 %/330.2 MiB. No se atribuyen timeouts a memoria agotada.
+
+Handler /me p95=4119.902 ms (marginal, no correlación por solicitud), también alto;
+no hay evidencia de que todo el problema esté fuera de API. Perfil V8 completo
+del proceso:95097 muestras/187.804 s; idle50.78 %, writev7.62 %, writeBuffer2.69 %,
+GC1.60 %. 2065 huecos>10 ms, máximo296.377 ms: no interpretar muestras como msCPU
+ni inferir GC del generador. En la ventana SQL hubo22.351 s acumulados de WAL sync;
+no son todos los tiempos de COMMIT ni prueban una causa única. Reloj k6 civil/run
+varió de−103.692 a6.740 ms; no se observó salto multisegundo como el previo al smoke.
+
+Para separar el sobrecosto del V8 se vuelve opt-in explícito con CpuProfile;
+EngineDiagnostics conserva observación SQL/HTTP/cgroups sin ese perfilador.
+Cuotas, seguridad y carga no cambian. Se programa **un solo calentamiento de
+control sin V8**, sin borrar los resultados desfavorables ni atribuir aún su causa.
+
 ## Estado
 
-La instrumentación corregida/validada justifica una sola repetición diagnóstica
-completa de ID-LOAD-01 con el producto original y calentamiento independiente:
-es necesaria para obtener motor/CPU/dispatch bajo 1000 VU, no para aprobar un
-candidato rechazado. Pendiente registrar sus resultados finales. **T103 conserva [x] como ejecución
+La repetición diagnóstica fue interrumpida; falta contraste del sobrecosto y no
+hay nueva evidencia de meseta. Las seis creaciones tardías anteriores siguen
+abiertas. **T103 conserva [x] como ejecución
 e informe; capacidad y cierre del spec no aprobados.** D10 continúa pendiente,
 T104 requiere participantes, bootstrap intermitente sigue abierto para T106,
 T095 permanece CLI sin programación y D13 no tiene SLA de recuperación aprobado.

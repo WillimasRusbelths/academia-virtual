@@ -4,7 +4,6 @@ services:
   db:
     command: [postgres, -c, shared_preload_libraries=pg_stat_statements, -c, pg_stat_statements.track_planning=on, -c, track_io_timing=on, -c, track_wal_io_timing=on]
   api:
-    command: [sh, -c, 'umask 077 && npm run build --workspace apps/api && exec node --cpu-prof --cpu-prof-dir=/load-private "--cpu-prof-name=$${LOAD_DIAGNOSTICS_NAME}-cpu.cpuprofile" --experimental-strip-types load-tests/identity/serve.ts']
     environment:
       LOAD_ENGINE_DIAGNOSTICS: '1'
   runner:

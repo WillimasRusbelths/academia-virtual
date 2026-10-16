@@ -3,13 +3,16 @@ param(
   [Parameter(Mandatory=$true)][string]$ContextFile,
   [Parameter(Mandatory=$true)][ValidateSet('sessions-warmup','sessions','authentication','smoke-sessions','smoke-authentication')][string]$Scenario,
   [switch]$Diagnostics,
-  [switch]$EngineDiagnostics
+  [switch]$EngineDiagnostics,
+  [switch]$CpuProfile
 )
 . (Join-Path $PSScriptRoot '../../ops/recovery/common.ps1')
+if($CpuProfile -and -not $EngineDiagnostics){throw 'CpuProfile requiere EngineDiagnostics.'}
 $context=Get-Content -LiteralPath $ContextFile -Raw | ConvertFrom-Json
 if($context.project -notmatch '^identity-load-[a-f0-9]{12}$'){throw 'Proyecto aislado invalido.'}
 $compose=@('compose','--project-name',$context.project,'--env-file',$context.envFile,'-f',(Join-Path $PSScriptRoot 'compose.yml'))
 if($EngineDiagnostics){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.engine.yml'))}
+if($CpuProfile){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.cpu-profile.yml'))}
 $name=$Scenario+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)
 $env:LOAD_DIAGNOSTICS=if($Diagnostics){'1'}else{'0'}
 $env:LOAD_DIAGNOSTICS_NAME=$name
@@ -34,7 +37,7 @@ $phase=if($Scenario -eq 'sessions-warmup'){'warmup'}else{'measured'}
 $kind=if($Scenario -eq 'smoke-authentication'){'authentication'}else{'sessions'}
 $elapsed=[Diagnostics.Stopwatch]::StartNew()
 $started=[DateTime]::UtcNow
-$metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;engineDiagnostics=[bool]$EngineDiagnostics;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
+$metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;engineDiagnostics=[bool]$EngineDiagnostics;cpuProfile=[bool]$CpuProfile;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
   lockSha256=(Get-FileHash -LiteralPath (Join-Path $repo 'package-lock.json') -Algorithm SHA256).Hash.ToLowerInvariant();
   diffSha256=(Get-FileHash -LiteralPath (Join-Path $context.directory ($name+'-diff.patch')) -Algorithm SHA256).Hash.ToLowerInvariant();
   hardware=$hardware;containers=$images;imageDigests=$imageDigests;k6=$k6;network='Docker bridge interna, sin puertos publicados; API y generador separados';finishedAt=$null;exitCode=$null}

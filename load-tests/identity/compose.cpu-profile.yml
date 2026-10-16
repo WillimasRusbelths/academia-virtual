@@ -1,0 +1,4 @@
+# Solo perfil de CPU; requiere compose.yml + compose.engine.yml y nombre de ensayo.
+services:
+  api:
+    command: [sh, -c, 'umask 077 && npm run build --workspace apps/api && exec node --cpu-prof --cpu-prof-dir=/load-private "--cpu-prof-name=$${LOAD_DIAGNOSTICS_NAME}-cpu.cpuprofile" --experimental-strip-types load-tests/identity/serve.ts']

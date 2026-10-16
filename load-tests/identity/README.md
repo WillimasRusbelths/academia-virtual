@@ -267,9 +267,12 @@ queryid, parámetros, resultados o identidades. El benchmark captura antes/despu
 API lo hace cada cinco muestras completas (no exactamente cinco segundos si espera
 pool). Añade event loop, CPU y comparación de reloj civil/monotónico sin envolver pg,
 salvo que también se pida `-Diagnostics`. Todo el costo de observación se declara.
-Ese modo conserva también `<ejecución>-cpu.cpuprofile` privado del proceso Node API,
+Añadir `-CpuProfile` junto con `-EngineDiagnostics` para conservar
+`<ejecución>-cpu.cpuprofile` privado del proceso Node API,
 para identificar funciones que consumen CPU; no perfila los workers nativos Argon2
 ni constituye una ejecución sin sobrecosto del perfilador.
+Desde esta separación el modo EngineDiagnostics solo no activa V8. Los primeros
+ensayos b34b7ee/a110e79 sí lo activaban; se preservan como ensayos perfilados.
 [cpu-report.mjs](cpu-report.mjs) resume muestras por función, incluyendo idle/GC y
 los huecos del muestreo; sus porcentajes no son milisegundos CPU ni latencias HTTP.
 
