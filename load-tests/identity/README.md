@@ -280,6 +280,9 @@ los huecos del muestreo; sus porcentajes no son milisegundos CPU ni latencias HT
 reinicios de contadores. Las máximas por sentencia son acumuladas, no percentiles
 del intervalo. Estadísticas database/WAL pueden publicarse con retraso; I/O abarca
 el clúster aislado, no una operación exclusiva. No deducir espera de disco de bytes.
+ENGINE_MONITOR/ENGINE_SETTINGS/ACTIVITY_MONITOR incluyen el costo del propio lector;
+su sentencia actual aparece desde la siguiente muestra. Los primeros ensayos no
+capturaron ese costo por clase: dato no medido, no cero.
 Restaurar configuración base con `docker @dc up -d --wait db` solo tras detener API;
 la extensión queda en la BD aislada para reproducir observación, no en manual.
 

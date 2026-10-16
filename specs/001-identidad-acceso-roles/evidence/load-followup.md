@@ -60,7 +60,7 @@ recorridos seriales y 2000 a concurrencia 100, usando repositorios reales y
 comprobando identidad/renovación. Sin logins HTTP ni Argon2 durante la ventana
 medida. Mismos límites del driver/BD y pool; sin otras pruebas durante ese tramo.
 
-| Variante / archivo privado | Sentencias por recorrido | 2000 concurrentes, ms | p95 recorrido, ms | p95 espera pool, ms | p95 SQL cliente, ms | WAL sync del intervalo, ms |
+| Variante / archivo privado | Sentencias por recorrido | 2000 operaciones a concurrencia 100, ms | p95 recorrido, ms | p95 espera pool, ms | p95 SQL cliente, ms | WAL sync del intervalo, ms |
 | --- | --- | --- | --- | --- | --- | --- |
 | Base, engine-baseline-02 | 8 | 19271.456 | 1763.815 | 1599.719 | 190.877 | 6021.285 |
 | CTE de bloqueos, engine-locks-01 | 7 | 19328.203 | 1732.603 | 1502.722 | 194.950 | 6682.434 |
@@ -164,11 +164,61 @@ EngineDiagnostics conserva observación SQL/HTTP/cgroups sin ese perfilador.
 Cuotas, seguridad y carga no cambian. Se programa **un solo calentamiento de
 control sin V8**, sin borrar los resultados desfavorables ni atribuir aún su causa.
 
-## Estado
+## Control sin V8 y condiciones que impiden concluir capacidad
 
-La repetición diagnóstica fue interrumpida; falta contraste del sobrecosto y no
-hay nueva evidencia de meseta. Las seis creaciones tardías anteriores siguen
-abiertas. **T103 conserva [x] como ejecución
+`sessions-warmup-4897754d`, revisión f074ae0, cpuProfile=false: mismo programa20 VU/
+20 cuentas/1 min, generador69.328 s; 222 solicitudes/202 válidas,20 logouts y20
+rechazos401 de cookie anterior. Errores/cruces/503=0, limpieza0/0, cuentas/singleton
+intactos. **Login p95=4256.207 ms, aún incumplido**; /me p95/p99=217.104/288.461 ms.
+Hash espera2185.356 ms/cola15/trabajo máximo486.595 ms, sin parada de seguridad.
+API CPU/RAM116 %/156 MiB, BD95.41 %/83.75 MiB, k67.8 %/21.79 MiB, sin OOM.
+La diferencia con V8 no prueba una causa única; quitarlo no resolvió la referencia.
+Ese control demuestra retorno funcional tras reiniciar API después del aborto,
+con latencia desfavorable. No demuestra recuperación automática ni un SLA.
+
+Lecturas posteriores del host: inicialmente batería17 %; registro de22:32:04 UTC
+batería15 %, PowerOnline=false/Discharging=true, plan **Power Saver**, frecuencia
+1400 MHz frente a MaxClockSpeed2300 MHz, PercentProcessorPerformance60. Son
+observaciones posteriores, **no telemetría histórica del T103 original**. Confirman
+una condición de energía/rendimiento que limita la comparación; no demuestran que
+explique por sí sola los fallos originales o actuales. No se cambia el plan de energía.
+Inspección posterior de BD sin autovacuum activo; no se atribuye a este los fallos.
+
+| Componente | Conclusión respaldada / límite |
+| --- | --- |
+| Pool/API | Espera real89.50 % acumulada en benchmark; cola203 y handler p95≈4.12 s en rampa. Presión confirmada, no justifica aumentar conexiones. |
+| PostgreSQL | Costos internos de planificación, ejecución y WAL medidos; cuota1 CPU con picos cercanos al límite. Sin aislamiento causal de CPU, disco, red y observador. |
+| Argon2 | No se rebasó espera5 s; parámetros, cola y concurrencia conservados. No fue la condición que abortó el perfil. |
+| Generador | CPU pico107.4 % y330.2/512 MiB en intento; sin OOM. Falta control en otro host y perfil de Go para separar sus interferencias. |
+| Continuidad | Nueva ejecución termina a152 s; no evalúa frontera300 s ni meseta. Las seis creaciones tardías anteriores permanecen abiertas. |
+| Observación | V8 separado y SQL no medido omitido. Se agregan ENGINE_MONITOR/ENGINE_SETTINGS/ACTIVITY_MONITOR para cuantificar el lector; prueba dirigida real y privacidad aprobadas. Ese desglose no se capturó en los intentos anteriores. |
+
+No se repite otra carga completa: ambos candidatos carecen de mejora demostrada y
+el control continúa desfavorable. Para concluir faltan una ventana documentada de
+alimentación/frecuencia estables, un control del generador independiente y del costo
+del observador, y una ejecución íntegra con dispatch/recepción bajo1000 VU. D10 debe
+confirmar rúbrica y tratamiento de frontera; mientras tanto [300,900), muestras y
+umbrales originales se conservan. ID-LOAD-02 anterior se reutiliza como evidencia
+histórica válida del código sin cambios; no garantiza el rendimiento del host actual.
+
+## Conservación y cierre del seguimiento
+
+Repetición de limpieza dirigida 0/0. Snapshot final: 1120 cuentas, digest de User y
+singleton conservados y cero sesiones válidas en las tres cohortes; no se borran
+cuentas ni volúmenes. Las 15 manuales, 12 originales y credenciales conservan ambas
+huellas iniciales. Servicios del ensayo detenidos; los cuatro manuales saludables.
+Paquete nuevo privado `load-test-results/identity/t103-followup-20261016/`: 102 entradas,
+33 694 930 bytes, ACL privada y manifiesto SHA-256 verificado. Incluye crudos,
+metadatos, CPU/SQL/recursos, auditorías, derivados y parches de candidatos retirados;
+no copia fixtures.json/private.env. Los dos paquetes anteriores vuelven a verificar
+sus 68/152 entradas sin cambios. No se reemplazan resultados desfavorables.
+
+Comprobaciones finales adicionales: prueba de costo/privacidad del motor 1/1 Docker,
+lint de herramientas y ambos tsconfig Windows aprobados. Se reutilizan build/lint
+y regresiones descritos arriba porque el código de producto quedó igual a 84b7ebe.
+510 enlaces locales y git diff --check comprobados; no push ni merge.
+
+**T103 conserva [x] como ejecución
 e informe; capacidad y cierre del spec no aprobados.** D10 continúa pendiente,
 T104 requiere participantes, bootstrap intermitente sigue abierto para T106,
 T095 permanece CLI sin programación y D13 no tiene SLA de recuperación aprobado.

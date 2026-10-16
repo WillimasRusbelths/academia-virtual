@@ -16,6 +16,9 @@ export async function engineSnapshot(pool:Pool):Promise<Record<string,unknown>> 
     'waits',(SELECT json_agg(w) FROM (SELECT state,wait_event_type,wait_event,count(*)::int AS count
       FROM pg_stat_activity WHERE datname=current_database() GROUP BY state,wait_event_type,wait_event) w),
     'statements',(SELECT json_agg(q) FROM (SELECT CASE
+      WHEN query LIKE '%pg_stat_statements%' THEN 'ENGINE_MONITOR'
+      WHEN query LIKE '%pg_extension%' THEN 'ENGINE_SETTINGS'
+      WHEN query LIKE '%pg_stat_activity%' THEN 'ACTIVITY_MONITOR'
       WHEN query LIKE '%count(DISTINCT%' THEN 'OBSERVER'
       WHEN query LIKE '%json_build_object%' AND query LIKE '%"Session" s%' THEN 'SNAPSHOT'
       WHEN query LIKE '%FOR UPDATE%' AND query LIKE '%locked_user%' THEN 'LOCK_BOTH'
@@ -33,6 +36,6 @@ export async function engineSnapshot(pool:Pool):Promise<Record<string,unknown>> 
       sum(wal_bytes)::float8 AS "walBytes",sum(temp_blks_written)::float8 AS "tempBlocks"
       FROM load_observation.pg_stat_statements WHERE dbid=(SELECT oid FROM pg_database WHERE datname=current_database())
       AND userid=(SELECT oid FROM pg_roles WHERE rolname=current_user)
-      AND query NOT LIKE '%pg_stat_%' AND query NOT LIKE '%pg_extension%' GROUP BY 1) q)) AS sample`)).rows[0].sample;
+      GROUP BY 1) q)) AS sample`)).rows[0].sample;
   return {settings,...result};
 }

@@ -246,3 +246,7 @@ Los 1.201 s de este informe corresponden a la primera publicación completa, no 
 un instante exacto de commit. No se modifican estos valores, los crudos originales
 ni la clasificación provisional pendiente de D10. T103 sigue completa como reporte;
 la aceptación de capacidad permanece abierta.
+
+[Seguimiento adicional](load-followup.md): import reproducible corregido, medición
+interna de SQL/CPU y candidatos retirados; rampa diagnóstica interrumpida y control
+desfavorable. Conserva estos resultados y la capacidad sin aprobar.

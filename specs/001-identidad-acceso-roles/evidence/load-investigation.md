@@ -333,3 +333,7 @@ independiente para validar sus interferencias. No se contrató infraestructura.
 Las nuevas trazas no prueban cómo era el entorno histórico. No hay evidencia que
 justifique ampliar pool, debilitar hashes, bajar carga o alterar umbrales. No se
 extrapola identidad local a producción, matrícula, video, clases o chat.
+
+[Continuación de la investigación](load-followup.md): incorpora tipos del editor,
+motor SQL/WAL, CPU, candidatos retirados y condiciones de energía observadas.
+La nueva rampa no completó la meseta; los incumplimientos aquí registrados permanecen.
