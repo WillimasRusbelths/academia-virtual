@@ -3,7 +3,7 @@
 Procedimiento pendiente de ejecución y de disponer de un segundo equipo. No requiere
 contratar servicios. No acredita separación causal ni capacidad hasta medirlo.
 Conservar el [protocolo ID-LOAD-01/02](../../specs/001-identidad-acceso-roles/verification.md#escenario-de-carga-id-load-01-1000-sesiones-activas)
-y los resultados anteriores. [Estado de la investigación](../../specs/001-identidad-acceso-roles/evidence/load-followup.md).
+y los resultados anteriores. [Estado de la investigación](../../specs/001-identidad-acceso-roles/evidence/load-environment.md).
 
 ## Recursos y aislamiento necesarios
 

@@ -95,6 +95,8 @@ Para separar contención del generador se preparó una
 El muestreo externo registra CPU/RAM del PowerShell padre y duración de sus ciclos;
 excluye procesos hijos Docker/CIM y el costo interno de observar la API. No permite
 afirmar por sí solo que la observación carece de efecto.
+Resultado real de esta comprobación y límites:
+[entorno y capacidad, 2026-10-17](../../specs/001-identidad-acceso-roles/evidence/load-environment.md).
 
 [sessions.js](sessions.js): un VU/cuenta por `execution.vu.idInTest`, login único sin
 reintento silencioso, cookie propia conservada con noCookiesReset, /me cada 5–10 s y
