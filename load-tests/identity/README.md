@@ -74,6 +74,28 @@ inspeccionar y limpiar explícitamente. No hay limpieza global ni borrado de vol
 
 ## Perfiles completos para T103
 
+### Condiciones del host antes de repetir
+
+Ejecutar [host-preflight.ps1](host-preflight.ps1) antes y después, fuera de la ventana
+medida. Solo consulta alimentación/plan, CPU, RAM, procesos y capacidad de Docker;
+guarda un JSON nuevo con ACL privada bajo `.cache/identity-host-*`. No cambia Windows,
+no inicia Docker y no considera un fallo de lectura como cero consumo.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File load-tests/identity/host-preflight.ps1
+```
+
+Mantener alimentación y plan elegidos por el operador, evitar suspensión y cargas
+competidoras durante toda la prueba; registrar cambios, no asumir condiciones pasadas.
+Una lectura puntual de frecuencia no demuestra limitación sostenida ni temperatura.
+Si Docker está apagado, comprobar sus recursos efectivos tras iniciarlo. Comenzar
+por smoke/calentamiento; investigar cualquier incumplimiento antes del perfil completo.
+Para separar contención del generador se preparó una
+[alternativa con otro equipo](separate-generator.md), todavía no ejecutada.
+El muestreo externo registra CPU/RAM del PowerShell padre y duración de sus ciclos;
+excluye procesos hijos Docker/CIM y el costo interno de observar la API. No permite
+afirmar por sí solo que la observación carece de efecto.
+
 [sessions.js](sessions.js): un VU/cuenta por `execution.vu.idInTest`, login único sin
 reintento silencioso, cookie propia conservada con noCookiesReset, /me cada 5–10 s y
 headers reales Origin/CSRF. Probar revocación con la cookie anterior solo al cerrar,

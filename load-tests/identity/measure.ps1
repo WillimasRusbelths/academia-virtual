@@ -37,10 +37,13 @@ $phase=if($Scenario -eq 'sessions-warmup'){'warmup'}else{'measured'}
 $kind=if($Scenario -eq 'smoke-authentication'){'authentication'}else{'sessions'}
 $elapsed=[Diagnostics.Stopwatch]::StartNew()
 $started=[DateTime]::UtcNow
+$observerProcess=[Diagnostics.Process]::GetCurrentProcess()
+$observerCpuStart=$observerProcess.TotalProcessorTime.TotalMilliseconds
 $metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;engineDiagnostics=[bool]$EngineDiagnostics;cpuProfile=[bool]$CpuProfile;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
   lockSha256=(Get-FileHash -LiteralPath (Join-Path $repo 'package-lock.json') -Algorithm SHA256).Hash.ToLowerInvariant();
   diffSha256=(Get-FileHash -LiteralPath (Join-Path $context.directory ($name+'-diff.patch')) -Algorithm SHA256).Hash.ToLowerInvariant();
-  hardware=$hardware;containers=$images;imageDigests=$imageDigests;k6=$k6;network='Docker bridge interna, sin puertos publicados; API y generador separados';finishedAt=$null;exitCode=$null}
+  hardware=$hardware;containers=$images;imageDigests=$imageDigests;k6=$k6;network='Docker bridge interna, sin puertos publicados; API y generador separados';finishedAt=$null;exitCode=$null;
+  observerCoverage='Proceso PowerShell padre: CPU/RAM y duracion de ciclo; excluye procesos docker.exe, CIM, motor Docker y observador dentro de API.'}
 $statsFile=Join-Path $context.directory ($name+'-resources.jsonl')
 $resources=@{};$resourceSamples=0
 $exitCode=1
@@ -48,6 +51,7 @@ try{
   $null=Invoke-RecoveryDocker ($compose+@('run','-d','--no-deps','--name',$generator,'-e',('RESULT_NAME='+$name),'-e',('LOAD_PHASE='+$phase),'-e',('SMOKE_KIND='+$kind),
     'generator','run','--out',('json=/load-private/'+$name+'-raw.jsonl'),('/scripts/'+$script)))
   while((Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$generator)).Trim() -eq 'true'){
+    $cycleStart=$elapsed.Elapsed.TotalMilliseconds
     $stats=Invoke-RecoveryDocker (@('stats','--no-stream','--format','{{json .}}')+$containers+@($generator))
     $sample=[ordered]@{at=[DateTime]::UtcNow.ToString('o');elapsedMonotonicMs=$elapsed.Elapsed.TotalMilliseconds;docker=($stats -split "`n" | ForEach-Object {$_|ConvertFrom-Json})}
     if($Diagnostics -or $EngineDiagnostics){
@@ -74,10 +78,12 @@ try{
       if($memPercent -ge $resources[$role].peakMemoryPercent){$resources[$role].peakMemoryPercent=$memPercent;$resources[$role].peakMemory=$entry.MemUsage}
       $resources[$role].blockIo=$entry.BlockIO;$resources[$role].networkIo=$entry.NetIO
     }
-    Add-Content -LiteralPath $statsFile -Value ($sample|ConvertTo-Json -Depth 5 -Compress) -Encoding utf8
     $probe=Invoke-RecoveryDocker ($compose+@('exec','-T','api','node','--experimental-strip-types','load-tests/identity/watchdog.ts'))
     $free=(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory
     $oom=$false;foreach($container in ($containers+@($generator))){if((Invoke-RecoveryDocker @('inspect','--format','{{.State.OOMKilled}}',$container)).Trim() -eq 'true'){$oom=$true}}
+    $observerProcess.Refresh()
+    $sample['observer']=[ordered]@{cpuSinceWindowMs=($observerProcess.TotalProcessorTime.TotalMilliseconds-$observerCpuStart);workingSetBytes=$observerProcess.WorkingSet64;privateMemoryBytes=$observerProcess.PrivateMemorySize64;cycleElapsedMs=($elapsed.Elapsed.TotalMilliseconds-$cycleStart)}
+    Add-Content -LiteralPath $statsFile -Value ($sample|ConvertTo-Json -Depth 5 -Compress) -Encoding utf8
     if($probe.Trim() -ne 'CONTINUE' -or $free -lt 262144 -or $oom){
       $null=Invoke-RecoveryDocker @('stop','--time','1',$generator);$metadata['stopReason']=if($oom){'OOM_KILLED'}elseif($free -lt 262144){'HOST_RAM_UNDER_256M'}else{$probe.Trim()};break
     }
