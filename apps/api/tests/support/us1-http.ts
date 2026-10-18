@@ -10,7 +10,7 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from '../../dist/src/app.module.js';
 import { configureTransport } from '../../dist/src/http/transport.js';
 import { SessionCookie } from '../../dist/src/http/session-cookie.js';
-import { createDatabase } from '../../src/infrastructure/database/database.js';
+import { createDatabase } from '../../dist/src/infrastructure/database/database.js';
 import { identityDatabase } from './identity-database.js';
 import { createIdentityFixtures, readFixtureManifest } from './identity-fixtures.js';
 import type { FixtureAccount } from './identity-fixtures.js';
