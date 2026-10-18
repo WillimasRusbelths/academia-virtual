@@ -278,6 +278,13 @@ continuidad es solo lectura; no reconstruye actividad reciente a partir de la
 
 `LOAD_BENCH_TRACE=off` omite solo la instrumentación pg del benchmark; mantiene los
 mismos recorridos y comprobaciones de acceso. No omite controles de producto.
+`-e LOAD_BENCH_LEASES=1`, solo en `diagnostic-bench`, añade la sonda optativa
+[connection-leases.ts](connection-leases.ts): tiempo acquire→release y cantidad de
+sentencias por préstamo, clasificado por la primera sentencia (snapshot, perfil o
+transacción). No almacena SQL, parámetros ni datos; preserva callbacks y release.
+La ventana excluye snapshots opcionales del motor y verifica 2050 préstamos por
+clase. Incluye red, espera del backend y planificación de JavaScript; no equivale a
+tiempo de ejecución SQL. No se activa en los perfiles HTTP.
 [diagnostic-report.mjs](diagnostic-report.mjs) lee el directorio archivado y nombre
 de ejecución; conserva ventanas de CPU cgroup, última IO con PIDs>0 y ambas bases
 temporales de meseta. [query-plan.ts](query-plan.ts), tras el ensayo y sobre un destino
