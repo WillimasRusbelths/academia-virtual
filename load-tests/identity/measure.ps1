@@ -5,10 +5,12 @@ param(
   [switch]$Diagnostics,
   [switch]$EngineDiagnostics,
   [switch]$CpuProfile,
-  [ValidateSet('baseline','pg2','k6-2','pg2-k6-2')][string]$ResourceExperiment='baseline'
+  [ValidateSet('baseline','pg2','k6-2','pg2-k6-2')][string]$ResourceExperiment='baseline',
+  [ValidateSet(512,1024)][int]$GeneratorMemoryMiB=512
 )
 . (Join-Path $PSScriptRoot '../../ops/recovery/common.ps1')
 if($CpuProfile -and -not $EngineDiagnostics){throw 'CpuProfile requiere EngineDiagnostics.'}
+if($GeneratorMemoryMiB -ne 512 -and $ResourceExperiment -eq 'baseline'){throw 'Memoria experimental requiere override local explícito.'}
 $context=Get-Content -LiteralPath $ContextFile -Raw | ConvertFrom-Json
 if($context.project -notmatch '^identity-load-[a-f0-9]{12}$'){throw 'Proyecto aislado invalido.'}
 $compose=@('compose','--project-name',$context.project,'--env-file',$context.envFile,'-f',(Join-Path $PSScriptRoot 'compose.yml'))
@@ -16,6 +18,7 @@ if($EngineDiagnostics){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.engine
 if($CpuProfile){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.cpu-profile.yml'))}
 $env:IDENTITY_EXPERIMENT_PG_CPUS=if($ResourceExperiment -in @('pg2','pg2-k6-2')){'2'}else{'1'}
 $env:IDENTITY_EXPERIMENT_K6_CPUS=if($ResourceExperiment -in @('k6-2','pg2-k6-2')){'2'}else{'1'}
+$env:IDENTITY_EXPERIMENT_K6_MEMORY=$GeneratorMemoryMiB.ToString()+'m'
 if($ResourceExperiment -ne 'baseline'){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.resources.yml'))}
 $name=$Scenario+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)
 $env:LOAD_DIAGNOSTICS=if($Diagnostics){'1'}else{'0'}
@@ -47,7 +50,7 @@ $started=[DateTime]::UtcNow
 $observerProcess=[Diagnostics.Process]::GetCurrentProcess()
 $observerCpuStart=$observerProcess.TotalProcessorTime.TotalMilliseconds
 $metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;engineDiagnostics=[bool]$EngineDiagnostics;cpuProfile=[bool]$CpuProfile;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
-  resourceExperiment=$ResourceExperiment;requestedPostgresCpus=[int]$env:IDENTITY_EXPERIMENT_PG_CPUS;requestedGeneratorCpus=[int]$env:IDENTITY_EXPERIMENT_K6_CPUS;postgresResources=$postgresResources;
+  resourceExperiment=$ResourceExperiment;requestedPostgresCpus=[int]$env:IDENTITY_EXPERIMENT_PG_CPUS;requestedGeneratorCpus=[int]$env:IDENTITY_EXPERIMENT_K6_CPUS;requestedGeneratorMemoryMiB=$GeneratorMemoryMiB;postgresResources=$postgresResources;
   lockSha256=(Get-FileHash -LiteralPath (Join-Path $repo 'package-lock.json') -Algorithm SHA256).Hash.ToLowerInvariant();
   diffSha256=(Get-FileHash -LiteralPath (Join-Path $context.directory ($name+'-diff.patch')) -Algorithm SHA256).Hash.ToLowerInvariant();
   hardware=$hardware;containers=$images;imageDigests=$imageDigests;k6=$k6;network='Docker bridge interna, sin puertos publicados; API y generador separados';finishedAt=$null;exitCode=$null;
@@ -59,7 +62,7 @@ try{
   $null=Invoke-RecoveryDocker ($compose+@('run','-d','--no-deps','--name',$generator,'-e',('RESULT_NAME='+$name),'-e',('LOAD_PHASE='+$phase),'-e',('SMOKE_KIND='+$kind),
     'generator','run','--out',('json=/load-private/'+$name+'-raw.jsonl'),('/scripts/'+$script)))
   $metadata['generatorResources']=Invoke-RecoveryDocker @('inspect','--format','memory={{.HostConfig.Memory}} nanoCpus={{.HostConfig.NanoCpus}}',$generator)
-  $expectedGenerator='memory=536870912 nanoCpus='+([long]$env:IDENTITY_EXPERIMENT_K6_CPUS*1000000000).ToString()
+  $expectedGenerator='memory='+([long]$GeneratorMemoryMiB*1024*1024).ToString()+' nanoCpus='+([long]$env:IDENTITY_EXPERIMENT_K6_CPUS*1000000000).ToString()
   if($metadata.generatorResources.Trim() -ne $expectedGenerator){throw 'Cuota efectiva k6 distinta de la solicitada; no aceptar carga.'}
   while((Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$generator)).Trim() -eq 'true'){
     $cycleStart=$elapsed.Elapsed.TotalMilliseconds

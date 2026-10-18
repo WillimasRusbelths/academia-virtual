@@ -79,8 +79,11 @@ inspeccionar y limpiar explícitamente. No hay limpieza global ni borrado de vol
 [compose.resources.yml](compose.resources.yml) se aplica solo al proyecto aislado de
 carga. `measure.ps1 -ResourceExperiment baseline` conserva la configuración original;
 `pg2` cambia solo PostgreSQL de 1 a 2 CPU, `k6-2` solo k6 de 1 a 2 CPU y `pg2-k6-2`
-permite un segundo experimento de k6 después de fijar PostgreSQL a 2 CPU. Memoria,
-pool, seguridad, código y perfiles siguen iguales. Comparar una sola diferencia por
+permite un segundo experimento de k6 después de fijar PostgreSQL a 2 CPU. La memoria
+permanece por defecto en 512 MiB para PG/k6. Solo si `memory.events` lo justifica,
+`-GeneratorMemoryMiB 1024` amplía únicamente k6 en otro ensayo, manteniendo las CPU
+del comparador; requiere override explícito. Pool, seguridad, código y perfiles
+siguen iguales. Comparar una sola diferencia por
 vez, precedida de control comparable; no usar el override en desarrollo/producción.
 Una mejora con más recursos no aprueba la configuración original.
 
