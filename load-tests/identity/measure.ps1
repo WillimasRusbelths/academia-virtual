@@ -69,11 +69,15 @@ try{
       $cgroups=@{}
       foreach($target in @(@{role='api';id=$containers[0]},@{role='database';id=$containers[1]},@{role='generator';id=$generator})){
         if((Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$target.id)).Trim() -eq 'true'){
-          try{$cpu=Invoke-RecoveryDocker @('exec',$target.id,'sh','-c','cat /sys/fs/cgroup/cpu.stat')}catch{
+          try{$cpu=Invoke-RecoveryDocker @('exec',$target.id,'sh','-c','cat /sys/fs/cgroup/cpu.stat /sys/fs/cgroup/memory.events')}catch{
             if($target.role -eq 'generator' -and (Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$target.id)).Trim() -eq 'false'){continue}
             throw
           }
-          $fields=@{};foreach($line in ($cpu -split "`n")){if($line -match '^([a-z_]+) ([0-9]+)$'){$fields[$matches[1]]=[long]$matches[2]}}
+          $fields=@{};foreach($line in ($cpu -split "`n")){if($line -match '^([a-z_]+) ([0-9]+)$'){
+            $key=$matches[1];$value=[long]$matches[2]
+            if($key -in @('low','high','max','oom','oom_kill','oom_group_kill','sock_throttled')){$key='memory_'+$key}
+            $fields[$key]=$value
+          }}
           $cgroups[$target.role]=$fields
         }
       }
