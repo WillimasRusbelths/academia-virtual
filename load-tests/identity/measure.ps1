@@ -4,7 +4,8 @@ param(
   [Parameter(Mandatory=$true)][ValidateSet('sessions-warmup','sessions','authentication','smoke-sessions','smoke-authentication')][string]$Scenario,
   [switch]$Diagnostics,
   [switch]$EngineDiagnostics,
-  [switch]$CpuProfile
+  [switch]$CpuProfile,
+  [ValidateSet('baseline','pg2','k6-2','pg2-k6-2')][string]$ResourceExperiment='baseline'
 )
 . (Join-Path $PSScriptRoot '../../ops/recovery/common.ps1')
 if($CpuProfile -and -not $EngineDiagnostics){throw 'CpuProfile requiere EngineDiagnostics.'}
@@ -13,6 +14,9 @@ if($context.project -notmatch '^identity-load-[a-f0-9]{12}$'){throw 'Proyecto ai
 $compose=@('compose','--project-name',$context.project,'--env-file',$context.envFile,'-f',(Join-Path $PSScriptRoot 'compose.yml'))
 if($EngineDiagnostics){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.engine.yml'))}
 if($CpuProfile){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.cpu-profile.yml'))}
+$env:IDENTITY_EXPERIMENT_PG_CPUS=if($ResourceExperiment -in @('pg2','pg2-k6-2')){'2'}else{'1'}
+$env:IDENTITY_EXPERIMENT_K6_CPUS=if($ResourceExperiment -in @('k6-2','pg2-k6-2')){'2'}else{'1'}
+if($ResourceExperiment -ne 'baseline'){$compose+=@('-f',(Join-Path $PSScriptRoot 'compose.resources.yml'))}
 $name=$Scenario+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)
 $env:LOAD_DIAGNOSTICS=if($Diagnostics){'1'}else{'0'}
 $env:LOAD_DIAGNOSTICS_NAME=$name
@@ -40,6 +44,7 @@ $started=[DateTime]::UtcNow
 $observerProcess=[Diagnostics.Process]::GetCurrentProcess()
 $observerCpuStart=$observerProcess.TotalProcessorTime.TotalMilliseconds
 $metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;engineDiagnostics=[bool]$EngineDiagnostics;cpuProfile=[bool]$CpuProfile;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
+  resourceExperiment=$ResourceExperiment;requestedPostgresCpus=[int]$env:IDENTITY_EXPERIMENT_PG_CPUS;requestedGeneratorCpus=[int]$env:IDENTITY_EXPERIMENT_K6_CPUS;
   lockSha256=(Get-FileHash -LiteralPath (Join-Path $repo 'package-lock.json') -Algorithm SHA256).Hash.ToLowerInvariant();
   diffSha256=(Get-FileHash -LiteralPath (Join-Path $context.directory ($name+'-diff.patch')) -Algorithm SHA256).Hash.ToLowerInvariant();
   hardware=$hardware;containers=$images;imageDigests=$imageDigests;k6=$k6;network='Docker bridge interna, sin puertos publicados; API y generador separados';finishedAt=$null;exitCode=$null;
@@ -50,6 +55,7 @@ $exitCode=1
 try{
   $null=Invoke-RecoveryDocker ($compose+@('run','-d','--no-deps','--name',$generator,'-e',('RESULT_NAME='+$name),'-e',('LOAD_PHASE='+$phase),'-e',('SMOKE_KIND='+$kind),
     'generator','run','--out',('json=/load-private/'+$name+'-raw.jsonl'),('/scripts/'+$script)))
+  $metadata['generatorResources']=Invoke-RecoveryDocker @('inspect','--format','memory={{.HostConfig.Memory}} nanoCpus={{.HostConfig.NanoCpus}}',$generator)
   while((Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$generator)).Trim() -eq 'true'){
     $cycleStart=$elapsed.Elapsed.TotalMilliseconds
     $stats=Invoke-RecoveryDocker (@('stats','--no-stream','--format','{{json .}}')+$containers+@($generator))
@@ -80,10 +86,19 @@ try{
     }
     $probe=Invoke-RecoveryDocker ($compose+@('exec','-T','api','node','--experimental-strip-types','load-tests/identity/watchdog.ts'))
     $free=(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory
+    $sample['host']=[ordered]@{freeRamBytes=([long]$free*1024)}
+    # Muestras espaciadas; el costo CIM queda incluido en el ciclo del observador.
+    if($resourceSamples%5 -eq 1){
+      $probeStarted=$elapsed.Elapsed.TotalMilliseconds
+      $sample.host['at']=[DateTime]::UtcNow.ToString('o')
+      $sample.host['processor']=Get-CimInstance Win32_PerfFormattedData_Counters_ProcessorInformation | Where-Object Name -eq '_Total' | Select-Object ProcessorFrequency,PercentProcessorPerformance,PercentProcessorTime
+      $sample.host['power']=@(Get-CimInstance -Namespace root/wmi -ClassName BatteryStatus | Select-Object PowerOnline,Discharging)
+      $sample.host['samplingMs']=($elapsed.Elapsed.TotalMilliseconds-$probeStarted)
+    }
     $oom=$false;foreach($container in ($containers+@($generator))){if((Invoke-RecoveryDocker @('inspect','--format','{{.State.OOMKilled}}',$container)).Trim() -eq 'true'){$oom=$true}}
     $observerProcess.Refresh()
     $sample['observer']=[ordered]@{cpuSinceWindowMs=($observerProcess.TotalProcessorTime.TotalMilliseconds-$observerCpuStart);workingSetBytes=$observerProcess.WorkingSet64;privateMemoryBytes=$observerProcess.PrivateMemorySize64;cycleElapsedMs=($elapsed.Elapsed.TotalMilliseconds-$cycleStart)}
-    Add-Content -LiteralPath $statsFile -Value ($sample|ConvertTo-Json -Depth 5 -Compress) -Encoding utf8
+    Add-Content -LiteralPath $statsFile -Value ($sample|ConvertTo-Json -Depth 7 -Compress) -Encoding utf8
     if($probe.Trim() -ne 'CONTINUE' -or $free -lt 262144 -or $oom){
       $null=Invoke-RecoveryDocker @('stop','--time','1',$generator);$metadata['stopReason']=if($oom){'OOM_KILLED'}elseif($free -lt 262144){'HOST_RAM_UNDER_256M'}else{$probe.Trim()};break
     }

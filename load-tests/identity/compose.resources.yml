@@ -1,0 +1,7 @@
+# Experimentos locales: combinar solo con compose.yml y proyecto identity-load-*.
+# No cambia memoria, conexiones, seguridad, volúmenes ni perfiles de tráfico.
+services:
+  db:
+    cpus: ${IDENTITY_EXPERIMENT_PG_CPUS:-1}
+  generator:
+    cpus: ${IDENTITY_EXPERIMENT_K6_CPUS:-1}

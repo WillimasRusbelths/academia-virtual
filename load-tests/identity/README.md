@@ -74,6 +74,20 @@ inspeccionar y limpiar explícitamente. No hay limpieza global ni borrado de vol
 
 ## Perfiles completos para T103
 
+### Experimentos locales de recursos
+
+[compose.resources.yml](compose.resources.yml) se aplica solo al proyecto aislado de
+carga. `measure.ps1 -ResourceExperiment baseline` conserva la configuración original;
+`pg2` cambia solo PostgreSQL de 1 a 2 CPU, `k6-2` solo k6 de 1 a 2 CPU y `pg2-k6-2`
+permite un segundo experimento de k6 después de fijar PostgreSQL a 2 CPU. Memoria,
+pool, seguridad, código y perfiles siguen iguales. Comparar una sola diferencia por
+vez, precedida de control comparable; no usar el override en desarrollo/producción.
+Una mejora con más recursos no aprueba la configuración original.
+
+Los metadatos etiquetan la variante y los límites efectivos; las muestras externas
+guardan RAM libre del host y CPU/frecuencia/alimentación cada cinco ciclos, con costo
+CIM registrado. Si falta margen, se conserva el resultado y no se aumenta otra cuota.
+
 ### Condiciones del host antes de repetir
 
 Ejecutar [host-preflight.ps1](host-preflight.ps1) antes y después, fuera de la ventana
