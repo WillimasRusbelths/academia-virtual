@@ -2,6 +2,8 @@
 
 Preparado el 2026-10-18; base funcional `7dbf3a6`. **Sin sesiones observadas: T104,
 SC-001 y la parte humana de SC-010 pendientes.** Dependencia T094 cumplida.
+Acuerdo vigente 2026-10-18: ejecución aplazada hasta evaluar con diez personas reales
+la versión integrada y estable; este guion y tabla se conservan para entonces.
 Protocolo vinculante: [SC-001/010](../spec.md#resultados-medibles),
 [verificación](../verification.md) y [T104](../tasks.md).
 

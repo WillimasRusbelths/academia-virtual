@@ -2,9 +2,9 @@
 
 Ejecutar todos los comandos desde la raíz del repositorio. Se conserva el monorepo
 con NestJS, React/Vite, Prisma, PostgreSQL 16.14 y Mailpit 1.31.3. Este entorno sirve
-para desarrollo y pruebas de la aplicación mínima; no es un despliegue de producción.
-Identidad, pagos y video no están implementados. Los 1000 usuarios concurrentes siguen
-pendientes de demostrar con pruebas de carga.
+para desarrollo y pruebas locales; no es un despliegue de producción. Identidad tiene
+sus siete checkpoints y [regresión T106](../../specs/001-identidad-acceso-roles/evidence/regression.md)
+comprobados. Pagos/video siguen previstos; la capacidad de 1000 usuarios no está aprobada.
 
 ## Requisitos previos
 
@@ -76,8 +76,8 @@ tabla y los registros históricos permanecen como referencia del entorno predete
 Vite dirige `/api` a `http://api:3000`, conservando la ruta;
 se autoriza explícitamente el host `web` para la prueba interna de Chromium, sin
 permitir hosts arbitrarios.
-Los endpoints de identidad previstos aún no existen. El endpoint de salud actual se
-consulta directamente en el puerto API. Las páginas usan `localhost` de forma consistente.
+Los endpoints de identidad están en `/api/v1`, según [contratos](../../specs/001-identidad-acceso-roles/contracts/api.md).
+La salud se consulta directamente en el puerto API. Las páginas usan `localhost` de forma consistente.
 
 T023 añade `/health/ready`: responde 200 si el pool puede consultar PostgreSQL y 503 ante
 fallo, con configuración esencial validada al iniciar. No consulta SMTP; Mailpit no condiciona
@@ -149,8 +149,14 @@ docker compose exec -T api npm run test:unit
 docker compose exec -T api npm run test:integration
 docker compose exec -T api npm run test:crypto-mail
 docker compose --profile tests build browser-tests
-docker compose --profile tests run --rm browser-tests
 ```
+
+Para navegador, usar también `-f ops/docker/compose.identity-tests.yml` y ejecutar las
+diez configuraciones de [T106](../../specs/001-identidad-acceso-roles/evidence/regression.md#resultados-y-seguimiento)
+mediante `run --rm --no-deps --entrypoint sh browser-tests -c '<comando E2E>'`.
+Cada grupo necesita su configuración original de fixtures/origen/tamaños; la recopilación
+sin distinguir esas configuraciones no equivale a la matriz verificada. Para reproducir
+desde cero, usar el [quickstart aislado](../../specs/001-identidad-acceso-roles/quickstart.md#reproducir-con-configuración-y-bd-nuevas).
 
 La integración comprueba PostgreSQL real, permisos, rollback y esquema aislado. El ensayo
 SMTP conecta desde el contenedor API a Mailpit, solo con destinatarios `@example.test`;

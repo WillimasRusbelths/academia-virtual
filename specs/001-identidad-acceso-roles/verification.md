@@ -1,6 +1,17 @@
 # Estrategia de verificación de identidad
 
-Estado: entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md),
+**Estado vigente — 2026-10-18:** las siete historias tienen checkpoints comprobados;
+[T106](evidence/regression.md) repite instalación/V00, lint/build, 120 unitarias,
+744 integraciones y 203 E2E sobre configuración/BD nuevas. Incluye V16 nuevo,
+retención/invalidez y diagnóstico de bootstrap 23/23; el hallazgo histórico **sigue abierto**,
+con causa no confirmada. U2 completo se reutiliza con los límites de su evidencia original.
+[T105](evidence/login-timing.md) acredita SC-008 local. T104/SC-001/010 humanos se aplazan
+hasta la versión integrada estable con diez personas; [T108 permanece preliminar](evidence/acceptance.md).
+Capacidad sin aprobar: T103 completa como ejecución/informe, conservando resultados y
+referencias pendientes de D10. VPS/nuevas cargas esperan a matrícula. D13 no tiene SLA
+aprobado y la purga T095 sigue sin programación; SMTP externo y video siguen independientes.
+
+**Registro histórico por bloques:** entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md),
 [checkpoint funcional US2](evidence/us2.md), [checkpoint funcional US6](evidence/us6.md),
 [checkpoint funcional US4](evidence/us4.md) y [checkpoint funcional US7](evidence/us7.md)
 aprobados en su alcance técnico. V01/V02 funcionales, V03 funcional, V04-A/B, V06–V08,
@@ -8,8 +19,8 @@ V11/V15 y partes de V10/V12/V13 comprobadas en esos checkpoints.
 El [checkpoint técnico US5](evidence/us5.md) añade V09/V12/V14/VA y la
 [comparación temporal T087](evidence/enumeration.md) comprobadas en los flujos P1 actuales.
 [T095](evidence/retention.md) completa retención/purga y rotación privada en su alcance.
-Recuperación operativa, carga, estudio de participantes y el resto de V01–V16
-permanecen pendientes según sus criterios. El hallazgo intermitente CLI sigue abierto,
+En ese corte, recuperación operativa, carga, estudio de participantes y el resto de V01–V16
+permanecían pendientes según sus criterios. El hallazgo intermitente CLI sigue abierto,
 con causa no confirmada; no equivale a un fallo reproducido en este bloque.
 El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).

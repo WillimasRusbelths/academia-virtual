@@ -1,5 +1,92 @@
 # Guía de ejecución local y recuperación
 
+**Vigente — 2026-10-18:** siete checkpoints de identidad comprobados y
+[T106 completa](evidence/regression.md) sobre configuración/BD nuevas (commit `82bb85f`).
+No acredita aceptación integral, capacidad de 1000 usuarios ni SMTP externo. El texto de
+diseño original queda conservado al final como histórico.
+
+## Operación comprobada
+
+- **Ensayo manual conservado:** usar su configuración privada y el
+  [overlay T094](evidence/us3.md#entorno-manual-e-incidencia-de-correo), con el
+  [puerto/volumen existentes](../../ops/local/manual-us1.md). Web `http://localhost:5173`,
+  Mailpit `http://localhost:18025`. Conservar las 15 cuentas y credenciales; no ejecutar
+  aquí preparación de fixtures, purga, restauración ni configuración nueva.
+- **Primer ADMIN:** [CLI interactiva](../../ops/local/first-admin.md), solo para un destino
+  que nunca se haya inicializado, sin seed ni contraseña predeterminada. El
+  [hallazgo intermitente](evidence/regression.md) permanece abierto: 23/23 no confirmó su causa.
+- **Retención/recuperación:** [CLI y registros](../../ops/local/logging.md) y
+  [backup/restauración](../../ops/recovery/README.md), con mantenimiento e invalidación
+  antes de reabrir. Purga sin programación activada; D13 sin SLA aprobado.
+
+## Reproducir con configuración y BD nuevas
+
+Usar una **copia nueva del repositorio**, sin `.env`, no el checkout/volumen del ensayo
+manual. Docker Linux y Compose vigentes; si la red necesita CA local, preparar el
+[override de certificados](../../ops/docker/README.md#red-con-inspección-tls).
+El generador rechaza sobrescribir configuración. El ejemplo usa Node 22 compatible del
+host; la [guía Docker](../../ops/docker/README.md#configuración-privada) ofrece la variante
+con contenedor si no está instalado. En PowerShell desde esa copia:
+
+```powershell
+if (Test-Path .env) { throw 'Usar una copia nueva, sin configuración existente.' }
+node ops/docker/configure.mjs
+if ($LASTEXITCODE -ne 0) { throw 'No se creó configuración nueva.' }
+$trialProject = 'identity-regression-' + [guid]::NewGuid().ToString('N').Substring(0,12)
+$trial = @('compose','--project-name',$trialProject,'-f','compose.yml')
+if (Test-Path compose.override.yml) { $trial += @('-f','compose.override.yml') }
+$trial += @('-f','ops/docker/compose.regression.yml','-f','ops/docker/compose.identity-tests.yml')
+docker @trial --profile tests build --no-cache api web browser-tests
+docker @trial up -d --no-build --wait db mailpit api web
+docker @trial exec -T api npm run lint
+docker @trial exec -T api npm run build
+docker @trial exec -T api npm run verify:v00
+docker @trial exec -T api npm run db:generate
+docker @trial exec -T api npm run db:migrate:deploy
+docker @trial exec -T api npm run test:unit --workspace apps/api -- --maxWorkers=1
+docker @trial exec -T api npm run test:unit --workspace apps/web -- --maxWorkers=1
+docker @trial exec -T api npm run test:integration --workspace apps/api -- --maxWorkers=1
+```
+
+Comprobar cada código de salida; no continuar como aprobado si falla. Ese override usa
+`APP_ENV=test`, volumen propio y cero puertos publicados. Las suites migran/limpian solo
+sus esquemas nuevos. Para E2E, ejecutar **todos** los grupos de
+[T106](evidence/regression.md#resultados-y-seguimiento), uno por vez, en
+`docker @trial run --rm --no-deps --entrypoint sh browser-tests -c '<comando E2E>'`.
+La imagen ya genera Prisma y compila API; no necesita artefactos del ensayo manual.
+Conservar reportes privados y detener con `docker @trial stop`, **sin borrar volúmenes**.
+
+## SMTP futuro
+
+No activado ni contratado. Antes de publicar, elegir proveedor y documentar tarifa fechada,
+región, cuotas, volumen previsto, límites de destinatarios/reintentos, retención y costo
+total junto con alojamiento, copias, video y pruebas: **S/300 en total**, no mensual.
+Proveedor, costos y condiciones reales siguen pendientes; Mailpit no los valida.
+
+En demo/producción, inyectar secretos separados (`APP_ENV`, URLs/roles de BD con TLS,
+`APP_ORIGIN` HTTPS, `TRUSTED_PROXY` y claves de identidad). Configurar `MAIL_MODE=smtp`,
+`SMTP_HOST`, usuario/contraseña privados y `MAIL_FROM` de dominio verificado.
+TLS validado: **465 con `SMTP_SECURE=true`**, o **587 con `SMTP_SECURE=false` y
+`SMTP_REQUIRE_TLS=true`**; nunca desactivar validación del certificado. Publicar/revisar
+los registros DNS del proveedor: SPF, DKIM y política DMARC alineados con el remitente.
+Estas comprobaciones y una entrega real autorizada, errores/reintentos y límites del
+proveedor deben verificarse antes de activar; ninguna se da por probada aquí. No cambiar
+cuotas de aplicación para acomodar el servicio ni registrar credenciales/enlaces completos.
+La UI 202 confirma solicitud, no entrega; el ejecutor y la rotación existentes se reutilizan.
+Local/test conservan `capture`, `mailpit:1025` y destinatarios `@example.test`.
+
+## Pendientes de aceptación
+
+T104 y SC-001/010 humanos esperan diez personas en versión integrada estable. T103 conserva
+ejecución/informe e incumplimientos; capacidad sin aprobar, D10 pendiente y VPS/nuevas cargas
+aplazados hasta matrícula. SC-008 sí tiene [evidencia local T105](evidence/login-timing.md).
+T108 es [preliminar](evidence/acceptance.md); D13 y el bootstrap siguen abiertos. Investigar
+video/protección/alojamiento **D07–D09 de forma independiente y temprana**, sin esperar a
+finalizar identidad/matrícula; aplazar el VPS no elimina esa obligación ni autoriza contratar.
+
+<details>
+<summary>Guía de diseño 2026-10-06 conservada como histórico; sus futuros/pendientes no son el estado actual</summary>
+
 **Entorno vigente — 2026-10-06:** Docker Compose con PostgreSQL 16.14, Mailpit 1.31.3, API NestJS y web React/Vite en contenedores Linux. Procedimiento: [entorno Docker](../../ops/docker/README.md). Resultados: [verificación](../../ops/docker/verification.md). No cambia el alcance funcional ni se afirma capacidad demostrada.
 
 ## Entorno vigente y arranque V00
@@ -168,3 +255,5 @@ sobrescribir bases para ensayar recuperación.
 Estos puntos no requieren reabrir las decisiones de correo obligatorio, recuperación por
 enlace o rol único. El diseño está preparado para tareas; la ejecución local necesita los
 prerrequisitos señalados.
+
+</details>

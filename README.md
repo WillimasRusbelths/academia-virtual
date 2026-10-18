@@ -3,7 +3,19 @@
 Proyecto de academia virtual para un trabajo final de curso, con cuatro meses de plazo
 y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-16:** React/NestJS con Docker Compose como entorno local principal.
+**Estado al 2026-10-18:** React/NestJS con Docker Compose como entorno local principal.
+Las siete historias de identidad tienen sus checkpoints funcionales comprobados. La
+[regresión T106](specs/001-identidad-acceso-roles/evidence/regression.md) reproduce configuración
+y bases nuevas: 120 unitarias, 744 integraciones y 203 E2E aprobadas. La
+[medición T105](specs/001-identidad-acceso-roles/evidence/login-timing.md) acredita SC-008 local.
+T104 sigue aplazada hasta diez personas reales en la versión integrada y estable;
+[T108 es preliminar](specs/001-identidad-acceso-roles/evidence/acceptance.md). Son **106/108 tareas**
+completas, sin aceptación integral. El bootstrap intermitente sigue abierto, sin causa confirmada.
+Capacidad sin aprobar: [T103 conserva ejecución/informe e incumplimientos](specs/001-identidad-acceso-roles/evidence/load-resources.md).
+VPS y nuevas cargas completas esperan a matrícula; D10/D13 y SMTP real siguen pendientes.
+La purga es CLI explícita, sin programación. Operación actual y SMTP futuro:
+[quickstart](specs/001-identidad-acceso-roles/quickstart.md).
+
 [US1: acceso y cierre de sesión](specs/001-identidad-acceso-roles/evidence/us1.md) está implementada
 y verificada con cuentas de prueba de los tres roles: login, consulta propia, recarga y logout.
 [US2: registro y verificación](specs/001-identidad-acceso-roles/evidence/us2.md) está implementada
@@ -31,6 +43,11 @@ y pruebas necesarias, no a financiar una operación permanente. Se prevén aprox
 
 ## Ejecución local
 
+Para reanudar el ensayo manual existente, usar su [configuración y overlay T094](specs/001-identidad-acceso-roles/quickstart.md#operación-comprobada),
+conservando sus cuentas/credenciales. El arranque general siguiente corresponde a una instalación
+local nueva; la [reproducción aislada](specs/001-identidad-acceso-roles/quickstart.md#reproducir-con-configuración-y-bd-nuevas)
+separa configuración y datos de prueba.
+
 Iniciar Docker Desktop con motor Linux. Crear `.env` a partir de `.env.example` con cinco
 contraseñas locales y cuatro claves de identidad independientes, o generarlo sin sobrescribir archivos mediante el comando
 documentado en [ops/docker/README.md](ops/docker/README.md).
@@ -39,6 +56,11 @@ documentado en [ops/docker/README.md](ops/docker/README.md).
 docker compose up -d --build
 docker compose ps
 ```
+
+En una BD de desarrollo nueva, generar y aplicar las migraciones revisadas antes de usar
+identidad: `docker compose exec -T api npm run db:generate` y
+`docker compose exec -T api npm run db:migrate:deploy`. Para datos persistentes, revisar
+primero el [procedimiento de actualización/recuperación](ops/recovery/README.md).
 
 Web: `http://localhost:5173`; API: `http://localhost:3000/health/live`;
 Mailpit: `http://localhost:18025`. PostgreSQL se publica en `127.0.0.1:55432` y SMTP
@@ -127,6 +149,9 @@ Para cada funcionalidad pequeña:
 4. Generar tareas con `$speckit-tasks` y revisar consistencia con `$speckit-analyze`.
 5. Implementar con `$speckit-implement` y verificar los criterios de aceptación.
 
+<details>
+<summary>Registro histórico de incrementos hasta T095 (2026-10-16; no es el estado vigente)</summary>
+
 La primera funcionalidad especificada y planificada es **identidad, autenticación y acceso
 por roles**. T001–T095 están completadas, incluidos los checkpoints US1, US2, US3, US4, US5, US7 y
 [US6](specs/001-identidad-acceso-roles/evidence/us6.md), con [operación del primer administrador](ops/local/first-admin.md);
@@ -161,6 +186,8 @@ las verificaciones finales T096–T108 siguen pendientes. Para ejecutar
 el entorno actual, seguir la [guía Docker](ops/docker/README.md) y la evidencia de cada
 incremento; el quickstart conserva procedimientos aún previstos. La viabilidad del
 video y la rúbrica de evaluación permanecen pendientes. No se han ejecutado pruebas de capacidad.
+
+</details>
 
 ## Archivos compartidos y configuración local
 
