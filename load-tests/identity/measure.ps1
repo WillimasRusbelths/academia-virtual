@@ -31,9 +31,12 @@ $cpu=Get-CimInstance Win32_Processor | Select-Object -First 1
 $disk=Get-CimInstance Win32_LogicalDisk | Where-Object {$_.DeviceID -eq [IO.Path]::GetPathRoot($repo).TrimEnd('\')}
 $k6=Invoke-RecoveryDocker ($compose+@('run','--rm','--no-deps','generator','version'))
 $hardware=[ordered]@{os=$os.Caption;cpu=$cpu.Name;cores=$cpu.NumberOfLogicalProcessors;ramBytes=([long]$os.TotalVisibleMemorySize*1024);freeRamBytes=([long]$os.FreePhysicalMemory*1024);diskFreeBytes=$disk.FreeSpace;diskBytes=$disk.Size;fileSystem=$disk.FileSystem;driveType=$disk.DriveType;docker=(Invoke-RecoveryDocker @('info','--format','{{json .NCPU}} {{json .MemTotal}}'));sameHostContention=$true}
-$null=Invoke-RecoveryDocker ($compose+@('up','-d','--wait','api'))
+$null=Invoke-RecoveryDocker ($compose+@('up','-d','--wait','db','mailpit','api'))
 $null=Invoke-RecoveryDocker ($compose+@('run','--rm','--no-deps','runner','-c',('node --experimental-strip-types load-tests/identity/snapshot.ts '+$name+'-before')))
 $containers=@((Invoke-RecoveryDocker ($compose+@('ps','-q','api'))).Trim(),(Invoke-RecoveryDocker ($compose+@('ps','-q','db'))).Trim())
+$postgresResources=(Invoke-RecoveryDocker @('inspect','--format','{{.HostConfig.NanoCpus}} {{.HostConfig.Memory}}',$containers[1])).Trim()
+$expectedPostgres=([long]$env:IDENTITY_EXPERIMENT_PG_CPUS*1000000000).ToString()+' 536870912'
+if($postgresResources -ne $expectedPostgres){throw 'Cuota efectiva PostgreSQL distinta de la solicitada; no iniciar carga.'}
 $images=foreach($container in $containers){Invoke-RecoveryDocker @('inspect','--format','{{.Image}} memory={{.HostConfig.Memory}} nanoCpus={{.HostConfig.NanoCpus}}',$container)}
 $imageDigests=foreach($image in @('academia-local-api:latest','postgres:16.14-bookworm','grafana/k6:1.6.0')){Invoke-RecoveryDocker @('image','inspect','--format','{{.Id}} {{json .RepoDigests}}',$image)}
 $script=if($Scenario.StartsWith('smoke-')){'smoke.js'}elseif($Scenario -eq 'authentication'){'authentication.js'}else{'sessions.js'}
@@ -44,7 +47,7 @@ $started=[DateTime]::UtcNow
 $observerProcess=[Diagnostics.Process]::GetCurrentProcess()
 $observerCpuStart=$observerProcess.TotalProcessorTime.TotalMilliseconds
 $metadata=[ordered]@{scenario=$Scenario;diagnostics=[bool]$Diagnostics;engineDiagnostics=[bool]$EngineDiagnostics;cpuProfile=[bool]$CpuProfile;startedAt=$started.ToString('o');revision=$revision;sourceHashes=$sourceHashes;
-  resourceExperiment=$ResourceExperiment;requestedPostgresCpus=[int]$env:IDENTITY_EXPERIMENT_PG_CPUS;requestedGeneratorCpus=[int]$env:IDENTITY_EXPERIMENT_K6_CPUS;
+  resourceExperiment=$ResourceExperiment;requestedPostgresCpus=[int]$env:IDENTITY_EXPERIMENT_PG_CPUS;requestedGeneratorCpus=[int]$env:IDENTITY_EXPERIMENT_K6_CPUS;postgresResources=$postgresResources;
   lockSha256=(Get-FileHash -LiteralPath (Join-Path $repo 'package-lock.json') -Algorithm SHA256).Hash.ToLowerInvariant();
   diffSha256=(Get-FileHash -LiteralPath (Join-Path $context.directory ($name+'-diff.patch')) -Algorithm SHA256).Hash.ToLowerInvariant();
   hardware=$hardware;containers=$images;imageDigests=$imageDigests;k6=$k6;network='Docker bridge interna, sin puertos publicados; API y generador separados';finishedAt=$null;exitCode=$null;
@@ -56,6 +59,8 @@ try{
   $null=Invoke-RecoveryDocker ($compose+@('run','-d','--no-deps','--name',$generator,'-e',('RESULT_NAME='+$name),'-e',('LOAD_PHASE='+$phase),'-e',('SMOKE_KIND='+$kind),
     'generator','run','--out',('json=/load-private/'+$name+'-raw.jsonl'),('/scripts/'+$script)))
   $metadata['generatorResources']=Invoke-RecoveryDocker @('inspect','--format','memory={{.HostConfig.Memory}} nanoCpus={{.HostConfig.NanoCpus}}',$generator)
+  $expectedGenerator='memory=536870912 nanoCpus='+([long]$env:IDENTITY_EXPERIMENT_K6_CPUS*1000000000).ToString()
+  if($metadata.generatorResources.Trim() -ne $expectedGenerator){throw 'Cuota efectiva k6 distinta de la solicitada; no aceptar carga.'}
   while((Invoke-RecoveryDocker @('inspect','--format','{{.State.Running}}',$generator)).Trim() -eq 'true'){
     $cycleStart=$elapsed.Elapsed.TotalMilliseconds
     $stats=Invoke-RecoveryDocker (@('stats','--no-stream','--format','{{json .}}')+$containers+@($generator))
