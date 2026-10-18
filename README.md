@@ -1,7 +1,7 @@
 # academia-virtual
 
-Proyecto de academia virtual para un trabajo final de curso, con cuatro meses de plazo
-y desarrollo local mediante Spec-Driven Development con GitHub Spec Kit.
+Proyecto de academia virtual para un trabajo final de curso, con desarrollo local
+mediante Spec-Driven Development con GitHub Spec Kit.
 
 **Estado al 2026-10-18:** React/NestJS con Docker Compose como entorno local principal.
 Las siete historias de identidad tienen sus checkpoints funcionales comprobados. La
