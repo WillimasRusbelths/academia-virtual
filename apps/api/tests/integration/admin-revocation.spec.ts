@@ -1,4 +1,5 @@
 import { beforeAll,beforeEach,afterAll,afterEach,test,expect } from 'vitest';
+import { waitForBlockedBy } from '../support/locks.js';
 import { us2Dataset,seedAction } from '../support/us2.js';
 import type { Us2Dataset } from '../support/us2.js';
 import { us1Http } from '../support/us1-http.js';
@@ -97,7 +98,7 @@ for(const change of ['sesión','rol','estado'] as const)test(`actor pierde ${cha
     await holder.query('BEGIN');await holder.query('SELECT id FROM "SystemState" WHERE id=1 FOR UPDATE');
     const pid=(await holder.query('SELECT pg_backend_pid() AS pid')).rows[0].pid;
     pending=command(target.id,'role','TEACHER',actor.sessions[0].secret);
-    await expect.poll(async()=>Number((await holder.query('SELECT count(*)::int AS n FROM pg_stat_activity WHERE $1=ANY(pg_blocking_pids(pid))',[pid])).rows[0].n)>0,{timeout:3000}).toBe(true);
+    await waitForBlockedBy(data.context.database.pool,pid);
     if(change==='sesión')await data.context.database.pool.query('UPDATE "Session" SET "revokedAt"=clock_timestamp() WHERE id=$1',[actor.sessions[0].id]);
     else if(change==='rol')await data.context.database.pool.query(`UPDATE "User" SET role='TEACHER',"authVersion"="authVersion"+1 WHERE id=$1`,[actor.id]);
     else await data.context.database.pool.query(`UPDATE "User" SET status='DISABLED',"disabledAt"=clock_timestamp(),"authVersion"="authVersion"+1 WHERE id=$1`,[actor.id]);

@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { waitForBlockedBy } from '../support/locks.js';
 import { beforeAll, beforeEach, afterEach, afterAll, test, expect } from 'vitest';
 import { us2Dataset, type Us2Dataset } from '../support/us2.js';
 import { us1Http, type Us1Http } from '../support/us1-http.js';
@@ -88,7 +89,7 @@ test('actor pierde sesión mientras nombre espera destino: 401 y cero cambios',a
     await holder.query('BEGIN');await holder.query('SELECT id FROM "User" WHERE id=$1 FOR UPDATE',[target.id]);
     const pid=(await holder.query('SELECT pg_backend_pid() AS pid')).rows[0].pid;
     pending=request('PATCH',`/admin/users/${target.id}/name`,{name:'No permitido'});
-    await expect.poll(async()=>Number((await holder.query('SELECT count(*)::int AS n FROM pg_stat_activity WHERE $1=ANY(pg_blocking_pids(pid))',[pid])).rows[0].n)>0,{timeout:3000}).toBe(true);
+    await waitForBlockedBy(db,pid);
     // El actor podría estar ya bloqueado por orden UUID: revocar la sesión no invierte locks User.
     await db.query('UPDATE "Session" SET "revokedAt"=clock_timestamp() WHERE id=$1',[actor.sessions[0].id]);
     await holder.query('COMMIT');await adminError(await pending,401,'AUTH_REQUIRED');

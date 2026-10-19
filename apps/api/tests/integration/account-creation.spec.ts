@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { beforeAll, beforeEach, afterAll, test, expect } from 'vitest';
 import { us2Dataset, type Us2Dataset } from '../support/us2.js';
 import { adminSnapshot, projection } from '../support/us4.js';
+import { waitForBlockedBy } from '../support/locks.js';
 import { CreateAccount, AccountConflict } from '../../src/modules/identity/application/create-account.js';
 import { PostgresAccountCreationStore } from '../../src/modules/identity/infrastructure/account-creation-store.js';
 import { PostgresSessionStore } from '../../src/modules/identity/infrastructure/session-store.js';
@@ -104,7 +105,7 @@ test('alta ADMIN espera gobierno y revalida actor al liberarse SystemState',asyn
     await holder.query('BEGIN');await holder.query('SELECT id FROM "SystemState" WHERE id=1 FOR UPDATE');
     const pid=(await holder.query('SELECT pg_backend_pid() AS pid')).rows[0].pid;
     result=services().create.execute(actor,{...input(),role:'ADMIN'}).then(view=>({view}),error=>({error}));
-    await expect.poll(async()=>Number((await holder.query('SELECT count(*)::int AS n FROM pg_stat_activity WHERE $1=ANY(pg_blocking_pids(pid))',[pid])).rows[0].n)>0,{timeout:3000}).toBe(true);
+    await waitForBlockedBy(db,pid);
     await db.query(`UPDATE "User" SET role='TEACHER',"authVersion"="authVersion"+1 WHERE id=$1`,[actor.userId]);
     const before=await adminSnapshot(data);await holder.query('COMMIT');
     const outcome=await result;expect('error'in outcome&&outcome.error instanceof AuthorizationFailure).toBe(true);
