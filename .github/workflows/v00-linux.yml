@@ -114,7 +114,14 @@ jobs:
           docker compose exec -T api npm --version >> "$GITHUB_STEP_SUMMARY"
           uname -a >> "$GITHUB_STEP_SUMMARY"
           sha256sum package-lock.json >> "$GITHUB_STEP_SUMMARY"
-          docker image inspect node:22.23.1-bookworm-slim postgres:16.14-bookworm axllent/mailpit:v1.31.3 --format '{{json .RepoDigests}}' >> "$GITHUB_STEP_SUMMARY"
+          # BuildKit no tiene por qué cargar la etiqueta FROM en el almacén local.
+          # Registrar las imágenes reales de los servicios, incluidas API/web construidas.
+          for service in db mailpit api web; do
+            container_id=$(docker compose ps -q "$service")
+            image_id=$(docker inspect "$container_id" --format '{{.Image}}')
+            docker image inspect "$image_id" \
+              --format "service=$service id={{.Id}} digests={{json .RepoDigests}}" >> "$GITHUB_STEP_SUMMARY"
+          done
       - name: Detener solo el proyecto efímero
         if: always()
         run: docker compose down
