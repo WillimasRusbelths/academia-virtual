@@ -1,18 +1,19 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T004 completadas y verificadas el 2026-10-19; T005–T074 pendientes.
-T005/T006 tienen pruebas escritas y ejecutadas en rojo; no se marca comportamiento aprobado.
+**Estado**: T001–T008 completadas y verificadas el 2026-10-19; T009–T074 pendientes.
+T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
-[entorno y harness](evidence/environment.md), [pruebas T005/T006](evidence/t005-t006.md).
+[entorno y harness](evidence/environment.md), [rojo T005/T006](evidence/t005-t006.md) y
+[modelo y migración T007/T008](evidence/t007-t008.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
 
 La instrucción de generar tareas sucede a las etapas históricas descritas en spec/plan;
-no cambia su negocio. Se ejecutó el primer bloque y una instrucción posterior autorizó
-únicamente escribir/ejecutar T005/T006 antes de T007/T008. Las demás tareas siguen siendo
-destinos futuros. Completar el harness no acredita funcionalidad académica.
+no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
+únicamente T007/T008 para implementar/verificar modelo y migración aditiva. Las demás
+tareas siguen siendo destinos futuros; este cierre no acredita funcionalidad académica.
 
 ## Formato y convenciones
 
@@ -42,17 +43,17 @@ Objetivo: preparar una ejecución reproducible sin tocar la instalación manual.
 Depende de T001–T004. No habilitar historias hasta completar esta fase. Las pruebas de
 fundamentos son comunes; la lógica de publicación y consulta se entrega en las historias.
 
-- [ ] T005 [P] Escribir PG de migración nueva/incremental en `apps/api/tests/integration/academic-offering-migration.spec.ts`: aplicar 0001–0004 a fixtures, luego nueva migración; comparar cuentas, hashes, authVersion, sesiones, tokens, auditoría y SystemState, salvo columna default 0; comprobar runtime sin DDL, vista/trigger en esquema no public y rechazos por restricciones (FR-016; V-A11).
-- [ ] T006 [P] Escribir PG de generación en `apps/api/tests/integration/academic-offering-eligibility.spec.ts`: pérdida de rol/estado/verificación incrementa una vez, recuperación/nombre/reset/no-op no incrementan, UPDATE no sustituye generación, overflow aborta y rollback conserva acceso/auditoría juntos (FR-012/016; V-A06).
+- [X] T005 [P] Escribir PG de migración nueva/incremental en `apps/api/tests/integration/academic-offering-migration.spec.ts`: aplicar 0001–0004 a fixtures, luego nueva migración; comparar cuentas, hashes, authVersion, sesiones, tokens, auditoría y SystemState, salvo columna default 0; comprobar runtime sin DDL, vista/trigger en esquema no public y rechazos por restricciones (FR-016; V-A11).
+- [X] T006 [P] Escribir PG de generación en `apps/api/tests/integration/academic-offering-eligibility.spec.ts`: pérdida de rol/estado/verificación incrementa una vez, recuperación/nombre/reset/no-op no incrementan, UPDATE no sustituye generación, overflow aborta y rollback conserva acceso/auditoría juntos (FR-012/016; V-A06).
 
-Avance T005/T006, 2026-10-19: 42 casos ejecutados, un control aprobado y 41 fallos de
-aserción esperados por migración/tablas/vista/generación ausentes; cero casos omitidos.
-Las expectativas posteriores a las precondiciones siguen pendientes de ejecutarse con
-la implementación de T007/T008. Se conservan ambos checkboxes sin marcar hasta verificar
-sus criterios completos. Véanse evidencia y resultados por caso; E1 de T012/T014 se conserva.
+Historial T005/T006, 2026-10-19: inicialmente 42 casos ejecutados, un control aprobado y
+41 fallos de aserción por objetos ausentes. Tras T007/T008, los 42 pasan sin modificar
+sus expectativas; se ejercieron también las ramas antes inaccesibles. Se agregaron seis
+comprobaciones SQL del nuevo esquema y pasaron. Los informes en rojo se conservan como
+históricos; el cierre actualizado está en la evidencia T007/T008. E1 se conserva.
 
-- [ ] T007 Describir las cinco entidades académicas y `User.teacherEligibilityVersion` en `apps/api/prisma/schema.prisma`, aplicando literalmente las restricciones del anexo. Termina con relaciones RESTRICT, nulabilidad/enums y bigint coherentes con data-model, sin Occupancy, Enrollment ni datos académicos iniciales (FR-002/005/015/016).
-- [ ] T008 Preparar y revisar `apps/api/prisma/migrations/0005_academic_offering/migration.sql` después de comprobar numeración real: aditiva, checks/índices, pertenencia inmutable y trigger de estados, snapshot emparejado, generación y vista AcademicTeacherDirectory en esquema configurado. Aplicar solo en destino T002/T005; probar SQL personalizado y generación Prisma con scripts existentes. No modificar migraciones aplicadas ni conceder DDL/CREATEDB al runtime; sombra exclusiva si se usa create-only (FR-002/005/008/012/015/016).
+- [X] T007 Describir las cinco entidades académicas y `User.teacherEligibilityVersion` en `apps/api/prisma/schema.prisma`, aplicando literalmente las restricciones del anexo. Termina con relaciones RESTRICT, nulabilidad/enums y bigint coherentes con data-model, sin Occupancy, Enrollment ni datos académicos iniciales (FR-002/005/015/016).
+- [X] T008 Preparar y revisar `apps/api/prisma/migrations/0005_academic_offering/migration.sql` después de comprobar numeración real: aditiva, checks/índices, pertenencia inmutable y trigger de estados, snapshot emparejado, generación y vista AcademicTeacherDirectory en esquema configurado. Aplicar solo en destino T002/T005; probar SQL personalizado y generación Prisma con scripts existentes. No modificar migraciones aplicadas ni conceder DDL/CREATEDB al runtime; sombra exclusiva si se usa create-only (FR-002/005/008/012/015/016).
 - [ ] T009 Publicar tipos mínimos en `apps/api/src/modules/users/public/teaching-directory.ts` y adaptador en `apps/api/src/modules/users/infrastructure/teaching-directory.ts`: userId/name/eligible/eligibilityVersion; selector solo elegibles. Termina sin UserView/email, pool nuevo, preview Prisma ni tipos pg en contrato público (FR-011/012).
 - [ ] T010 Crear contratos puros en `apps/api/src/modules/academic-offering/public/offer.ts`, `application/offering-store.ts` y `domain/offering-error.ts`; cerrar DTO por audiencia, errores y tipos conforme al API y anexo. Termina sin Nest/pg en núcleo ni generación docente expuesta al cliente (FR-002/010/011/013).
 - [ ] T011 Extender `apps/api/src/modules/authorization/domain/permissions.ts` y su `permissions.test.ts` con academic:manage ADMIN, academic:read-published ADMIN/STUDENT y academic:read-own TEACHER; mantener los permisos de identidad y denegación por defecto. Termina con todas las combinaciones unitarias aprobadas (FR-010/016).

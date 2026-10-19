@@ -86,6 +86,7 @@ model User {
   provisionalPasswordHash String?
   provisionalExpiresAt    DateTime?     @db.Timestamptz(6)
   authVersion             BigInt        @default(0)
+  teacherEligibilityVersion BigInt      @default(0)
   createdAt               DateTime      @default(now()) @db.Timestamptz(6)
   updatedAt               DateTime      @default(now()) @db.Timestamptz(6)
   disabledAt              DateTime?     @db.Timestamptz(6)
@@ -94,6 +95,10 @@ model User {
   auditAsActor            AuditEvent[]  @relation("AuditActor")
   auditAsTarget           AuditEvent[]  @relation("AuditTarget")
   bootstrapState          SystemState?
+  academicGroups          AcademicGroup[] @relation("AcademicTeacher")
+  academicPublishedGroups AcademicGroup[] @relation("AcademicPublishedTeacher")
+  academicCommands        AcademicCommand[]
+  academicAuditEvents     AcademicAuditEvent[]
 }
 
 model Session {
@@ -194,3 +199,121 @@ model RateEvent {
   reservationExpiresAt DateTime?  @db.Timestamptz(6)
   @@index([bucketKey, occurredAt])
 }
+
+enum AcademicCourseState {
+  DRAFT
+  PUBLISHED
+  WITHDRAWN
+}
+
+enum AcademicGroupState {
+  DRAFT
+  PUBLISHED
+  WITHDRAWN
+  CANCELLED
+}
+
+enum AcademicResourceKind {
+  COURSE
+  GROUP
+}
+
+enum AcademicOperation {
+  COURSE_CREATE
+  COURSE_EDIT
+  COURSE_PUBLISH
+  COURSE_WITHDRAW
+  GROUP_CREATE
+  GROUP_EDIT
+  GROUP_SCHEDULE
+  GROUP_PUBLISH
+  GROUP_WITHDRAW
+  GROUP_CANCEL
+}
+
+model AcademicCourse {
+  id          String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  description String?
+  state       AcademicCourseState @default(DRAFT)
+  revision    BigInt              @default(1)
+  createdAt   DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime            @default(now()) @db.Timestamptz(6)
+  groups      AcademicGroup[]
+}
+
+model AcademicGroup {
+  id                                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  courseId                           String             @db.Uuid
+  course                             AcademicCourse     @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  name                               String
+  state                              AcademicGroupState @default(DRAFT)
+  periodStart                        DateTime?          @db.Date
+  periodEnd                          DateTime?          @db.Date
+  timeZone                           String             @default("America/Lima")
+  capacity                           Int?               @db.SmallInt
+  teacherUserId                      String?            @db.Uuid
+  teacher                            User?              @relation("AcademicTeacher", fields: [teacherUserId], references: [id], onDelete: Restrict)
+  publishedTeacherUserId             String?            @db.Uuid
+  publishedTeacher                   User?              @relation("AcademicPublishedTeacher", fields: [publishedTeacherUserId], references: [id], onDelete: Restrict)
+  publishedTeacherEligibilityVersion BigInt?
+  cancellationReason                 String?
+  cancelledAt                        DateTime?          @db.Timestamptz(6)
+  revision                           BigInt             @default(1)
+  createdAt                          DateTime           @default(now()) @db.Timestamptz(6)
+  updatedAt                          DateTime           @default(now()) @db.Timestamptz(6)
+  slots                              AcademicSlot[]
+
+  @@index([courseId, state, id])
+  @@index([teacherUserId, state, id])
+  // CHECK, transiciones y búsqueda parcial PUBLISHED en 0005; sin preview Prisma.
+}
+
+model AcademicSlot {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  groupId     String        @db.Uuid
+  group       AcademicGroup @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  dayOfWeek   Int           @db.SmallInt
+  startMinute Int           @db.SmallInt
+  endMinute   Int           @db.SmallInt
+
+  @@unique([groupId, dayOfWeek, startMinute, endMinute], map: "AcademicSlot_group_day_start_end_key")
+  @@index([groupId, dayOfWeek])
+}
+
+model AcademicCommand {
+  actorUserId       String               @db.Uuid
+  actor             User                 @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+  commandId         String               @db.Uuid
+  operation         AcademicOperation
+  targetKind        AcademicResourceKind
+  targetId          String               @db.Uuid
+  payloadDigest     Bytes
+  resultingRevision BigInt
+  appliedAt         DateTime             @default(now()) @db.Timestamptz(6)
+  result            AuditResult
+
+  @@id([actorUserId, commandId])
+}
+
+model AcademicAuditEvent {
+  id             String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorUserId    String               @db.Uuid
+  actor          User                 @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+  resourceKind   AcademicResourceKind
+  resourceId     String               @db.Uuid
+  action         AcademicOperation
+  result         AuditResult
+  commandId      String               @db.Uuid
+  requestId      String               @db.Uuid
+  // El estado de curso es el subconjunto sin CANCELLED, protegido también por CHECK.
+  beforeState    AcademicGroupState?
+  afterState     AcademicGroupState
+  beforeRevision BigInt?
+  afterRevision  BigInt
+  occurredAt     DateTime             @default(now()) @db.Timestamptz(6)
+
+  @@index([resourceKind, resourceId, occurredAt])
+}
+
+// AcademicTeacherDirectory y triggers/checks se versionan en SQL, sin vistas experimentales.

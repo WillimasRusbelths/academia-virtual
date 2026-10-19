@@ -1,0 +1,658 @@
+{
+    "Date":  "2026-10-19",
+    "Branch":  "feat/002-oferta-academica",
+    "TestsCommit":  "1dad476bbe7f986f708f3bc89dbb38858c0f8721",
+    "OriginalT005T006":  42,
+    "AdditionalSchema":  6,
+    "SelectedRegression":  70,
+    "UnitArchitecture":  75,
+    "FinalFailed":  0,
+    "FinalSkipped":  0,
+    "Sources":  [
+                    {
+                        "Path":  "apps/api/prisma/schema.prisma",
+                        "SHA256":  "AF1E7FF0EBBA9A287774D54F8CE1680C493ABC9197AB7955EA3149823C72EF4E"
+                    },
+                    {
+                        "Path":  "apps/api/prisma/migrations/0005_academic_offering/migration.sql",
+                        "SHA256":  "DEEF3E283D56E40A1FA30343B05B70137DF35471763275FDF31126A4C5E36E21"
+                    },
+                    {
+                        "Path":  "apps/api/tests/integration/academic-offering-schema.spec.ts",
+                        "SHA256":  "FE786C6ECEE1B31A3A01EF8B5B1CE613713A1EF0A57151BDD6E18AB07D0A1630"
+                    },
+                    {
+                        "Path":  "apps/api/tests/integration/migrations.spec.ts",
+                        "SHA256":  "9ABDC45D28EBAAA924B152D114573825B41AECD0AC9E8E79AF19D026EAB8B6CC"
+                    }
+                ],
+    "Cases":  [
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E01 INSERT ordinario inicia generación 0 para docente elegible",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E02 perder rol docente hacia STUDENT incrementa exactamente una vez",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E02 perder rol docente hacia ADMIN incrementa exactamente una vez",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E03 desactivar incrementa una vez; cambios posteriores mientras sigue inhabilitado no incrementan",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E04 perder verificación también invalida generación sin depender de consultas",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E05 recuperación de role conserva generación nueva; snapshot anterior sigue inválido",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E05 recuperación de status conserva generación nueva; snapshot anterior sigue inválido",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E05 recuperación de verification conserva generación nueva; snapshot anterior sigue inválido",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E06 dos pérdidas separadas por recuperación avanzan a generación 2, sin reciclarla",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E07 cambio de nombre y UPDATE no-op no invalidan publicación docente",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E08 una cuenta que nunca fue elegible no incrementa por desactivación",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=false",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=true",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E10 reset real revoca sesión y aumenta authVersion sin aumentar generación docente",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E11 cambio de acceso real confirma generación, revocación y auditoría juntos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E12 fallo de auditoría revierte acceso, generación y revocación en una sola transacción",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E13 overflow bigint aborta pérdida de habilitación sin reciclar generación ni alterar la fila",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E14 recuperar habilitación no actualiza snapshot ni estado/revision de un grupo publicado",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M01 control: propietario migra en esquema t_ y runtime conserva DML sin DDL",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M02 deploy vacío incorpora una migración posterior a las cuatro de identidad",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M03 deploy vacío crea cinco tablas académicas vacías y generación bigint default 0",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M04 directorio SQL mínimo funciona con runtime en esquema distinto de public",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M05 actualización incremental conserva cuentas, hashes, sesiones, tokens, auditoría, correo y bootstrap",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: capacidad cero",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: capacidad negativa",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: capacidad 51",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: zona ajena",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: revision cero",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: nombre vacío",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M07 capacidad admite 1 y 50, borrador incompleto y nombres iguales sin unicidad inventada",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M08 periodo invertido y snapshot incompleto son rechazados sin cambio parcial",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M09 FK RESTRICT y pertenencia inmutable no permiten trasladar o borrar padres",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M10 cancelar exige motivo/fecha y Cancelado es terminal incluso ante escritura SQL runtime",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=0 inicio=60 fin=120",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=8 inicio=60 fin=120",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=-1 fin=60",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=60 fin=1440",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=60 fin=60",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=120 fin=60",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M12 franjas contiguas válidas y duplicado exacto rechazado por unicidad",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M13 ledger exige unicidad actor/comando y huella SHA-256 de 32 bytes",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M14 generación no admite negativos en una nueva fila y Published exige datos completos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-schema.spec.ts",
+                      "Case":  "S01 curso exige retirar antes de editar, incluso si se intenta retirar y editar juntos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-schema.spec.ts",
+                      "Case":  "S02 grupo publicado exige retiro separado y conserva captura hasta publicación explícita",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-schema.spec.ts",
+                      "Case":  "S03 una franja no puede trasladarse a otro grupo",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-schema.spec.ts",
+                      "Case":  "S04 auditoría académica conserva recurso propio y rechaza estados/actor/revisiones inválidos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-schema.spec.ts",
+                      "Case":  "S05 ledger rechaza operación/destino incompatibles y revisiones no positivas",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-schema.spec.ts",
+                      "Case":  "S06 runtime no puede deshabilitar el trigger que protege la generación",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-harness.spec.ts",
+                      "Case":  "rechaza modo manual antes de abrir conexiones",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-harness.spec.ts",
+                      "Case":  "dos suites separan cuentas, observador y limpieza dirigida",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "academic-offering-harness.spec.ts",
+                      "Case":  "la conexión observadora detecta una espera real fuera de la transacción retenida",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "role: UUID inválido, campos ausentes y filtros extra son 400; inexistente autorizado 404",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "status: UUID inválido, campos ausentes y filtros extra son 400; inexistente autorizado 404",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "rol revoca sesiones pero conserva tokens y entregas; auditoría contiene solo roles",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "desactivación conserva tokens consumidos/marca revocada previa y cancela entrega SENDING con payload borrado",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "reactivar conserva versión, verificación pendiente y provisional; no habilita acceso por sí sola",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "cambiar rol de cuenta desactivada conserva disabledAt",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "no-op role: no altera cuenta, tokens o correo; audita NO_CHANGE sin metadatos de transición",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "no-op status: no altera cuenta, tokens o correo; audita NO_CHANGE sin metadatos de transición",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "fallo AuditEvent por HTTP: 503 seguro y rollback de cuenta/sesiones/tokens/entregas",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "aborto de auditoría: dos reintentos y un cambio de versión/evento",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "aborto de auditoría: dos reintentos y rollback total",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "access-change.spec.ts",
+                      "Case":  "aborto en revalidación real conserva señal segura y permite dos reintentos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "credential-races.spec.ts",
+                      "Case":  "login pausado tras verificar hash: reset confirma versión nueva y no nace ninguna sesión antigua",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "credential-races.spec.ts",
+                      "Case":  "reset frente a desactivación (before-lock): orden serial y ningún rescate al reactivar",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "credential-races.spec.ts",
+                      "Case":  "reset frente a desactivación (before-commit): orden serial y ningún rescate al reactivar",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "credential-races.spec.ts",
+                      "Case":  "emisión de reset frente a desactivación (before-lock): no queda enlace ni entrega utilizables",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "credential-races.spec.ts",
+                      "Case":  "emisión de reset frente a desactivación (before-commit): no queda enlace ni entrega utilizables",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "credential-races.spec.ts",
+                      "Case":  "SMTP indisponible: solicitudes repetidas conservan cuenta/sesiones, cuotas y reemplazo sin ampliar caducidad",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "credential-races.spec.ts",
+                      "Case":  "SMTP indisponible: veinte admisiones por origen suman propósitos, incluso sin destinatario; reiniciar adaptadores no libera cuota",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "password-reset-store.spec.ts",
+                      "Case":  "provisional vencida verificada: reset limpia provisional, conserva identidad y habilita solo contraseña nueva",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "password-reset-store.spec.ts",
+                      "Case":  "fallo después de cambiar hash y consumir token: rollback total y posterior reintento con el mismo enlace",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "password-reset-store.spec.ts",
+                      "Case":  "hash fuera de locks y caducidad revalidada después de calcularlo",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "password-reset-store.spec.ts",
+                      "Case":  "cookie configurada HTTPS: solo se elimina tras éxito, sin emitir sesión",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "visitante: todos los endpoints administrativos y consulta propia requieren sesión, sin efectos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT: matriz administrativa conocida/desconocida idéntica y sin datos de B",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER: matriz administrativa conocida/desconocida idéntica y sin datos de B",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT con sesión revoked: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT con sesión idle: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT con sesión absolute: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT con sesión version: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT con sesión disabled: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT con sesión unverified: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT con sesión provisional: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER con sesión revoked: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER con sesión idle: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER con sesión absolute: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER con sesión version: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER con sesión disabled: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER con sesión unverified: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER con sesión provisional: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN con sesión revoked: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN con sesión idle: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN con sesión absolute: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN con sesión version: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN con sesión disabled: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN con sesión unverified: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN con sesión provisional: matriz completa 401, sin actividad ni cambios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "credencial de sesión malformed: no sustituye identidad en ningún endpoint",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "credencial de sesión unknown: no sustituye identidad en ningún endpoint",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "credencial de sesión bearer: no sustituye identidad en ningún endpoint",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "credencial de sesión duplicate: no sustituye identidad en ningún endpoint",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "STUDENT: /me devuelve exclusivamente identidad propia, sin selector ni perfiles ajenos editables",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "TEACHER: /me devuelve exclusivamente identidad propia, sin selector ni perfiles ajenos editables",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN: /me devuelve exclusivamente identidad propia, sin selector ni perfiles ajenos editables",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "ADMIN: controles positivos de las seis operaciones y 404 únicamente después de autorizar",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "permission-matrix.spec.ts",
+                      "Case":  "inyección de identidad, permisos y campos ajenos a cada comando: 400 sin elevación ni efectos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "Prisma deploy crea trece tablas, cinco migraciones y singleton sin usuarios",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "aplicar SQL incremental sobre copia ficticia conserva usuarios y datos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "migraciones son idempotentes mediante el historial de Prisma y no reinicializan datos",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "restricciones de cuenta: Unicode, trim, correo canónico, enum, versión y credenciales",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "unicidad canónica ante veinte escrituras concurrentes y desactivación sin liberar correo",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "sesiones: huella de 32 bytes, FK, vencimiento exacto y fechas UTC con reloj de BD",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "índice parcial de tokens no depende de now(): revoca vencido antes de reemitir",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "auditoría y singleton exigen actor/destino válidos y marca permanente de bootstrap",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "correo exige token/payload activo y conserva metadatos terminales al purgar el token",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "límites: claves HMAC, fases válidas, reservas de 30 s y FK sin cascada",
+                      "Status":  "passed"
+                  },
+                  {
+                      "File":  "migrations.spec.ts",
+                      "Case":  "Prisma usa el pool restringido y revierte escritura de cuenta/auditoría en el mismo commit",
+                      "Status":  "passed"
+                  }
+              ],
+    "Catalog":  {
+                    "views":  [
+                                  "AcademicTeacherDirectory"
+                              ],
+                    "checks":  21,
+                    "tables":  [
+                                   "AcademicAuditEvent",
+                                   "AcademicCommand",
+                                   "AcademicCourse",
+                                   "AcademicGroup",
+                                   "AcademicSlot"
+                               ],
+                    "triggers":  [
+                                     "AcademicCourse_editorial_guard",
+                                     "AcademicGroup_editorial_guard",
+                                     "AcademicSlot_membership_guard",
+                                     "User_teacher_eligibility"
+                                 ],
+                    "migrations":  [
+                                       "0001_identity_users",
+                                       "0002_identity_access",
+                                       "0003_identity_mail_limits",
+                                       "0004_identity_argon2_format",
+                                       "0005_academic_offering"
+                                   ],
+                    "newChecksum":  "deef3e283d56e40a1fa30343b05b70137df35471763275fdf31126a4c5e36e21",
+                    "publicUsers":  0,
+                    "runtimeCanCreate":  false,
+                    "academicSchemasRemaining":  0
+                },
+    "GeneratedSQLSHA256":  "B9783FAE7FCAA288FB2A71CE693FC3B7359267D206C70D52191707E8830D714A",
+    "ReportSHA256":  {
+                         "Feature":  "32621401CD8FB59B9DE030019A85BADA92D03C296DC3CE60BB2FDCA095B00454",
+                         "Regression":  "9FE2E44CD6165A6496BA3A9C86E13BCD5659F948EBC1CCA5FF5A985F0076AA1C",
+                         "CorrectedMigration":  "6644300474A52922E2CEE5C1E299372A72F0DDF870501D4C350E5FABB8B4FA60",
+                         "Unit":  "25370247AB4D57E313DAD4D94930A882360D54BA9B220F050833363C944B56F8"
+                     }
+}
