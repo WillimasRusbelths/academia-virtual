@@ -1,0 +1,278 @@
+﻿{
+    "Date":  "2026-10-19",
+    "Branch":  "feat/002-oferta-academica",
+    "BaseCommit":  "75f164130297a15a96f831f3c601d66000d35147",
+    "Passed":  1,
+    "Failed":  41,
+    "Skipped":  0,
+    "Cases":  [
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E01 INSERT ordinario inicia generación 0 para docente elegible",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E02 perder rol docente hacia STUDENT incrementa exactamente una vez",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E02 perder rol docente hacia ADMIN incrementa exactamente una vez",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E03 desactivar incrementa una vez; cambios posteriores mientras sigue inhabilitado no incrementan",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E04 perder verificación también invalida generación sin depender de consultas",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E05 recuperación de role conserva generación nueva; snapshot anterior sigue inválido",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E05 recuperación de status conserva generación nueva; snapshot anterior sigue inválido",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E05 recuperación de verification conserva generación nueva; snapshot anterior sigue inválido",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E06 dos pérdidas separadas por recuperación avanzan a generación 2, sin reciclarla",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E07 cambio de nombre y UPDATE no-op no invalidan publicación docente",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E08 una cuenta que nunca fue elegible no incrementa por desactivación",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=false",
+                      "Status":  "failed",
+                      "Cause":  "columna-generacion-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=true",
+                      "Status":  "failed",
+                      "Cause":  "columna-generacion-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E10 reset real revoca sesión y aumenta authVersion sin aumentar generación docente",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E11 cambio de acceso real confirma generación, revocación y auditoría juntos",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E12 fallo de auditoría revierte acceso, generación y revocación en una sola transacción",
+                      "Status":  "failed",
+                      "Cause":  "generacion-no-persistida"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E13 overflow bigint aborta pérdida de habilitación sin reciclar generación ni alterar la fila",
+                      "Status":  "failed",
+                      "Cause":  "columna-generacion-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-eligibility.spec.ts",
+                      "Case":  "E14 recuperar habilitación no actualiza snapshot ni estado/revision de un grupo publicado",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M01 control: propietario migra en esquema t_ y runtime conserva DML sin DDL",
+                      "Status":  "passed",
+                      "Cause":  "control-aprobado"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M02 deploy vacío incorpora una migración posterior a las cuatro de identidad",
+                      "Status":  "failed",
+                      "Cause":  "migracion-aditiva-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M03 deploy vacío crea cinco tablas académicas vacías y generación bigint default 0",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M04 directorio SQL mínimo funciona con runtime en esquema distinto de public",
+                      "Status":  "failed",
+                      "Cause":  "vista-directorio-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M05 actualización incremental conserva cuentas, hashes, sesiones, tokens, auditoría, correo y bootstrap",
+                      "Status":  "failed",
+                      "Cause":  "migracion-aditiva-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: capacidad cero",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: capacidad negativa",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: capacidad 51",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: zona ajena",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: revision cero",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M06 restricción de grupo: nombre vacío",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M07 capacidad admite 1 y 50, borrador incompleto y nombres iguales sin unicidad inventada",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M08 periodo invertido y snapshot incompleto son rechazados sin cambio parcial",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M09 FK RESTRICT y pertenencia inmutable no permiten trasladar o borrar padres",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M10 cancelar exige motivo/fecha y Cancelado es terminal incluso ante escritura SQL runtime",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=0 inicio=60 fin=120",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=8 inicio=60 fin=120",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=-1 fin=60",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=60 fin=1440",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=60 fin=60",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M11 franja rechazada día=1 inicio=120 fin=60",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M12 franjas contiguas válidas y duplicado exacto rechazado por unicidad",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M13 ledger exige unicidad actor/comando y huella SHA-256 de 32 bytes",
+                      "Status":  "failed",
+                      "Cause":  "tabla-academica-ausente"
+                  },
+                  {
+                      "File":  "academic-offering-migration.spec.ts",
+                      "Case":  "M14 generación no admite negativos en una nueva fila y Published exige datos completos",
+                      "Status":  "failed",
+                      "Cause":  "columna-generacion-ausente"
+                  }
+              ],
+    "Sources":  [
+                    {
+                        "Path":  "apps/api/tests/support/academic-migration.ts",
+                        "SHA256":  "DA9C9585C198B0E0A206E4A9A7A4CF293C40121316210C9E9216F83DD210A81A"
+                    },
+                    {
+                        "Path":  "apps/api/tests/integration/academic-offering-migration.spec.ts",
+                        "SHA256":  "C42810CA38F9F8722208EA8AA2867E1A5CDBC5DFBA2022E57A6ADD3AFD5253AC"
+                    },
+                    {
+                        "Path":  "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+                        "SHA256":  "B3D169DA3B622957AFC1DDBA6CD11A42ABF867350269764144DC8BAAA64EB453"
+                    }
+                ],
+    "PrivateReportSHA256":  "8FAD959734A862A32F5B72C50C172C763BA2A1FB2A5A585219110CDFDE6893B8",
+    "Scope":  "Pruebas de T005/T006 en rojo; T007/T008 sin implementar"
+}
