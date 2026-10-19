@@ -1,14 +1,16 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: tareas propuestas; ninguna ejecutada. Se conservan las cinco aclaraciones.
+**Estado**: T001–T004 completadas y verificadas el 2026-10-19; T005–T074 pendientes.
+Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
+[entorno y harness](evidence/environment.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
 
 La instrucción de generar tareas sucede a las etapas históricas descritas en spec/plan;
-no cambia su negocio ni acredita implementación. No ejecutar estas tareas en esta etapa.
-Las rutas de código, pruebas y evidencia siguientes son destinos futuros, no resultados.
+no cambia su negocio. La instrucción posterior autoriza solo T001–T004; las demás tareas
+siguen siendo destinos futuros. Completar el harness no acredita funcionalidad académica.
 
 ## Formato y convenciones
 
@@ -28,10 +30,10 @@ Las rutas de código, pruebas y evidencia siguientes son destinos futuros, no re
 
 Objetivo: preparar una ejecución reproducible sin tocar la instalación manual.
 
-- [ ] T001 Registrar inventario inicial en `specs/002-oferta-academica/evidence/baseline.md`: rama, diff, huellas de nueve documentos previos y primer spec, versiones y pendientes; comprobar que configuración, quince cuentas y evidencia manual se conservarán sin copiar secretos al informe. Termina con fuente reproducible e inventario sin datos privados (FR-016).
-- [ ] T002 Preparar copia de trabajo y proyecto Compose exclusivos siguiendo `specs/002-oferta-academica/quickstart.md`; documentar destino y guardas en `specs/002-oferta-academica/evidence/environment.md`. Incluir fuente pendiente, no solo HEAD; generar configuración solo si no existe, verificar puertos/esquemas propios y detener ante destino ambiguo. No reset, db push, purgas, bootstrap manual ni down -v (FR-016).
-- [ ] T003 Crear soporte de fixtures académicas en `apps/api/tests/support/academic-offering.ts` sobre identityDatabase, test-environment y locks existentes; crear cuentas ficticias por mecanismos de identidad, esquemas únicos y conexión observadora separada. Termina con aislamiento verificado y limpieza limitada al esquema de esta suite (FR-010/016).
-- [ ] T004 Crear `apps/web/tests/support/academic-offering-fixture.ts` y `apps/web/playwright.academic-offering.config.ts` siguiendo fixtures de identidad: API real, origen loopback, esquemas aislados, móvil/escritorio y teclado. Verificar arranque/cierre sin usar PLAYWRIGHT_BASE_URL manual ni añadir servicios o paquetes (FR-014/016).
+- [X] T001 Registrar inventario inicial en `specs/002-oferta-academica/evidence/baseline.md`: rama, diff, huellas de nueve documentos previos y primer spec, versiones y pendientes; comprobar que configuración, quince cuentas y evidencia manual se conservarán sin copiar secretos al informe. Termina con fuente reproducible e inventario sin datos privados (FR-016).
+- [X] T002 Preparar copia de trabajo y proyecto Compose exclusivos siguiendo `specs/002-oferta-academica/quickstart.md`; documentar destino y guardas en `specs/002-oferta-academica/evidence/environment.md`. Incluir fuente pendiente, no solo HEAD; generar configuración solo si no existe, verificar puertos/esquemas propios y detener ante destino ambiguo. No reset, db push, purgas, bootstrap manual ni down -v (FR-016).
+- [X] T003 Crear soporte de fixtures académicas en `apps/api/tests/support/academic-offering.ts` sobre identityDatabase, test-environment y locks existentes; crear cuentas ficticias por mecanismos de identidad, esquemas únicos y conexión observadora separada. Termina con aislamiento verificado y limpieza limitada al esquema de esta suite (FR-010/016).
+- [X] T004 Crear `apps/web/tests/support/academic-offering-fixture.ts` y `apps/web/playwright.academic-offering.config.ts` siguiendo fixtures de identidad: API real, origen loopback, esquemas aislados, móvil/escritorio y teclado. Verificar arranque/cierre sin usar PLAYWRIGHT_BASE_URL manual ni añadir servicios o paquetes (FR-014/016).
 
 ## Fase 2: fundamentos obligatorios (T005–T018)
 
