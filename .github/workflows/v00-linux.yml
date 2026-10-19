@@ -1,7 +1,9 @@
-name: Docker Compose manual
+name: Docker Compose - validación
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -17,6 +19,7 @@ jobs:
     timeout-minutes: 20
     env:
       COMPOSE_PROJECT_NAME: academia-ci-${{ github.run_id }}-${{ github.run_attempt }}
+      COMPOSE_FILE: compose.yml:ops/docker/compose.regression.yml:ops/docker/compose.identity-tests.yml
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -37,15 +40,73 @@ jobs:
         run: |
           docker compose ps
           docker compose logs --tail=100 db mailpit api web
-      - name: Migraciones y pruebas
-        run: docker compose exec -T api npm run test:docker
-      - name: Navegador
+      - name: Lint - API y web
+        run: docker compose exec -T api npm run lint
+      - name: Compilación - API y web
+        run: docker compose exec -T api npm run build
+      - name: Unitarias y arquitectura
+        run: docker compose exec -T api npm run test:unit
+      - name: Migraciones y permisos de compatibilidad
         run: |
-          docker compose --profile tests build browser-tests
-          docker compose --profile tests run --rm browser-tests
-      - name: Auditar dependencias por separado
+          docker compose exec -T api npm run probe:migrate
+          docker compose exec -T api npm run probe:check
+      - name: Migraciones de identidad - BD de prueba
+        run: docker compose exec -T api npm run db:migrate:deploy
+      - name: Integración - API y PostgreSQL
+        run: docker compose exec -T api npm run test:integration
+      - name: Compatibilidad - Argon2 y SMTP
+        run: docker compose exec -T api npm run test:crypto-mail
+      - name: Construir runner E2E
+        run: docker compose --profile tests build browser-tests
+      - name: E2E - infraestructura
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web --
+          --config playwright.config.ts harness.spec.ts foundations.spec.ts
+      - name: E2E - acceso y sesiones
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.identity.config.ts
+      - name: E2E - registro y verificación
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.registration.config.ts
+      - name: E2E - primer administrador
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.first-admin.config.ts
+      - name: E2E - administración de cuentas
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.admin-users.config.ts
+      - name: E2E - recuperación de contraseña
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.password-reset.config.ts
+      - name: E2E - seguridad y privacidad
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.security.config.ts
+      - name: E2E - perfil
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.profile.config.ts
+      - name: E2E - accesibilidad
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.accessibility.config.ts
+      - name: E2E - tiempos de acceso secuenciales
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.login-timing.config.ts
+      - name: Auditar dependencias - informativo
         continue-on-error: true
         run: docker compose exec -T api npm audit --json
+      - name: Logs de diagnóstico si falla
+        if: failure()
+        run: |
+          docker compose ps
+          docker compose logs --tail=100 db mailpit api web
       - name: Registrar plataforma
         shell: bash
         run: |
@@ -53,7 +114,14 @@ jobs:
           docker compose exec -T api npm --version >> "$GITHUB_STEP_SUMMARY"
           uname -a >> "$GITHUB_STEP_SUMMARY"
           sha256sum package-lock.json >> "$GITHUB_STEP_SUMMARY"
-          docker image inspect node:22.23.1-bookworm-slim postgres:16.14-bookworm axllent/mailpit:v1.31.3 --format '{{json .RepoDigests}}' >> "$GITHUB_STEP_SUMMARY"
+          # BuildKit no tiene por qué cargar la etiqueta FROM en el almacén local.
+          # Registrar las imágenes reales de los servicios, incluidas API/web construidas.
+          for service in db mailpit api web; do
+            container_id=$(docker compose ps -q "$service")
+            image_id=$(docker inspect "$container_id" --format '{{.Image}}')
+            docker image inspect "$image_id" \
+              --format "service=$service id={{.Id}} digests={{json .RepoDigests}}" >> "$GITHUB_STEP_SUMMARY"
+          done
       - name: Detener solo el proyecto efímero
         if: always()
         run: docker compose down

@@ -166,9 +166,16 @@ solo el navegador y las dependencias necesarias para la prueba existente. Los re
 de esa ejecución efímera no se copian al repositorio.
 
 `docker compose exec -T api npm run verify:v00` agrupa las comprobaciones de compatibilidad;
-no reemplaza lint, límites de capas ni navegador. El workflow manual
-[v00-linux.yml](../../.github/workflows/v00-linux.yml) usa el mismo Compose en un proyecto
-aislado y ejecuta estos comandos. Una validación local no acredita una ejecución de Actions.
+no reemplaza lint, límites de capas ni navegador. El workflow
+[v00-linux.yml](../../.github/workflows/v00-linux.yml) admite ejecución manual y se activa
+en los PR hacia `main`. Usa Compose con `compose.regression.yml` y
+`compose.identity-tests.yml`: proyecto nuevo, API en test y puertos sin publicar.
+Muestra etapas separadas para lint, compilación, unitarias/arquitectura, migraciones,
+integración, Argon2/SMTP y diez grupos E2E con sus configuraciones originales.
+Un fallo mantiene las etapas dependientes como omitidas; no cuentan como aprobadas.
+La auditoría de dependencias sigue siendo informativa. Se conservan los logs de error
+y la detención del proyecto se ejecuta también si falla una prueba.
+Una validación local no acredita una ejecución de Actions ni capacidad de 1000 usuarios.
 Antes de ejecutar el workflow remoto, revisar autorización, visibilidad y cuota disponible
 de la cuenta; no habilitar gastos adicionales. Esta migración no lo dispara.
 
