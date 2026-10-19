@@ -24,6 +24,9 @@ ENV PLAYWRIGHT_BROWSERS_PATH=/opt/browsers
 RUN --mount=type=secret,id=npm_ca,required=false \
     if [ -s /run/secrets/npm_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/npm_ca; fi; \
     npx playwright install --with-deps --only-shell chromium
-RUN chown node:node /workspace
+RUN --mount=type=secret,id=npm_ca,required=false \
+    if [ -s /run/secrets/npm_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/npm_ca; fi; \
+    npm run probe:generate && npm run db:generate && npm run build --workspace @academia/api \
+    && chown -R node:node /workspace/apps && chown node:node /workspace
 USER node
 CMD ["npm", "run", "test:e2e"]

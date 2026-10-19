@@ -1,7 +1,160 @@
 # Estrategia de verificación de identidad
 
-Estado: compatibilidad del entorno Docker comprobada; escenarios funcionales V01–V16 pendientes.
+**Estado vigente — 2026-10-18:** las siete historias tienen checkpoints comprobados;
+[T106](evidence/regression.md) repite instalación/V00, lint/build, 120 unitarias,
+744 integraciones y 203 E2E sobre configuración/BD nuevas. Incluye V16 nuevo,
+retención/invalidez y diagnóstico de bootstrap 23/23; el hallazgo histórico **sigue abierto**,
+con causa no confirmada. U2 completo se reutiliza con los límites de su evidencia original.
+[T105](evidence/login-timing.md) acredita SC-008 local. T104/SC-001/010 humanos se aplazan
+hasta la versión integrada estable con diez personas; [T108 permanece preliminar](evidence/acceptance.md).
+Capacidad sin aprobar: T103 completa como ejecución/informe, conservando resultados y
+referencias pendientes de D10. VPS/nuevas cargas esperan a matrícula. D13 no tiene SLA
+aprobado y la purga T095 sigue sin programación; SMTP externo y video siguen independientes.
+
+**Registro histórico por bloques:** entorno Docker comprobado; [checkpoint funcional US1](evidence/us1.md),
+[checkpoint funcional US2](evidence/us2.md), [checkpoint funcional US6](evidence/us6.md),
+[checkpoint funcional US4](evidence/us4.md) y [checkpoint funcional US7](evidence/us7.md)
+aprobados en su alcance técnico. V01/V02 funcionales, V03 funcional, V04-A/B, V06–V08,
+V11/V15 y partes de V10/V12/V13 comprobadas en esos checkpoints.
+El [checkpoint técnico US5](evidence/us5.md) añade V09/V12/V14/VA y la
+[comparación temporal T087](evidence/enumeration.md) comprobadas en los flujos P1 actuales.
+[T095](evidence/retention.md) completa retención/purga y rotación privada en su alcance.
+En ese corte, recuperación operativa, carga, estudio de participantes y el resto de V01–V16
+permanecían pendientes según sus criterios. El hallazgo intermitente CLI sigue abierto,
+con causa no confirmada; no equivale a un fallo reproducido en este bloque.
+El registro por bloques siguiente conserva el estado de cada entrega en su momento.
 Evidencia: [compatibility.md](../../ops/docker/compatibility.md).
+T011–T016 añaden pruebas de configuración y persistencia; resultados y límites en
+[fundamentos de configuración y persistencia](evidence/fundamentos-datos.md). No cierran V01–V16.
+T017–T020 añaden [reglas, credenciales y límites persistidos](evidence/reglas-credenciales-limites.md)
+comprobados; tampoco completan las historias ni el protocolo temporal HTTP de T087.
+T021–T023 añaden [sesiones, autorización y transporte HTTP](evidence/sesiones-autorizacion-http.md).
+Sus pruebas de fundamentos no cierran V01–V16 ni sustituyen la aceptación con las rutas y UI definitivas.
+T024 añade [contratos y adaptadores de correo](evidence/adaptadores-correo.md), comprobados con
+Mailpit y servidores TLS locales. No completa el ejecutor de entregas ni V13.
+T025–T026 añaden [entregas persistidas y recuperación del ejecutor](evidence/entregas-persistidas.md).
+Sus pruebas de fundamentos no cierran V13: todavía faltan emisión/reenvío y consumo de enlaces
+en las historias, además de retención/purga e integración funcional.
+T027 añade [auditoría transaccional y privacidad de logs/errores](evidence/auditoria-privacidad.md).
+Comprueba U1 como fundamento; no completa los flujos administrativos, bootstrap ni V12/V16.
+T028 añade [bootstrap atómico persistido](evidence/bootstrap-atomico.md): inicialización única,
+concurrencia y rollback comprobados. La CLI y activación de US6 y la aceptación V08 siguen pendientes.
+T029 añade [fixtures y CLI de ensayo seguros](evidence/fixtures-seguros.md), con persistencia,
+secretos privados y limpieza dirigida comprobados; no ofrece rutas privilegiadas ni cierra historias.
+T030 añade [cliente, router, UI comunes y verificación V00-L](evidence/transporte-ui.md).
+Los fundamentos están comprobados; login/logout/perfil funcionales y V01–V16 siguen pendientes.
+T031–T033 completan la [escritura de pruebas US1](evidence/us1-pruebas.md): suites ejecutables
+con fallos esperados por rutas y pantalla de acceso ausentes. No aceptan los flujos funcionales;
+T039 exige aprobarlas tras T034–T038. V04-B y la comprobación temporal de T087 siguen pendientes.
+T034–T036 añaden [login, logout y consulta propia](evidence/us1-implementacion.md) comprobados
+como casos de uso y controladores en composición de pruebas. Su montaje productivo T037 y
+la UI T038 siguen pendientes; las suites originales todavía no aceptan US1.
+T037–T039 integran rutas y UI y completan la [aceptación funcional US1](evidence/us1.md):
+T031/T032 y los recorridos originales T033 pasan sin omisiones. No cierra V04-B, T087 ni SC-002 completo.
+T040–T042 completan la [escritura de pruebas US2](evidence/us2-pruebas.md).
+T043–T045 añaden [emisión atómica, registro y confirmación](evidence/us2-implementacion.md).
+T046–T049 incorporan reenvío, UI y el [checkpoint funcional US2](evidence/us2.md): registro
+público → Mailpit → confirmación → login, con cuotas, consumo único y fallo SMTP real aislado.
+No completan retención/purga de V13, protocolo temporal T087 ni observación humana SC-001.
+T050–T052 completan la [escritura de pruebas US6](evidence/us6-pruebas.md): controles de
+bootstrap/PTY/fixtures y Mailpit aprobados; CLI, ruta inicial y pantalla aún ausentes.
+Los fallos funcionales esperados no aceptan US6; T058 requiere resolverlos tras T053–T057.
+T053–T055 añaden [bootstrap operativo y sustitución inicial en API](evidence/us6-implementacion.md):
+CLI y API originales aprobadas, con concurrencia, caducidad, rollback y correlación privada.
+T052 conserva ocho fallos esperados por la pantalla pendiente T056; no se cierra US6/V08.
+T056–T058 completan pantalla inicial, documentación operativa y [checkpoint US6](evidence/us6.md):
+T050–T052 originales aprobadas y recorrido CLI → Mailpit → activación → acceso comprobado.
+La recuperación tras provisional vencida espera T081; V08 no está completo hasta verificar
+gestión/último ADMIN en US4. No se anticipan retención/purga ni observación humana finales.
+T059–T061 completan la [escritura de pruebas US4](evidence/us4-pruebas.md): controles reales
+aprobados y fallos esperados por rutas/pantallas administrativas ausentes. V04-B queda escrito,
+sin aceptación funcional; T071 exige resultados satisfactorios tras implementar T062–T070.
+T062–T064 incorporan [consultas, nombre y alta administrativa](evidence/us4-implementacion.md):
+GET/PATCH administrativos y alta transaccional directa comprobados; POST alta, rol/estado,
+UI y checkpoint US4/V04-B siguen pendientes. No se anticipan verificaciones finales.
+T065–T067 incorporan [cambios de acceso y comandos HTTP](evidence/us4-cambios-acceso.md):
+T059/T060 originales aprobadas y revocación/rollback comprobados. T061 conserva fallos
+esperados por UI administrativa ausente; US4, T070/T071 y V04-B permanecen pendientes.
+T068–T069 añaden [pantallas administrativas](evidence/us4-ui.md): T061 y ocho casos de UI
+adicionales aprobados. Sus resultados técnicos no aceptan US4/V04-B; T070 y T071 siguen
+pendientes, sin adelantar sus carreras ni el checkpoint.
+T070–T071 completan las [carreras y el checkpoint US4](evidence/us4.md): T059–T061
+aprobadas, V04-B comprobado con formularios reales y V04 reunido con V04-A de T039
+y su regresión actual. V06–V08 comprobados junto con la evidencia de US6; V15 solo
+en rol/desactivación/confirmación, sin anticipar reset de US7. SC-002 completo,
+aceptación humana y demás verificaciones transversales conservan sus dependencias.
+T072–T074 incorporan [escritura de pruebas US7](evidence/us7-pruebas.md): seis controles
+API y dos de navegador aprobados; 39 fallos HTTP y 12 de UI por rutas/pantallas ausentes,
+sin errores inesperados tras corregir el fixture temporal. No se acepta US7 ni V11;
+T075–T081 deben implementar y comprobar las aserciones funcionales pendientes.
+T075–T077 incorporan [recuperación mediante API](evidence/us7-implementacion.md): T072/T073
+45/45, cuatro comprobaciones adicionales de persistencia/credenciales/cookie y regresiones
+aprobadas. T074 conserva doce fallos por pantallas ausentes. US7/V11 completo y las carreras
+de T080 siguen pendientes; no se acepta el checkpoint T081.
+T078–T081 completan [pantallas, carreras y checkpoint US7](evidence/us7.md): originales
+T072–T074 y T080 aprobadas; recuperación tras provisional vencida de docente y primer
+administrador comprobada en móvil/escritorio. V11 y las carreras de recuperación de V15
+quedan verificadas junto con la regresión de US4. No se anticipan retención/purga de V13,
+comparación temporal T087 ni aceptación humana T104/SC-010.
+T082–T084 añaden [escritura de pruebas US5](evidence/us5-pruebas.md): matriz V09 y privacidad
+de flujos P1 aprobadas, con controles de auditoría/U1. La ruta directa de la API cierra CORS;
+el proxy Vite añade cabeceras y resuelve preflight de forma incompatible con V14.
+La suite de navegador conserva fallos funcionales esperados; no se acepta US5 ni V14
+completo. T085–T088 e invalidación global T096/T098 mantienen sus verificaciones pendientes.
+T085–T086 completan la [revisión VA e integración de seguridad web](evidence/us5-integracion.md):
+reglas/grafo de dependencias y atomicidad revisados, guardas/limpieza tras 401, texto escapado
+y CSP comprobados. Las 16 pruebas originales de T084 pasan tras cerrar CORS del proxy;
+12 nuevas pruebas de navegador y las regresiones de los cinco checkpoints también pasan.
+T087–T088, invalidación global T096/T098 y aceptación humana T104 conservan su alcance;
+la incidencia CLI no reproducida en las repeticiones queda registrada en la evidencia.
+T087–T088 completan el [checkpoint técnico US5](evidence/us5.md): matriz, privacidad,
+CSRF/CORS y capas aprobados; 17 endpoints con política explícita y
+[U2](evidence/enumeration.md) con 8700 muestras + 870 calentamientos, sin señal detectada
+bajo ese protocolo. Las regresiones API y navegador pasan sin omisiones. El diagnóstico
+CLI conserva el hallazgo de causa no confirmada para T106, sin declararlo resuelto.
+La invalidación global T096/T098 y aceptación humana T104 continúan pendientes.
+T089–T090 añaden [escritura de pruebas US3](evidence/us3-pruebas.md): contrato propio 18/18;
+56 casos de interfaz en ambas resoluciones, 42 aprobados y 14 fallos esperados por
+perfil/protección y enlace desde inicio pendientes de T091–T092. El arnés quedó comprobado
+tras revisar navegación, coordenadas subpíxel y descripción accesible de errores, sin
+errores de pruebas o infraestructura. Las regresiones API y navegador permanecen aprobadas.
+No se acepta US3, V05 ni SC-005 hasta T094. El hallazgo CLI conserva su causa no confirmada.
+T091–T093 implementan [perfil, inicio y presentación accesible](evidence/us3-implementacion.md):
+T089 pasa 18/18 y T090 pasa 56/56, resolviendo sus 14 fallos previos sin modificar aserciones.
+Ocho comprobaciones adicionales de perfil cubren caducidad/revocación, fallo SQL y recuperación
+manual, texto largo y cierre por teclado en ambas resoluciones. Estos resultados preparan
+T094; su aceptación de US3/V05/SC-005 y la observación humana permanecen pendientes.
+T094 completa la [aceptación US3/V05/SC-005](evidence/us3.md): reutiliza T089 18/18,
+T090 56/56 y las regresiones válidas; añade diez capturas inspeccionadas por el agente
+(dos recorridos adicionales aprobados) y los reportes humanos reales de Williams.
+Registro/verificación, inicio/perfil/cierre por rol, permisos, sustitución inicial,
+recuperación y administración se confirmaron en 360×800 y 1366×768 con teclado, foco,
+etiquetas y mensajes textuales. Las 12 cuentas originales y su archivo privado conservan
+la huella inicial. T094 y el checkpoint US3 quedan cerrados; T104/SC-001/SC-010 requieren
+su estudio separado de diez participantes. El hallazgo intermitente CLI sigue abierto
+para T106, sin atribuir resolución a la ausencia de nuevas reproducciones.
+T095 incorpora [retención por lotes y rotación privada](evidence/retention.md): 29/29 pruebas
+nuevas y 195 regresiones de integración verificadas entre lotes, más lint/build y 120
+unitarias/arquitectura. Incluye fronteras exactas por evento, cancelación de entregas antes
+de purgar tokens, FK SET NULL con metadata durante siete días desde finishedAt, reanudación,
+concurrencia, rollback y datos vigentes preservados. Las 12 cuentas originales, las 15 del
+ensayo manual, SystemState y archivo privado mantienen sus huellas. CLI explícita y
+rotación existente verificadas en aislamiento; no se activa purga en desarrollo/manual.
+Al cierre de T095, T096–T108 conservaban sus pendientes.
+T096 completa la [invalidación atribuible de estado restaurado](evidence/restored-state.md):
+17/17 nuevas, registro global seguro y fallo cerrado antes de reabrir tráfico.
+T097–T098 completan [procedimiento cifrado y ensayo V16](evidence/recovery.md), con
+migración fallida real, restauración a BD nueva, comparación de schema/datos/permisos,
+migración correctiva, invalidación y reinicio en otro proceso Node. RPO conservador
+≤23.875 s y RTO local 27.147 s, sin SLA aprobado por D13. Se preservan las 15 cuentas
+manuales y credenciales; T095 continúa sin programación de purga. T099–T108 siguen
+pendientes; T104 requiere participantes y el hallazgo de bootstrap sigue abierto para T106.
+T099–T102 completan la [preparación verificable de carga](evidence/load-preparation.md):
+k6 real y cohortes 1000+20+100, perfiles exactos inspeccionados, contadores y captura
+privada con smokes de 2 VU, controles deterministas y parada por fallo de monitor.
+Los perfiles completos, sus umbrales y las 1000 sesiones durante diez minutos todavía
+requieren T103; no se extrapolan los smokes. T104 y bootstrap/T106 siguen pendientes;
+T095 no tiene programación de purga y D13 no tiene SLA aprobado.
 La revisión del checklist de especificación no equivale a estas pruebas. Referencias:
 [spec](spec.md), [API](contracts/api.md), [datos](data-model.md), [guía](quickstart.md).
 

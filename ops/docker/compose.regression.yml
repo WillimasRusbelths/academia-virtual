@@ -1,0 +1,13 @@
+# Solo para un proyecto NUEVO y configuración privada nueva; no usar academia-local.
+# Sin puertos publicados ni volúmenes externos. Conservar el volumen al detenerlo.
+services:
+  db:
+    ports: !reset []
+  mailpit:
+    ports: !reset []
+  api:
+    environment:
+      APP_ENV: test
+    ports: !reset []
+  web:
+    ports: !reset []

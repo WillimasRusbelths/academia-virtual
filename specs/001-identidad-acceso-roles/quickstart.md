@@ -1,19 +1,108 @@
 # Guía de ejecución local y recuperación
 
+**Vigente — 2026-10-18:** siete checkpoints de identidad comprobados y
+[T106 completa](evidence/regression.md) sobre configuración/BD nuevas (commit `82bb85f`).
+No acredita aceptación integral, capacidad de 1000 usuarios ni SMTP externo. El texto de
+diseño original queda conservado al final como histórico.
+
+## Operación comprobada
+
+- **Ensayo manual conservado:** usar su configuración privada y el
+  [overlay T094](evidence/us3.md#entorno-manual-e-incidencia-de-correo), con el
+  [puerto/volumen existentes](../../ops/local/manual-us1.md). Web `http://localhost:5173`,
+  Mailpit `http://localhost:18025`. Conservar las 15 cuentas y credenciales; no ejecutar
+  aquí preparación de fixtures, purga, restauración ni configuración nueva.
+- **Primer ADMIN:** [CLI interactiva](../../ops/local/first-admin.md), solo para un destino
+  que nunca se haya inicializado, sin seed ni contraseña predeterminada. El
+  [hallazgo intermitente](evidence/regression.md) permanece abierto: 23/23 no confirmó su causa.
+- **Retención/recuperación:** [CLI y registros](../../ops/local/logging.md) y
+  [backup/restauración](../../ops/recovery/README.md), con mantenimiento e invalidación
+  antes de reabrir. Purga sin programación activada; D13 sin SLA aprobado.
+
+## Reproducir con configuración y BD nuevas
+
+Usar una **copia nueva del repositorio**, sin `.env`, no el checkout/volumen del ensayo
+manual. Docker Linux y Compose vigentes; si la red necesita CA local, preparar el
+[override de certificados](../../ops/docker/README.md#red-con-inspección-tls).
+El generador rechaza sobrescribir configuración. El ejemplo usa Node 22 compatible del
+host; la [guía Docker](../../ops/docker/README.md#configuración-privada) ofrece la variante
+con contenedor si no está instalado. En PowerShell desde esa copia:
+
+```powershell
+if (Test-Path .env) { throw 'Usar una copia nueva, sin configuración existente.' }
+node ops/docker/configure.mjs
+if ($LASTEXITCODE -ne 0) { throw 'No se creó configuración nueva.' }
+$trialProject = 'identity-regression-' + [guid]::NewGuid().ToString('N').Substring(0,12)
+$trial = @('compose','--project-name',$trialProject,'-f','compose.yml')
+if (Test-Path compose.override.yml) { $trial += @('-f','compose.override.yml') }
+$trial += @('-f','ops/docker/compose.regression.yml','-f','ops/docker/compose.identity-tests.yml')
+docker @trial --profile tests build --no-cache api web browser-tests
+docker @trial up -d --no-build --wait db mailpit api web
+docker @trial exec -T api npm run lint
+docker @trial exec -T api npm run build
+docker @trial exec -T api npm run verify:v00
+docker @trial exec -T api npm run db:generate
+docker @trial exec -T api npm run db:migrate:deploy
+docker @trial exec -T api npm run test:unit --workspace apps/api -- --maxWorkers=1
+docker @trial exec -T api npm run test:unit --workspace apps/web -- --maxWorkers=1
+docker @trial exec -T api npm run test:integration --workspace apps/api -- --maxWorkers=1
+```
+
+Comprobar cada código de salida; no continuar como aprobado si falla. Ese override usa
+`APP_ENV=test`, volumen propio y cero puertos publicados. Las suites migran/limpian solo
+sus esquemas nuevos. Para E2E, ejecutar **todos** los grupos de
+[T106](evidence/regression.md#resultados-y-seguimiento), uno por vez, en
+`docker @trial run --rm --no-deps --entrypoint sh browser-tests -c '<comando E2E>'`.
+La imagen ya genera Prisma y compila API; no necesita artefactos del ensayo manual.
+Conservar reportes privados y detener con `docker @trial stop`, **sin borrar volúmenes**.
+
+## SMTP futuro
+
+No activado ni contratado. Antes de publicar, elegir proveedor y documentar tarifa fechada,
+región, cuotas, volumen previsto, límites de destinatarios/reintentos, retención y costo
+total junto con alojamiento, copias, video y pruebas: **S/300 en total**, no mensual.
+Proveedor, costos y condiciones reales siguen pendientes; Mailpit no los valida.
+
+En demo/producción, inyectar secretos separados (`APP_ENV`, URLs/roles de BD con TLS,
+`APP_ORIGIN` HTTPS, `TRUSTED_PROXY` y claves de identidad). Configurar `MAIL_MODE=smtp`,
+`SMTP_HOST`, usuario/contraseña privados y `MAIL_FROM` de dominio verificado.
+TLS validado: **465 con `SMTP_SECURE=true`**, o **587 con `SMTP_SECURE=false` y
+`SMTP_REQUIRE_TLS=true`**; nunca desactivar validación del certificado. Publicar/revisar
+los registros DNS del proveedor: SPF, DKIM y política DMARC alineados con el remitente.
+Estas comprobaciones y una entrega real autorizada, errores/reintentos y límites del
+proveedor deben verificarse antes de activar; ninguna se da por probada aquí. No cambiar
+cuotas de aplicación para acomodar el servicio ni registrar credenciales/enlaces completos.
+La UI 202 confirma solicitud, no entrega; el ejecutor y la rotación existentes se reutilizan.
+Local/test conservan `capture`, `mailpit:1025` y destinatarios `@example.test`.
+
+## Pendientes de aceptación
+
+T104 y SC-001/010 humanos esperan diez personas en versión integrada estable. T103 conserva
+ejecución/informe e incumplimientos; capacidad sin aprobar, D10 pendiente y VPS/nuevas cargas
+aplazados hasta matrícula. SC-008 sí tiene [evidencia local T105](evidence/login-timing.md).
+T108 es [preliminar](evidence/acceptance.md); D13 y el bootstrap siguen abiertos. Investigar
+video/protección/alojamiento **D07–D09 de forma independiente y temprana**, sin esperar a
+finalizar identidad/matrícula; aplazar el VPS no elimina esa obligación ni autoriza contratar.
+
+<details>
+<summary>Guía de diseño 2026-10-06 conservada como histórico; sus futuros/pendientes no son el estado actual</summary>
+
 **Entorno vigente — 2026-10-06:** Docker Compose con PostgreSQL 16.14, Mailpit 1.31.3, API NestJS y web React/Vite en contenedores Linux. Procedimiento: [entorno Docker](../../ops/docker/README.md). Resultados: [verificación](../../ops/docker/verification.md). No cambia el alcance funcional ni se afirma capacidad demostrada.
 
 ## Entorno vigente y arranque V00
 
 Seguir [ops/docker/README.md](../../ops/docker/README.md) para configurar `.env`, iniciar
 los cuatro servicios, aplicar la migración de ensayo y ejecutar pruebas. Resultados en
-[verification.md](../../ops/docker/verification.md). Las historias de identidad siguen
-sin implementar; los comandos de producto descritos más adelante son futuros.
+[verification.md](../../ops/docker/verification.md). US1, US2 y el checkpoint de US6 cuentan
+con evidencia funcional; las demás historias y verificaciones finales siguen pendientes.
 
 ## Variables y ejemplos sin credenciales
 
-Los ejemplos actuales de Compose existen; la tabla siguiente describe configuración de producto futura.
-Los archivos reales `.env`/`.env.test` quedan ignorados. Un único cargador explícito en API,
-Prisma CLI y comandos operativos leerá el archivo indicado desde la raíz, sin depender de
+Los ejemplos y el cargador de T011 ya existen. `APP_ENV` se selecciona explícitamente;
+desarrollo lee `.env`, test solo `.env.test` y demo/producción solo variables inyectadas.
+En Compose no se montan archivos privados: las variables llegan al contenedor desde `.env`.
+Los archivos reales `.env`/`.env.test` quedan ignorados. El cargador compartido por API y
+Prisma CLI lee el archivo indicado desde la raíz, sin depender de
 que el directorio actual sea `apps/api`. Vite solo recibe configuración pública y usa `/api`.
 
 | Variable | Local previsto / significado | Regla |
@@ -25,6 +114,9 @@ que el directorio actual sea `apps/api`. Vite solo recibe configuración públic
 | POSTGRES_USER / POSTGRES_DB | academia_runtime / academia_dev | Identificadores locales, no secretos |
 | POSTGRES_PASSWORD | Vacío en ejemplo; generado localmente | Nunca valor real versionado |
 | DATABASE_URL | Vacío en ejemplo; conexión local con contraseña privada | BD separada por entorno; URL nunca en logs |
+| MIGRATION_DATABASE_URL | Conexión del propietario al mismo destino | Usuario y contraseña diferentes del runtime |
+| TEST_DATABASE_URL / TEST_MIGRATION_DATABASE_URL | `academia_v00_test`; runtime y propietario de prueba | Solo se seleccionan con APP_ENV=test |
+| TEST_MAIL_PAYLOAD_KEY / TEST_RATE_HMAC_KEY | Dos claves de prueba de 32 bytes en base64 | Distintas de las claves de desarrollo |
 | DB_POOL_MAX | 10 inicial | Medir; no aumentar conexiones sin revisar memoria/carga |
 | MAIL_MODE | capture en desarrollo/test, smtp en producción | Producción rechaza capture; local rechaza SMTP externo |
 | SMTP_HOST / SMTP_PORT | `mailpit` / 1025 | Solo Mailpit en capture |
@@ -43,19 +135,26 @@ no contendrán cuenta administrativa, contraseña provisional ni claves comparti
 Para crear claves al implementar puede usarse una herramienta criptográfica local; nunca
 se generan dentro del documento ni se pegan en archivos versionados.
 
-## Arranque futuro, después de implementar los archivos
+## Generación y migraciones de identidad
 
-Todos los comandos siguientes son **contratos de scripts por crear**. No se han ejecutado.
-Suponen completada la tarea inicial anterior y un lockfile generado; `npm ci` no lo crea.
-Cuando existan los scripts de producto, se ejecutarán dentro de `api`:
+`db:generate` y `db:migrate:deploy` existen y se comprobaron en Docker: generación offline
+y aplicación a esquemas aislados de prueba. El segundo comando siguiente aplica las
+migraciones a desarrollo; revisar SQL y respaldos antes de usarlo sobre datos persistentes:
 
 ```sh
 docker compose exec -T api npm run db:generate --workspace @academia/api
 docker compose exec -T api npm run db:migrate:deploy --workspace @academia/api
 ```
 
-Actualmente solo existen las migraciones de ensayo `probe:generate` y `probe:migrate`.
-El endpoint existente es `/health/live`; no se afirma implementación de `/health/ready`.
+Hay cuatro migraciones de identidad y, por separado, las de ensayo `probe:generate` y
+`probe:migrate`. Los ensayos no migraron desarrollo. `db:migrate:dev` solo acepta desarrollo,
+usa `--create-only` y requiere una BD sombra con permisos para Prisma; ese flujo no se
+comprobó. Los CHECKs, triggers y el índice parcial requieren conservar y revisar su SQL.
+Evidencia: [T011–T016](evidence/fundamentos-datos.md). Retención/purga y recuperación
+operativa mantienen sus dependencias y comprobaciones finales pendientes.
+El incremento [T017–T020](evidence/reglas-credenciales-limites.md) aporta reglas, credenciales,
+cuotas y compatibilidad PHC reutilizadas por las historias implementadas.
+`/health/live` y `/health/ready` existen; sus respuestas no acreditan entrega de correo.
 No usar `db push` como sustituto de migraciones.
 
 ### Primer administrador
@@ -64,23 +163,22 @@ No usar `db push` como sustituto de migraciones.
 docker compose exec api npm run admin:bootstrap --workspace @academia/api
 ```
 
-Comando futuro interactivo: solicitar nombre, correo propio del operador y credencial
-provisional con entrada oculta, sin argumentos con secretos. No imprimir esa credencial ni
-registrar entrada. Operador con acceso local restringido a BD y configuración; la aplicación
-web no puede invocar el comando. SystemState hace la acción única incluso en paralelo.
-Verificar el correo en Mailpit, establecer contraseña propia y acceder. Repetir debe fallar
-sin cambiar ninguna cuenta. No se incluye administrador predeterminado en seeds.
+CLI implementada: requiere imagen actual, migraciones de identidad, terminal interactivo
+y acceso local a configuración/BD del destino; no usar `-T` ni ejecutarla sobre el esquema
+manual de US1. Solicita `operatorRef` ASCII de 1–64 caracteres sin valor predeterminado,
+nombre, correo y provisional con entrada oculta. No recibe secretos por argumentos ni
+los imprime. Éxito: código 0 e ID/correo; repetición: error seguro, sin cambios.
 
-Precisión U1 (2026-09-25): bootstrap y `security:invalidate-restored-state` solicitan al
-responsable un `operatorRef` no secreto, sin valor por defecto, con 1–64 caracteres
-ASCII `[A-Za-z0-9_-]`. Es un alias operativo declarado, no cuenta ni método de autenticación;
-el acceso al equipo/configuración/BD sigue restringido. No usar correo, nombre de Windows
-o hostname como alias automático. Cada ejecución genera su correlación y eventos privados
-de inicio/resultado, sin secretos; la invalidación usa destino global, sin FK a User.
-AuditEvent de bootstrap solo se escribe junto con la cuenta creada. Véanse listas permitidas
-en [data-model.md](data-model.md#registros-operativos-y-de-seguridad-sin-tabla-de-cuentas-ni-fk).
-Los registros estructurados se capturan en un destino privado fuera del repositorio, con
-rotación y retención máxima de 30 días, sin contratar un servicio adicional.
+Confirmar el correo capturado en Mailpit y sustituir la provisional en
+`http://localhost:5173/establecer-contrasena`, en cualquier orden; ambas condiciones son
+obligatorias antes de iniciar sesión. No hay seed privilegiado ni endpoint bootstrap.
+Antes de retirar al primero debe existir un segundo ADMIN habilitado; su gestión espera US4.
+La recuperación tras provisional vencida espera US7/T081, sin eludir la verificación.
+Prerrequisitos, entrega privada, reenvío, errores y continuidad en
+[operación del primer administrador](../../ops/local/first-admin.md).
+Resultados: [US6](evidence/us6.md). Auditoría y registros privados:
+[modelo/U1](data-model.md#registros-operativos-y-de-seguridad-sin-tabla-de-cuentas-ni-fk).
+La invalidación operativa tras restaurar sigue pendiente de T096.
 
 ### Datos y escenarios de prueba
 
@@ -157,3 +255,5 @@ sobrescribir bases para ensayar recuperación.
 Estos puntos no requieren reabrir las decisiones de correo obligatorio, recuperación por
 enlace o rol único. El diseño está preparado para tareas; la ejecución local necesita los
 prerrequisitos señalados.
+
+</details>

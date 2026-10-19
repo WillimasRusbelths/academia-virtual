@@ -2,9 +2,9 @@
 
 Ejecutar todos los comandos desde la raíz del repositorio. Se conserva el monorepo
 con NestJS, React/Vite, Prisma, PostgreSQL 16.14 y Mailpit 1.31.3. Este entorno sirve
-para desarrollo y pruebas de la aplicación mínima; no es un despliegue de producción.
-Identidad, pagos y video no están implementados. Los 1000 usuarios concurrentes siguen
-pendientes de demostrar con pruebas de carga.
+para desarrollo y pruebas locales; no es un despliegue de producción. Identidad tiene
+sus siete checkpoints y [regresión T106](../../specs/001-identidad-acceso-roles/evidence/regression.md)
+comprobados. Pagos/video siguen previstos; la capacidad de 1000 usuarios no está aprobada.
 
 ## Requisitos previos
 
@@ -19,6 +19,15 @@ Copiar `.env.example` a `.env` solo si no existe y completar las cinco contrase�
 valores aleatorios independientes, hexadecimales de 64 caracteres. No usar contraseñas
 reales de otros sistemas ni compartir `.env`. Las URL se construyen dentro de Compose
 con nombres de servicio; no se deben pegar las conexiones del host en contenedores.
+
+Además, completar `MAIL_PAYLOAD_KEY`, `RATE_HMAC_KEY`, `TEST_MAIL_PAYLOAD_KEY` y
+`TEST_RATE_HMAC_KEY` con cuatro claves independientes de 32 bytes en base64. El generador
+crea también estas claves. Si `.env` ya existe, conservar sus contraseñas y añadir solo
+las claves de identidad faltantes:
+
+```powershell
+docker run --rm --mount "type=bind,source=$PWD,target=/workspace" -w /workspace node:22.23.1-bookworm-slim node ops/docker/configure.mjs --identity-keys
+```
 
 Alternativamente, este comando genera `.env` y rechaza sobrescribirlo (PowerShell):
 
@@ -59,11 +68,22 @@ publica en loopback. La red `local` tiene `internal: true` para la comunicación
 servicios. La red adicional `access` permite publicar puertos en el host: este motor
 no publica los de contenedores conectados únicamente a una red interna. Es una red
 bridge con salida posible; la aplicación no necesita Internet en ejecución.
+
+El ensayo manual existente utiliza un override específico con PostgreSQL publicado en
+55532 para evitar una reserva de Windows sobre 55432. Conserva los datos y `db:5432`:
+consultar [el comando de reanudación](../local/manual-us1.md). El puerto general de esta
+tabla y los registros históricos permanecen como referencia del entorno predeterminado.
 Vite dirige `/api` a `http://api:3000`, conservando la ruta;
 se autoriza explícitamente el host `web` para la prueba interna de Chromium, sin
 permitir hosts arbitrarios.
-Los endpoints de identidad previstos aún no existen. El endpoint de salud actual se
-consulta directamente en el puerto API. Las páginas usan `localhost` de forma consistente.
+Los endpoints de identidad están en `/api/v1`, según [contratos](../../specs/001-identidad-acceso-roles/contracts/api.md).
+La salud se consulta directamente en el puerto API. Las páginas usan `localhost` de forma consistente.
+
+T023 añade `/health/ready`: responde 200 si el pool puede consultar PostgreSQL y 503 ante
+fallo, con configuración esencial validada al iniciar. No consulta SMTP; Mailpit no condiciona
+la disponibilidad del transporte de sesiones. `/health/live` sigue indicando proceso vivo.
+Ninguna ruta de salud renueva actividad de sesión. Evidencia del bloque en
+[sesiones, autorización y transporte](../../specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md).
 
 La API espera a PostgreSQL y Mailpit saludables; la web espera a la API saludable.
 El health check de la API demuestra que el proceso HTTP responde, no prueba por sí
@@ -77,8 +97,8 @@ El volumen `postgres_data` persiste con `docker compose down`. PostgreSQL ejecut
 pueden conectarse a desarrollo ni crear objetos con el runtime. No se importa, elimina
 ni modifica la instalación PostgreSQL del host.
 
-El modelo actual de ensayo contiene únicamente CompatibilityProbe. No hay migraciones
-de identidad. Generar y aplicar la migración existente dentro de `api`:
+El modelo de ensayo `CompatibilityProbe` permanece separado del esquema de identidad.
+Generar y aplicar la migración de compatibilidad dentro de `api`:
 
 ```sh
 docker compose exec -T api npm run probe:generate
@@ -87,6 +107,21 @@ docker compose exec -T api npm run probe:check
 ```
 
 Las guardas exigen `db:5432`, `academia_v00_test` y los roles exclusivos de ensayo.
+
+El esquema de identidad contiene ocho modelos y cuatro migraciones revisadas. La imagen
+genera el cliente con `db:generate`, sin conexión a la BD. `db:migrate:deploy` aplica solo
+migraciones versionadas al entorno explícito: desarrollo por defecto en Compose o prueba
+mediante `-e APP_ENV=test`. No se ejecuta automáticamente al iniciar la API. Revisar SQL
+y respaldos antes de aplicarlo sobre datos persistentes. `db:migrate:dev` está restringido
+a desarrollo y solicita solo crear la migración; necesita una BD sombra con permisos
+adecuados para Prisma. No se otorgó CREATEDB al propietario ni se validó ese flujo aquí.
+
+Las pruebas de integración migran esquemas vacíos aislados de `academia_v00_test`,
+verifican una copia ficticia incremental y eliminan exclusivamente sus propios esquemas.
+Los resultados de T011–T016 están en [fundamentos de configuración y persistencia](../../specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
+T017–T020 y la corrección incremental del formato PHC están en
+[reglas, credenciales y límites](../../specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md).
+
 No usar `db push`, reset ni ejecutar el inicializador de bases sobre un volumen existente.
 Cambiar contraseñas en `.env` no cambia las almacenadas: para una rotación hay que
 actualizar los roles mediante un procedimiento controlado y conservar los datos.
@@ -114,8 +149,14 @@ docker compose exec -T api npm run test:unit
 docker compose exec -T api npm run test:integration
 docker compose exec -T api npm run test:crypto-mail
 docker compose --profile tests build browser-tests
-docker compose --profile tests run --rm browser-tests
 ```
+
+Para navegador, usar también `-f ops/docker/compose.identity-tests.yml` y ejecutar las
+diez configuraciones de [T106](../../specs/001-identidad-acceso-roles/evidence/regression.md#resultados-y-seguimiento)
+mediante `run --rm --no-deps --entrypoint sh browser-tests -c '<comando E2E>'`.
+Cada grupo necesita su configuración original de fixtures/origen/tamaños; la recopilación
+sin distinguir esas configuraciones no equivale a la matriz verificada. Para reproducir
+desde cero, usar el [quickstart aislado](../../specs/001-identidad-acceso-roles/quickstart.md#reproducir-con-configuración-y-bd-nuevas).
 
 La integración comprueba PostgreSQL real, permisos, rollback y esquema aislado. El ensayo
 SMTP conecta desde el contenedor API a Mailpit, solo con destinatarios `@example.test`;

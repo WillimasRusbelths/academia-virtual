@@ -1,0 +1,29 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #1b1b1b;
+  background: #fff;
+  line-height: 1.5;
+}
+
+body { margin: 0; }
+main { box-sizing: border-box; max-width: 64rem; margin: 2rem auto; padding: 0 1rem; overflow-wrap: anywhere; }
+main, form, fieldset, nav, .form-field { min-width: 0; }
+input, select, textarea, button { box-sizing: border-box; max-width: 100%; font: inherit; }
+button { white-space: normal; }
+input, select, textarea { min-width: 0; }
+a { color: #174c96; }
+:focus-visible { outline: 3px solid #2457a6; outline-offset: 3px; }
+
+.form-field { display: flex; flex-direction: column; gap: .25rem; max-width: 100%; margin-bottom: 1rem; }
+.field-error { margin: 0; color: #8a1620; overflow-wrap: anywhere; }
+[aria-invalid="true"] { border: 2px solid #8a1620; }
+.feedback { overflow-wrap: anywhere; }
+.profile-page { max-width: 40rem; }
+.profile-facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: .5rem 1rem; }
+.profile-facts dt { font-weight: bold; }
+.profile-facts dd { margin: 0; min-width: 0; }
+
+@media (max-width: 30rem) {
+  .profile-facts { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+  .profile-facts dd { margin-bottom: .75rem; }
+}

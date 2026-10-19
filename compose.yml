@@ -44,7 +44,21 @@ services:
       dockerfile: apps/api/Dockerfile
     environment:
       API_HOST: 0.0.0.0
+      APP_ENV: development
+      APP_ORIGIN: http://localhost:${WEB_PORT:-5173}
+      MAIL_MODE: capture
+      MAIL_FROM: academia@example.test
+      MAIL_KEY_ID: local-v1
+      MAIL_PAYLOAD_KEY: ${MAIL_PAYLOAD_KEY:?Completar clave de identidad en .env}
+      RATE_HMAC_KEY: ${RATE_HMAC_KEY:?Completar clave de identidad en .env}
+      TEST_MAIL_PAYLOAD_KEY: ${TEST_MAIL_PAYLOAD_KEY:?Completar clave de test en .env}
+      TEST_RATE_HMAC_KEY: ${TEST_RATE_HMAC_KEY:?Completar clave de test en .env}
+      DB_POOL_MAX: "10"
+      TRUSTED_PROXY: ""
       DATABASE_URL: postgresql://academia_runtime:${ACADEMIA_RUNTIME_PASSWORD:?Completar .env}@db:5432/academia_dev
+      MIGRATION_DATABASE_URL: postgresql://academia_owner:${ACADEMIA_OWNER_PASSWORD:?Completar .env}@db:5432/academia_dev
+      TEST_DATABASE_URL: postgresql://academia_v00_runtime:${PROBE_RUNTIME_PASSWORD:?Completar .env}@db:5432/academia_v00_test
+      TEST_MIGRATION_DATABASE_URL: postgresql://academia_v00_owner:${PROBE_OWNER_PASSWORD:?Completar .env}@db:5432/academia_v00_test
       PROBE_MIGRATION_URL: postgresql://academia_v00_owner:${PROBE_OWNER_PASSWORD:?Completar .env}@db:5432/academia_v00_test
       PROBE_DATABASE_URL: postgresql://academia_v00_runtime:${PROBE_RUNTIME_PASSWORD:?Completar .env}@db:5432/academia_v00_test
       SMTP_HOST: mailpit

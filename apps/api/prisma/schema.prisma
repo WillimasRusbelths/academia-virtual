@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client"
+  output = "../generated/identity"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+enum AccountStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum TokenPurpose {
+  VERIFY_EMAIL
+  RESET_PASSWORD
+}
+
+enum AuditActor {
+  ACCOUNT
+  SYSTEM_BOOTSTRAP
+}
+
+enum AuditAction {
+  ACCOUNT_CREATED
+  BOOTSTRAP_ADMIN_CREATED
+  NAME_CHANGED
+  ROLE_CHANGED
+  STATUS_CHANGED
+}
+
+enum AuditResult {
+  APPLIED
+  NO_CHANGE
+}
+
+enum DeliveryStatus {
+  PENDING
+  SENDING
+  SENT
+  FAILED
+  CANCELLED
+}
+
+enum MailErrorClass {
+  TIMEOUT
+  TEMPORARY
+  PERMANENT
+  EXPIRED
+}
+
+enum RateScope {
+  LOGIN_PAIR
+  MAIL_RECIPIENT_PURPOSE
+  MAIL_ORIGIN
+}
+
+enum RatePhase {
+  ADMISSION
+  SMTP
+}
+
+enum RateResult {
+  RESERVED
+  FAILED
+  ACCEPTED
+}
+
+model User {
+  id                      String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                    String
+  email                   String
+  emailCanonical          String        @unique
+  role                    Role
+  status                  AccountStatus @default(ACTIVE)
+  emailVerifiedAt         DateTime?     @db.Timestamptz(6)
+  passwordHash            String?
+  mustSetPassword         Boolean       @default(false)
+  provisionalPasswordHash String?
+  provisionalExpiresAt    DateTime?     @db.Timestamptz(6)
+  authVersion             BigInt        @default(0)
+  createdAt               DateTime      @default(now()) @db.Timestamptz(6)
+  updatedAt               DateTime      @default(now()) @db.Timestamptz(6)
+  disabledAt              DateTime?     @db.Timestamptz(6)
+  sessions                Session[]
+  actionTokens            ActionToken[]
+  auditAsActor            AuditEvent[]  @relation("AuditActor")
+  auditAsTarget           AuditEvent[]  @relation("AuditTarget")
+  bootstrapState          SystemState?
+}
+
+model Session {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tokenHash         Bytes    @unique
+  userId            String   @db.Uuid
+  user              User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+  authVersion       BigInt
+  createdAt         DateTime @default(now()) @db.Timestamptz(6)
+  lastAcceptedAt    DateTime @default(now()) @db.Timestamptz(6)
+  absoluteExpiresAt DateTime @db.Timestamptz(6)
+  revokedAt         DateTime? @db.Timestamptz(6)
+  @@index([userId, revokedAt])
+  @@index([absoluteExpiresAt])
+}
+
+model ActionToken {
+  id                     String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId                 String       @db.Uuid
+  user                   User         @relation(fields: [userId], references: [id], onDelete: Restrict)
+  purpose                TokenPurpose
+  tokenHash              Bytes        @unique
+  emailCanonicalSnapshot String
+  createdAt              DateTime     @default(now()) @db.Timestamptz(6)
+  expiresAt              DateTime     @db.Timestamptz(6)
+  consumedAt             DateTime?    @db.Timestamptz(6)
+  revokedAt              DateTime?    @db.Timestamptz(6)
+  mailDelivery           MailDelivery?
+  @@index([userId, purpose])
+  @@index([expiresAt])
+  // La unicidad parcial sin now() se define en 0002_identity_access.
+}
+
+model AuditEvent {
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorKind    AuditActor
+  actorUserId  String?      @db.Uuid
+  actor        User?        @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: Restrict)
+  targetUserId String       @db.Uuid
+  target       User         @relation("AuditTarget", fields: [targetUserId], references: [id], onDelete: Restrict)
+  action       AuditAction
+  result       AuditResult
+  occurredAt   DateTime     @default(now()) @db.Timestamptz(6)
+  requestId    String       @db.Uuid
+  oldRole      Role?
+  newRole      Role?
+  oldStatus    AccountStatus?
+  newStatus    AccountStatus?
+  @@index([targetUserId, occurredAt])
+}
+
+model SystemState {
+  id                   Int       @id @default(1)
+  bootstrapCompletedAt DateTime? @db.Timestamptz(6)
+  firstAdminUserId      String?   @unique @db.Uuid
+  firstAdmin            User?     @relation(fields: [firstAdminUserId], references: [id], onDelete: Restrict)
+}
+
+model MailDelivery {
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tokenId          String?        @unique @db.Uuid
+  token            ActionToken?   @relation(fields: [tokenId], references: [id], onDelete: SetNull)
+  status           DeliveryStatus @default(PENDING)
+  recipientKey     String
+  originKey        String
+  encryptedPayload Bytes?
+  nonce            Bytes?
+  authTag          Bytes?
+  keyId            String?
+  attempts         Int            @default(0)
+  nextAttemptAt    DateTime        @default(now()) @db.Timestamptz(6)
+  leaseUntil       DateTime?      @db.Timestamptz(6)
+  claimId          String?        @db.Uuid
+  createdAt        DateTime        @default(now()) @db.Timestamptz(6)
+  sentAt           DateTime?      @db.Timestamptz(6)
+  finishedAt       DateTime?      @db.Timestamptz(6)
+  lastErrorClass   MailErrorClass?
+  @@index([status, nextAttemptAt])
+  @@index([leaseUntil])
+}
+
+model RateBucket {
+  key          String     @id
+  scope        RateScope
+  phase        RatePhase
+  blockedUntil DateTime?  @db.Timestamptz(6)
+  updatedAt    DateTime    @default(now()) @db.Timestamptz(6)
+  events       RateEvent[]
+}
+
+model RateEvent {
+  id                   String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  bucketKey            String
+  bucket               RateBucket @relation(fields: [bucketKey], references: [key], onDelete: Restrict)
+  occurredAt           DateTime   @default(now()) @db.Timestamptz(6)
+  attemptId            String?    @db.Uuid
+  status               RateResult
+  reservationExpiresAt DateTime?  @db.Timestamptz(6)
+  @@index([bucketKey, occurredAt])
+}

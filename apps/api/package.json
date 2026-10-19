@@ -4,16 +4,23 @@
     "lint": "eslint src tests eslint.config.js",
     "build": "tsc -p tsconfig.json",
     "dev": "npm run build && node dist/src/main.js",
-    "test:unit": "vitest run tests/architecture",
+    "test:unit": "vitest run tests/architecture src/modules",
     "test:integration": "vitest run tests/compatibility/runtime.spec.ts tests/compatibility/postgres.spec.ts tests/integration",
     "test:smoke": "vitest run tests/compatibility/runtime.spec.ts",
     "test:crypto-mail": "vitest run tests/compatibility/crypto-mail.spec.ts",
-    "test:postgres": "vitest run tests/compatibility/postgres.spec.ts"
+    "test:postgres": "vitest run tests/compatibility/postgres.spec.ts",
+    "db:generate": "node scripts/database.mjs generate",
+    "db:migrate:dev": "node scripts/database.mjs dev",
+    "db:migrate:deploy": "node scripts/database.mjs deploy",
+    "fixtures:identity": "node dist/src/cli/fixtures-identity.js",
+    "maintenance:retain": "node dist/src/cli/retain-records.js",
+    "security:invalidate-restored-state": "node dist/src/cli/invalidate-restored-state.js",
+    "admin:bootstrap": "node dist/src/cli/bootstrap-admin.js"
   },
   "dependencies": {
     "@nestjs/common": "12.1.0", "@nestjs/core": "12.1.0", "@nestjs/platform-express": "12.1.0",
     "@prisma/client": "7.10.0", "@prisma/adapter-pg": "7.10.0", "pg": "^8.0.0",
     "reflect-metadata": "^0.2.0", "rxjs": "^7.0.0", "argon2": "0.45.1", "nodemailer": "10.0.11"
   },
-  "devDependencies": {"@nestjs/testing": "12.1.0", "@types/pg": "^8.0.0", "@types/nodemailer": "^7.0.0"}
+  "devDependencies": {"@nestjs/testing": "12.1.0", "@types/pg": "^8.0.0", "@types/nodemailer": "^7.0.0", "@types/express": "5.0.6"}
 }

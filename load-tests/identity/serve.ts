@@ -1,0 +1,54 @@
+import 'reflect-metadata';
+import { appendFileSync, readFileSync, existsSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
+import type { Request,Response,NextFunction } from 'express';
+import { AppModule } from '../../apps/api/dist/src/app.module.js';
+import { configureTransport } from '../../apps/api/dist/src/http/transport.js';
+import { loadEnvironment } from '../../apps/api/dist/src/infrastructure/config/environment.js';
+import { createDatabase } from '../../apps/api/dist/src/infrastructure/database/database.js';
+import { credentialMetrics, ARGON2_PARAMETERS, HASH_CONCURRENCY, HASH_QUEUE_MAX, HASH_WAIT_MS } from '../../apps/api/dist/src/modules/identity/infrastructure/credentials.js';
+import { assertLoadTarget,readManifest } from './fixtures.ts';
+import { sessionCounts,stopReason,databaseActivity } from './observe.ts';
+import { Diagnostics } from './diagnostics.ts';
+import { engineSnapshot } from './engine.ts';
+
+const environment=loadEnvironment(),database=createDatabase(environment);await assertLoadTarget(environment,database.pool);
+const manifest=readManifest('/load-private/fixtures',environment);
+const engineEnabled=process.env.LOAD_ENGINE_DIAGNOSTICS==='1';
+const diagnostic=process.env.LOAD_DIAGNOSTICS==='1'||engineEnabled?new Diagnostics(process.env.LOAD_DIAGNOSTICS_NAME??'invalid'):null;
+if(process.env.LOAD_DIAGNOSTICS==='1')diagnostic?.install(database.pool);
+if(engineEnabled)await engineSnapshot(database.pool);
+const app=await NestFactory.create<NestExpressApplication>(AppModule.forRoot(environment,database),{logger:false,bodyParser:false});
+let inFlight=0,peakInFlight=0;
+app.use((request:Request,response:Response,next:NextFunction)=>{
+  if(request.path.startsWith('/api/v1/')){inFlight++;peakInFlight=Math.max(peakInFlight,inFlight);let done=false;
+    const finish=()=>{if(!done){done=true;inFlight--;}};response.once('finish',finish);response.once('close',finish);}
+  if(diagnostic)diagnostic.middleware(request,response,next);else next();
+});
+configureTransport(app,environment);await app.listen(3000,'0.0.0.0');
+writeFileSync('/load-private/settings.json',JSON.stringify({node:process.version,installedLockSha256:createHash('sha256').update(readFileSync('/workspace/package-lock.json')).digest('hex'),
+  postgres:(await database.pool.query('SHOW server_version')).rows[0].server_version,pool:environment.poolMax,argon2:ARGON2_PARAMETERS,hashConcurrency:HASH_CONCURRENCY,hashQueue:HASH_QUEUE_MAX,hashWaitMs:HASH_WAIT_MS}),{mode:0o600});
+let pending=false,stopped=false,sampleIndex=0;
+const timer=setInterval(()=>{if(pending||stopped)return;pending=true;void sample().catch(()=>{
+  writeFileSync('/load-private/stop.json',JSON.stringify({reason:'MONITOR_UNAVAILABLE',at:new Date().toISOString()}),{mode:0o600});
+}).finally(()=>{pending=false;});},1000);
+async function sample(){
+  const groupSamples:Record<string,{statementStartedAt:Date;readFinishedAt:Date}>={};
+  const groups=await sessionCounts(database.pool,manifest,(group,times)=>{groupSamples[group]=times;});
+  const activity=await databaseActivity(database.pool);
+  const hash=credentialMetrics();let memoryCurrent=0,memoryLimit=0;
+  if(existsSync('/sys/fs/cgroup/memory.current')){memoryCurrent=Number(readFileSync('/sys/fs/cgroup/memory.current','utf8'));memoryLimit=Number(readFileSync('/sys/fs/cgroup/memory.max','utf8'));}
+  const engine=engineEnabled&&sampleIndex++%5===0?await engineSnapshot(database.pool):undefined;
+  const event={at:new Date().toISOString(),hash,http:{active:inFlight,peak:peakInFlight},pool:{total:database.pool.totalCount,idle:database.pool.idleCount,waiting:database.pool.waitingCount},groups,groupSamples,activity,memoryCurrent,memoryLimit,diagnostics:diagnostic?.sample(),engine};
+  appendFileSync('/load-private/server.jsonl',JSON.stringify(event)+'\n',{mode:0o600});
+  const reason=stopReason(hash.waitMaxMs,memoryCurrent,memoryLimit);
+  if(reason){
+    writeFileSync('/load-private/stop.json',JSON.stringify({reason,at:event.at}),{mode:0o600});
+    stopped=true;await app.close();
+  }
+}
+async function shutdown(){stopped=true;clearInterval(timer);while(pending)await new Promise(resolve=>setTimeout(resolve,25));await app.close();diagnostic?.write();await database.close();}
+process.once('SIGTERM',()=>{void shutdown().finally(()=>{process.exitCode=0;});});
+process.once('SIGINT',()=>{void shutdown().finally(()=>{process.exitCode=0;});});

@@ -5,7 +5,7 @@
 > y [tareas](../specs/001-identidad-acceso-roles/tasks.md); «lista para planificar» es
 > histórico. La base técnica y T009/T010 tienen evidencia, pero las historias siguen sin
 > implementar. Para entorno y estado usar Compose y el
-> [inventario actualizado](../arquitectura/arquitectura-inicial.md). Esta revisión documental
+> [inventario actualizado](02-arquitectura-software/arquitectura-inicial.md). Esta revisión documental
 > no cierra decisiones comerciales, académicas ni de aceptación aquí pendientes.
 
 Estado al 2026-09-23: decisiones abiertas o parcialmente resueltas según cada fila.
@@ -32,6 +32,17 @@ evidencia y especificaciones afectadas. Las reglas obligatorias de la
 | D11 | Identidad y permisos: comportamiento definido | Confirmado el 2026-09-23: correo verificado antes del acceso, recuperación por correo con enlace de un solo uso y un único rol por cuenta. Registro público solo de alumnos, gestión administrativa y revocación de sesiones definidos en [identidad](../specs/001-identidad-acceso-roles/spec.md). | Checklist de especificación revisado; lista para planificar, no implementada. El plan validará envío de correo, costo y procedimiento operativo. La pertenencia a cursos se definirá con ese dominio. |
 | D12 | Materiales y paneles | Faltan formatos, tamaños, almacenamiento y operaciones mínimas por rol. | Alcance acotado por funcionalidad compatible con el plazo y el presupuesto. |
 | D13 | Actualización y recuperación | Faltan ubicación/retención de respaldos, responsables y tiempos aceptables de recuperación. | Procedimiento y restauración comprobada antes de una demo con datos persistentes o publicación. |
+
+## Seguimiento D09/D10 — 2026-10-18
+
+Por acuerdo de planificación, el VPS y los nuevos ensayos completos de 1000 usuarios se
+aplazan hasta integrar matrícula. Entonces se retomarán recursos/escenarios y rúbrica con
+el profesor (D10), sin cambiar los criterios ya registrados. T103 conserva su estado de
+ejecución e informe completos; la capacidad **no está aprobada** y el cierre integral de
+identidad permanece pendiente. Se conservan [incumplimientos, recursos y umbrales
+provisionales](../specs/001-identidad-acceso-roles/evidence/load-resources.md).
+Este aplazamiento no elimina las verificaciones ni impide preparar T104/T105, independientes
+de la carga; no autoriza contratar servicios.
 
 ## Historial de la decisión de pasarela (D02)
 

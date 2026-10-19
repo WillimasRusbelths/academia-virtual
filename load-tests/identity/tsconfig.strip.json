@@ -1,0 +1,6 @@
+{
+  "extends":"./tsconfig.json",
+  "compilerOptions":{"erasableSyntaxOnly":true},
+  "include":["*.ts"],
+  "exclude":["*.spec.ts"]
+}

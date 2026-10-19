@@ -1,0 +1,9 @@
+# Experimentos locales: combinar solo con compose.yml y proyecto identity-load-*.
+# Memoria original por defecto; ampliación k6 solo tras evidencia de memory.events.
+# No cambia conexiones, seguridad, volúmenes ni perfiles de tráfico.
+services:
+  db:
+    cpus: ${IDENTITY_EXPERIMENT_PG_CPUS:-1}
+  generator:
+    cpus: ${IDENTITY_EXPERIMENT_K6_CPUS:-1}
+    mem_limit: ${IDENTITY_EXPERIMENT_K6_MEMORY:-512m}

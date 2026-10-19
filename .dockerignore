@@ -19,10 +19,12 @@ apps/api/generated/
 .aws/
 compose.override.yml
 .secrets/
+**/.secrets/
 secrets/
 credentials/
 *.key
 *.pem
 *.log
+**/logs/
 backups/
 data/
