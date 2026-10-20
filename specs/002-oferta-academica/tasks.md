@@ -1,12 +1,14 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T010 completadas y verificadas el 2026-10-19; T011–T074 pendientes.
+**Estado**: T001–T011 completadas y verificadas el 2026-10-19. T012 preparada y
+ejecutada en rojo, pendiente de cumplir todos sus criterios; T013–T074 pendientes.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
 [entorno y harness](evidence/environment.md), [rojo T005/T006](evidence/t005-t006.md) y
 [modelo y migración T007/T008](evidence/t007-t008.md) e
-[interfaces y contratos T009/T010](evidence/t009-t010.md).
+[interfaces y contratos T009/T010](evidence/t009-t010.md) y
+[permisos y pruebas de protocolo T011/T012](evidence/t011-t012.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -14,7 +16,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 La instrucción de generar tareas sucede a las etapas históricas descritas en spec/plan;
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
-T009/T010 para interfaces y contratos. Las demás tareas siguen siendo destinos futuros;
+T009/T010 para interfaces y contratos. El bloque actual autoriza solo T011 y después
+las pruebas T012; no T013/T014. Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
 ## Formato y convenciones
@@ -58,7 +61,7 @@ históricos; el cierre actualizado está en la evidencia T007/T008. E1 se conser
 - [X] T008 Preparar y revisar `apps/api/prisma/migrations/0005_academic_offering/migration.sql` después de comprobar numeración real: aditiva, checks/índices, pertenencia inmutable y trigger de estados, snapshot emparejado, generación y vista AcademicTeacherDirectory en esquema configurado. Aplicar solo en destino T002/T005; probar SQL personalizado y generación Prisma con scripts existentes. No modificar migraciones aplicadas ni conceder DDL/CREATEDB al runtime; sombra exclusiva si se usa create-only (FR-002/005/008/012/015/016).
 - [X] T009 Publicar tipos mínimos en `apps/api/src/modules/users/public/teaching-directory.ts` y adaptador en `apps/api/src/modules/users/infrastructure/teaching-directory.ts`: userId/name/eligible/eligibilityVersion; selector solo elegibles. Termina sin UserView/email, pool nuevo, preview Prisma ni tipos pg en contrato público (FR-011/012).
 - [X] T010 Crear contratos puros en `apps/api/src/modules/academic-offering/public/offer.ts`, `application/offering-store.ts` y `domain/offering-error.ts`; cerrar DTO por audiencia, errores y tipos conforme al API y anexo. Termina sin Nest/pg en núcleo ni generación docente expuesta al cliente (FR-002/010/011/013).
-- [ ] T011 Extender `apps/api/src/modules/authorization/domain/permissions.ts` y su `permissions.test.ts` con academic:manage ADMIN, academic:read-published ADMIN/STUDENT y academic:read-own TEACHER; mantener los permisos de identidad y denegación por defecto. Termina con todas las combinaciones unitarias aprobadas (FR-010/016).
+- [X] T011 Extender `apps/api/src/modules/authorization/domain/permissions.ts` y su `permissions.test.ts` con academic:manage ADMIN, academic:read-published ADMIN/STUDENT y academic:read-own TEACHER; mantener los permisos de identidad y denegación por defecto. Termina con todas las combinaciones unitarias aprobadas (FR-010/016).
 - [ ] T012 Escribir PG del protocolo en `apps/api/tests/integration/academic-offering-transaction.spec.ts`: locks User ordenados → Session → Course → Group; redescubrimiento por cambio de conjunto, tres intentos totales compartidos, rollback fallido y COMMIT ambiguo sin replay automático. Antes de T014, probar también el contrato del ledger/auditoría con agregados ficticios: reautorización antes de replay, unicidad actor/commandId, hash distinto rechazado, proyección actual/revisión original y fallo de auditoría revierte ledger/agregado. Termina con barreras observadas desde tercera conexión y aserciones persistidas; T045/T052 ampliarán estos casos a comandos HTTP completos (FR-015/016).
 - [ ] T013 Implementar `apps/api/src/infrastructure/database/account-locks.ts` y `academic-transaction.ts` reutilizando accountTransaction una sola vez; descubrir dentro de cada intento, revalidar sesión existente, abortar antes de adquirir User nuevos tras padre, consultar conflictos en sentencia posterior. Sin SystemState, locks de grupos ajenos ni bucle exterior; T012 verde y semántica de identidad intacta (FR-004/010/015).
 - [ ] T014 Implementar ledger canónico y escritor atómico en `apps/api/src/modules/academic-offering/infrastructure/offering-store.ts` y `offering-audit.ts`: PK actor/commandId, digest incluye operación/destino/expectedRevision, reautorizar antes de replay, proyección actual con appliedRevision original, sin nuevo efecto/auditoría; fallo revierte todo, sin purga. Termina con T012 verde e interfaces listas para comandos de historias (FR-015).
@@ -66,6 +69,15 @@ históricos; el cierre actualizado está en la evidencia T007/T008. E1 se conser
 - [ ] T016 Preparar ensamblaje en `apps/api/src/modules/academic-offering/academic-offering.module.ts` y `apps/api/src/app.module.ts`; inyectar pool único, directorio y revalidateInTransaction existente por capacidades estructurales. Termina con composición compilable, sin callbacks identidad→oferta ni cambios a SessionRepository (FR-010/016).
 - [ ] T017 Ampliar `apps/api/tests/architecture/endpoint-policies.spec.ts`, `layers.spec.ts` e `import-boundaries.spec.ts` para módulo/superficies nuevos y mantener reglas de `ops/lint/import-boundaries.mjs`. Termina con núcleo puro y ningún controlador sin ACCESS_POLICY; repetir al agregar rutas (FR-010/016).
 - [ ] T018 Ejecutar checkpoint de fundamentos y registrar `specs/002-oferta-academica/evidence/foundations.md`: T005/T006/T012/T017 aprobadas, migración nueva/incremental y regresión PG de acceso, sesiones, reset y bootstrap sin alteración. Registrar hallazgo bootstrap heredado aunque una ejecución pase; no habilitar historias con una regresión (FR-016; V-A11/A12).
+
+Avance T011/T012, 2026-10-19: T011 completa; matriz unitaria 24/24 y PG de permisos
+13/13, con regresión de identidad 33/33. T012 contiene 33 casos descubiertos/ejecutados:
+seis controles PG/helper existente aprobados y 27 fallos esperados de precondición por
+capacidades académicas T013/T014 ausentes (12 y 15). Las aserciones posteriores de esos
+27 casos aún no se alcanzaron; no son imports fallidos ni pruebas de comportamiento
+aprobadas. T012 sigue sin marcar: exige barreras y estado persistido del protocolo real,
+no solo escribir pruebas rojas. B01 sí observó la barrera de PK desde tercera conexión;
+no acredita los locks del adaptador académico. E1 y sus líneas T012/T014 se conservan.
 
 ## Fase 3: US1 — Preparar cursos y grupos (P1, T019–T030)
 
