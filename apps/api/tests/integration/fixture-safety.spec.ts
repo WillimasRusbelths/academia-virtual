@@ -21,7 +21,7 @@ beforeAll(async () => { context = await identityDatabase('fixture_safety'); },12
 afterEach(async () => {
   vi.restoreAllMocks();
   await context.isolated.ownerQuery(`DROP FUNCTION IF EXISTS fixture_test_failure() CASCADE;
-    TRUNCATE "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+    TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
 });
 afterAll(async () => { await context?.cleanup();rmSync(directory,{recursive:true,force:true}); });

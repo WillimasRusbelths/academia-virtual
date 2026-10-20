@@ -30,7 +30,7 @@ afterEach(async () => {
   vi.restoreAllMocks();
   // Exclusivamente el esquema aleatorio de esta suite en *_test. No restablecer marcas reales.
   await context.isolated.ownerQuery(`DROP FUNCTION IF EXISTS bootstrap_test_failure() CASCADE;
-    TRUNCATE "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+    TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
 });
 afterAll(async () => { await context?.cleanup(); });

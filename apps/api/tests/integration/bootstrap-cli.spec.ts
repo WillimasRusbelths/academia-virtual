@@ -14,7 +14,7 @@ let context:IdentityTestDatabase;
 beforeAll(async()=>{context=await identityDatabase('us6_cli');},120000);
 afterEach(async()=>{
   // Solo el esquema t_* creado por esta suite; nunca se restablece una marca real.
-  await context.isolated.ownerQuery(`TRUNCATE "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+  await context.isolated.ownerQuery(`TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
 });
 afterAll(async()=>{await context?.cleanup();});

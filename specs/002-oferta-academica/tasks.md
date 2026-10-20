@@ -1,9 +1,9 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T017 completas. T015/T016/T017 cerradas individualmente el
-2026-10-20 con errores seguros, composición real y barreras de arquitectura verificadas.
-T018–T074 pendientes; no se ha iniciado el checkpoint T018.
+**Estado**: T001–T018 completas. Checkpoint de fundamentos T018 aprobado el
+2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
+T019–T074 pendientes; no se ha iniciado US1. Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
 [entorno y harness](evidence/environment.md), [rojo T005/T006](evidence/t005-t006.md) y
@@ -12,7 +12,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [permisos y pruebas de protocolo T011/T012](evidence/t011-t012.md) y
 [implementación del protocolo T013](evidence/t013.md) y
 [escritor atómico y cierre T012–T014](evidence/t014.md) y
-[errores, composición y arquitectura T015–T017](evidence/t015-t017.md).
+[errores, composición y arquitectura T015–T017](evidence/t015-t017.md) y
+[checkpoint de fundamentos T018](evidence/foundations.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -21,7 +22,7 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual autoriza únicamente T015–T017; se detiene antes de T018. Las demás tareas siguen siendo destinos futuros;
+actual autoriza únicamente T018; se detiene antes de T019. Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
 ## Formato y convenciones
@@ -72,7 +73,7 @@ históricos; el cierre actualizado está en la evidencia T007/T008. E1 se conser
 - [X] T015 Extender allowlists en `apps/api/src/http/error.filter.ts` y `apps/api/src/infrastructure/logging/security-events.ts`: códigos/campos de api.md, conflictingGroupIds solo en los dos 409 administrativos, targets COURSE/GROUP y requestId separado de commandId. Termina sin serialización genérica, SQL, motivos, cuerpos, emails ni USER_REFERENCE ficticio (FR-011/013/015).
 - [X] T016 Preparar ensamblaje en `apps/api/src/modules/academic-offering/academic-offering.module.ts` y `apps/api/src/app.module.ts`; inyectar pool único, directorio y revalidateInTransaction existente por capacidades estructurales. Termina con composición compilable, sin callbacks identidad→oferta ni cambios a SessionRepository (FR-010/016).
 - [X] T017 Ampliar `apps/api/tests/architecture/endpoint-policies.spec.ts`, `layers.spec.ts` e `import-boundaries.spec.ts` para módulo/superficies nuevos y mantener reglas de `ops/lint/import-boundaries.mjs`. Termina con núcleo puro y ningún controlador sin ACCESS_POLICY; repetir al agregar rutas (FR-010/016).
-- [ ] T018 Ejecutar checkpoint de fundamentos y registrar `specs/002-oferta-academica/evidence/foundations.md`: T005/T006/T012/T017 aprobadas, migración nueva/incremental y regresión PG de acceso, sesiones, reset y bootstrap sin alteración. Registrar hallazgo bootstrap heredado aunque una ejecución pase; no habilitar historias con una regresión (FR-016; V-A11/A12).
+- [X] T018 Ejecutar checkpoint de fundamentos y registrar `specs/002-oferta-academica/evidence/foundations.md`: T005/T006/T012/T017 aprobadas, migración nueva/incremental y regresión PG de acceso, sesiones, reset y bootstrap sin alteración. Registrar hallazgo bootstrap heredado aunque una ejecución pase; no habilitar historias con una regresión (FR-016; V-A11/A12).
 
 Historial T011/T012 antes de T013, 2026-10-19: T011 completa; matriz unitaria 24/24 y PG de permisos
 13/13, con regresión de identidad 33/33. T012 contiene 33 casos descubiertos/ejecutados:
@@ -118,6 +119,19 @@ Tipos, lint y compilación aprobados, cero omisiones finales. 347 casos únicos 
 repeticiones. Criterios, cinco aclaraciones, E1 y fuentes T014 intactos; entorno manual
 preservado. Sin bloqueos conocidos de estas tres tareas; detenerse antes de T018 y ejecutar
 su checkpoint completo en el siguiente bloque. No se acredita funcionalidad o capacidad.
+
+Cierre T018, 2026-10-20: checkpoint aprobado sobre base limpia 461bba9. T005 24/24,
+T006 18/18, T012 33/33 y T017 14/14 verdes; integración API completa 896/896 en 52
+archivos y unitarias/arquitectura 106/106 en 16 archivos, cero fallos/omitidos finales.
+Se corrigieron solo listas explícitas de limpieza de cinco suites tras observar 0A000
+por las FK nuevas; aserciones, CLI, parser y timeouts intactos. Primer lote amplio
+895/896 por API local ausente; repetido completo con main real compilado y preflight
+ready/live 200, sin cambiar esa prueba. Ambos informes iniciales conservados, sin
+contarlos como aprobación funcional. Acceso 30/30, sesiones 35/35, reset 49/49 y
+bootstrap 42/42 dentro del lote; ocho pares del diagnóstico pasan sin confirmar la
+causa de la intermitencia heredada, que sigue abierta. Compilación/tipos API y lint
+aprobados; 72 archivos protegidos y 19 fuentes anteriores idénticos, entorno manual
+intacto. No hay regresión actual pendiente; no se inicia T019 ni se acepta funcionalidad.
 
 ## Fase 3: US1 — Preparar cursos y grupos (P1, T019–T030)
 

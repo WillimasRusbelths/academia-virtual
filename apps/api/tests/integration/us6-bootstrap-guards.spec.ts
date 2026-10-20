@@ -13,7 +13,7 @@ import { runBootstrapDialogue } from '../support/us6-cli.js';
 let context:IdentityTestDatabase;
 beforeAll(async()=>{context=await identityDatabase('us6_cli_guards');},120000);
 afterEach(async()=>{
-  await context.isolated.ownerQuery(`TRUNCATE "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+  await context.isolated.ownerQuery(`TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
 });
 afterAll(async()=>{await context?.cleanup();});
