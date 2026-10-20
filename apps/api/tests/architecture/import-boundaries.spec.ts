@@ -31,4 +31,20 @@ describe('límites del monolito modular', () => {
     expect(messages("import '../../features/profile/view.js';", 'apps/web/src/features/auth/login.ts', 'web-layers')[0]?.messageId).toBe('feature');
     expect(messages("import '../features/auth/login.js';", 'apps/web/src/shared/button.ts', 'web-layers')[0]?.messageId).toBe('app');
   });
+
+  test('T017 oferta mantiene núcleo puro y superficies públicas, incluso en infraestructura', () => {
+    for (const layer of ['application','domain','public']) {
+      const file = `apps/api/src/modules/academic-offering/${layer}/contract.ts`;
+      expect(messages("import 'pg';", file, 'api-layers')[0]?.messageId).toBe('external');
+      expect(messages("import '@nestjs/common';", file, 'api-layers')[0]?.messageId).toBe('external');
+      expect(messages("export * from '../../../infrastructure/database/academic-transaction.js';", file, 'api-layers')[0]?.messageId).toBe('escape');
+    }
+    const adapter = 'apps/api/src/modules/academic-offering/infrastructure/offering-store.ts';
+    expect(messages("import '../../identity/infrastructure/session-store.js';", adapter, 'api-layers')[0]?.messageId).toBe('module');
+    expect(messages("import '../../users/infrastructure/teaching-directory.js';", adapter, 'api-layers')[0]?.messageId).toBe('module');
+    expect(messages("import '../../users/public/teaching-directory.js';", adapter, 'api-layers')).toHaveLength(0);
+    expect(messages("import '../../authorization/public/session.js';", adapter, 'api-layers')).toHaveLength(0);
+    expect(messages("import '../../../infrastructure/database/academic-transaction.js';", adapter, 'api-layers')).toHaveLength(0);
+    expect(messages("export * from '../infrastructure/offering-store.js';", 'apps/api/src/modules/academic-offering/public/offer.ts', 'api-layers')[0]?.messageId).toBe('layer');
+  });
 });

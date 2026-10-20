@@ -29,11 +29,14 @@ import { PostgresAuditWriter } from './modules/audit/infrastructure/audit-writer
 import { PostgresAccountCreationStore } from './modules/identity/infrastructure/account-creation-store.js';
 import { PostgresAccessChangeStore } from './modules/identity/infrastructure/access-change-store.js';
 import { PostgresPasswordResetStore } from './modules/identity/infrastructure/password-reset-store.js';
+import { AcademicOfferingModule } from './modules/academic-offering/academic-offering.module.js';
+import { createAcademicCommandWriter } from './modules/academic-offering/infrastructure/offering-store.js';
+import { PostgresTeachingDirectory } from './modules/users/infrastructure/teaching-directory.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
 export class AppModule {
-  static forRoot(environment: Environment, database: ReturnType<typeof createDatabase>): DynamicModule {
+  static forRoot(environment: Environment, database: Pick<ReturnType<typeof createDatabase>, 'pool' | 'close'>): DynamicModule {
     const rates = new PostgresRateStore(database.pool, environment.rateHmacKey);
     const sessions=new PostgresSessionStore(database.pool);const cookie=new SessionCookie(environment);
     const mutations={authorization:sessions,audit:new PostgresAuditWriter()};
@@ -48,7 +51,10 @@ export class AppModule {
           new PostgresAccountCreationStore(database.pool,mutations),new PostgresAccessChangeStore(database.pool,mutations),
           new PostgresPasswordResetStore(database.pool)),
         UsersModule.forRoot(new PostgresUserQueries(database.pool),
-          new PostgresNameStore(database.pool,mutations))],
+          new PostgresNameStore(database.pool,mutations)),
+        AcademicOfferingModule.forRoot(createAcademicCommandWriter(database.pool, {
+          revalidateInTransaction: sessions.revalidateInTransaction.bind(sessions),
+        }), new PostgresTeachingDirectory(database.pool))],
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
         { provide: 'MAIL_DELIVERY_SCHEDULER', useValue: new DeliveryScheduler(deliveries) },

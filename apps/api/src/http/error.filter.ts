@@ -14,6 +14,9 @@ import { UserNotFound, UserQueryInvalid } from '../modules/users/application/lis
 import { AccountConflict } from '../modules/identity/application/create-account.js';
 import { AdminInvariant } from '../modules/identity/domain/account-administration.js';
 import { AccessTargetMissing, AccessCommandInvalid } from '../modules/identity/application/change-access.js';
+import { OfferingError, OFFERING_ERROR_MESSAGES } from '../modules/academic-offering/public/offer.js';
+import { academicRouteTargets } from '../infrastructure/logging/security-events.js';
+import type { Role } from '../modules/users/public/account.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -24,8 +27,11 @@ export interface HttpRequest {
   headers: Record<string, string | string[] | undefined>;
   method: string;
   requestId?: string;
-  actor?: { userId: string };
+  actor?: { userId: string; role?: Role };
   params?: Record<string, unknown>;
+  /** Solo metadatos de enrutamiento Express y contexto validado por el servidor. */
+  route?: { path?: unknown };
+  commandId?: string;
 }
 export interface HttpResponse {
   statusCode: number;
@@ -42,10 +48,18 @@ const messages: Record<number, string> = {
 };
 const codes: Record<number, readonly string[]> = {
   400:['VALIDATION_ERROR','INVALID_ACTION_LINK'],401:['AUTH_REQUIRED','INVALID_CREDENTIALS'],
-  403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],409:['ACCOUNT_CONFLICT','ADMIN_INVARIANT'],
+  403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],409:['ACCOUNT_CONFLICT','ADMIN_INVARIANT',
+    'OFFERING_VERSION_CONFLICT','OFFERING_STATE_CONFLICT','TEACHER_NOT_ELIGIBLE','TEACHER_SCHEDULE_CONFLICT',
+    'COURSE_PUBLICATION_BLOCKED','IDEMPOTENCY_CONFLICT'],
   413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE'],
 };
 const fieldNames=['name','email','password','provisionalPassword','newPassword','role','status','token'];
+const academicFields=['name','description','periodStart','periodEnd','timeZone','capacity','teacherUserId','schedule',
+  'cancellationReason','expectedRevision','commandId','q','state','page','pageSize'];
+const academicStatuses = { VALIDATION_ERROR:400, AUTH_REQUIRED:401, FORBIDDEN:403, REQUEST_NOT_ALLOWED:403,
+  NOT_FOUND:404, OFFERING_VERSION_CONFLICT:409, OFFERING_STATE_CONFLICT:409, TEACHER_NOT_ELIGIBLE:409,
+  TEACHER_SCHEDULE_CONFLICT:409, COURSE_PUBLICATION_BLOCKED:409, IDEMPOTENCY_CONFLICT:409, TEMPORARILY_UNAVAILABLE:503 };
+const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** Lista permitida de salida: jamás serializa causas, cuerpos o mensajes de adaptadores. */
 @Catch()
@@ -58,7 +72,24 @@ export class SafeErrorFilter implements ExceptionFilter {
     let status = 503;
     let code = 'TEMPORARILY_UNAVAILABLE';
     let fields: { field: string; message: string }[] | undefined;
-    if(error instanceof InvalidCredentials) {
+    let conflictingGroupIds: string[] | undefined;
+    const template = typeof request.route?.path === 'string' ? request.route.path.replace(/^\/api\/v1(?=\/)/, '') : '';
+    const route = Object.hasOwn(academicRouteTargets, template) ? academicRouteTargets[template] : undefined;
+    const academic = route !== undefined || error instanceof OfferingError;
+    if (error instanceof OfferingError) {
+      code = error.code; status = Object.hasOwn(academicStatuses, error.code) ? academicStatuses[error.code] : 503;
+      const failure = error.failure;
+      if ((failure.code === 'VALIDATION_ERROR' || failure.code === 'TEACHER_NOT_ELIGIBLE') && Array.isArray(failure.fields)) {
+        const allowed = failure.code === 'TEACHER_NOT_ELIGIBLE' ? ['teacherUserId'] : academicFields;
+        fields = [...new Set(failure.fields.filter(field => typeof field === 'string' && allowed.includes(field)))]
+          .map(field => ({ field, message: 'Campo inválido.' }));
+      }
+      if (request.actor?.role === 'ADMIN' && route && template.startsWith('/admin/academic/')
+        && (failure.code === 'TEACHER_SCHEDULE_CONFLICT' || failure.code === 'COURSE_PUBLICATION_BLOCKED')
+        && Array.isArray(failure.conflictingGroupIds)) {
+        conflictingGroupIds = [...new Set(failure.conflictingGroupIds.filter(id => typeof id === 'string' && uuid.test(id)))];
+      }
+    }else if(error instanceof InvalidCredentials) {
       status=401;code='INVALID_CREDENTIALS';
     }else if(error instanceof LoginLimited || error instanceof MailAdmissionLimited) {
       status=429;code='RATE_LIMITED';response.setHeader('Retry-After',String(error.retryAfterSeconds));
@@ -83,8 +114,10 @@ export class SafeErrorFilter implements ExceptionFilter {
       status = 404; code = 'NOT_FOUND';
     }
     if (!codes[status]?.includes(code)) { status=503;code='TEMPORARILY_UNAVAILABLE'; }
-    if (fields) fields=Array.isArray(fields)?fields.filter(field => field && typeof field.field==='string' && fieldNames.includes(field.field))
-      .map(field => ({field:field.field,message:'Campo inválido.'})):undefined;
+    if (fields) fields=(status === 400 && code === 'VALIDATION_ERROR' || status === 409 && code === 'TEACHER_NOT_ELIGIBLE') && Array.isArray(fields)
+      ?fields.filter(field => field && typeof field.field==='string' && (code === 'TEACHER_NOT_ELIGIBLE'
+        ?field.field === 'teacherUserId':(academic?academicFields:fieldNames).includes(field.field)))
+        .map(field => ({field:field.field,message:'Campo inválido.'})):undefined;
     const requestId = typeof request.requestId==='string'
       && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(request.requestId)
       ?request.requestId:randomUUID();
@@ -96,13 +129,18 @@ export class SafeErrorFilter implements ExceptionFilter {
           result:status===503?'FAILED':'DENIED',reasonCode:code,
           actorKind:request.actor && !authentication?'ACCOUNT':'ANONYMOUS',
           ...(request.actor && !authentication?{actorUserId:request.actor.userId}:{}),
-          targetKind:request.params?.id!==undefined?'USER_REFERENCE':'NONE',
-          ...(request.params?.id!==undefined?{requestedTargetId:request.params.id}:{})},requestId);
+          targetKind:route?.kind ?? (!academic && request.params?.id!==undefined?'USER_REFERENCE':'NONE'),
+          ...(route?.param && request.params?.[route.param]!==undefined?{requestedTargetId:request.params[route.param]}
+            :!academic && request.params?.id!==undefined?{requestedTargetId:request.params.id}:{}),
+          ...(route?{routeTemplate:template}:{}),
+          ...(academic && request.actor && typeof request.commandId==='string' && uuid.test(request.commandId)?{commandId:request.commandId}:{})},requestId);
       } catch { /* El canal privado nunca cambia la respuesta pública. */ }
     }
     response.setHeader('Cache-Control', 'no-store');
     response.setHeader('Referrer-Policy', 'no-referrer');
-    response.status(status).json({ error: { code, message: messages[status] ?? 'Solicitud no aceptada.',
-      requestId, ...(fields ? { fields } : {}) } });
+    const message = academic && Object.hasOwn(OFFERING_ERROR_MESSAGES,code)
+      ? OFFERING_ERROR_MESSAGES[code as keyof typeof OFFERING_ERROR_MESSAGES] : messages[status] ?? 'Solicitud no aceptada.';
+    response.status(status).json({ error: { code, message, requestId, ...(fields ? { fields } : {}),
+      ...(status === 409 && conflictingGroupIds ? { conflictingGroupIds } : {}) } });
   }
 }

@@ -6,13 +6,36 @@ import { repositoryRoot } from '../config/environment.js';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const actions = ['ACCESS_DENIED','AUTHENTICATION_FAILED','ADMIN_COMMAND_REJECTED','BOOTSTRAP_ATTEMPT',
   'RESTORED_STATE_INVALIDATION','MAIL_DELIVERY_FAILED','RUNTIME_FAILURE'] as const;
+const academicReasons = ['OFFERING_VERSION_CONFLICT','OFFERING_STATE_CONFLICT','TEACHER_NOT_ELIGIBLE',
+  'TEACHER_SCHEDULE_CONFLICT','COURSE_PUBLICATION_BLOCKED','IDEMPOTENCY_CONFLICT'];
 const reasons = ['AUTH_REQUIRED','INVALID_CREDENTIALS','FORBIDDEN','REQUEST_NOT_ALLOWED','VALIDATION_ERROR','NOT_FOUND',
-  'ACCOUNT_CONFLICT','ADMIN_INVARIANT','RATE_LIMITED','ALREADY_INITIALIZED','TEMPORARILY_UNAVAILABLE','SMTP_FAILURE','NONE'];
+  'ACCOUNT_CONFLICT','ADMIN_INVARIANT','RATE_LIMITED','ALREADY_INITIALIZED','TEMPORARILY_UNAVAILABLE','SMTP_FAILURE','NONE',
+  ...academicReasons];
+/** Plantillas del servidor, nunca URL/params recibidos. Sin prefijo /api/v1, como identidad. */
+export const academicRouteTargets: Readonly<Record<string, { readonly kind: 'COURSE' | 'GROUP' | 'NONE'; readonly param?: string }>> = {
+  '/admin/academic/courses': { kind: 'NONE' },
+  '/admin/academic/courses/:id': { kind: 'COURSE', param: 'id' },
+  '/admin/academic/courses/:id/publish': { kind: 'COURSE', param: 'id' },
+  '/admin/academic/courses/:id/withdraw': { kind: 'COURSE', param: 'id' },
+  '/admin/academic/courses/:courseId/groups': { kind: 'COURSE', param: 'courseId' },
+  '/admin/academic/groups/:id': { kind: 'GROUP', param: 'id' },
+  '/admin/academic/groups/:id/schedule': { kind: 'GROUP', param: 'id' },
+  '/admin/academic/groups/:id/publish': { kind: 'GROUP', param: 'id' },
+  '/admin/academic/groups/:id/withdraw': { kind: 'GROUP', param: 'id' },
+  '/admin/academic/groups/:id/cancel': { kind: 'GROUP', param: 'id' },
+  '/admin/academic/teachers': { kind: 'NONE' },
+  '/academic/courses': { kind: 'NONE' },
+  '/academic/courses/:id': { kind: 'COURSE', param: 'id' },
+  '/academic/courses/:courseId/groups': { kind: 'COURSE', param: 'courseId' },
+  '/academic/courses/:courseId/groups/:id': { kind: 'GROUP', param: 'id' },
+  '/teaching/groups': { kind: 'NONE' },
+  '/teaching/groups/:id': { kind: 'GROUP', param: 'id' },
+};
 const routes = ['/auth/login','/auth/register','/auth/logout','/auth/password/initial','/auth/password/forgot','/auth/password/reset',
   '/auth/verification/request','/auth/verification/confirm','/me','/home','/admin/users','/admin/users/:id',
-  '/admin/users/:id/name','/admin/users/:id/role','/admin/users/:id/status'];
+  '/admin/users/:id/name','/admin/users/:id/role','/admin/users/:id/status', ...Object.keys(academicRouteTargets)];
 const fields = ['category','action','result','reasonCode','actorKind','actorUserId','operatorRef','targetKind',
-  'requestedTargetId','routeTemplate','counts'];
+  'requestedTargetId','routeTemplate','counts','commandId'];
 const warning = () => { try { console.warn('Registro privado no disponible. Detalles omitidos.'); } catch { /* no altera la operación */ } };
 export const newCorrelationId = (): string => randomUUID();
 
@@ -51,13 +74,19 @@ export class SecurityEvents {
     } else if (value.actorKind === 'LOCAL_OPERATOR') {
       if (typeof value.operatorRef !== 'string' || !/^[A-Za-z0-9_-]{1,64}$/.test(value.operatorRef) || value.actorUserId !== undefined) throw new Error();
     } else if (!['ANONYMOUS','SYSTEM'].includes(value.actorKind) || value.actorUserId !== undefined || value.operatorRef !== undefined) throw new Error();
-    if (!['USER_REFERENCE','IDENTITY_SCOPE','NONE'].includes(value.targetKind)) throw new Error();
-    if (value.targetKind !== 'USER_REFERENCE' && value.requestedTargetId !== undefined) throw new Error();
+    const reference = ['USER_REFERENCE','COURSE','GROUP'].includes(value.targetKind);
+    if (!['USER_REFERENCE','IDENTITY_SCOPE','COURSE','GROUP','NONE'].includes(value.targetKind)) throw new Error();
+    if (academicReasons.includes(value.reasonCode) && !['COURSE','GROUP','NONE'].includes(value.targetKind)) throw new Error();
+    if (!reference && value.requestedTargetId !== undefined) throw new Error();
+    if (value.commandId !== undefined && (typeof value.commandId !== 'string' || !uuid.test(value.commandId)
+      || value.actorKind !== 'ACCOUNT' || !['COURSE','GROUP','NONE'].includes(value.targetKind))) throw new Error();
     if (['BOOTSTRAP_ATTEMPT','RESTORED_STATE_INVALIDATION'].includes(value.action)
       && (value.actorKind !== 'LOCAL_OPERATOR' || value.targetKind !== 'IDENTITY_SCOPE')) throw new Error();
     if (value.reasonCode === 'NOT_FOUND' && (value.actorKind !== 'ACCOUNT' || value.action !== 'ADMIN_COMMAND_REJECTED')) throw new Error();
     if (value.action === 'AUTHENTICATION_FAILED' && (value.actorKind !== 'ANONYMOUS' || value.reasonCode !== 'INVALID_CREDENTIALS')) throw new Error();
     if (value.routeTemplate !== undefined && (typeof value.routeTemplate !== 'string' || !routes.includes(value.routeTemplate))) throw new Error();
+    if (typeof value.routeTemplate === 'string' && Object.hasOwn(academicRouteTargets, value.routeTemplate)
+      && value.targetKind !== academicRouteTargets[value.routeTemplate].kind) throw new Error();
     let counts: Record<string, unknown> | undefined;
     if (value.counts !== undefined) {
       if (value.action !== 'RESTORED_STATE_INVALIDATION' || value.result !== 'SUCCEEDED'
@@ -72,8 +101,9 @@ export class SecurityEvents {
       actorKind:value.actorKind,targetKind:value.targetKind,
       ...(value.actorKind==='ACCOUNT'?{actorUserId:value.actorUserId}:{}),
       ...(value.actorKind==='LOCAL_OPERATOR'?{operatorRef:value.operatorRef}:{}),
-      ...(value.targetKind==='USER_REFERENCE' && typeof value.requestedTargetId==='string' && uuid.test(value.requestedTargetId)
+      ...(reference && typeof value.requestedTargetId==='string' && uuid.test(value.requestedTargetId)
         ?{requestedTargetId:value.requestedTargetId}:{}),
+      ...(value.commandId !== undefined?{commandId:value.commandId}:{}),
       ...(value.routeTemplate?{routeTemplate:value.routeTemplate}:{}),...(counts?{counts}:{}) };
   }
 

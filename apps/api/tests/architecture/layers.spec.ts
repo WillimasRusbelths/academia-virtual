@@ -35,6 +35,21 @@ const local = (filename: string) => (imports.get(filename) ?? []).filter(value =
 const relative = (filename: string) => normalize(path.relative(root, filename));
 
 describe('VA: dependencias del código real', () => {
+  test('T017 oferta y directorio se incluyen en el grafo real, sin callbacks de identidad a oferta', () => {
+    for (const filename of ['modules/academic-offering/academic-offering.module.ts',
+      'modules/academic-offering/application/offering-store.ts','modules/academic-offering/domain/offering-error.ts',
+      'modules/academic-offering/public/offer.ts','modules/academic-offering/infrastructure/offering-store.ts',
+      'modules/academic-offering/infrastructure/offering-audit.ts','modules/users/public/teaching-directory.ts',
+      'modules/users/infrastructure/teaching-directory.ts','infrastructure/database/academic-transaction.ts']) {
+      expect(imports.has(path.join(root, filename)), `Falta superficie real ${filename}`).toBe(true);
+    }
+    const callbacks = sources.filter(filename => relative(filename).startsWith('modules/identity/'))
+      .flatMap(filename => local(filename).filter(target => relative(target).startsWith('modules/academic-offering/')));
+    expect(callbacks).toEqual([]);
+    const composition = path.join(root, 'app.module.ts');
+    expect(local(composition).map(relative)).toContain('modules/academic-offering/academic-offering.module.ts');
+    expect(local(composition).map(relative)).toContain('modules/users/infrastructure/teaching-directory.ts');
+  });
   test('todas las capas cumplen ESLint, incluido guard y superficies públicas', async () => {
     const eslint = new ESLint({ cwd: path.resolve(root, '..') });
     const results = await eslint.lintFiles([path.join(root, '**/*.ts')]);

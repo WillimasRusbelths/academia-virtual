@@ -11,6 +11,17 @@ function controllers(directory:string):string[] {
   return readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?controllers(path.join(directory,entry.name))
     :entry.name.endsWith('.controller.js')?[path.join(directory,entry.name)]:[]);
 }
+/** Verifica cada ruta encontrada, además del inventario cerrado inferior.
+ * Al añadir rutas se actualiza el inventario y se vuelve a ejecutar esta puerta.
+ */
+function validPolicy(route: string, policy: unknown): boolean {
+  if (typeof policy !== 'string' || !['public','profile:read','users:manage','academic:manage','academic:read-published','academic:read-own'].includes(policy)) return false;
+  const path = route.slice(route.indexOf(' ') + 1);
+  if (/^\/api\/v1\/admin\/academic(?:\/|$)/.test(path)) return policy === 'academic:manage';
+  if (/^\/api\/v1\/academic(?:\/|$)/.test(path)) return policy === 'academic:read-published';
+  if (/^\/api\/v1\/teaching(?:\/|$)/.test(path)) return policy === 'academic:read-own';
+  return true;
+}
 test('T088: todos los endpoints compilados tienen la política explícita de su contrato',async()=>{
   const routes:Record<string,string>={};
   for(const filename of controllers(fileURLToPath(new URL('../../dist/src/',import.meta.url)))) {
@@ -25,7 +36,9 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
         const route=(prefix+'/'+suffix).replace(/\/+/g,'/').replace(/\/$/,'');
         const key=RequestMethod[method]+' /'+route.replace(/^\//,'');
         expect(Object.hasOwn(routes,key)).toBe(false);
-        routes[key]=Reflect.getMetadata(ACCESS_POLICY,handler)??Reflect.getMetadata(ACCESS_POLICY,target);
+        const policy: unknown = Reflect.getMetadata(ACCESS_POLICY,handler)??Reflect.getMetadata(ACCESS_POLICY,target);
+        expect(validPolicy(key,policy), `Política ausente/incorrecta: ${key}`).toBe(true);
+        routes[key]=policy as string;
       }
     }
   }
@@ -40,4 +53,15 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
     'PATCH /api/v1/admin/users/:id/name':'users:manage','PUT /api/v1/admin/users/:id/role':'users:manage',
     'PUT /api/v1/admin/users/:id/status':'users:manage',
   });
+});
+
+test.each([
+  ['GET /api/v1/admin/academic/courses', 'academic:manage'],
+  ['GET /api/v1/academic/courses/:courseId/groups/:id', 'academic:read-published'],
+  ['GET /api/v1/teaching/groups/:id', 'academic:read-own'],
+] as const)('T017 familias académicas: %s exige %s y nunca admite public/ausencia/otra audiencia', (route, required) => {
+  expect(validPolicy(route, required)).toBe(true);
+  for (const policy of [undefined, 'public', 'profile:read', 'users:manage', 'academic:manage','academic:read-published','academic:read-own'].filter(value => value !== required)) {
+    expect(validPolicy(route, policy)).toBe(false);
+  }
 });
