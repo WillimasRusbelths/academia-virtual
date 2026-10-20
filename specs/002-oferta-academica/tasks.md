@@ -4,8 +4,9 @@
 **Estado**: T001–T018 completas. Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 tienen pruebas escritas y ejecutadas en rojo; conservan estado pendiente
-hasta comprobar las reglas reales de T023 y sus aserciones posteriores. T021–T074
-pendientes, sin iniciar. Hallazgo histórico de bootstrap abierto.
+hasta comprobar las reglas reales de T023 y sus aserciones posteriores. T021/T022
+tienen pruebas PG/HTTP y E2E preparadas; su verificación funcional sigue pendiente
+de T024–T029. T023–T074 sin iniciar. Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
 [entorno y harness](evidence/environment.md), [rojo T005/T006](evidence/t005-t006.md) y
@@ -16,7 +17,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [escritor atómico y cierre T012–T014](evidence/t014.md) y
 [errores, composición y arquitectura T015–T017](evidence/t015-t017.md) y
 [checkpoint de fundamentos T018](evidence/foundations.md) y
-[pruebas UNIT T019/T020](evidence/t019-t020.md).
+[pruebas UNIT T019/T020](evidence/t019-t020.md) y
+[pruebas PG/HTTP y E2E T021/T022](evidence/t021-t022.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -25,7 +27,7 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual autoriza únicamente preparar/ejecutar T019/T020; se detiene antes de T021.
+actual autoriza únicamente preparar/ejecutar T021/T022; se detiene antes de T023.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
@@ -148,6 +150,14 @@ checkboxes pendientes, sin cambiar sus descripciones. El comando unitario comple
 conserva 106 pruebas existentes verdes, incluidas 14 de arquitectura; tipos/lint/build
 aprobados. E1, cinco aclaraciones y checkpoint T018 conservados. Véase la
 [evidencia y dependencia de T023](evidence/t019-t020.md). No se inicia T021.
+
+Avance acotado T021/T022, 2026-10-20: pruebas contra AppModule, PostgreSQL, Vite y
+Chromium reales del entorno aislado, con fixtures T004 y sin rutas/datos de producto
+simulados. T019/T020 permanecen pendientes de T023. T021/T022 conservan sus marcas
+pendientes hasta alcanzar las aserciones de comportamiento de T024–T029; escribir y
+ejecutar pruebas rojas no acredita los recorridos. Resultados y casos únicos separados
+de las repeticiones móvil/escritorio en [evidencia del bloque](evidence/t021-t022.md).
+Las descripciones originales, cinco aclaraciones, E1 y hallazgo de bootstrap se conservan.
 
 Objetivo: administrador crea un curso y dos grupos independientes y los recupera tras
 recargar, todavía en preparación. Prueba independiente: seis escenarios US1 con fixtures
