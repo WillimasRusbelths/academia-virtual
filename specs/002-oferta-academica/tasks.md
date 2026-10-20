@@ -1,14 +1,16 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T011 completadas y verificadas el 2026-10-19. T012 preparada y
-ejecutada en rojo, pendiente de cumplir todos sus criterios; T013–T074 pendientes.
+**Estado**: T001–T011 completas. T013 implementada y verificada en su alcance propio
+el 2026-10-19; T012 y el cierre formal de T013 siguen pendientes de los 15 casos T014.
+T014–T074 pendientes; no se ha iniciado T014.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
 [entorno y harness](evidence/environment.md), [rojo T005/T006](evidence/t005-t006.md) y
 [modelo y migración T007/T008](evidence/t007-t008.md) e
 [interfaces y contratos T009/T010](evidence/t009-t010.md) y
-[permisos y pruebas de protocolo T011/T012](evidence/t011-t012.md).
+[permisos y pruebas de protocolo T011/T012](evidence/t011-t012.md) y
+[implementación del protocolo T013](evidence/t013.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -16,8 +18,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 La instrucción de generar tareas sucede a las etapas históricas descritas en spec/plan;
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
-T009/T010 para interfaces y contratos. El bloque actual autoriza solo T011 y después
-las pruebas T012; no T013/T014. Las demás tareas siguen siendo destinos futuros;
+T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
+actual autoriza únicamente T013; no T014. Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
 ## Formato y convenciones
@@ -70,7 +72,7 @@ históricos; el cierre actualizado está en la evidencia T007/T008. E1 se conser
 - [ ] T017 Ampliar `apps/api/tests/architecture/endpoint-policies.spec.ts`, `layers.spec.ts` e `import-boundaries.spec.ts` para módulo/superficies nuevos y mantener reglas de `ops/lint/import-boundaries.mjs`. Termina con núcleo puro y ningún controlador sin ACCESS_POLICY; repetir al agregar rutas (FR-010/016).
 - [ ] T018 Ejecutar checkpoint de fundamentos y registrar `specs/002-oferta-academica/evidence/foundations.md`: T005/T006/T012/T017 aprobadas, migración nueva/incremental y regresión PG de acceso, sesiones, reset y bootstrap sin alteración. Registrar hallazgo bootstrap heredado aunque una ejecución pase; no habilitar historias con una regresión (FR-016; V-A11/A12).
 
-Avance T011/T012, 2026-10-19: T011 completa; matriz unitaria 24/24 y PG de permisos
+Historial T011/T012 antes de T013, 2026-10-19: T011 completa; matriz unitaria 24/24 y PG de permisos
 13/13, con regresión de identidad 33/33. T012 contiene 33 casos descubiertos/ejecutados:
 seis controles PG/helper existente aprobados y 27 fallos esperados de precondición por
 capacidades académicas T013/T014 ausentes (12 y 15). Las aserciones posteriores de esos
@@ -78,6 +80,16 @@ capacidades académicas T013/T014 ausentes (12 y 15). Las aserciones posteriores
 aprobadas. T012 sigue sin marcar: exige barreras y estado persistido del protocolo real,
 no solo escribir pruebas rojas. B01 sí observó la barrera de PK desde tercera conexión;
 no acredita los locks del adaptador académico. E1 y sus líneas T012/T014 se conservan.
+
+Avance T013, 2026-10-19: implementación real conectada sin modificar T012 ni su soporte.
+Los 12 casos P01–P08 ahora pasan, con barreras y aserciones persistidas; B01–B06 pasan
+por separado como controles. Quedan 15 fallos de precondición L01–L11 exclusivamente
+por T014 ausente. Ocho comprobaciones PG adicionales del protocolo pasan; guard de
+padre omitido corregido en producción, sin debilitar expectativas. Regresión de identidad
+seleccionada: 56/56; unitarias/arquitectura finales: 101 casos únicos aprobados por archivo.
+T012 no se cierra. T013 conserva su checkbox pendiente por el criterio literal «T012
+verde», aunque su implementación y verificaciones propias están aprobadas; el cierre
+conjunto requiere T014. No se cambia ese criterio ni se implementa ledger/auditoría.
 
 ## Fase 3: US1 — Preparar cursos y grupos (P1, T019–T030)
 
