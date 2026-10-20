@@ -1,0 +1,1520 @@
+{
+  "feature": "002-oferta-academica",
+  "scope": "T019/T020 only; stop before T021",
+  "date": "2026-10-20",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "baseCommit": "835a6ccf83ec110578e901260e4a32aae98d6d2b",
+  "checkpoint": "835a6cc",
+  "initialGitClean": true,
+  "tasks": {
+    "T019": {
+      "state": "pending",
+      "writtenAndExecuted": true,
+      "uniqueCases": 59,
+      "dependency": "T023: ejecutar aserciones de reglas reales"
+    },
+    "T020": {
+      "state": "pending",
+      "writtenAndExecuted": true,
+      "uniqueCases": 91,
+      "dependency": "T023: verificar fórmula, límites y zona con implementación real"
+    }
+  },
+  "source": [
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "sha256": "fb0ad0c863fe2d120b64a95c8f5e9192e06e8c40cafecbd57202acaba21e148e"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "sha256": "463e3e1c25759722c9ca58082566e2e630c889c500604690bdd31fbf37425504"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "sha256": "e1f110eeb52b74c3713718f29ebed0b4040a09382770dc609431d5351b1dd1a8"
+    },
+    {
+      "path": "apps/api/tests/support/academic-rules-contract.ts",
+      "sha256": "c88e07aef3bc8e1cf754b4fc7b3cf94412e050ca74e063e6906b97d1539d74f2"
+    }
+  ],
+  "runs": [
+    {
+      "action": "rules-utc-initial",
+      "timezone": "UTC",
+      "exitCode": 1,
+      "total": 150,
+      "passed": 0,
+      "expectedFailures": 150,
+      "unexpectedFailures": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "files": [
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "executed": 20
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "executed": 39
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "executed": 91
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-offering-validation/t019-t020-reports/rules-utc-initial.json",
+        "sha256": "eb565fb7a5a0d05e08ba657838a90d1c1fa604a449e6e5f128edefe809036459"
+      }
+    },
+    {
+      "action": "rules-utc",
+      "timezone": "UTC",
+      "exitCode": 1,
+      "total": 150,
+      "passed": 0,
+      "expectedFailures": 150,
+      "unexpectedFailures": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "files": [
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "executed": 20
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "executed": 39
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "executed": 91
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-offering-validation/t019-t020-reports/rules-utc.json",
+        "sha256": "27ab06ec8c9121bc15ee4d6348959f37fda328a2393dfc7ce41e4e98944b2300"
+      }
+    },
+    {
+      "action": "rules-lima",
+      "timezone": "America/Lima",
+      "exitCode": 1,
+      "total": 150,
+      "passed": 0,
+      "expectedFailures": 150,
+      "unexpectedFailures": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "files": [
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "executed": 20
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "executed": 39
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "executed": 91
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-offering-validation/t019-t020-reports/rules-lima.json",
+        "sha256": "03e3c3d9637a67eb62ad901badd657542eea092ee1c3a6d27ec65b4881034015"
+      }
+    },
+    {
+      "action": "unit",
+      "timezone": "UTC",
+      "exitCode": 1,
+      "total": 256,
+      "passed": 106,
+      "expectedFailures": 150,
+      "unexpectedFailures": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "files": [
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "executed": 20
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "executed": 39
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "executed": 91
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-offering-validation/t019-t020-reports/unit.json",
+        "sha256": "7d7a7fa42e603d845f09eb9b7f73bb6b347dc9b9d1a6a77db0cb9d237589d888"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "action": "types",
+      "timezone": "UTC",
+      "exitCode": 0,
+      "date": "2026-10-20T20:56:59.119Z",
+      "dependenciesStarted": false,
+      "path": ".cache/academic-offering-validation/t019-t020-reports/types-command.json",
+      "sha256": "6b7185dcc00056912d56991627bde74490096645ad485d2bf76a8661655c3283"
+    },
+    {
+      "action": "lint",
+      "timezone": "UTC",
+      "exitCode": 0,
+      "date": "2026-10-20T20:57:09.603Z",
+      "dependenciesStarted": false,
+      "path": ".cache/academic-offering-validation/t019-t020-reports/lint-command.json",
+      "sha256": "6eac62bcdef03131be6c5179e5544ed93d77d39e4170f890dcd85ee5e3bacf23"
+    },
+    {
+      "action": "build",
+      "timezone": "UTC",
+      "exitCode": 0,
+      "date": "2026-10-20T20:57:22.151Z",
+      "dependenciesStarted": false,
+      "path": ".cache/academic-offering-validation/t019-t020-reports/build-command.json",
+      "sha256": "b30b09dd847df26e5ba32af921c1921a362d3cbc2d22633f947f131189622213"
+    }
+  ],
+  "regression": {
+    "existingUnitCasesPassed": 106,
+    "architecturePassed": 14,
+    "architectureLayerLintMilliseconds": 3694.875136,
+    "timeoutMillisecondsUnchanged": 15000,
+    "integrationExecuted": false,
+    "e2eExecuted": false
+  },
+  "cases": [
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C01 alta incompleta: referencia del servidor estable, nombre recortado, DRAFT y descripción null",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción null se normaliza a null en preparación",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \"\" se normaliza a null en preparación",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \" \\t\\n \" se normaliza a null en preparación",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C03 recorta descripción; no interpreta HTML ni elimina contenido interno",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \"\" con error de campo",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \" \\t\\n \" con error de campo",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido null con error de campo",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido 123 con error de campo",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido undefined con error de campo",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual 42",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual false",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual {}",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C06 nombres repetidos permitidos, referencias distintas y sin límite nuevo de longitud",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita DRAFT sin publicar ni cambiar referencia",
+      "status": "failed",
+      "missingCapability": "editCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita WITHDRAWN sin publicar ni cambiar referencia",
+      "status": "failed",
+      "missingCapability": "editCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C08 PATCH de descripción conserva nombre; PATCH de nombre conserva descripción",
+      "status": "failed",
+      "missingCapability": "editCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C09 publicado exige retiro antes de editar, aunque el cambio sea válido",
+      "status": "failed",
+      "missingCapability": "editCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C10 cambio inválido no modifica parcialmente el curso recibido",
+      "status": "failed",
+      "missingCapability": "editCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C11 curso solo posee datos académicos generales, sin capacidad, docente ni horario",
+      "status": "failed",
+      "missingCapability": "createCourse",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G01 omisión inicial permite DRAFT incompleto con capacidad null y zona explícita",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 1 se conserva exactamente",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 50 se conserva exactamente",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 25 se conserva exactamente",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada null, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada vacía, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada blanco, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada string 25, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada cero, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada negativa, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada fracción, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada 51, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada NaN, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada Infinity, no la confunde con omisión",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad null y conserva la configurada",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad \"\" y conserva la configurada",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 0 y conserva la configurada",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad -1 y conserva la configurada",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 1.5 y conserva la configurada",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 51 y conserva la configurada",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 1 sin publicar",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 50 sin publicar",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \"\" se rechaza por campo",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \" \\t\\n \" se rechaza por campo",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido null se rechaza por campo",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido 42 se rechaza por campo",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido undefined se rechaza por campo",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de DRAFT conserva referencias y estado; omitir capacidad la conserva",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de WITHDRAWN conserva referencias y estado; omitir capacidad la conserva",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de PUBLISHED sin cambios parciales",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de CANCELLED sin cambios parciales",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G09 dos grupos del mismo curso son independientes, incluso con nombre repetido",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G10 periodo parcial válido permite preparación incompleta",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G12 grupo admite periodo inclusivo de un solo día real",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodStart inválido 2026-02-29",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodEnd inválido 2026-04-31",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza timeZone inválido UTC",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G14 edición rechaza periodo invertido y no aplica el nombre parcialmente",
+      "status": "failed",
+      "missingCapability": "editGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G11 grupo no exige mínimo 40, código manual ni nombre único",
+      "status": "failed",
+      "missingCapability": "createGroup",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S01 borrador permite cero franjas y periodo todavía incompleto",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial 2026-10-19/null valida las franjas sin exigir publicación",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/2026-10-25 valida las franjas sin exigir publicación",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/null valida las franjas sin exigir publicación",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 1 ocurre en periodo de un día inclusivo 2026-10-19",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 2 ocurre en periodo de un día inclusivo 2026-10-20",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 3 ocurre en periodo de un día inclusivo 2026-10-21",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 4 ocurre en periodo de un día inclusivo 2026-10-22",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 5 ocurre en periodo de un día inclusivo 2026-10-23",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 6 ocurre en periodo de un día inclusivo 2026-10-24",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 7 ocurre en periodo de un día inclusivo 2026-10-25",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2024-02-29, incluidos bisiesto y cambio de año",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2000-02-29, incluidos bisiesto y cambio de año",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2026-12-31, incluidos bisiesto y cambio de año",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2027-01-01, incluidos bisiesto y cambio de año",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-02-29\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2100-02-29\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-04-31\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-13-01\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-00-10\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-00\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-1-9\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"19/10/2026\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-19T00:00:00Z\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"\", sin rollover ni zona de navegador",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-02-30",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-11-31",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-10-25T00:00:00-05:00",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S07 rechaza periodo invertido aunque no haya franjas",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"UTC\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/Bogota\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/New_York\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza null",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 0 sin coerción",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 8 sin coerción",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO -1 sin coerción",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 1.5 sin coerción",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO \"1\" sin coerción",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO null sin coerción",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–00:01",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 23:58–23:59",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–23:59",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"24:00\" fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"23:60\" fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"-1:00\" fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"9:00\" fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00:00\" fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00Z\" fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"\" fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial null fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial 1080 fuera del contrato HH:mm",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"24:00\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:60\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:00:00\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"\"",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final null",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 18:00–18:00",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 19:00–18:00",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:00–01:00",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:59–00:00",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 00:00–00:00",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 0 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 1 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 2 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 3 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:30\",\"endTime\":\"18:45\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 0 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 1 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"19:00\",\"endTime\":\"20:00\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 2 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 3 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S16 exige ocurrencia de CADA franja; una válida no oculta otra fuera de periodo",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S17 periodo inclusivo sin lunes rechaza la franja; no basta con fechas ordenadas",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S18 al cambiar el periodo se vuelve a validar el horario completo",
+      "status": "failed",
+      "missingCapability": "validateSchedule",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O01 misma franja y periodo",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O02 solapamiento parcial",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O03 contención de horas",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O04 franjas contiguas",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O05 horas separadas",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O06 distinto día ISO",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O07 periodos disjuntos, mismas horas",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O08 intersección de fechas sin lunes: c…",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O09 primera ocurrencia común justo en U…",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O10 único día compartido lunes 19 inclu…",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O11 único día compartido martes sin lun…",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O12 domingo ISO 7 en extremo inclusivo",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O13 paso de domingo a lunes con ajuste …",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O14 coincidencia solo en segunda franja…",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O15 conjunto vacío no coincide",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O16 extremos horarios adyacentes 00:01",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O17 fecha bisiesta efectiva compartida",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O18 periodo de 400 años devuelve decisi…",
+      "status": "failed",
+      "missingCapability": "schedulesOverlap",
+      "cause": "T023: regla de producto todavía ausente",
+      "businessAssertionsReached": false
+    }
+  ],
+  "limitations": {
+    "newBusinessCasesPassed": 0,
+    "newBusinessAssertionsReached": 0,
+    "timezoneBehaviorVerified": false,
+    "noExpansionVerified": false,
+    "functionalAcceptance": false,
+    "humanAcceptance": false,
+    "concurrent1000Validated": false
+  },
+  "corrections": [
+    {
+      "type": "fixture-type",
+      "detail": "TS2322 corregido usando Slot[dayOfWeek]; tipos repetidos aprobados"
+    },
+    {
+      "type": "labels",
+      "detail": "Títulos únicos explícitos para NaN/Infinity y pares de franjas; expectativas intactas"
+    },
+    {
+      "type": "environment",
+      "detail": "Docker inicialmente detenido; habilitado en segundo plano antes de ejecutar tests; no contabilizado como rojo"
+    }
+  ],
+  "preserved": {
+    "protectedFiles": 72,
+    "previousSourceFiles": 24,
+    "originalSpecAndFiveClarifications": true,
+    "E1": true,
+    "migrationsUnchanged": true,
+    "productUnchanged": true,
+    "checkpointEvidenceUnchanged": true
+  },
+  "environment": {
+    "volumes": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "manualMounts": 0,
+    "sqlExecuted": false,
+    "isolatedDb": {
+      "status": "exited",
+      "finishedAt": "2026-10-20T11:29:07.312431639Z",
+      "startedAt": "2026-10-20T11:11:09.067203221Z"
+    },
+    "project": "academic-offering-fa3d46bddbb8",
+    "publishedPorts": 0,
+    "manualDb": {
+      "status": "exited",
+      "startedAt": "2026-10-18T19:19:45.837265111Z",
+      "finishedAt": "2026-10-18T21:58:41.760194769Z",
+      "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+    },
+    "appEnv": "test"
+  },
+  "historicalBootstrap": {
+    "state": "open",
+    "rerunInThisBlock": false
+  },
+  "reportHashes": [
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/rules-utc-initial.log",
+      "sha256": "bac6ce382b48898ff2162529a6cc7df682afdc3e23ad2d5a98fdc551c8228bd2"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/rules-utc.log",
+      "sha256": "bd97acf8f7aa604951dc1c70fcfaf85377524f55cfbea6fdd3bc362c70c2c2a3"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/rules-lima.log",
+      "sha256": "a3d4153caef44293cc4b2dc0ed4dd9986f8d9e3af725debbf419b91e01c660ce"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/unit.log",
+      "sha256": "32bf54da3d293fdb0a494210a17879a87869bf28b37ed79c01679eec33c0e1f1"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/types.log",
+      "sha256": "8d533829c83474a26cdecb190d2d46da6718038236fb03e7bb2357fb03c61de6"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/lint.log",
+      "sha256": "a422dfe73d860e1f9885106223135f55d7f3177fae259e803df2bdfd6377c487"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/build.log",
+      "sha256": "ade06c9b52cebd145209164af85c3922b412b446feee988023478e53faa14e78"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020-reports/environment.json",
+      "sha256": "21746116701195237b605a66327e29fa097361ae3e39f501c5fbe7a4086390e3"
+    }
+  ],
+  "privateHelperHashes": [
+    {
+      "path": ".cache/academic-offering-validation/t019-t020/run.ps1",
+      "sha256": "9ab86f1a8df2367c1f5f168d9d8c6e7b0e5b24d0dd1c673238255a57b418cdcf"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020/verify.mjs",
+      "sha256": "0cec716aa8f693fc4904c9b645712d4f2e3269e745489ad3831228109c1f3d70"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020/environment.ps1",
+      "sha256": "3f762d6e55fb2c17aa5941fd5dba6ef866a082a4badd48d9fd63301027c8f4e8"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t019-t020/summarize.mjs",
+      "sha256": "400e9df02addc9a0b4b7f3da0d727ae74992330e6b6ebe429a2bfaff938f86ab"
+    }
+  ],
+  "nextBlock": "T021 PG/HTTP; T022 E2E independiente tras T018; T023 vuelve verdes estas UNIT"
+}
