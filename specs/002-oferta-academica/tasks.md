@@ -1,12 +1,12 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T018 completas. Checkpoint de fundamentos T018 aprobado el
+**Estado**: T001–T020 y T023 completas. Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
-T019/T020 tienen pruebas escritas y ejecutadas en rojo; conservan estado pendiente
-hasta comprobar las reglas reales de T023 y sus aserciones posteriores. T021/T022
+T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
+America/Lima; 150 casos únicos, 300 ejecuciones dirigidas finales aprobadas. T021/T022
 tienen pruebas PG/HTTP y E2E preparadas; su verificación funcional sigue pendiente
-de T024–T029. T023–T074 sin iniciar. Hallazgo histórico de bootstrap abierto.
+de T024–T029. T024–T074 sin iniciar. Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
 [entorno y harness](evidence/environment.md), [rojo T005/T006](evidence/t005-t006.md) y
@@ -18,7 +18,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [errores, composición y arquitectura T015–T017](evidence/t015-t017.md) y
 [checkpoint de fundamentos T018](evidence/foundations.md) y
 [pruebas UNIT T019/T020](evidence/t019-t020.md) y
-[pruebas PG/HTTP y E2E T021/T022](evidence/t021-t022.md).
+[pruebas PG/HTTP y E2E T021/T022](evidence/t021-t022.md) y
+[reglas puras y cierre T019/T020/T023](evidence/t023.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -27,7 +28,7 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual autoriza únicamente preparar/ejecutar T021/T022; se detiene antes de T023.
+actual autoriza únicamente T023; se detiene antes de T024.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
@@ -159,15 +160,27 @@ ejecutar pruebas rojas no acredita los recorridos. Resultados y casos únicos se
 de las repeticiones móvil/escritorio en [evidencia del bloque](evidence/t021-t022.md).
 Las descripciones originales, cinco aclaraciones, E1 y hallazgo de bootstrap se conservan.
 
+Cierre T023, 2026-10-21: dominio puro de cursos/grupos/horarios, edición solo en
+preparación, capacidad omitida versus configuración inválida y calendario civil con
+coincidencia semanal exacta sin Date ni expansión de clases. T019 59/59 y T020 91/91
+alcanzan sus aserciones completas, sin modificar pruebas ni enlace de conformidad;
+150 únicos en UTC y America/Lima (300 ejecuciones dirigidas finales). Regresión API
+final 266/266: los mismos 150, diez comprobaciones adicionales y 106 existentes,
+incluidas 14 de arquitectura. Tipos/lint/build aprobados; sin PG/E2E nuevos ni rutas.
+T019, T020 y T023 completas; T021/T022 siguen pendientes de T024–T029.
+Evidencia, corrección de validación de array disperso, repeticiones históricas y
+conservación en [t023.md](evidence/t023.md). Bootstrap continúa abierto; sin aceptación
+funcional integrada ni capacidad concurrente acreditada. Detenido antes de T024.
+
 Objetivo: administrador crea un curso y dos grupos independientes y los recupera tras
 recargar, todavía en preparación. Prueba independiente: seis escenarios US1 con fixtures
 vacías, capacidad 1/50 y franjas contiguas; sin depender de publicación o matrícula.
 
-- [ ] T019 [P] [US1] Escribir UNIT en `apps/api/src/modules/academic-offering/domain/course.test.ts` y `group.test.ts`: campos independientes, referencias estables, recorte, borrador incompleto versus capacidad enviada null/vacía/0/fracción/51; 1 y 50 válidos y edición solo en preparación (FR-001/002/005; V-A01/A03).
-- [ ] T020 [P] [US1] Escribir UNIT en `apps/api/src/modules/academic-offering/domain/schedule.test.ts`: fecha real inclusiva, día ISO, America/Lima, 00:00/23:59, duplicados, adyacencia, medianoche, fin igual/invertido, fecha efectiva común y franjas sin ocurrencia. Verificar fórmula sin expandir clases ni depender de zona del host (FR-003/004; V-A02).
+- [X] T019 [P] [US1] Escribir UNIT en `apps/api/src/modules/academic-offering/domain/course.test.ts` y `group.test.ts`: campos independientes, referencias estables, recorte, borrador incompleto versus capacidad enviada null/vacía/0/fracción/51; 1 y 50 válidos y edición solo en preparación (FR-001/002/005; V-A01/A03).
+- [X] T020 [P] [US1] Escribir UNIT en `apps/api/src/modules/academic-offering/domain/schedule.test.ts`: fecha real inclusiva, día ISO, America/Lima, 00:00/23:59, duplicados, adyacencia, medianoche, fin igual/invertido, fecha efectiva común y franjas sin ocurrencia. Verificar fórmula sin expandir clases ni depender de zona del host (FR-003/004; V-A02).
 - [ ] T021 [P] [US1] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-preparation.spec.ts`: altas/lecturas/PATCH/PUT de API, dos grupos independientes, pertenencia inmutable, campos desconocidos, cuerpo 16 KiB, revision y persistencia; validar 401/403 para cada ruta y cero efectos en fallo (FR-001/002/003/005/010/015).
 - [ ] T022 [P] [US1] Escribir E2E en `apps/web/tests/e2e/academic-offering-preparation.spec.ts`: seis escenarios US1, listado vacío versus fallo, cancelar sin guardar, entradas conservadas y recarga; ejecutar móvil/escritorio y teclado con fixtures T004 (FR-001/013/014; SC-005).
-- [ ] T023 [US1] Implementar reglas en `apps/api/src/modules/academic-offering/domain/course.ts`, `group.ts` y `schedule.ts` según anexo y PA-04/05; fecha civil, comparación exacta de ocurrencias y no expansión a Clase. Termina con T019/T020 verdes y nulabilidad inicial diferenciada de valor configurado inválido (FR-002–005).
+- [X] T023 [US1] Implementar reglas en `apps/api/src/modules/academic-offering/domain/course.ts`, `group.ts` y `schedule.ts` según anexo y PA-04/05; fecha civil, comparación exacta de ocurrencias y no expansión a Clase. Termina con T019/T020 verdes y nulabilidad inicial diferenciada de valor configurado inválido (FR-002–005).
 - [ ] T024 [US1] Implementar altas/ediciones/reemplazo de franjas en `apps/api/src/modules/academic-offering/application/commands.ts` y `infrastructure/offering-store.ts`: protocolo T013/T014, padre bloqueado, revision propia, snapshot preservado y horario completo revalidado al cambiar periodo. Termina con escrituras atómicas y T021 verde en comandos (FR-001–005/015).
 - [ ] T025 [US1] Implementar lecturas administrativas paginadas en `apps/api/src/modules/academic-offering/application/queries.ts` y `infrastructure/offering-queries.ts`: búsqueda/estado/página permitidos, orden name/id, conteo coherente sin N+1; vista mínima docente. Termina con detalles/listados cerrados, no confundir fallo con vacío (FR-001/010/011/013).
 - [ ] T026 [US1] Exponer administración y selector en `apps/api/src/modules/academic-offering/entrypoints/http/admin.controller.ts`: rutas de preparación y teachers de api.md, ACCESS_POLICY, JSON estricto, 201/200, errores seguros y revalidación transaccional. Termina con T021 y políticas T017 verdes; ninguna ruta de escritura abierta (FR-001/010/012/013).

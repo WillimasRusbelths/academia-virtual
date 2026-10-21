@@ -1,0 +1,2680 @@
+{
+  "feature": "002-oferta-academica",
+  "scope": "T023 only; stop before T024",
+  "date": "2026-10-21",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "baseCommit": "ed42b3dffdb5c67f485c8f72389371414fe43063",
+  "checkpoint": "ed42b3d",
+  "initialGitClean": true,
+  "source": [
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/course.ts",
+      "sha256": "8db24780f656d2bbd3806fa1dbe388f50ebea178ad4dc7fc9cfd4b71020a2ed6"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/group.ts",
+      "sha256": "a7a5ad5e7ecae3d305fcbb27765b795918f038d29796de8b9fb9682a578b81b2"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/schedule.ts",
+      "sha256": "5a688bd9c8442a7ec2fca66aee4beb2db4cff0da9c8ea2d260c87f5781588dd4"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "sha256": "d84d0bc2f909ccba72b631e29bb79f170cb8741ea8ebc284f5dd2ff679267bdf"
+    }
+  ],
+  "originalTestFiles": [
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "sha256": "fb0ad0c863fe2d120b64a95c8f5e9192e06e8c40cafecbd57202acaba21e148e"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "sha256": "463e3e1c25759722c9ca58082566e2e630c889c500604690bdd31fbf37425504"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "sha256": "e1f110eeb52b74c3713718f29ebed0b4040a09382770dc609431d5351b1dd1a8"
+    },
+    {
+      "path": "apps/api/tests/support/academic-rules-contract.ts",
+      "sha256": "c88e07aef3bc8e1cf754b4fc7b3cf94412e050ca74e063e6906b97d1539d74f2"
+    }
+  ],
+  "tasks": {
+    "T019": {
+      "state": "complete",
+      "uniqueCases": 59,
+      "passedPerTimezone": 59
+    },
+    "T020": {
+      "state": "complete",
+      "uniqueCases": 91,
+      "passedPerTimezone": 91
+    },
+    "T023": {
+      "state": "complete",
+      "pureDomain": true
+    },
+    "T021": {
+      "state": "pending",
+      "dependency": "T024/T025/T026"
+    },
+    "T022": {
+      "state": "pending",
+      "dependency": "T024/T025/T026/T027/T028/T029"
+    },
+    "T024": {
+      "state": "not-started"
+    }
+  },
+  "counts": {
+    "targetedUnique": 150,
+    "targetedExecutions": 300,
+    "allTargetedBusinessAssertionsReached": true,
+    "finalUnitUnique": 266,
+    "finalUnitPassed": 266,
+    "unitIncludesThirdExecutionOfTargeted150": true,
+    "finalVerificationExecutions": 566,
+    "finalVerificationUnique": 266,
+    "newRegressionUnique": 10,
+    "existingRegressionUnique": 106,
+    "architectureIncluded": 14,
+    "skipped": 0,
+    "unexpectedFinalFailures": 0
+  },
+  "runs": [
+    {
+      "action": "rules-utc",
+      "timezone": "UTC",
+      "exitCode": 0,
+      "date": "2026-10-21T17:38:51.924Z",
+      "dependenciesStarted": false,
+      "total": 150,
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t023-reports/rules-utc.json",
+        "sha256": "898e99d35dfa82391fb42d7711b9bf7d39d2fa2ec63707c52a29ac670a9a0200"
+      },
+      "files": [
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "cases": 20,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "cases": 39,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "cases": 91,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "rules-lima",
+      "timezone": "America/Lima",
+      "exitCode": 0,
+      "date": "2026-10-21T17:39:09.210Z",
+      "dependenciesStarted": false,
+      "total": 150,
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t023-reports/rules-lima.json",
+        "sha256": "7b01d7148a8ca06e338bb966f38f73767e1adbf3e1df1ce6dcd6b5a6de3a6242"
+      },
+      "files": [
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "cases": 20,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "cases": 39,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "cases": 91,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "unit",
+      "timezone": "UTC",
+      "exitCode": 0,
+      "date": "2026-10-21T17:41:10.688Z",
+      "dependenciesStarted": false,
+      "total": 266,
+      "passed": 266,
+      "failed": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t023-reports/unit.json",
+        "sha256": "0797ee2a880ce2eb1176fe8c399a1c1a46b5b6b709453240ccd89686ce14b718"
+      },
+      "files": [
+        {
+          "path": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/tests/architecture/layers.spec.ts",
+          "cases": 6,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "cases": 20,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "cases": 39,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "cases": 10,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "cases": 91,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "cases": 24,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "cases": 7,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/access.test.ts",
+          "cases": 6,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "cases": 12,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/login.test.ts",
+          "cases": 7,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "cases": 9,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/users/domain/account.test.ts",
+          "cases": 4,
+          "status": "passed"
+        },
+        {
+          "path": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "cases": 3,
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "action": "types",
+      "timezone": "UTC",
+      "exitCode": 0,
+      "date": "2026-10-21T17:40:31.871Z",
+      "dependenciesStarted": false,
+      "path": ".cache/academic-offering-validation/t023-reports/types-command.json",
+      "sha256": "f03063994ed68466315836751b1134f877dac8a95b40637851a859f39f72aaf2"
+    },
+    {
+      "action": "lint",
+      "timezone": "UTC",
+      "exitCode": 0,
+      "date": "2026-10-21T17:40:42.553Z",
+      "dependenciesStarted": false,
+      "path": ".cache/academic-offering-validation/t023-reports/lint-command.json",
+      "sha256": "76cea0b3445768f82e19d8ccd72c171205354e6081990a0465c2ed72a2596c65"
+    }
+  ],
+  "cases": [
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C01 alta incompleta: referencia del servidor estable, nombre recortado, DRAFT y descripción null",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción null se normaliza a null en preparación",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \"\" se normaliza a null en preparación",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \" \\t\\n \" se normaliza a null en preparación",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C03 recorta descripción; no interpreta HTML ni elimina contenido interno",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \"\" con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \" \\t\\n \" con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido null con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido 123 con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido undefined con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual 42",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual false",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual {}",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C06 nombres repetidos permitidos, referencias distintas y sin límite nuevo de longitud",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita DRAFT sin publicar ni cambiar referencia",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita WITHDRAWN sin publicar ni cambiar referencia",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C08 PATCH de descripción conserva nombre; PATCH de nombre conserva descripción",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C09 publicado exige retiro antes de editar, aunque el cambio sea válido",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C10 cambio inválido no modifica parcialmente el curso recibido",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C11 curso solo posee datos académicos generales, sin capacidad, docente ni horario",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G01 omisión inicial permite DRAFT incompleto con capacidad null y zona explícita",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 1 se conserva exactamente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 50 se conserva exactamente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 25 se conserva exactamente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada null, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada vacía, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada blanco, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada string 25, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada cero, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada negativa, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada fracción, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada 51, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada NaN, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada Infinity, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad null y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad \"\" y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 0 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad -1 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 1.5 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 51 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 1 sin publicar",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 50 sin publicar",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \"\" se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \" \\t\\n \" se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido null se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido 42 se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido undefined se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de DRAFT conserva referencias y estado; omitir capacidad la conserva",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de WITHDRAWN conserva referencias y estado; omitir capacidad la conserva",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de PUBLISHED sin cambios parciales",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de CANCELLED sin cambios parciales",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G09 dos grupos del mismo curso son independientes, incluso con nombre repetido",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G10 periodo parcial válido permite preparación incompleta",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G12 grupo admite periodo inclusivo de un solo día real",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodStart inválido 2026-02-29",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodEnd inválido 2026-04-31",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza timeZone inválido UTC",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G14 edición rechaza periodo invertido y no aplica el nombre parcialmente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G11 grupo no exige mínimo 40, código manual ni nombre único",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S01 borrador permite cero franjas y periodo todavía incompleto",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial 2026-10-19/null valida las franjas sin exigir publicación",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/2026-10-25 valida las franjas sin exigir publicación",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/null valida las franjas sin exigir publicación",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 1 ocurre en periodo de un día inclusivo 2026-10-19",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 2 ocurre en periodo de un día inclusivo 2026-10-20",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 3 ocurre en periodo de un día inclusivo 2026-10-21",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 4 ocurre en periodo de un día inclusivo 2026-10-22",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 5 ocurre en periodo de un día inclusivo 2026-10-23",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 6 ocurre en periodo de un día inclusivo 2026-10-24",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 7 ocurre en periodo de un día inclusivo 2026-10-25",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2024-02-29, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2000-02-29, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2026-12-31, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2027-01-01, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-02-29\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2100-02-29\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-04-31\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-13-01\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-00-10\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-00\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-1-9\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"19/10/2026\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-19T00:00:00Z\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-02-30",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-11-31",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-10-25T00:00:00-05:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S07 rechaza periodo invertido aunque no haya franjas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"UTC\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/Bogota\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/New_York\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza null",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 0 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 8 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO -1 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 1.5 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO \"1\" sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO null sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–00:01",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 23:58–23:59",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–23:59",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"24:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"23:60\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"-1:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"9:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00Z\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial null fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial 1080 fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"24:00\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:60\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:00:00\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final null",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 18:00–18:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 19:00–18:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:00–01:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:59–00:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 00:00–00:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 0 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 1 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 2 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 3 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:30\",\"endTime\":\"18:45\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 0 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 1 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"19:00\",\"endTime\":\"20:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 2 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 3 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S16 exige ocurrencia de CADA franja; una válida no oculta otra fuera de periodo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S17 periodo inclusivo sin lunes rechaza la franja; no basta con fechas ordenadas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S18 al cambiar el periodo se vuelve a validar el horario completo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O01 misma franja y periodo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O02 solapamiento parcial",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O03 contención de horas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O04 franjas contiguas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O05 horas separadas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O06 distinto día ISO",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O07 periodos disjuntos, mismas horas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O08 intersección de fechas sin lunes: c…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O09 primera ocurrencia común justo en U…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O10 único día compartido lunes 19 inclu…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O11 único día compartido martes sin lun…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O12 domingo ISO 7 en extremo inclusivo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O13 paso de domingo a lunes con ajuste …",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O14 coincidencia solo en segunda franja…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O15 conjunto vacío no coincide",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O16 extremos horarios adyacentes 00:01",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O17 fecha bisiesta efectiva compartida",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O18 periodo de 400 años devuelve decisi…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "UTC",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C01 alta incompleta: referencia del servidor estable, nombre recortado, DRAFT y descripción null",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción null se normaliza a null en preparación",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \"\" se normaliza a null en preparación",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \" \\t\\n \" se normaliza a null en preparación",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C03 recorta descripción; no interpreta HTML ni elimina contenido interno",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \"\" con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \" \\t\\n \" con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido null con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido 123 con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido undefined con error de campo",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual 42",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual false",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual {}",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C06 nombres repetidos permitidos, referencias distintas y sin límite nuevo de longitud",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita DRAFT sin publicar ni cambiar referencia",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita WITHDRAWN sin publicar ni cambiar referencia",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C08 PATCH de descripción conserva nombre; PATCH de nombre conserva descripción",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C09 publicado exige retiro antes de editar, aunque el cambio sea válido",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C10 cambio inválido no modifica parcialmente el curso recibido",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 curso — FR-001/002; V-A01 C11 curso solo posee datos académicos generales, sin capacidad, docente ni horario",
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G01 omisión inicial permite DRAFT incompleto con capacidad null y zona explícita",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 1 se conserva exactamente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 50 se conserva exactamente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 25 se conserva exactamente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada null, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada vacía, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada blanco, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada string 25, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada cero, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada negativa, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada fracción, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada 51, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada NaN, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada Infinity, no la confunde con omisión",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad null y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad \"\" y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 0 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad -1 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 1.5 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 51 y conserva la configurada",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 1 sin publicar",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 50 sin publicar",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \"\" se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \" \\t\\n \" se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido null se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido 42 se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido undefined se rechaza por campo",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de DRAFT conserva referencias y estado; omitir capacidad la conserva",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de WITHDRAWN conserva referencias y estado; omitir capacidad la conserva",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de PUBLISHED sin cambios parciales",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de CANCELLED sin cambios parciales",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G09 dos grupos del mismo curso son independientes, incluso con nombre repetido",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G10 periodo parcial válido permite preparación incompleta",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G12 grupo admite periodo inclusivo de un solo día real",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodStart inválido 2026-02-29",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodEnd inválido 2026-04-31",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza timeZone inválido UTC",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G14 edición rechaza periodo invertido y no aplica el nombre parcialmente",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G11 grupo no exige mínimo 40, código manual ni nombre único",
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S01 borrador permite cero franjas y periodo todavía incompleto",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial 2026-10-19/null valida las franjas sin exigir publicación",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/2026-10-25 valida las franjas sin exigir publicación",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/null valida las franjas sin exigir publicación",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 1 ocurre en periodo de un día inclusivo 2026-10-19",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 2 ocurre en periodo de un día inclusivo 2026-10-20",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 3 ocurre en periodo de un día inclusivo 2026-10-21",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 4 ocurre en periodo de un día inclusivo 2026-10-22",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 5 ocurre en periodo de un día inclusivo 2026-10-23",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 6 ocurre en periodo de un día inclusivo 2026-10-24",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 7 ocurre en periodo de un día inclusivo 2026-10-25",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2024-02-29, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2000-02-29, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2026-12-31, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2027-01-01, incluidos bisiesto y cambio de año",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-02-29\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2100-02-29\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-04-31\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-13-01\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-00-10\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-00\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-1-9\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"19/10/2026\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-19T00:00:00Z\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"\", sin rollover ni zona de navegador",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-02-30",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-11-31",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-10-25T00:00:00-05:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S07 rechaza periodo invertido aunque no haya franjas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"UTC\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/Bogota\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/New_York\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza null",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 0 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 8 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO -1 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 1.5 sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO \"1\" sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO null sin coerción",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–00:01",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 23:58–23:59",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–23:59",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"24:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"23:60\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"-1:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"9:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00:00\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00Z\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"\" fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial null fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial 1080 fuera del contrato HH:mm",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"24:00\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:60\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:00:00\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"\"",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final null",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 18:00–18:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 19:00–18:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:00–01:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:59–00:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 00:00–00:00",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 0 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 1 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 2 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 3 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:30\",\"endTime\":\"18:45\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 0 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 1 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"19:00\",\"endTime\":\"20:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 2 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 3 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S16 exige ocurrencia de CADA franja; una válida no oculta otra fuera de periodo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S17 periodo inclusivo sin lunes rechaza la franja; no basta con fechas ordenadas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S18 al cambiar el periodo se vuelve a validar el horario completo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O01 misma franja y periodo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O02 solapamiento parcial",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O03 contención de horas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O04 franjas contiguas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O05 horas separadas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O06 distinto día ISO",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O07 periodos disjuntos, mismas horas",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O08 intersección de fechas sin lunes: c…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O09 primera ocurrencia común justo en U…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O10 único día compartido lunes 19 inclu…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O11 único día compartido martes sin lun…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O12 domingo ISO 7 en extremo inclusivo",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O13 paso de domingo a lunes con ajuste …",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O14 coincidencia solo en segunda franja…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O15 conjunto vacío no coincide",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O16 extremos horarios adyacentes 00:01",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O17 fecha bisiesta efectiva compartida",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    },
+    {
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O18 periodo de 400 años devuelve decisi…",
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "timezone": "America/Lima",
+      "status": "passed",
+      "businessAssertionsReached": true
+    }
+  ],
+  "additionalCases": [
+    {
+      "name": "R01 ordinal civil contrasta siglos y año contra oráculo UTC independiente, solo en tests",
+      "status": "passed"
+    },
+    {
+      "name": "R02 edición válida del curso conserva entrada congelada y referencia, sin publicar",
+      "status": "passed"
+    },
+    {
+      "name": "R03 editar borrador incompleto conserva omisión de capacidad; undefined enviado no configura",
+      "status": "passed"
+    },
+    {
+      "name": "R04 editar periodo con franjas conservadas revalida ocurrencias sin mutación parcial",
+      "status": "passed"
+    },
+    {
+      "name": "R05 edición retirada conserva snapshot, revisión recibida y estado; no renueva publicación",
+      "status": "passed"
+    },
+    {
+      "name": "R06 comparación exige periodos completos; formas inválidas usan errores seguros del dominio",
+      "status": "passed"
+    },
+    {
+      "name": "R07 fecha con salto de línea produce validación segura, no coerción ni TypeError",
+      "status": "passed"
+    },
+    {
+      "name": "R07 hora con salto de línea produce validación segura, no coerción ni TypeError",
+      "status": "passed"
+    },
+    {
+      "name": "R07 UUID con salto de línea produce validación segura, no coerción ni TypeError",
+      "status": "passed"
+    },
+    {
+      "name": "R07 franja ausente produce validación segura, no coerción ni TypeError",
+      "status": "passed"
+    }
+  ],
+  "architecture": {
+    "files": 3,
+    "passed": 14,
+    "layerLintMilliseconds": 3316.6690339999996,
+    "timeoutMillisecondsUnchanged": 15000
+  },
+  "calendarReview": {
+    "civilArithmeticWithoutDateOrClock": true,
+    "occurrenceFormulaConstantInDateSpan": true,
+    "calendarExpansion": false,
+    "slotValidationComplexity": "O(n^2)",
+    "comparisonComplexity": "O(n*m)",
+    "independentUTCOracleInTestsOnly": true
+  },
+  "history": [
+    {
+      "action": "rules-utc-initial",
+      "total": 150,
+      "passed": 150,
+      "failed": 0,
+      "sourceStage": "antes de la corrección Array.from; reportes conservados, sin atribuirles hash de fuente final",
+      "report": {
+        "path": ".cache/academic-offering-validation/t023-reports/rules-utc-initial.json",
+        "sha256": "f7a921994eb6be96584d715f5a90a54f401a20ca48ad2e68d7498c6a903aad7f"
+      }
+    },
+    {
+      "action": "rules-lima-initial",
+      "total": 150,
+      "passed": 150,
+      "failed": 0,
+      "sourceStage": "antes de la corrección Array.from; reportes conservados, sin atribuirles hash de fuente final",
+      "report": {
+        "path": ".cache/academic-offering-validation/t023-reports/rules-lima-initial.json",
+        "sha256": "ee03ab4f9ac738ccb7c91697aec0cc1b2972ce683243b495c5bcbd4ec2611a5d"
+      }
+    },
+    {
+      "action": "unit-initial",
+      "total": 262,
+      "passed": 262,
+      "failed": 0,
+      "sourceStage": "antes de la corrección Array.from; reportes conservados, sin atribuirles hash de fuente final",
+      "report": {
+        "path": ".cache/academic-offering-validation/t023-reports/unit-initial.json",
+        "sha256": "dddb9f32351151aa20dbb9e491992814c09581a4597dcb39fc0ac14002c09976"
+      }
+    }
+  ],
+  "regressionRed": {
+    "total": 10,
+    "passed": 9,
+    "failed": 1,
+    "case": "R07 franja ausente produce validación segura, no coerción ni TypeError",
+    "cause": "TypeError para hueco de array; se esperaba OfferingError",
+    "fixedBy": "Array.from valida también elementos ausentes",
+    "report": {
+      "path": ".cache/academic-offering-validation/t023-reports/regression-red.json",
+      "sha256": "3fdcf0dde858cf9f77765a1ba9c7eded1101384f204246b7dba46a21a8d9be1c"
+    }
+  },
+  "corrections": [
+    {
+      "type": "domain-validation",
+      "detail": "Huecos en arrays de franjas rechazan con VALIDATION_ERROR; no cambia reglas ni expectativas originales"
+    },
+    {
+      "type": "lint-format",
+      "detail": "no-unexpected-multiline corregido en test.each; lint/tipos/unit repetidos verdes"
+    },
+    {
+      "type": "environment",
+      "detail": "Docker inicialmente detenido al reanudar; intento sin tests, motor habilitado y separación verificada"
+    }
+  ],
+  "discrepancies": {
+    "betweenOriginalTestsAndApprovedSpecification": 0,
+    "originalTestsModified": false,
+    "conformanceHelperModified": false,
+    "businessRulesChanged": false
+  },
+  "environmentBefore": {
+    "volumes": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "manualMounts": 0,
+    "sqlExecuted": false,
+    "isolatedDb": {
+      "status": "exited",
+      "finishedAt": "2026-10-20T21:24:41.543367856Z",
+      "startedAt": "2026-10-20T21:16:45.345325131Z"
+    },
+    "project": "academic-offering-fa3d46bddbb8",
+    "publishedPorts": 0,
+    "manualDb": {
+      "status": "exited",
+      "startedAt": "2026-10-18T19:19:45.837265111Z",
+      "finishedAt": "2026-10-18T21:58:41.760194769Z",
+      "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+    },
+    "appEnv": "test"
+  },
+  "environmentAfter": {
+    "volumes": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "manualMounts": 0,
+    "sqlExecuted": false,
+    "isolatedDb": {
+      "status": "exited",
+      "finishedAt": "2026-10-20T21:24:41.543367856Z",
+      "startedAt": "2026-10-20T21:16:45.345325131Z"
+    },
+    "project": "academic-offering-fa3d46bddbb8",
+    "publishedPorts": 0,
+    "manualDb": {
+      "status": "exited",
+      "startedAt": "2026-10-18T19:19:45.837265111Z",
+      "finishedAt": "2026-10-18T21:58:41.760194769Z",
+      "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+    },
+    "appEnv": "test"
+  },
+  "preserved": {
+    "files": 72,
+    "priorSources": 31,
+    "firstSpecAndEvidence": true,
+    "fiveClarifications": true,
+    "E1": true,
+    "manualConfigurationAndCredentials": true,
+    "manualAccountsNotQueried": true,
+    "migrationsUnchanged": true
+  },
+  "limitations": {
+    "postgresExecuted": false,
+    "e2eExecuted": false,
+    "bootstrapExecuted": false,
+    "historicalBootstrapState": "open",
+    "functionalAcceptance": false,
+    "humanAcceptance": false,
+    "publicationConcurrencyVerifiedByThisBlock": false,
+    "concurrent1000Validated": false
+  },
+  "reportHashes": [
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/rules-utc.json",
+      "sha256": "898e99d35dfa82391fb42d7711b9bf7d39d2fa2ec63707c52a29ac670a9a0200"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/rules-lima.json",
+      "sha256": "7b01d7148a8ca06e338bb966f38f73767e1adbf3e1df1ce6dcd6b5a6de3a6242"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/unit.json",
+      "sha256": "0797ee2a880ce2eb1176fe8c399a1c1a46b5b6b709453240ccd89686ce14b718"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/rules-utc.log",
+      "sha256": "b6303c6db768e21c23f92840d11a51c8dc8c8360fb389ef2e175532c9bb6c2d1"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/rules-lima.log",
+      "sha256": "d0cd1c4b3a06e86223ba6a38ec354a5e7ae3c87b289f57e6e33f45e4e6899480"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/unit.log",
+      "sha256": "827a394d208f265aa979af97fa73da61c565c37ba1d4e09fdc67ad4bdb9ec1aa"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/types.log",
+      "sha256": "4c9ba4464b41b7175ffe65d38c1ee28bf30dcbaf47cc5359e40aa099b022ed17"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/lint.log",
+      "sha256": "e5507ff53d3d93e5f14eda625ba68213deb91690d9fdd0e00744b09b2ccf47f5"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/regression-red.log",
+      "sha256": "394cd4324c2829f6ea3666812af05b908feaef56a4b9fe05eef323aecbe883ec"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/lint-format-failure.log",
+      "sha256": "4f39c8ef0db4811d9786be0cc5414e46fbec93d8704c377cd0d108c166e29355"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/docker-unavailable.log",
+      "sha256": "56ade91fbdb26ae32c86fd9244a271abecd4813ece42f20eb765dc4c6e918e8a"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/environment-before.json",
+      "sha256": "44fcf35297a9a12a5fc02f6df69816c7fc560b7bfac85353243121450700eb8f"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023-reports/environment-after.json",
+      "sha256": "44fcf35297a9a12a5fc02f6df69816c7fc560b7bfac85353243121450700eb8f"
+    }
+  ],
+  "privateHelpers": [
+    {
+      "path": ".cache/academic-offering-validation/t023/run.ps1",
+      "sha256": "55990114b6e88aa46f0fdb9120f4b4ca7baa765bbf578c59994b6b5aa8ea8e89"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023/verify.mjs",
+      "sha256": "9d849a52a98c7f06ac41023ba830b23ccc3db3f7c904229ef36d4ebff3bcf01f"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023/summarize.mjs",
+      "sha256": "49fa64f0b2339afc123bb7f78b75f3d6996c2f1062547cc9ed99e51a8ea02cac"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023/environment-before.ps1",
+      "sha256": "3ba12a472ee2649537ba626447d11744dfd5e98e0135e946146f535252011c61"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t023/environment-after.ps1",
+      "sha256": "786ff92db4dcc8f42eb5e12f6ed60f53500bdc9758a7c56e82ca2afbc53ea64a"
+    }
+  ],
+  "next": "T024: comandos atómicos reales con agregado completo, revisión, protocolo T013/T014 y reglas T023"
+}
