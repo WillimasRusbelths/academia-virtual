@@ -30,7 +30,9 @@ import { PostgresAccountCreationStore } from './modules/identity/infrastructure/
 import { PostgresAccessChangeStore } from './modules/identity/infrastructure/access-change-store.js';
 import { PostgresPasswordResetStore } from './modules/identity/infrastructure/password-reset-store.js';
 import { AcademicOfferingModule } from './modules/academic-offering/academic-offering.module.js';
-import { createAcademicCommandWriter } from './modules/academic-offering/infrastructure/offering-store.js';
+import { createAcademicCommandWriter, createPreparationStore } from './modules/academic-offering/infrastructure/offering-store.js';
+import { createAdministrativeQueries } from './modules/academic-offering/infrastructure/offering-queries.js';
+import { PreparationCommands } from './modules/academic-offering/application/commands.js';
 import { PostgresTeachingDirectory } from './modules/users/infrastructure/teaching-directory.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
@@ -39,6 +41,8 @@ export class AppModule {
   static forRoot(environment: Environment, database: Pick<ReturnType<typeof createDatabase>, 'pool' | 'close'>): DynamicModule {
     const rates = new PostgresRateStore(database.pool, environment.rateHmacKey);
     const sessions=new PostgresSessionStore(database.pool);const cookie=new SessionCookie(environment);
+    const academicAuthorization = { revalidateInTransaction: sessions.revalidateInTransaction.bind(sessions) };
+    const academicWriter = createAcademicCommandWriter(database.pool, academicAuthorization);
     const mutations={authorization:sessions,audit:new PostgresAuditWriter()};
     const cipher=createPayloadCipher(environment);
     const links=new IssueActionLink(new PostgresActionTokenStore(database.pool),rates,accessSecrets,cipher,environment.appOrigin);
@@ -52,9 +56,10 @@ export class AppModule {
           new PostgresPasswordResetStore(database.pool)),
         UsersModule.forRoot(new PostgresUserQueries(database.pool),
           new PostgresNameStore(database.pool,mutations)),
-        AcademicOfferingModule.forRoot(createAcademicCommandWriter(database.pool, {
-          revalidateInTransaction: sessions.revalidateInTransaction.bind(sessions),
-        }), new PostgresTeachingDirectory(database.pool))],
+        AcademicOfferingModule.forRoot(academicWriter, new PostgresTeachingDirectory(database.pool), {
+          commands: new PreparationCommands(createPreparationStore(database.pool, academicAuthorization, academicWriter)),
+          queries: createAdministrativeQueries(database.pool, sessions),
+        })],
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
         { provide: 'MAIL_DELIVERY_SCHEDULER', useValue: new DeliveryScheduler(deliveries) },

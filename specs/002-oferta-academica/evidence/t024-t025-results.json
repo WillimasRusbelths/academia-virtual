@@ -1,0 +1,3997 @@
+{
+  "feature": "002-oferta-academica",
+  "scope": "T024/T025 only; stop before T026",
+  "date": "2026-10-21",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "baseCommit": "7dd2270114a87c3492207a36304fab8e0a15c1dc",
+  "checkpoint": "7dd2270",
+  "initialGitClean": true,
+  "source": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "c3716f671e4ab2dc51c28e46d18c82ccc20777d8cf2e53068a6c955be59036bb"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/academic-offering.module.ts",
+      "sha256": "dccb9a72af71ccdb9499d99fba76ecb428e95a1e738a5865f9969f0c33173e83"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/application/commands.ts",
+      "sha256": "cb84c166dfe70c5aaab29410e0888ba4f0017d38c2f8cf2b79c3e91aa852db71"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/application/queries.ts",
+      "sha256": "9646d18a9acbd85cc0c3b30f638b86f23bf03a9a64230f8eada7bcf8d338a1a5"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/offering-store.ts",
+      "sha256": "5b692f6600df12e43e5d9b213ed1d809b99ca327aaeee473ce6eed9b3cb961e7"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts",
+      "sha256": "b55a6bbef25502dd9b2d3c7d4553a177822cf8ed1f324f7c830516b2b8e6247e"
+    },
+    {
+      "path": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+      "sha256": "0eb10f3b0466a8f1e2a411d395489181bc17993c7324f6de22607f6025b6cc88"
+    }
+  ],
+  "finalRuns": [
+    {
+      "action": "api",
+      "exitCode": 0,
+      "date": "2026-10-21T21:10:45.395Z",
+      "timezone": "America/Lima",
+      "total": 58,
+      "passed": 58,
+      "failed": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/api.json",
+        "sha256": "91151eab4e3879440c5b6773faee7aaf1aacdbe9b30c2162d5e85694d906406e"
+      },
+      "files": [
+        {
+          "path": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "cases": 58,
+          "status": "passed",
+          "durationMs": 6618.6552734375
+        }
+      ],
+      "cases": [
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C01/H02 alta normalizada, UUID servidor, persistencia observador, ledger y auditoría",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C02/H03 grupo incompleto/capacidad undefined, hermano y padre intactos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C02/H03 grupo incompleto/capacidad 1, hermano y padre intactos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C02/H03 grupo incompleto/capacidad 50, hermano y padre intactos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C03/H07 ediciones independientes y metadatos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C04/H08 reemplazo completo contiguo y vacío; revisión solo del grupo",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C05/H11 revisión bigint sin pérdida de precisión",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C06/H13 revisión obsoleta COURSE_EDIT sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C06/H13 revisión obsoleta GROUP_EDIT sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C06/H13 revisión obsoleta GROUP_SCHEDULE sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 0 sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida -1 sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 1.5 sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 51 sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida  sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida null sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 20 sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido medianoche sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido duplicado sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido solapamiento sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido día cero sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C09/H18 cambiar periodo revalida franja persistida, no solo atributos enviados",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C10/H19 replay canónico y conflicto de intención; no duplica auditoría",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C11 no-op validado y replay devuelve proyección actual, revisión aplicada original",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C12 STUDENT denegado antes de efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C12 TEACHER denegado antes de efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C13 replay también reautoriza sesión revocada",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C14 asignación elegible e inelegible, no expone generación",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C15 conservar captura al editar grupo retirado, reactivación no elimina revisión",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: COURSE_CREATE",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: COURSE_EDIT",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: GROUP_CREATE",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: GROUP_EDIT",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: GROUP_SCHEDULE",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C19 lock real del padre antes de modificar franjas, observado desde tercera conexión",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C20 pérdida de habilitación confirmada durante espera impide asignación; barrera PostgreSQL",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C21 no edita ni reemplaza franjas de grupo PUBLISHED",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C21 no edita ni reemplaza franjas de grupo CANCELLED",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C22 curso publicado no editable, retirado editable sin cambiar estado",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C23 pertenencia desconocida y PATCH vacío rechazados sin efectos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C24 composición real expone comandos y consultas US1 con el mismo pool, sin rutas nuevas",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C17 dos revisiones simultáneas: un commit y un conflicto",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C18 dos repeticiones simultáneas de alta: un recurso y una auditoría",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q01/H01 vacío y página fuera de rango conservan total",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q02/H04 búsqueda literal, estado, orden name/id y conteo",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q03/H05 DTO cerrado, franjas y capacidad configurada sin disponibilidad",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q04/H06 selector mínimo solo docentes elegibles, sin información privada",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q05/H20 inexistente se distingue de vacío, sin inventar error de infraestructura",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q06 STUDENT no consulta administración",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q06 TEACHER no consulta administración",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q07 fallo SQL real no se convierte en página vacía ni filtra SQL",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q08 una sentencia por proyección/listado/conteo, independiente de número de grupos",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q09 sesión revocada no recibe proyección aunque conserve actor anterior",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":0,\"pageSize\":20}",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":1,\"pageSize\":51}",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":1.5,\"pageSize\":20}",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":1,\"pageSize\":20,\"state\":\"CANCELLED\"}",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q11 visibilidad/revisión derivadas en una sentencia; recuperar habilitación no republica",
+          "status": "passed",
+          "classification": "US1_REAL_APPLICATION_AND_POSTGRES",
+          "laterAssertionsReached": true
+        }
+      ]
+    },
+    {
+      "action": "regression",
+      "exitCode": 0,
+      "date": "2026-10-21T21:14:11.873Z",
+      "timezone": "America/Lima",
+      "total": 105,
+      "passed": 105,
+      "failed": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/regression.json",
+        "sha256": "8f3197ab33a4bd6d2dbeef82665e648b3d774852c39ee1bce9ff5e2094181adb"
+      },
+      "files": [
+        {
+          "path": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "cases": 7,
+          "status": "passed",
+          "durationMs": 358.051513671875
+        },
+        {
+          "path": "apps/api/tests/integration/academic-composition.spec.ts",
+          "cases": 3,
+          "status": "passed",
+          "durationMs": 188.8642578125
+        },
+        {
+          "path": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "cases": 18,
+          "status": "passed",
+          "durationMs": 379.103759765625
+        },
+        {
+          "path": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "cases": 33,
+          "status": "passed",
+          "durationMs": 4758.1611328125
+        },
+        {
+          "path": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "cases": 13,
+          "status": "passed",
+          "durationMs": 76.31494140625
+        },
+        {
+          "path": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "cases": 8,
+          "status": "passed",
+          "durationMs": 565.763671875
+        },
+        {
+          "path": "apps/api/tests/integration/access-change.spec.ts",
+          "cases": 12,
+          "status": "passed",
+          "durationMs": 4094.939697265625
+        },
+        {
+          "path": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "cases": 11,
+          "status": "passed",
+          "durationMs": 63.21337890625
+        }
+      ],
+      "cases": [
+        {
+          "file": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "name": "W01 escritor real: CHECK de auditoría falla después del ledger y revierte ambos con el agregado",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "name": "W02 revisión obsoleta se rechaza bajo locks antes del callback; la clave sigue libre",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "name": "W03 escritor comparte tres intentos entre redescubrimiento y aborto PG después de auditoría",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "name": "W04 JSON anidado canónico conserva arrays; cambiar su orden es una intención distinta",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "name": "W05 el escritor exige academic:manage aunque el llamante pase profile:read",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "name": "W06 alta ficticia: UUID original se recupera del ledger y no se crea otro recurso",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-command-writer.spec.ts",
+          "name": "W07 escritor genérico: grupo con revisión bigint mayor que precisión JS y auditoría propia",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-composition.spec.ts",
+          "name": "C01 composición real exporta capacidades sin consultas ficticias o pool adicional",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-composition.spec.ts",
+          "name": "C02 escritor ensamblado confirma y repite un comando ficticio mediante protocolo/ledger/auditoría reales",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-composition.spec.ts",
+          "name": "C03 HTTP real: plantilla de Express, guard, error administrativo y logs sin cuerpo ni renovación de sesión",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E01 INSERT ordinario inicia generación 0 para docente elegible",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E02 perder rol docente hacia STUDENT incrementa exactamente una vez",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E02 perder rol docente hacia ADMIN incrementa exactamente una vez",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E03 desactivar incrementa una vez; cambios posteriores mientras sigue inhabilitado no incrementan",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E04 perder verificación también invalida generación sin depender de consultas",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E05 recuperación de role conserva generación nueva; snapshot anterior sigue inválido",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E05 recuperación de status conserva generación nueva; snapshot anterior sigue inválido",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E05 recuperación de verification conserva generación nueva; snapshot anterior sigue inválido",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E06 dos pérdidas separadas por recuperación avanzan a generación 2, sin reciclarla",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E07 cambio de nombre y UPDATE no-op no invalidan publicación docente",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E08 una cuenta que nunca fue elegible no incrementa por desactivación",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=false",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=true",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E10 reset real revoca sesión y aumenta authVersion sin aumentar generación docente",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E11 cambio de acceso real confirma generación, revocación y auditoría juntos",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E12 fallo de auditoría revierte acceso, generación y revocación en una sola transacción",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E13 overflow bigint aborta pérdida de habilitación sin reciclar generación ni alterar la fila",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E14 recuperar habilitación no actualiza snapshot ni estado/revision de un grupo publicado",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "B01 control PG: PK actor/commandId serializa inserts concurrentes; barrera desde tercera conexión",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "B02 control PG: agregado/ledger/auditoría confirman en una transacción existente",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "B03 control PG: fallo real de restricción de auditoría revierte agregado y ledger",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "B04 control PG: presupuesto compartido de señal de aborto y SQL 40001 no supera tres intentos",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "B05 control PG: COMMIT aplicado sin acuse devuelve 503 y no repite el efecto",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "B06 control PG: rollback sin acuse confirmado descarta cliente y no reintenta",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P01 T013: User ordenados antes de sesión, Course y Group; sin SystemState ni grupos ajenos",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P02 T013: espera real en account observada fuera de la transacción retenida",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P02 T013: espera real en session observada fuera de la transacción retenida",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P02 T013: espera real en course observada fuera de la transacción retenida",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P02 T013: espera real en group observada fuera de la transacción retenida",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P03 T013: consulta posterior al lock ve el commit que hizo esperar, no la instantánea anterior",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P04 T013: redescubre conjunto cambiado dentro del siguiente intento y no toma User nuevos tras Course",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P05 T013: cambios persistentes de conjunto y 40P01 comparten tres intentos completos, sin bucle exterior",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P06 T013: commit incierto no reejecuta el callback académico",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P06 T013: rollback incierto no reejecuta el callback académico",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P07 T013: espera agotada devuelve indisponibilidad, nunca falso conflicto de horario",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "P08 T013: efecto y comprobaciones usan READ COMMITTED en la misma conexión",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L01 T014: comando aceptado confirma agregado, ledger y auditoría con IDs distintos",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L02 T014: replay idéntico retorna proyección actual y appliedRevision original, sin efecto/auditoría duplicados",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L03 T014: mismo actor/commandId con payload distinto rechaza sin consumir cambios",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L03 T014: mismo actor/commandId con target distinto rechaza sin consumir cambios",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L03 T014: mismo actor/commandId con revision distinto rechaza sin consumir cambios",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L03 T014: mismo actor/commandId con operation distinto rechaza sin consumir cambios",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L04 T014: claves JSON en distinto orden producen el mismo comando canónico",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L05 T014: reautoriza session antes de consultar ledger y no entrega proyección en replay denegado",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L05 T014: reautoriza role antes de consultar ledger y no entrega proyección en replay denegado",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L06 T014: fallo de auditoría revierte negocio y ledger; corregir permite reutilizar commandId",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L07 T014: dos conexiones del mismo actor/commandId esperan su lock y confirman un solo efecto",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L08 T014: commandId pertenece al actor; mismo UUID de otro administrador no es replay",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L09 T014: NO_CHANGE conserva revisión, persiste intención y replay no agrega auditoría",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L10 T014: fallo de negocio no consume commandId y error se conserva sin traducirlo a horario/503",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+          "name": "L11 T014: COMMIT sin acuse conserva ledger; solo reintento manual idéntico recupera resultado sin otro efecto",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional ADMIN/academic:manage=true",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional ADMIN/academic:read-published=true",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional ADMIN/academic:read-own=false",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional STUDENT/academic:manage=false",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional STUDENT/academic:read-published=true",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional STUDENT/academic:read-own=false",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional TEACHER/academic:manage=false",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional TEACHER/academic:read-published=false",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A01 autorización primaria y revalidación transaccional TEACHER/academic:read-own=true",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:manage",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:read-published",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:read-own",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-permissions.spec.ts",
+          "name": "A03 sesión revocada no aprovecha un actor validado anteriormente",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G01 pérdida de session confirmada durante espera impide efecto y fase posterior a autorización",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G01 pérdida de role confirmada durante espera impide efecto y fase posterior a autorización",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G01 pérdida de status confirmada durante espera impide efecto y fase posterior a autorización",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G02 fase tras autorización puede devolver sin locks de recursos ni efecto; no implementa ledger",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G03 validación posterior a recheck conserva error de negocio y revierte escrituras de la transacción",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G04 cambio del conjunto de hijos redescubre también grupos, no solo cuentas",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G05 nunca ejecuta efecto de grupo sin su padre bloqueado, aunque discover lo omita",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+          "name": "G06 añade actor omitido, normaliza UUID duplicados y entrega snapshot inmutable",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "role: UUID inválido, campos ausentes y filtros extra son 400; inexistente autorizado 404",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "status: UUID inválido, campos ausentes y filtros extra son 400; inexistente autorizado 404",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "rol revoca sesiones pero conserva tokens y entregas; auditoría contiene solo roles",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "desactivación conserva tokens consumidos/marca revocada previa y cancela entrega SENDING con payload borrado",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "reactivar conserva versión, verificación pendiente y provisional; no habilita acceso por sí sola",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "cambiar rol de cuenta desactivada conserva disabledAt",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "no-op role: no altera cuenta, tokens o correo; audita NO_CHANGE sin metadatos de transición",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "no-op status: no altera cuenta, tokens o correo; audita NO_CHANGE sin metadatos de transición",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "fallo AuditEvent por HTTP: 503 seguro y rollback de cuenta/sesiones/tokens/entregas",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "aborto de auditoría: dos reintentos y un cambio de versión/evento",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "aborto de auditoría: dos reintentos y rollback total",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/access-change.spec.ts",
+          "name": "aborto en revalidación real conserva señal segura y permite dos reintentos",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D01 find proyecta solo cuatro campos y bigint, incluso cuenta no elegible",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D02 selector excluye otros roles, deshabilitados y no verificados; provisional no es condición académica",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D03 búsqueda parametrizada por nombre, sin email, comodines literales y conteo filtrado",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D04 perder y recuperar habilitación cambia generación sin autorizar el snapshot anterior",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D05 generación mayor que MAX_SAFE_INTEGER conserva precisión",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"page\":0}",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"page\":1.5}",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"pageSize\":51}",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"pageSize\":0}",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"q\":\"\\u0000\"}",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D07 identificador inválido se rechaza y fallo SQL no se convierte en vacío ni filtra detalles",
+          "status": "passed",
+          "classification": "FOUNDATION_AND_IDENTITY_REGRESSION",
+          "laterAssertionsReached": true
+        }
+      ]
+    },
+    {
+      "action": "unit",
+      "exitCode": 0,
+      "date": "2026-10-21T21:13:09.355Z",
+      "timezone": "America/Lima",
+      "total": 266,
+      "passed": 266,
+      "failed": 0,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/unit.json",
+        "sha256": "79c32ae37999897bc4427e6ce14e00758784ea8c001c00a64cae3f3876516882"
+      },
+      "files": [
+        {
+          "path": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 792.463134765625
+        },
+        {
+          "path": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 110.207763671875
+        },
+        {
+          "path": "apps/api/tests/architecture/layers.spec.ts",
+          "cases": 6,
+          "status": "passed",
+          "durationMs": 3518.4365234375
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 5.228271484375
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "cases": 20,
+          "status": "passed",
+          "durationMs": 13.002197265625
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "cases": 39,
+          "status": "passed",
+          "durationMs": 66.277099609375
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "cases": 10,
+          "status": "passed",
+          "durationMs": 15.450439453125
+        },
+        {
+          "path": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "cases": 91,
+          "status": "passed",
+          "durationMs": 64.572998046875
+        },
+        {
+          "path": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "cases": 24,
+          "status": "passed",
+          "durationMs": 11.31005859375
+        },
+        {
+          "path": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 14.8974609375
+        },
+        {
+          "path": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 12.9892578125
+        },
+        {
+          "path": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "cases": 7,
+          "status": "passed",
+          "durationMs": 10.370849609375
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/access.test.ts",
+          "cases": 6,
+          "status": "passed",
+          "durationMs": 7.522705078125
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "cases": 12,
+          "status": "passed",
+          "durationMs": 8.1943359375
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 7.619384765625
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/login.test.ts",
+          "cases": 7,
+          "status": "passed",
+          "durationMs": 4.23828125
+        },
+        {
+          "path": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "cases": 9,
+          "status": "passed",
+          "durationMs": 4.61279296875
+        },
+        {
+          "path": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 86.85546875
+        },
+        {
+          "path": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "cases": 3,
+          "status": "passed",
+          "durationMs": 4.433837890625
+        },
+        {
+          "path": "apps/api/src/modules/users/domain/account.test.ts",
+          "cases": 4,
+          "status": "passed",
+          "durationMs": 11.704833984375
+        }
+      ],
+      "cases": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T088: todos los endpoints compilados tienen la política explícita de su contrato",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T017 familias académicas: GET /api/v1/admin/academic/courses exige academic:manage y nunca admite public/ausencia/otra audiencia",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T017 familias académicas: GET /api/v1/academic/courses/:courseId/groups/:id exige academic:read-published y nunca admite public/ausencia/otra audiencia",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T017 familias académicas: GET /api/v1/teaching/groups/:id exige academic:read-own y nunca admite public/ausencia/otra audiencia",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular dominio no importa Nest ni infraestructura",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular aplicación usa dominio y otro módulo solo por public",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular frontend mantiene shared y features sin ciclos laterales",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular T017 oferta mantiene núcleo puro y superficies públicas, incluso en infraestructura",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real T017 oferta y directorio se incluyen en el grafo real, sin callbacks de identidad a oferta",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real todas las capas cumplen ESLint, incluido guard y superficies públicas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real el cierre transitivo del núcleo no alcanza IO, composición ni DTO HTTP",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real el grafo de archivos y las raíces de composición no tienen ciclos",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real HTTP y CLI consumen aplicación; no comparten reglas a través de entradas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real las barreras rechazan escapes reales que el patrón de carpetas no cubría",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C01 DTO cerrados por audiencia, sin generación, credenciales ni datos de cuenta",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C02 revisiones JSON decimales, sin capacidad de inscripción ficticia",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C03 comandos explícitos, revisión en recursos existentes y sin actualización de snapshot desde cliente",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C04 errores de negocio seguros; referencias solo en conflictos administrativos",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C01 alta incompleta: referencia del servidor estable, nombre recortado, DRAFT y descripción null",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C02 descripción null se normaliza a null en preparación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C02 descripción \"\" se normaliza a null en preparación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C02 descripción \" \\t\\n \" se normaliza a null en preparación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C03 recorta descripción; no interpreta HTML ni elimina contenido interno",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \"\" con error de campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \" \\t\\n \" con error de campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido null con error de campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido 123 con error de campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido undefined con error de campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual 42",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual {}",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C06 nombres repetidos permitidos, referencias distintas y sin límite nuevo de longitud",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C07 edita DRAFT sin publicar ni cambiar referencia",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C07 edita WITHDRAWN sin publicar ni cambiar referencia",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C08 PATCH de descripción conserva nombre; PATCH de nombre conserva descripción",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C09 publicado exige retiro antes de editar, aunque el cambio sea válido",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C10 cambio inválido no modifica parcialmente el curso recibido",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C11 curso solo posee datos académicos generales, sin capacidad, docente ni horario",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G01 omisión inicial permite DRAFT incompleto con capacidad null y zona explícita",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 1 se conserva exactamente",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 50 se conserva exactamente",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 25 se conserva exactamente",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada null, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada vacía, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada blanco, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada string 25, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada cero, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada negativa, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada fracción, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada 51, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada NaN, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada Infinity, no la confunde con omisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad null y conserva la configurada",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad \"\" y conserva la configurada",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 0 y conserva la configurada",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad -1 y conserva la configurada",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 1.5 y conserva la configurada",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 51 y conserva la configurada",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 1 sin publicar",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 50 sin publicar",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \"\" se rechaza por campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \" \\t\\n \" se rechaza por campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido null se rechaza por campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido 42 se rechaza por campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido undefined se rechaza por campo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de DRAFT conserva referencias y estado; omitir capacidad la conserva",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de WITHDRAWN conserva referencias y estado; omitir capacidad la conserva",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de PUBLISHED sin cambios parciales",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de CANCELLED sin cambios parciales",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G09 dos grupos del mismo curso son independientes, incluso con nombre repetido",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G10 periodo parcial válido permite preparación incompleta",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G12 grupo admite periodo inclusivo de un solo día real",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodStart inválido 2026-02-29",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodEnd inválido 2026-04-31",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza timeZone inválido UTC",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G14 edición rechaza periodo invertido y no aplica el nombre parcialmente",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G11 grupo no exige mínimo 40, código manual ni nombre único",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R01 ordinal civil contrasta siglos y año contra oráculo UTC independiente, solo en tests",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R02 edición válida del curso conserva entrada congelada y referencia, sin publicar",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R03 editar borrador incompleto conserva omisión de capacidad; undefined enviado no configura",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R04 editar periodo con franjas conservadas revalida ocurrencias sin mutación parcial",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R05 edición retirada conserva snapshot, revisión recibida y estado; no renueva publicación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R06 comparación exige periodos completos; formas inválidas usan errores seguros del dominio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 fecha con salto de línea produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 hora con salto de línea produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 UUID con salto de línea produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 franja ausente produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S01 borrador permite cero franjas y periodo todavía incompleto",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial 2026-10-19/null valida las franjas sin exigir publicación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/2026-10-25 valida las franjas sin exigir publicación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/null valida las franjas sin exigir publicación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 1 ocurre en periodo de un día inclusivo 2026-10-19",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 2 ocurre en periodo de un día inclusivo 2026-10-20",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 3 ocurre en periodo de un día inclusivo 2026-10-21",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 4 ocurre en periodo de un día inclusivo 2026-10-22",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 5 ocurre en periodo de un día inclusivo 2026-10-23",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 6 ocurre en periodo de un día inclusivo 2026-10-24",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 7 ocurre en periodo de un día inclusivo 2026-10-25",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2024-02-29, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2000-02-29, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2026-12-31, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2027-01-01, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-02-29\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2100-02-29\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-04-31\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-13-01\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-00-10\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-00\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-1-9\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"19/10/2026\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-19T00:00:00Z\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-02-30",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-11-31",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-10-25T00:00:00-05:00",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S07 rechaza periodo invertido aunque no haya franjas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"UTC\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/Bogota\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/New_York\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza null",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 0 sin coerción",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 8 sin coerción",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO -1 sin coerción",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 1.5 sin coerción",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO \"1\" sin coerción",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO null sin coerción",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–00:01",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 23:58–23:59",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–23:59",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"24:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"23:60\" fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"-1:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"9:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00Z\" fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"\" fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial null fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial 1080 fuera del contrato HH:mm",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"24:00\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:60\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:00:00\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"\"",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final null",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 18:00–18:00",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 19:00–18:00",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:00–01:00",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:59–00:00",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 00:00–00:00",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 0 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 1 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 2 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 3 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:30\",\"endTime\":\"18:45\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 0 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 1 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"19:00\",\"endTime\":\"20:00\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 2 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 3 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S16 exige ocurrencia de CADA franja; una válida no oculta otra fuera de periodo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S17 periodo inclusivo sin lunes rechaza la franja; no basta con fechas ordenadas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S18 al cambiar el periodo se vuelve a validar el horario completo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O01 misma franja y periodo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O02 solapamiento parcial",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O03 contención de horas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O04 franjas contiguas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O05 horas separadas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O06 distinto día ISO",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O07 periodos disjuntos, mismas horas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O08 intersección de fechas sin lunes: c…",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O09 primera ocurrencia común justo en U…",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O10 único día compartido lunes 19 inclu…",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O11 único día compartido martes sin lun…",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O12 domingo ISO 7 en extremo inclusivo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O13 paso de domingo a lunes con ajuste …",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O14 coincidencia solo en segunda franja…",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O15 conjunto vacío no coincide",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O16 extremos horarios adyacentes 00:01",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O17 fecha bisiesta efectiva compartida",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O18 periodo de 400 años devuelve decisi…",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica ADMIN / academic:manage = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica ADMIN / academic:read-published = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica ADMIN / academic:read-own = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica STUDENT / academic:manage = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica STUDENT / academic:read-published = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica STUDENT / academic:read-own = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica TEACHER / academic:manage = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica TEACHER / academic:read-published = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica TEACHER / academic:read-own = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión ADMIN / academic:manage = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión ADMIN / academic:read-published = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión ADMIN / academic:read-own = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión STUDENT / academic:manage = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión STUDENT / academic:read-published = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión STUDENT / academic:read-own = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión TEACHER / academic:manage = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión TEACHER / academic:read-published = false",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión TEACHER / academic:read-own = true",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:manage, sin consultar repositorio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-published, sin consultar repositorio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-own, sin consultar repositorio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "roles desconocidos/visitante y permisos desconocidos siempre se deniegan",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz de identidad: perfil propio para tres roles; administración solo ADMIN",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "operaciones y roles ajenos a la matriz se deniegan",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "prepara hash/enlace antes del store y solo transmite material persistible, sin provisional",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "fallo de credenciales no inicia la transaccion ni emite un enlace",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "fallo de preparacion de enlace no toca store ni revela errores del adaptador",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "conserva rechazo irreversible de T028 sin inventar otro camino de inicializacion",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "cuota antes de store; factory cifra enlace de origen fijo y no devuelve secreto",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "sin cuota no toca store, generador de payload ni cuenta",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "factory VERIFY_EMAIL conserva caducidad y elegibilidad de dominio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "factory RESET_PASSWORD conserva caducidad y elegibilidad de dominio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "contraseña inválida no invoca hash, repositorio ni consumo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "token mal formado no invoca hash ni repositorio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "fallo de hash deja sin invocar el repositorio",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "repositorio que rechaza consumo produce únicamente InvalidActionLink",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "hash finaliza antes del repositorio; la regla pura exige verificación, propósito y caducidad vigentes",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "solicitar reutiliza emisión con propósito reset y responde igual con o sin entrega",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "cuota denegada conserva la espera definida por emisión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "elegibilidad exige cuenta activa, correo verificado y contraseña propia",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "sesión vence exactamente a 30 minutos; no cambia ni renueva sus fechas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "sesión vence a ocho horas aunque haya actividad reciente",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "acción VERIFY_EMAIL: propósito, destinatario, vigencia y uso único",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "acción RESET_PASSWORD: propósito, destinatario, vigencia y uso único",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "credencial provisional vence a 24 h; no exige correo para establecer clave, ni concede sesión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide cambio propio role/STUDENT",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide retirar último ADMIN ACTIVE mediante role/STUDENT",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide cambio propio role/TEACHER",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide retirar último ADMIN ACTIVE mediante role/TEACHER",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide cambio propio status/DISABLED",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide retirar último ADMIN ACTIVE mediante status/DISABLED",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "otro ADMIN puede retirarse cuando queda otro activo; no exige correo verificado para contar",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "no-op propio role no revoca ni restaura",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "no-op propio status no revoca ni restaura",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "desactivar revoca sesiones y acciones; cambiar rol solo sesiones",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "reactivar y no-op desactivado no reconstruyen sesiones, tokens ni provisional",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "ADMIN desactivado no cuenta como último activo para un cambio de rol",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "quinto fallo bloquea 15 minutos; solicitudes rechazadas no prolongan bloqueo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "ventana móvil: frontera inferior excluida y ninguna actividad futura",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "cinco reservas en vuelo consumen capacidad; al vencer se convierten en fallos conservadores",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "éxito elimina fallos sin eliminar reservas de solicitudes concurrentes",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada misma credencial y versión habilitadas",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de estado",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de correo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de verificación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de contraseña",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de versión",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de provisional",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "alias operativo ASCII de 1 a 64, sin derivacion ni valor predeterminado",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (0)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (1)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (2)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (3)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (4)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (5)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (6)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (7)",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "acuse de commit incierto devuelve error seguro sin repetir la operación",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "dos conflictos abortados con rollback confirmado permiten un tercer intento",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "conflicto persistente no supera tres intentos",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "sin rollback confirmado no reintenta y descarta el cliente fallido",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "name": "mínimo de 60 s exactos por destinatario y propósito",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "name": "cinco por hora con ventana móvil, frontera exacta y Retry-After según ambos límites",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "name": "veinte por origen sumando propósitos; la cuota limita aun con destinatario nuevo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "nombre Unicode: trim exterior y límites por caracteres, no bytes ni unidades UTF-16",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "correo: trim y minúscula simple, sin transformar alias ni puntos",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "contraseñas preservan espacios, composición Unicode y contenido completo",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "rol único y estado admiten exclusivamente los enums",
+          "status": "passed",
+          "classification": "UNIT_AND_ARCHITECTURE",
+          "laterAssertionsReached": true
+        }
+      ]
+    },
+    {
+      "action": "http",
+      "exitCode": 1,
+      "date": "2026-10-21T21:14:45.964Z",
+      "timezone": "America/Lima",
+      "total": 74,
+      "passed": 6,
+      "failed": 68,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/http.json",
+        "sha256": "a909a84470ef6635947be1e7a5a3c3c32cc495b4789e036e29a5026aa8493cec"
+      },
+      "files": [
+        {
+          "path": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "cases": 74,
+          "status": "failed",
+          "durationMs": 7132.248046875
+        }
+      ],
+      "cases": [
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 controles de infraestructura, NO aceptación académica I01 PostgreSQL real, migraciones y observador separado; identidad HTTP de los tres roles",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 controles de infraestructura, NO aceptación académica I02 cuerpo superior a 16 KiB: middleware real conserva las cinco tablas académicas",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 controles de infraestructura, NO aceptación académica I03 tipo de contenido: middleware real conserva las cinco tablas académicas",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 controles de infraestructura, NO aceptación académica I04 Origin externo: middleware real conserva las cinco tablas académicas",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 controles de infraestructura, NO aceptación académica I05 CSRF ausente: middleware real conserva las cinco tablas académicas",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 controles de infraestructura, NO aceptación académica I06 fallo SQL dirigido al esquema propio y recuperación del permiso, sin afectar identidad",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "laterAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H01 listado vacío es 200 y no error; página/conteo coherentes",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H02 POST curso incompleto, UUID servidor, recorte y commit visibles desde observador",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H03 POST dos grupos del mismo curso, capacidad 1/50 y omisión inicial diferenciada",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H04 GET curso y grupos conservan pertenencia y DTO cerrado sin datos privados",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H05 GET grupo usa fechas civiles, horario y capacidad sin disponibilidad ficticia",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H06 selector docente entrega solo candidatos habilitados y claves id/name",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H07 PATCH curso conserva grupos; PATCH grupo conserva hermano y curso",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H08 PUT reemplaza franjas atómicamente y admite adyacencia; solo aumenta revisión propia",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H09 datos creados por HTTP persisten tras cerrar/reabrir AppModule con la misma base aislada",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H10 16 KiB exactos en UTF-8 no se rechazan ni se inventa límite de texto",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H11 revisión bigint no pierde precisión al editar y serializar",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H12 pertenencia inmutable: PATCH courseId es campo desconocido, cero efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H13 ruta 6 rechaza revisión obsoleta sin efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H13 ruta 8 rechaza revisión obsoleta sin efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H13 ruta 9 rechaza revisión obsoleta sin efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 5 rechaza campo desconocido sin escribir ni consumir commandId",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 6 rechaza campo desconocido sin escribir ni consumir commandId",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 7 rechaza campo desconocido sin escribir ni consumir commandId",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 8 rechaza campo desconocido sin escribir ni consumir commandId",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 9 rechaza campo desconocido sin escribir ni consumir commandId",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 0 rechaza query desconocida",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 1 rechaza query desconocida",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 2 rechaza query desconocida",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 3 rechaza query desconocida",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 4 rechaza query desconocida",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida null no produce cambios parciales",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida \"\" no produce cambios parciales",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida 0 no produce cambios parciales",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida -1 no produce cambios parciales",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida 1.5 no produce cambios parciales",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida 51 no produce cambios parciales",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza duplicado y conserva franjas/revisión/ledger/auditoría",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza solapamiento y conserva franjas/revisión/ledger/auditoría",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza medianoche y conserva franjas/revisión/ledger/auditoría",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza día inválido y conserva franjas/revisión/ledger/auditoría",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H18 cambiar periodo revalida las franjas existentes sin ocurrencias, cero efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H19 replay idéntico del alta no crea segundo curso, comando o auditoría",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H20 un 404 de recurso requiere primero ruta funcional, no confundir ausencia de controlador",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-0 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-1 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-2 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-3 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-4 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-5 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-6 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-7 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-8 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-9 devuelve 401, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-0 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-1 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-2 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-3 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-4 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-5 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-6 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-7 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-8 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-9 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-0 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-1 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-2 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-3 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-4 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-5 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-6 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-7 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-8 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+          "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-9 devuelve 403, sin datos ni efectos",
+          "status": "failed",
+          "classification": "BLOCKED_BY_T026_HTTP_STATUS",
+          "laterAssertionsReached": false
+        }
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-21T21:11:53.643Z",
+      "timezone": "America/Lima",
+      "log": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/types-final-console.log",
+        "sha256": "db9188b71e327afc8ebd95345433b97e60d0982e96f375aba98522b2b6536602"
+      }
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-21T21:12:10.343Z",
+      "timezone": "America/Lima",
+      "log": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/lint-final-console.log",
+        "sha256": "b3d0a37a4abf3938eb7980493c5c4a92a075e3e39d03d9e515a7dafa5cb46ebe"
+      }
+    },
+    {
+      "action": "build",
+      "exitCode": 0,
+      "date": "2026-10-21T21:12:37.953Z",
+      "timezone": "America/Lima",
+      "log": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/build-final-console.log",
+        "sha256": "dab1d8971be0f32632a0293425439338eb440829b51a660689d72c389ed5dbe2"
+      }
+    }
+  ],
+  "interim": [
+    {
+      "name": "red-initial-fixture-error",
+      "total": 40,
+      "passed": 0,
+      "failed": 40,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/red-initial-fixture-error.json",
+        "sha256": "ac272efd5a304875a4e37cc3fd4c6438d76f7e6ec2b95291e73307dad2818c17"
+      }
+    },
+    {
+      "name": "red-corrected",
+      "total": 40,
+      "passed": 0,
+      "failed": 40,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/red-corrected.json",
+        "sha256": "d0e46048e0c7117526406366fab90b511861c59c64a0dde721dbd6bb250b1c06"
+      }
+    },
+    {
+      "name": "green-initial",
+      "total": 40,
+      "passed": 36,
+      "failed": 4,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/green-initial.json",
+        "sha256": "eac949814f2fbac7080919509e3158d7e3892ae7b62745c00b5e1c5f7ec2839f"
+      }
+    },
+    {
+      "name": "green-second",
+      "total": 57,
+      "passed": 57,
+      "failed": 0,
+      "report": {
+        "path": ".cache/academic-offering-validation/t024-t025-reports/green-second.json",
+        "sha256": "1b83767cefec264f1b0fe5c14175392259e046385af09e70ed79880bd857b80c"
+      }
+    }
+  ],
+  "invalidEvidenceExcluded": [
+    "red fixture INACTIVE",
+    "red fixture disabledAt",
+    "initial stale dist type check",
+    "intermediate invalid schedule arrays unpacked by test.each: final named objects correct inputs"
+  ],
+  "protections": {
+    "protectedFiles": 72,
+    "unchangedProtectedFiles": 72,
+    "priorSourceFiles": 35,
+    "unchangedPriorSourceFiles": 32,
+    "intentionallyModified": [
+      "apps/api/src/app.module.ts",
+      "apps/api/src/modules/academic-offering/academic-offering.module.ts",
+      "apps/api/src/modules/academic-offering/infrastructure/offering-store.ts"
+    ],
+    "genericWriterBodyUnchanged": true,
+    "priorTestsDomainMigrationsAndEvidenceUnchanged": true,
+    "manualSqlExecuted": false
+  },
+  "environment": {
+    "before": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-20T21:24:41.543367856Z",
+        "startedAt": "2026-10-20T21:16:45.345325131Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "after": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-21T21:16:53.995060219Z",
+        "startedAt": "2026-10-21T21:03:08.06796155Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "taskStatus": {
+    "T021": "PENDING: 68 HTTP cases need T026; no later HTTP assertions claimed",
+    "T022": "PENDING: T026-T029 and complete E2E criteria",
+    "T024": "COMPLETE: 43 real command/composition cases; no HTTP acceptance",
+    "T025": "COMPLETE: 15 real administrative query cases"
+  },
+  "E1": "Preserved: tests before writer and green protocol/ledger/audit gate repeated",
+  "historicalBootstrapFinding": "OPEN",
+  "businessClarifications": "PA-01 through PA-05 unchanged",
+  "claims": {
+    "functionalAcceptance": false,
+    "concurrencyCapacity1000": false,
+    "e2eExecuted": false,
+    "newProductMigration": false
+  },
+  "nextTask": "T026 administrative HTTP, using composed command/query providers; stop before implementing it"
+}
