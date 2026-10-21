@@ -2,6 +2,7 @@ import { AuthorizationFailure, permits } from '../../authorization/public/sessio
 import type { SessionActor, SessionRepository } from '../../authorization/public/session.js';
 import type { CourseQuery, GroupQuery, NameQuery, OfferingStore } from './offering-store.js';
 import type { UUID } from '../public/offer.js';
+export const ACADEMIC_ADMINISTRATIVE_QUERIES = Symbol('AcademicAdministrativeQueries');
 
 export type AdministrativeReads = Pick<OfferingStore,
   'adminCourses' | 'adminCourse' | 'adminGroups' | 'adminGroup' | 'teacherCandidates'>;

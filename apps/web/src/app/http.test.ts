@@ -129,6 +129,50 @@ test('filtros administrativos se codifican en GET; no se aceptan secretos ni con
   await expect(api.request('/admin/users',{method:'POST',query:{q:'dato'}})).rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});
   expect(transport).toHaveBeenCalledTimes(1);
 });
+
+test.each([
+  ['/admin/academic/courses',{q:'%_ &+',state:'DRAFT',page:2,pageSize:20}],
+  ['/admin/academic/courses/00000000-0000-4000-8000-000000000001/groups',{q:'Turno',state:'WITHDRAWN',page:1}],
+  ['/admin/academic/teachers',{q:'Docente',pageSize:50}],
+])('T027 query permitida por ruta %s',async(path,query)=>{
+  const transport=vi.fn<typeof fetch>().mockImplementation(async()=>response(200));
+  await createApiClient(vi.fn(),transport).request(path as string,{query:query as Record<string,string|number>});
+  const url=new URL(String(transport.mock.calls[0][0]),'http://localhost');
+  for(const [key,value] of Object.entries(query))expect(url.searchParams.get(key)).toBe(String(value));
+});
+test.each([
+  ['/admin/academic/courses',{token:'secreto'}],['/admin/academic/teachers',{state:'DRAFT'}],
+  ['/admin/academic/groups/00000000-0000-4000-8000-000000000001',{q:'no'}],
+  ['/academic/courses',{q:'todavía fuera del bloque'}],
+])('T027 no amplía queries arbitrarias %s/%j',async(path,query)=>{
+  const transport=vi.fn<typeof fetch>();
+  await expect(createApiClient(vi.fn(),transport).request(path as string,{query:query as Record<string,string>}))
+    .rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});expect(transport).not.toHaveBeenCalled();
+});
+test.each(['OFFERING_VERSION_CONFLICT','OFFERING_STATE_CONFLICT','TEACHER_NOT_ELIGIBLE','IDEMPOTENCY_CONFLICT'])(
+  'T027 reconoce conflicto académico %s solo en ruta administrativa, sin texto remoto ni retry',async code=>{
+    const transport=vi.fn<typeof fetch>().mockImplementation(async()=>new Response(JSON.stringify({error:{code,message:'secreto remoto',
+      fields:[{field:'teacherUserId',message:'secreto'},{field:'password',message:'secreto'}],conflictingGroupIds:['no-uuid']}}),{status:409}));
+    await expect(createApiClient(vi.fn(),transport).request('/admin/academic/courses',{method:'POST',body:{}}))
+      .rejects.toMatchObject({code,fields:code==='TEACHER_NOT_ELIGIBLE'?['teacherUserId']:[]});
+    expect(transport).toHaveBeenCalledTimes(1);
+    await expect(createApiClient(vi.fn(),transport).request('/auth/login',{method:'POST'}))
+      .rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});
+  });
+test('T027 referencias de conflicto solo códigos y UUID administrativos permitidos',async()=>{
+  const id='00000000-0000-4000-8000-000000000001';
+  const transport=vi.fn<typeof fetch>().mockImplementation(async()=>new Response(JSON.stringify({error:{code:'TEACHER_SCHEDULE_CONFLICT',
+    conflictingGroupIds:[id,id,'sql secreto'],message:'remoto'}}),{status:409}));
+  await expect(createApiClient(vi.fn(),transport).request('/admin/academic/groups/'+id,{method:'PATCH'}))
+    .rejects.toMatchObject({code:'TEACHER_SCHEDULE_CONFLICT',conflictingGroupIds:[id]});
+});
+test.each([[400,'INVALID_ACTION_LINK'],[401,'INVALID_CREDENTIALS']] as const)(
+  'T027 rechaza código de identidad %s/%s ajeno al contrato académico',async(status,code)=>{
+    const auth=vi.fn();const transport=vi.fn<typeof fetch>().mockImplementation(async()=>response(status,code));
+    await expect(createApiClient(auth,transport).request('/admin/academic/courses'))
+      .rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});
+    expect(auth).not.toHaveBeenCalled();expect(transport).toHaveBeenCalledTimes(1);
+  });
 test('router reconoce detalle sin aceptar subrutas ni valores externos',()=>{
   expect(matchRoute('/admin/cuentas/:id','/admin/cuentas/identificador')).toEqual({id:'identificador'});
   expect(matchRoute('/admin/cuentas/:id','/admin/cuentas/identificador/name')).toBeNull();

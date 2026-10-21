@@ -2,6 +2,7 @@ import { AuthorizationFailure, permits } from '../../authorization/public/sessio
 import type { SessionActor } from '../../authorization/public/session.js';
 import type { CommandContext, OfferingCommand } from './offering-store.js';
 import type { CommandResult } from '../public/offer.js';
+export const ACADEMIC_PREPARATION_COMMANDS = Symbol('AcademicPreparationCommands');
 
 /** Preparación US1: no ofrece transiciones de publicación/retiro/cancelación. */
 export type PreparationCommand = Extract<OfferingCommand,

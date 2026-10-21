@@ -52,6 +52,16 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
     'GET /api/v1/admin/users/:id':'users:manage','POST /api/v1/admin/users':'users:manage',
     'PATCH /api/v1/admin/users/:id/name':'users:manage','PUT /api/v1/admin/users/:id/role':'users:manage',
     'PUT /api/v1/admin/users/:id/status':'users:manage',
+    'GET /api/v1/admin/academic/courses':'academic:manage',
+    'GET /api/v1/admin/academic/courses/:id':'academic:manage',
+    'GET /api/v1/admin/academic/courses/:courseId/groups':'academic:manage',
+    'GET /api/v1/admin/academic/groups/:id':'academic:manage',
+    'GET /api/v1/admin/academic/teachers':'academic:manage',
+    'POST /api/v1/admin/academic/courses':'academic:manage',
+    'PATCH /api/v1/admin/academic/courses/:id':'academic:manage',
+    'POST /api/v1/admin/academic/courses/:courseId/groups':'academic:manage',
+    'PATCH /api/v1/admin/academic/groups/:id':'academic:manage',
+    'PUT /api/v1/admin/academic/groups/:id/schedule':'academic:manage',
   });
 });
 
