@@ -1,13 +1,13 @@
 # Alcance del MVP de academia-virtual
 
-> **Estado del entorno — 2026-10-06:** Docker Compose ejecuta PostgreSQL, Mailpit,
-> API y web. Véanse [ejecución](../ops/docker/README.md) y
-> [verificación](../ops/docker/verification.md). Se conserva el alcance funcional:
-> identidad, pagos/video y capacidad de 1000 concurrentes no están demostrados.
-> Las menciones a «esta etapa» describen el estado histórico del 2026-09-23.
+> **Vigencia — 2026-10-22:** el [inventario de la rama 002](estado-documental.md)
+> distingue implementación y evidencia: identidad con checkpoints y preparación de
+> oferta ADMIN implementadas. Publicación/ciclo/lecturas académicas restantes,
+> pagos/video y capacidad integral siguen pendientes. Las menciones iniciales a
+> «esta etapa» y la propuesta técnica conservan su contexto histórico de alcance.
 
-Estado al 2026-09-23: documentación y primera especificación. La aplicación no está implementada y su
-capacidad no está validada. Este alcance está sujeto a la
+Estado histórico al 2026-09-23: documentación y primera especificación, sin aplicación
+implementada entonces. El estado actual se enlaza arriba. Este alcance está sujeto a la
 [constitución](../.specify/memory/constitution.md).
 
 ## Objetivo y restricciones
@@ -26,8 +26,8 @@ gratuitos ni precios todavía no comprobados.
 
 | Área | Alcance previsto | Pendiente de definir |
 | --- | --- | --- |
-| Identidad | Registro de alumnos, correo verificado, sesiones, recuperación por correo, un rol por cuenta y gestión administrativa; permisos en backend. | Plan e implementación de la especificación de identidad; viabilidad y costo del envío de correo. |
-| Oferta académica | Cursos, grupos, horarios y cupos; grupos de 40 a 50 alumnos. | Cambios de grupo, reglas de horarios y reservas. |
+| Identidad | Registro de alumnos, correo verificado, sesiones, recuperación por correo, un rol por cuenta y gestión administrativa; permisos en backend. | Implementada con evidencia local; aceptación integral, bootstrap histórico y SMTP real pendientes. |
+| Oferta académica | Cursos, grupos, horarios y capacidad; población prevista de 40 a 50, capacidad configurable aprobada de 1 a 50. | 002 PA-01–PA-05 aprobadas, preparación ADMIN implementada; publicación/ciclo/catálogo/lectura docente pendientes. Reservas y matrícula de D06 abiertas. |
 | Orden y matrícula | Selección de varios cursos, precio por curso, conceptos y total calculados por servidor. | Regla definitiva de pago, vigencia y momento de asignación de cupos. |
 | Pago | Propuesta: un pago por el total de la orden y matrícula por cada curso adquirido. Izipay elegida para el MVP; integración no implementada. | Validación de la regla de pago, tarifas finales, límites, acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada. |
 | Materiales | Acceso a materiales por curso sujeto a autorización. | Formatos, límites, almacenamiento y reglas de publicación. |
@@ -36,8 +36,9 @@ gratuitos ni precios todavía no comprobados.
 
 ## Exclusiones de esta etapa y del MVP
 
-En esta etapa solo se prepara documentación y el repositorio. No se implementa la
-aplicación, se contratan servicios ni se despliega infraestructura.
+La etapa inicial del 2026-09-23 solo preparaba documentación y repositorio. El corte
+actual incorpora código según el inventario; esta sincronización documental no amplía
+funcionalidades, contrata servicios ni despliega infraestructura.
 
 Quedan fuera del MVP, salvo modificación explícita del alcance:
 
@@ -52,7 +53,8 @@ Quedan fuera del MVP, salvo modificación explícita del alcance:
 
 Las elecciones siguientes distinguen base técnica e implementación funcional.
 Docker Compose y los servicios locales cuentan con validación registrada; los flujos
-de negocio y las integraciones externas permanecen pendientes.
+de negocio tenían implementación pendiente en esta propuesta inicial. Para su estado
+actual se usa el inventario; las integraciones externas siguen sin acreditar.
 
 | Componente | Propuesta | Validación necesaria |
 | --- | --- | --- |

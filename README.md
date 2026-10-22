@@ -3,7 +3,7 @@
 Proyecto de academia virtual para un trabajo final de curso, con desarrollo local
 mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-18:** React/NestJS con Docker Compose como entorno local principal.
+**Estado documental al 2026-10-22:** [versión, inventario y evidencia](docs/estado-documental.md). React/NestJS con Docker Compose como entorno local principal.
 Las siete historias de identidad tienen sus checkpoints funcionales comprobados. La
 [regresión T106](specs/001-identidad-acceso-roles/evidence/regression.md) reproduce configuración
 y bases nuevas: 120 unitarias, 744 integraciones y 203 E2E aprobadas. La
@@ -26,14 +26,17 @@ restringida y activación mediante contraseña propia y correo verificado, compr
 checkpoint funcional comprobado, incluidas revocación, carreras administrativas y V04-B.
 [US7: recuperación de contraseña](specs/001-identidad-acceso-roles/evidence/us7.md) tiene su checkpoint
 funcional comprobado en API y navegador, con revocación de sesiones y recuperación tras provisional vencida.
-Las funciones académicas siguen pendientes;
+Oferta académica incorpora preparación ADMIN (cursos, grupos, horarios, capacidad y
+selector docente), con diez rutas y pantallas verificadas en 002 T026–T029. T030 y
+publicación/ciclo/catálogo alumno/lectura docente siguen pendientes;
 no hay integración de pagos/video ni despliegue acreditado.
-La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
+La configuración por entorno y las cuatro migraciones originales de identidad cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
+La migración aditiva 0005 de oferta tiene [evidencia nueva/incremental](specs/002-oferta-academica/evidence/t007-t008.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
 se reutilizan en US1 y US2.
 Las [sesiones, autorización y protecciones HTTP](specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md)
-respaldan los flujos implementados; las verificaciones finales de identidad siguen pendientes.
+respaldan los flujos implementados; la aceptación integral de identidad sigue pendiente (T104/T108).
 El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
 de carga reproducibles; no es una capacidad garantizada.
 
@@ -70,6 +73,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 
 ## Documentación
 
+- [Sincronización para la exposición](docs/informe-sincronizacion-2026-10-22.md): versión revisada, diagramas, comprobaciones y pendientes.
 - [Constitución del proyecto](.specify/memory/constitution.md): principios y gobernanza.
 - [Alcance del MVP](docs/alcance-mvp.md): funcionalidades previstas, exclusiones y propuesta técnica.
 - [Decisiones pendientes](docs/decisiones-pendientes.md): reglas y riesgos por resolver.
@@ -88,11 +92,12 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Atributos de calidad](docs/01-analisis-de-sistema/04-atributos-de-calidad.md) y [restricciones](docs/01-analisis-de-sistema/05-restricciones.md).
 - [Escenarios de atributos de calidad](docs/01-analisis-de-sistema/08-escenarios-atributos-calidad.md): medidas, trazabilidad y evidencia disponible.
 - [Drivers arquitectónicos](docs/01-analisis-de-sistema/06-driver-arquitectonicos.md).
-- [Arquitectura inicial de tres capas](docs/02-arquitectura-software/arquitectura-inicial.md): diagrama Mermaid,
-  inventario, evidencia, discrepancias y pendientes. Esta síntesis enlaza el detalle existente
+- [Vista histórica inicial de tres capas](docs/02-arquitectura-software/arquitectura-inicial.md): diagrama Mermaid,
+  corte histórico 2026-10-06. El [diagrama vigente](docs/02-arquitectura-software/diagrama-arquitectura.md)
+  y la [referencia documental](docs/estado-documental.md) mantienen estado y evidencia actuales. Enlaza el detalle existente
   en `docs/` y `specs/`, que conserva el alcance y sus criterios de aceptación.
 - [Catálogo de componentes arquitectónicos](docs/02-arquitectura-software/componentes-arquitectonicos.md): responsabilidades, interfaces, estados y relaciones del backend.
-- [Diseño interno de módulos](docs/03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md): organización de identidad por capas, contratos, adaptadores y diseño académico previsto.
+- [Diseño interno de módulos](docs/03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md): organización de identidad y preparación de oferta por capas, contratos, adaptadores y límites pendientes.
 - [Patrones de diseño](docs/03-diseno-de-software/diseno-interno/patrones-de-diseno.md): adaptadores existentes y previstos, entrega diferida transaccional y límites de su implementación.
 - [Principios de diseño](docs/03-diseno-de-software/diseno-interno/principios-de-diseno.md): aplicaciones de SOLID, evidencia disponible y límites de los contratos y dependencias actuales.
 - [Contexto del sistema C1](docs/04-modelo-c4/01-contexto-del-sistema.md): propósito, personas, sistemas externos, relaciones previstas e incertidumbres.

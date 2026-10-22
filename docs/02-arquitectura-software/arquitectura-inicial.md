@@ -1,4 +1,8 @@
-# Arquitectura inicial de Academia Virtual
+# Arquitectura inicial de Academia Virtual — vista histórica
+
+> **HISTÓRICA · corte 2026-10-06.** Las afirmaciones de implementación y pendientes
+> siguientes describen ese momento. No representan la rama 002 actual. Consultar el
+> [estado vigente](../estado-documental.md) y el [diagrama actual](diagrama-arquitectura.md).
 
 Revisión del entorno: **2026-10-06**, sobre el repositorio `academia-virtual` existente.
 Esta es una vista inicial de **tres capas lógicas**

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="24.7.17" type="device">
+  <diagram id="arquitectura-general" name="Arquitectura vigente">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Academia Virtual · Arquitectura vigente" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=32;fontColor=#18344b;" vertex="1" parent="1">
+          <mxGeometry x="30" y="18" width="1540" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="scope" value="Colaboración en ejecución · Tres capas generales; negocio = aplicación + dominio" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=22;fontColor=#18344b;" vertex="1" parent="1">
+          <mxGeometry x="30" y="73" width="1540" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="I = implementado en alcance rotulado · P = parcial · F = futuro | Azul / ámbar / gris" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=21;fontColor=#18344b;" vertex="1" parent="1">
+          <mxGeometry x="30" y="795" width="1540" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="legend2" value="Continua: colaboración actual · Discontinua: prevista · Flechas de ejecución, sin imports" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=20;fontColor=#18344b;" vertex="1" parent="1">
+          <mxGeometry x="30" y="830" width="1540" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="source" value="Fuente: ecb1efe · 2026-10-22 | docs/estado-documental.md · Sin aceptación integral ni capacidad aprobada" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=18;fontColor=#18344b;" vertex="1" parent="1">
+          <mxGeometry x="30" y="866" width="1540" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="APP02" value="APP02 · Backend monolítico NestJS" style="rounded=0;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacing=14;fontSize=22;fillColor=#ffffff;strokeColor=#7891a5;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="335" y="145" width="900" height="630" as="geometry" />
+        </mxCell>
+        <mxCell id="APP01" value="APP01 · Presentación web&#10;React / Vite&#10;Identidad + preparación ADMIN&#10;[P]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#fff1d6;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="25" y="220" width="270" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="REST" value="Presentación backend&#10;C01 · REST / DTO / cookies&#10;C05 · Sesión y permiso&#10;[I]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#e5f2ff;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="220" width="345" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="BUSINESS" value="Negocio&#10;C03 / C04 · Identidad / usuarios&#10;C12 · Preparación de oferta&#10;[P]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#fff1d6;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="435" width="345" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="DATA" value="Datos / infraestructura&#10;Adaptadores / C09 pool&#10;SQL, locks, ledger y auditoría&#10;[I]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#e5f2ff;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="640" width="345" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="FUTURE" value="Negocio futuro&#10;C13–C19 · Compra, matrícula&#10;Materiales, clases, chat, paneles&#10;[F]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#f1f3f5;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="850" y="435" width="345" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="MAIL" value="C06 · Correo interno&#10;Entregas cifradas&#10;Scheduler fuera de HTTP&#10;[I]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#e5f2ff;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="850" y="220" width="345" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="AL01" value="AL01 · PostgreSQL&#10;Identidad + oferta&#10;[I]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#e5f2ff;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="640" width="280" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="E03" value="E03 · Mailpit&#10;Captura SMTP local&#10;[I]" style="rounded=1;arcSize=8;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=21;spacing=10;fillColor=#e5f2ff;strokeColor=#45647c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="220" width="280" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-16" value="JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;fontSize=20;fontColor=#18344b;strokeColor=#45647c;strokeWidth=2;endArrow=classic;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="APP01" target="REST">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="337.5" y="297.5" />
+              <mxPoint x="337.5" y="295.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-17" value="casos de uso" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;fontSize=20;fontColor=#18344b;strokeColor=#45647c;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="REST" target="BUSINESS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-18" value="puertos atómicos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;fontSize=20;fontColor=#18344b;strokeColor=#45647c;strokeWidth=2;endArrow=classic;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="BUSINESS" target="DATA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-19" value="programa entrega" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;fontSize=20;fontColor=#18344b;strokeColor=#45647c;strokeWidth=2;endArrow=classic;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="BUSINESS" target="MAIL">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="785" y="510" />
+              <mxPoint x="785" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-20" value="SMTP" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;fontSize=20;fontColor=#18344b;strokeColor=#45647c;strokeWidth=2;endArrow=classic;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="MAIL" target="E03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-21" value="PostgreSQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;fontSize=20;fontColor=#18344b;strokeColor=#45647c;strokeWidth=2;endArrow=classic;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="DATA" target="AL01">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="outside" value="Integraciones futuras externas:&#10;ver C1–C2" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=22;fontColor=#18344b;" vertex="1" parent="1">
+          <mxGeometry x="850" y="615" width="360" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
