@@ -1,11 +1,12 @@
 # Decisiones pendientes
 
-> **Nota de vigencia — 2026-10-22:** se conserva el registro inicial de decisiones y
-> sus seguimientos fechados. D11 tiene identidad implementada con checkpoints,
-> sin aceptación integral; su antigua preparación para planificar queda superada. 002 aprueba
-> PA-01–PA-05 e implementa preparación ADMIN, sin cerrar reservas/matrícula de D06.
-> Ver [inventario vigente y evidencia](estado-documental.md). Esta revisión no cambia
-> decisiones de negocio ni cierra D10/D13, bootstrap o integraciones no verificadas.
+> **Nota de vigencia — 2026-10-06:** se conserva este registro de decisiones del
+> 2026-09-23. D11 ya tiene [plan y decisiones de diseño](../specs/001-identidad-acceso-roles/plan.md)
+> y [tareas](../specs/001-identidad-acceso-roles/tasks.md); «lista para planificar» es
+> histórico. La base técnica y T009/T010 tienen evidencia, pero las historias siguen sin
+> implementar. Para entorno y estado usar Compose y el
+> [inventario actualizado](02-arquitectura-software/arquitectura-inicial.md). Esta revisión documental
+> no cierra decisiones comerciales, académicas ni de aceptación aquí pendientes.
 
 Estado al 2026-09-23: decisiones abiertas o parcialmente resueltas según cada fila.
 La elección de Izipay está resuelta; sus condiciones e integración siguen pendientes.
@@ -28,7 +29,7 @@ evidencia y especificaciones afectadas. Las reglas obligatorias de la
 | D08 | Protección de video | ¿La elección YouTube Live permite satisfacer RF16 y las reglas de acceso? La compatibilidad con las condiciones de manifiestos/segmentos, acceso directo y expiración aún debe comprobarse. | Pruebas de acceso directo permitido/denegado y permisos vencidos; autenticar la página u ocultar enlaces no demuestra protección y no se promete impedir grabaciones. |
 | D09 | Alojamiento y presupuesto | Faltan proveedor, región, recursos, almacenamiento, transferencia, HTTPS y tiempo de uso. | Estimación fechada de gasto total de servicios y pruebas que no exceda S/300, con forma de detener consumo al terminar. No contratar en esta etapa. |
 | D10 | Criterios de evaluación | Falta la rúbrica del profesor: distribución de 1000 usuarios, duración, carga, latencia, errores y evidencia exigida. | Escenarios y umbrales acordados con el profesor; distinguir matrícula, chat, video y cualquier escenario combinado. |
-| D11 | Identidad y permisos: comportamiento definido | Confirmado el 2026-09-23: correo verificado antes del acceso, recuperación por correo con enlace de un solo uso y un único rol por cuenta. Registro público solo de alumnos, gestión administrativa y revocación de sesiones definidos en [identidad](../specs/001-identidad-acceso-roles/spec.md). | Implementación y checkpoints 001 comprobados; 106/108 tareas, T104/T108 pendientes. Bootstrap histórico abierto; Mailpit funcional, SMTP real/costo pendientes. PA-01 de 002 define consulta académica sin matrícula; pertenencia de matrícula sigue futura. |
+| D11 | Identidad y permisos: comportamiento definido | Confirmado el 2026-09-23: correo verificado antes del acceso, recuperación por correo con enlace de un solo uso y un único rol por cuenta. Registro público solo de alumnos, gestión administrativa y revocación de sesiones definidos en [identidad](../specs/001-identidad-acceso-roles/spec.md). | Checklist de especificación revisado; lista para planificar, no implementada. El plan validará envío de correo, costo y procedimiento operativo. La pertenencia a cursos se definirá con ese dominio. |
 | D12 | Materiales y paneles | Faltan formatos, tamaños, almacenamiento y operaciones mínimas por rol. | Alcance acotado por funcionalidad compatible con el plazo y el presupuesto. |
 | D13 | Actualización y recuperación | Faltan ubicación/retención de respaldos, responsables y tiempos aceptables de recuperación. | Procedimiento y restauración comprobada antes de una demo con datos persistentes o publicación. |
 
@@ -56,8 +57,8 @@ de la carga; no autoriza contratar servicios.
 
 ## Prioridades
 
-Identidad (D11) tiene checkpoints técnicos; su aceptación con participantes y cierre
-integral conservan T104/T108 pendientes. Obtener la rúbrica (D10) e investigar video, protección y alojamiento (D07–D09)
+El comportamiento de identidad (D11) está definido y puede pasar a planificación cuando
+se solicite. Obtener la rúbrica (D10) e investigar video, protección y alojamiento (D07–D09)
 sigue siendo prioritario. Son riesgos que pueden modificar el diseño y el escenario
 demostrable dentro del presupuesto; también se deberá validar el costo del correo.
 

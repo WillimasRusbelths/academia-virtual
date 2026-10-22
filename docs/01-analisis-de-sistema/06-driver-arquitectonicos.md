@@ -1,6 +1,6 @@
 # 06. Drivers arquitectónicos
 
-Revisión: 2026-10-22. Los drivers son requisitos y restricciones que condicionan la
+Fecha: 2026-10-07. Los drivers son requisitos y restricciones que condicionan la
 estructura, las dependencias y la viabilidad del sistema. Sus orígenes se encuentran en
 los [requisitos funcionales RF](03-requisitos-funcionales.md),
 los [atributos de calidad AC](04-atributos-de-calidad.md) y las
@@ -37,15 +37,15 @@ en el incremento de identidad.
 
 | Driver | Problema que plantea | Decisión que responde |
 | --- | --- | --- |
-| DA01 | Acceso directo, permisos revocados o recursos de otro usuario o clase. | Verificar sesión, cuenta y autorización en backend y revalidar las invariantes en el caso de uso. Sesiones persistidas en PostgreSQL; controles de preparación ADMIN comprobados; demás recorridos académicos y aceptación integral pendientes. |
+| DA01 | Acceso directo, permisos revocados o recursos de otro usuario o clase. | Verificar sesión, cuenta y autorización en backend y revalidar las invariantes en el caso de uso. Sesiones persistidas en PostgreSQL; controles académicos y aceptación funcional pendientes. |
 | DA02 | Confirmaciones falsas o repetidas, cobros inconsistentes y competencia por cupos. | Izipay mediante adaptador; verificación del proveedor, idempotencia y transacciones PostgreSQL. La integración y las reglas detalladas de D01–D06 siguen pendientes. |
 | DA03 | Distribuir clases sin asumir capacidad, costo ni protección de acceso del proveedor. | OBS emite a YouTube Live. La integración y la compatibilidad con todas las condiciones de RF16, AC03, AC04 y RT08 deben validarse; la selección no acredita control del enlace externo ni reproducción autorizada. |
 | DA04 | Complejidad de desarrollo y operación incompatible con recursos limitados. | Monolito por capas organizado en módulos, con PostgreSQL y componentes justificados por requisitos. Docker Compose facilita la ejecución local; no define el estilo arquitectónico. |
 | DA05 | Capacidad y tiempos de respuesta desconocidos al aumentar la carga. | Medir con los escenarios de carga definidos y ajustar consultas, índices, pool y recursos según resultados. Los 1000 concurrentes siguen pendientes. El escalamiento horizontal es una posibilidad por validar si las mediciones lo justifican, no una implementación existente. |
-| DA06 | Cambios de proveedor y solicitudes dependientes de fallos SMTP. | Contratos de aplicación y adaptadores Izipay/SMTP; Mailpit para captura local. Entregas persistidas y ejecutor interno con reintentos implementados y comprobados con Mailpit (001); SMTP externo pendiente. |
+| DA06 | Cambios de proveedor y solicitudes dependientes de fallos SMTP. | Contratos de aplicación y adaptadores Izipay/SMTP; Mailpit para captura local. Entregas persistidas y ejecutor interno con reintentos son diseño previsto, sin integración funcional acreditada. |
 | DA07 | Cambios que se propagan innecesariamente entre módulos o tecnologías. | Clean Architecture dentro de cada módulo: entrada → aplicación → dominio; infraestructura implementa contratos internos y la composición conecta adaptadores. Consumir solo interfaces públicas entre módulos; lint y pruebas verifican los límites. |
-| DA08 | Pérdida de datos, recuperación insegura o exposición de secretos. | Volumen persistente PostgreSQL y configuración privada por entorno; procedimientos de migración, backup y restauración con invalidación de sesiones y tokens. El volumen no sustituye al respaldo; V16 local de identidad comprobado; D13 sigue pendiente, sin disponibilidad de producción demostrada. |
-| DA09 | Acoplamiento de la web con persistencia, reglas de negocio o proveedores. | API REST NestJS en presentación, con contratos JSON y rutas relativas; los casos de uso conservan las reglas. El contrato de identidad define DTO, cookies, origen y errores; endpoints de identidad y preparación ADMIN implementados; publicación y lecturas académicas restantes pendientes. |
+| DA08 | Pérdida de datos, recuperación insegura o exposición de secretos. | Volumen persistente PostgreSQL y configuración privada por entorno; procedimientos de migración, backup y restauración con invalidación de sesiones y tokens. El volumen no sustituye al respaldo; D13 y V16 siguen pendientes, sin disponibilidad de producción demostrada. |
+| DA09 | Acoplamiento de la web con persistencia, reglas de negocio o proveedores. | API REST NestJS en presentación, con contratos JSON y rutas relativas; los casos de uso conservan las reglas. El contrato de identidad define DTO, cookies, origen y errores; los endpoints funcionales siguen pendientes. |
 | DA10 | Diferencias de ejecución y pruebas entre equipos, o pérdida de datos al detener el entorno. | Docker Compose con PostgreSQL, Mailpit, API y web, health checks y espera de dependencias saludables; npm ci con lockfile, nombres de servicio y volumen persistente. Entorno local validado en 47c8338; no equivale a publicación ni prueba de carga. |
 
 El [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) y la
@@ -58,7 +58,3 @@ Las [decisiones pendientes](../decisiones-pendientes.md) conservan D01–D06,
 D10 y D13; la [estrategia de verificación](../../specs/001-identidad-acceso-roles/verification.md)
 define los escenarios de carga y V16. Ningún driver ni decisión de diseño demuestra
 por sí solo el cumplimiento de los requisitos de origen.
-
-## Estado contrastado y trazabilidad de oferta
-
-[Referencia vigente](../estado-documental.md): las decisiones conservan su contenido; su implementación no se infiere de aceptarlas. 002 PA-01–PA-05 refinan RF10/HU08/HU09; DA01/DA07/DA09 → R01/R02/R03/R05 → C05/C04/C12. Preparación ADMIN comprobada en 002 T023–T029; publicación, lectura alumno/docente y ciclo pendientes. DA02 mantiene integridad futura de matrícula, distinta de capacidad configurada.

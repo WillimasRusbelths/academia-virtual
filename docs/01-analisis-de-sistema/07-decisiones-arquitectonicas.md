@@ -6,20 +6,20 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 
 | ID | Decisión arquitectónica | Driver relacionado | Justificación | Resultado |
 | --- | --- | --- | --- | --- |
-| R01 | Monolito por capas organizado en módulos, con Clean Architecture para las dependencias internas. | DA04, DA07 | Reducir la complejidad operativa y permitir cambios sin afectar innecesariamente otros módulos. | Aplicada en identidad y preparación de oferta; módulos restantes futuros. |
-| R02 | Autenticación y autorización en el servidor con sesiones opacas persistidas en PostgreSQL. | DA01, DA08 | Consultar permisos vigentes y permitir revocación efectiva. | Identidad implementada y verificada localmente; aceptación integral pendiente. |
-| R03 | API REST y aplicación web bajo un mismo origen, con cookies y protección CSRF. | DA01, DA09 | Separar presentación y casos de uso mediante un contrato HTTP seguro. | REST de identidad y preparación ADMIN implementados; publicación pública/HTTPS pendiente. |
-| R04 | Argon2id para contraseñas y límites de cómputo medidos. | DA01, DA05 | Proteger credenciales y limitar la saturación del proceso. | Argon2id y flujos comprobados; carga conserva incumplimientos. |
-| R05 | Transacciones y control de concurrencia para cambios de identidad y revocación. | DA01 | Evitar sesiones válidas después de cambios incompatibles de cuenta o permisos. | Carreras de identidad y protocolo/preparación académica comprobados; publicación pendiente. |
-| R06 | Enlaces secretos de un solo uso y credencial inicial restringida. | DA01, DA06 | Limitar exposición, reutilización y privilegios durante verificación y recuperación. | Verificación, inicial y recuperación comprobadas localmente. |
-| R07 | Interfaces y adaptadores para integraciones; Mailpit local y futura salida SMTP. | DA06, DA07 | Sustituir proveedores sin trasladar sus detalles al dominio. | SMTP funcional local con Mailpit comprobado; proveedor real pendiente. |
-| R08 | Entrega de correo persistida en PostgreSQL y ejecutada fuera de la solicitud HTTP. | DA06, DA08 | Permitir reintentos y recuperación sin bloquear las operaciones del usuario. | Ejecutor interno y entregas persistidas comprobados con límites SMTP. |
-| R09 | Límites persistentes de solicitudes y respuestas que reduzcan enumeración de cuentas. | DA01, DA05 | Contener abuso y mantener controles coherentes entre solicitudes. | Cuotas y respuestas públicas implementadas y comprobadas en 001. |
+| R01 | Monolito por capas organizado en módulos, con Clean Architecture para las dependencias internas. | DA04, DA07 | Reducir la complejidad operativa y permitir cambios sin afectar innecesariamente otros módulos. | Decisión aceptada; módulos funcionales pendientes. |
+| R02 | Autenticación y autorización en el servidor con sesiones opacas persistidas en PostgreSQL. | DA01, DA08 | Consultar permisos vigentes y permitir revocación efectiva. | Decisión aceptada; identidad pendiente de implementación y validación funcional. |
+| R03 | API REST y aplicación web bajo un mismo origen, con cookies y protección CSRF. | DA01, DA09 | Separar presentación y casos de uso mediante un contrato HTTP seguro. | Decisión aceptada; contrato de identidad definido, operaciones pendientes. |
+| R04 | Argon2id para contraseñas y límites de cómputo medidos. | DA01, DA05 | Proteger credenciales y limitar la saturación del proceso. | Decisión aceptada; compatibilidad de la biblioteca comprobada, flujo funcional pendiente. |
+| R05 | Transacciones y control de concurrencia para cambios de identidad y revocación. | DA01 | Evitar sesiones válidas después de cambios incompatibles de cuenta o permisos. | Decisión aceptada; escenarios de concurrencia pendientes. |
+| R06 | Enlaces secretos de un solo uso y credencial inicial restringida. | DA01, DA06 | Limitar exposición, reutilización y privilegios durante verificación y recuperación. | Decisión aceptada; flujos pendientes. |
+| R07 | Interfaces y adaptadores para integraciones; Mailpit local y futura salida SMTP. | DA06, DA07 | Sustituir proveedores sin trasladar sus detalles al dominio. | Decisión aceptada; servicio Mailpit comprobado, envío funcional y proveedor externo pendientes. |
+| R08 | Entrega de correo persistida en PostgreSQL y ejecutada fuera de la solicitud HTTP. | DA06, DA08 | Permitir reintentos y recuperación sin bloquear las operaciones del usuario. | Decisión aceptada; ejecutor y garantías funcionales pendientes. |
+| R09 | Límites persistentes de solicitudes y respuestas que reduzcan enumeración de cuentas. | DA01, DA05 | Contener abuso y mantener controles coherentes entre solicitudes. | Decisión aceptada; implementación y pruebas pendientes. |
 | R10 | Pruebas de carga y optimización basada en mediciones. | DA05 | Dimensionar consultas, conexiones y recursos con evidencia. | Estrategia aceptada; 1000 usuarios concurrentes pendientes de demostrar. |
 | R11, R12 | Docker Compose para una operación local reproducible. | DA04, DA10 | Ejecutar dependencias y aplicaciones con configuración y procedimiento comunes. | Entorno local comprobado en el commit 47c8338. |
 | D02 | Izipay mediante un adaptador; PostgreSQL, transacciones e idempotencia para pagos y matrículas. | DA02, DA06 | Verificar el pago y evitar duplicados o inconsistencias entre cobro y acceso. | Pasarela elegida; integración y reglas pendientes. |
 | DEC01 | Video mediante YouTube Live con OBS. | DA03 | Externalizar emisión y distribución dentro de las restricciones del proyecto. | Elección aceptada; integración y control de acceso pendientes de validación. |
-| D13 | Respaldo y recuperación verificables, con políticas operativas por definir. | DA08 | Recuperar datos y restablecer un estado seguro tras un incidente. | V16 local de identidad demostrado; políticas/custodia D13 pendientes. |
+| D13 | Respaldo y recuperación verificables, con políticas operativas por definir. | DA08 | Recuperar datos y restablecer un estado seguro tras un incidente. | Necesidad aceptada; políticas propuestas y restauración pendientes. |
 
 ## R01 — Estructura y dependencias internas
 
@@ -27,7 +27,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** mantener un monolito por capas organizado en módulos. Aplicar Clean Architecture: presentación invoca aplicación; aplicación depende del dominio; infraestructura implementa sus interfaces y la raíz de composición conecta adaptadores. Se mantienen las tecnologías vigentes.
 - **Justificación:** la modularidad y las dependencias hacia el dominio permiten modificar funcionalidades sin afectar innecesariamente otros módulos, con contratos públicos y separación de responsabilidades.
 - **Consecuencias y limitaciones:** cada módulo debe evitar acceso a detalles internos de otros y dependencias circulares. Clean Architecture es el enfoque interno; Docker no determina el estilo arquitectónico.
-- **Estado:** decisión aceptada en el [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) y la [arquitectura inicial](../02-arquitectura-software/arquitectura-inicial.md); identidad y preparación ADMIN implementadas; resto futuro.
+- **Estado:** decisión aceptada en el [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) y la [arquitectura inicial](../02-arquitectura-software/arquitectura-inicial.md); módulos funcionales pendientes.
 
 ## R02 — Autenticación, autorización y sesiones
 
@@ -35,7 +35,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** usar sesiones opacas persistidas en PostgreSQL, con secreto en cookie HttpOnly y huella almacenada. Revalidar cuenta, sesión y autorización en el servidor; contemplar caducidad y revocación.
 - **Justificación:** la persistencia permite invalidar acceso después de cambios de rol, desactivación o recuperación de contraseña.
 - **Consecuencias y limitaciones:** las operaciones protegidas dependen de PostgreSQL. Los controles de identidad no sustituyen la futura comprobación de matrícula para recursos académicos.
-- **Estado:** sesiones y autorización de identidad comprobadas; oferta ADMIN parcial.
+- **Estado:** decisión aceptada; funcionalidad y pruebas de autorización pendientes.
 
 ## R03 — Comunicación mediante API REST
 
@@ -43,7 +43,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** exponer API REST bajo `/api/v1`, con JSON y rutas relativas bajo el mismo origen. Usar cookies de sesión y controles de origen y CSRF en operaciones de escritura; el adaptador HTTP traduce solicitudes, respuestas y errores.
 - **Justificación:** separar el contrato HTTP del dominio facilita pruebas y evolución de la presentación.
 - **Consecuencias y limitaciones:** HTTPS y cookies seguras son necesarios en producción. La configuración de desarrollo no demuestra protección de un despliegue público.
-- **Estado:** decisión aceptada y [contrato de identidad](../../specs/001-identidad-acceso-roles/contracts/api.md) definido; endpoints de identidad y preparación ADMIN implementados.
+- **Estado:** decisión aceptada y [contrato de identidad](../../specs/001-identidad-acceso-roles/contracts/api.md) definido; endpoints funcionales pendientes.
 
 ## R04 — Protección de contraseñas y recursos
 
@@ -51,7 +51,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** emplear Argon2id y acotar las solicitudes y el trabajo de hashing conforme a R04 de la investigación.
 - **Justificación:** el costo de protección de contraseñas debe presupuestarse sin debilitar la seguridad para alcanzar una cifra de concurrencia.
 - **Consecuencias y limitaciones:** límites y tiempos deben medirse bajo carga; comprobar la biblioteca no demuestra seguridad ni rendimiento del flujo completo.
-- **Estado:** Argon2id funcional comprobado; carga ejecutada con incumplimientos, sin aprobar capacidad.
+- **Estado:** decisión aceptada; compatibilidad criptográfica comprobada en Docker, implementación funcional y carga pendientes.
 
 ## R05 — Consistencia de cambios de identidad
 
@@ -59,7 +59,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** usar transacciones PostgreSQL, versión de autorización y bloqueos con orden definido para revalidar y confirmar cambios. Mantener hashing y llamadas externas fuera de transacciones prolongadas.
 - **Justificación:** evitar que una solicitud concurrente confirme una sesión o escritura con permisos obsoletos.
 - **Consecuencias y limitaciones:** deben comprobarse carreras, rollback y manejo de conflictos; los reintentos no deben producir efectos duplicados.
-- **Estado:** carreras de identidad verificadas según aceptación preliminar; no extrapolar a matrícula.
+- **Estado:** decisión aceptada; comportamiento concurrente de identidad pendiente de implementación y verificación.
 
 ## R06 — Verificación, recuperación y acceso inicial
 
@@ -67,15 +67,15 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** utilizar secretos aleatorios, persistidos mediante huella, con propósito, caducidad y consumo único; restringir la credencial inicial y exigir su cambio.
 - **Justificación:** reducir reutilización de enlaces y acceso indebido durante operaciones sensibles.
 - **Consecuencias y limitaciones:** consumo y cambios asociados deben ser atómicos. Los secretos no deben aparecer en registros ni permitir eludir las restricciones de cuenta.
-- **Estado:** flujos de identidad comprobados, aceptación integral pendiente.
+- **Estado:** decisión aceptada; flujos de identidad pendientes.
 
 ## R07 — Integraciones sustituibles y correo
 
 - **Contexto:** DA06 y AC06 requieren independencia de proveedores; RT07 distingue correo local de entrega externa.
 - **Decisión:** definir interfaces para integraciones e implementar adaptadores de infraestructura. Para correo, usar Mailpit local y preparar una futura salida SMTP con autenticación y TLS según el proveedor elegido.
 - **Justificación:** las reglas de negocio pueden conservarse al cambiar proveedor o usar sustitutos en pruebas.
-- **Consecuencias y limitaciones:** deben resolverse costo, cuotas, remitente y configuración del correo externo. Mailpit comprueba recuperación local; su captura no demuestra entrega real externa.
-- **Estado:** adaptador/ejecutor y flujos funcionales Mailpit comprobados; SMTP real pendiente.
+- **Consecuencias y limitaciones:** deben resolverse costo, cuotas, remitente y configuración del correo externo. Capturar correo local no demuestra entrega real ni el flujo de recuperación.
+- **Estado:** decisión aceptada; Mailpit validado como servicio local; adaptador funcional y proveedor externo pendientes.
 
 ## R08 — Entrega diferida de correo
 
@@ -83,7 +83,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** persistir entregas junto con la operación correspondiente y procesarlas mediante un ejecutor interno con reintentos acotados. Proteger el contenido sensible y descartar entregas caducadas o canceladas.
 - **Justificación:** separar la confirmación de la operación del tiempo y disponibilidad de SMTP.
 - **Consecuencias y limitaciones:** se deben comprobar reinicios y concurrencia del ejecutor; SMTP puede entregar duplicados, aunque el enlace deba consumirse una sola vez.
-- **Estado:** persistencia y ejecutor interno comprobados, sin garantía de recepción ni envío exactamente una vez.
+- **Estado:** decisión aceptada; persistencia y ejecutor funcional pendientes.
 
 ## R09 — Contención del abuso
 
@@ -91,7 +91,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** persistir límites en PostgreSQL y emitir respuestas públicas coherentes; separar cuotas de admisión y entrega de correo.
 - **Justificación:** mantener controles entre solicitudes y limitar abuso de autenticación y enlaces.
 - **Consecuencias y limitaciones:** los controles generan consultas adicionales y requieren medir contención y falsos bloqueos; no garantizan protección frente a todo ataque distribuido.
-- **Estado:** controles y pruebas de identidad disponibles en aceptación preliminar.
+- **Estado:** decisión aceptada; controles y pruebas pendientes.
 
 ## R10 — Capacidad y rendimiento verificables
 
@@ -99,7 +99,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** realizar pruebas de carga reproducibles, medir latencias, errores y recursos, y optimizar consultas, índices, conexiones y recursos según resultados.
 - **Justificación:** elegir ajustes a partir de cuellos de botella observados y separar carga interna de pruebas de proveedores externos.
 - **Consecuencias y limitaciones:** caché o escalamiento horizontal son posibilidades por validar si las mediciones las justifican. Un escenario de identidad no demuestra capacidad de chat, video o de toda la academia.
-- **Estado:** cargas de identidad ejecutadas con incumplimientos de latencia y continuidad. Capacidad sin aprobar; D10/rúbrica y nuevos ensayos completos aplazados según el seguimiento vigente.
+- **Estado:** estrategia aceptada; protocolo definitivo y prueba de 1000 concurrentes pendientes. Las comprobaciones técnicas existentes no acreditan esa capacidad.
 
 ## R11 y R12 — Operación local reproducible
 
@@ -107,7 +107,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** usar Docker Compose para PostgreSQL, Mailpit, API y web, con versiones definidas, configuración privada, comprobaciones de salud y volumen de datos.
 - **Justificación:** reproducir instalación, arranque y verificaciones del entorno local.
 - **Consecuencias y limitaciones:** Docker Compose es una decisión del entorno de ejecución. La persistencia del volumen no equivale a respaldo y la validación local no demuestra disponibilidad en producción.
-- **Estado:** decisión aceptada y resultado comprobado en el commit `47c8338`: los cuatro servicios funcionan y las verificaciones técnicas están registradas. Las funcionalidades actuales se delimitan en la referencia de estado.
+- **Estado:** decisión aceptada y resultado comprobado en el commit `47c8338`: los cuatro servicios funcionan y las verificaciones técnicas están registradas. Las funcionalidades del dominio permanecen pendientes.
 
 ## D02 — Pagos y matrículas consistentes
 
@@ -131,8 +131,4 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Decisión:** exigir un procedimiento de respaldo y restauración comprobable antes de operar con datos persistentes en una demostración o producción. Mantener como propuestas las políticas operativas aún sin aprobar.
 - **Justificación:** recuperar datos debe incluir invalidar sesiones y enlaces restaurados y cancelar correos obsoletos antes de reabrir el acceso.
 - **Consecuencias y limitaciones:** definir RPO, RTO, almacenamiento, retención y responsables; ensayar restauración en una base separada. Un volumen persistente o servicios saludables no acreditan recuperación ni una disponibilidad contractual.
-- **Estado:** V16 de identidad ensayado localmente en T098/T106; D13 pendiente, sin SLA ni recuperación integrada de oferta.
-
-## Estado contrastado y trazabilidad de oferta
-
-[Referencia vigente](../estado-documental.md): las decisiones conservan su contenido; su implementación no se infiere de aceptarlas. 002 PA-01–PA-05 refinan RF10/HU08/HU09; DA01/DA07/DA09 → R01/R02/R03/R05 → C05/C04/C12. Preparación ADMIN comprobada en 002 T023–T029; publicación, lectura alumno/docente y ciclo pendientes. DA02 mantiene integridad futura de matrícula, distinta de capacidad configurada.
+- **Estado:** necesidad aceptada; políticas pendientes de validación y restauración funcional no comprobada, según V16 de la verificación de identidad.

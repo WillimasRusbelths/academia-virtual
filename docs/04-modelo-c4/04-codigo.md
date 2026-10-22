@@ -40,14 +40,10 @@ El ensamblaje conecta el adaptador con el consumidor. Los imports y firmas justi
 
 Consulta primaria, revocación idempotente, caducidad, actividad aceptada y revalidación tienen pruebas existentes. La regla pura no renueva sesiones; el adaptador no amplía su caducidad absoluta. Indisponibilidad se comunica con errores tipados, sin conceder acceso.
 
-La selección es estructural y no muestra todos los flujos. Login/logout, creación y revocación conjunta por gestión/reset están integrados y comprobados en 001 US1/US4/US7 y T106, según la [referencia vigente](../estado-documental.md). El núcleo no importa NestJS ni PostgreSQL; la revalidación transaccional exige una transacción abierta y no traslada PoolClient a aplicación.
+Son fundamentos comprobados, no el ciclo completo de login/logout ni mutaciones administrativas integradas. La creación de sesiones y revocación conjunta en esos flujos siguen pendientes. El núcleo no importa NestJS ni PostgreSQL; la revalidación transaccional exige una transacción abierta y no traslada PoolClient a aplicación.
 
 ## Referencias
 
 - [C3](03-componentes.md), [catálogo](../02-arquitectura-software/componentes-arquitectonicos.md) y [diseño interno](../03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md).
 - [Persistencia compartida](../../apps/api/src/infrastructure/database/database.ts) y [composición](../../apps/api/src/app.module.ts).
 - [Pruebas de sesiones](../../apps/api/tests/integration/session-store.spec.ts), [reglas](../../apps/api/src/modules/identity/domain/access.test.ts) y [resultados registrados](../../specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md).
-
-La selección amplía las mismas responsabilidades C03/C05/C09; las dos páginas del editable separan contratos/consumidor y adaptador/reglas para lectura en diapositiva. La segunda exportación es [adaptador de sesiones](../diagramas/imagenes/c4-codigo-adaptador.png). Flechas de código (uso/realización) según [leyenda](../diagramas/README.md); no comunicaciones de red.
-
-![Adaptador y reglas](../diagramas/imagenes/c4-codigo-adaptador.png)

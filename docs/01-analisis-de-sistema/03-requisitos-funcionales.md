@@ -3,20 +3,21 @@
 RF01–RF19 son requisitos de síntesis del MVP. Los
 FR-001–FR-033 de la [especificación de identidad](../../specs/001-identidad-acceso-roles/spec.md)
 conservan sus IDs, detalles, límites y criterios de aceptación; no se renumeran.
-RF01–RF09 tienen implementación y evidencia de identidad; RF10 es parcial (preparación ADMIN). RF11–RF18 son futuros. RF19 tiene procedimientos/ensayo local de identidad, con D13 pendiente. Ver [inventario](../estado-documental.md); especificar no equivale a aceptar integralmente.
+Ningún RF de esta tabla está implementado como flujo de negocio. La base técnica y las
+pruebas auxiliares existentes no equivalen a su cumplimiento.
 
 | ID | El sistema debe… | Fuente / condición |
 | --- | --- | --- |
-| RF01 | Registrar públicamente solo alumnos con nombre, correo único normalizado y contraseña; rechazar elevación de privilegios y duplicados, incluso simultáneos. | Identidad FR-001–003; implementado, ver evidencia 001 en referencia de estado. |
-| RF02 | Verificar el correo antes de conceder acceso protegido mediante enlace de un solo uso, con vencimiento, reenvío y cuotas; programar entregas sin prometer éxito ante fallo SMTP. | FR-004/029–031; implementado, ver evidencia 001 en referencia de estado. Verificación no inicia sesión ni cambia contraseña. |
-| RF03 | Autenticar cuentas habilitadas, mantener y cerrar sesiones, expirar a los 30 minutos de inactividad o a las 8 horas y rechazar sesiones revocadas con errores públicos seguros y límites de intentos. | FR-005–009/022–023; implementado, ver evidencia 001 en referencia de estado. |
-| RF04 | Restablecer la contraseña de una cuenta activa/verificada con enlace de un solo uso de 30 minutos; revocar sesiones y credenciales anteriores, exigir nuevo login y proteger los secretos. | FR-024/030–033; implementado, ver evidencia 001 en referencia de estado. |
-| RF05 | Mostrar al titular su nombre, correo, único rol, estado e inicio mínimo accesible; ofrecer perfil/logout y gestión de cuentas solo al administrador. | FR-010–012/021/023; implementado; no panel académico completo. |
-| RF06 | Permitir solo al administrador consultar/crear cuentas, corregir nombres y cambiar rol/estado; entregar credencial provisional restringida, revocar sesiones al cambiar accesos y proteger al último administrador activo. | FR-013–017; implementado, ver evidencia 001 en referencia de estado. No borrar cuentas, autoalterar privilegios ni recuperar secretos almacenados. |
-| RF07 | Inicializar al primer administrador una única vez por entorno mediante operación restringida, sin credenciales predeterminadas y resistiendo ejecuciones repetidas o concurrentes. | FR-027–028; implementado, ver evidencia 001 en referencia de estado. |
-| RF08 | Verificar en backend sesión, cuenta, permisos actuales y propiedad en cada operación protegida; denegar por defecto y comprobar pertenencia/matrícula cuando el dominio académico lo requiera. | FR-018–020, constitución II; cuentas y preparación ADMIN verificadas; otras lecturas académicas pendientes. |
+| RF01 | Registrar públicamente solo alumnos con nombre, correo único normalizado y contraseña; rechazar elevación de privilegios y duplicados, incluso simultáneos. | Identidad FR-001–003; especificado. |
+| RF02 | Verificar el correo antes de conceder acceso protegido mediante enlace de un solo uso, con vencimiento, reenvío y cuotas; programar entregas sin prometer éxito ante fallo SMTP. | FR-004/029–031; especificado. Verificación no inicia sesión ni cambia contraseña. |
+| RF03 | Autenticar cuentas habilitadas, mantener y cerrar sesiones, expirar a los 30 minutos de inactividad o a las 8 horas y rechazar sesiones revocadas con errores públicos seguros y límites de intentos. | FR-005–009/022–023; especificado. |
+| RF04 | Restablecer la contraseña de una cuenta activa/verificada con enlace de un solo uso de 30 minutos; revocar sesiones y credenciales anteriores, exigir nuevo login y proteger los secretos. | FR-024/030–033; especificado. |
+| RF05 | Mostrar al titular su nombre, correo, único rol, estado e inicio mínimo accesible; ofrecer perfil/logout y gestión de cuentas solo al administrador. | FR-010–012/021/023; especificado; no panel académico completo. |
+| RF06 | Permitir solo al administrador consultar/crear cuentas, corregir nombres y cambiar rol/estado; entregar credencial provisional restringida, revocar sesiones al cambiar accesos y proteger al último administrador activo. | FR-013–017; especificado. No borrar cuentas, autoalterar privilegios ni recuperar secretos almacenados. |
+| RF07 | Inicializar al primer administrador una única vez por entorno mediante operación restringida, sin credenciales predeterminadas y resistiendo ejecuciones repetidas o concurrentes. | FR-027–028; especificado. |
+| RF08 | Verificar en backend sesión, cuenta, permisos actuales y propiedad en cada operación protegida; denegar por defecto y comprobar pertenencia/matrícula cuando el dominio académico lo requiera. | FR-018–020, constitución II; cuentas especificadas, extensión académica pendiente. |
 | RF09 | Registrar los cambios administrativos con actor, destino, momento, acción y resultado, excluyendo contraseñas, enlaces y tokens de errores y registros. | FR-025–026/033; modelo de datos U1 distingue auditoría aceptada y registros de denegación/operación. |
-| RF10 | Permitir consultar y gestionar cursos, grupos, horarios y cupos bajo permisos definidos, reflejando la oferta disponible. | 002 FR-001–016, PA-01–PA-05 aprobadas. Preparación ADMIN implementada; publicación/ciclo/lectura alumno-docente pendientes; reservas D04 y matrícula D06 abiertas. |
+| RF10 | Permitir consultar y gestionar cursos, grupos, horarios y cupos bajo permisos definidos, reflejando la oferta disponible. | Alcance: oferta; previsto. Administración propuesta en HU09, solapamientos/cambios/reservas pendientes D04/D06. |
 | RF11 | Crear una orden con varios cursos, precios válidos, conceptos y total calculados en servidor, conservando el detalle para comprobar el cobro. | Alcance y constitución III; previsto. No confiar en importes enviados por el cliente. |
 | RF12 | Tramitar pagos con Izipay mediante un adaptador y reconocerlos solo tras comprobar autenticidad, orden, importe y moneda con el proveedor, procesando reintentos/notificaciones de forma idempotente. | Constitución V–VII; previsto, integración pendiente D02. La pantalla de éxito no confirma pago. Un pago por total sigue sujeto a D01. |
 | RF13 | Activar matrículas pagadas únicamente tras pago verificado y garantizar ausencia de duplicados y sobreventa en matrículas/asignación de cupos mediante transacciones y restricciones persistentes. | Constitución IV–VI; previsto. D01–D06 deben fijar atomicidad de la orden, identidad/vigencia de matrícula, momento de reserva/asignación, pago tardío y cancelaciones antes de implementar. |
@@ -25,7 +26,7 @@ RF01–RF09 tienen implementación y evidencia de identidad; RF10 es parcial (pr
 | RF16 | Habilitar la emisión de clases por el docente autorizado y la reproducción por alumnos habilitados, comprobando acceso a manifiestos y segmentos HLS incluso por URL directa o con permiso vencido. | Alcance, constitución VIII; previsto, D03/D07–D08. YouTube Live con OBS es la elección DEC01; la compatibilidad de estos controles con el proveedor sigue pendiente de validación. |
 | RF17 | Habilitar chat autorizado por clase para alumnos con acceso vigente y aislar los mensajes entre clases/grupos. | Alcance y constitución II; previsto, Socket.IO propuesto; no incluye participación audiovisual del alumno. |
 | RF18 | Mostrar paneles básicos por rol con las acciones y datos autorizados que se definan para el MVP. | Alcance; previsto, mínimos pendientes D12; no presume métricas académicas/financieras. |
-| RF19 | Permitir ejecutar migraciones controladas, respaldar/restaurar datos y recuperar el servicio mediante procedimientos operativos verificables antes de demo persistente o publicación. | Constitución X, plan y V16 de identidad ensayado localmente; No es una pantalla nueva; responsables y objetivos de recuperación pendientes D13. |
+| RF19 | Permitir ejecutar migraciones controladas, respaldar/restaurar datos y recuperar el servicio mediante procedimientos operativos verificables antes de demo persistente o publicación. | Constitución X, plan y V16; previsto. No es una pantalla nueva; responsables y objetivos de recuperación pendientes D13. |
 
 ## Relación HU y RF
 
@@ -85,7 +86,9 @@ como HU1.1, distintas de los IDs HU01–HU17 del análisis.
 | RF08 | FR-018, FR-019, FR-020 |
 | RF09 | FR-025, FR-026, FR-033 |
 
-La unión cubre los 33 FR sin eliminarlos ni cambiar sus condiciones. RF10/HU08/HU09 se refinan en 002 FR-001–016: US1 preparación, US2 publicación/consulta, US3 ciclo y US4 asignación/lectura propia. RF11–RF18 y HU10–HU17 siguen futuros. RF08 ya incluye academic:manage/read-published/read-own; solo preparación tiene rutas de producto. RF19 procede de la constitución y del plan
+La unión cubre los 33 FR sin eliminarlos ni cambiar sus condiciones. RF10–RF18 y HU08–HU17
+corresponden al alcance académico futuro; no se les atribuyen FR de identidad inexistentes.
+RF08 se ampliará con permisos académicos. RF19 procede de la constitución y del plan
 operativo/V16, no de un supuesto FR-034. El detalle de aceptación permanece en
 [spec.md](../../specs/001-identidad-acceso-roles/spec.md) y
 [verification.md](../../specs/001-identidad-acceso-roles/verification.md).
