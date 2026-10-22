@@ -1,0 +1,1880 @@
+{
+  "feature": "002-oferta-academica",
+  "scope": "T030 checkpoint, T031/T032 test preparation and real execution only; stop before T033",
+  "date": "2026-10-22",
+  "timezone": "America/Lima",
+  "baseCommit": "cf2fc851931c8921f312aa3a8c11feca83440747",
+  "source": [
+    {
+      "path": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "sha256": "85dcb147751b78073984175722108de1f5413aca853aefc5def038cd33dcaf14"
+    },
+    {
+      "path": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+      "sha256": "f09528d9163f620d2a8c729eca2fd929dfe320a723a1060cecbb6d470cf07c43"
+    }
+  ],
+  "checkpoint": {
+    "artifact": "us1-results.json",
+    "sha256": "e10c9168cc8cf85876e4b48e743628630e2f99f9e99a83069fc83148f920c76a",
+    "status": "PASS"
+  },
+  "runs": [
+    {
+      "action": "visibility",
+      "timezone": "America/Lima",
+      "total": 42,
+      "passed": 0,
+      "expectedFailed": 42,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "reportSha256": "e853dbd0c1b999386eecf877457d6e6d3680494a693c9a5f24b5e614b9ecc9d7",
+      "cases": [
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo DRAFT",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo PUBLISHED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo DRAFT",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo PUBLISHED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo DRAFT",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo PUBLISHED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 sin publicación previa: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación quitada: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación sustituida: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 docente no habilitado: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 directorio sin asignado: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 cuenta recuperada con generación posterior: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V03 generación bigint no se compara redondeándola a number",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de rol sin consultas intermedias no rehabilita snapshot",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de estado sin consultas intermedias no rehabilita snapshot",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de verificación sin consultas intermedias no rehabilita snapshot",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V05 nombre/reset sin pérdida de habilitación conserva la visibilidad, no depende de authVersion",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V06 captura explícita nueva vuelve a habilitar grupo; no muta entrada ni cuenta",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso DRAFT sin hijos no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso PUBLISHED sin hijos no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso WITHDRAWN sin hijos no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo DRAFT no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo WITHDRAWN no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo CANCELLED no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V09 curso con hijos que requieren revisión no visible aunque editorialmente publicados",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V10 un hijo visible basta; hijos ocultos no se vuelven visibles",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre DRAFT oculta aunque hijo fuera apto",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre WITHDRAWN oculta aunque hijo fuera apto",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 1 no es ocupación ni disponibilidad",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 45 no es ocupación ni disponibilidad",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 50 no es ocupación ni disponibilidad",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V13 no proyecta metadatos editoriales, revisión, generación, IDs docentes o privados",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V15 no proyecta generación invalidada y recuperada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V16 proyectar no muta snapshot, horarios ni docente",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "visibility-utc",
+      "timezone": "UTC",
+      "total": 42,
+      "passed": 0,
+      "expectedFailed": 42,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "reportSha256": "ee4aa328ba88bf42f900afa36334d7753dfe3da57ee601647935d7ed56029680",
+      "cases": [
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo DRAFT",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo PUBLISHED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo DRAFT",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo PUBLISHED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo DRAFT",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo PUBLISHED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 sin publicación previa: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación quitada: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación sustituida: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 docente no habilitado: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 directorio sin asignado: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 cuenta recuperada con generación posterior: oculta y revisión derivada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V03 generación bigint no se compara redondeándola a number",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de rol sin consultas intermedias no rehabilita snapshot",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de estado sin consultas intermedias no rehabilita snapshot",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de verificación sin consultas intermedias no rehabilita snapshot",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V05 nombre/reset sin pérdida de habilitación conserva la visibilidad, no depende de authVersion",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V06 captura explícita nueva vuelve a habilitar grupo; no muta entrada ni cuenta",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso DRAFT sin hijos no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso PUBLISHED sin hijos no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso WITHDRAWN sin hijos no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo DRAFT no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo WITHDRAWN no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo CANCELLED no visible",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V09 curso con hijos que requieren revisión no visible aunque editorialmente publicados",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V10 un hijo visible basta; hijos ocultos no se vuelven visibles",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre DRAFT oculta aunque hijo fuera apto",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre WITHDRAWN oculta aunque hijo fuera apto",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 1 no es ocupación ni disponibilidad",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 45 no es ocupación ni disponibilidad",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 50 no es ocupación ni disponibilidad",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V13 no proyecta metadatos editoriales, revisión, generación, IDs docentes o privados",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto CANCELLED",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V15 no proyecta generación invalidada y recuperada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V16 proyectar no muta snapshot, horarios ni docente",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Pure visibility function absent; capability assertion runs independently in this case",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Visibility/review/projection expectations"
+          ]
+        }
+      ]
+    },
+    {
+      "action": "publication",
+      "timezone": "America/Lima",
+      "total": 58,
+      "passed": 5,
+      "expectedFailed": 53,
+      "skipped": 0,
+      "collectionErrors": 0,
+      "reportSha256": "9b7f8525fe51d070ba398e36ed41662e2e1cb88ed1ed648f722755b3980ca7ac",
+      "cases": [
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 controles reales y proyecciones existentes; NO publicación aprobada I01 AppModule real, conexión observadora distinta, cinco migraciones y sesión administrativa",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "reason": "All assertions reached",
+          "downstreamBusinessAssertionsReached": true,
+          "pendingAssertions": []
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 controles reales y proyecciones existentes; NO publicación aprobada I02 SQL de fixture preparado no fabrica comandos ni auditoría; directorio mínimo",
+          "status": "passed",
+          "classification": "INFRASTRUCTURE_CONTROL",
+          "reason": "All assertions reached",
+          "downstreamBusinessAssertionsReached": true,
+          "pendingAssertions": []
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 controles reales y proyecciones existentes; NO publicación aprobada I03 lectura administrativa existente distingue curso vacío editorialmente publicado de visible",
+          "status": "passed",
+          "classification": "EXISTING_ADMINISTRATIVE_PROJECTION_BEHAVIOR",
+          "reason": "All assertions reached",
+          "downstreamBusinessAssertionsReached": true,
+          "pendingAssertions": []
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 controles reales y proyecciones existentes; NO publicación aprobada I04 pérdida/recuperación real sin consultas intermedias mantiene snapshot inválido; GET no escribe",
+          "status": "passed",
+          "classification": "EXISTING_ADMINISTRATIVE_PROJECTION_BEHAVIOR",
+          "reason": "All assertions reached",
+          "downstreamBusinessAssertionsReached": true,
+          "pendingAssertions": []
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 controles reales y proyecciones existentes; NO publicación aprobada I05 proyección HTTP existente de fixture visible no inventa ocupación y excluye generación",
+          "status": "passed",
+          "classification": "EXISTING_ADMINISTRATIVE_PROJECTION_BEHAVIOR",
+          "reason": "All assertions reached",
+          "downstreamBusinessAssertionsReached": true,
+          "pendingAssertions": []
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P01 curso sin grupos se publica pero no se ofrece; commit, revisión, ledger y auditoría",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P02 publicar curso no publica borradores ni captura generaciones de sus hijos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P03 curso incompleto enumera descripción faltante y no aplica nada",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P04 curso ya publicado rechaza nueva publicación, no NO_CHANGE",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P05 republicar curso retirado es explícito y no renueva capturas ni estados hijos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P06 grupo no se publica bajo padre DRAFT",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P06 grupo no se publica bajo padre WITHDRAWN",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P07 grupo completo con capacidad 1 captura docente/generación y conserva padre/hermano",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P07 grupo completo con capacidad 50 captura docente/generación y conserva padre/hermano",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P08 dato faltante capacity impide publicar sin cambios parciales",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P08 dato faltante periodStart impide publicar sin cambios parciales",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P08 dato faltante periodEnd impide publicar sin cambios parciales",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P08 dato faltante teacherUserId impide publicar sin cambios parciales",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P08 dato faltante schedule impide publicar sin cambios parciales",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P09 docente que pierde role rechaza publicación con error seguro por campo",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P09 docente que pierde status rechaza publicación con error seguro por campo",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P09 docente que pierde verification rechaza publicación con error seguro por campo",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P10 publicación revalida sin ocurrencia aunque fixture SQL permita filas",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P10 publicación revalida solapamiento interno aunque fixture SQL permita filas",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P11 grupo PUBLISHED rechaza publicar; cancelación terminal",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P11 grupo CANCELLED rechaza publicar; cancelación terminal",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P12 curso retirado revalida hijo publicado válido sin tocar ninguna fila de grupo",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P13 curso no limpia revisión tras pérdida/recuperación role sin lecturas",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P13 curso no limpia revisión tras pérdida/recuperación status sin lecturas",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P13 curso no limpia revisión tras pérdida/recuperación verification sin lecturas",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P14 si un hijo publicado carece de franjas se revierte curso y se conservan todos los hijos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P15 hijos no publicados no bloquean ni se publican al recuperar curso",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P16 solo republicar explícitamente grupo retirado captura nueva generación; padre intacto",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P22 curso revalida docente actualmente inhabilitado por role y revierte todo",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P22 curso revalida docente actualmente inhabilitado por status y revierte todo",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P22 curso revalida docente actualmente inhabilitado por verification y revierte todo",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P23 curso revalida integridad del hijo publicado: sin ocurrencia",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P23 curso revalida integridad del hijo publicado: solapamiento interno",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P24 republicación de grupo sustituye captura del docente anterior, no al editar la asignación",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P25 grupo incompleto enumera todos los datos faltantes, sin aplicar parte de la publicación",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P17 courses: revisión obsoleta no deja efectos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P18 courses: replay idéntico conserva revisión y no duplica ledger/auditoría",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P19 courses: fallo real de auditoría revierte negocio y ledger juntos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P20 courses: VISITOR denegado sin efectos ni datos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P20 courses: STUDENT denegado sin efectos ni datos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P20 courses: TEACHER denegado sin efectos ni datos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P17 groups: revisión obsoleta no deja efectos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P18 groups: replay idéntico conserva revisión y no duplica ledger/auditoría",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P19 groups: fallo real de auditoría revierte negocio y ledger juntos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P20 groups: VISITOR denegado sin efectos ni datos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P20 groups: STUDENT denegado sin efectos ni datos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P20 groups: TEACHER denegado sin efectos ni datos",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P21 DTO estricto: commandId omitido",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P21 DTO estricto: expectedRevision omitida",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P21 DTO estricto: revisión numérica",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P21 DTO estricto: dos docentes inyectados",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P21 DTO estricto: snapshot del cliente",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-publication.spec.ts",
+          "name": "T032 publicación HTTP/PG — FR-004/007/008/012; SC-004 P21 DTO estricto: estado del cliente",
+          "status": "failed",
+          "classification": "EXPECTED_RED",
+          "reason": "Real HTTP 404: publication route not implemented; no load/configuration error",
+          "downstreamBusinessAssertionsReached": false,
+          "pendingAssertions": [
+            "Publication status/envelope/errors",
+            "Persisted business state and revision",
+            "Ledger and audit atomicity/replay where applicable"
+          ]
+        }
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-22T23:46:54.885Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-22T23:47:10.156Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "build",
+      "exitCode": 0,
+      "date": "2026-10-22T23:47:51.788Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "architecture",
+      "exitCode": 0,
+      "date": "2026-10-22T23:48:24.297Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "totals": {
+    "T031UniqueCases": 42,
+    "T031Executions": 84,
+    "T031ExpectedFailures": 84,
+    "T032UniqueCases": 58,
+    "T032Executions": 58,
+    "T032InfrastructureControlsPassed": 2,
+    "T032ExistingProjectionCasesPassed": 3,
+    "T032PublicationCasesApproved": 0,
+    "T032ExpectedFailures": 53
+  },
+  "operationalIncident": {
+    "initialDockerEngineUnavailable": true,
+    "initialDockerDesktopPathNotFound": true,
+    "correctInstalledPathUsed": true,
+    "standaloneArchitectureFirstRun": {
+      "passed": 13,
+      "failed": 1,
+      "cause": "Stale image dist: private runner did not compile before separate architecture action; missing ten already-implemented academic endpoints",
+      "reportSha256": "4d1b0aea0b89d4de8f1530119d4b4622e28ab19a7577ddecca6230d223bf86ee",
+      "acceptedAsBusinessRed": false,
+      "fix": "Generate Prisma and compile current API source inside same ephemeral container before architecture suite",
+      "rerunPassed": 14,
+      "timeLimitsChanged": false,
+      "assertionsChanged": false
+    },
+    "historicalArchitectureTimeout": "Original evidence retained; did not recur"
+  },
+  "preservation": {
+    "unchangedTrackedFilesExceptTasks": 574,
+    "unchangedProtectedFiles": 72,
+    "allPreviouslyTrackedProductionSourceUnchanged": true,
+    "priorTestsMigrationsAndEvidenceUnchanged": true,
+    "noNewProductImplementation": true,
+    "noNewMigration": true,
+    "manualSqlExecuted": false,
+    "before": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-22T01:11:00.654189262Z",
+        "startedAt": "2026-10-22T00:36:34.946814487Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "after": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-22T23:50:22.438700248Z",
+        "startedAt": "2026-10-22T23:32:36.841607665Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "tasks": {
+    "T030": "COMPLETE: checkpoint criteria met",
+    "T031": "PENDING: tests written/executed; behavior and downstream assertions await T036",
+    "T032": "PENDING: tests written/executed; publication/rollback/replay assertions await T036/T038",
+    "T033": "NOT_STARTED"
+  },
+  "E1": "Preserved",
+  "clarifications": "PA-01 through PA-05 unchanged",
+  "bootstrap": "OPEN",
+  "limits": {
+    "SC001Complete": false,
+    "humanAcceptance": false,
+    "capacity1000Validated": false,
+    "publicationImplemented": false,
+    "excluded": [
+      "enrollment",
+      "reservations",
+      "payments",
+      "classes",
+      "materials",
+      "video",
+      "chat"
+    ],
+    "open": [
+      "D04",
+      "D06 enrollment",
+      "T104/T108",
+      "D10/D13",
+      "real SMTP",
+      "historical bootstrap"
+    ]
+  },
+  "nextBlock": "T033/T034/T035: US2 catalog, concurrent-publication and browser tests; then implementation in dependency order T036-T041; no skipping T034 races"
+}

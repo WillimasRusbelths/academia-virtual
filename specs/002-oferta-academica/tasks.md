@@ -1,13 +1,15 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T029 completas. Checkpoint de fundamentos T018 aprobado el
+**Estado**: T001–T030 completas. Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
 America/Lima; 150 casos únicos, 300 ejecuciones dirigidas finales aprobadas. T021
 verificada con las diez rutas reales de T026; 74/74 casos HTTP aprobados. T027 cliente
 y contratos verificados. T028/T029 verificadas; T022 cierra con sus 19 casos originales
-en escritorio y móvil, sin modificar sus expectativas. T030–T074 sin iniciar.
+en escritorio y móvil, sin modificar sus expectativas. T030 verifica US1 completa en
+su alcance de preparación. T031/T032 escritas y ejecutadas, pendientes de T036/T038
+para demostrar sus aserciones de negocio; T033–T074 sin iniciar.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
@@ -24,7 +26,9 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [reglas puras y cierre T019/T020/T023](evidence/t023.md) y
 [comandos y consultas T024/T025](evidence/t024-t025.md) y
 [rutas y cliente T026/T027](evidence/t026-t027.md) e
-[interfaz, navegación y cierre T022/T028/T029](evidence/t028-t029.md).
+[interfaz, navegación y cierre T022/T028/T029](evidence/t028-t029.md),
+[checkpoint US1 T030](evidence/us1.md) y
+[pruebas de visibilidad/publicación T031/T032](evidence/t031-t032.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -33,7 +37,7 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual autoriza únicamente T028/T029 y el cierre verificable de T022; se detiene antes de T030.
+actual autoriza únicamente T030/T031/T032; se detiene antes de T033.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
@@ -222,9 +226,23 @@ vacías, capacidad 1/50 y franjas contiguas; sin depender de publicación o matr
 - [X] T027 [US1] Extender `apps/web/src/shared/api-client.ts`, `apps/web/src/app/http.ts`, `http.test.ts` y crear `apps/web/src/features/academic-offering/api.ts` con `api.test.ts`: queries por ruta, DTO cerrados, errores tipados, UUID por intención y revision decimal; replay idéntico manual, cambios con ID nuevo, sin storage ni nuevas cabeceras. Termina con rechazo de DTO inesperado y sin retry tras login (FR-011/013/015).
 - [X] T028 [US1] Crear `apps/web/src/features/academic-offering/admin-courses-page.tsx`, `admin-course-page.tsx`, `admin-group-page.tsx`, `course-form.tsx`, `group-form.tsx`, `schedule-editor.tsx` y `offering-state.tsx`: preparación y selector, «Sin configurar», validaciones textuales, cancelación, espera/error/éxito y foco. Termina con T022 verde tras T029 (FR-001–005/013/014).
 - [X] T029 [US1] Integrar rutas administrativas y política de rutas académicas en `apps/web/src/app/App.tsx`, `router.tsx`, `protected-route.tsx` y `apps/web/src/features/profile/home-page.tsx`; conservar perfil/logout/cuentas, incluir isProtectedPath y limpieza ante pérdida de sesión. Termina con acceso directo denegado y navegación por teclado (FR-010/014/016).
-- [ ] T030 [US1] Ejecutar checkpoint y registrar `specs/002-oferta-academica/evidence/us1.md`: T019–T022, arquitectura y persistencia tras recarga; dos grupos sin cambios cruzados, todos los casos US1 y notas de revisión. Primer incremento demostrable de preparación, sin afirmar SC-001 completo antes de US3 ni aceptación humana (FR-001–005/013–016).
+- [X] T030 [US1] Ejecutar checkpoint y registrar `specs/002-oferta-academica/evidence/us1.md`: T019–T022, arquitectura y persistencia tras recarga; dos grupos sin cambios cruzados, todos los casos US1 y notas de revisión. Primer incremento demostrable de preparación, sin afirmar SC-001 completo antes de US3 ni aceptación humana (FR-001–005/013–016).
 
 ## Fase 4: US2 — Publicar y comparar oferta (P1, T031–T042)
+
+Checkpoint T030 y avance T031/T032, 2026-10-22: US1 aprobó nuevamente 266/266
+API (150 reglas T019/T020 y 14 arquitectura), 74/74 HTTP/PostgreSQL, 141/141 web y
+62/62 ejecuciones de navegador (30 casos funcionales únicos en dos perfiles + dos
+controles). T030 completa; persistencia tras recarga y dos grupos independientes
+comprobados. T031 agrega 42 casos únicos, ejecutados en America/Lima y UTC (84):
+fallos esperados independientes por reglas puras ausentes, sin error de colección.
+T032 ejecuta 58 casos únicos: 2 controles y 3 proyecciones existentes aprobados,
+53 fallos esperados por rutas publish ausentes; aserciones posteriores aún no alcanzadas.
+T031/T032 permanecen pendientes de verificación con T036/T038; pruebas escritas y
+ejecutadas no equivalen a publicación aprobada. Tipos/lint/builds aprobados; arquitectura
+final 14/14 tras corregir dist antiguo en el runner privado, sin debilitar pruebas.
+PA-01–PA-05 y E1 conservados. Bootstrap histórico abierto. Evidencia en
+[US1](evidence/us1.md) y [T031/T032](evidence/t031-t032.md). No se inicia T033.
 
 Depende de fundamentos y US1. Prueba independiente: fixtures preparadas de varios
 estados, publicación completa y alumno desde inicio compara dos grupos. No necesita
