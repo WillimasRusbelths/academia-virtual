@@ -1,0 +1,125 @@
+﻿{
+    "durationSeconds":  900,
+    "version":  "16.0",
+    "width":  960,
+    "textOverflows":  [
+
+                      ],
+    "height":  540,
+    "referenceCommit":  "542c341",
+    "slides":  [
+                   {
+                       "notesLength":  759,
+                       "editableTextShapes":  7,
+                       "render":  "diapositiva-01.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  1
+                   },
+                   {
+                       "notesLength":  926,
+                       "editableTextShapes":  14,
+                       "render":  "diapositiva-02.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  2
+                   },
+                   {
+                       "notesLength":  859,
+                       "editableTextShapes":  20,
+                       "render":  "diapositiva-03.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  3
+                   },
+                   {
+                       "notesLength":  963,
+                       "editableTextShapes":  17,
+                       "render":  "diapositiva-04.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  4
+                   },
+                   {
+                       "notesLength":  1020,
+                       "editableTextShapes":  13,
+                       "render":  "diapositiva-05.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  5
+                   },
+                   {
+                       "notesLength":  878,
+                       "editableTextShapes":  19,
+                       "render":  "diapositiva-06.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  6
+                   },
+                   {
+                       "notesLength":  1032,
+                       "editableTextShapes":  16,
+                       "render":  "diapositiva-07.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  7
+                   },
+                   {
+                       "notesLength":  1332,
+                       "editableTextShapes":  15,
+                       "render":  "diapositiva-08.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  8
+                   },
+                   {
+                       "notesLength":  1090,
+                       "editableTextShapes":  11,
+                       "render":  "diapositiva-09.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  9
+                   },
+                   {
+                       "notesLength":  1237,
+                       "editableTextShapes":  15,
+                       "render":  "diapositiva-10.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  10
+                   },
+                   {
+                       "notesLength":  1301,
+                       "editableTextShapes":  16,
+                       "render":  "diapositiva-11.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  11
+                   },
+                   {
+                       "notesLength":  1470,
+                       "editableTextShapes":  15,
+                       "render":  "diapositiva-12.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  12
+                   },
+                   {
+                       "notesLength":  1538,
+                       "editableTextShapes":  15,
+                       "render":  "diapositiva-13.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  13
+                   },
+                   {
+                       "notesLength":  1662,
+                       "editableTextShapes":  12,
+                       "render":  "diapositiva-14.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  14
+                   },
+                   {
+                       "notesLength":  1339,
+                       "editableTextShapes":  17,
+                       "render":  "diapositiva-15.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  15
+                   },
+                   {
+                       "notesLength":  1828,
+                       "editableTextShapes":  13,
+                       "render":  "diapositiva-16.png",
+                       "nativeBitmapFormat":  "Format24bppRgb",
+                       "slide":  16
+                   }
+               ],
+    "application":  "Microsoft PowerPoint"
+}

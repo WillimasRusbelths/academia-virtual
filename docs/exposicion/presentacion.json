@@ -1,0 +1,4858 @@
+{
+  "width": 960,
+  "height": 540,
+  "referenceCommit": "542c341",
+  "implementationCommit": "ecb1efe",
+  "durationSeconds": 900,
+  "slides": [
+    {
+      "title": "Academia Virtual",
+      "section": "Análisis · arquitectura · diseño",
+      "seconds": 40,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "ANÁLISIS · ARQUITECTURA · DISEÑO",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Academia Virtual",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "01 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 139,
+          "w": 896,
+          "h": 273,
+          "fill": "152D42",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 58,
+          "y": 168,
+          "w": 825,
+          "h": 98,
+          "text": "De los requisitos\na las decisiones de software",
+          "size": 38,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 60,
+          "y": 300,
+          "w": 800,
+          "h": 67,
+          "text": "Un monolito modular con alcance y evidencia explícitos.",
+          "size": 25,
+          "color": "C9E8E8",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 34,
+          "y": 439,
+          "w": 890,
+          "h": 44,
+          "text": "16 diapositivas · 15 minutos · implementación local y diseño previsto diferenciados",
+          "size": 18,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "Presentar el sistema como un trabajo universitario en evolución. La exposición sigue una cadena: necesidades, requisitos, drivers, decisiones, estructura y evidencia. La fuente documental es 542c341 y el código de referencia ecb1efe; el árbol local estaba limpio en 542c341 al preparar la presentación.",
+      "transition": "Partimos del problema que el software debe resolver, antes de hablar de tecnologías.",
+      "question": "¿La academia ya está terminada? No. Identidad tiene checkpoints funcionales y oferta dispone de preparación ADMIN; quedan criterios humanos e incrementos futuros.",
+      "sources": [
+        "docs/informe-sincronizacion-2026-10-22.md",
+        "docs/estado-documental.md"
+      ]
+    },
+    {
+      "title": "Un acceso coherente a la actividad académica",
+      "section": "01 · Problema, objetivo y alcance",
+      "seconds": 55,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "01 · PROBLEMA, OBJETIVO Y ALCANCE",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Un acceso coherente a la actividad académica",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "02 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 138,
+          "w": 284,
+          "h": 302,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 50,
+          "y": 153,
+          "w": 248,
+          "h": 22,
+          "text": "NECESIDAD",
+          "size": 13,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 50,
+          "y": 185,
+          "w": 248,
+          "h": 53,
+          "text": "Coordinar accesos",
+          "size": 23,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 50,
+          "y": 249,
+          "w": 248,
+          "h": 180,
+          "text": "Roles, oferta y aprendizaje con permisos y datos coherentes.",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 338,
+          "y": 138,
+          "w": 284,
+          "h": 302,
+          "fill": "E5F2FF",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 356,
+          "y": 153,
+          "w": 248,
+          "h": 22,
+          "text": "CORTE IMPLEMENTADO",
+          "size": 13,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 356,
+          "y": 185,
+          "w": 248,
+          "h": 53,
+          "text": "Identidad + ADMIN",
+          "size": 23,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 356,
+          "y": 249,
+          "w": 248,
+          "h": 180,
+          "text": "Cuentas, sesiones y preparación de cursos y grupos.",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 644,
+          "y": 138,
+          "w": 284,
+          "h": 302,
+          "fill": "F1F3F5",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 662,
+          "y": 153,
+          "w": 248,
+          "h": 22,
+          "text": "MVP PREVISTO",
+          "size": 13,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 662,
+          "y": 185,
+          "w": 248,
+          "h": 53,
+          "text": "Compra y aprendizaje",
+          "size": 23,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 662,
+          "y": 249,
+          "w": 248,
+          "h": 180,
+          "text": "Órdenes, pago, matrícula, materiales, clases y chat.",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 470,
+          "w": 896,
+          "h": 33,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 475,
+          "w": 872,
+          "h": 25,
+          "text": "Alcance acotado: sin exámenes, certificados ni audio/cámara del alumno.",
+          "size": 17,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        }
+      ],
+      "explanation": "El problema se formula a partir del alcance del proyecto: coordinar acceso por rol, oferta y una futura compra y experiencia de aprendizaje. No se dispone de una investigación que cuantifique fallos de una academia real: no inventar entrevistas, porcentajes ni un sistema previo. El objetivo es centralizar esas operaciones con autorización y consistencia. El MVP completo incluye órdenes, pago verificado, matrícula, materiales y clases con chat, todavía futuros. El corte actual cubre identidad y preparación administrativa.",
+      "transition": "Ese objetivo solo se concreta si sabemos quién puede hacer qué.",
+      "question": "¿Qué queda fuera? Exámenes, certificados, apps nativas, grabación automática y participación audiovisual del alumno.",
+      "sources": [
+        "docs/alcance-mvp.md",
+        "docs/estado-documental.md",
+        ".specify/memory/constitution.md"
+      ]
+    },
+    {
+      "title": "Tres roles; dos participantes adicionales",
+      "section": "02 · Actores y responsabilidades",
+      "seconds": 45,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "02 · ACTORES Y RESPONSABILIDADES",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Tres roles; dos participantes adicionales",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "03 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 134,
+          "w": 896,
+          "h": 55,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 45,
+          "y": 147,
+          "w": 58,
+          "h": 30,
+          "text": "A01",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 113,
+          "y": 146,
+          "w": 290,
+          "h": 34,
+          "text": "Visitante",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 412,
+          "y": 146,
+          "w": 501,
+          "h": 34,
+          "text": "Registro Alumno y acceso",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 197,
+          "w": 896,
+          "h": 55,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 45,
+          "y": 210,
+          "w": 58,
+          "h": 30,
+          "text": "A02",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 113,
+          "y": 209,
+          "w": 290,
+          "h": 34,
+          "text": "Alumno",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 412,
+          "y": 209,
+          "w": 501,
+          "h": 34,
+          "text": "Identidad actual; catálogo previsto",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 260,
+          "w": 896,
+          "h": 55,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 45,
+          "y": 273,
+          "w": 58,
+          "h": 30,
+          "text": "A03",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 113,
+          "y": 272,
+          "w": 290,
+          "h": 34,
+          "text": "Docente",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 412,
+          "y": 272,
+          "w": 501,
+          "h": 34,
+          "text": "Identidad actual; asignados previstos",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 323,
+          "w": 896,
+          "h": 55,
+          "fill": "E5F2FF",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 45,
+          "y": 336,
+          "w": 58,
+          "h": 30,
+          "text": "A04",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 113,
+          "y": 335,
+          "w": 290,
+          "h": 34,
+          "text": "Administrador",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 412,
+          "y": 335,
+          "w": 501,
+          "h": 34,
+          "text": "Cuentas y preparación de oferta",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 386,
+          "w": 896,
+          "h": 55,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 45,
+          "y": 399,
+          "w": 58,
+          "h": 30,
+          "text": "A05",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 113,
+          "y": 398,
+          "w": 290,
+          "h": 34,
+          "text": "Responsable del entorno",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 412,
+          "y": 398,
+          "w": 501,
+          "h": 34,
+          "text": "Bootstrap y operación restringida",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 34,
+          "y": 467,
+          "w": 890,
+          "h": 26,
+          "text": "A01 y A05 describen participación; no agregan roles al modelo de cuentas.",
+          "size": 18,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "Los únicos roles de cuenta son Alumno, Docente y Administrador. Visitante es quien no tiene sesión; responsable del entorno es un operador, no un cuarto rol. Todos los roles comparten identidad y perfil. Alumno todavía no dispone del catálogo y docente no dispone de Mis grupos. ADMIN sí gestiona cuentas y prepara oferta. El operador usa CLI restringidas y procedimientos. Los sistemas externos se muestran después en C1.",
+      "transition": "Con estos límites podemos convertir necesidades en historias y requisitos verificables.",
+      "question": "¿Un docente puede editar la oferta? No. PA-01 reserva gestión al administrador; la lectura docente prevista se limita a asignados.",
+      "sources": [
+        "docs/01-analisis-de-sistema/01-actores.md",
+        "specs/002-oferta-academica/spec.md"
+      ]
+    },
+    {
+      "title": "Historias que se convierten en controles concretos",
+      "section": "03 · Trazabilidad de requisitos",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "03 · TRAZABILIDAD DE REQUISITOS",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Historias que se convierten en controles concretos",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "04 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "text",
+          "x": 42,
+          "y": 140,
+          "w": 200,
+          "h": 28,
+          "text": "Historia",
+          "size": 18,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 272,
+          "y": 140,
+          "w": 290,
+          "h": 28,
+          "text": "Requisito representativo",
+          "size": 18,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 592,
+          "y": 140,
+          "w": 326,
+          "h": 28,
+          "text": "Resultado o alcance",
+          "size": 18,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 183,
+          "w": 896,
+          "h": 79,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 42,
+          "y": 195,
+          "w": 202,
+          "h": 61,
+          "text": "HU02 · Acceder",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 272,
+          "y": 195,
+          "w": 292,
+          "h": 61,
+          "text": "RF03 / RF08\nSesión y permiso vigentes",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 592,
+          "y": 195,
+          "w": 326,
+          "h": 61,
+          "text": "001 US1\nAcceso y cierre comprobados",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 271,
+          "w": 896,
+          "h": 79,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 42,
+          "y": 283,
+          "w": 202,
+          "h": 61,
+          "text": "HU09 · Gestionar oferta",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 272,
+          "y": 283,
+          "w": 292,
+          "h": 61,
+          "text": "RF10 → 002 US1\nFR-001–005 / 015",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 592,
+          "y": 283,
+          "w": 326,
+          "h": 61,
+          "text": "Preparación ADMIN\nCheckpoint T030 pendiente",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 359,
+          "w": 896,
+          "h": 79,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 42,
+          "y": 371,
+          "w": 202,
+          "h": 61,
+          "text": "HU11 · Comprar",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 272,
+          "y": 371,
+          "w": 292,
+          "h": 61,
+          "text": "RF12 / RF13\nPago auténtico e idempotente",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 592,
+          "y": 371,
+          "w": 326,
+          "h": 61,
+          "text": "Diseño previsto\nSin pagos ni matrículas",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 470,
+          "w": 896,
+          "h": 33,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 475,
+          "w": 872,
+          "h": 25,
+          "text": "Historia → requisito → decisión → componente → evidencia; siempre con el spec identificado.",
+          "size": 17,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        }
+      ],
+      "explanation": "HU y RF pertenecen al análisis general. US, FR y T se interpretan siempre dentro de 001 o 002: las numeraciones no se mezclan. HU02 lleva a acceso controlado RF03/RF08 y a sesiones revocables de identidad. HU09 refina RF10 en la preparación US1 de 002; solo ese alcance ADMIN está implementado. HU11 describe un destino: pago y matrícula todavía no existen. La trazabilidad vincula historia, regla verificable, decisión y evidencia, en lugar de contar documentos como funciones.",
+      "transition": "Además de lo que hace el sistema, necesitamos condiciones de calidad y límites de trabajo.",
+      "question": "¿RF10 está completo? No. Preparación ADMIN es parcial; consulta, publicación y ciclo siguen pendientes.",
+      "sources": [
+        "docs/01-analisis-de-sistema/02-historias-del-usuario.md",
+        "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+        "specs/002-oferta-academica/tasks.md"
+      ]
+    },
+    {
+      "title": "Calidad medible dentro de recursos limitados",
+      "section": "04 · Calidad y restricciones",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "04 · CALIDAD Y RESTRICCIONES",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Calidad medible dentro de recursos limitados",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "05 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 138,
+          "w": 896,
+          "h": 60,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 47,
+          "y": 150,
+          "w": 279,
+          "h": 36,
+          "text": "AC04 · Seguridad",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 340,
+          "y": 150,
+          "w": 570,
+          "h": 36,
+          "text": "Denegación en API y reautorización de escrituras",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 206,
+          "w": 896,
+          "h": 60,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 47,
+          "y": 218,
+          "w": 279,
+          "h": 36,
+          "text": "AC06 · Mantenibilidad",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 340,
+          "y": 218,
+          "w": 570,
+          "h": 36,
+          "text": "Núcleo sin HTTP, SQL ni proveedores",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 274,
+          "w": 896,
+          "h": 60,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 47,
+          "y": 286,
+          "w": 279,
+          "h": 36,
+          "text": "AC02 · Recuperación",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 340,
+          "y": 286,
+          "w": 570,
+          "h": 36,
+          "text": "V16 local de identidad; D13 operativo pendiente",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 342,
+          "w": 896,
+          "h": 60,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 47,
+          "y": 354,
+          "w": 279,
+          "h": 36,
+          "text": "AC01 / AC03 · Capacidad",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 340,
+          "y": 354,
+          "w": 570,
+          "h": 36,
+          "text": "1000 concurrentes: objetivo sin aprobar",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 470,
+          "w": 896,
+          "h": 33,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 475,
+          "w": 872,
+          "h": 25,
+          "text": "RT01 / RT02 / RT05 · 1 persona · 4 meses · S/300 totales · complejidad justificada",
+          "size": 17,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        }
+      ],
+      "explanation": "AC04 exige denegar accesos indebidos en backend, no solo ocultar botones. AC06 exige mantener el núcleo independiente de HTTP y proveedores. AC02 requiere recuperación segura: V16 de identidad está demostrado localmente, pero D13 operativo no está cerrado. AC01 y AC03 conservan el objetivo de 1000 concurrentes sin aprobación; hubo cargas con incumplimientos de /me y continuidad. No confundir 1000 estudiantes previstos con sesiones o espectadores. Recursos: una persona, cuatro meses y S/300 en total.",
+      "transition": "Las condiciones que más afectan la estructura se convierten en drivers arquitectónicos.",
+      "question": "¿Los números de carga son garantías? No. Se limitan a versión, infraestructura y escenario; D10/rúbrica sigue pendiente.",
+      "sources": [
+        "docs/01-analisis-de-sistema/04-atributos-de-calidad.md",
+        "docs/01-analisis-de-sistema/05-restricciones.md",
+        "docs/01-analisis-de-sistema/08-escenarios-atributos-calidad.md"
+      ]
+    },
+    {
+      "title": "Los drivers priorizan riesgos de estructura",
+      "section": "05 · Drivers arquitectónicos",
+      "seconds": 50,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "05 · DRIVERS ARQUITECTÓNICOS",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Los drivers priorizan riesgos de estructura",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "06 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 135,
+          "w": 896,
+          "h": 59,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 149,
+          "w": 70,
+          "h": 30,
+          "text": "DA01",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 126,
+          "y": 148,
+          "w": 265,
+          "h": 32,
+          "text": "Acceso vigente",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 405,
+          "y": 148,
+          "w": 505,
+          "h": 32,
+          "text": "Permisos en servidor; aislamiento por recurso",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 202,
+          "w": 896,
+          "h": 59,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 216,
+          "w": 70,
+          "h": 30,
+          "text": "DA07",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 126,
+          "y": 215,
+          "w": 265,
+          "h": 32,
+          "text": "Evolución modular",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 405,
+          "y": 215,
+          "w": 505,
+          "h": 32,
+          "text": "Contratos públicos; reglas separadas de IO",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 269,
+          "w": 896,
+          "h": 59,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 283,
+          "w": 70,
+          "h": 30,
+          "text": "DA04",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 126,
+          "y": 282,
+          "w": 265,
+          "h": 32,
+          "text": "Viabilidad",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 405,
+          "y": 282,
+          "w": 505,
+          "h": 32,
+          "text": "Una unidad backend con operación sencilla",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 336,
+          "w": 896,
+          "h": 59,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 350,
+          "w": 70,
+          "h": 30,
+          "text": "DA05",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 126,
+          "y": 349,
+          "w": 265,
+          "h": 32,
+          "text": "Capacidad demostrable",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 405,
+          "y": 349,
+          "w": 505,
+          "h": 32,
+          "text": "Medir latencias, errores y recursos",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 403,
+          "w": 896,
+          "h": 59,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 417,
+          "w": 70,
+          "h": 30,
+          "text": "DA02",
+          "size": 19,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 126,
+          "y": 416,
+          "w": 265,
+          "h": 32,
+          "text": "Integridad futura",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 405,
+          "y": 416,
+          "w": 505,
+          "h": 32,
+          "text": "Pago, cupos y matrícula sin duplicados",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "Un driver es un requisito o restricción que condiciona la estructura o viabilidad. DA01 y DA07 ya se reflejan en autorización, contratos y pruebas de límites. DA04 hace razonable un solo backend. DA05 exige medir antes de escalar; no autoriza introducir Redis o balanceadores. DA02 condiciona la integridad futura de pagos y matrículas: el ledger académico actual no acredita idempotencia de pagos. DA03 y DA06 siguen presentes en las integraciones futuras, con correo local ya funcional.",
+      "transition": "Ahora podemos justificar decisiones concretas, en vez de enumerar tecnologías.",
+      "question": "¿Por qué no microservicios? DA04/DA07 favorecen simplicidad y cohesión; no hay necesidad distribuida demostrada.",
+      "sources": [
+        "docs/01-analisis-de-sistema/06-driver-arquitectonicos.md"
+      ]
+    },
+    {
+      "title": "Cada decisión resuelve un riesgo y acepta un costo",
+      "section": "06 · Decisiones justificadas",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "06 · DECISIONES JUSTIFICADAS",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Cada decisión resuelve un riesgo y acepta un costo",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "07 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 138,
+          "w": 896,
+          "h": 70,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 148,
+          "w": 250,
+          "h": 26,
+          "text": "DA04 / DA07 → R01",
+          "size": 16,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 174,
+          "w": 250,
+          "h": 27,
+          "text": "Monolito modular",
+          "size": 18,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 327,
+          "y": 160,
+          "w": 581,
+          "h": 40,
+          "text": "Menor coordinación; proceso compartido",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 217,
+          "w": 896,
+          "h": 70,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 227,
+          "w": 250,
+          "h": 26,
+          "text": "DA01 → R02 / R05",
+          "size": 16,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 253,
+          "w": 250,
+          "h": 27,
+          "text": "Sesiones + transacciones",
+          "size": 18,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 327,
+          "y": 239,
+          "w": 581,
+          "h": 40,
+          "text": "Revocación efectiva; dependencia de BD",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 296,
+          "w": 896,
+          "h": 70,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 306,
+          "w": 250,
+          "h": 26,
+          "text": "DA06 → R07 / R08",
+          "size": 16,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 332,
+          "w": 250,
+          "h": 27,
+          "text": "Adaptadores + correo",
+          "size": 18,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 327,
+          "y": 318,
+          "w": 581,
+          "h": 40,
+          "text": "HTTP independiente; reintentos y leases",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 375,
+          "w": 896,
+          "h": 70,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 385,
+          "w": 250,
+          "h": 26,
+          "text": "DA05 → R10",
+          "size": 16,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 411,
+          "w": 250,
+          "h": 27,
+          "text": "Medir antes de dimensionar",
+          "size": 18,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 327,
+          "y": 397,
+          "w": 581,
+          "h": 40,
+          "text": "Resultados acotados; sin capacidad aprobada",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "R01 responde a DA04/DA07 con monolito modular y Clean Architecture: simplifica operación, pero comparte proceso y recursos. R02/R05 responden a DA01 con sesiones persistidas y revalidación transaccional: habilitan revocación y dependen de disponibilidad de BD. R07/R08 responden a DA06 con adaptadores y entrega durable de correo: desacoplan HTTP de SMTP, pero agregan leases/reintentos y no garantizan recepción. R10 evita afirmar capacidad sin evidencia. D02/DEC01 son elecciones futuras de Izipay y YouTube Live con OBS, sin integración acreditada.",
+      "transition": "La primera decisión define el estilo del sistema que veremos a continuación.",
+      "question": "¿Qué desventaja tiene un monolito modular? Despliegue y recursos compartidos; requiere disciplina para que módulos no dependan de internos ajenos.",
+      "sources": [
+        "docs/01-analisis-de-sistema/07-decisiones-arquitectonicas.md",
+        "docs/02-arquitectura-software/estilo-arquitectonico.md"
+      ]
+    },
+    {
+      "title": "Un backend; módulos y capas con responsabilidades",
+      "section": "07 · Estilo arquitectónico",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "07 · ESTILO ARQUITECTÓNICO",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Un backend; módulos y capas con responsabilidades",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "08 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 246,
+          "y": 127,
+          "w": 442,
+          "h": 332,
+          "fill": "FFFFFF",
+          "stroke": "7891A5",
+          "dash": true
+        },
+        {
+          "kind": "text",
+          "x": 258,
+          "y": 134,
+          "w": 418,
+          "h": 21,
+          "text": "APP02 · NestJS · un proceso",
+          "size": 15,
+          "color": "536D7D",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 233,
+          "w": 180,
+          "h": 93,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 241,
+          "w": 168,
+          "h": 77,
+          "text": "APP01 · Web\nReact / Vite\nP",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 280,
+          "y": 168,
+          "w": 243,
+          "h": 72,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 286,
+          "y": 176,
+          "w": 231,
+          "h": 56,
+          "text": "Presentación · REST\nI",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 280,
+          "y": 272,
+          "w": 243,
+          "h": 80,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 286,
+          "y": 280,
+          "w": 231,
+          "h": 64,
+          "text": "Negocio · núcleo\nIdentidad + oferta · P",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 280,
+          "y": 385,
+          "w": 243,
+          "h": 63,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 286,
+          "y": 393,
+          "w": 231,
+          "h": 47,
+          "text": "Persistencia · pg / pool\nI",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 545,
+          "y": 168,
+          "w": 125,
+          "h": 82,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 551,
+          "y": 176,
+          "w": 113,
+          "h": 66,
+          "text": "C06 · Correo\nEjecutor · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 718,
+          "y": 165,
+          "w": 210,
+          "h": 85,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 724,
+          "y": 173,
+          "w": 198,
+          "h": 69,
+          "text": "E03 · Mailpit\nCaptura SMTP local · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 718,
+          "y": 377,
+          "w": 210,
+          "h": 72,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 724,
+          "y": 385,
+          "w": 198,
+          "h": 56,
+          "text": "AL01 · PostgreSQL\nI",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              212,
+              279
+            ],
+            [
+              246,
+              279
+            ],
+            [
+              246,
+              204
+            ],
+            [
+              280,
+              204
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              401,
+              240
+            ],
+            [
+              401,
+              272
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              401,
+              352
+            ],
+            [
+              401,
+              385
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              523,
+              310
+            ],
+            [
+              538,
+              310
+            ],
+            [
+              538,
+              209
+            ],
+            [
+              545,
+              209
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              670,
+              209
+            ],
+            [
+              718,
+              209
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              523,
+              416
+            ],
+            [
+              718,
+              416
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 718,
+          "y": 279,
+          "w": 210,
+          "h": 82,
+          "text": "Módulos cohesionados;\nsin HTTP entre ellos.",
+          "size": 20,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 477,
+          "w": 896,
+          "h": 22,
+          "text": "I: implementado en alcance rotulado  ·  P: parcial  ·  F: futuro",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 498,
+          "w": 896,
+          "h": 15,
+          "text": "Flechas de ejecución: continua = colaboración actual; discontinua = prevista.",
+          "size": 12,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "El estilo es monolito modular por capas. Presentación incluye web y entradas REST; negocio incluye aplicación y dominio; persistencia implementa el acceso a datos. Infraestructura también incluye correo y criptografía. APP02 es un proceso NestJS con identity/users/authorization/mail/audit/academic-offering. No hay un microservicio por módulo. Compose tiene web/api/db/mailpit; esas unidades operativas no coinciden uno a uno con capas o módulos. El scheduler está dentro de API y Mailpit es apoyo local. Las flechas de esta selección representan ejecución.",
+      "transition": "El recorrido de una llamada no explica todavía qué código puede importar a qué código.",
+      "question": "¿Prisma ejecuta todo? No. Modela/genera y pg ejecuta SQL/transacciones explícitas con un pool compartido.",
+      "sources": [
+        "docs/02-arquitectura-software/estilo-arquitectonico.md",
+        "docs/02-arquitectura-software/diagrama-arquitectura.md",
+        "compose.yml",
+        "docs/diagramas/arquitectura-general.drawio"
+      ],
+      "diagram": {
+        "file": "docs/diagramas/arquitectura-general.drawio",
+        "page": "Arquitectura vigente",
+        "pageId": "arquitectura-general",
+        "nodes": [
+          "APP01",
+          "REST",
+          "BUSINESS",
+          "DATA",
+          "MAIL",
+          "AL01",
+          "E03"
+        ],
+        "edges": [
+          [
+            "APP01",
+            "REST"
+          ],
+          [
+            "REST",
+            "BUSINESS"
+          ],
+          [
+            "BUSINESS",
+            "DATA"
+          ],
+          [
+            "BUSINESS",
+            "MAIL"
+          ],
+          [
+            "MAIL",
+            "E03"
+          ],
+          [
+            "DATA",
+            "AL01"
+          ]
+        ],
+        "originalLabels": {
+          "APP01": "APP01 · Presentación web\nReact / Vite\nIdentidad + preparación ADMIN\n[P]",
+          "REST": "Presentación backend\nC01 · REST / DTO / cookies\nC05 · Sesión y permiso\n[I]",
+          "BUSINESS": "Negocio\nC03 / C04 · Identidad / usuarios\nC12 · Preparación de oferta\n[P]",
+          "DATA": "Datos / infraestructura\nAdaptadores / C09 pool\nSQL, locks, ledger y auditoría\n[I]",
+          "MAIL": "C06 · Correo interno\nEntregas cifradas\nScheduler fuera de HTTP\n[I]",
+          "AL01": "AL01 · PostgreSQL\nIdentidad + oferta\n[I]",
+          "E03": "E03 · Mailpit\nCaptura SMTP local\n[I]"
+        }
+      }
+    },
+    {
+      "title": "Clean Architecture dirige los imports al núcleo",
+      "section": "08 · Enfoque y dependencias",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "08 · ENFOQUE Y DEPENDENCIAS",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Clean Architecture dirige los imports al núcleo",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "09 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 325,
+          "y": 161,
+          "w": 300,
+          "h": 270,
+          "fill": "FFFFFF",
+          "stroke": "7891A5",
+          "dash": true
+        },
+        {
+          "kind": "text",
+          "x": 337,
+          "y": 168,
+          "w": 276,
+          "h": 21,
+          "text": "NÚCLEO · tipos y contratos",
+          "size": 15,
+          "color": "536D7D",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 209,
+          "w": 240,
+          "h": 85,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 217,
+          "w": 228,
+          "h": 69,
+          "text": "Presentación\nHTTP / CLI · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 353,
+          "y": 209,
+          "w": 244,
+          "h": 85,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 359,
+          "y": 217,
+          "w": 232,
+          "h": 69,
+          "text": "Aplicación\nCasos de uso y puertos · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 353,
+          "y": 337,
+          "w": 244,
+          "h": 75,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 359,
+          "y": 345,
+          "w": 232,
+          "h": 59,
+          "text": "Dominio\nReglas puras · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 686,
+          "y": 209,
+          "w": 242,
+          "h": 110,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 692,
+          "y": 217,
+          "w": 230,
+          "h": 94,
+          "text": "Infraestructura\npg / SMTP / Argon2\nI",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              272,
+              251
+            ],
+            [
+              353,
+              251
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              475,
+              294
+            ],
+            [
+              475,
+              337
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              686,
+              251
+            ],
+            [
+              597,
+              251
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 641,
+          "y": 339,
+          "w": 281,
+          "h": 76,
+          "text": "Implementa contratos;\nAppModule conecta\nlas instancias.",
+          "size": 20,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 470,
+          "w": 896,
+          "h": 33,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 475,
+          "w": 872,
+          "h": 25,
+          "text": "Flechas = imports. En ejecución, el caso de uso llama al adaptador mediante su contrato.",
+          "size": 17,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        }
+      ],
+      "explanation": "Presentación depende de aplicación; aplicación depende de dominio. Infraestructura implementa contratos del núcleo. En ejecución un caso de uso puede invocar el adaptador inyectado sin importar su clase concreta. La raíz AppModule sí conoce implementaciones y las conecta. Dominio y aplicación no importan Nest, pg, Prisma o SMTP. Las responsabilidades son internas a cada módulo según necesidad; no se obliga a crear cuatro módulos globales ni una clase por regla. La evidencia de arquitectura revisa imports y políticas, no certifica universalmente todo ciclo semántico.",
+      "transition": "Con la regla de dependencias clara, podemos ampliar el sistema desde el contexto hasta el código.",
+      "question": "¿Inyección e inversión son lo mismo? No. Inversión trata de dependencias del código; inyección entrega instancias en composición.",
+      "sources": [
+        "docs/02-arquitectura-software/enfoque-arquitectonico.md",
+        "docs/03-diseno-de-software/diseno-interno/principios-de-diseno.md",
+        "apps/api/src/app.module.ts"
+      ]
+    },
+    {
+      "title": "C1 · Personas, sistema y entorno externo",
+      "section": "09 · Contexto del sistema",
+      "seconds": 45,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "09 · CONTEXTO DEL SISTEMA",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "C1 · Personas, sistema y entorno externo",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "10 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 117,
+          "w": 896,
+          "h": 24,
+          "text": "Selección editable del C1 sincronizado · A01/A05 y apoyo local se explican en notas.",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 167,
+          "w": 223,
+          "h": 78,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 175,
+          "w": 211,
+          "h": 62,
+          "text": "A02 · Alumno\nIdentidad actual · P",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 293,
+          "w": 223,
+          "h": 78,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 301,
+          "w": 211,
+          "h": 62,
+          "text": "A04 · Administrador\nGestión ADMIN · P",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 402,
+          "w": 223,
+          "h": 62,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 410,
+          "w": 211,
+          "h": 46,
+          "text": "A03 · Docente\nIdentidad actual · P",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 358,
+          "y": 211,
+          "w": 253,
+          "h": 157,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 364,
+          "y": 219,
+          "w": 241,
+          "h": 141,
+          "text": "Academia Virtual\nIdentidad + preparación ADMIN\nCompra / aprendizaje futuros\nP",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 740,
+          "y": 155,
+          "w": 188,
+          "h": 75,
+          "fill": "F1F3F5",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 746,
+          "y": 163,
+          "w": 176,
+          "h": 59,
+          "text": "E01 · Izipay\nPago futuro · F",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 740,
+          "y": 277,
+          "w": 188,
+          "h": 75,
+          "fill": "F1F3F5",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 746,
+          "y": 285,
+          "w": 176,
+          "h": 59,
+          "text": "E02 · Correo externo\nSMTP real futuro · F",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 740,
+          "y": 398,
+          "w": 188,
+          "h": 66,
+          "fill": "F1F3F5",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 746,
+          "y": 406,
+          "w": 176,
+          "h": 50,
+          "text": "E04-YT · YouTube\nEmisión futura · F",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              255,
+              206
+            ],
+            [
+              304,
+              206
+            ],
+            [
+              304,
+              250
+            ],
+            [
+              358,
+              250
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              255,
+              332
+            ],
+            [
+              308,
+              332
+            ],
+            [
+              308,
+              329
+            ],
+            [
+              358,
+              329
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              611,
+              251
+            ],
+            [
+              673,
+              251
+            ],
+            [
+              673,
+              192
+            ],
+            [
+              740,
+              192
+            ]
+          ],
+          "dash": true,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              611,
+              329
+            ],
+            [
+              681,
+              329
+            ],
+            [
+              681,
+              315
+            ],
+            [
+              740,
+              315
+            ]
+          ],
+          "dash": true,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              255,
+              433
+            ],
+            [
+              640,
+              433
+            ],
+            [
+              640,
+              431
+            ],
+            [
+              740,
+              431
+            ]
+          ],
+          "dash": true,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 396,
+          "y": 405,
+          "w": 226,
+          "h": 26,
+          "text": "OBS → YouTube · previsto",
+          "size": 15,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 477,
+          "w": 896,
+          "h": 22,
+          "text": "I: implementado en alcance rotulado  ·  P: parcial  ·  F: futuro",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 498,
+          "w": 896,
+          "h": 15,
+          "text": "Flechas de ejecución: continua = colaboración actual; discontinua = prevista.",
+          "size": 12,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "Esta es una selección editable de la página funcional C1 sincronizada. Conserva el sistema único y relaciones de origen. A02 usa identidad actual y tendrá oferta/aprendizaje; A04 ya gestiona cuentas y prepara oferta. A03 emite con OBS hacia YouTube como diseño futuro. E01 Izipay y E02 correo externo también son futuros. Se omiten Visitante A01 y operador A05, explicados en actores; Mailpit E03 aparece en la página de apoyo local del editable. No hay control backend–YouTube ni una garantía de protección del video.",
+      "transition": "Ampliamos ahora el único sistema para mostrar sus aplicaciones y almacén.",
+      "question": "¿El chat es de YouTube? No. Socket.IO autorizado por clase está previsto dentro de Academia Virtual y no está implementado.",
+      "sources": [
+        "docs/04-modelo-c4/01-contexto-del-sistema.md",
+        "docs/diagramas/c4-contexto-del-sistema.drawio"
+      ],
+      "diagram": {
+        "file": "docs/diagramas/c4-contexto-del-sistema.drawio",
+        "page": "C1 - Contexto funcional del MVP",
+        "pageId": "c4-contexto-del-sistema",
+        "nodes": [
+          "A02",
+          "A03",
+          "A04",
+          "AV",
+          "E01",
+          "E02",
+          "E04-YT"
+        ],
+        "edges": [
+          [
+            "A02",
+            "AV"
+          ],
+          [
+            "A04",
+            "AV"
+          ],
+          [
+            "AV",
+            "E01"
+          ],
+          [
+            "AV",
+            "E02"
+          ],
+          [
+            "A03",
+            "E04-YT"
+          ]
+        ],
+        "originalLabels": {
+          "A02": "A02 · Alumno\nIdentidad actual\nOferta y aprendizaje futuros\n[P]",
+          "A03": "A03 · Docente\nIdentidad actual\nGrupos/emisión futuros\n[P]",
+          "A04": "A04 · Administrador\nCuentas y preparación\nPublicación pendiente\n[P]",
+          "AV": "Academia Virtual\nAcceso y perfiles\nPreparación de oferta ADMIN\nCompra y aprendizaje previstos\n[P]",
+          "E01": "E01 · Izipay\nPago verificado\nIntegración pendiente\n[F]",
+          "E02": "E02 · Correo externo\nEntrega real\nProveedor pendiente\n[F]",
+          "E04-YT": "E04-YT · YouTube Live\nVideo mediante OBS\nProtección por validar\n[F]"
+        }
+      }
+    },
+    {
+      "title": "C2 · Dos aplicaciones y un almacén principal",
+      "section": "10 · Contenedores C4",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "10 · CONTENEDORES C4",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "C2 · Dos aplicaciones y un almacén principal",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "11 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 117,
+          "w": 896,
+          "h": 24,
+          "text": "Selección del C2 sincronizado · apoyo Mailpit y AL02 previsto: notas y editable original.",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 147,
+          "w": 643,
+          "h": 313,
+          "fill": "FFFFFF",
+          "stroke": "7891A5",
+          "dash": true
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 154,
+          "w": 619,
+          "h": 21,
+          "text": "ACADEMIA VIRTUAL",
+          "size": 15,
+          "color": "536D7D",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 57,
+          "y": 215,
+          "w": 225,
+          "h": 100,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 63,
+          "y": 223,
+          "w": 213,
+          "h": 84,
+          "text": "APP01 · Web\nReact / TS / Vite\nP",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 393,
+          "y": 215,
+          "w": 250,
+          "h": 100,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 399,
+          "y": 223,
+          "w": 238,
+          "h": 84,
+          "text": "APP02 · Backend\nNestJS / TS · Prisma / pg\nP",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 393,
+          "y": 371,
+          "w": 250,
+          "h": 75,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 399,
+          "y": 379,
+          "w": 238,
+          "h": 59,
+          "text": "AL01 · PostgreSQL 16.14\nIdentidad + oferta · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 747,
+          "y": 151,
+          "w": 181,
+          "h": 76,
+          "fill": "F1F3F5",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 753,
+          "y": 159,
+          "w": 169,
+          "h": 60,
+          "text": "E01 · Izipay\nF",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 747,
+          "y": 272,
+          "w": 181,
+          "h": 76,
+          "fill": "F1F3F5",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 753,
+          "y": 280,
+          "w": 169,
+          "h": 60,
+          "text": "E02 · SMTP real\nF",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 747,
+          "y": 393,
+          "w": 181,
+          "h": 72,
+          "fill": "F1F3F5",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 753,
+          "y": 401,
+          "w": 169,
+          "h": 56,
+          "text": "E04-YT · YouTube\nF",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              282,
+              265
+            ],
+            [
+              393,
+              265
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 286,
+          "y": 233,
+          "w": 107,
+          "h": 22,
+          "text": "REST / JSON",
+          "size": 13,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              518,
+              315
+            ],
+            [
+              518,
+              371
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 528,
+          "y": 337,
+          "w": 104,
+          "h": 20,
+          "text": "SQL / pool",
+          "size": 13,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              643,
+              240
+            ],
+            [
+              695,
+              240
+            ],
+            [
+              695,
+              189
+            ],
+            [
+              747,
+              189
+            ]
+          ],
+          "dash": true,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              643,
+              288
+            ],
+            [
+              703,
+              288
+            ],
+            [
+              703,
+              310
+            ],
+            [
+              747,
+              310
+            ]
+          ],
+          "dash": true,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              170,
+              315
+            ],
+            [
+              170,
+              475
+            ],
+            [
+              703,
+              475
+            ],
+            [
+              703,
+              429
+            ],
+            [
+              747,
+              429
+            ]
+          ],
+          "dash": true,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 477,
+          "w": 896,
+          "h": 22,
+          "text": "I: implementado en alcance rotulado  ·  P: parcial  ·  F: futuro",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 498,
+          "w": 896,
+          "h": 15,
+          "text": "Flechas de ejecución: continua = colaboración actual; discontinua = prevista.",
+          "size": 12,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "APP01 es React/TypeScript/Vite; la interfaz corre en navegador. APP02 es el backend Node/Nest/TypeScript; Prisma y pg pertenecen a su infraestructura. AL01 es PostgreSQL 16.14 con cinco migraciones de identidad/oferta. REST/JSON lleva cookie y usa proxy local; publicación HTTPS todavía no se acredita. Backend usa un pool para SQL; PostgreSQL no llama proveedores. Las conexiones a Izipay/SMTP real y reproducción de YouTube son futuras. Se omite AL02 de materiales, sin tecnología definida, y el apoyo local E03 Mailpit que sí captura SMTP funcional. Un contenedor C4 no equivale a un contenedor Docker.",
+      "transition": "Entramos en APP02 para observar cómo colaboran sus componentes de preparación.",
+      "question": "¿Hay un worker de correo separado? No. DeliverPending y su scheduler están dentro del proceso API.",
+      "sources": [
+        "docs/04-modelo-c4/02-contenedores.md",
+        "docs/diagramas/c4-contenedores.drawio",
+        "apps/api/src/app.module.ts"
+      ],
+      "diagram": {
+        "file": "docs/diagramas/c4-contenedores.drawio",
+        "page": "C2 - Contenedores del MVP",
+        "pageId": "c4-contenedores",
+        "nodes": [
+          "APP01",
+          "APP02",
+          "AL01",
+          "E01",
+          "E02",
+          "E04-YT"
+        ],
+        "edges": [
+          [
+            "APP01",
+            "APP02"
+          ],
+          [
+            "APP02",
+            "AL01"
+          ],
+          [
+            "APP02",
+            "E01"
+          ],
+          [
+            "APP02",
+            "E02"
+          ],
+          [
+            "APP01",
+            "E04-YT"
+          ]
+        ],
+        "originalLabels": {
+          "APP01": "APP01 · Web\nReact / TypeScript / Vite\nIdentidad + preparación ADMIN\n[P]",
+          "APP02": "APP02 · Backend\nNode.js / NestJS / TypeScript\nMonolito modular · Prisma/pg\n[P]",
+          "AL01": "AL01 · Datos\nPostgreSQL 16.14\nIdentidad + oferta · 5 migraciones\n[I]",
+          "E01": "E01 · Izipay\nIntegración pendiente\n[F]",
+          "E02": "E02 · Correo externo\nSMTP real pendiente\n[F]",
+          "E04-YT": "E04-YT · YouTube\nVideo futuro / OBS\nAcceso por validar\n[F]"
+        }
+      }
+    },
+    {
+      "title": "C3 · Preparación de oferta dentro de APP02",
+      "section": "11 · Componentes y colaboraciones",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "11 · COMPONENTES Y COLABORACIONES",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "C3 · Preparación de oferta dentro de APP02",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "12 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 117,
+          "w": 896,
+          "h": 24,
+          "text": "Ampliación editable de «5a · Preparación de oferta» · flechas de ejecución.",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 236,
+          "y": 146,
+          "w": 532,
+          "h": 319,
+          "fill": "FFFFFF",
+          "stroke": "7891A5",
+          "dash": true
+        },
+        {
+          "kind": "text",
+          "x": 248,
+          "y": 153,
+          "w": 508,
+          "h": 21,
+          "text": "APP02 · BACKEND MONOLÍTICO",
+          "size": 15,
+          "color": "536D7D",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 194,
+          "w": 178,
+          "h": 80,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 202,
+          "w": 166,
+          "h": 64,
+          "text": "APP01 · Web\nOferta ADMIN · P",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 262,
+          "y": 194,
+          "w": 223,
+          "h": 80,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 268,
+          "y": 202,
+          "w": 211,
+          "h": 64,
+          "text": "C01 · REST\nControlador ADMIN · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 552,
+          "y": 194,
+          "w": 190,
+          "h": 80,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 558,
+          "y": 202,
+          "w": 178,
+          "h": 64,
+          "text": "C05 · Autorización\nSesión + permiso · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 262,
+          "y": 302,
+          "w": 223,
+          "h": 80,
+          "fill": "FFF1D6",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 268,
+          "y": 310,
+          "w": 211,
+          "h": 64,
+          "text": "C12 · Oferta\nPreparación ADMIN · P",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 552,
+          "y": 302,
+          "w": 190,
+          "h": 80,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 558,
+          "y": 310,
+          "w": 178,
+          "h": 64,
+          "text": "C04 · Usuarios\nDirectorio mínimo · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 262,
+          "y": 402,
+          "w": 223,
+          "h": 60,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 268,
+          "y": 410,
+          "w": 211,
+          "h": 44,
+          "text": "C09 · Datos\nLocks / pool · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 791,
+          "y": 402,
+          "w": 137,
+          "h": 60,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 797,
+          "y": 410,
+          "w": 125,
+          "h": 44,
+          "text": "AL01 · Datos\nPostgreSQL · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              210,
+              234
+            ],
+            [
+              262,
+              234
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              485,
+              234
+            ],
+            [
+              552,
+              234
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              373,
+              274
+            ],
+            [
+              373,
+              302
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              485,
+              342
+            ],
+            [
+              552,
+              342
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              373,
+              382
+            ],
+            [
+              373,
+              402
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              485,
+              432
+            ],
+            [
+              791,
+              432
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 477,
+          "w": 896,
+          "h": 22,
+          "text": "I: implementado en alcance rotulado  ·  P: parcial  ·  F: futuro",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 498,
+          "w": 896,
+          "h": 15,
+          "text": "Flechas de ejecución: continua = colaboración actual; discontinua = prevista.",
+          "size": 12,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "La selección reutiliza todos los nodos y relaciones de la página de preparación de oferta. C01 adapta HTTP y C05 resuelve sesión/academic:manage. C12 contiene comandos/consultas de preparación. C04 ofrece el directorio mínimo: tipos públicos y vista SQL para lecturas bajo una instantánea. C09 proporciona locks, pool y revalidación inyectada desde composición; AL01 conserva agregado, ledger y auditoría. Identidad no recibe callbacks hacia oferta. No hay HTTP entre módulos. Otras capacidades del backend se conservan en las páginas de identidad, composición y correo. AL01 y APP01 están fuera de la frontera APP02.",
+      "transition": "Estas colaboraciones sostienen reglas concretas de curso, grupo y preparación.",
+      "question": "¿Oferta accede a User directamente? Usa AcademicTeacherDirectory pública y capacidades de infraestructura compartida; no correo, hashes ni internos de identidad.",
+      "sources": [
+        "docs/04-modelo-c4/03-componentes.md",
+        "docs/03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md",
+        "specs/002-oferta-academica/contracts/integration.md",
+        "docs/diagramas/c4-componentes.drawio"
+      ],
+      "diagram": {
+        "file": "docs/diagramas/c4-componentes.drawio",
+        "page": "5a - Preparacion de oferta",
+        "pageId": "c4-componentes-oferta",
+        "nodes": [
+          "APP01",
+          "C01",
+          "C05",
+          "C12",
+          "C04",
+          "C09",
+          "AL01"
+        ],
+        "edges": [
+          [
+            "APP01",
+            "C01"
+          ],
+          [
+            "C01",
+            "C05"
+          ],
+          [
+            "C01",
+            "C12"
+          ],
+          [
+            "C12",
+            "C04"
+          ],
+          [
+            "C12",
+            "C09"
+          ],
+          [
+            "C09",
+            "AL01"
+          ]
+        ],
+        "originalLabels": {
+          "APP01": "APP01 · Web\nFormularios / selector ADMIN\n[P]",
+          "C01": "C01 · REST\nAcademicAdminController\n[I]",
+          "C05": "C05 · Autorización\nacademic:manage / sesión\n[I]",
+          "C12": "C12 · Oferta\nPreparationCommands\nAdministrativeQueries\n[P]",
+          "C04": "C04 · Usuarios\nTeachingDirectory público\nVista SQL mínima\n[I]",
+          "C09": "C09 · Datos\nLocks / revalidación inyectada\n[I]",
+          "AL01": "AL01 · PostgreSQL\nAgregado + ledger + auditoría\n[I]"
+        }
+      }
+    },
+    {
+      "title": "Curso y grupo separan contenido de programación",
+      "section": "12 · Diseño de la preparación ADMIN",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "12 · DISEÑO DE LA PREPARACIÓN ADMIN",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Curso y grupo separan contenido de programación",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "13 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 138,
+          "w": 282,
+          "h": 265,
+          "fill": "E5F2FF",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 50,
+          "y": 153,
+          "w": 246,
+          "h": 22,
+          "text": "CURSO",
+          "size": 13,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 50,
+          "y": 185,
+          "w": 246,
+          "h": 53,
+          "text": "Identidad del curso",
+          "size": 23,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 50,
+          "y": 249,
+          "w": 246,
+          "h": 143,
+          "text": "Nombre, descripción y estado editorial.",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 336,
+          "y": 138,
+          "w": 282,
+          "h": 265,
+          "fill": "FFF1D6",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 354,
+          "y": 153,
+          "w": 246,
+          "h": 22,
+          "text": "GRUPO",
+          "size": 13,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 354,
+          "y": 185,
+          "w": 246,
+          "h": 53,
+          "text": "Programación",
+          "size": 23,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 354,
+          "y": 249,
+          "w": 246,
+          "h": 143,
+          "text": "Periodo, franjas, America/Lima y docente.",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 640,
+          "y": 138,
+          "w": 288,
+          "h": 265,
+          "fill": "FFF1D6",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 658,
+          "y": 153,
+          "w": 252,
+          "h": 22,
+          "text": "CAPACIDAD",
+          "size": 13,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 658,
+          "y": 185,
+          "w": 252,
+          "h": 53,
+          "text": "Entero de 1 a 50",
+          "size": 23,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 658,
+          "y": 249,
+          "w": 252,
+          "h": 143,
+          "text": "Ocupación y disponibilidad no calculadas.",
+          "size": 20,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 34,
+          "y": 420,
+          "w": 892,
+          "h": 42,
+          "text": "5 mutaciones: crear/editar curso · crear/editar grupo · reemplazar franjas.",
+          "size": 20,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 470,
+          "w": 896,
+          "h": 33,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 475,
+          "w": 872,
+          "h": 25,
+          "text": "ADMIN: listar y consultar; selector docente. Guardar no publica ni reserva plazas.",
+          "size": 17,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        }
+      ],
+      "explanation": "Curso conserva referencia, nombre, descripción y estado editorial. Grupo pertenece a un curso inmutable y define periodo, franjas semanales, America/Lima, capacidad y cero o un docente en preparación. Capacidad configurada es entero de 1 a 50 inclusive; 40–50 es población prevista, no mínimo. Ocupación y disponibilidad son null/NOT_CALCULATED. El contrato permite borradores incompletos; dato omitido no es dato inválido. Actualmente hay cinco mutaciones: POST courses, PATCH courses/:id, POST courses/:courseId/groups, PATCH groups/:id, PUT groups/:id/schedule, bajo /api/v1/admin/academic. Cinco GET: courses, courses/:id, courses/:courseId/groups, groups/:id, teachers. La edición admite preparación DRAFT/WITHDRAWN, pero WITHDRAWN se prepara en fixtures: no hay ruta de retiro. Publicados/cancelados son solo lectura. Guardar no publica ni reserva.",
+      "transition": "Para ver la inversión de dependencias sobre código existente, seleccionamos las sesiones.",
+      "question": "¿Se puede publicar un grupo? Todavía no. PA-02/PA-03/PA-05 lo regulan, pero los comandos publish/withdraw/cancel y consulta alumno/docente siguen pendientes. Exactamente un docente habilitado será obligatorio al publicar; hoy preparación permite cero o uno.",
+      "sources": [
+        "docs/estado-documental.md",
+        "specs/002-oferta-academica/contracts/api.md",
+        "specs/002-oferta-academica/evidence/t028-t029.md",
+        "apps/api/src/modules/academic-offering/entrypoints/http/admin.controller.ts"
+      ]
+    },
+    {
+      "title": "C4 · Sesiones: un contrato, consumidor y adaptador",
+      "section": "13 · Selección concreta del código",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "13 · SELECCIÓN CONCRETA DEL CÓDIGO",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "C4 · Sesiones: un contrato, consumidor y adaptador",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "14 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 117,
+          "w": 896,
+          "h": 24,
+          "text": "Selección editable C4: APP02 → C03 sesiones; colaboradores C05 y C09.",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 192,
+          "w": 255,
+          "h": 109,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 200,
+          "w": 243,
+          "h": 93,
+          "text": "C05 · SessionLookup\nClase · authorize / accepted\nI",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 352,
+          "y": 192,
+          "w": 256,
+          "h": 109,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 358,
+          "y": 200,
+          "w": 244,
+          "h": 93,
+          "text": "C05 · SessionRepository\nInterfaz · lookup / accept / revoke\nI",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 675,
+          "y": 192,
+          "w": 253,
+          "h": 109,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 681,
+          "y": 200,
+          "w": 241,
+          "h": 93,
+          "text": "C03 · PostgresSessionStore\nClase adaptadora\nI",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 355,
+          "w": 255,
+          "h": 78,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 38,
+          "y": 363,
+          "w": 243,
+          "h": 62,
+          "text": "C05 · permits\nFunción pura · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "rect",
+          "x": 352,
+          "y": 355,
+          "w": 256,
+          "h": 78,
+          "fill": "E5F2FF",
+          "stroke": "45647C",
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 358,
+          "y": 363,
+          "w": 244,
+          "h": 62,
+          "text": "C05 · SessionActor\nInterfaz de datos · I",
+          "size": 18,
+          "color": "203A4D",
+          "bold": false,
+          "align": "center"
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              287,
+              246
+            ],
+            [
+              352,
+              246
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              675,
+              246
+            ],
+            [
+              608,
+              246
+            ]
+          ],
+          "dash": true,
+          "arrow": true,
+          "hollow": true
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              159,
+              301
+            ],
+            [
+              159,
+              355
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "line",
+          "points": [
+            [
+              480,
+              301
+            ],
+            [
+              480,
+              355
+            ]
+          ],
+          "dash": false,
+          "arrow": true,
+          "hollow": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 477,
+          "w": 896,
+          "h": 22,
+          "text": "I: implementado en alcance rotulado  ·  P: parcial  ·  F: futuro",
+          "size": 14,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 455,
+          "w": 896,
+          "h": 20,
+          "text": "Flechas de código: uso; línea discontinua + triángulo hueco: realización de interfaz.",
+          "size": 13,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        }
+      ],
+      "explanation": "La selección es estructural y deriva de la primera página C4 de sesiones. SessionLookup conserva referencia SessionRepository y usa permits. El contrato ofrece lookup, accept y revoke; PostgresSessionStore lo implementa. El adaptador no es una subclase de SessionLookup: la línea discontinua con triángulo hueco es realización de interfaz. SessionActor son datos internos, no una credencial enviada al navegador. El adaptador usa pg, huella y reglas puras; la segunda página del editable detalla canUseSession/canAccessApplication. lookup no renueva; accept revalida sin revivir ni ampliar expiración absoluta; revoke es idempotente. revalidateInTransaction usa PoolClient solo en infraestructura, fuera del contrato público.",
+      "transition": "La estructura del código permite identificar patrones y principios sin inventar jerarquías.",
+      "question": "¿Es composición UML por usar un pool compartido? No. Una referencia compartida no demuestra propiedad exclusiva. ¿Realización es herencia? No, aquí implementa una interfaz.",
+      "sources": [
+        "docs/04-modelo-c4/04-codigo.md",
+        "apps/api/src/modules/authorization/public/session.ts",
+        "apps/api/src/modules/authorization/application/session-lookup.ts",
+        "apps/api/src/modules/identity/infrastructure/session-store.ts",
+        "docs/diagramas/c4-codigo-sesiones.drawio"
+      ],
+      "diagram": {
+        "file": "docs/diagramas/c4-codigo-sesiones.drawio",
+        "page": "C4 de sesiones - Contratos",
+        "pageId": "c4-codigo-sesiones",
+        "nodes": [
+          "SessionLookup",
+          "SessionRepository",
+          "PostgresSessionStore",
+          "permits",
+          "SessionActor"
+        ],
+        "edges": [
+          [
+            "SessionLookup",
+            "SessionRepository"
+          ],
+          [
+            "PostgresSessionStore",
+            "SessionRepository"
+          ],
+          [
+            "SessionLookup",
+            "permits"
+          ],
+          [
+            "SessionRepository",
+            "SessionActor"
+          ]
+        ],
+        "originalLabels": {
+          "SessionLookup": "C05 · SessionLookup\nclass\nauthorize / accepted\n[I]",
+          "SessionRepository": "C05 · SessionRepository\ninterface\nlookup / accept / revoke\n[I]",
+          "PostgresSessionStore": "C03 · PostgresSessionStore\nclass implements\nSessionRepository\n[I]",
+          "permits": "C05 · permits\nfunción pura\nRole + Permission → boolean\n[I]",
+          "SessionActor": "C05 · SessionActor\ninterface de datos\nsessionId / userId / role\nauthVersion\n[I]"
+        }
+      }
+    },
+    {
+      "title": "Patrones y principios observados en código real",
+      "section": "14 · Decisiones de diseño interno",
+      "seconds": 60,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "14 · DECISIONES DE DISEÑO INTERNO",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "Patrones y principios observados en código real",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "15 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 138,
+          "w": 896,
+          "h": 69,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 146,
+          "w": 343,
+          "h": 27,
+          "text": "Puertos y adaptadores",
+          "size": 19,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 176,
+          "w": 430,
+          "h": 27,
+          "text": "SessionRepository ↔ PostgresSessionStore",
+          "size": 16,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 493,
+          "y": 157,
+          "w": 417,
+          "h": 41,
+          "text": "Inversión de dependencias",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 216,
+          "w": 896,
+          "h": 69,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 224,
+          "w": 343,
+          "h": 27,
+          "text": "Entrega diferida transaccional",
+          "size": 19,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 254,
+          "w": 430,
+          "h": 27,
+          "text": "MailDelivery + DeliverPending",
+          "size": 16,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 493,
+          "y": 235,
+          "w": 417,
+          "h": 41,
+          "text": "SMTP fuera de HTTP; puede duplicar",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 294,
+          "w": 896,
+          "h": 69,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 302,
+          "w": 343,
+          "h": 27,
+          "text": "Idempotencia académica",
+          "size": 19,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 332,
+          "w": 430,
+          "h": 27,
+          "text": "actor + commandId + digest",
+          "size": 16,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 493,
+          "y": 313,
+          "w": 417,
+          "h": 41,
+          "text": "Reautorizar antes de replay",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 372,
+          "w": 896,
+          "h": 69,
+          "fill": "F5F8FA",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 380,
+          "w": 343,
+          "h": 27,
+          "text": "Responsabilidad / segregación",
+          "size": 19,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 46,
+          "y": 410,
+          "w": 430,
+          "h": 27,
+          "text": "schedule.ts y TeachingDirectory mínimo",
+          "size": 16,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 493,
+          "y": 391,
+          "w": 417,
+          "h": 41,
+          "text": "Reglas sin IO; contrato acotado",
+          "size": 19,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 470,
+          "w": 896,
+          "h": 33,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 475,
+          "w": 872,
+          "h": 25,
+          "text": "Ejemplos comprobados; sin certificar SOLID completo ni sustituibilidad universal.",
+          "size": 17,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        }
+      ],
+      "explanation": "Puertos/adaptadores se ve en SessionRepository y PostgresSessionStore, y respalda inversión de dependencias. El patrón de entrega diferida transaccional persiste token y MailDelivery; DeliverPending reclama leases y envía fuera de HTTP. SMTP puede duplicar mensajes aunque consumo del enlace sea único. Idempotencia académica usa actor/commandId y digest, con reautorización antes de replay; no demuestra idempotencia de pagos. Responsabilidad única se observa en schedule.ts sin IO frente a controlador/adaptador. Segregación se ilustra con TeachingDirectory mínimo. No afirmar SOLID completo: SessionLookup recibe revoke sin usarlo; un adaptador productivo no prueba sustitución arbitraria de proveedores. Pool compartido no implica Singleton y BEGIN/COMMIT no prueba Unit of Work.",
+      "transition": "Cerramos con lo que la evidencia permite afirmar y los pendientes que siguen abiertos.",
+      "question": "¿Inyección prueba Strategy? No. Es un mecanismo de composición. Los patrones se identifican por estructura y comportamiento, no por nombres de framework.",
+      "sources": [
+        "docs/03-diseno-de-software/diseno-interno/patrones-de-diseno.md",
+        "docs/03-diseno-de-software/diseno-interno/principios-de-diseno.md",
+        "specs/002-oferta-academica/evidence/t014.md"
+      ]
+    },
+    {
+      "title": "El avance se sostiene con evidencia y límites explícitos",
+      "section": "15 · Estado, evidencia y pendientes",
+      "seconds": 65,
+      "items": [
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 20,
+          "w": 880,
+          "h": 18,
+          "text": "15 · ESTADO, EVIDENCIA Y PENDIENTES",
+          "size": 12,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 48,
+          "w": 900,
+          "h": 52,
+          "text": "El avance se sostiene con evidencia y límites explícitos",
+          "size": 30,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 107,
+          "w": 896,
+          "h": 2,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 32,
+          "y": 515,
+          "w": 830,
+          "h": 14,
+          "text": "ACADEMIA VIRTUAL   |   Documentación 542c341 · fuente ecb1efe   |   22 OCT 2026",
+          "size": 10,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 882,
+          "y": 512,
+          "w": 46,
+          "h": 20,
+          "text": "16 / 16",
+          "size": 11,
+          "color": "536D7D",
+          "bold": false,
+          "align": "right"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 138,
+          "w": 432,
+          "h": 189,
+          "fill": "E5F2FF",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "rect",
+          "x": 486,
+          "y": 138,
+          "w": 442,
+          "h": 189,
+          "fill": "FFF1D6",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 48,
+          "y": 153,
+          "w": 402,
+          "h": 27,
+          "text": "001 · IDENTIDAD",
+          "size": 15,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 48,
+          "y": 192,
+          "w": 402,
+          "h": 70,
+          "text": "7 checkpoints\n106 / 108 tareas",
+          "size": 26,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 48,
+          "y": 271,
+          "w": 402,
+          "h": 46,
+          "text": "T106: 120 unidad · 744 integración\n203 E2E; evidencia histórica",
+          "size": 17,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 502,
+          "y": 153,
+          "w": 409,
+          "h": 27,
+          "text": "002 · OFERTA ADMIN",
+          "size": 15,
+          "color": "007F83",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 502,
+          "y": 192,
+          "w": 409,
+          "h": 70,
+          "text": "Preparación comprobada\nT001–T029; T030 pendiente",
+          "size": 24,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 502,
+          "y": 271,
+          "w": 409,
+          "h": 46,
+          "text": "74 HTTP/PG · 60 ejecuciones E2E\n+ 2 controles (T028/T029)",
+          "size": 17,
+          "color": "203A4D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 34,
+          "y": 347,
+          "w": 894,
+          "h": 60,
+          "text": "Abiertos: bootstrap · aceptación humana · 1000 concurrentes\nD13 · integraciones externas",
+          "size": 21,
+          "color": "152D42",
+          "bold": true,
+          "align": "left"
+        },
+        {
+          "kind": "text",
+          "x": 34,
+          "y": 413,
+          "w": 894,
+          "h": 25,
+          "text": "SMTP real, Izipay y video/chat: sin integración verificada.",
+          "size": 17,
+          "color": "536D7D",
+          "bold": false,
+          "align": "left"
+        },
+        {
+          "kind": "rect",
+          "x": 32,
+          "y": 448,
+          "w": 896,
+          "h": 33,
+          "fill": "007F83",
+          "stroke": null,
+          "dash": false
+        },
+        {
+          "kind": "text",
+          "x": 44,
+          "y": 453,
+          "w": 872,
+          "h": 25,
+          "text": "Pendientes: publicación, ciclo y consulta alumno/docente; compra y aprendizaje futuros.",
+          "size": 17,
+          "color": "FFFFFF",
+          "bold": true,
+          "align": "left"
+        }
+      ],
+      "explanation": "Identidad 001 tiene 106/108 tareas y siete checkpoints; T106 histórico acredita 120 unitarias, 744 integraciones y 203 E2E en su versión. Oferta 002 tiene T001–T029 completas y T030–T074 pendientes. T028/T029 acredita 74 HTTP/PG, 30 casos E2E funcionales por dos perfiles: 60 ejecuciones más dos controles; API 266/web 141 y regresión E2E identidad seleccionada 49 no se suman como casos independientes. No se ejecutó otra regresión para esta presentación. T030 sigue pendiente y SC-001 no se completa hasta ciclo. Bootstrap intermitente conserva causa no confirmada. Aceptación humana: 001 T104 diez personas y T108, además de SC-002 humano de oferta. Capacidad 1000 concurrentes sin aprobar; hubo cargas con incumplimientos y nuevos ensayos/VPS aplazados hasta matrícula y D10. D13 custodia, responsables y objetivos operativos siguen pendientes; V16 solo acredita identidad local. SMTP real, Izipay, video/protección y Socket.IO no están verificados; materiales y paneles completos son futuros. D04 y matrícula de D06 abiertas, purga CLI sin programación.",
+      "transition": "Abrir preguntas y volver a la trazabilidad: qué requisito motiva una decisión y qué evidencia respalda su estado.",
+      "question": "¿Qué se puede demostrar hoy? Identidad y preparación ADMIN en el entorno local, sin atribuir publicación, matrícula o capacidad global. ¿Siguiente checkpoint? 002 T030, respetando el flujo ya definido.",
+      "sources": [
+        "docs/estado-documental.md",
+        "specs/001-identidad-acceso-roles/evidence/acceptance.md",
+        "specs/001-identidad-acceso-roles/evidence/regression.md",
+        "specs/001-identidad-acceso-roles/evidence/load-resources.md",
+        "specs/002-oferta-academica/evidence/t028-t029.md",
+        "specs/002-oferta-academica/tasks.md",
+        "docs/decisiones-pendientes.md"
+      ]
+    }
+  ],
+  "sourceHashes": {
+    ".specify/memory/constitution.md": "e6d55000bbfc298852284e03026dc6ce2b5ecd9e4408890ef9124c490d463b3e",
+    "apps/api/src/app.module.ts": "c3716f671e4ab2dc51c28e46d18c82ccc20777d8cf2e53068a6c955be59036bb",
+    "apps/api/src/modules/academic-offering/entrypoints/http/admin.controller.ts": "0f3285472d4f9389a53201c8f0a15a94e9d893626d7f479d7415633d7c928def",
+    "apps/api/src/modules/authorization/application/session-lookup.ts": "ec560d352077cd1eda282d5c566c9fbebe7e9b978fc95f1da77db7e5f8477836",
+    "apps/api/src/modules/authorization/public/session.ts": "0b6018177ec96f51afa6e5af4df1a76a57d84a47e0fbead92fcc3e6d770a3b47",
+    "apps/api/src/modules/identity/infrastructure/session-store.ts": "f4bee98e6947489841519a0b33f723ca4b3cc123d4e6b2642817734b37faec95",
+    "compose.yml": "be5d31518626ac915885cf7b0163004c7f4c537de2be2fcca2349a433c63868e",
+    "docs/01-analisis-de-sistema/01-actores.md": "b77440de2651fa05f03a93b8606058e8d4716523ffc0dddd56f63bb49bf33cee",
+    "docs/01-analisis-de-sistema/02-historias-del-usuario.md": "698b4860639518dd3794b68c41b87ed1bd1084950b29283b8daf13ae91d90f69",
+    "docs/01-analisis-de-sistema/03-requisitos-funcionales.md": "a7a77aa494aafec46302280f51dbedd1ba1e41ea6936275b81dd03f26aee1d7d",
+    "docs/01-analisis-de-sistema/04-atributos-de-calidad.md": "3f3ebcb5232652fbc7c6d51dc6e099032c9b3ceef029b8e91a51bffc0b444afe",
+    "docs/01-analisis-de-sistema/05-restricciones.md": "9a41a977af1e5cdb8df5d4d1cb2d262c72ea622a32c2b37a768e4688e486a337",
+    "docs/01-analisis-de-sistema/06-driver-arquitectonicos.md": "afe7f03cbffd71118ee5abfb5bc2d7a6063882f6fac30ddca7667c5eb9e38614",
+    "docs/01-analisis-de-sistema/07-decisiones-arquitectonicas.md": "8c97e2a0de6ee720cbeaa60825e95974f774f44bcd6882638465bb6d0618e57e",
+    "docs/01-analisis-de-sistema/08-escenarios-atributos-calidad.md": "4ee0384bde74c4a2d52386c4f8994a2e8a87db287bbadd2d2627e67c1e804ba2",
+    "docs/02-arquitectura-software/diagrama-arquitectura.md": "7d698079954ae27725fe401e06133883a09b08876363b2cb0c5feeeb414f6c94",
+    "docs/02-arquitectura-software/enfoque-arquitectonico.md": "8677fa7587342008bd44d00a764f09c170efccd8f1eff9c1efd92bf83cdf3c45",
+    "docs/02-arquitectura-software/estilo-arquitectonico.md": "37698985a5d00c03f72417cbe98a76bfa3920620cb8e27836f2025fee3f8d106",
+    "docs/03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md": "208854bae2c16043133d232ef4f71816fdc2ae7997374328e98395a52bdf5dd2",
+    "docs/03-diseno-de-software/diseno-interno/patrones-de-diseno.md": "89ea5221c7b975e596d0661d27e3a52ab02112f52600a8cf0ba34fee12c37788",
+    "docs/03-diseno-de-software/diseno-interno/principios-de-diseno.md": "51a8bfa07c84772f05d7d9778d76f2597e8e619477995148d3f68fedd013f3de",
+    "docs/04-modelo-c4/01-contexto-del-sistema.md": "4fd38c29d42d769e77fb33b58798978b3ffeb03208ea457e75d26b477f3fb256",
+    "docs/04-modelo-c4/02-contenedores.md": "a7f93b02e3cf23d792416453bdd2a91d6c611663911225b1a1e89682448b87fe",
+    "docs/04-modelo-c4/03-componentes.md": "6effefa647f10124c1dc5ea77bd7f4cb778c2f6ba1e3fe02a824b07b9ef34883",
+    "docs/04-modelo-c4/04-codigo.md": "e911367626559b1107d2e43db39919614b7f5326077656ecf55a21d5923df280",
+    "docs/alcance-mvp.md": "e65b918fc8cdf78e384ca6c88b5f0847eec935e7e5a840e6f3c7461128fe6786",
+    "docs/decisiones-pendientes.md": "de31cddf86fafbe5ffb4831e48ad650eec9d112fac250d2e862bbeddbfdd5a30",
+    "docs/diagramas/arquitectura-general.drawio": "d3b3e31add5ecaeb691b82e27607da7d6d99e7f0210be592d598314d2b37c771",
+    "docs/diagramas/c4-codigo-sesiones.drawio": "aaad628260f3e59bfea20cadf73bc9a45a65a3d070d68c4bce606111bcdbaefa",
+    "docs/diagramas/c4-componentes.drawio": "db871226bcdcef1cb0d5ce7ce28cbe9a1cc796fe3789d3458f8a1b5c5ac3b56e",
+    "docs/diagramas/c4-contenedores.drawio": "836a9862146b1142dcd62043e422449720ad1e25288952e6fb891e7e2096492c",
+    "docs/diagramas/c4-contexto-del-sistema.drawio": "6a87c57f8054d1c01cc1c2f5137893980208d703567d6deadbfba4e747120eed",
+    "docs/estado-documental.md": "bb43e7cdcc3089a9d827d1cfc5f26e53a4037d150a5d96e1d5d27cfb5574d30b",
+    "docs/informe-sincronizacion-2026-10-22.md": "8fdfd7475c140fd074dfdffa1f885f5518025dc1ff0af502fcd328ea74193aba",
+    "specs/001-identidad-acceso-roles/evidence/acceptance.md": "15fb5845caa9d03d4dea7940d7526341c46b625f9872a90aa91c4e0b8b90615c",
+    "specs/001-identidad-acceso-roles/evidence/load-resources.md": "fbf9f9c71ca3b00614957cf855a799bd6c5d660b22d5f6e708a838abade62a79",
+    "specs/001-identidad-acceso-roles/evidence/regression.md": "340605a5e848688e932f5a3b8404c9d3a49d5ed14c2bf7aef52d125118cf5866",
+    "specs/002-oferta-academica/contracts/api.md": "3396290a32e310167a9345333e1c3b4cee3cd01d3dd1375456401c1e59f935b2",
+    "specs/002-oferta-academica/contracts/integration.md": "aa029b7f51566ef15f9b2e7953d56d9d8dba66ac812ac2e915a56d0bb7c06e20",
+    "specs/002-oferta-academica/evidence/t014.md": "c2953939aca008bcdb1121adeccebec53f9f8ba0d46336c8b2e3f450825e7fbe",
+    "specs/002-oferta-academica/evidence/t028-t029.md": "70b65d60e55a222210d75065bfc93a23f1784899efabf821737142be2158bfd4",
+    "specs/002-oferta-academica/spec.md": "38ac3e76389e4701d7216e611c8e3bd09780fd99ea719546b02c74342f985742",
+    "specs/002-oferta-academica/tasks.md": "4fdfe7a5e3fb7c452bbf1db08672bf0a456484eb226bbaf7b01d6da0c302e65f"
+  }
+}

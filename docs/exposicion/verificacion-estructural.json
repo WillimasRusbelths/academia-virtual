@@ -1,0 +1,137 @@
+{
+  "referenceCommit": "542c341",
+  "implementationCommit": "ecb1efe",
+  "pptxSha256": "8c233fa468e9fdc6890f0c535842d4e250da5ccc7aab16dfdb7066469a757b26",
+  "durationSeconds": 900,
+  "sourceFilesVerified": 43,
+  "slides": [
+    {
+      "number": 1,
+      "title": "Academia Virtual",
+      "seconds": 40,
+      "notesPresent": true,
+      "editableShapes": 9,
+      "pngSha256": "cd667055ae9fcbaae8706185d480eea0d3f00310985aa5805ea83f6dff7ba9da"
+    },
+    {
+      "number": 2,
+      "title": "Un acceso coherente a la actividad académica",
+      "seconds": 55,
+      "notesPresent": true,
+      "editableShapes": 19,
+      "pngSha256": "85385c6165e589f0410a371bb336129e38e9f1239037e17843851e2e4cf94faf"
+    },
+    {
+      "number": 3,
+      "title": "Tres roles; dos participantes adicionales",
+      "seconds": 45,
+      "notesPresent": true,
+      "editableShapes": 26,
+      "pngSha256": "2c390eb37e4922e09c22faad7a6340530e944f9f2a97ac842183fb9a9d655583"
+    },
+    {
+      "number": 4,
+      "title": "Historias que se convierten en controles concretos",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 22,
+      "pngSha256": "53af2659c07c9c369c9add71dbe845b77e23155137604a9bc0f8d76c59d18cbe"
+    },
+    {
+      "number": 5,
+      "title": "Calidad medible dentro de recursos limitados",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 19,
+      "pngSha256": "1a080203a7d630d5ee1de75e830b76c1a49a552e938b9fe77a8c2b0b27e81ba0"
+    },
+    {
+      "number": 6,
+      "title": "Los drivers priorizan riesgos de estructura",
+      "seconds": 50,
+      "notesPresent": true,
+      "editableShapes": 25,
+      "pngSha256": "b8edde6653bcc8f865e6027476a0c27fc9e1642a6a36b1a3dc0956b8b55820de"
+    },
+    {
+      "number": 7,
+      "title": "Cada decisión resuelve un riesgo y acepta un costo",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 21,
+      "pngSha256": "e5d12673bf8a2f44c7aef8d5c8200602ade25af71a27023c8378ea9e9e80da1d"
+    },
+    {
+      "number": 8,
+      "title": "Un backend; módulos y capas con responsabilidades",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 24,
+      "pngSha256": "ee95baae1aaa0a6760dfdf3835e3101244eace04ab0bbef5c81e5b343051421a"
+    },
+    {
+      "number": 9,
+      "title": "Clean Architecture dirige los imports al núcleo",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 18,
+      "pngSha256": "ff153797d6e6595d0698ffb9a8fb4992a98c4606d7d39f42612fb7b4e145ce3d"
+    },
+    {
+      "number": 10,
+      "title": "C1 · Personas, sistema y entorno externo",
+      "seconds": 45,
+      "notesPresent": true,
+      "editableShapes": 23,
+      "pngSha256": "fc1e84f46cd339b916991abf87e5e14a932c79b26036b83c80d510d502099a6a"
+    },
+    {
+      "number": 11,
+      "title": "C2 · Dos aplicaciones y un almacén principal",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 24,
+      "pngSha256": "3b58121340795a49af9c5efa0b2de61f9d16f3d870c54dd8b505615d13c300a7"
+    },
+    {
+      "number": 12,
+      "title": "C3 · Preparación de oferta dentro de APP02",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 24,
+      "pngSha256": "f404547477e99b4afba0e2c8bb65e5e7e560e866db20630ac0eaa07038f4a5a7"
+    },
+    {
+      "number": 13,
+      "title": "Curso y grupo separan contenido de programación",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 20,
+      "pngSha256": "9904781a3b43640ef148536533e9b3b5ed1a0b6746d84c7f2a22d7634bfd0147"
+    },
+    {
+      "number": 14,
+      "title": "C4 · Sesiones: un contrato, consumidor y adaptador",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 19,
+      "pngSha256": "caf0bf085a6434aa01cf746365bfdd5fd8cef9286d4f80c27e6b6501d743acee"
+    },
+    {
+      "number": 15,
+      "title": "Patrones y principios observados en código real",
+      "seconds": 60,
+      "notesPresent": true,
+      "editableShapes": 23,
+      "pngSha256": "b28fcc4aedf55d53d03cee3d4c13652f8b91a5f17e441eaaec2e7a9bbd4adc3c"
+    },
+    {
+      "number": 16,
+      "title": "El avance se sostiene con evidencia y límites explícitos",
+      "seconds": 65,
+      "notesPresent": true,
+      "editableShapes": 17,
+      "pngSha256": "fb8a5fc88fe5f0bf85f9da5eb1d286225b5b64d56f221d22ec3528f98a12c84b"
+    }
+  ]
+}
