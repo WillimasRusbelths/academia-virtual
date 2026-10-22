@@ -13,6 +13,9 @@ import { ForgotPasswordPage } from '../features/auth/forgot-password-page';
 import { ResetPasswordPage } from '../features/auth/reset-password-page';
 import { AccountsPage } from '../features/admin-users/accounts-page';
 import { AccountDetailPage } from '../features/admin-users/account-detail-page';
+import { AdminCoursesPage } from '../features/academic-offering/admin-courses-page';
+import { AdminCoursePage } from '../features/academic-offering/admin-course-page';
+import { AdminGroupPage } from '../features/academic-offering/admin-group-page';
 export function App() {
   return <SessionProvider><SessionRoutes/></SessionProvider>;
 }
@@ -33,5 +36,8 @@ function SessionRoutes() {
       onLogout={session.logout} onRefresh={session.refresh}/>},
     {path:'/admin/cuentas',access:'admin',element:<AccountsPage api={session.api}/>},
     {path:'/admin/cuentas/:id',access:'admin',render:params=><AccountDetailPage api={session.api} id={params.id}/>},
+    {path:'/admin/oferta',access:'admin',element:<AdminCoursesPage api={session.api} navigate={navigate}/>},
+    {path:'/admin/oferta/cursos/:id',access:'admin',render:params=><AdminCoursePage api={session.api} id={params.id} navigate={navigate}/>},
+    {path:'/admin/oferta/grupos/:id',access:'admin',render:params=><AdminGroupPage api={session.api} id={params.id} navigate={navigate}/>},
   ]}/>;
 }

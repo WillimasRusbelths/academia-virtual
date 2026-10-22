@@ -1,0 +1,10 @@
+.offering-page { max-width: 64rem; }
+.offering-page form, .offering-page section { margin-top: 1.25rem; }
+.offering-page button { margin: .25rem .5rem .5rem 0; }
+.offering-page select, .offering-page textarea { width: 100%; }
+.offering-page fieldset { min-inline-size: 0; margin: 1rem 0; padding: 1rem; }
+.offering-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.offering-list { padding-left: 1.25rem; }
+.offering-list li { margin: 1rem 0; }
+.offering-page label { display: block; }
+@media (min-width: 46rem) { .offering-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

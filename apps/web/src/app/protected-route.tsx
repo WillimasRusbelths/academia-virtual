@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { RouteAccess } from './router';
+import { permitsRoute } from './router';
 import { useSession } from './session';
 import { Feedback } from '../shared/ui/feedback';
 
@@ -9,7 +10,7 @@ export function ProtectedRoute({children,access}:{readonly children:ReactNode;re
   if(!user)return <main><h1>Acceso</h1>{error
     ?<Feedback error={error} onRetry={()=>void refresh()}/>
     :<p role="status">Consultando sesión…</p>}</main>;
-  if(access==='admin'&&user.role!=='ADMIN')return <main><h1>Acceso no permitido</h1>
+  if(!permitsRoute(user.role,access))return <main><h1>Acceso no permitido</h1>
     <p role="alert">No tienes permiso para esta acción.</p><a href="/inicio">Volver al inicio</a></main>;
   return children;
 }

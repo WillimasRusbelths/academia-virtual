@@ -12,6 +12,7 @@ export function HomePage({user,loading,error,onLogout,onRefresh}:{readonly user:
       <nav aria-label="Navegación de inicio">
         <p><a href="/perfil">Mi perfil</a></p>
         {user.role==='ADMIN'&&<p><a href="/admin/cuentas">Gestionar cuentas</a></p>}
+        {user.role==='ADMIN'&&<p><a href="/admin/oferta">Gestionar oferta</a></p>}
       </nav>
       <button type="button" disabled={loading} onClick={()=>void onLogout()}>Cerrar sesión</button>
     </>}
