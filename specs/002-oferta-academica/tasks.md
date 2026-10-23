@@ -8,8 +8,8 @@ America/Lima; 150 casos únicos, 300 ejecuciones dirigidas finales aprobadas. T0
 verificada con las diez rutas reales de T026; 74/74 casos HTTP aprobados. T027 cliente
 y contratos verificados. T028/T029 verificadas; T022 cierra con sus 19 casos originales
 en escritorio y móvil, sin modificar sus expectativas. T030 verifica US1 completa en
-su alcance de preparación. T031/T032 escritas y ejecutadas, pendientes de T036/T038
-para demostrar sus aserciones de negocio; T033–T074 sin iniciar.
+su alcance de preparación. T031–T035 escritas y ejecutadas, pendientes de las capas
+T036–T041 para demostrar sus aserciones de negocio; T036–T074 sin iniciar.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
@@ -28,7 +28,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [rutas y cliente T026/T027](evidence/t026-t027.md) e
 [interfaz, navegación y cierre T022/T028/T029](evidence/t028-t029.md),
 [checkpoint US1 T030](evidence/us1.md) y
-[pruebas de visibilidad/publicación T031/T032](evidence/t031-t032.md).
+[pruebas de visibilidad/publicación T031/T032](evidence/t031-t032.md) y
+[pruebas de catálogo, carreras y recorridos T033–T035](evidence/t033-t035.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -37,7 +38,7 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual autoriza únicamente T030/T031/T032; se detiene antes de T033.
+actual autoriza únicamente T033/T034/T035; se detiene antes de T036.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
@@ -243,6 +244,19 @@ ejecutadas no equivalen a publicación aprobada. Tipos/lint/builds aprobados; ar
 final 14/14 tras corregir dist antiguo en el runner privado, sin debilitar pruebas.
 PA-01–PA-05 y E1 conservados. Bootstrap histórico abierto. Evidencia en
 [US1](evidence/us1.md) y [T031/T032](evidence/t031-t032.md). No se inicia T033.
+
+Avance T033/T034/T035, 2026-10-22: pruebas de catálogo HTTP/PG, publicaciones
+concurrentes con observador independiente y seis escenarios US2 en móvil/escritorio.
+La regresión seleccionada aprobó 121/121 (arquitectura 14, preparación HTTP 74 y
+protocolo T012 33). T033 ejecuta 44 casos: dos controles aprobados, 42 fallos esperados
+por rutas ausentes tras corregir el SQL del fixture; su ejecución inicial inválida se
+conserva como incidencia. T034 prepara 16 casos: dos controles PostgreSQL y 14 del
+publicador ausente. T035 ejecuta diez casos funcionales en ambos perfiles (20) y dos
+controles de harness. Las aserciones de negocio posteriores a los gates siguen
+pendientes; T033/T034/T035 no se marcan completas. Se corrigen cuatro nombres de
+operación en T032 conforme a enums existentes y se repite su suite, sin cambiar reglas.
+PA-01–PA-05, E1 y bootstrap abierto conservados. Resultados finales por caso y
+conservación en [t033-t035.md](evidence/t033-t035.md). Detenido antes de T036.
 
 Depende de fundamentos y US1. Prueba independiente: fixtures preparadas de varios
 estados, publicación completa y alumno desde inicio compara dos grupos. No necesita

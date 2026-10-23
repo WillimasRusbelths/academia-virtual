@@ -116,9 +116,9 @@ describe('T032 publicación HTTP/PG — FR-004/007/008/012; SC-004', () => {
     expect(result.command).toEqual({ id: commandId, replayed: false, appliedRevision: '2', result: 'APPLIED' });
     expect((await pool().query('SELECT state,revision::text FROM "AcademicCourse" WHERE id=$1', [seed.otherCourseId])).rows[0]).toEqual({ state: 'PUBLISHED', revision: '2' });
     expect((await pool().query('SELECT operation,"resultingRevision"::text AS revision FROM "AcademicCommand" WHERE "commandId"=$1', [commandId])).rows)
-      .toEqual([{ operation: 'PUBLISH_COURSE', revision: '2' }]);
+      .toEqual([{ operation: 'COURSE_PUBLISH', revision: '2' }]);
     expect((await pool().query('SELECT action,"afterState","afterRevision"::text AS revision FROM "AcademicAuditEvent" WHERE "commandId"=$1', [commandId])).rows)
-      .toEqual([{ action: 'PUBLISH_COURSE', afterState: 'PUBLISHED', revision: '2' }]);
+      .toEqual([{ action: 'COURSE_PUBLISH', afterState: 'PUBLISHED', revision: '2' }]);
   });
   test('P02 publicar curso no publica borradores ni captura generaciones de sus hijos', async () => {
     const children = await rows('AcademicGroup'); const result = await applied<AdminCourse>(await post('courses'));
@@ -148,8 +148,8 @@ describe('T032 publicación HTTP/PG — FR-004/007/008/012; SC-004', () => {
       .toEqual({ teacherUserId: data.account('TEACHER').id, publishedTeacherUserId: data.account('TEACHER').id, version, revision: '2' });
     expect(await rows('AcademicCourse')).toEqual(parent);
     expect((await pool().query('SELECT to_jsonb(g) AS value FROM "AcademicGroup" g WHERE id=$1', [seed.otherGroupId])).rows).toEqual(sibling);
-    expect((await pool().query('SELECT operation FROM "AcademicCommand" WHERE "targetId"=$1', [seed.groupId])).rows).toEqual([{ operation: 'PUBLISH_GROUP' }]);
-    expect((await pool().query('SELECT action FROM "AcademicAuditEvent" WHERE "resourceId"=$1', [seed.groupId])).rows).toEqual([{ action: 'PUBLISH_GROUP' }]);
+    expect((await pool().query('SELECT operation FROM "AcademicCommand" WHERE "targetId"=$1', [seed.groupId])).rows).toEqual([{ operation: 'GROUP_PUBLISH' }]);
+    expect((await pool().query('SELECT action FROM "AcademicAuditEvent" WHERE "resourceId"=$1', [seed.groupId])).rows).toEqual([{ action: 'GROUP_PUBLISH' }]);
   });
   test.each(['capacity','periodStart','periodEnd','teacherUserId','schedule'] as const)('P08 dato faltante %s impide publicar sin cambios parciales', async field => {
     await parentPublished();
