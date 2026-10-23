@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Inject, Param, Patch, Post, Put, Query, Req, SetMetadata } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Inject, Param, Patch, Post, Put, Query, Req, SetMetadata } from '@nestjs/common';
 import { ACCESS_POLICY } from '../../../authorization/public/session.js';
 import type { SessionActor } from '../../../authorization/public/session.js';
-import { ACADEMIC_PREPARATION_COMMANDS } from '../../application/commands.js';
-import type { PreparationCommands } from '../../application/commands.js';
+import { ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_PUBLICATION_COMMANDS } from '../../application/commands.js';
+import type { PreparationCommands, PublicationCommands } from '../../application/commands.js';
 import { ACADEMIC_ADMINISTRATIVE_QUERIES } from '../../application/queries.js';
 import type { AdministrativeReads } from '../../application/queries.js';
 import type { CourseQuery, GroupQuery, NameQuery } from '../../application/offering-store.js';
@@ -47,14 +47,29 @@ function body(request: Request, input: unknown, schema: Record<string, (value: u
   return values;
 }
 
-/** Preparación administrativa únicamente. Guard global autoriza antes de leer destinos;
+/** Gestión administrativa. Guard global autoriza antes de leer destinos;
  * el caso de uso vuelve a autorizar cada escritura dentro del protocolo existente.
  */
 @Controller('api/v1/admin/academic')
 @SetMetadata(ACCESS_POLICY, 'academic:manage')
 export class AcademicAdminController {
   constructor(@Inject(ACADEMIC_PREPARATION_COMMANDS) private readonly commands: PreparationCommands,
-    @Inject(ACADEMIC_ADMINISTRATIVE_QUERIES) private readonly queries: AdministrativeReads) {}
+    @Inject(ACADEMIC_ADMINISTRATIVE_QUERIES) private readonly queries: AdministrativeReads,
+    @Inject(ACADEMIC_PUBLICATION_COMMANDS) private readonly publication: PublicationCommands) {}
+  @Post('courses/:id/publish')
+  @HttpCode(200)
+  async publishCourse(@Req() request: Request, @Param('id') courseId: string, @Body() input: unknown, @Query() search: unknown) {
+    strictDto(search, {}); const values = body(request, input, {}, true);
+    return { data: await this.publication.execute(request.actor, { operation: 'COURSE_PUBLISH', courseId: id(courseId),
+      commandId: values.commandId as string, expectedRevision: values.expectedRevision as string }, { requestId: request.requestId! }) };
+  }
+  @Post('groups/:id/publish')
+  @HttpCode(200)
+  async publishGroup(@Req() request: Request, @Param('id') groupId: string, @Body() input: unknown, @Query() search: unknown) {
+    strictDto(search, {}); const values = body(request, input, {}, true);
+    return { data: await this.publication.execute(request.actor, { operation: 'GROUP_PUBLISH', groupId: id(groupId),
+      commandId: values.commandId as string, expectedRevision: values.expectedRevision as string }, { requestId: request.requestId! }) };
+  }
   @Get('courses')
   async courses(@Req() request: Request, @Query() input: unknown) {
     read(request); return { data: await this.queries.adminCourses(request.actor, query(input, 'course') as CourseQuery) };

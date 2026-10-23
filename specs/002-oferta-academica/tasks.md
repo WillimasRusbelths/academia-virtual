@@ -1,7 +1,8 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T031 y T034 completas. Checkpoint de fundamentos T018 aprobado el
+**Estado**: T001–T034 y T036–T038 completas. T035 pendiente de interfaz/E2E.
+Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
 America/Lima; 150 casos únicos, 300 ejecuciones dirigidas finales aprobadas. T021
@@ -9,10 +10,8 @@ verificada con las diez rutas reales de T026; 74/74 casos HTTP aprobados. T027 c
 y contratos verificados. T028/T029 verificadas; T022 cierra con sus 19 casos originales
 en escritorio y móvil, sin modificar sus expectativas. T030 verifica US1 completa en
 su alcance de preparación. T031/T034 verificadas con implementación real de T036.
-T032/T033/T035 pendientes de HTTP/catálogo/UI. T036 implementada y verificada en
-dominio/persistencia, pendiente del criterio integrado T032 verde en T038.
-T037 implementada y verificada por capas; pendiente del criterio T033 verde en T038.
-T038–T074 sin iniciar.
+T038 conecta publicación/catálogo por HTTP y cierra los criterios integrados de
+T032/T033/T036/T037. T035 sigue pendiente de T039–T041; T039–T074 sin iniciar.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
@@ -34,7 +33,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [pruebas de visibilidad/publicación T031/T032](evidence/t031-t032.md) y
 [pruebas de catálogo, carreras y recorridos T033–T035](evidence/t033-t035.md) y
 [publicación real, visibilidad y avance T036](evidence/t036.md) y
-[consultas reales de catálogo y avance T037](evidence/t037.md).
+[consultas reales de catálogo y avance T037](evidence/t037.md) y
+[HTTP real y cierre T032/T033/T036–T038](evidence/t038.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -43,7 +43,7 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual autoriza únicamente T037; se detiene antes de T038.
+actual autoriza únicamente T038; se detiene antes de T039.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
@@ -290,18 +290,32 @@ HTTP por pruebas directas ni cambiar descripciones. T032/T035/T036 también pend
 PA-01–PA-05, E1, bootstrap abierto y entorno manual conservados. Evidencia y comandos
 en [t037.md](evidence/t037.md). Detenido antes de T038.
 
+Cierre T032/T033/T036/T037/T038, 2026-10-23: las dos rutas de publicación y cuatro
+rutas de catálogo se conectan a las capacidades reales existentes, compartiendo pool,
+autorización, aceptación de sesión y escritor atómico. T032 original 58/58 y T033
+original 44/44, con todas las aserciones posteriores antes inaccesibles; sin alterar
+esas pruebas. T034 original 16/16 (dos controles y 14 casos de publicación concurrente).
+Unitarias/arquitectura 308/308, incluidas T031 42 y T017 14 con inventario actualizado.
+Publicación directa 35/35, catálogo directo 41/41, regresión PG/HTTP/identidad 259/259
+y nueva protección HTTP 24/24; tipos, lint y builds aprobados. Se cierran individualmente
+las cinco tareas al cumplir sus puertas integradas; las evidencias anteriores en rojo
+y la incidencia de fixture T037 permanecen como historia. Sin fallos finales ni omitidos;
+sin adelantar retiro/cancelación, consultas docentes o UI. T035 pendiente de interfaz
+T039–T041. PA-01–PA-05, E1, bootstrap abierto y entorno manual conservados. Véase
+[t038.md](evidence/t038.md). Detenido antes de T039.
+
 Depende de fundamentos y US1. Prueba independiente: fixtures preparadas de varios
 estados, publicación completa y alumno desde inicio compara dos grupos. No necesita
 interfaz US3/US4; sus invariantes de seguridad ya deben funcionar aquí.
 
 - [X] T031 [P] [US2] Escribir UNIT en `apps/api/src/modules/academic-offering/domain/visibility.test.ts`: estados padre/hijo, docente actual/snapshot/generación, pérdida y recuperación sin consultas, curso sin grupos visibles y proyecciones sin ocupación ficticia (FR-006/007/009/011/012; V-A05/A06).
-- [ ] T032 [P] [US2] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-publication.spec.ts`: curso vacío publicable pero invisible, grupo exige padre publicado/completitud/docente único, captura generación solo en grupo; curso revalida hijos publicados sin renovar snapshot, todo rollback si alguno falla (FR-004/007/008/012; SC-004).
-- [ ] T033 [P] [US2] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-catalog.spec.ts`: todas las rutas catálogo, filtros antes de conteo/paginación, enlaces grupo/curso incompatibles 404 indistinguibles, docente 403/visitante 401, DTO sin privados y capacidadStatus NOT_CALCULATED (FR-006/009–011).
+- [X] T032 [P] [US2] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-publication.spec.ts`: curso vacío publicable pero invisible, grupo exige padre publicado/completitud/docente único, captura generación solo en grupo; curso revalida hijos publicados sin renovar snapshot, todo rollback si alguno falla (FR-004/007/008/012; SC-004).
+- [X] T033 [P] [US2] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-catalog.spec.ts`: todas las rutas catálogo, filtros antes de conteo/paginación, enlaces grupo/curso incompatibles 404 indistinguibles, docente 403/visitante 401, DTO sin privados y capacidadStatus NOT_CALCULATED (FR-006/009–011).
 - [X] T034 [P] [US2] Escribir PG concurrente en `apps/api/tests/integration/academic-offering-publication-races.spec.ts`: dos admins/distintas conexiones publican mismo docente/franja y solo uno confirma; distintos docentes pueden publicar; probar fechas efectivas y fronteras, consulta posterior a lock mediante barrera observada (FR-004/007/015; SC-004/006).
 - [ ] T035 [P] [US2] Escribir E2E en `apps/web/tests/e2e/academic-offering-catalog.spec.ts`: seis escenarios US2, confirmación de publicación, curso más dos grupos, capacidad máxima/no calculada, vacío/reintento/no disponible, móvil/teclado y cero acciones de compra/reserva (FR-006/007/009/013/014; SC-002/005 automatizado).
-- [ ] T036 [US2] Implementar `apps/api/src/modules/academic-offering/domain/visibility.ts` y publicación en `application/commands.ts` y `infrastructure/offering-store.ts`: curso/grupo con revalidación completa, locks de todos los docentes, conflicto contra otros PUBLISHED incluso padre retirado o revisión requerida; snapshot solo en grupo. Termina con T031/T032/T034 verdes, sin refrescar generación al publicar curso (FR-004/007/008/012/015).
-- [ ] T037 [US2] Implementar catálogo en `apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts` y `application/queries.ts`: una sentencia por proyección con directorio, franjas y conteo, filtro antes de página; lectura posterior a pérdida de habilitación oculta. Termina con T033 verde y sin cambios en GET (FR-006/009/011/012).
-- [ ] T038 [US2] Añadir publish a `apps/api/src/modules/academic-offering/entrypoints/http/admin.controller.ts` y consultas a `catalog.controller.ts`; implementar todos los paths y políticas de api.md, accepted-session existente y errores de conflicto solo administrativos. Termina con T032–T034 y T017 aprobadas (FR-007/009/010/013).
+- [X] T036 [US2] Implementar `apps/api/src/modules/academic-offering/domain/visibility.ts` y publicación en `application/commands.ts` y `infrastructure/offering-store.ts`: curso/grupo con revalidación completa, locks de todos los docentes, conflicto contra otros PUBLISHED incluso padre retirado o revisión requerida; snapshot solo en grupo. Termina con T031/T032/T034 verdes, sin refrescar generación al publicar curso (FR-004/007/008/012/015).
+- [X] T037 [US2] Implementar catálogo en `apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts` y `application/queries.ts`: una sentencia por proyección con directorio, franjas y conteo, filtro antes de página; lectura posterior a pérdida de habilitación oculta. Termina con T033 verde y sin cambios en GET (FR-006/009/011/012).
+- [X] T038 [US2] Añadir publish a `apps/api/src/modules/academic-offering/entrypoints/http/admin.controller.ts` y consultas a `catalog.controller.ts`; implementar todos los paths y políticas de api.md, accepted-session existente y errores de conflicto solo administrativos. Termina con T032–T034 y T017 aprobadas (FR-007/009/010/013).
 - [ ] T039 [US2] Añadir resumen/confirmación y feedback de publicación en `apps/web/src/features/academic-offering/admin-course-page.tsx`, `admin-group-page.tsx` y `offering-state.tsx`: distinguir Publicado de Visible, faltantes/agenda y COURSE_PUBLICATION_BLOCKED, nunca publicación implícita. Termina con casos admin de T035 verdes (FR-007/013).
 - [ ] T040 [US2] Crear `apps/web/src/features/academic-offering/catalog-page.tsx`, `course-page.tsx` y `group-page.tsx`: comparación paginada, zona explícita, textos «Capacidad máxima: N alumnos» y «Ocupación y disponibilidad no calculadas», error/no disponible sin causa privada. Termina con T035 verde (FR-003/006/009/011/014).
 - [ ] T041 [US2] Integrar catálogo STUDENT/ADMIN en `apps/web/src/app/App.tsx`, `router.tsx` y `apps/web/src/features/profile/home-page.tsx`; profesor usa solo futura ruta propia, visitante acceso; conservar limpieza de respuestas tardías al perder sesión. Termina con pruebas de rutas y recorrido desde inicio en T035 (FR-009/010/014/016).
