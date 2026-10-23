@@ -1,5 +1,9 @@
 # Plan de implementación: Identidad, autenticación y acceso por roles
 
+> Contexto de planificación 2026-10-23: [15 000 cuentas y objetivo 2500 activos](../../docs/planificacion/reservas-capacidad.md).
+> El protocolo y criterios históricos de identidad (1000) se conservan; esta nota no amplía
+> sus resultados ni cambia T103 [x] ejecución/informe, T104/T108 [ ] o bootstrap abierto.
+
 **Rama Git**: `feat/001-identidad-acceso-roles` | **Fecha**: 2026-09-23 | **Especificación**: [spec.md](spec.md)
 
 **Revisión final**: 2026-09-24, sobre los documentos existentes; no se regeneró el plan.

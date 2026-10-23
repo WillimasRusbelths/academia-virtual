@@ -1,5 +1,10 @@
 # Contenedores C2
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 ## Descripción
 
 Academia Virtual comprende una aplicación web, un backend monolítico por capas organizado en módulos con Clean Architecture y un almacén de datos. Se conservan los identificadores del catálogo. Un contenedor C4 es una aplicación o almacén de datos, no necesariamente un contenedor Docker. Esta vista amplía [C1](01-contexto-del-sistema.md) y distingue fundamentos comprobados de funcionalidades previstas.
@@ -43,7 +48,7 @@ La API local usa HTTP; R03 prevé HTTPS bajo un mismo origen para publicación. 
 - **Pagos (D01–D06):** modalidad, confirmación, cupos y vigencia; no se atribuye procesamiento de tarjetas ni conexión directa navegador–Izipay.
 - **Correo (R07/R08):** proveedor, seguridad, costo y ejecutor funcional.
 - **Video (DEC01, D07/D08):** acceso directo y permisos vencidos según RF16; una página autenticada no demuestra restricción.
-- **Operación (D09/D10/D12/D13):** publicación/HTTPS, materiales, recuperación y carga; 1000 concurrentes siguen sin demostrar.
+- **Operación (D09/D10/D12/D13):** publicación/HTTPS, materiales, recuperación y carga; 2500 activos concurrentes siguen sin demostrar.
 
 ## Referencias esenciales
 

@@ -1,5 +1,10 @@
 # Arquitectura inicial de Academia Virtual
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 Revisión del entorno: **2026-10-06**, sobre el repositorio `academia-virtual` existente.
 Esta es una vista inicial de **tres capas lógicas**
 del MVP, no una implementación terminada ni tres servidores obligatorios. Se conserva
@@ -87,4 +92,4 @@ D01–D06 mantienen reglas de pagos y matrículas pendientes; D07–D08, validac
 video y control de acceso; D09–D10, alojamiento y criterios de carga; D12–D13,
 materiales, paneles y recuperación. D11 tiene comportamiento definido sin aceptación
 funcional. Izipay, correo externo, YouTube Live y recuperación requieren implementación
-y validación. Los **1000 usuarios concurrentes siguen siendo un objetivo no demostrado**.
+y validación. Los **2500 usuarios concurrentes activos siguen siendo un objetivo no demostrado**.

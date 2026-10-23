@@ -1,5 +1,10 @@
 # 06. Drivers arquitectónicos
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 Fecha: 2026-10-07. Los drivers son requisitos y restricciones que condicionan la
 estructura, las dependencias y la viabilidad del sistema. Sus orígenes se encuentran en
 los [requisitos funcionales RF](03-requisitos-funcionales.md),
@@ -22,7 +27,7 @@ pasarela elegida y YouTube Live con OBS la solución de video seleccionada.
 | DA02 | Integridad de pagos, órdenes, cupos y matrículas ante concurrencia y reintentos. | RF11, RF12, RF13; AC05; RT06 | Exige totales calculados en servidor, verificación con Izipay, idempotencia y transacciones con restricciones en PostgreSQL para evitar duplicados y sobreventa. |
 | DA03 | Viabilidad y acceso autorizado a clases por video. | RF16; AC03, AC04; RT02, RT08 | La distribución externa condiciona el reproductor, los permisos y la dependencia del proveedor. Requiere validar emisión, reproducción, calidad, simultaneidad y costo; el acceso a la página no demuestra protección del video externo. |
 | DA04 | Viabilidad del desarrollo dentro del plazo, equipo y presupuesto disponibles. | RT01, RT02, RT03, RT05 | Una persona, cuatro meses y S/300 totales requieren una estructura comprensible, pocos componentes operativos y reutilización de capacidades, sin complejidad distribuida injustificada. |
-| DA05 | Rendimiento y escalabilidad con un objetivo de 1000 usuarios concurrentes. | AC01, AC03; RT11 | Condiciona consultas, índices, pool de conexiones y recursos. Deben medirse latencias, errores, concurrencia real y consumo antes de dimensionar o adoptar tácticas de escalamiento. |
+| DA05 | Rendimiento y escalabilidad con un objetivo de 2500 usuarios concurrentes activos. | AC01, AC03; RT11 | Condiciona consultas, índices, pool de conexiones y recursos. Deben medirse latencias, errores, concurrencia real y consumo antes de dimensionar o adoptar tácticas de escalamiento. |
 | DA06 | Integraciones sustituibles y continuidad ante fallos de correo. | RF02, RF04, RF12; AC06, AC07; RT06, RT07 | La dependencia de Izipay y SMTP debe quedar en adaptadores. El correo requiere entregas persistidas, reintentos y vencimientos, sin bloquear la respuesta HTTP ni prometer una entrega exitosa. |
 | DA07 | Mantenibilidad y evolución modular. | AC06; RT01, RT03 | Modificar una funcionalidad debe afectar solo los módulos necesarios. La modularidad, separación por capas y Clean Architecture aíslan reglas de negocio del transporte, la persistencia y los proveedores, con contratos públicos y pruebas de regresión. |
 | DA08 | Disponibilidad, recuperación segura y protección de datos y secretos. | RF09, RF19; AC02; RT09 | Exige migraciones controladas, respaldos, restauración comprobada, revocación del estado restaurado y registros sin secretos. Los responsables y objetivos de recuperación deben definirse antes de operar con datos persistentes. |
@@ -41,7 +46,7 @@ en el incremento de identidad.
 | DA02 | Confirmaciones falsas o repetidas, cobros inconsistentes y competencia por cupos. | Izipay mediante adaptador; verificación del proveedor, idempotencia y transacciones PostgreSQL. La integración y las reglas detalladas de D01–D06 siguen pendientes. |
 | DA03 | Distribuir clases sin asumir capacidad, costo ni protección de acceso del proveedor. | OBS emite a YouTube Live. La integración y la compatibilidad con todas las condiciones de RF16, AC03, AC04 y RT08 deben validarse; la selección no acredita control del enlace externo ni reproducción autorizada. |
 | DA04 | Complejidad de desarrollo y operación incompatible con recursos limitados. | Monolito por capas organizado en módulos, con PostgreSQL y componentes justificados por requisitos. Docker Compose facilita la ejecución local; no define el estilo arquitectónico. |
-| DA05 | Capacidad y tiempos de respuesta desconocidos al aumentar la carga. | Medir con los escenarios de carga definidos y ajustar consultas, índices, pool y recursos según resultados. Los 1000 concurrentes siguen pendientes. El escalamiento horizontal es una posibilidad por validar si las mediciones lo justifican, no una implementación existente. |
+| DA05 | Capacidad y tiempos de respuesta desconocidos al aumentar la carga. | Medir con los escenarios de carga definidos y ajustar consultas, índices, pool y recursos según resultados. Los 2500 activos concurrentes siguen pendientes. El escalamiento horizontal es una posibilidad por validar si las mediciones lo justifican, no una implementación existente. |
 | DA06 | Cambios de proveedor y solicitudes dependientes de fallos SMTP. | Contratos de aplicación y adaptadores Izipay/SMTP; Mailpit para captura local. Entregas persistidas y ejecutor interno con reintentos son diseño previsto, sin integración funcional acreditada. |
 | DA07 | Cambios que se propagan innecesariamente entre módulos o tecnologías. | Clean Architecture dentro de cada módulo: entrada → aplicación → dominio; infraestructura implementa contratos internos y la composición conecta adaptadores. Consumir solo interfaces públicas entre módulos; lint y pruebas verifican los límites. |
 | DA08 | Pérdida de datos, recuperación insegura o exposición de secretos. | Volumen persistente PostgreSQL y configuración privada por entorno; procedimientos de migración, backup y restauración con invalidación de sesiones y tokens. El volumen no sustituye al respaldo; D13 y V16 siguen pendientes, sin disponibilidad de producción demostrada. |

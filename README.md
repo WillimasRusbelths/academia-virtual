@@ -3,7 +3,16 @@
 Proyecto de academia virtual para un trabajo final de curso, con desarrollo local
 mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-18:** React/NestJS con Docker Compose como entorno local principal.
+**Estado al 2026-10-23:** React/NestJS y PostgreSQL, monolito modular y Docker Compose local.
+Requisitos confirmados: **al menos 15 000 cuentas registradas**, objetivo de **2500
+usuarios concurrentes activos todavía sin demostrar**, y reserva de cupo previa al pago
+por **24 horas exactas desde confirmación del servidor**. Pago verificado confirma
+matrícula; vencimiento sin pago libera cupo según conciliación consistente aún por diseñar.
+Presupuesto **S/300 total**. [Planificación y decisiones abiertas](docs/planificacion/reservas-capacidad.md),
+[backlog futuro](docs/planificacion/tasks.md) y [smokes recientes](docs/planificacion/evidence/2026-10-23-smokes.md).
+Se propone preparar VPS y acceso controlado en apertura; AWS se evaluará después de
+mediciones y presupuesto, sin adoptarlo, contratar ni desplegar en este bloque.
+
 Las siete historias de identidad tienen sus checkpoints funcionales comprobados. La
 [regresión T106](specs/001-identidad-acceso-roles/evidence/regression.md) reproduce configuración
 y bases nuevas: 120 unitarias, 744 integraciones y 203 E2E aprobadas. La
@@ -12,7 +21,8 @@ T104 sigue aplazada hasta diez personas reales en la versión integrada y establ
 [T108 es preliminar](specs/001-identidad-acceso-roles/evidence/acceptance.md). Son **106/108 tareas**
 completas, sin aceptación integral. El bootstrap intermitente sigue abierto, sin causa confirmada.
 Capacidad sin aprobar: [T103 conserva ejecución/informe e incumplimientos](specs/001-identidad-acceso-roles/evidence/load-resources.md).
-VPS y nuevas cargas completas esperan a matrícula; D10/D13 y SMTP real siguen pendientes.
+Las nuevas cargas completas esperan a matrícula; se prepara la evaluación VPS, sin
+ejecutarla ni contratar. D10/D13 y SMTP real siguen pendientes.
 La purga es CLI explícita, sin programación. Operación actual y SMTP futuro:
 [quickstart](specs/001-identidad-acceso-roles/quickstart.md).
 
@@ -26,7 +36,10 @@ restringida y activación mediante contraseña propia y correo verificado, compr
 checkpoint funcional comprobado, incluidas revocación, carreras administrativas y V04-B.
 [US7: recuperación de contraseña](specs/001-identidad-acceso-roles/evidence/us7.md) tiene su checkpoint
 funcional comprobado en API y navegador, con revocación de sesiones y recuperación tras provisional vencida.
-Las funciones académicas siguen pendientes;
+Oferta académica está en desarrollo: [002](specs/002-oferta-academica/tasks.md) conserva
+T001–T034/T036–T038 completas en `eafae88`; T035 y T039–T074 siguen pendientes.
+Las cinco aclaraciones y E1 se conservan; el siguiente bloque de implementación es T039.
+Reservas, órdenes y matrícula requieren su propio spec y no amplían 002;
 no hay integración de pagos/video ni despliegue acreditado.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
@@ -34,12 +47,13 @@ Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles
 se reutilizan en US1 y US2.
 Las [sesiones, autorización y protecciones HTTP](specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md)
 respaldan los flujos implementados; las verificaciones finales de identidad siguen pendientes.
-El objetivo de 1000 usuarios concurrentes está pendiente de validación mediante pruebas
-de carga reproducibles; no es una capacidad garantizada.
+El objetivo vigente de 2500 usuarios concurrentes activos está pendiente de validación.
+Las pruebas históricas de 1000 se conservan completas, con sus fallos y límites.
 
 El presupuesto de infraestructura y servicios es **S/300 en total**, destinado a despliegue
-y pruebas necesarias, no a financiar una operación permanente. Se prevén aproximadamente
-1000 estudiantes, con grupos de 40 a 50 alumnos por curso.
+y pruebas necesarias, no a financiar una operación permanente. Al menos 15 000 cuentas
+no equivalen a usuarios activos, peticiones en vuelo ni reservas. La capacidad configurada
+por grupo es de 1–50 según PA-04 de 002; ocupación/disponibilidad no se calculan todavía.
 
 ## Ejecución local
 
@@ -73,6 +87,9 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Constitución del proyecto](.specify/memory/constitution.md): principios y gobernanza.
 - [Alcance del MVP](docs/alcance-mvp.md): funcionalidades previstas, exclusiones y propuesta técnica.
 - [Decisiones pendientes](docs/decisiones-pendientes.md): reglas y riesgos por resolver.
+- [Planificación vigente de reservas/capacidad](docs/planificacion/reservas-capacidad.md):
+  24 horas confirmadas, escenarios, pendientes, VPS propuesto y continuidad de los specs.
+- [Oferta académica en desarrollo](specs/002-oferta-academica/tasks.md): avances y evidencia intactos.
 - [Identidad, autenticación y acceso por roles](specs/001-identidad-acceso-roles/spec.md):
   primera especificación revisada, con correo verificado, recuperación por correo, un rol
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
@@ -108,11 +125,12 @@ niveles distintos de descripción, no cifras alternativas del mismo catálogo. V
 ## MVP previsto
 
 Autenticación para administrador, docente y alumno; cursos, grupos, horarios y cupos;
-órdenes con varios cursos, conceptos y total; matrículas y pagos verificados; materiales;
+reserva previa de 24 h, órdenes con conceptos y total; matrículas y pagos verificados; materiales;
 clases emitidas por el docente con chat para alumnos; y paneles básicos por rol.
 
 Se propone un pago por el total de cada orden y una matrícula por cada curso adquirido.
-Esta regla requiere validación. **Izipay es la pasarela elegida para el MVP** desde el
+Esta regla y la reserva de varios cursos requieren validación; las 24 h sí están
+confirmadas. **Izipay es la pasarela elegida para el MVP** desde el
 2026-09-23 y sustituye a Culqi, que figuraba como candidata inicial. La integración no está
 implementada; siguen pendientes tarifas finales, límites, acceso al entorno de pruebas y
 habilitación de Yape para la modalidad contratada. No se asume capacidad ilimitada.
@@ -125,7 +143,7 @@ React, TypeScript y Vite para el frontend; NestJS como monolito modular con Type
 PostgreSQL 16.14 y Prisma, con Mailpit 1.31.3 para correo local. Compose construye las
 imágenes Linux de API/web con `npm ci` y conserva los datos de PostgreSQL en un volumen.
 La API y la web incorporan los flujos de acceso/cierre y registro/verificación de identidad;
-las funciones académicas permanecen previstas.
+la oferta académica está parcialmente implementada y verificada en 002, sin reservas/matrícula.
 
 Socket.IO autorizado por clase sigue propuesto. YouTube Live con OBS es la elección
 de video del MVP según DA03 y DEC01; integración y control de acceso pendientes.

@@ -1,5 +1,10 @@
 # Diseño interno de módulos
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 ## Alcance y organización
 
 Este documento detalla el incremento de identidad de Academia Virtual sobre el [catálogo de componentes](../../02-arquitectura-software/componentes-arquitectonicos.md). Mantiene el [monolito por capas organizado en módulos](../../02-arquitectura-software/estilo-arquitectonico.md) y [Clean Architecture](../../02-arquitectura-software/enfoque-arquitectonico.md). El servidor NestJS es una única aplicación; sus módulos no son servicios independientes. La web permanece separada y consume contratos HTTP, sin acceder a entidades Prisma o PostgreSQL.
@@ -201,7 +206,7 @@ El [alcance del MVP](../../alcance-mvp.md) y el catálogo respaldan estas respon
 | C18 · Chat de clase | Mensajes/reconexiones aislados por clase; gateway y contrato por definir, Socket.IO propuesto | RF17; HU16; no persistencia de mensajes ni eventos nuevos aprobados |
 | C19 · Paneles básicos | Consumir capacidades públicas autorizadas de otros módulos; no consultar sus internos ni inventar métricas | RF18; HU17; mínimos D12; separado del inicio mínimo de identidad |
 
-No se atribuyen clases, métodos, tablas académicas ni integración implementada a estas responsabilidades. Matrícula, chat y video tienen cargas distintas; los 1000 concurrentes continúan pendientes según los [escenarios de calidad](../../01-analisis-de-sistema/08-escenarios-atributos-calidad.md). Disponibilidad de producción, respaldo/restauración y acceso al video tampoco se deducen del entorno Docker validado.
+No se atribuyen clases, métodos, tablas académicas ni integración implementada a estas responsabilidades. Matrícula, chat y video tienen cargas distintas; los 2500 activos concurrentes continúan pendientes según los [escenarios de calidad](../../01-analisis-de-sistema/08-escenarios-atributos-calidad.md). Disponibilidad de producción, respaldo/restauración y acceso al video tampoco se deducen del entorno Docker validado.
 
 ## Evidencia del estado
 
