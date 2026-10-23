@@ -32,7 +32,14 @@ La asignación de cupos y la creación de matrículas DEBEN impedir sobreventa y
 mediante transacciones y restricciones de base de datos. La especificación DEBE definir
 la identidad de una matrícula y el momento en que se ocupa o libera un cupo. Las pruebas
 DEBEN cubrir competencia por el último cupo y solicitudes repetidas, verificando el estado
-final persistido. La política de reservas queda pendiente de definición explícita.
+final persistido. El alumno DEBE reservar un cupo antes de pagar. Una reserva confirmada
+por el servidor dura exactamente 24 horas (86 400 segundos desde esa confirmación);
+el servidor DEBE persistir su inicio y vencimiento, sin depender del navegador.
+El pago verificado confirma la matrícula; el vencimiento sin pago libera el cupo mediante
+una política consistente de conciliación, sin doble consumo ni sobreventa.
+Antes de implementar DEBEN resolverse o delimitarse reservas de varios cursos, orden de
+llegada, pagos en el límite o tardíos, reembolsos, cancelaciones y abuso. La duración
+confirmada no aprueba automáticamente esas decisiones ni una extensión del plazo.
 
 ### V. Confirmación de pagos
 
@@ -83,21 +90,27 @@ servicio ante una actualización fallida, sin asumir que toda migración es reve
 
 ### XI. Capacidad demostrable
 
-Soportar 1000 usuarios concurrentes es un objetivo por validar. NO se DEBE afirmar que se
+Soportar 2500 usuarios concurrentes activos es un objetivo por validar. NO se DEBE afirmar que se
 alcanza hasta disponer de resultados reproducibles para un escenario definido y criterios
 de aceptación acordados con la rúbrica del profesor. Las conclusiones DEBEN limitarse a la
 versión, infraestructura, duración y carga realmente medidas. El número de alumnos
 registrados NO demuestra concurrencia y los usuarios virtuales NO equivalen automáticamente
-a solicitudes por segundo.
+a solicitudes por segundo ni a solicitudes simultáneas en vuelo. Se DEBEN distinguir
+al menos 15 000 cuentas registradas (población persistida), usuarios activos durante una
+ventana y mezcla de operaciones definidas, solicitudes concurrentes observadas y capacidad
+de reservas (inventario/consistencia y tasa de confirmación). Una cifra no demuestra las otras.
+La evidencia histórica de 1000 usuarios se conserva con sus perfiles, criterios y fallos;
+no se rebautiza como validación de 2500 ni se elimina por el nuevo objetivo.
 
 ## Restricciones y orientación del proyecto
 
 - El proyecto es un trabajo final de curso con un plazo de cuatro meses. El presupuesto
   de infraestructura y servicios es **S/300 en total**, reservado para despliegue y pruebas
   necesarias; NO es un presupuesto mensual ni garantiza operación permanente.
-- La población prevista es de aproximadamente 1000 estudiantes, con grupos de 40 a 50
-  alumnos por curso. El diseño DEBE permitir evolución posterior sin construir ahora
-  infraestructura para 10 000 usuarios.
+- La población requerida es de **al menos 15 000 cuentas registradas**; el objetivo es
+  **2500 usuarios concurrentes activos**, todavía sin demostrar. Son magnitudes distintas.
+  La oferta configura capacidad de **1 a 50** alumnos por grupo según PA-04 del spec 002;
+  la capacidad configurada no calcula disponibilidad hasta implementar reservas/matrícula.
 - El MVP comprende autenticación y roles; cursos, grupos, horarios y cupos; selección de
   varios cursos con órdenes desglosadas; matrículas; materiales; clases emitidas por el
   docente con participación de alumnos solo mediante chat; y paneles básicos por rol.
@@ -115,6 +128,10 @@ a solicitudes por segundo.
   prueba temprana antes de considerarse resueltos o comprometer alojamiento.
 - NO se DEBEN incorporar microservicios, Kubernetes, Redis ni balanceadores sin una
   necesidad comprobada y una justificación documentada compatible con plazo y presupuesto.
+- La dirección técnica propuesta mantiene NestJS, PostgreSQL y monolito modular;
+  prepara VPS y acceso controlado durante apertura de matrícula. No implica contratación,
+  despliegue ni una política de cola/FIFO aprobada. AWS se evaluará después con mediciones
+  y presupuesto; no se adopta ni se prepara infraestructura AWS en este bloque.
 
 El alcance detallado se registra en `docs/alcance-mvp.md` y las decisiones abiertas en
 `docs/decisiones-pendientes.md`. Las decisiones que afecten una funcionalidad DEBEN resolverse
@@ -131,9 +148,13 @@ aplicables; ejecutar un comando NO equivale a aprobar sus resultados.
 
 La validación de capacidad DEBE documentar por separado:
 
-- **Matrícula:** operaciones de aplicación con k6, cuentas diferentes, pagos simulados,
-  órdenes de varios cursos y competencia por cupos; comprobar precios, matrículas únicas
-  y ausencia de sobreventa al terminar.
+- **Reservas y matrícula:** operaciones con k6 desde otro equipo contra VPS, cuentas
+  ficticias diferentes y pagos simulados; población de al menos 15 000 cuentas, carga
+  activa y solicitudes en vuelo medidas por separado. Probar último cupo, duplicados,
+  desconexión/reinicio, reserva exacta de 24 h, conciliación del vencimiento/pago y
+  cancelación de grupos. Órdenes de varios cursos siguen sujetas a D01/D04. Comprobar
+  precios, matrículas únicas, liberación correcta y ausencia de sobreventa al terminar.
+  No sustituir la espera de 24 h por un smoke de identidad ni acortar la regla de producto.
 - **Chat:** conexiones autorizadas por clase, distribución por grupos, frecuencia de
   mensajes, duración y reconexiones. La herramienta y el cliente de prueba DEBEN hablar
   el protocolo Socket.IO utilizado; una conexión WebSocket aislada no basta para validarlo.
@@ -146,7 +167,7 @@ Cada informe DEBE registrar versión del código, configuración y scripts repro
 secretos, infraestructura, duración, patrón y carga alcanzada, concurrencia, solicitudes
 por segundo cuando corresponda, latencia, errores, recursos y consistencia de matrículas.
 DEBE distinguir el consumo del generador de carga del sistema evaluado. Los criterios
-definitivos, incluida la distribución de los 1000 usuarios entre actividades y las
+definitivos, incluida la distribución de los 2500 usuarios activos entre actividades y las
 condiciones de aprobación, DEBEN alinearse con la rúbrica del profesor antes de concluir
 que el objetivo se cumple. Una prueba aislada NO acredita un escenario combinado no medido.
 
@@ -169,4 +190,4 @@ incompatible; MINOR para añadir principios o ampliar materialmente las obligaci
 PATCH para aclaraciones y correcciones sin cambio de obligaciones. La versión 1.0.0
 corresponde a la primera adopción, en sustitución de una plantilla sin ratificar.
 
-**Versión**: 1.1.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-09-23
+**Versión**: 1.2.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-10-23

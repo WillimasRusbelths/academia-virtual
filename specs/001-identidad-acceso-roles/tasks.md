@@ -1,4 +1,8 @@
 ---
+
+> Contexto de planificación 2026-10-23: [15 000 cuentas y objetivo 2500 activos](../../docs/planificacion/reservas-capacidad.md).
+> El protocolo y criterios históricos de identidad (1000) se conservan; esta nota no amplía
+> sus resultados ni cambia T103 [x] ejecución/informe, T104/T108 [ ] o bootstrap abierto.
 description: "Tareas de implementación de identidad, autenticación y acceso por roles"
 ---
 

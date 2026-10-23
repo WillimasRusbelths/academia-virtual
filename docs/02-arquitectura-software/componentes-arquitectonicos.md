@@ -1,12 +1,17 @@
 # Componentes arquitectónicos
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 ## Organización y frontera
 
 Academia Virtual adopta un **monolito por capas organizado internamente en módulos**, con **Clean Architecture** para las responsabilidades y dependencias del backend. Presentación adapta solicitudes; aplicación coordina casos de uso; dominio contiene reglas independientes de tecnología; infraestructura implementa contratos del núcleo. NestJS conecta las implementaciones mediante inyección de dependencias. Aplicación y dominio corresponden a la lógica de negocio de la vista de tres capas; los adaptadores de persistencia corresponden a datos, mientras que infraestructura también incluye correo, criptografía y pagos.
 
 La frontera es **el servidor backend NestJS de APP02**: un proceso con C01–C10 y C12–C19, distinguiendo implementación y diseño previsto. C11 reutiliza código del backend en una ejecución CLI transitoria fuera de HTTP: bootstrap implementado, recuperación operativa pendiente. La web, los almacenes y los proveedores quedan fuera. Un componente puede agrupar funciones o adaptadores; no exige una clase, módulo Nest ni servicio independiente por fila.
 
-React/Vite es la tecnología de APP01, PostgreSQL es AL01 y Docker Compose configura la ejecución local. No son módulos de negocio. Los servicios Compose `web`, `api`, `db` y `mailpit` son unidades de ejecución, no las capas ni los componentes internos. El entorno local está validado; los 1000 usuarios concurrentes siguen pendientes de pruebas de carga, con matrícula y clases diferenciadas.
+React/Vite es la tecnología de APP01, PostgreSQL es AL01 y Docker Compose configura la ejecución local. No son módulos de negocio. Los servicios Compose `web`, `api`, `db` y `mailpit` son unidades de ejecución, no las capas ni los componentes internos. El entorno local está validado; los 2500 usuarios concurrentes activos siguen pendientes de pruebas de carga, con matrícula y clases diferenciadas.
 
 ## Diagrama de componentes
 
@@ -129,4 +134,4 @@ Para las dependencias del código se conserva presentación → aplicación → 
 
 Estado contrastado hasta **T058**: fundamentos de correo, auditoría y bootstrap implementados; checkpoints US1, US2 y US6 comprobados. C03/C04/C06/C07/C11 permanecen parciales por administración, recuperación, purga o aceptación transversal pendientes. No se ejecutan nuevas pruebas de comportamiento para esta sincronización documental.
 
-Los módulos C12–C19 pertenecen al MVP respaldado por HU08–HU17 y RF10–RF18, pero aún requieren especificación funcional. D01–D06 delimitan órdenes/cupos/pagos; D07/D08, video y acceso; D12, materiales/paneles; D13, recuperación. Izipay, SMTP de producción y YouTube Live no tienen integración funcional acreditada. Los escenarios EQ y [verification.md](../../specs/001-identidad-acceso-roles/verification.md) definen verificaciones pendientes; los resultados locales no demuestran disponibilidad pública ni 1000 concurrentes.
+Los módulos C12–C19 pertenecen al MVP respaldado por HU08–HU17 y RF10–RF18, pero aún requieren especificación funcional. D01–D06 delimitan órdenes/cupos/pagos; D07/D08, video y acceso; D12, materiales/paneles; D13, recuperación. Izipay, SMTP de producción y YouTube Live no tienen integración funcional acreditada. Los escenarios EQ y [verification.md](../../specs/001-identidad-acceso-roles/verification.md) definen verificaciones pendientes; los resultados locales no demuestran disponibilidad pública ni 2500 activos concurrentes.

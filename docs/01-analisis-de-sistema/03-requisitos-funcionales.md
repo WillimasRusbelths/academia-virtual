@@ -1,5 +1,7 @@
 # 03. Requisitos funcionales
 
+> Actualizado 2026-10-23: [requisitos RC, decisiones RA y escenarios RE](../planificacion/reservas-capacidad.md).
+
 RF01–RF19 son requisitos de síntesis del MVP. Los
 FR-001–FR-033 de la [especificación de identidad](../../specs/001-identidad-acceso-roles/spec.md)
 conservan sus IDs, detalles, límites y criterios de aceptación; no se renumeran.
@@ -17,10 +19,10 @@ pruebas auxiliares existentes no equivalen a su cumplimiento.
 | RF07 | Inicializar al primer administrador una única vez por entorno mediante operación restringida, sin credenciales predeterminadas y resistiendo ejecuciones repetidas o concurrentes. | FR-027–028; especificado. |
 | RF08 | Verificar en backend sesión, cuenta, permisos actuales y propiedad en cada operación protegida; denegar por defecto y comprobar pertenencia/matrícula cuando el dominio académico lo requiera. | FR-018–020, constitución II; cuentas especificadas, extensión académica pendiente. |
 | RF09 | Registrar los cambios administrativos con actor, destino, momento, acción y resultado, excluyendo contraseñas, enlaces y tokens de errores y registros. | FR-025–026/033; modelo de datos U1 distingue auditoría aceptada y registros de denegación/operación. |
-| RF10 | Permitir consultar y gestionar cursos, grupos, horarios y cupos bajo permisos definidos, reflejando la oferta disponible. | Alcance: oferta; previsto. Administración propuesta en HU09, solapamientos/cambios/reservas pendientes D04/D06. |
-| RF11 | Crear una orden con varios cursos, precios válidos, conceptos y total calculados en servidor, conservando el detalle para comprobar el cobro. | Alcance y constitución III; previsto. No confiar en importes enviados por el cliente. |
+| RF10 | Consultar/gestionar oferta bajo PA-01–PA-05 de 002: cursos/grupos, horarios America/Lima y capacidad configurada 1–50, sin presentarla como disponibilidad. | 002 hasta T038; T035/T039–T074 pendientes. Reservas y conflictos de matrícula aparte D04/D06. |
+| RF11 | Confirmar reserva antes del pago por 24 h exactas desde confirmación del servidor, persistiendo vencimiento; tramitar orden con precios/conceptos/total del servidor. | RC-03/04, HU10; múltiples cursos/atomicidad e identidad de reserva/orden pendientes D01/D04. No implementado. |
 | RF12 | Tramitar pagos con Izipay mediante un adaptador y reconocerlos solo tras comprobar autenticidad, orden, importe y moneda con el proveedor, procesando reintentos/notificaciones de forma idempotente. | Constitución V–VII; previsto, integración pendiente D02. La pantalla de éxito no confirma pago. Un pago por total sigue sujeto a D01. |
-| RF13 | Activar matrículas pagadas únicamente tras pago verificado y garantizar ausencia de duplicados y sobreventa en matrículas/asignación de cupos mediante transacciones y restricciones persistentes. | Constitución IV–VI; previsto. D01–D06 deben fijar atomicidad de la orden, identidad/vigencia de matrícula, momento de reserva/asignación, pago tardío y cancelaciones antes de implementar. |
+| RF13 | Confirmar matrícula tras pago verificado y liberar reserva vencida sin pago mediante conciliación consistente, sin duplicados, doble consumo/liberación ni sobreventa. | RC-05/06, constitución IV–VI; RE-01–RE-10. Pagos al límite/tardíos, reembolsos y cancelaciones requieren RA-03–RA-05; implementación futura. |
 | RF14 | Permitir al alumno acceder a materiales solo con la autorización académica vigente. | Alcance y constitución II; previsto, D03/D12. |
 | RF15 | Permitir publicar materiales a los responsables autorizados de cada curso. | Área materiales; descomposición propuesta HU13. Docente y reglas exactas de publicación por validar en D12; no se aprueban formatos/límites nuevos. |
 | RF16 | Habilitar la emisión de clases por el docente autorizado y la reproducción por alumnos habilitados, comprobando acceso a manifiestos y segmentos HLS incluso por URL directa o con permiso vencido. | Alcance, constitución VIII; previsto, D03/D07–D08. YouTube Live con OBS es la elección DEC01; la compatibilidad de estos controles con el proveedor sigue pendiente de validación. |

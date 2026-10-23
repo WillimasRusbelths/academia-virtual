@@ -1,21 +1,20 @@
 # Alcance del MVP de academia-virtual
 
-> **Estado del entorno — 2026-10-06:** Docker Compose ejecuta PostgreSQL, Mailpit,
-> API y web. Véanse [ejecución](../ops/docker/README.md) y
-> [verificación](../ops/docker/verification.md). Se conserva el alcance funcional:
-> identidad, pagos/video y capacidad de 1000 concurrentes no están demostrados.
-> Las menciones a «esta etapa» describen el estado histórico del 2026-09-23.
-
-Estado al 2026-09-23: documentación y primera especificación. La aplicación no está implementada y su
-capacidad no está validada. Este alcance está sujeto a la
-[constitución](../.specify/memory/constitution.md).
+**Vigente al 2026-10-23**, según solicitud confirmada y
+[constitución 1.2.0](../.specify/memory/constitution.md). Identidad conserva sus
+checkpoints y aceptación integral pendiente; oferta [002](../specs/002-oferta-academica/tasks.md)
+está en desarrollo hasta T038. Reservas/matrícula/pagos/video y capacidad objetivo no
+están demostrados. [Planificación detallada](planificacion/reservas-capacidad.md) y
+[backlog](planificacion/tasks.md). Evidencia histórica de 1000 intacta, T103 ejecución/informe completa.
 
 ## Objetivo y restricciones
 
 Construir una academia virtual como trabajo final de curso durante cuatro meses, con
-desarrollo local. Se prevén aproximadamente 1000 estudiantes y grupos de 40 a 50 alumnos
-por curso. El objetivo de 1000 usuarios concurrentes requiere pruebas reproducibles bajo
-un escenario definido y acordado con el profesor.
+desarrollo local. Se requieren **al menos 15 000 cuentas registradas** y se plantea
+**2500 usuarios concurrentes activos**, pendiente de demostrar bajo escenario y rúbrica
+D10. Cuentas persistidas, usuarios activos, solicitudes en vuelo/RPS e inventario/tasa
+de reservas son magnitudes diferentes. Oferta mantiene capacidad configurada 1–50
+por grupo (PA-04), sin inventar ocupación/disponibilidad.
 
 El presupuesto de infraestructura y servicios es **S/300 en total**, destinado al despliegue
 y las pruebas necesarias. No financia una operación permanente. Las decisiones de alojamiento
@@ -26,9 +25,9 @@ gratuitos ni precios todavía no comprobados.
 
 | Área | Alcance previsto | Pendiente de definir |
 | --- | --- | --- |
-| Identidad | Registro de alumnos, correo verificado, sesiones, recuperación por correo, un rol por cuenta y gestión administrativa; permisos en backend. | Plan e implementación de la especificación de identidad; viabilidad y costo del envío de correo. |
-| Oferta académica | Cursos, grupos, horarios y cupos; grupos de 40 a 50 alumnos. | Cambios de grupo, reglas de horarios y reservas. |
-| Orden y matrícula | Selección de varios cursos, precio por curso, conceptos y total calculados por servidor. | Regla definitiva de pago, vigencia y momento de asignación de cupos. |
+| Identidad | Registro, verificación, sesiones, recuperación y administración implementados; un rol y permisos backend. | T104/T108, bootstrap histórico, SMTP real/costo; no aceptación integral. |
+| Oferta académica | Spec 002: cursos/grupos, horarios America/Lima, capacidad 1–50 y publicación; avances T038 conservados. | T035/T039–T074 de 002; matrícula/solapamientos del alumno aparte D06. |
+| Reserva, orden y matrícula | Reserva previa al pago por 24 h exactas desde confirmación servidor; pago verificado confirma matrícula; vencimiento sin pago libera cupo por conciliación consistente. Precios/conceptos/total calculados por servidor. | Identidad de reserva/matrícula, varios cursos/atomicidad, prioridad, pago al límite/tardío, reembolsos/cancelaciones y abuso; no se implementa aquí. |
 | Pago | Propuesta: un pago por el total de la orden y matrícula por cada curso adquirido. Izipay elegida para el MVP; integración no implementada. | Validación de la regla de pago, tarifas finales, límites, acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada. |
 | Materiales | Acceso a materiales por curso sujeto a autorización. | Formatos, límites, almacenamiento y reglas de publicación. |
 | Clase en vivo | Emisión del docente con OBS hacia YouTube Live; alumnos como espectadores con participación solo por chat. | Calidad, latencia, simultaneidad, costo y compatibilidad del control de acceso con RF16. |
@@ -36,15 +35,15 @@ gratuitos ni precios todavía no comprobados.
 
 ## Exclusiones de esta etapa y del MVP
 
-En esta etapa solo se prepara documentación y el repositorio. No se implementa la
-aplicación, se contratan servicios ni se despliega infraestructura.
+Este bloque actualiza planificación, prepara un perfil local sin ejecutarlo y ejecuta
+solo dos smokes de identidad. No implementa matrícula, contrata servicios ni despliega.
 
 Quedan fuera del MVP, salvo modificación explícita del alcance:
 
 - Audio, cámara o transmisión de pantalla de alumnos en las clases.
 - Grabación automática, biblioteca de grabaciones y garantías contra copia de pantalla.
-- Infraestructura dimensionada para 10 000 usuarios u operación permanente financiada
-  con los S/300.
+- Operación permanente financiada con S/300 o infraestructura no justificada por
+  mediciones. Las 15 000 cuentas son población, no un requisito de 15 000 concurrentes.
 - Funciones adicionales como exámenes, certificados o aplicaciones móviles nativas.
 - Microservicios, Kubernetes, Redis y balanceadores sin una necesidad comprobada.
 
@@ -62,7 +61,7 @@ de negocio y las integraciones externas permanecen pendientes.
 | Chat | Socket.IO con autorización por clase. | Aislamiento de clases, reconexión y carga definida. |
 | Video | OBS del docente → YouTube Live, elección DA03/DEC01 para el MVP. | Integración, acceso directo, permisos vencidos y compatibilidad con RF16; latencia, consumo y costo. |
 | Entorno local | Docker Compose con PostgreSQL, Mailpit, API y web. | Arranque y verificaciones locales comprobados en `47c8338`; no acredita funcionalidades ni producción. |
-| Publicación | Nginx y HTTPS. | Alojamiento, costo total y controles de acceso de extremo a extremo. |
+| Publicación propuesta | VPS, Nginx/HTTPS y acceso controlado durante apertura de matrícula, manteniendo monolito/PostgreSQL. | D09/D10/D13, costo total y pruebas desde otro equipo; sin despliegue ni contratación. AWS se evaluará después, no se adopta. |
 
 La elección de Izipay del 2026-09-23 sustituye a Culqi, candidata inicial; no acredita
 contratación ni capacidad ilimitada. La integración del proveedor debe quedar separada
@@ -72,22 +71,22 @@ contexto de esta decisión se registran en D02 de decisiones pendientes.
 El diseño debe conservar límites de módulos que permitan evolucionar sin anticipar
 infraestructura distribuida. La viabilidad del video exige una prueba temprana: una
 emisión autorizada, reproducción real, solicitudes directas sin permiso y medición del
-tráfico. Esa prueba no demuestra por sí sola 1000 espectadores.
+tráfico. Esa prueba no demuestra por sí sola la carga combinada ni el objetivo de 2500 activos.
 
 ## Evidencia requerida para la capacidad
 
 | Escenario | Carga que debe describirse | Evidencia específica |
 | --- | --- | --- |
-| Matrícula | Cuentas diferentes, selección de cursos, órdenes y pagos simulados con k6. | Latencia, errores, cupos finales, matrículas únicas y totales correctos. |
+| Reservas/matrícula | Población ≥15 000 cuentas ficticias; k6 desde otro equipo contra VPS; usuarios activos y peticiones en vuelo medidos; pagos simulados. | Último cupo, reserva de 24 h, reinicios, vencimiento/pago/cancelación, duplicados, latencia/errores, cupos finales y matrícula única según reglas aprobadas. |
 | Chat | Clases/grupos, conexiones, mensajes y reconexiones con cliente compatible con Socket.IO. | Autorización, entregas, latencia, errores y recursos consumidos. |
-| Video | Emisiones simultáneas con OBS y reproducción real de YouTube Live; calidad, consumidores y protocolo de prueba por validar. | Tráfico observable, fallos, reproducción y controles de acceso; sin extrapolar un ensayo aislado a 1000 concurrentes. |
+| Video | Emisiones simultáneas con OBS y reproducción real de YouTube Live; calidad, consumidores y protocolo de prueba por validar. | Tráfico observable, fallos, reproducción y acceso; sin extrapolar un ensayo aislado al objetivo agregado de 2500 activos. |
 
 Cada informe debe registrar versión del código, infraestructura, scripts/configuración,
 duración, carga alcanzada, latencia, errores, consumo de recursos y consistencia de matrículas
 o su no aplicabilidad justificada. Los usuarios virtuales no equivalen automáticamente a
 solicitudes por segundo. Abrir páginas no demuestra reproducciones simultáneas.
 
-El escenario de aceptación de 1000 usuarios, sus umbrales y su duración se acordarán según
+El escenario de aceptación de 2500 usuarios activos, sus umbrales y duración se acordarán según
 la rúbrica del profesor. No se extrapolarán pruebas separadas a una carga combinada sin
 medirla. La integración de pagos se validará aparte en el sandbox de la pasarela.
 

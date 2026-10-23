@@ -1,5 +1,10 @@
 # Componentes C3 del backend
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 ## Alcance
 
 Estas vistas amplían APP02 del nivel C2. El texto y el catálogo se contrastan hasta T058: fundamentos implementados y checkpoints US1/US2/US6 comprobados, sin completar identidad. Se conservan los identificadores; las flechas describen colaboración o ensamblaje, no imports. Las imágenes mantienen estados anteriores, señalados a continuación.
@@ -24,7 +29,7 @@ C01 invoca casos de uso de C03; la consulta propia pasa por C05 y C04. Las rutas
 
 - Administración, recuperación, US3/US5 completas y módulos académicos pendientes; C03/C04/C06/C07/C11 permanecen parciales. Retención/purga, restauración y aceptación transversal conservan sus tareas finales.
 - C11 ejecuta bootstrap comprobado fuera de HTTP; invalidación tras restaurar pendiente. C06 tiene ejecutor interno, sin worker separado; Mailpit acredita captura funcional local, no correo de producción.
-- Izipay, video/control de acceso y 1000 concurrentes sin validar; no hay conexión de control backend–YouTube.
+- Izipay, video/control de acceso y 2500 activos concurrentes sin validar; no hay conexión de control backend–YouTube.
 - Actualizar las páginas “Mapa general de componentes”, “C3 del backend · Identidad y acceso”, “3 - Composicion y salud” y “4 - Correo y auditoria” del editable. Las páginas 5–7 conservan diseño académico previsto, pero deben corregir su pie común “sin historias completas”. Solo las dos primeras tienen PNG incrustados aquí.
 
 ## Referencias

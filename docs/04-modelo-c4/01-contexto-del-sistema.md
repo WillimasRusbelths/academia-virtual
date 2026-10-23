@@ -1,5 +1,10 @@
 # Contexto del sistema
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 ## Propósito y alcance
 
 Academia Virtual es un único sistema para gestionar acceso y perfiles, ofrecer cursos, grupos, horarios y cupos, coordinar órdenes, pagos verificados y matrículas, y facilitar materiales, clases, chat y paneles autorizados. Estas capacidades describen el MVP previsto. El alcance excluye participación audiovisual del alumno, grabaciones automáticas, garantías contra copia, exámenes, certificados y aplicaciones móviles nativas; la consulta pública de cursos no está aprobada.
@@ -39,7 +44,7 @@ Las responsabilidades son previstas. Alumno, docente y administrador comparten a
 - **Pagos (D01–D06):** definir modalidad de integración, cupos, vigencia, cancelaciones y reembolsos; confirmar condiciones, pruebas y Yape (D02). No se atribuye procesamiento de tarjetas ni conexión técnica directa alumno–Izipay. La pantalla de éxito no confirma el pago.
 - **Correo (R07/R08):** seleccionar proveedor, remitente, seguridad, cuotas y costo; comprobar entrega real.
 - **Video (DEC01, D07/D08):** YouTube Live con OBS está elegido; integración y compatibilidad con RF16 pendientes. Validar acceso directo y permisos vencidos: autenticar una página u ocultar enlaces no demuestra restricción.
-- **Permisos y operación:** asignación, publicación, moderación y paneles requieren especificación (D12); no se conceden facultades indefinidas. Recuperación, alojamiento y criterios de carga siguen abiertos (D09/D10/D13); 1000 concurrentes no están demostrados, distinguiendo matrícula y clases.
+- **Permisos y operación:** asignación, publicación, moderación y paneles requieren especificación (D12); no se conceden facultades indefinidas. Recuperación, alojamiento y criterios de carga siguen abiertos (D09/D10/D13); 2500 activos concurrentes no están demostrados, distinguiendo matrícula y clases.
 
 ## Referencias esenciales
 

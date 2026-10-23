@@ -1,5 +1,10 @@
 # Principios de diseño
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 Los principios SOLID orientan la organización de responsabilidades y contratos de Academia Virtual. Se aplican a funciones, tipos y objetos del proyecto, sin exigir herencia ni una clase por regla de negocio. Su aplicación se examina sobre el código y las pruebas existentes; tener carpetas, interfaces o inyección de dependencias no demuestra cumplimiento completo.
 
 El [diseño interno de módulos](diseno-interno-de-modulos.md) detalla las responsabilidades y el documento de [patrones de diseño](patrones-de-diseno.md) explica los adaptadores. Se conservan el monolito por capas y [Clean Architecture](../../02-arquitectura-software/enfoque-arquitectonico.md), relacionados con R01 y DA07 en las [decisiones](../../01-analisis-de-sistema/07-decisiones-arquitectonicas.md) y los [drivers](../../01-analisis-de-sistema/06-driver-arquitectonicos.md).
@@ -82,4 +87,4 @@ Existe un límite concreto: SessionLookup utiliza lookup y accept, pero recibe t
 
 La cohesión reúne elegibilidad en identity, permisos en authorization, validaciones/proyección en users y entrega en mail. Contratos y superficies públicas limitan el acoplamiento: authorization no importa IdentityModule y mail no importa internos de identity; AppModule conecta PostgresDeliveryEligibility mediante el contrato público de mail. Esa separación está implementada, sin constituir una medida universal de cohesión/acoplamiento. Los módulos académicos siguen previstos.
 
-Las evidencias registran ejecuciones anteriores; esta sincronización no ejecuta nuevas pruebas ni cierra tareas. Los checkpoints US1/US2/US6 comprobados no acreditan SOLID completo, producción ni 1000 concurrentes. Administración, recuperación y verificaciones transversales mantienen sus dependencias en la [estrategia de verificación](../../../specs/001-identidad-acceso-roles/verification.md).
+Las evidencias registran ejecuciones anteriores; esta sincronización no ejecuta nuevas pruebas ni cierra tareas. Los checkpoints US1/US2/US6 comprobados no acreditan SOLID completo, producción ni 2500 activos concurrentes. Administración, recuperación y verificaciones transversales mantienen sus dependencias en la [estrategia de verificación](../../../specs/001-identidad-acceso-roles/verification.md).
