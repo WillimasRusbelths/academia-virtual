@@ -18,3 +18,17 @@ export class PreparationCommands {
     return this.store.execute(actor, command, context);
   }
 }
+
+export type PublicationCommand =
+  | (Extract<OfferingCommand, { operation: 'COURSE_PUBLISH' | 'COURSE_WITHDRAW' }> & { readonly operation: 'COURSE_PUBLISH' })
+  | (Extract<OfferingCommand, { operation: 'GROUP_PUBLISH' | 'GROUP_WITHDRAW' }> & { readonly operation: 'GROUP_PUBLISH' });
+export interface PublicationStore {
+  execute(actor: SessionActor, command: PublicationCommand, context: CommandContext): Promise<CommandResult>;
+}
+export class PublicationCommands {
+  constructor(private readonly store: PublicationStore) {}
+  async execute(actor: SessionActor, command: PublicationCommand, context: CommandContext): Promise<CommandResult> {
+    if (!permits(actor.role, 'academic:manage')) throw new AuthorizationFailure('FORBIDDEN');
+    return this.store.execute(actor, command, context);
+  }
+}

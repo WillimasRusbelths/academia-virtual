@@ -7,10 +7,13 @@ import { OfferingError } from '../public/offer.js';
 import type { AdminCourse, AdminGroup, CommandResult, GroupState, Revision, UUID, Slot } from '../public/offer.js';
 import { offeringAudit } from './offering-audit.js';
 import type { AcademicAuditWriter } from './offering-audit.js';
-import type { PreparationCommand, PreparationStore } from '../application/commands.js';
+import type { PreparationCommand, PreparationStore, PublicationStore } from '../application/commands.js';
 import { createCourse, editCourse } from '../domain/course.js';
 import { assertGroupEditable, createGroup, editGroup } from '../domain/group.js';
-import { validateSchedule } from '../domain/schedule.js';
+import { schedulesOverlap, validateSchedule } from '../domain/schedule.js';
+import { assertCoursePublication, groupVisibility, validateGroupPublication } from '../domain/visibility.js';
+import type { VisibilityInput, PublicationGroup } from '../domain/visibility.js';
+import type { TeacherEligibility } from '../../users/public/teaching-directory.js';
 import { projectCourse, projectGroup } from './offering-queries.js';
 
 type Resource = AdminCourse | AdminGroup;
@@ -264,6 +267,107 @@ export function createPreparationStore(pool: Pool, authorization: AcademicTransa
           }
           return { resource: await projectGroup(client, targetId), result: changed ? 'APPLIED' : 'NO_CHANGE',
             beforeState: before.state, beforeRevision: before.revision };
+        },
+      });
+    },
+  };
+}
+
+interface PublicationRow extends Omit<PublicationGroup, 'publishedTeacherEligibilityVersion'> {
+  publishedTeacherEligibilityVersion: string | null;
+  courseState: AdminCourse['state'];
+  directoryUserId: string | null; directoryName: string | null; eligible: boolean | null; eligibilityVersion: string | null;
+}
+/** Solo oferta y la interfaz SQL pública de usuarios; nunca columnas privadas de User.
+ * Fechas/horas civiles, generación decimal sin pasar por number. Una consulta por lote.
+ */
+const publicationProjection = `SELECT g.id,g."courseId",g.name,g.state,g.capacity,g."timeZone",g."teacherUserId",
+  to_char(g."periodStart",'YYYY-MM-DD') AS "periodStart",to_char(g."periodEnd",'YYYY-MM-DD') AS "periodEnd",
+  g."publishedTeacherUserId",g."publishedTeacherEligibilityVersion"::text,c.state AS "courseState",
+  d."userId" AS "directoryUserId",d.name AS "directoryName",d.eligible,d."eligibilityVersion"::text,
+  COALESCE((SELECT jsonb_agg(jsonb_build_object('dayOfWeek',s."dayOfWeek",
+    'startTime',lpad((s."startMinute"/60)::text,2,'0')||':'||lpad((s."startMinute"%60)::text,2,'0'),
+    'endTime',lpad((s."endMinute"/60)::text,2,'0')||':'||lpad((s."endMinute"%60)::text,2,'0'))
+    ORDER BY s."dayOfWeek",s."startMinute",s."endMinute") FROM "AcademicSlot" s WHERE s."groupId"=g.id),'[]'::jsonb) AS schedule
+  FROM "AcademicGroup" g JOIN "AcademicCourse" c ON c.id=g."courseId"
+  LEFT JOIN "AcademicTeacherDirectory" d ON d."userId"=g."teacherUserId"`;
+function publicationInput(row: PublicationRow): VisibilityInput {
+  const teacher: TeacherEligibility | null = row.directoryUserId === null ? null : {
+    userId: row.directoryUserId, name: row.directoryName!, eligible: row.eligible === true, eligibilityVersion: BigInt(row.eligibilityVersion!),
+  };
+  return { courseState: row.courseState, teacher, group: {
+    id: row.id, courseId: row.courseId, name: row.name, state: row.state, capacity: row.capacity, periodStart: row.periodStart,
+    periodEnd: row.periodEnd, timeZone: row.timeZone, teacherUserId: row.teacherUserId, schedule: row.schedule,
+    publishedTeacherUserId: row.publishedTeacherUserId,
+    publishedTeacherEligibilityVersion: row.publishedTeacherEligibilityVersion === null ? null : BigInt(row.publishedTeacherEligibilityVersion),
+  } };
+}
+async function publicationInputs(client: PoolClient, ids: readonly string[]): Promise<VisibilityInput[]> {
+  return (await client.query<PublicationRow>(`${publicationProjection} WHERE g.id=ANY($1::uuid[]) ORDER BY g.id`, [ids])).rows.map(publicationInput);
+}
+/** Sentencia NUEVA después de los locks User/Session/Course/Group del protocolo.
+ * Sin locks de agregados ajenos. PUBLISHED bloquea aun con padre retirado/revisión.
+ */
+async function scheduleConflicts(client: PoolClient, input: VisibilityInput): Promise<string[]> {
+  const rows = await client.query<PublicationRow>(`${publicationProjection}
+    WHERE g."teacherUserId"=$1 AND g.state='PUBLISHED' AND g.id<>$2 ORDER BY g.id`, [input.group.teacherUserId, input.group.id]);
+  return rows.rows.map(publicationInput).filter(other => schedulesOverlap(input.group, other.group)).map(other => other.group.id);
+}
+
+/** Publicación US2 con el mismo escritor, ledger, auditoría y presupuesto transaccional.
+ * No se conecta a HTTP aquí, ni implementa retiro/cancelación o lecturas de catálogo.
+ */
+export function createPublicationStore(pool: Pool, authorization: AcademicTransactionDependencies,
+  write: AcademicCommandWriter = createAcademicCommandWriter(pool, authorization)): PublicationStore {
+  return {
+    async execute(actor, command, context) {
+      if (command.operation !== 'COURSE_PUBLISH' && command.operation !== 'GROUP_PUBLISH') throw new OfferingError({ code: 'VALIDATION_ERROR' });
+      const course = command.operation === 'COURSE_PUBLISH';
+      keys(command, ['operation', 'commandId', 'expectedRevision', course ? 'courseId' : 'groupId']);
+      const targetId = reference(course ? command.courseId : command.groupId);
+      const commandId = reference(command.commandId), requestId = reference(context.requestId);
+      const expectedRevision = command.expectedRevision;
+      if (typeof expectedRevision !== 'string' || !/^[1-9]\d{0,18}$/.test(expectedRevision) || BigInt(expectedRevision) > 9223372036854775807n) {
+        throw new OfferingError({ code: 'VALIDATION_ERROR', fields: ['expectedRevision'] });
+      }
+      const discover = async (client: PoolClient) => {
+        const rows = await client.query<{ id: string; courseId: string; teacherUserId: string | null; publishedTeacherUserId: string | null }>(
+          `SELECT id,"courseId","teacherUserId","publishedTeacherUserId" FROM "AcademicGroup"
+           WHERE ${course ? '"courseId"=$1 AND state=\'PUBLISHED\'' : 'id=$1'} ORDER BY id`, [targetId]);
+        return { accountIds: rows.rows.flatMap(row => [row.teacherUserId, row.publishedTeacherUserId]).filter((id): id is string => id !== null),
+          courseIds: course ? [targetId] : rows.rows.map(row => row.courseId), groupIds: course ? rows.rows.map(row => row.id) : [targetId] };
+      };
+      return write<Resource>({ actor, permission: 'academic:manage', commandId, requestId, operation: command.operation,
+        targetKind: course ? 'COURSE' : 'GROUP', targetId, expectedRevision, payload: {}, discover, recheck: client => discover(client),
+        project: course ? projectCourse : projectGroup,
+        async apply(client) {
+          if (course) {
+            const before = await projectCourse(client, targetId); assertCoursePublication(before);
+            const children = await client.query<{ id: string }>('SELECT id FROM "AcademicGroup" WHERE "courseId"=$1 AND state=\'PUBLISHED\' ORDER BY id', [targetId]);
+            const inputs = await publicationInputs(client, children.rows.map(row => row.id)); const blocked: string[] = [];
+            for (const input of inputs) {
+              try {
+                validateGroupPublication(input.group, input.teacher);
+                if (groupVisibility(input).teacherReviewRequired || (await scheduleConflicts(client, input)).length) blocked.push(input.group.id);
+              } catch (error) {
+                if (error instanceof OfferingError && ['VALIDATION_ERROR', 'TEACHER_NOT_ELIGIBLE'].includes(error.code)) blocked.push(input.group.id);
+                else throw error;
+              }
+            }
+            if (blocked.length) throw new OfferingError({ code: 'COURSE_PUBLICATION_BLOCKED', conflictingGroupIds: blocked });
+            // Solo el curso: jamás renovar capturas, revisiones o estados de sus hijos.
+            await client.query('UPDATE "AcademicCourse" SET state=\'PUBLISHED\',revision=revision+1 WHERE id=$1', [targetId]);
+            return { resource: await projectCourse(client, targetId), result: 'APPLIED', beforeState: before.state, beforeRevision: before.revision };
+          }
+          const before = await projectGroup(client, targetId); assertGroupEditable(before.state);
+          const input = (await publicationInputs(client, [targetId]))[0];
+          if (input.courseState !== 'PUBLISHED') throw new OfferingError({ code: 'OFFERING_STATE_CONFLICT' });
+          validateGroupPublication(input.group, input.teacher);
+          const conflicts = await scheduleConflicts(client, input);
+          if (conflicts.length) throw new OfferingError({ code: 'TEACHER_SCHEDULE_CONFLICT', conflictingGroupIds: conflicts });
+          await client.query(`UPDATE "AcademicGroup" SET state='PUBLISHED',"publishedTeacherUserId"="teacherUserId",
+            "publishedTeacherEligibilityVersion"=$2,revision=revision+1 WHERE id=$1`, [targetId, input.teacher!.eligibilityVersion.toString()]);
+          return { resource: await projectGroup(client, targetId), result: 'APPLIED', beforeState: before.state, beforeRevision: before.revision };
         },
       });
     },
