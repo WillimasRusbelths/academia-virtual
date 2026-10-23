@@ -11,7 +11,8 @@ en escritorio y móvil, sin modificar sus expectativas. T030 verifica US1 comple
 su alcance de preparación. T031/T034 verificadas con implementación real de T036.
 T032/T033/T035 pendientes de HTTP/catálogo/UI. T036 implementada y verificada en
 dominio/persistencia, pendiente del criterio integrado T032 verde en T038.
-T037–T074 sin iniciar.
+T037 implementada y verificada por capas; pendiente del criterio T033 verde en T038.
+T038–T074 sin iniciar.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
@@ -32,7 +33,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [checkpoint US1 T030](evidence/us1.md) y
 [pruebas de visibilidad/publicación T031/T032](evidence/t031-t032.md) y
 [pruebas de catálogo, carreras y recorridos T033–T035](evidence/t033-t035.md) y
-[publicación real, visibilidad y avance T036](evidence/t036.md).
+[publicación real, visibilidad y avance T036](evidence/t036.md) y
+[consultas reales de catálogo y avance T037](evidence/t037.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución 1.1.0.
@@ -41,7 +43,7 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual autoriza únicamente T036; se detiene antes de T037.
+actual autoriza únicamente T037; se detiene antes de T038.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita funcionalidad académica.
 
@@ -272,6 +274,21 @@ aprobados y 53 fallos de rutas ausentes, con aserciones HTTP posteriores pendien
 T036 conserva checkbox pendiente por su criterio literal T032 verde, que requiere
 T038; no se adelantan rutas. T033/T035 siguen pendientes. PA-01–PA-05, E1 y bootstrap
 abierto conservados. Véase [t036.md](evidence/t036.md). Detenido antes de T037.
+
+Avance T037, 2026-10-23: cuatro consultas públicas reales en aplicación/persistencia,
+una sentencia por proyección con directorio y filtros antes de página/conteo. Primera
+ejecución: 38 fallos de capacidad ausente y tres errores de fixture de sesión; informe
+conservado y no aceptado como rojo válido completo. Fixture corregida, control contra
+fuente anterior aislada 41/41 rojos por capacidad ausente e implementación 41/41 verdes,
+con todas sus aserciones: DTO cerrados, ocultación tras pérdida/recuperación, permisos,
+sesión revocada, consulta única real, error SQL y ausencia de efectos académicos.
+Regresión PostgreSQL seleccionada 87/87; unitarias/arquitectura 308/308; tipos, lint
+y builds aprobados. T033 original se repite íntegra: dos controles verdes y 42 fallos
+esperados por rutas HTTP ausentes de T038; aserciones posteriores pendientes.
+T033/T037 conservan checkbox pendiente por sus criterios completos, sin sustituir
+HTTP por pruebas directas ni cambiar descripciones. T032/T035/T036 también pendientes.
+PA-01–PA-05, E1, bootstrap abierto y entorno manual conservados. Evidencia y comandos
+en [t037.md](evidence/t037.md). Detenido antes de T038.
 
 Depende de fundamentos y US1. Prueba independiente: fixtures preparadas de varios
 estados, publicación completa y alumno desde inicio compara dos grupos. No necesita

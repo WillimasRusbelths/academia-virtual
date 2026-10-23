@@ -1,11 +1,31 @@
 import { AuthorizationFailure, permits } from '../../authorization/public/session.js';
 import type { SessionActor, SessionRepository } from '../../authorization/public/session.js';
-import type { CourseQuery, GroupQuery, NameQuery, OfferingStore } from './offering-store.js';
+import type { CourseQuery, GroupQuery, NameQuery, PageQuery, OfferingStore } from './offering-store.js';
 import type { UUID } from '../public/offer.js';
 export const ACADEMIC_ADMINISTRATIVE_QUERIES = Symbol('AcademicAdministrativeQueries');
+export const ACADEMIC_CATALOG_QUERIES = Symbol('AcademicCatalogQueries');
 
 export type AdministrativeReads = Pick<OfferingStore,
   'adminCourses' | 'adminCourse' | 'adminGroups' | 'adminGroup' | 'teacherCandidates'>;
+export type CatalogReads = Pick<OfferingStore,
+  'catalogCourses' | 'catalogCourse' | 'catalogGroups' | 'catalogGroup'>;
+
+/** Misma aceptación primaria que administración. El adaptador proyecta únicamente
+ * oferta visible; aceptar la sesión no sustituye la habilitación docente en SQL.
+ */
+export class CatalogQueries implements CatalogReads {
+  constructor(private readonly reads: CatalogReads, private readonly sessions: Pick<SessionRepository, 'accept'>) {}
+  private async read<T>(actor: SessionActor, work: () => Promise<T>): Promise<T> {
+    if (!permits(actor.role, 'academic:read-published')) throw new AuthorizationFailure('FORBIDDEN');
+    const value = await work();
+    if (!await this.sessions.accept(actor)) throw new AuthorizationFailure('AUTH_REQUIRED');
+    return value;
+  }
+  catalogCourses(actor: SessionActor, query: NameQuery) { return this.read(actor, () => this.reads.catalogCourses(actor, query)); }
+  catalogCourse(actor: SessionActor, id: UUID) { return this.read(actor, () => this.reads.catalogCourse(actor, id)); }
+  catalogGroups(actor: SessionActor, id: UUID, query: PageQuery) { return this.read(actor, () => this.reads.catalogGroups(actor, id, query)); }
+  catalogGroup(actor: SessionActor, courseId: UUID, id: UUID) { return this.read(actor, () => this.reads.catalogGroup(actor, courseId, id)); }
+}
 
 /** La proyección se obtiene en una sentencia. La aceptación primaria existente
  * confirma la sesión antes de entregar datos; no confía en un rol almacenado en UI.

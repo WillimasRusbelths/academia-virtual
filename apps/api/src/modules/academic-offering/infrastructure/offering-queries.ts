@@ -1,10 +1,10 @@
 import type { Pool, PoolClient } from 'pg';
 import type { SessionRepository } from '../../authorization/public/session.js';
-import { AdministrativeQueries } from '../application/queries.js';
-import type { AdministrativeReads } from '../application/queries.js';
+import { AdministrativeQueries, CatalogQueries } from '../application/queries.js';
+import type { AdministrativeReads, CatalogReads } from '../application/queries.js';
 import type { NameQuery } from '../application/offering-store.js';
 import { OfferingError } from '../public/offer.js';
-import type { AdminCourse, AdminGroup, Page, TeacherCandidate } from '../public/offer.js';
+import type { AdminCourse, AdminGroup, CatalogCourse, CatalogGroup, Page, TeacherCandidate } from '../public/offer.js';
 
 // Superficie pública SQL de usuarios. Nunca consultar columnas privadas de User.
 const visible = `g.state='PUBLISHED' AND g."teacherUserId"=g."publishedTeacherUserId"
@@ -99,4 +99,52 @@ export function createAdministrativeQueries(pool: Pool, sessions: Pick<SessionRe
     },
   };
   return new AdministrativeQueries(reads, sessions);
+}
+
+// Proyecciones públicas cerradas: nunca derivarlas serializando AdminGroup/User.
+// Directorio, captura, franjas y conteo comparten la instantánea de cada sentencia.
+const catalogCourseProjection = `SELECT c.id,c.name,c.description FROM "AcademicCourse" c`;
+const catalogCourseVisible = `c.state='PUBLISHED' AND EXISTS (SELECT 1 FROM "AcademicGroup" g
+  JOIN "AcademicTeacherDirectory" d ON d."userId"=g."teacherUserId"
+  WHERE g."courseId"=c.id AND ${visible})`;
+const catalogGroupProjection = `SELECT g.id,g."courseId",g.name,
+  to_char(g."periodStart",'YYYY-MM-DD') AS "periodStart",to_char(g."periodEnd",'YYYY-MM-DD') AS "periodEnd",
+  g."timeZone",g.capacity,NULL::integer AS occupancy,NULL::integer AS availability,'NOT_CALCULATED'::text AS "capacityStatus",
+  COALESCE((SELECT jsonb_agg(jsonb_build_object('dayOfWeek',s."dayOfWeek",
+    'startTime',lpad((s."startMinute"/60)::text,2,'0')||':'||lpad((s."startMinute"%60)::text,2,'0'),
+    'endTime',lpad((s."endMinute"/60)::text,2,'0')||':'||lpad((s."endMinute"%60)::text,2,'0'))
+    ORDER BY s."dayOfWeek",s."startMinute",s."endMinute") FROM "AcademicSlot" s WHERE s."groupId"=g.id),'[]'::jsonb) AS schedule,
+  jsonb_build_object('name',d.name) AS teacher
+  FROM "AcademicGroup" g JOIN "AcademicCourse" c ON c.id=g."courseId"
+  JOIN "AcademicTeacherDirectory" d ON d."userId"=g."teacherUserId"`;
+
+export function createCatalogQueries(pool: Pool, sessions: Pick<SessionRepository, 'accept'>): CatalogReads {
+  async function query<T>(sql: string, values: readonly unknown[]): Promise<T> {
+    try { return (await pool.query<T & Record<string, unknown>>(sql, [...values])).rows[0]; }
+    catch { throw new OfferingError({ code: 'TEMPORARILY_UNAVAILABLE' }); }
+  }
+  const reads: CatalogReads = {
+    async catalogCourses(_actor, input) {
+      const result = await query<Pick<Page<CatalogCourse>, 'items' | 'total'>>(paginated(catalogCourseProjection,
+        `${catalogCourseVisible} AND strpos(lower(c.name),lower($1))>0`), page(input));
+      return { ...result, page: input.page, pageSize: input.pageSize };
+    },
+    async catalogCourse(_actor, id) {
+      return (await query<{ resource: CatalogCourse | null }>(`SELECT (SELECT to_jsonb(p)
+        FROM (${catalogCourseProjection} WHERE c.id=$1 AND ${catalogCourseVisible}) p) AS resource`, [id])).resource;
+    },
+    async catalogGroups(_actor, id, input) {
+      if (Object.keys(input).some(key => !['page', 'pageSize'].includes(key))) throw new OfferingError({ code: 'VALIDATION_ERROR' });
+      const result = await query<Pick<Page<CatalogGroup>, 'items' | 'total'> & { exists: boolean }>(paginated(catalogGroupProjection,
+        `g."courseId"=$4 AND c.state='PUBLISHED' AND ${visible} AND $1::text=''`,
+        `,EXISTS(${catalogCourseProjection} WHERE c.id=$4 AND ${catalogCourseVisible}) AS exists`), [...page(input), id]);
+      return result.exists ? { items: result.items, total: result.total, page: input.page, pageSize: input.pageSize } : null;
+    },
+    async catalogGroup(_actor, courseId, id) {
+      return (await query<{ resource: CatalogGroup | null }>(`SELECT (SELECT to_jsonb(p)
+        FROM (${catalogGroupProjection} WHERE g.id=$2 AND g."courseId"=$1 AND c.state='PUBLISHED' AND ${visible}) p) AS resource`,
+      [courseId, id])).resource;
+    },
+  };
+  return new CatalogQueries(reads, sessions);
 }

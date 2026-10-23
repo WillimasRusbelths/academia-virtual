@@ -1,0 +1,3151 @@
+{
+  "feature": "002-oferta-academica",
+  "scope": "T037 only; stop before T038",
+  "baseCommit": "ed0661f",
+  "date": "2026-10-23",
+  "source": [
+    {
+      "path": "apps/api/src/modules/academic-offering/application/queries.ts",
+      "sha256": "d11bb1e0c49240e04f70d0def60deae7a7864f67ea9d2bc2f6a891b3331d4a1f"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts",
+      "sha256": "3101a3c4f6f8efa4636dc7184cd0d07df01d4bfee020e960cc19d34e046912e1"
+    },
+    {
+      "path": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+      "sha256": "82e133b5bb4a952147251522541648134646d828987b91a7296378e71fd9d2ec"
+    }
+  ],
+  "runs": [
+    {
+      "action": "catalog-layers",
+      "exitCode": 0,
+      "date": "2026-10-23T13:09:39.961Z",
+      "timezone": "America/Lima",
+      "total": 41,
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0,
+      "reportSha256": "41eef76d224b294acba3214bc63e2a04530b84ef10af60936335a88d4787d515",
+      "cases": [
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q01 cursos visibles antes de página/conteo 1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q01 cursos visibles antes de página/conteo 2",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q01 cursos visibles antes de página/conteo 3",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q02 búsqueda literal recortada sin distinguir mayúsculas e inyección inerte",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q03 grupos visibles antes de página/conteo 1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q03 grupos visibles antes de página/conteo 2",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q03 grupos visibles antes de página/conteo 3",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q04 ADMIN DTO exactos y franjas/capacidad sin privados ni efectos académicos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q04 STUDENT DTO exactos y franjas/capacidad sin privados ni efectos académicos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q05 emptyCourseId e inexistente indistinguibles, sin hijos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q05 hiddenCourseId e inexistente indistinguibles, sin hijos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q06 grupo oculto 0 e inexistente indistinguibles",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q06 grupo oculto 1 e inexistente indistinguibles",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q06 grupo oculto 2 e inexistente indistinguibles",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q06 grupo oculto 3 e inexistente indistinguibles",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q07 catálogo vacío verdadero devuelve página vacía",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q08 pérdida role y recuperación sin lectura nunca rehabilita captura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q08 pérdida status y recuperación sin lectura nunca rehabilita captura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q08 pérdida verification y recuperación sin lectura nunca rehabilita captura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q09 operación 0 ejecuta una sola sentencia de proyección real sin N+1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q09 operación 1 ejecuta una sola sentencia de proyección real sin N+1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q09 operación 2 ejecuta una sola sentencia de proyección real sin N+1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q09 operación 3 ejecuta una sola sentencia de proyección real sin N+1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q10 docente rechazado antes de consultar operación 0",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q10 docente rechazado antes de consultar operación 1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q10 docente rechazado antes de consultar operación 2",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q10 docente rechazado antes de consultar operación 3",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q11 sesión revocada impide entregar proyección operación 0",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q11 sesión revocada impide entregar proyección operación 1",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q11 sesión revocada impide entregar proyección operación 2",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q11 sesión revocada impide entregar proyección operación 3",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"page\":0} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"page\":1.5} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"pageSize\":0} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"pageSize\":51} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"page\":9007199254740991} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"state\":\"PUBLISHED\"} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"unknown\":1} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q12 consulta inválida {\"q\":1} rechazada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q13 listado de grupos no admite q ni state",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-catalog-layers.spec.ts",
+          "name": "Q14 error PostgreSQL real no se convierte en vacío y recuperación conserva datos",
+          "status": "passed",
+          "allAssertionsReached": true
+        }
+      ]
+    },
+    {
+      "action": "unit",
+      "exitCode": 0,
+      "date": "2026-10-23T13:04:16.183Z",
+      "timezone": "America/Lima",
+      "total": 308,
+      "passed": 308,
+      "failed": 0,
+      "skipped": 0,
+      "reportSha256": "a9f93f5b4adb7a6119ad1af0be2419656099dbc8725bda2bec19387facbed141",
+      "cases": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T088: todos los endpoints compilados tienen la política explícita de su contrato",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T017 familias académicas: GET /api/v1/admin/academic/courses exige academic:manage y nunca admite public/ausencia/otra audiencia",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T017 familias académicas: GET /api/v1/academic/courses/:courseId/groups/:id exige academic:read-published y nunca admite public/ausencia/otra audiencia",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "name": "T017 familias académicas: GET /api/v1/teaching/groups/:id exige academic:read-own y nunca admite public/ausencia/otra audiencia",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular dominio no importa Nest ni infraestructura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular aplicación usa dominio y otro módulo solo por public",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular frontend mantiene shared y features sin ciclos laterales",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "name": "límites del monolito modular T017 oferta mantiene núcleo puro y superficies públicas, incluso en infraestructura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real T017 oferta y directorio se incluyen en el grafo real, sin callbacks de identidad a oferta",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real todas las capas cumplen ESLint, incluido guard y superficies públicas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real el cierre transitivo del núcleo no alcanza IO, composición ni DTO HTTP",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real el grafo de archivos y las raíces de composición no tienen ciclos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real HTTP y CLI consumen aplicación; no comparten reglas a través de entradas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "name": "VA: dependencias del código real las barreras rechazan escapes reales que el patrón de carpetas no cubría",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C01 alta incompleta: referencia del servidor estable, nombre recortado, DRAFT y descripción null",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C02 descripción null se normaliza a null en preparación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C02 descripción \"\" se normaliza a null en preparación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C02 descripción \" \\t\\n \" se normaliza a null en preparación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C03 recorta descripción; no interpreta HTML ni elimina contenido interno",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \"\" con error de campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \" \\t\\n \" con error de campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido null con error de campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido 123 con error de campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido undefined con error de campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual 42",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual {}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C06 nombres repetidos permitidos, referencias distintas y sin límite nuevo de longitud",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C07 edita DRAFT sin publicar ni cambiar referencia",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C07 edita WITHDRAWN sin publicar ni cambiar referencia",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C08 PATCH de descripción conserva nombre; PATCH de nombre conserva descripción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C09 publicado exige retiro antes de editar, aunque el cambio sea válido",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C10 cambio inválido no modifica parcialmente el curso recibido",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "name": "T019 curso — FR-001/002; V-A01 C11 curso solo posee datos académicos generales, sin capacidad, docente ni horario",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G01 omisión inicial permite DRAFT incompleto con capacidad null y zona explícita",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 1 se conserva exactamente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 50 se conserva exactamente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 25 se conserva exactamente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada null, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada vacía, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada blanco, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada string 25, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada cero, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada negativa, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada fracción, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada 51, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada NaN, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada Infinity, no la confunde con omisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad null y conserva la configurada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad \"\" y conserva la configurada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 0 y conserva la configurada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad -1 y conserva la configurada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 1.5 y conserva la configurada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 51 y conserva la configurada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 1 sin publicar",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 50 sin publicar",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \"\" se rechaza por campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \" \\t\\n \" se rechaza por campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido null se rechaza por campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido 42 se rechaza por campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido undefined se rechaza por campo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de DRAFT conserva referencias y estado; omitir capacidad la conserva",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de WITHDRAWN conserva referencias y estado; omitir capacidad la conserva",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de PUBLISHED sin cambios parciales",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de CANCELLED sin cambios parciales",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G09 dos grupos del mismo curso son independientes, incluso con nombre repetido",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G10 periodo parcial válido permite preparación incompleta",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G12 grupo admite periodo inclusivo de un solo día real",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodStart inválido 2026-02-29",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodEnd inválido 2026-04-31",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza timeZone inválido UTC",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G14 edición rechaza periodo invertido y no aplica el nombre parcialmente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G11 grupo no exige mínimo 40, código manual ni nombre único",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R01 ordinal civil contrasta siglos y año contra oráculo UTC independiente, solo en tests",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R02 edición válida del curso conserva entrada congelada y referencia, sin publicar",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R03 editar borrador incompleto conserva omisión de capacidad; undefined enviado no configura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R04 editar periodo con franjas conservadas revalida ocurrencias sin mutación parcial",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R05 edición retirada conserva snapshot, revisión recibida y estado; no renueva publicación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R06 comparación exige periodos completos; formas inválidas usan errores seguros del dominio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 fecha con salto de línea produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 hora con salto de línea produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 UUID con salto de línea produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "name": "R07 franja ausente produce validación segura, no coerción ni TypeError",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S01 borrador permite cero franjas y periodo todavía incompleto",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial 2026-10-19/null valida las franjas sin exigir publicación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/2026-10-25 valida las franjas sin exigir publicación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/null valida las franjas sin exigir publicación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 1 ocurre en periodo de un día inclusivo 2026-10-19",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 2 ocurre en periodo de un día inclusivo 2026-10-20",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 3 ocurre en periodo de un día inclusivo 2026-10-21",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 4 ocurre en periodo de un día inclusivo 2026-10-22",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 5 ocurre en periodo de un día inclusivo 2026-10-23",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 6 ocurre en periodo de un día inclusivo 2026-10-24",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 7 ocurre en periodo de un día inclusivo 2026-10-25",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2024-02-29, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2000-02-29, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2026-12-31, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2027-01-01, incluidos bisiesto y cambio de año",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-02-29\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2100-02-29\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-04-31\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-13-01\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-00-10\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-00\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-1-9\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"19/10/2026\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-19T00:00:00Z\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"\", sin rollover ni zona de navegador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-02-30",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-11-31",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-10-25T00:00:00-05:00",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S07 rechaza periodo invertido aunque no haya franjas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"UTC\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/Bogota\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/New_York\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza null",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 0 sin coerción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 8 sin coerción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO -1 sin coerción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 1.5 sin coerción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO \"1\" sin coerción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO null sin coerción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–00:01",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 23:58–23:59",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–23:59",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"24:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"23:60\" fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"-1:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"9:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00:00\" fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00Z\" fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"\" fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial null fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial 1080 fuera del contrato HH:mm",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"24:00\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:60\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:00:00\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"\"",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final null",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 18:00–18:00",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 19:00–18:00",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:00–01:00",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:59–00:00",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 00:00–00:00",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 0 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 1 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 2 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 3 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:30\",\"endTime\":\"18:45\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 0 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 1 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"19:00\",\"endTime\":\"20:00\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 2 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 3 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S16 exige ocurrencia de CADA franja; una válida no oculta otra fuera de periodo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S17 periodo inclusivo sin lunes rechaza la franja; no basta con fechas ordenadas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S18 al cambiar el periodo se vuelve a validar el horario completo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O01 misma franja y periodo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O02 solapamiento parcial",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O03 contención de horas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O04 franjas contiguas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O05 horas separadas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O06 distinto día ISO",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O07 periodos disjuntos, mismas horas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O08 intersección de fechas sin lunes: c…",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O09 primera ocurrencia común justo en U…",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O10 único día compartido lunes 19 inclu…",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O11 único día compartido martes sin lun…",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O12 domingo ISO 7 en extremo inclusivo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O13 paso de domingo a lunes con ajuste …",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O14 coincidencia solo en segunda franja…",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O15 conjunto vacío no coincide",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O16 extremos horarios adyacentes 00:01",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O17 fecha bisiesta efectiva compartida",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O18 periodo de 400 años devuelve decisi…",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo DRAFT",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo PUBLISHED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo WITHDRAWN",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo CANCELLED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo DRAFT",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo PUBLISHED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo WITHDRAWN",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo CANCELLED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo DRAFT",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo PUBLISHED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo WITHDRAWN",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo CANCELLED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 sin publicación previa: oculta y revisión derivada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación quitada: oculta y revisión derivada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación sustituida: oculta y revisión derivada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 docente no habilitado: oculta y revisión derivada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 directorio sin asignado: oculta y revisión derivada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 cuenta recuperada con generación posterior: oculta y revisión derivada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V03 generación bigint no se compara redondeándola a number",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de rol sin consultas intermedias no rehabilita snapshot",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de estado sin consultas intermedias no rehabilita snapshot",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de verificación sin consultas intermedias no rehabilita snapshot",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V05 nombre/reset sin pérdida de habilitación conserva la visibilidad, no depende de authVersion",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V06 captura explícita nueva vuelve a habilitar grupo; no muta entrada ni cuenta",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso DRAFT sin hijos no visible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso PUBLISHED sin hijos no visible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso WITHDRAWN sin hijos no visible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo DRAFT no visible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo WITHDRAWN no visible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo CANCELLED no visible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V09 curso con hijos que requieren revisión no visible aunque editorialmente publicados",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V10 un hijo visible basta; hijos ocultos no se vuelven visibles",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre DRAFT oculta aunque hijo fuera apto",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre WITHDRAWN oculta aunque hijo fuera apto",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 1 no es ocupación ni disponibilidad",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 45 no es ocupación ni disponibilidad",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 50 no es ocupación ni disponibilidad",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V13 no proyecta metadatos editoriales, revisión, generación, IDs docentes o privados",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto WITHDRAWN",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto CANCELLED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V15 no proyecta generación invalidada y recuperada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "name": "T031 proyección pura mínima — FR-006/011 V16 proyectar no muta snapshot, horarios ni docente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "prepara hash/enlace antes del store y solo transmite material persistible, sin provisional",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "fallo de credenciales no inicia la transaccion ni emite un enlace",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "fallo de preparacion de enlace no toca store ni revela errores del adaptador",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "name": "conserva rechazo irreversible de T028 sin inventar otro camino de inicializacion",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "cuota antes de store; factory cifra enlace de origen fijo y no devuelve secreto",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "sin cuota no toca store, generador de payload ni cuenta",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "factory VERIFY_EMAIL conserva caducidad y elegibilidad de dominio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "name": "factory RESET_PASSWORD conserva caducidad y elegibilidad de dominio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "contraseña inválida no invoca hash, repositorio ni consumo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "token mal formado no invoca hash ni repositorio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "fallo de hash deja sin invocar el repositorio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "repositorio que rechaza consumo produce únicamente InvalidActionLink",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "hash finaliza antes del repositorio; la regla pura exige verificación, propósito y caducidad vigentes",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "solicitar reutiliza emisión con propósito reset y responde igual con o sin entrega",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "name": "cuota denegada conserva la espera definida por emisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C01 DTO cerrados por audiencia, sin generación, credenciales ni datos de cuenta",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C02 revisiones JSON decimales, sin capacidad de inscripción ficticia",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C03 comandos explícitos, revisión en recursos existentes y sin actualización de snapshot desde cliente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "name": "C04 errores de negocio seguros; referencias solo en conflictos administrativos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "elegibilidad exige cuenta activa, correo verificado y contraseña propia",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "sesión vence exactamente a 30 minutos; no cambia ni renueva sus fechas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "sesión vence a ocho horas aunque haya actividad reciente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "acción VERIFY_EMAIL: propósito, destinatario, vigencia y uso único",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "acción RESET_PASSWORD: propósito, destinatario, vigencia y uso único",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "name": "credencial provisional vence a 24 h; no exige correo para establecer clave, ni concede sesión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide cambio propio role/STUDENT",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide retirar último ADMIN ACTIVE mediante role/STUDENT",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide cambio propio role/TEACHER",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide retirar último ADMIN ACTIVE mediante role/TEACHER",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide cambio propio status/DISABLED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "impide retirar último ADMIN ACTIVE mediante status/DISABLED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "otro ADMIN puede retirarse cuando queda otro activo; no exige correo verificado para contar",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "no-op propio role no revoca ni restaura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "no-op propio status no revoca ni restaura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "desactivar revoca sesiones y acciones; cambiar rol solo sesiones",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "reactivar y no-op desactivado no reconstruyen sesiones, tokens ni provisional",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "name": "ADMIN desactivado no cuenta como último activo para un cambio de rol",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "quinto fallo bloquea 15 minutos; solicitudes rechazadas no prolongan bloqueo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "ventana móvil: frontera inferior excluida y ninguna actividad futura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "cinco reservas en vuelo consumen capacidad; al vencer se convierten en fallos conservadores",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "name": "éxito elimina fallos sin eliminar reservas de solicitudes concurrentes",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada misma credencial y versión habilitadas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de estado",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de correo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de verificación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de contraseña",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de versión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "name": "revalidación de una credencial comprobada rechaza cambio de provisional",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "alias operativo ASCII de 1 a 64, sin derivacion ni valor predeterminado",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (0)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (1)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (2)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (3)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (4)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (5)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (6)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "name": "rechaza alias invalido sin normalizarlo (7)",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "acuse de commit incierto devuelve error seguro sin repetir la operación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "dos conflictos abortados con rollback confirmado permiten un tercer intento",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "conflicto persistente no supera tres intentos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "name": "sin rollback confirmado no reintenta y descarta el cliente fallido",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica ADMIN / academic:manage = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica ADMIN / academic:read-published = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica ADMIN / academic:read-own = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica STUDENT / academic:manage = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica STUDENT / academic:read-published = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica STUDENT / academic:read-own = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica TEACHER / academic:manage = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica TEACHER / academic:read-published = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz académica TEACHER / academic:read-own = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión ADMIN / academic:manage = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión ADMIN / academic:read-published = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión ADMIN / academic:read-own = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión STUDENT / academic:manage = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión STUDENT / academic:read-published = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión STUDENT / academic:read-own = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión TEACHER / academic:manage = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión TEACHER / academic:read-published = false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "autorización backend por interfaz de sesión TEACHER / academic:read-own = true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:manage, sin consultar repositorio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-published, sin consultar repositorio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-own, sin consultar repositorio",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "roles desconocidos/visitante y permisos desconocidos siempre se deniegan",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "matriz de identidad: perfil propio para tres roles; administración solo ADMIN",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "name": "operaciones y roles ajenos a la matriz se deniegan",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "name": "mínimo de 60 s exactos por destinatario y propósito",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "name": "cinco por hora con ventana móvil, frontera exacta y Retry-After según ambos límites",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "name": "veinte por origen sumando propósitos; la cuota limita aun con destinatario nuevo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "nombre Unicode: trim exterior y límites por caracteres, no bytes ni unidades UTF-16",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "correo: trim y minúscula simple, sin transformar alias ni puntos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "contraseñas preservan espacios, composición Unicode y contenido completo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "name": "rol único y estado admiten exclusivamente los enums",
+          "status": "passed",
+          "allAssertionsReached": true
+        }
+      ]
+    },
+    {
+      "action": "regression",
+      "exitCode": 0,
+      "date": "2026-10-23T13:04:45.770Z",
+      "timezone": "America/Lima",
+      "total": 87,
+      "passed": 87,
+      "failed": 0,
+      "skipped": 0,
+      "reportSha256": "e9edbec9c82753c28b2639e03afb28ddaf76670db69e81d625717e3303384f81",
+      "cases": [
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E01 INSERT ordinario inicia generación 0 para docente elegible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E02 perder rol docente hacia STUDENT incrementa exactamente una vez",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E02 perder rol docente hacia ADMIN incrementa exactamente una vez",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E03 desactivar incrementa una vez; cambios posteriores mientras sigue inhabilitado no incrementan",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E04 perder verificación también invalida generación sin depender de consultas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E05 recuperación de role conserva generación nueva; snapshot anterior sigue inválido",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E05 recuperación de status conserva generación nueva; snapshot anterior sigue inválido",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E05 recuperación de verification conserva generación nueva; snapshot anterior sigue inválido",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E06 dos pérdidas separadas por recuperación avanzan a generación 2, sin reciclarla",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E07 cambio de nombre y UPDATE no-op no invalidan publicación docente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E08 una cuenta que nunca fue elegible no incrementa por desactivación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=false",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=true",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E10 reset real revoca sesión y aumenta authVersion sin aumentar generación docente",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E11 cambio de acceso real confirma generación, revocación y auditoría juntos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E12 fallo de auditoría revierte acceso, generación y revocación en una sola transacción",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E13 overflow bigint aborta pérdida de habilitación sin reciclar generación ni alterar la fila",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-eligibility.spec.ts",
+          "name": "E14 recuperar habilitación no actualiza snapshot ni estado/revision de un grupo publicado",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C01/H02 alta normalizada, UUID servidor, persistencia observador, ledger y auditoría",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C02/H03 grupo incompleto/capacidad undefined, hermano y padre intactos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C02/H03 grupo incompleto/capacidad 1, hermano y padre intactos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C02/H03 grupo incompleto/capacidad 50, hermano y padre intactos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C03/H07 ediciones independientes y metadatos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C04/H08 reemplazo completo contiguo y vacío; revisión solo del grupo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C05/H11 revisión bigint sin pérdida de precisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C06/H13 revisión obsoleta COURSE_EDIT sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C06/H13 revisión obsoleta GROUP_EDIT sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C06/H13 revisión obsoleta GROUP_SCHEDULE sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 0 sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida -1 sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 1.5 sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 51 sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida  sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida null sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C07/H16 capacidad inválida 20 sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido medianoche sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido duplicado sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido solapamiento sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C08/H17 horario inválido día cero sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C09/H18 cambiar periodo revalida franja persistida, no solo atributos enviados",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C10/H19 replay canónico y conflicto de intención; no duplica auditoría",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C11 no-op validado y replay devuelve proyección actual, revisión aplicada original",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C12 STUDENT denegado antes de efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C12 TEACHER denegado antes de efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C13 replay también reautoriza sesión revocada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C14 asignación elegible e inelegible, no expone generación",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C15 conservar captura al editar grupo retirado, reactivación no elimina revisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: COURSE_CREATE",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: COURSE_EDIT",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: GROUP_CREATE",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: GROUP_EDIT",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C16 fallo real de auditoría revierte agregado, franjas y ledger: GROUP_SCHEDULE",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C19 lock real del padre antes de modificar franjas, observado desde tercera conexión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C20 pérdida de habilitación confirmada durante espera impide asignación; barrera PostgreSQL",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C21 no edita ni reemplaza franjas de grupo PUBLISHED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C21 no edita ni reemplaza franjas de grupo CANCELLED",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C22 curso publicado no editable, retirado editable sin cambiar estado",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C23 pertenencia desconocida y PATCH vacío rechazados sin efectos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C24 composición real expone comandos y consultas US1 con el mismo pool, sin rutas nuevas",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C17 dos revisiones simultáneas: un commit y un conflicto",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "C18 dos repeticiones simultáneas de alta: un recurso y una auditoría",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q01/H01 vacío y página fuera de rango conservan total",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q02/H04 búsqueda literal, estado, orden name/id y conteo",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q03/H05 DTO cerrado, franjas y capacidad configurada sin disponibilidad",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q04/H06 selector mínimo solo docentes elegibles, sin información privada",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q05/H20 inexistente se distingue de vacío, sin inventar error de infraestructura",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q06 STUDENT no consulta administración",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q06 TEACHER no consulta administración",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q07 fallo SQL real no se convierte en página vacía ni filtra SQL",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q08 una sentencia por proyección/listado/conteo, independiente de número de grupos",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q09 sesión revocada no recibe proyección aunque conserve actor anterior",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":0,\"pageSize\":20}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":1,\"pageSize\":51}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":1.5,\"pageSize\":20}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q10 parámetros administrativos inválidos {\"page\":1,\"pageSize\":20,\"state\":\"CANCELLED\"}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/academic-offering-preparation-layers.spec.ts",
+          "name": "Q11 visibilidad/revisión derivadas en una sentencia; recuperar habilitación no republica",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D01 find proyecta solo cuatro campos y bigint, incluso cuenta no elegible",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D02 selector excluye otros roles, deshabilitados y no verificados; provisional no es condición académica",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D03 búsqueda parametrizada por nombre, sin email, comodines literales y conteo filtrado",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D04 perder y recuperar habilitación cambia generación sin autorizar el snapshot anterior",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D05 generación mayor que MAX_SAFE_INTEGER conserva precisión",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"page\":0}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"page\":1.5}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"pageSize\":51}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"pageSize\":0}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D06 consulta inválida rechazada antes de SQL: {\"q\":\"\\u0000\"}",
+          "status": "passed",
+          "allAssertionsReached": true
+        },
+        {
+          "file": "apps/api/tests/integration/teaching-directory.spec.ts",
+          "name": "D07 identificador inválido se rechaza y fallo SQL no se convierte en vacío ni filtra detalles",
+          "status": "passed",
+          "allAssertionsReached": true
+        }
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-23T13:03:46.260Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-23T13:03:25.725Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "build",
+      "exitCode": 0,
+      "date": "2026-10-23T13:04:34.263Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "validBaselineRed": {
+    "total": 41,
+    "failed": 41,
+    "skipped": 0,
+    "collectionErrors": 0,
+    "reportSha256": "b8c5774c4688603468fb6e8331ca483215d4ac8f09818f96ad42e676ef6fbf8f",
+    "reason": "Each independent test reached the missing real createCatalogQueries assertion; no load/configuration failure",
+    "fixtureIsolation": "Q11 uses fresh fictitious student session per case; verified against pre-T037 HEAD only in private source copy, then restored implemented source; business assertions unchanged"
+  },
+  "initialInvalidRed": {
+    "total": 41,
+    "expectedMissingCapability": 38,
+    "fixtureErrors": 3,
+    "acceptedAsFullRedEvidence": false,
+    "reportSha256": "6a71a7eacd8018571601e1d70a4f56a712b557dbe08964d8cabfe2a83ec9141f",
+    "cause": "Q11 reused a session revoked by its previous case; corrected with fresh fictitious session, no weakened assertions",
+    "laterBaselineRedAndRealImplementationGreen": true
+  },
+  "T033": {
+    "status": "PENDING",
+    "originalTestsUnchanged": true,
+    "total": 44,
+    "controlsPassed": 2,
+    "expectedMissingHttpRouteFailures": 42,
+    "reportSha256": "c5b78da655637e52ac4ff7f6c48a9e406c41c5df12a873753ec30b3fe32acbca",
+    "cases": [
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 controles del contexto; NO catálogo implementado I01 composición real, observador separado y fixture oculta por generación real",
+        "status": "passed",
+        "classification": "EXISTING_INFRASTRUCTURE_OR_ADMIN_CONTROL",
+        "downstreamHttpAssertionsReached": true
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 controles del contexto; NO catálogo implementado I02 proyección administrativa existente conserva capacidad y revisión, sin GET con efectos",
+        "status": "passed",
+        "classification": "EXISTING_INFRASTRUCTURE_OR_ADMIN_CONTROL",
+        "downstreamHttpAssertionsReached": true
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C01 vacío es 200 con página vacía; no falso error o disponibilidad",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C02 filtra ocultos antes de contar/paginar cursos: página 1",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C02 filtra ocultos antes de contar/paginar cursos: página 2",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C02 filtra ocultos antes de contar/paginar cursos: página 3",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C03 q recortado y sin distinguir mayúsculas; solo cuenta coincidencias visibles",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 ADMIN ruta 0: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 ADMIN ruta 1: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 ADMIN ruta 2: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 ADMIN ruta 3: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 STUDENT ruta 0: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 STUDENT ruta 1: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 STUDENT ruta 2: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C04 STUDENT ruta 3: DTO cerrado sin privados ni ocupación ficticia",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C05 grupos: filtro antes de página 1, total no revela cuatro hijos ocultos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C05 grupos: filtro antes de página 2, total no revela cuatro hijos ocultos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C05 grupos: filtro antes de página 3, total no revela cuatro hijos ocultos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C06 grupo oculto 0 y grupo inexistente son indistinguibles",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C06 grupo oculto 1 y grupo inexistente son indistinguibles",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C06 grupo oculto 2 y grupo inexistente son indistinguibles",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C06 grupo oculto 3 y grupo inexistente son indistinguibles",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C07 grupo visible de otro curso no se filtra por enlace manipulado",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C08 curso emptyCourseId no se entrega ni enumera hijos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C08 curso hiddenCourseId no se entrega ni enumera hijos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 VISITOR ruta 0: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 VISITOR ruta 1: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 VISITOR ruta 2: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 VISITOR ruta 3: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 TEACHER ruta 0: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 TEACHER ruta 1: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 TEACHER ruta 2: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C09 TEACHER ruta 3: denegación sin datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C10 query inválida page=0 no abre filtros administrativos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C10 query inválida page=1.5 no abre filtros administrativos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C10 query inválida pageSize=0 no abre filtros administrativos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C10 query inválida pageSize=51 no abre filtros administrativos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C10 query inválida q=a&q=b no abre filtros administrativos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C10 query inválida state=PUBLISHED no abre filtros administrativos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C10 query inválida unknown=1 no abre filtros administrativos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C11 grupo/listado no admite búsqueda q ni detalle parámetros desconocidos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C12 pérdida y recuperación sin lecturas oculta futuras consultas; ninguna lectura renueva captura",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C13 fallo PostgreSQL real devuelve 503; recuperar permisos vuelve a ofrecer mismos datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      },
+      {
+        "file": "apps/api/tests/integration/academic-offering-catalog.spec.ts",
+        "name": "T033 catálogo HTTP/PG real — FR-006/009/010/011 C14 texto con sintaxis SQL no altera consulta, permisos o datos",
+        "status": "failed",
+        "classification": "EXPECTED_HTTP_ROUTE_ABSENT",
+        "downstreamHttpAssertionsReached": false
+      }
+    ]
+  },
+  "T037": {
+    "status": "PENDING",
+    "implementationAndDirectVerification": "PASS",
+    "directCases": 41,
+    "reason": "Literal criterion requires T033 green; HTTP routes belong to T038; original criterion and tests preserved"
+  },
+  "otherTasks": {
+    "T032": "PENDING",
+    "T035": "PENDING",
+    "T036": "PENDING integrated T032 gate",
+    "T038": "NOT_STARTED"
+  },
+  "preservation": {
+    "unchangedPreviouslyTrackedFiles": 588,
+    "unchangedProtectedFiles": 72,
+    "intentionallyModifiedExistingFiles": [
+      "apps/api/src/modules/academic-offering/application/queries.ts",
+      "apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts",
+      "specs/002-oferta-academica/tasks.md"
+    ],
+    "originalTestSuitesUnchanged": true,
+    "constitutionSpecClarificationsContractsPriorEvidenceUnchanged": true,
+    "before": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-23T12:44:04.861831052Z",
+        "startedAt": "2026-10-23T12:29:19.487988344Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "after": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-23T13:09:53.698231563Z",
+        "startedAt": "2026-10-23T13:06:59.375185692Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "guarantees": {
+    "oneStatementPerAcademicProjectionVerifiedAgainstRealPool": true,
+    "spyForwardsToRealPostgresqlWithoutReplacement": true,
+    "visibilityBeforePaginationAndCount": true,
+    "onlyPublicTeacherDirectory": true,
+    "noAcademicWrites": true,
+    "identitySessionAcceptanceReused": true,
+    "noNewPoolsOrServices": true,
+    "noSchemaChanges": true
+  },
+  "limitations": {
+    "httpRoutesAdded": false,
+    "webChanged": false,
+    "E2ERun": false,
+    "fullIntegrationClaimedGreen": false,
+    "humanAcceptance": false,
+    "capacity1000Validated": false,
+    "open": [
+      "historical bootstrap",
+      "D04",
+      "D06 enrollment",
+      "real SMTP",
+      "T104/T108",
+      "D10/D13"
+    ]
+  },
+  "E1": "Preserved without protocol or original tests changes",
+  "clarifications": "PA-01–PA-05 unchanged",
+  "nextTask": "T038 real HTTP composition and routes; rerun T032/T033/T034/T017"
+}
