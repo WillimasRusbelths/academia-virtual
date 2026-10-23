@@ -143,7 +143,7 @@ test.each([
 test.each([
   ['/admin/academic/courses',{token:'secreto'}],['/admin/academic/teachers',{state:'DRAFT'}],
   ['/admin/academic/groups/00000000-0000-4000-8000-000000000001',{q:'no'}],
-  ['/academic/courses',{q:'todavía fuera del bloque'}],
+  ['/academic/courses',{state:'DRAFT'}],
 ])('T027 no amplía queries arbitrarias %s/%j',async(path,query)=>{
   const transport=vi.fn<typeof fetch>();
   await expect(createApiClient(vi.fn(),transport).request(path as string,{query:query as Record<string,string>}))

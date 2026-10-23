@@ -107,13 +107,16 @@ SMTP real, D10/rúbrica y D13/operación continúan pendientes. [Aceptación his
 
 Oferta: `feat/002-oferta-academica` conserva `eafae88`, PA-01–PA-05/E1 y
 [tasks.md](../../specs/002-oferta-academica/tasks.md): T001–T034/T036–T038 completas;
-T035 depende de UI T039–T041, resto T039–T074 pendiente. Continúa T039 sin incorporar
-reservas, órdenes, matrícula o pagos al spec 002. Aquí no se cambia su plan ni sus
+Esa es la base histórica previa al bloque de continuidad. El merge `b0af757` conserva
+ambos historiales (`eafae88` y `061b183`); T035/T039–T041 quedan verificadas según
+[evidencia](../../specs/002-oferta-academica/evidence/t039-t041.md). Sigue T042; T042–T074
+permanecen pendientes. No se incorporan reservas, órdenes, matrícula o pagos al spec 002.
+Aquí no se cambia su plan ni sus
 checklists/criterios históricos de constitución 1.1.0; la enmienda 1.2.0 gobierna el
 trabajo nuevo y no invalida ni amplía lo demostrado anteriormente.
-Antes de reanudar implementación en la rama de oferta, incorporar este commit documental
-revisado para que la constitución vigente acompañe el trabajo; este bloque no fusiona
-ramas ni cambia la referencia del checkpoint de oferta.
+La etapa documental no fusionó ramas. El bloque posterior de continuidad incorporó
+el commit mediante merge para que la constitución vigente acompañe la implementación;
+el checkpoint histórico de oferta permanece referenciado y conservado.
 
 Propuesto para después: spec `003-reservas-ordenes-matricula` (confirmar numeración
 libre al crearlo con Spec Kit). No se crea esa carpeta/rama, ni un plan de implementación

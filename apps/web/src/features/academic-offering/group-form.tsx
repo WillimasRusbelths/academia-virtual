@@ -11,11 +11,14 @@ function values(group?: AdminGroup) {
   return { name: group?.name ?? '', capacity: group?.capacity?.toString() ?? '', periodStart: group?.periodStart ?? '',
     periodEnd: group?.periodEnd ?? '', teacherUserId: group?.teacher?.id ?? '' };
 }
-export function GroupForm({ client, courseId, initial, busy = false, onBusy = () => undefined, onSaved, onCancel, onDenied, onReplace }: {
+export function GroupForm({ client, courseId, initial, busy = false, onBusy = () => undefined, onSaved, onCancel, onDenied, onReplace, onDirty, externalErrors = {} }: {
   client: ReturnType<typeof academicOfferingApi>; courseId: string; initial?: AdminGroup; busy?: boolean; onBusy?: (value: boolean) => void;
   onSaved: (value: AdminGroup) => void; onCancel: () => void; onDenied: (error: ApiFailure) => void; onReplace?: (value: AdminGroup) => void;
+  onDirty?: (dirty: boolean) => void; externalErrors?: Readonly<Record<string, string>>;
 }) {
   const [draft, setDraft] = useState(() => values(initial)); const [touched, setTouched] = useState<ReadonlySet<string>>(new Set());
+  const dirty = JSON.stringify(draft) !== JSON.stringify(values(initial));
+  useEffect(() => { onDirty?.(dirty); }, [dirty, onDirty]);
   const [errors, setErrors] = useState<FieldErrors>({}); const form = useRef<HTMLFormElement>(null); const command = useOfferingCommand<AdminGroup>();
   const [search, setSearch] = useState(''); const [filter, setFilter] = useState({ q: '', page: 1, pageSize: 20 });
   const [selectedTeacher, setSelectedTeacher] = useState(initial?.teacher ? { id: initial.teacher.id, name: initial.teacher.name } : undefined);
@@ -27,7 +30,7 @@ export function GroupForm({ client, courseId, initial, busy = false, onBusy = ()
     if (key === 'teacherUserId') setSelectedTeacher(teachers.data?.items.find(teacher => teacher.id === value));
   }
   function searchTeachers() { setFilter({ ...filter, q: search.trim(), page: 1 }); }
-  const error = (key: string) => errors[key] ?? (command.error?.fields.includes(key as 'name') ? 'Revisa este campo.' : undefined);
+  const error = (key: string) => errors[key] ?? externalErrors[key] ?? (command.error?.fields.includes(key as 'name') ? 'Revisa este campo.' : undefined);
   async function save() {
     const invalid: Record<string, string> = {}; const badName = nameError(draft.name); if (badName) invalid.name = badName;
     const configured = draft.capacity !== '' || initial?.capacity != null || touched.has('capacity');

@@ -8,3 +8,5 @@
 .offering-list li { margin: 1rem 0; }
 .offering-page label { display: block; }
 @media (min-width: 46rem) { .offering-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.offering-page dialog { max-inline-size: min(40rem, calc(100vw - 2rem)); max-block-size: calc(100dvh - 2rem); overflow: auto; overflow-wrap: anywhere; padding: 1rem; }
+.offering-page dialog::backdrop { background: rgb(0 0 0 / 45%); }

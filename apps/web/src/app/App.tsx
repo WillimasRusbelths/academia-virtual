@@ -16,6 +16,9 @@ import { AccountDetailPage } from '../features/admin-users/account-detail-page';
 import { AdminCoursesPage } from '../features/academic-offering/admin-courses-page';
 import { AdminCoursePage } from '../features/academic-offering/admin-course-page';
 import { AdminGroupPage } from '../features/academic-offering/admin-group-page';
+import { CatalogPage } from '../features/academic-offering/catalog-page';
+import { CoursePage } from '../features/academic-offering/course-page';
+import { GroupPage } from '../features/academic-offering/group-page';
 export function App() {
   return <SessionProvider><SessionRoutes/></SessionProvider>;
 }
@@ -39,5 +42,8 @@ function SessionRoutes() {
     {path:'/admin/oferta',access:'admin',element:<AdminCoursesPage api={session.api} navigate={navigate}/>},
     {path:'/admin/oferta/cursos/:id',access:'admin',render:params=><AdminCoursePage api={session.api} id={params.id} navigate={navigate}/>},
     {path:'/admin/oferta/grupos/:id',access:'admin',render:params=><AdminGroupPage api={session.api} id={params.id} navigate={navigate}/>},
+    {path:'/oferta',access:'student',element:<CatalogPage api={session.api}/>},
+    {path:'/oferta/cursos/:id',access:'student',render:params=><CoursePage api={session.api} id={params.id}/>},
+    {path:'/oferta/cursos/:courseId/grupos/:id',access:'student',render:params=><GroupPage api={session.api} courseId={params.courseId} id={params.id}/>},
   ]}/>;
 }

@@ -1,6 +1,7 @@
 # Backlog trazable — reservas, matrícula y VPS
 
-Planificación del 2026-10-23; todo pendiente, sin autorización de implementación.
+Planificación del 2026-10-23; CT001 verificada en el bloque de continuidad de oferta.
+El resto permanece pendiente y no autoriza implementar reservas, matrícula ni VPS.
 [Requisitos RC, decisiones RA y escenarios RE](reservas-capacidad.md).
 Rutas `specs/003-reservas-ordenes-matricula/` propuestas, no creadas: verificar
 numeración/convención al iniciar Spec Kit. No sustituye tasks.md del futuro spec.
@@ -9,7 +10,7 @@ checkboxes y dependencias; este backlog no las mezcla ni renumera.
 
 ## Especificación futura
 
-- [ ] RP001 Inventariar interfaces/estado real de oferta e identidad en `specs/003-reservas-ordenes-matricula/research.md`, con base, pendientes T035/T039–T074 y contratos consumibles; sin cerrar tareas de 002. Dep.: revisión del checkpoint disponible. RC-03/05; RE-09/10.
+- [ ] RP001 Inventariar interfaces/estado real de oferta e identidad en `specs/003-reservas-ordenes-matricula/research.md`, con base, pendientes reales de 002 al iniciar ese spec y contratos consumibles; sin cerrar tareas de 002. Dep.: revisión del checkpoint disponible. RC-03/05; RE-09/10.
 - [ ] RP002 Ejecutar specify y redactar `specs/003-reservas-ordenes-matricula/spec.md` y checklist con RC-01–RC-07, historias priorizadas de reserva/orden/pago verificado/matrícula y RE-01–RE-10; distinguir lo confirmado de RA-01–RA-06, sin implementación. Dep.: RP001.
 - [ ] RP003 Ejecutar clarify y registrar respuestas RA-01–RA-06 en el futuro `spec.md`: reserva múltiple/atomicidad, prioridad, pago exacto/tardío, reembolsos, cancelación y abuso; conservar bloqueos si faltan respuestas. Dep.: RP002; D01/D03–D06.
 - [ ] RP004 Planificar contratos públicos, identidad de reserva/orden/matrícula y estados en futuros `plan.md`, `data-model.md` y `contracts/`; confirmar disponibilidad/consumo de capacidad y migración aditiva después de RP003, sin alterar cuentas o evidencia de 002. Dep.: RP003; RC-03/05/06, RE-01/02/09.
@@ -37,6 +38,6 @@ checkboxes y dependencias; este backlog no las mezcla ni renumera.
 
 ## Continuidad y seguimiento local
 
-- [ ] CT001 Incorporar el commit documental revisado de `docs/planificacion-reservas-capacidad` antes de continuar T039 y después T040/T041 en `feat/002-oferta-academica`; cerrar T035 solo con E2E completos y conservar las cinco aclaraciones/E1, sin marcar ocupación/disponibilidad en 002. Dep.: checkpoint T038 `eafae88` preservado y revisión de la enmienda vigente, sin fusión en este bloque.
+- [X] CT001 Incorporar el commit documental revisado de `docs/planificacion-reservas-capacidad` antes de continuar T039 y después T040/T041 en `feat/002-oferta-academica`; cerrar T035 solo con E2E completos y conservar las cinco aclaraciones/E1, sin marcar ocupación/disponibilidad en 002. Dep.: checkpoint T038 `eafae88` preservado y revisión de la enmienda vigente. Verificado: merge `b0af757` con dos padres y cierre T035/T039–T041 en el bloque posterior autorizado; [evidencia](../../specs/002-oferta-academica/evidence/t039-t041.md). La restricción de no fusionar correspondía únicamente a la etapa documental anterior.
 - [ ] CT002 Retomar T104 con diez participantes reales en versión integrada estable en `specs/001-identidad-acceso-roles/evidence/usability.md` y luego T108 en `specs/001-identidad-acceso-roles/evidence/acceptance.md`; registrar criterio ≥9/10 por flujo en <180 s activos, sin inventar personas/resultados. Conservar bootstrap abierto hasta evidencia de causa/corrección independiente. Dep.: tareas originales T104/T107/T108, sin sustituirlas por este backlog.
 - [ ] CT003 Ejecutar más adelante el perfil independiente `load-tests/identity/followup-local.js`, 10/25 VU ×2 min, solo tras autorización, guardas y observación; registrar resultados separados de los smokes/T103. Preparado pero no ejecutado aquí; no hay aceptación de 2500. Dep.: revisión de seguridad/recursos y autorización posterior.

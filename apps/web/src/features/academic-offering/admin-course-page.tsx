@@ -5,19 +5,26 @@ import { academicOfferingApi } from './api';
 import type { GroupFilters } from './api';
 import { CourseForm } from './course-form';
 import { GroupForm } from './group-form';
+import { PublicationAction } from './publication-action';
 import { LoadingState, OfferingLayout, stateLabels, useOfferingResource } from './offering-state';
 
 export function AdminCoursePage({ api, id, navigate }: { api: ApiClient; id: string; navigate: (path: string) => void }) {
   const client = useMemo(() => academicOfferingApi(api), [api]); const load = useCallback((signal: AbortSignal) => client.course(id, signal), [client, id]);
   const resource = useOfferingResource(load); const [creating, setCreating] = useState(false); const [formVersion, setFormVersion] = useState(0);
+  const [busy, setBusy] = useState(false); const [dirty, setDirty] = useState(false);
+  const [errors, setErrors] = useState<Readonly<Record<string, string>>>({});
   const [filter, setFilter] = useState<GroupFilters>({ page: 1, pageSize: 20 }); const [search, setSearch] = useState(''); const [state, setState] = useState('');
   const loadGroups = useCallback((signal: AbortSignal) => client.groups(id, filter, signal), [client, id, filter]); const groups = useOfferingResource(loadGroups);
   return <OfferingLayout title="Preparar curso"><LoadingState loading={resource.loading} error={resource.error} retry={resource.reload}/>
     {resource.data && <><p>{resource.data.name} · {stateLabels[resource.data.state]} · {resource.data.studentVisible ? 'Visible para alumnos' : 'No visible para alumnos'}</p>
       {creating ? <><h2>Crear grupo</h2><GroupForm client={client} courseId={id} onSaved={value => navigate(`/admin/oferta/grupos/${value.id}`)} onCancel={() => setCreating(false)} onDenied={resource.denied}/></>
-        : <><CourseForm key={formVersion} client={client} initial={resource.data} onSaved={resource.accept} onCancel={() => navigate('/admin/oferta')}
+        : <><CourseForm key={formVersion} client={client} initial={resource.data} busy={busy} onBusy={setBusy} onDirty={setDirty} externalErrors={errors}
+          onSaved={value => { resource.accept(value); setErrors({}); }} onCancel={() => navigate('/admin/oferta')}
           onDenied={resource.denied} onReplace={value => { resource.accept(value); setFormVersion(value => value + 1); }}/>
-          <section aria-label="Grupos del curso"><h2>Grupos</h2><button type="button" onClick={() => setCreating(true)}>Crear grupo</button>
+          <PublicationAction value={resource.data} dirty={dirty} busy={busy} onBusy={setBusy} onInvalid={setErrors}
+            prepare={() => client.prepareCoursePublication(id, resource.data!.revision)} onSaved={resource.accept} onDenied={resource.denied}
+            load={() => client.course(id)} onReplace={value => { resource.accept(value); setFormVersion(version => version + 1); setErrors({}); }}/>
+          <section aria-label="Grupos del curso"><h2>Grupos</h2><button type="button" disabled={busy} onClick={() => setCreating(true)}>Crear grupo</button>
             <form aria-label="Buscar grupos" onSubmit={event => { event.preventDefault(); setFilter({ page: 1, pageSize: 20, q: search.trim(), ...(state ? { state: state as GroupFilters['state'] } : {}) }); }}>
               <FormField id="group-search" label="Buscar grupo por nombre" value={search} onChange={event => setSearch(event.target.value)}/>
               <label htmlFor="group-state">Estado del grupo</label><select id="group-state" value={state} onChange={event => setState(event.target.value)}><option value="">Todos</option>

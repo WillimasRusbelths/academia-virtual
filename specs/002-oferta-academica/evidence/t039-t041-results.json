@@ -1,0 +1,2253 @@
+{
+  "date": "2026-10-23",
+  "branch": "feat/002-oferta-academica",
+  "base": "b0af757",
+  "merge": {
+    "commit": "b0af757",
+    "parents": [
+      "eafae88",
+      "061b183"
+    ],
+    "conflicts": 0,
+    "bothHistoriesRetained": true
+  },
+  "constitution": "1.2.0",
+  "scope": [
+    "T039",
+    "T040",
+    "T041"
+  ],
+  "closed": [
+    "T035",
+    "T039",
+    "T040",
+    "T041",
+    "CT001"
+  ],
+  "next": "T042",
+  "commands": [
+    {
+      "action": "unit",
+      "exitCode": 0,
+      "date": "2026-10-23T23:44:07.887Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-23T23:44:23.609Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-23T23:44:36.797Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "build",
+      "exitCode": 0,
+      "date": "2026-10-23T23:44:51.708Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser",
+      "exitCode": 0,
+      "date": "2026-10-23T23:43:33.623Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser-us1",
+      "exitCode": 0,
+      "date": "2026-10-23T23:51:45.534Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "identity",
+      "exitCode": 0,
+      "date": "2026-10-23T23:53:26.944Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "suites": {
+    "unit": {
+      "total": 156,
+      "passed": 156,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "catálogo pagina/busca por transporte común sin filtros administrativos",
+          "status": "passed"
+        },
+        {
+          "name": "detalle público conserva solo docente por nombre y capacidad sin disponibilidad",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyección pública ampliada o inválida 0",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyección pública ampliada o inválida 1",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyección pública ampliada o inválida 2",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyección pública ampliada o inválida 3",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyección pública ampliada o inválida 4",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyección pública ampliada o inválida 5",
+          "status": "passed"
+        },
+        {
+          "name": "publicación course requiere envío explícito y repite exactamente la intención",
+          "status": "passed"
+        },
+        {
+          "name": "publicación group requiere envío explícito y repite exactamente la intención",
+          "status": "passed"
+        },
+        {
+          "name": "sesión perdida cancela la otra respuesta tardía del detalle sin mostrar datos ni repetir comandos",
+          "status": "passed"
+        },
+        {
+          "name": "conflictos de publicación son administrativos; catálogo no expone referencias privadas",
+          "status": "passed"
+        },
+        {
+          "name": "W01 courses codifica solo filtros de su ruta",
+          "status": "passed"
+        },
+        {
+          "name": "W01 groups codifica solo filtros de su ruta",
+          "status": "passed"
+        },
+        {
+          "name": "W01 teachers codifica solo filtros de su ruta",
+          "status": "passed"
+        },
+        {
+          "name": "W02 acepta curso/grupo incompletos y revisión decimal exacta, sin disponibilidad",
+          "status": "passed"
+        },
+        {
+          "name": "W03 rechaza curso inesperado 0",
+          "status": "passed"
+        },
+        {
+          "name": "W03 rechaza curso inesperado 1",
+          "status": "passed"
+        },
+        {
+          "name": "W03 rechaza curso inesperado 2",
+          "status": "passed"
+        },
+        {
+          "name": "W03 rechaza curso inesperado 3",
+          "status": "passed"
+        },
+        {
+          "name": "W03 rechaza curso inesperado 4",
+          "status": "passed"
+        },
+        {
+          "name": "W03 rechaza curso inesperado 5",
+          "status": "passed"
+        },
+        {
+          "name": "W03 rechaza curso inesperado 6",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 0",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 1",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 2",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 3",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 4",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 5",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 6",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 7",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 8",
+          "status": "passed"
+        },
+        {
+          "name": "W04 rechaza grupo inesperado 9",
+          "status": "passed"
+        },
+        {
+          "name": "W05 página/selector cerrado 0",
+          "status": "passed"
+        },
+        {
+          "name": "W05 página/selector cerrado 1",
+          "status": "passed"
+        },
+        {
+          "name": "W05 página/selector cerrado 2",
+          "status": "passed"
+        },
+        {
+          "name": "W05 página/selector cerrado 3",
+          "status": "passed"
+        },
+        {
+          "name": "W05 página/selector cerrado 4",
+          "status": "passed"
+        },
+        {
+          "name": "W06 una intención, dos envíos manuales idénticos y datos editados con ID nuevo",
+          "status": "passed"
+        },
+        {
+          "name": "W07 cinco comandos usan método/ruta/revisión previstos; horario se copia",
+          "status": "passed"
+        },
+        {
+          "name": "W08 AUTH_REQUIRED no encola ni reenvía al iniciar sesión; reintento explícito conserva ID",
+          "status": "passed"
+        },
+        {
+          "name": "W10 nueva revisión exige nueva intención; PATCH vacío/atributos ajenos no salen al transporte",
+          "status": "passed"
+        },
+        {
+          "name": "W11 respuesta perdida permite solo reintento manual con ID, revisión y payload idénticos",
+          "status": "passed"
+        },
+        {
+          "name": "W09 rechaza resultado de comando incompatible: id",
+          "status": "passed"
+        },
+        {
+          "name": "W09 rechaza resultado de comando incompatible: resource",
+          "status": "passed"
+        },
+        {
+          "name": "W09 rechaza resultado de comando incompatible: revision",
+          "status": "passed"
+        },
+        {
+          "name": "W09 rechaza resultado de comando incompatible: unknown",
+          "status": "passed"
+        },
+        {
+          "name": "hidrata sesión en acceso directo /admin/oferta",
+          "status": "passed"
+        },
+        {
+          "name": "hidrata sesión en acceso directo /admin/oferta/cursos/00000000-0000-4000-8000-000000000001",
+          "status": "passed"
+        },
+        {
+          "name": "hidrata sesión en acceso directo /admin/oferta/grupos/00000000-0000-4000-8000-000000000001",
+          "status": "passed"
+        },
+        {
+          "name": "hidrata sesión en acceso directo /oferta",
+          "status": "passed"
+        },
+        {
+          "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001",
+          "status": "passed"
+        },
+        {
+          "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001/grupos/00000000-0000-4000-8000-000000000001",
+          "status": "passed"
+        },
+        {
+          "name": "políticas de audiencia STUDENT",
+          "status": "passed"
+        },
+        {
+          "name": "políticas de audiencia TEACHER",
+          "status": "passed"
+        },
+        {
+          "name": "políticas de audiencia ADMIN",
+          "status": "passed"
+        },
+        {
+          "name": "rutas no aceptan subrutas ni referencias externas",
+          "status": "passed"
+        },
+        {
+          "name": "inicio conserva perfil/cierre y enlace administrativo solo para STUDENT",
+          "status": "passed"
+        },
+        {
+          "name": "inicio conserva perfil/cierre y enlace administrativo solo para TEACHER",
+          "status": "passed"
+        },
+        {
+          "name": "inicio conserva perfil/cierre y enlace administrativo solo para ADMIN",
+          "status": "passed"
+        },
+        {
+          "name": "JSON relativo, CSRF fijo y cookie gestionada por navegador sin leer secretos",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza URL no permitida https://remote.invalid/auth/login sin contactar transporte",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza URL no permitida //remote.invalid sin contactar transporte",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza URL no permitida /../me sin contactar transporte",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza URL no permitida /me?token=secret sin contactar transporte",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza URL no permitida /me#secret sin contactar transporte",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza URL no permitida /me%2Fsecret sin contactar transporte",
+          "status": "passed"
+        },
+        {
+          "name": "GET sin cuerpo, 204 sin JSON y 202 no se interpreta como correo entregado",
+          "status": "passed"
+        },
+        {
+          "name": "429 muestra solo espera válida; Retry-After 60, sin replay",
+          "status": "passed"
+        },
+        {
+          "name": "429 muestra solo espera válida; Retry-After 0, sin replay",
+          "status": "passed"
+        },
+        {
+          "name": "429 muestra solo espera válida; Retry-After invalid, sin replay",
+          "status": "passed"
+        },
+        {
+          "name": "429 muestra solo espera válida; Retry-After 999999999999999999999999, sin replay",
+          "status": "passed"
+        },
+        {
+          "name": "fallo network es seguro, exige reintento manual y no afirma éxito",
+          "status": "passed"
+        },
+        {
+          "name": "fallo 503 es seguro, exige reintento manual y no afirma éxito",
+          "status": "passed"
+        },
+        {
+          "name": "fallo malformed es seguro, exige reintento manual y no afirma éxito",
+          "status": "passed"
+        },
+        {
+          "name": "fallo unknown-code es seguro, exige reintento manual y no afirma éxito",
+          "status": "passed"
+        },
+        {
+          "name": "401 de credenciales se distingue de expiración y no invalida otra sesión",
+          "status": "passed"
+        },
+        {
+          "name": "401 AUTH_REQUIRED limpia datos y cancela respuestas tardías, sin repetir mutación",
+          "status": "passed"
+        },
+        {
+          "name": "cancelación explícita no se convierte en éxito ni provoca replay",
+          "status": "passed"
+        },
+        {
+          "name": "errores de campo descartan valores y mensajes remotos, conservan nombres aprobados",
+          "status": "passed"
+        },
+        {
+          "name": "campos con etiqueta/error asociados y mensajes escapados; reintento solo manual",
+          "status": "passed"
+        },
+        {
+          "name": "router usa historial sin datos sensibles, reemplaza al expirar y rechaza destinos externos",
+          "status": "passed"
+        },
+        {
+          "name": "filtros administrativos se codifican en GET; no se aceptan secretos ni consultas arbitrarias",
+          "status": "passed"
+        },
+        {
+          "name": "T027 query permitida por ruta /admin/academic/courses",
+          "status": "passed"
+        },
+        {
+          "name": "T027 query permitida por ruta /admin/academic/courses/00000000-0000-4000-8000-000000000001/groups",
+          "status": "passed"
+        },
+        {
+          "name": "T027 query permitida por ruta /admin/academic/teachers",
+          "status": "passed"
+        },
+        {
+          "name": "T027 no amplía queries arbitrarias /admin/academic/courses/{\"token\":\"secreto\"}",
+          "status": "passed"
+        },
+        {
+          "name": "T027 no amplía queries arbitrarias /admin/academic/teachers/{\"state\":\"DRAFT\"}",
+          "status": "passed"
+        },
+        {
+          "name": "T027 no amplía queries arbitrarias /admin/academic/groups/00000000-0000-4000-8000-000000000001/{\"q\":\"no\"}",
+          "status": "passed"
+        },
+        {
+          "name": "T027 no amplía queries arbitrarias /academic/courses/{\"state\":\"DRAFT\"}",
+          "status": "passed"
+        },
+        {
+          "name": "T027 reconoce conflicto académico OFFERING_VERSION_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+          "status": "passed"
+        },
+        {
+          "name": "T027 reconoce conflicto académico OFFERING_STATE_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+          "status": "passed"
+        },
+        {
+          "name": "T027 reconoce conflicto académico TEACHER_NOT_ELIGIBLE solo en ruta administrativa, sin texto remoto ni retry",
+          "status": "passed"
+        },
+        {
+          "name": "T027 reconoce conflicto académico IDEMPOTENCY_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+          "status": "passed"
+        },
+        {
+          "name": "T027 referencias de conflicto solo códigos y UUID administrativos permitidos",
+          "status": "passed"
+        },
+        {
+          "name": "T027 rechaza código de identidad 400/INVALID_ACTION_LINK ajeno al contrato académico",
+          "status": "passed"
+        },
+        {
+          "name": "T027 rechaza código de identidad 401/INVALID_CREDENTIALS ajeno al contrato académico",
+          "status": "passed"
+        },
+        {
+          "name": "router reconoce detalle sin aceptar subrutas ni valores externos",
+          "status": "passed"
+        },
+        {
+          "name": "React renderiza el componente mínimo en español",
+          "status": "passed"
+        },
+        {
+          "name": "acepta únicamente una identidad habilitada y la proyección permitida",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza respuesta inválida: multirol",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza respuesta inválida: coerción",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza respuesta inválida: secreto",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza respuesta inválida: estado",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza respuesta inválida: verificación",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza respuesta inválida: provisional",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza respuesta inválida: fecha",
+          "status": "passed"
+        },
+        {
+          "name": "consulta filtros sin interpolar correo en paths y acepta cuentas sin sesión habilitada",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyecciones y metadatos no contractuales",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyecciones y metadatos no contractuales",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyecciones y metadatos no contractuales",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyecciones y metadatos no contractuales",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyecciones y metadatos no contractuales",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza proyecciones y metadatos no contractuales",
+          "status": "passed"
+        },
+        {
+          "name": "comandos envían solo campos permitidos y nunca reintentan un fallo",
+          "status": "passed"
+        },
+        {
+          "name": "feature usa exclusivamente la capacidad ApiClient y propaga cancelación",
+          "status": "passed"
+        },
+        {
+          "name": "crear intención no escribe; payload permitido se copia antes del envío",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza revisión no contractual 0 antes de escribir",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza revisión no contractual 01 antes de escribir",
+          "status": "passed"
+        },
+        {
+          "name": "rechaza revisión no contractual 9223372036854775808 antes de escribir",
+          "status": "passed"
+        },
+        {
+          "name": "error de autorización se propaga sin recrear ni reenviar la intención",
+          "status": "passed"
+        },
+        {
+          "name": "nombre vacío \"\"",
+          "status": "passed"
+        },
+        {
+          "name": "nombre vacío \" \"",
+          "status": "passed"
+        },
+        {
+          "name": "nombre vacío \"\\t\\n\"",
+          "status": "passed"
+        },
+        {
+          "name": "nombre sin límite de negocio inventado 0",
+          "status": "passed"
+        },
+        {
+          "name": "nombre sin límite de negocio inventado 1",
+          "status": "passed"
+        },
+        {
+          "name": "nombre sin límite de negocio inventado 2",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad válida 1",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad válida 50",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad válida 25",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \"\"",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \" \"",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \"0\"",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \"-1\"",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \"1.5\"",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \"51\"",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \"NaN\"",
+          "status": "passed"
+        },
+        {
+          "name": "capacidad inválida \"Infinity\"",
+          "status": "passed"
+        },
+        {
+          "name": "preparación incompleta admite cero franjas y fechas omitidas",
+          "status": "passed"
+        },
+        {
+          "name": "extremos incluidos y franjas contiguas",
+          "status": "passed"
+        },
+        {
+          "name": "fecha civil inválida 2026-02-30",
+          "status": "passed"
+        },
+        {
+          "name": "fecha civil inválida 2025-02-29",
+          "status": "passed"
+        },
+        {
+          "name": "fecha civil inválida 0000-01-01",
+          "status": "passed"
+        },
+        {
+          "name": "fecha civil inválida 19/10/2026",
+          "status": "passed"
+        },
+        {
+          "name": "periodo invertido",
+          "status": "passed"
+        },
+        {
+          "name": "día sin ocurrencia y periodo de un lunes con ocurrencia",
+          "status": "passed"
+        },
+        {
+          "name": "horario inválido duplicado",
+          "status": "passed"
+        },
+        {
+          "name": "horario inválido solapamiento",
+          "status": "passed"
+        },
+        {
+          "name": "horario inválido medianoche",
+          "status": "passed"
+        },
+        {
+          "name": "horario inválido horas iguales",
+          "status": "passed"
+        },
+        {
+          "name": "horario inválido 24:00",
+          "status": "passed"
+        },
+        {
+          "name": "horario inválido día inválido",
+          "status": "passed"
+        },
+        {
+          "name": "captura un secreto conforme al contrato una sola vez y retira fragmento, query e historial",
+          "status": "passed"
+        },
+        {
+          "name": "fragmento inválido ausente se retira sin conservarlo",
+          "status": "passed"
+        },
+        {
+          "name": "fragmento inválido con prefijo obsoleto se retira sin conservarlo",
+          "status": "passed"
+        },
+        {
+          "name": "fragmento inválido mal formado se retira sin conservarlo",
+          "status": "passed"
+        }
+      ]
+    },
+    "catalog": {
+      "stats": {
+        "startTime": "2026-10-23T23:40:04.390Z",
+        "duration": 209188.796,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "executions": 32,
+      "uniqueCases": 16,
+      "cases": [
+        {
+          "name": "B01 US2.1 grupo incompleto informa campos y no publica parcialmente",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B02 US2.2 confirmación/cancelación y publicación real de curso y dos grupos, sin publicación implícita",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B03 US2.3/4 compara dos grupos, datos completos, capacidad máxima y privacidad, solo teclado",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B04 US2.5 vacío publicado distinto de error y sin acciones de compra",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B05 US2.5 fallo SQL real y reintento manual; nunca vacío ficticio",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US2.6 retirada de grupo: enlace previo no disponible, sin causa privada",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US2.6 retirada de curso: enlace previo no disponible, sin causa privada",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B07 VISITOR: catálogo directo exige audiencia autorizada",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B07 TEACHER: catálogo directo exige audiencia autorizada",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 administrador consulta misma oferta pública, sin incidencias privadas",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B01 US2.1 grupo incompleto informa campos y no publica parcialmente",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B02 US2.2 confirmación/cancelación y publicación real de curso y dos grupos, sin publicación implícita",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B03 US2.3/4 compara dos grupos, datos completos, capacidad máxima y privacidad, solo teclado",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B04 US2.5 vacío publicado distinto de error y sin acciones de compra",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B05 US2.5 fallo SQL real y reintento manual; nunca vacío ficticio",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US2.6 retirada de grupo: enlace previo no disponible, sin causa privada",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US2.6 retirada de curso: enlace previo no disponible, sin causa privada",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B07 VISITOR: catálogo directo exige audiencia autorizada",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B07 TEACHER: catálogo directo exige audiencia autorizada",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 administrador consulta misma oferta pública, sin incidencias privadas",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "harness inicia API real, web loopback y sesión ficticia con teclado",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "harness inicia API real, web loopback y sesión ficticia con teclado",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P01 edición sin guardar bloquea publicación; Escape cancela y devuelve foco sin escribir",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P02 revisión concurrente rechaza publicación; comparar no reemplaza hasta decisión explícita",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P03 respuesta perdida después de commit: confirmación manual repite commandId y no duplica auditoría",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P04 curso bloqueado por revisión docente muestra referencias académicas administrativas seguras",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P05 comparación paginada consulta segunda página real sin enumerar grupos ocultos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P01 edición sin guardar bloquea publicación; Escape cancela y devuelve foco sin escribir",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P02 revisión concurrente rechaza publicación; comparar no reemplaza hasta decisión explícita",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P03 respuesta perdida después de commit: confirmación manual repite commandId y no duplica auditoría",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P04 curso bloqueado por revisión docente muestra referencias académicas administrativas seguras",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "P05 comparación paginada consulta segunda página real sin enumerar grupos ocultos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        }
+      ]
+    },
+    "preparation": {
+      "stats": {
+        "startTime": "2026-10-23T23:45:23.305Z",
+        "duration": 382186.90099999995,
+        "expected": 60,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "executions": 60,
+      "uniqueCases": 30,
+      "cases": [
+        {
+          "name": "B01 US1.1 listado vacío con acción para crear, navegación y teclado",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B02 US1.2 crea curso y dos grupos independientes, horarios/capacidad distintos y recarga",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B03 US1.3 nombre inválido conserva entradas, error asociado y cero guardado parcial",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B04 US1.4 cancelar alta vuelve al listado sin petición de escritura",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B05 US1.4 cancelar edición conserva datos y puede recorrerse solo con teclado",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"\" conserva entrada y datos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"0\" conserva entrada y datos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"-1\" conserva entrada y datos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"1.5\" conserva entrada y datos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"51\" conserva entrada y datos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B07 US1.6 franjas contiguas, fechas inclusivas y America/Lima persisten tras recarga",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 US1.6 horas inválidas 18:00–18:00, sin persistencia parcial",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 US1.6 horas inválidas 19:00–18:00, sin persistencia parcial",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 US1.6 horas inválidas 23:00–01:00, sin persistencia parcial",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B09 listado fallido por permiso SQL real muestra error/reintento, nunca vacío ficticio",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 duplicado: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 solapamiento: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 periodo invertido: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 sin ocurrencia: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B01 US1.1 listado vacío con acción para crear, navegación y teclado",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B02 US1.2 crea curso y dos grupos independientes, horarios/capacidad distintos y recarga",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B03 US1.3 nombre inválido conserva entradas, error asociado y cero guardado parcial",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B04 US1.4 cancelar alta vuelve al listado sin petición de escritura",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B05 US1.4 cancelar edición conserva datos y puede recorrerse solo con teclado",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"\" conserva entrada y datos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"0\" conserva entrada y datos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"-1\" conserva entrada y datos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"1.5\" conserva entrada y datos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B06 US1.5 capacidad inválida \"51\" conserva entrada y datos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B07 US1.6 franjas contiguas, fechas inclusivas y America/Lima persisten tras recarga",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 US1.6 horas inválidas 18:00–18:00, sin persistencia parcial",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 US1.6 horas inválidas 19:00–18:00, sin persistencia parcial",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B08 US1.6 horas inválidas 23:00–01:00, sin persistencia parcial",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B09 listado fallido por permiso SQL real muestra error/reintento, nunca vacío ficticio",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 duplicado: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 solapamiento: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 periodo invertido: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "B10 US1.6 sin ocurrencia: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U01 acceso directo denegado a VISITOR, sin consultar datos académicos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U01 acceso directo denegado a STUDENT, sin consultar datos académicos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U01 acceso directo denegado a TEACHER, sin consultar datos académicos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U02 inicio conserva perfil, cuentas y cierre al navegar por teclado hacia oferta",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U03 sesión revocada elimina borrador privado; login real no reenvía el guardado",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U04 fallo real de auditoría, rollback y reintento manual idéntico sin duplicar",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U05 conflicto conserva entradas y permite comparar sin adoptar otra revisión automáticamente",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U06 selector mínimo permite asignar un docente real y conservarlo tras recarga",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U07 docente pierde habilitación antes de guardar: rechazo real por campo y cero efectos académicos",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U08 Enter al buscar docente consulta candidatos sin guardar ni consumir comando",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U09 publicado bajo curso retirado y cancelado permanecen de solo lectura",
+          "project": "desktop",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U01 acceso directo denegado a VISITOR, sin consultar datos académicos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U01 acceso directo denegado a STUDENT, sin consultar datos académicos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U01 acceso directo denegado a TEACHER, sin consultar datos académicos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U02 inicio conserva perfil, cuentas y cierre al navegar por teclado hacia oferta",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U03 sesión revocada elimina borrador privado; login real no reenvía el guardado",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U04 fallo real de auditoría, rollback y reintento manual idéntico sin duplicar",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U05 conflicto conserva entradas y permite comparar sin adoptar otra revisión automáticamente",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U06 selector mínimo permite asignar un docente real y conservarlo tras recarga",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U07 docente pierde habilitación antes de guardar: rechazo real por campo y cero efectos académicos",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U08 Enter al buscar docente consulta candidatos sin guardar ni consumir comando",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "U09 publicado bajo curso retirado y cancelado permanecen de solo lectura",
+          "project": "mobile",
+          "expectedStatus": "passed",
+          "status": "passed"
+        }
+      ]
+    },
+    "identity": {
+      "stats": {
+        "startTime": "2026-10-23T23:52:16.068Z",
+        "duration": 36577.614,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "executions": 21,
+      "uniqueCases": 21,
+      "cases": [
+        {
+          "name": "cuenta DISABLED no concede sesión ni muestra identidad",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "cuenta UNVERIFIED no concede sesión ni muestra identidad",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "cuenta PROVISIONAL no concede sesión ni muestra identidad",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "correo inexistente mantiene error genérico y no crea cookie",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "cuota 429 en UI, sin replay; acceso manual después de los quince minutos",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "fallo SQL de login produce 503 seguro; no afirma éxito ni reintenta; recuperación manual",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "logout fallido conserva el aviso y solo cierra al reintentar explícitamente",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "hidratación 503 oculta identidad y recupera /me solo por acción manual",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "control: aplicación real, proxy y sesión válida en PostgreSQL",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "login/inicio/logout/atrás STUDENT en 360",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "login/inicio/logout/atrás TEACHER en 360",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "login/inicio/logout/atrás ADMIN en 360",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "credenciales incorrectas y recarga sin contraseña en 360",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "V04-A: inactividad, /me limpia UI y vuelve a login sin replay en 360",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "V04-A: absoluta, /me limpia UI y vuelve a login sin replay en 360",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "login/inicio/logout/atrás STUDENT en 1366",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "login/inicio/logout/atrás TEACHER en 1366",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "login/inicio/logout/atrás ADMIN en 1366",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "credenciales incorrectas y recarga sin contraseña en 1366",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "V04-A: inactividad, /me limpia UI y vuelve a login sin replay en 1366",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "V04-A: absoluta, /me limpia UI y vuelve a login sin replay en 1366",
+          "project": "",
+          "expectedStatus": "passed",
+          "status": "passed"
+        }
+      ]
+    },
+    "profile": {
+      "stats": {
+        "startTime": "2026-10-23T23:52:54.850Z",
+        "duration": 32037.833000000002,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "executions": 8,
+      "uniqueCases": 4,
+      "cases": [
+        {
+          "name": "perfil con sesión vencida: recarga vuelve a acceso sin datos privados",
+          "project": "movil",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "perfil con sesión revocada: recarga vuelve a acceso sin datos privados",
+          "project": "movil",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "perfil con fallo SQL: sin datos ni reintentos automáticos; recuperación explícita",
+          "project": "movil",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "perfil: nombre de 100 caracteres, lectura semántica y cierre por teclado",
+          "project": "movil",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "perfil con sesión vencida: recarga vuelve a acceso sin datos privados",
+          "project": "escritorio",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "perfil con sesión revocada: recarga vuelve a acceso sin datos privados",
+          "project": "escritorio",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "perfil con fallo SQL: sin datos ni reintentos automáticos; recuperación explícita",
+          "project": "escritorio",
+          "expectedStatus": "passed",
+          "status": "passed"
+        },
+        {
+          "name": "perfil: nombre de 100 caracteres, lectura semántica y cierre por teclado",
+          "project": "escritorio",
+          "expectedStatus": "passed",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "originalT035": {
+    "functionalUniqueCases": 10,
+    "executions": 20,
+    "passed": 20,
+    "originalSourceUnchanged": true
+  },
+  "newP01P05": {
+    "functionalUniqueCases": 5,
+    "executions": 10,
+    "passed": 10
+  },
+  "auxiliaryHarness": {
+    "uniqueControls": 1,
+    "executions": 2,
+    "passed": 2,
+    "academicBehaviorAttributed": false
+  },
+  "red": {
+    "total": 155,
+    "passed": 139,
+    "failed": 16,
+    "skipped": 0,
+    "cases": [
+      {
+        "name": "W01 courses codifica solo filtros de su ruta",
+        "status": "passed"
+      },
+      {
+        "name": "W01 groups codifica solo filtros de su ruta",
+        "status": "passed"
+      },
+      {
+        "name": "W01 teachers codifica solo filtros de su ruta",
+        "status": "passed"
+      },
+      {
+        "name": "W02 acepta curso/grupo incompletos y revisión decimal exacta, sin disponibilidad",
+        "status": "passed"
+      },
+      {
+        "name": "W03 rechaza curso inesperado 0",
+        "status": "passed"
+      },
+      {
+        "name": "W03 rechaza curso inesperado 1",
+        "status": "passed"
+      },
+      {
+        "name": "W03 rechaza curso inesperado 2",
+        "status": "passed"
+      },
+      {
+        "name": "W03 rechaza curso inesperado 3",
+        "status": "passed"
+      },
+      {
+        "name": "W03 rechaza curso inesperado 4",
+        "status": "passed"
+      },
+      {
+        "name": "W03 rechaza curso inesperado 5",
+        "status": "passed"
+      },
+      {
+        "name": "W03 rechaza curso inesperado 6",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 0",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 1",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 2",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 3",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 4",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 5",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 6",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 7",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 8",
+        "status": "passed"
+      },
+      {
+        "name": "W04 rechaza grupo inesperado 9",
+        "status": "passed"
+      },
+      {
+        "name": "W05 página/selector cerrado 0",
+        "status": "passed"
+      },
+      {
+        "name": "W05 página/selector cerrado 1",
+        "status": "passed"
+      },
+      {
+        "name": "W05 página/selector cerrado 2",
+        "status": "passed"
+      },
+      {
+        "name": "W05 página/selector cerrado 3",
+        "status": "passed"
+      },
+      {
+        "name": "W05 página/selector cerrado 4",
+        "status": "passed"
+      },
+      {
+        "name": "W06 una intención, dos envíos manuales idénticos y datos editados con ID nuevo",
+        "status": "passed"
+      },
+      {
+        "name": "W07 cinco comandos usan método/ruta/revisión previstos; horario se copia",
+        "status": "passed"
+      },
+      {
+        "name": "W08 AUTH_REQUIRED no encola ni reenvía al iniciar sesión; reintento explícito conserva ID",
+        "status": "passed"
+      },
+      {
+        "name": "W10 nueva revisión exige nueva intención; PATCH vacío/atributos ajenos no salen al transporte",
+        "status": "passed"
+      },
+      {
+        "name": "W11 respuesta perdida permite solo reintento manual con ID, revisión y payload idénticos",
+        "status": "passed"
+      },
+      {
+        "name": "W09 rechaza resultado de comando incompatible: id",
+        "status": "passed"
+      },
+      {
+        "name": "W09 rechaza resultado de comando incompatible: resource",
+        "status": "passed"
+      },
+      {
+        "name": "W09 rechaza resultado de comando incompatible: revision",
+        "status": "passed"
+      },
+      {
+        "name": "W09 rechaza resultado de comando incompatible: unknown",
+        "status": "passed"
+      },
+      {
+        "name": "hidrata sesión en acceso directo /admin/oferta",
+        "status": "passed"
+      },
+      {
+        "name": "hidrata sesión en acceso directo /admin/oferta/cursos/00000000-0000-4000-8000-000000000001",
+        "status": "passed"
+      },
+      {
+        "name": "hidrata sesión en acceso directo /admin/oferta/grupos/00000000-0000-4000-8000-000000000001",
+        "status": "passed"
+      },
+      {
+        "name": "hidrata sesión en acceso directo /oferta",
+        "status": "failed"
+      },
+      {
+        "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001",
+        "status": "failed"
+      },
+      {
+        "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001/grupos/00000000-0000-4000-8000-000000000001",
+        "status": "failed"
+      },
+      {
+        "name": "políticas de audiencia STUDENT",
+        "status": "passed"
+      },
+      {
+        "name": "políticas de audiencia TEACHER",
+        "status": "passed"
+      },
+      {
+        "name": "políticas de audiencia ADMIN",
+        "status": "passed"
+      },
+      {
+        "name": "rutas no aceptan subrutas ni referencias externas",
+        "status": "passed"
+      },
+      {
+        "name": "inicio conserva perfil/cierre y enlace administrativo solo para STUDENT",
+        "status": "failed"
+      },
+      {
+        "name": "inicio conserva perfil/cierre y enlace administrativo solo para TEACHER",
+        "status": "passed"
+      },
+      {
+        "name": "inicio conserva perfil/cierre y enlace administrativo solo para ADMIN",
+        "status": "failed"
+      },
+      {
+        "name": "JSON relativo, CSRF fijo y cookie gestionada por navegador sin leer secretos",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza URL no permitida https://remote.invalid/auth/login sin contactar transporte",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza URL no permitida //remote.invalid sin contactar transporte",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza URL no permitida /../me sin contactar transporte",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza URL no permitida /me?token=secret sin contactar transporte",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza URL no permitida /me#secret sin contactar transporte",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza URL no permitida /me%2Fsecret sin contactar transporte",
+        "status": "passed"
+      },
+      {
+        "name": "GET sin cuerpo, 204 sin JSON y 202 no se interpreta como correo entregado",
+        "status": "passed"
+      },
+      {
+        "name": "429 muestra solo espera válida; Retry-After 60, sin replay",
+        "status": "passed"
+      },
+      {
+        "name": "429 muestra solo espera válida; Retry-After 0, sin replay",
+        "status": "passed"
+      },
+      {
+        "name": "429 muestra solo espera válida; Retry-After invalid, sin replay",
+        "status": "passed"
+      },
+      {
+        "name": "429 muestra solo espera válida; Retry-After 999999999999999999999999, sin replay",
+        "status": "passed"
+      },
+      {
+        "name": "fallo network es seguro, exige reintento manual y no afirma éxito",
+        "status": "passed"
+      },
+      {
+        "name": "fallo 503 es seguro, exige reintento manual y no afirma éxito",
+        "status": "passed"
+      },
+      {
+        "name": "fallo malformed es seguro, exige reintento manual y no afirma éxito",
+        "status": "passed"
+      },
+      {
+        "name": "fallo unknown-code es seguro, exige reintento manual y no afirma éxito",
+        "status": "passed"
+      },
+      {
+        "name": "401 de credenciales se distingue de expiración y no invalida otra sesión",
+        "status": "passed"
+      },
+      {
+        "name": "401 AUTH_REQUIRED limpia datos y cancela respuestas tardías, sin repetir mutación",
+        "status": "passed"
+      },
+      {
+        "name": "cancelación explícita no se convierte en éxito ni provoca replay",
+        "status": "passed"
+      },
+      {
+        "name": "errores de campo descartan valores y mensajes remotos, conservan nombres aprobados",
+        "status": "passed"
+      },
+      {
+        "name": "campos con etiqueta/error asociados y mensajes escapados; reintento solo manual",
+        "status": "passed"
+      },
+      {
+        "name": "router usa historial sin datos sensibles, reemplaza al expirar y rechaza destinos externos",
+        "status": "passed"
+      },
+      {
+        "name": "filtros administrativos se codifican en GET; no se aceptan secretos ni consultas arbitrarias",
+        "status": "passed"
+      },
+      {
+        "name": "T027 query permitida por ruta /admin/academic/courses",
+        "status": "passed"
+      },
+      {
+        "name": "T027 query permitida por ruta /admin/academic/courses/00000000-0000-4000-8000-000000000001/groups",
+        "status": "passed"
+      },
+      {
+        "name": "T027 query permitida por ruta /admin/academic/teachers",
+        "status": "passed"
+      },
+      {
+        "name": "T027 no amplía queries arbitrarias /admin/academic/courses/{\"token\":\"secreto\"}",
+        "status": "passed"
+      },
+      {
+        "name": "T027 no amplía queries arbitrarias /admin/academic/teachers/{\"state\":\"DRAFT\"}",
+        "status": "passed"
+      },
+      {
+        "name": "T027 no amplía queries arbitrarias /admin/academic/groups/00000000-0000-4000-8000-000000000001/{\"q\":\"no\"}",
+        "status": "passed"
+      },
+      {
+        "name": "T027 no amplía queries arbitrarias /academic/courses/{\"q\":\"todavía fuera del bloque\"}",
+        "status": "passed"
+      },
+      {
+        "name": "T027 reconoce conflicto académico OFFERING_VERSION_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+        "status": "passed"
+      },
+      {
+        "name": "T027 reconoce conflicto académico OFFERING_STATE_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+        "status": "passed"
+      },
+      {
+        "name": "T027 reconoce conflicto académico TEACHER_NOT_ELIGIBLE solo en ruta administrativa, sin texto remoto ni retry",
+        "status": "passed"
+      },
+      {
+        "name": "T027 reconoce conflicto académico IDEMPOTENCY_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+        "status": "passed"
+      },
+      {
+        "name": "T027 referencias de conflicto solo códigos y UUID administrativos permitidos",
+        "status": "passed"
+      },
+      {
+        "name": "T027 rechaza código de identidad 400/INVALID_ACTION_LINK ajeno al contrato académico",
+        "status": "passed"
+      },
+      {
+        "name": "T027 rechaza código de identidad 401/INVALID_CREDENTIALS ajeno al contrato académico",
+        "status": "passed"
+      },
+      {
+        "name": "router reconoce detalle sin aceptar subrutas ni valores externos",
+        "status": "passed"
+      },
+      {
+        "name": "React renderiza el componente mínimo en español",
+        "status": "passed"
+      },
+      {
+        "name": "acepta únicamente una identidad habilitada y la proyección permitida",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza respuesta inválida: multirol",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza respuesta inválida: coerción",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza respuesta inválida: secreto",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza respuesta inválida: estado",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza respuesta inválida: verificación",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza respuesta inválida: provisional",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza respuesta inválida: fecha",
+        "status": "passed"
+      },
+      {
+        "name": "consulta filtros sin interpolar correo en paths y acepta cuentas sin sesión habilitada",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza proyecciones y metadatos no contractuales",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza proyecciones y metadatos no contractuales",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza proyecciones y metadatos no contractuales",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza proyecciones y metadatos no contractuales",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza proyecciones y metadatos no contractuales",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza proyecciones y metadatos no contractuales",
+        "status": "passed"
+      },
+      {
+        "name": "comandos envían solo campos permitidos y nunca reintentan un fallo",
+        "status": "passed"
+      },
+      {
+        "name": "feature usa exclusivamente la capacidad ApiClient y propaga cancelación",
+        "status": "passed"
+      },
+      {
+        "name": "crear intención no escribe; payload permitido se copia antes del envío",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza revisión no contractual 0 antes de escribir",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza revisión no contractual 01 antes de escribir",
+        "status": "passed"
+      },
+      {
+        "name": "rechaza revisión no contractual 9223372036854775808 antes de escribir",
+        "status": "passed"
+      },
+      {
+        "name": "error de autorización se propaga sin recrear ni reenviar la intención",
+        "status": "passed"
+      },
+      {
+        "name": "catálogo pagina/busca por transporte común sin filtros administrativos",
+        "status": "failed"
+      },
+      {
+        "name": "detalle público conserva solo docente por nombre y capacidad sin disponibilidad",
+        "status": "failed"
+      },
+      {
+        "name": "rechaza proyección pública ampliada o inválida 0",
+        "status": "failed"
+      },
+      {
+        "name": "rechaza proyección pública ampliada o inválida 1",
+        "status": "failed"
+      },
+      {
+        "name": "rechaza proyección pública ampliada o inválida 2",
+        "status": "failed"
+      },
+      {
+        "name": "rechaza proyección pública ampliada o inválida 3",
+        "status": "failed"
+      },
+      {
+        "name": "rechaza proyección pública ampliada o inválida 4",
+        "status": "failed"
+      },
+      {
+        "name": "rechaza proyección pública ampliada o inválida 5",
+        "status": "failed"
+      },
+      {
+        "name": "publicación course requiere envío explícito y repite exactamente la intención",
+        "status": "failed"
+      },
+      {
+        "name": "publicación group requiere envío explícito y repite exactamente la intención",
+        "status": "failed"
+      },
+      {
+        "name": "conflictos de publicación son administrativos; catálogo no expone referencias privadas",
+        "status": "failed"
+      },
+      {
+        "name": "nombre vacío \"\"",
+        "status": "passed"
+      },
+      {
+        "name": "nombre vacío \" \"",
+        "status": "passed"
+      },
+      {
+        "name": "nombre vacío \"\\t\\n\"",
+        "status": "passed"
+      },
+      {
+        "name": "nombre sin límite de negocio inventado 0",
+        "status": "passed"
+      },
+      {
+        "name": "nombre sin límite de negocio inventado 1",
+        "status": "passed"
+      },
+      {
+        "name": "nombre sin límite de negocio inventado 2",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad válida 1",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad válida 50",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad válida 25",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \"\"",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \" \"",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \"0\"",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \"-1\"",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \"1.5\"",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \"51\"",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \"NaN\"",
+        "status": "passed"
+      },
+      {
+        "name": "capacidad inválida \"Infinity\"",
+        "status": "passed"
+      },
+      {
+        "name": "preparación incompleta admite cero franjas y fechas omitidas",
+        "status": "passed"
+      },
+      {
+        "name": "extremos incluidos y franjas contiguas",
+        "status": "passed"
+      },
+      {
+        "name": "fecha civil inválida 2026-02-30",
+        "status": "passed"
+      },
+      {
+        "name": "fecha civil inválida 2025-02-29",
+        "status": "passed"
+      },
+      {
+        "name": "fecha civil inválida 0000-01-01",
+        "status": "passed"
+      },
+      {
+        "name": "fecha civil inválida 19/10/2026",
+        "status": "passed"
+      },
+      {
+        "name": "periodo invertido",
+        "status": "passed"
+      },
+      {
+        "name": "día sin ocurrencia y periodo de un lunes con ocurrencia",
+        "status": "passed"
+      },
+      {
+        "name": "horario inválido duplicado",
+        "status": "passed"
+      },
+      {
+        "name": "horario inválido solapamiento",
+        "status": "passed"
+      },
+      {
+        "name": "horario inválido medianoche",
+        "status": "passed"
+      },
+      {
+        "name": "horario inválido horas iguales",
+        "status": "passed"
+      },
+      {
+        "name": "horario inválido 24:00",
+        "status": "passed"
+      },
+      {
+        "name": "horario inválido día inválido",
+        "status": "passed"
+      },
+      {
+        "name": "captura un secreto conforme al contrato una sola vez y retira fragmento, query e historial",
+        "status": "passed"
+      },
+      {
+        "name": "fragmento inválido ausente se retira sin conservarlo",
+        "status": "passed"
+      },
+      {
+        "name": "fragmento inválido con prefijo obsoleto se retira sin conservarlo",
+        "status": "passed"
+      },
+      {
+        "name": "fragmento inválido mal formado se retira sin conservarlo",
+        "status": "passed"
+      }
+    ],
+    "cause": "Publication/catalog methods and protected navigation absent before implementation; no loading/configuration errors"
+  },
+  "preservation": {
+    "files": 72,
+    "changedProtectedFiles": [],
+    "originalTaskDescriptionsUnchanged": true,
+    "fiveClarificationsUnchanged": true,
+    "E1Preserved": true,
+    "historicalIdentityTasksEvidenceAndLoadProfilesUnchanged": true,
+    "manualSqlExecuted": false,
+    "environmentBefore": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-23T13:22:52.523300831Z",
+        "startedAt": "2026-10-23T13:13:38.054286497Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "environmentAfter": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-23T23:53:37.083953475Z",
+        "startedAt": "2026-10-23T23:38:11.840887946Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "docs": {
+    "date": "2026-10-23",
+    "documents": 32,
+    "localLinksChecked": 774,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  },
+  "limits": {
+    "reservationImplementation": false,
+    "twentyFourHoursPlannedInOwnSpec": true,
+    "openReservationDecisions": [
+      "RA-01",
+      "RA-02",
+      "RA-03",
+      "RA-04",
+      "RA-05",
+      "RA-06"
+    ],
+    "smokesRepeated": false,
+    "reason": "No backend identity/session changes; transport and protected navigation verified with UNIT/E2E",
+    "capacityLoadsExecuted": false,
+    "followup10And25Executed": false,
+    "capacity1000Approved": false,
+    "capacity2500Approved": false,
+    "integralAcceptance": false,
+    "humanSC002": "Pending T073",
+    "T103": "Completed execution/report; capacity unapproved",
+    "T104": "Pending human evidence",
+    "T108": "Pending acceptance dependencies",
+    "bootstrap": "Historical finding remains open"
+  }
+}

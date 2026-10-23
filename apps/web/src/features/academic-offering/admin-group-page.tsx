@@ -3,11 +3,14 @@ import type { ApiClient } from '../../shared/api-client';
 import { academicOfferingApi } from './api';
 import { GroupForm } from './group-form';
 import { ScheduleEditor } from './schedule-editor';
+import { PublicationAction } from './publication-action';
 import { LoadingState, OfferingLayout, stateLabels, useOfferingResource } from './offering-state';
 
 export function AdminGroupPage({ api, id, navigate }: { api: ApiClient; id: string; navigate: (path: string) => void }) {
   const client = useMemo(() => academicOfferingApi(api), [api]); const load = useCallback((signal: AbortSignal) => client.group(id, signal), [client, id]);
   const resource = useOfferingResource(load); const [busy, setBusy] = useState(false); const [formVersion, setFormVersion] = useState(0);
+  const [dirtyGroup, setDirtyGroup] = useState(false); const [dirtySchedule, setDirtySchedule] = useState(false);
+  const [errors, setErrors] = useState<Readonly<Record<string, string>>>({});
   return <OfferingLayout title="Preparar grupo"><LoadingState loading={resource.loading} error={resource.error} retry={resource.reload}/>
     {resource.data && <><p><a href={`/admin/oferta/cursos/${resource.data.courseId}`}>Volver al curso</a></p>
       <p>{stateLabels[resource.data.state]} · {resource.data.studentVisible ? 'Visible para alumnos' : 'No visible para alumnos'}</p>
@@ -15,10 +18,14 @@ export function AdminGroupPage({ api, id, navigate }: { api: ApiClient; id: stri
       {resource.data.teacher && !resource.data.teacher.eligible && <p>Docente no habilitado: {resource.data.teacher.name}</p>}
       {resource.data.teacherReviewRequired && <p>Revisión docente requerida. Recuperar habilitación no republica el grupo.</p>}
       <GroupForm key={`group-${formVersion}`} client={client} courseId={resource.data.courseId} initial={resource.data} busy={busy} onBusy={setBusy}
-        onSaved={resource.accept} onCancel={() => navigate(`/admin/oferta/cursos/${resource.data!.courseId}`)} onDenied={resource.denied}
+        onDirty={setDirtyGroup} externalErrors={errors} onSaved={value => { resource.accept(value); setErrors({}); }} onCancel={() => navigate(`/admin/oferta/cursos/${resource.data!.courseId}`)} onDenied={resource.denied}
         onReplace={value => { resource.accept(value); setFormVersion(value => value + 1); }}/>
-      <ScheduleEditor key={`schedule-${formVersion}`} client={client} group={resource.data} busy={busy} onBusy={setBusy} onSaved={resource.accept}
+      <ScheduleEditor key={`schedule-${formVersion}`} client={client} group={resource.data} busy={busy} onBusy={setBusy}
+        onDirty={setDirtySchedule} externalError={errors.schedule} onSaved={value => { resource.accept(value); setErrors({}); }}
         onDenied={resource.denied} onReplace={value => { resource.accept(value); setFormVersion(value => value + 1); }}/>
+      <PublicationAction value={resource.data} dirty={dirtyGroup || dirtySchedule} busy={busy} onBusy={setBusy} onInvalid={setErrors}
+        prepare={() => client.prepareGroupPublication(id, resource.data!.revision)} onSaved={resource.accept} onDenied={resource.denied}
+        load={() => client.group(id)} onReplace={value => { resource.accept(value); setFormVersion(version => version + 1); setErrors({}); }}/>
     </>}
   </OfferingLayout>;
 }

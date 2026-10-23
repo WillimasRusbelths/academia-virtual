@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ApiFailure } from '../../shared/api-client';
 import { FormField } from '../../shared/ui/form-field';
 import { Feedback } from '../../shared/ui/feedback';
@@ -7,14 +7,17 @@ import { focusInvalid, OfferingReview, useOfferingCommand } from './offering-sta
 import { scheduleErrors } from './validation';
 
 const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-export function ScheduleEditor({ client, group, busy, onBusy, onSaved, onDenied, onReplace }: {
+export function ScheduleEditor({ client, group, busy, onBusy, onSaved, onDenied, onReplace, onDirty, externalError }: {
   client: ReturnType<typeof academicOfferingApi>; group: AdminGroup; busy: boolean; onBusy: (value: boolean) => void;
   onSaved: (value: AdminGroup) => void; onDenied: (error: ApiFailure) => void; onReplace: (value: AdminGroup) => void;
+  onDirty?: (dirty: boolean) => void; externalError?: string;
 }) {
   const [slots, setSlots] = useState<readonly Slot[]>(group.schedule.map(value => ({ ...value })));
+  const dirty = JSON.stringify(slots) !== JSON.stringify(group.schedule);
+  useEffect(() => { onDirty?.(dirty); }, [dirty, onDirty]);
   const [invalid, setInvalid] = useState<string>(); const form = useRef<HTMLFormElement>(null); const command = useOfferingCommand<AdminGroup>();
   const editable = group.state === 'DRAFT' || group.state === 'WITHDRAWN'; const disabled = busy || command.pending || !editable;
-  const error = invalid ?? (command.error?.fields.includes('schedule') ? 'Revisa las franjas y sus ocurrencias en el periodo.' : undefined);
+  const error = invalid ?? externalError ?? (command.error?.fields.includes('schedule') ? 'Revisa las franjas y sus ocurrencias en el periodo.' : undefined);
   function change(index: number, values: Partial<Slot>) { command.changed(); setSlots(current => current.map((slot, offset) => offset === index ? { ...slot, ...values } : slot)); setInvalid(undefined); }
   async function save() {
     const errors = scheduleErrors(group.periodStart, group.periodEnd, slots); const invalid = errors.schedule ?? errors.periodStart ?? errors.periodEnd;
@@ -37,7 +40,7 @@ export function ScheduleEditor({ client, group, busy, onBusy, onSaved, onDenied,
         <button type="button" onClick={() => { command.changed(); setSlots(current => current.filter((_, offset) => offset !== index)); setInvalid(undefined); }}>Quitar franja {index + 1}</button>
       </fieldset>)}
       {error && <p id="schedule-error" className="field-error" role="alert">{error}</p>}
-      <button type="button" disabled={disabled} onClick={() => { command.changed(); setSlots(current => [...current, { dayOfWeek: 1, startTime: '', endTime: '' }]); setInvalid(undefined); }}>Añadir franja</button>
+      <button type="button" disabled={disabled} aria-invalid={!slots.length && error ? true : undefined} aria-describedby={!slots.length && error ? 'schedule-error' : undefined} onClick={() => { command.changed(); setSlots(current => [...current, { dayOfWeek: 1, startTime: '', endTime: '' }]); setInvalid(undefined); }}>Añadir franja</button>
       <Feedback error={command.error} message={command.message} onRetry={() => void save()}/>
       <button type="submit" disabled={disabled}>{command.pending ? 'Guardando…' : 'Guardar horario'}</button>
       {command.error && [409, 503].includes(command.error.status) && <OfferingReview load={() => client.group(group.id)} replace={onReplace} denied={onDenied} disabled={disabled}/>}

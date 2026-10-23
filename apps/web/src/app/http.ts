@@ -27,11 +27,14 @@ const academicConflicts:readonly ApiCode[] = ['OFFERING_VERSION_CONFLICT','OFFER
   'TEACHER_SCHEDULE_CONFLICT','COURSE_PUBLICATION_BLOCKED','IDEMPOTENCY_CONFLICT'];
 const uuid='[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
 const uuidPattern=new RegExp('^'+uuid+'$','i');
-const academicPath=new RegExp('^/admin/academic/(?:courses(?:/'+uuid+'(?:/groups)?)?|groups/'+uuid+'(?:/schedule)?|teachers)$','i');
+const academicPath=new RegExp('^/admin/academic/(?:courses(?:/'+uuid+'(?:/groups|/publish)?)?|groups/'+uuid+'(?:/schedule|/publish)?|teachers)$','i');
+const catalogPath=new RegExp('^/academic/courses(?:/'+uuid+'(?:/groups(?:/'+uuid+')?)?)?$','i');
 function queryFields(path:string):readonly string[] {
   if(path==='/admin/users')return ['q','role','status','page','pageSize'];
   if(path==='/admin/academic/courses'||new RegExp('^/admin/academic/courses/'+uuid+'/groups$','i').test(path))return ['q','state','page','pageSize'];
   if(path==='/admin/academic/teachers')return ['q','page','pageSize'];
+  if(path==='/academic/courses')return ['q','page','pageSize'];
+  if(new RegExp('^/academic/courses/'+uuid+'/groups$','i').test(path))return ['page','pageSize'];
   return [];
 }
 function unavailable() { return new ApiFailure(503,'TEMPORARILY_UNAVAILABLE',messages.TEMPORARILY_UNAVAILABLE); }
@@ -43,19 +46,19 @@ async function failure(response:Response,path:string):Promise<ApiFailure> {
   try { raw = await response.json(); } catch { return unavailable(); }
   const error = object(object(raw)?.error);
   const code = error?.code;
-  const academic=academicPath.test(path);
-  const allowedCodes=academic&&response.status===409?academicConflicts:
+  const adminAcademic=academicPath.test(path);const academic=adminAcademic||catalogPath.test(path);
+  const allowedCodes=adminAcademic&&response.status===409?academicConflicts:
     academic&&response.status===400?['VALIDATION_ERROR']:
       academic&&response.status===401?['AUTH_REQUIRED']:codes[response.status];
   if (typeof code!=='string' || !allowedCodes?.includes(code as ApiCode)) return unavailable();
   const retry = response.status===429?response.headers.get('Retry-After'):null;
   const seconds = retry && /^\d+$/.test(retry) && Number.isSafeInteger(Number(retry))?Number(retry):undefined;
-  const allowedFields=academic?(code==='VALIDATION_ERROR'?academicFields:code==='TEACHER_NOT_ELIGIBLE'?['teacherUserId']:[]):fieldNames;
+  const allowedFields=academic?(code==='VALIDATION_ERROR'?(adminAcademic?academicFields:queryFields(path)):adminAcademic&&code==='TEACHER_NOT_ELIGIBLE'?['teacherUserId']:[]):fieldNames;
   const fields = Array.isArray(error?.fields)?error.fields.flatMap(value => {
     const field = object(value)?.field;
     return typeof field==='string' && allowedFields.includes(field as ApiField)?[field as ApiField]:[];
   }):[];
-  const conflicts=academic&&response.status===409&&['TEACHER_SCHEDULE_CONFLICT','COURSE_PUBLICATION_BLOCKED'].includes(code)
+  const conflicts=adminAcademic&&response.status===409&&['TEACHER_SCHEDULE_CONFLICT','COURSE_PUBLICATION_BLOCKED'].includes(code)
     &&Array.isArray(error?.conflictingGroupIds)?error.conflictingGroupIds.filter((id):id is string=>typeof id==='string'&&uuidPattern.test(id)).map(id=>id.toLowerCase()):[];
   return new ApiFailure(response.status,code as ApiCode,messages[code as ApiCode],seconds,[...new Set(fields)],Object.freeze([...new Set(conflicts)]));
 }

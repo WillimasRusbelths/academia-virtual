@@ -9,12 +9,16 @@ export const stateLabels = { DRAFT: 'Borrador', PUBLISHED: 'Publicado', WITHDRAW
 export function safeFailure(value: unknown): ApiFailure {
   return value instanceof ApiFailure ? value : new ApiFailure(503, 'TEMPORARILY_UNAVAILABLE', 'Servicio temporalmente no disponible. Comprueba el estado antes de reintentar.');
 }
-export function OfferingLayout({ title, children }: { title: string; children: ReactNode }) {
+export function OfferingLayout({ title, children, catalog = false }: { title: string; children: ReactNode; catalog?: boolean }) {
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => heading.current?.focus(), []);
   return <main className="offering-page"><h1 ref={heading} tabIndex={-1}>{title}</h1>
-    <nav aria-label="Navegación de oferta"><a href="/inicio">Inicio</a> · <a href="/admin/oferta">Cursos</a> · <a href="/admin/cuentas">Gestionar cuentas</a></nav>{children}</main>;
+    <nav aria-label="Navegación de oferta"><a href="/inicio">Inicio</a> · {catalog ? <a href="/oferta">Oferta</a> : <><a href="/admin/oferta">Cursos</a> · <a href="/admin/cuentas">Gestionar cuentas</a></>}</nav>{children}</main>;
 }
+export function CatalogLoading({ loading, error, retry }: { loading: boolean; error?: ApiFailure; retry: () => void }) {
+  return error?.status === 404 ? <p role="status">Oferta no disponible</p> : <LoadingState loading={loading} error={error} retry={retry}/>;
+}
+export const weekDays = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
 export function useOfferingResource<T>(load: (signal: AbortSignal) => Promise<T>) {
   const [data, setData] = useState<T>(); const [error, setError] = useState<ApiFailure>();
   const [loading, setLoading] = useState(true); const [revision, setRevision] = useState(0);

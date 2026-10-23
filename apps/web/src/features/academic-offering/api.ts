@@ -17,6 +17,12 @@ export interface AdminGroup {
   readonly cancelledAt: string | null; readonly lastPublishedTeacherId: string | null; readonly createdAt: string; readonly updatedAt: string;
 }
 export interface TeacherCandidate { readonly id: string; readonly name: string }
+export interface CatalogCourse { readonly id: string; readonly name: string; readonly description: string }
+export interface CatalogGroup {
+  readonly id: string; readonly courseId: string; readonly name: string; readonly periodStart: string; readonly periodEnd: string;
+  readonly timeZone: 'America/Lima'; readonly capacity: number; readonly occupancy: null; readonly availability: null;
+  readonly capacityStatus: 'NOT_CALCULATED'; readonly schedule: readonly Slot[]; readonly teacher: { readonly name: string };
+}
 export interface Page<T> { readonly items: readonly T[]; readonly page: number; readonly pageSize: number; readonly total: number }
 export interface NameFilters { readonly q?: string; readonly page?: number; readonly pageSize?: number }
 export interface CourseFilters extends NameFilters { readonly state?: CourseState }
@@ -87,6 +93,20 @@ function candidate(value: unknown): TeacherCandidate {
   if (!isUuid(row.id) || !name(row.name)) return unavailable();
   return Object.freeze({ id: row.id, name: row.name });
 }
+function catalogCourse(value: unknown): CatalogCourse {
+  const row = object(value, ['id','name','description']);
+  if (!isUuid(row.id) || !name(row.name) || !name(row.description)) return unavailable();
+  return Object.freeze({ ...row }) as unknown as CatalogCourse;
+}
+function catalogGroup(value: unknown): CatalogGroup {
+  const row = object(value, ['id','courseId','name','periodStart','periodEnd','timeZone','capacity','occupancy','availability','capacityStatus','schedule','teacher']);
+  if (!isUuid(row.id) || !isUuid(row.courseId) || !name(row.name) || !date(row.periodStart) || !date(row.periodEnd)
+    || row.periodStart > row.periodEnd || row.timeZone !== 'America/Lima' || !Number.isInteger(row.capacity)
+    || Number(row.capacity) < 1 || Number(row.capacity) > 50 || row.occupancy !== null || row.availability !== null
+    || row.capacityStatus !== 'NOT_CALCULATED' || !Array.isArray(row.schedule) || !row.schedule.length) return unavailable();
+  const teacher = object(row.teacher, ['name']); if (!name(teacher.name)) return unavailable();
+  return Object.freeze({ ...row, teacher: Object.freeze({ name: teacher.name }), schedule: Object.freeze(Array.from(row.schedule, slot)) }) as unknown as CatalogGroup;
+}
 function page<T>(value: unknown, decode: (value: unknown) => T): Page<T> {
   const row = object(value, ['items','page','pageSize','total']);
   if (!Array.isArray(row.items) || !Number.isSafeInteger(row.page) || Number(row.page) < 1 || !Number.isSafeInteger(row.pageSize)
@@ -129,6 +149,15 @@ export function academicOfferingApi(api: ApiClient) {
   }
   const courseFields = ['name','description']; const groupFields = ['name','periodStart','periodEnd','timeZone','capacity','teacherUserId'];
   return {
+    async catalog(filters: NameFilters = {}, signal?: AbortSignal) { return page(await api.request('/academic/courses', { query: { ...filters }, signal }), catalogCourse); },
+    async catalogCourse(id: string, signal?: AbortSignal) { return catalogCourse(await api.request(path(id, 'courses').replace('/admin', ''), { signal })); },
+    async catalogGroups(id: string, filters: Pick<NameFilters, 'page' | 'pageSize'> = {}, signal?: AbortSignal) {
+      return page(await api.request(path(id, 'courses').replace('/admin', '') + '/groups', { query: { ...filters }, signal }), catalogGroup);
+    },
+    async catalogGroup(courseId: string, id: string, signal?: AbortSignal) {
+      const value = catalogGroup(await api.request(path(courseId, 'courses').replace('/admin', '') + '/groups/' + path(id, 'groups').split('/').pop(), { signal }));
+      if (value.courseId !== courseId.toLowerCase() || value.id !== id.toLowerCase()) return unavailable(); return value;
+    },
     async courses(filters: CourseFilters = {}, signal?: AbortSignal) { return page(await api.request('/admin/academic/courses', { query: { ...filters }, signal }), readCourse); },
     async course(id: string, signal?: AbortSignal) { return readCourse(await api.request(path(id, 'courses'), { signal })); },
     async groups(courseId: string, filters: GroupFilters = {}, signal?: AbortSignal) { return page(await api.request(path(courseId, 'courses') + '/groups', { query: { ...filters }, signal }), readGroup); },
@@ -136,6 +165,8 @@ export function academicOfferingApi(api: ApiClient) {
     async teachers(filters: NameFilters = {}, signal?: AbortSignal) { return page(await api.request('/admin/academic/teachers', { query: { ...filters }, signal }), candidate); },
     prepareCourse(input: CourseAttributes) { return prepare('/admin/academic/courses', 'POST', attributes(input, courseFields, true), readCourse); },
     prepareCourseEdit(id: string, expectedRevision: string, changes: Partial<CourseAttributes>) { return prepare(path(id, 'courses'), 'PATCH', attributes(changes, courseFields), readCourse, expectedRevision); },
+    prepareCoursePublication(id: string, expectedRevision: string) { return prepare(path(id, 'courses') + '/publish', 'POST', {}, readCourse, expectedRevision); },
+    prepareGroupPublication(id: string, expectedRevision: string) { return prepare(path(id, 'groups') + '/publish', 'POST', {}, readGroup, expectedRevision); },
     prepareGroup(courseId: string, input: GroupAttributes) { return prepare(path(courseId, 'courses') + '/groups', 'POST', attributes(input, groupFields, true), readGroup); },
     prepareGroupEdit(id: string, expectedRevision: string, changes: Partial<GroupAttributes>) { return prepare(path(id, 'groups'), 'PATCH', attributes(changes, groupFields), readGroup, expectedRevision); },
     prepareSchedule(id: string, expectedRevision: string, schedule: readonly Slot[]) {
