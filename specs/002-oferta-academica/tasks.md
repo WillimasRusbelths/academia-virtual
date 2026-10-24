@@ -1,7 +1,7 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T041 completas. Siguiente checkpoint: T042.
+**Estado**: T001–T042 completas. Siguiente bloque: pruebas US3 T043–T047.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -12,7 +12,8 @@ en escritorio y móvil, sin modificar sus expectativas. T030 verifica US1 comple
 su alcance de preparación. T031/T034 verificadas con implementación real de T036.
 T038 conecta publicación/catálogo por HTTP y cierra los criterios integrados de
 T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
-originales en escritorio/móvil; T042–T074 permanecen pendientes.
+originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
+T043–T074 permanecen pendientes. SC-002 humano sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
@@ -36,7 +37,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [publicación real, visibilidad y avance T036](evidence/t036.md) y
 [consultas reales de catálogo y avance T037](evidence/t037.md) y
 [HTTP real y cierre T032/T033/T036–T038](evidence/t038.md) y
-[merge de planificación e interfaz T039–T041](evidence/t039-t041.md).
+[merge de planificación e interfaz T039–T041](evidence/t039-t041.md) y
+[checkpoint US2 T042](evidence/us2.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -47,8 +49,8 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-actual incorpora la planificación y autoriza el bloque coherente T039–T041;
-se detiene antes de T042. Reservas de 24 horas pertenecen al futuro spec propio.
+anterior incorporó la planificación y verificó T039–T041. El actual comprueba
+únicamente T042 y se detiene antes de T043. Reservas de 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
 
@@ -334,7 +336,18 @@ siguen abiertos. No se implementan reservas, retiro/cancelación ni consultas do
 - [X] T039 [US2] Añadir resumen/confirmación y feedback de publicación en `apps/web/src/features/academic-offering/admin-course-page.tsx`, `admin-group-page.tsx` y `offering-state.tsx`: distinguir Publicado de Visible, faltantes/agenda y COURSE_PUBLICATION_BLOCKED, nunca publicación implícita. Termina con casos admin de T035 verdes (FR-007/013).
 - [X] T040 [US2] Crear `apps/web/src/features/academic-offering/catalog-page.tsx`, `course-page.tsx` y `group-page.tsx`: comparación paginada, zona explícita, textos «Capacidad máxima: N alumnos» y «Ocupación y disponibilidad no calculadas», error/no disponible sin causa privada. Termina con T035 verde (FR-003/006/009/011/014).
 - [X] T041 [US2] Integrar catálogo STUDENT/ADMIN en `apps/web/src/app/App.tsx`, `router.tsx` y `apps/web/src/features/profile/home-page.tsx`; profesor usa solo futura ruta propia, visitante acceso; conservar limpieza de respuestas tardías al perder sesión. Termina con pruebas de rutas y recorrido desde inicio en T035 (FR-009/010/014/016).
-- [ ] T042 [US2] Ejecutar checkpoint en `specs/002-oferta-academica/evidence/us2.md`: T031–T035, US1 y políticas; registrar datos/errores realmente probados y estado final de carrera. Dejar observación humana SC-002 expresamente pendiente de T073 (FR-006/007/009–012/015; SC-002/004).
+- [X] T042 [US2] Ejecutar checkpoint en `specs/002-oferta-academica/evidence/us2.md`: T031–T035, US1 y políticas; registrar datos/errores realmente probados y estado final de carrera. Dejar observación humana SC-002 expresamente pendiente de T073 (FR-006/007/009–012/015; SC-002/004).
+
+Checkpoint T042, 2026-10-23: API 308/308 (incluidas 42 de visibilidad y 14 de arquitectura),
+repetición UTC de visibilidad 42/42, integración PG/HTTP 310/310, web 156/156 y E2E
+US1/US2 92/92: 45 casos funcionales × dos perfiles y un control auxiliar × dos.
+T032 58/58, T033 44/44 y T034 16/16, con estados finales, ledger/auditoría y barreras
+observadas; controles separados del protocolo académico. Tipos, lint y compilaciones
+aprobados; cero omitidos/flaky/reintentos. Solo se cierra T042, sin cambiar código,
+tests o criterios. PA-01–PA-05/E1 y 72 archivos protegidos intactos; entorno manual
+conservado y proyecto aislado detenido con su volumen, sin esquemas t_ residuales.
+Véase [us2.md](evidence/us2.md). SC-002 humano/T073, T104/T108, bootstrap y capacidad
+siguen pendientes. No se inicia US3 ni reservas/matrícula. Detenido antes de T043.
 
 ## Fase 5: US3 — Mantener, retirar o cancelar (P2, T043–T054)
 

@@ -109,8 +109,11 @@ Oferta: `feat/002-oferta-academica` conserva `eafae88`, PA-01–PA-05/E1 y
 [tasks.md](../../specs/002-oferta-academica/tasks.md): T001–T034/T036–T038 completas;
 Esa es la base histórica previa al bloque de continuidad. El merge `b0af757` conserva
 ambos historiales (`eafae88` y `061b183`); T035/T039–T041 quedan verificadas según
-[evidencia](../../specs/002-oferta-academica/evidence/t039-t041.md). Sigue T042; T042–T074
-permanecen pendientes. No se incorporan reservas, órdenes, matrícula o pagos al spec 002.
+[evidencia](../../specs/002-oferta-academica/evidence/t039-t041.md). El
+[checkpoint T042](../../specs/002-oferta-academica/evidence/us2.md) aprueba la verificación
+automatizada US2 y su regresión; T043–T074 permanecen pendientes, incluida la
+observación humana SC-002/T073. Siguen las pruebas de US3 T043–T047. No se incorporan
+reservas, órdenes, matrícula o pagos al spec 002.
 Aquí no se cambia su plan ni sus
 checklists/criterios históricos de constitución 1.1.0; la enmienda 1.2.0 gobierna el
 trabajo nuevo y no invalida ni amplía lo demostrado anteriormente.
