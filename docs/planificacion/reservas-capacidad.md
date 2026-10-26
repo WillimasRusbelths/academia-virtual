@@ -117,8 +117,10 @@ verifica y cierra T043/T045/T046. Las [rutas T049](../../specs/002-oferta-academ
 cierran T044/T048/T049 con sus pruebas reales y políticas. La
 [interfaz T050/T051](../../specs/002-oferta-academica/evidence/t050-t051.md) cierra
 T047 con retiro/cancelación, revisión explícita y reintentos manuales verificados
-en escritorio/móvil. T001–T051 completas; siguiente T052, después checkpoint y
-documentación T053/T054. Se conserva el timeout B02 de regresión y su repetición
+en escritorio/móvil. La [ampliación de auditoría T052](../../specs/002-oferta-academica/evidence/t052.md)
+verifica hechos mínimos, atomicidad, snapshots, replay y logs privados con HTTP/PG
+reales. T001–T052 completas; siguiente bloque checkpoint y documentación T053/T054.
+Se conserva el timeout B02 de regresión y su repetición
 aprobada sin ampliar límites; no acredita estabilidad ni cierre de bootstrap.
 La observación humana SC-002/T073 sigue
 pendiente. No se incorporan

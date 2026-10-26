@@ -1,8 +1,8 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T051 completas. Siguiente bloque T052, auditoría ampliada;
-después T053/T054 para el checkpoint y documentación US3.
+**Estado**: T001–T052 completas. Siguiente bloque T053/T054 para el checkpoint
+y documentación US3; todavía no se inicia US4.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -15,8 +15,8 @@ T038 conecta publicación/catálogo por HTTP y cierra los criterios integrados d
 T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
 originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
 en ese checkpoint, T047 y T050–T074 permanecían pendientes. El cierre actual
-T047/T050/T051 se detalla abajo; T052–T074 siguen pendientes. SC-002 humano
-sigue pendiente de T073.
+T047/T050/T051 y la ampliación T052 se detallan abajo; T053–T074 siguen pendientes.
+SC-002 humano sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
@@ -45,7 +45,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [pruebas de mantenimiento T043–T047](evidence/t043-t047.md) y
 [transiciones y escritor real T048](evidence/t048.md) y
 [rutas reales y cierre HTTP T049](evidence/t049.md) e
-[interfaz editorial y conflictos T050/T051](evidence/t050-t051.md).
+[interfaz editorial y conflictos T050/T051](evidence/t050-t051.md) y
+[auditoría persistente y logs T052](evidence/t052.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -56,9 +57,9 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-anterior conectó y verificó T049, cerrando T044/T048 con HTTP real. El actual
-implementa y verifica únicamente la interfaz T050/T051, cerrando T047; no adelanta
-auditoría ampliada T052 ni checkpoint T053. Reservas de
+T049 conectó y verificó HTTP real, cerrando T044/T048. El bloque T050/T051 verificó
+la interfaz y cerró T047. El actual verifica únicamente auditoría/replay y logs T052;
+no adelanta el checkpoint T053 ni la documentación T054. Reservas de
 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
@@ -422,7 +423,19 @@ sin ampliar límites ni afirmar estabilidad. Véase [t050-t051.md](evidence/t050
 T052/T053/T054 pendientes; bootstrap, aceptación humana y capacidad sin resolver.
 PA-01–PA-05/E1, entorno manual, datos y decisiones futuras de reservas conservados.
 
-- [ ] T052 [US3] Añadir verificación de auditoría/replay y logs a `apps/api/tests/integration/academic-offering-audit.spec.ts`: actor/recurso/acción/momento/resultado, sin motivo/cuerpo/SQL, ledger y cambio atómicos, snapshot previo conservado y sin segundo hecho APPLIED en replay (FR-011/015; SC-006).
+- [X] T052 [US3] Añadir verificación de auditoría/replay y logs a `apps/api/tests/integration/academic-offering-audit.spec.ts`: actor/recurso/acción/momento/resultado, sin motivo/cuerpo/SQL, ledger y cambio atómicos, snapshot previo conservado y sin segundo hecho APPLIED en replay (FR-011/015; SC-006).
+
+Cierre T052, 2026-10-25: 28/28 casos únicos PostgreSQL/HTTP reales para diez
+operaciones, NO_CHANGE, replay/proyección actual, conservación de snapshot,
+rollback ante fallos de ledger/auditoría y logs privados reales sin entradas ni SQL.
+Regresión state/commands/maintenance-http 116/116, incluido un control auxiliar;
+T045 18/18. Tipos estrictos, compilación API y lint aprobados. No cambios de producto,
+migraciones, reglas ni mecanismos transaccionales. Se conserva el lint inicial fallido
+por asignación redundante del preparador, corregida sin debilitar asserts; 28 casos
+iniciales y 28 finales son repeticiones, no 56 casos únicos. Evidencia en
+[t052.md](evidence/t052.md). T053/T054 pendientes, igual que US4, aceptación humana,
+bootstrap y capacidad; PA-01–PA-05/E1 y entorno manual conservados.
+
 - [ ] T053 [US3] Ejecutar matriz completa de diez escenarios US3 y regresión US1/US2, registrando `specs/002-oferta-academica/evidence/us3.md`; incluir casos efectivos comunes, contiguos, distintos docentes y dos admins, con consultas finales persistidas (FR-004/008/015; SC-001/004/006).
 - [ ] T054 [US3] Documentar ciclo editorial y recuperación de conflictos en `specs/002-oferta-academica/quickstart.md`, vinculando evidencia T053 y manteniendo comandos seguros; checkpoint aprobado solo si T043–T047/T052 pasan, sin efectos sobre matrícula ni reembolsos (FR-008/013/016).
 
