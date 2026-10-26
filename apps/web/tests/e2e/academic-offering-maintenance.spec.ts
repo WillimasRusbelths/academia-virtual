@@ -37,7 +37,9 @@ test('M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente
   await activate(page, page.getByRole('button', { name: 'Guardar curso', exact: true })); expect((await saved).status()).toBe(200);
   expect((await offering.observerPool.query('SELECT state FROM "AcademicCourse" WHERE id=$1', [seed.courseId])).rows[0].state).toBe('WITHDRAWN');
   await transition(page, 'Publicar curso'); await confirm(page, 'Confirmar publicación', `/admin/academic/courses/${seed.courseId}/publish`);
-  await page.goto(`/admin/oferta/grupos/${seed.groupId}`); await transition(page, 'Retirar grupo');
+  await page.goto(`/admin/oferta/grupos/${seed.groupId}`);
+  await expect(page.getByLabel('Nombre', { exact: true })).toBeVisible();
+  await transition(page, 'Retirar grupo');
   await confirm(page, 'Confirmar retiro', groupPath(seed.groupId)+'/withdraw');
   await typeField(page, page.getByLabel('Capacidad máxima', { exact: true }), '45');
   const changed = page.waitForResponse(r => r.request().method() === 'PATCH' && r.url().endsWith(`/groups/${seed.groupId}`));

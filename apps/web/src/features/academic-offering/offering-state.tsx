@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import type { ReactNode, RefObject } from 'react';
 import { ApiFailure, RequestCancelled } from '../../shared/api-client';
 import { Feedback } from '../../shared/ui/feedback';
@@ -41,7 +41,7 @@ export function useOfferingCommand<T>() {
   const [pending, setPending] = useState(false); const busy = useRef(false); const live = useRef(true);
   const [error, setError] = useState<ApiFailure>(); const [message, setMessage] = useState<string>();
   const saved = useRef<{ key: string; intent: PreparedCommand<T> } | undefined>(undefined); const controller = useRef<AbortController | undefined>(undefined);
-  useEffect(() => { live.current = true; return () => { live.current = false; controller.current?.abort(); }; }, []);
+  useEffect(() => { live.current = true; return () => { live.current = false; controller.current?.abort(); saved.current = undefined; }; }, []);
   async function run(key: string, prepare: () => PreparedCommand<T>, accept: (value: T) => void, denied: (error: ApiFailure) => void,
     notify: (busy: boolean) => void = () => undefined) {
     if (busy.current) return; busy.current = true; setPending(true); setError(undefined); setMessage(undefined); notify(true);
@@ -51,15 +51,34 @@ export function useOfferingCommand<T>() {
       if (live.current) { saved.current = undefined; accept(result.resource); setMessage('Cambios guardados.'); }
     } catch (failure) {
       if (live.current && !(failure instanceof RequestCancelled)) {
-        const safe = safeFailure(failure); setError(safe);
+        const safe = safeFailure(failure);
+        setError(safe.status === 503 ? new ApiFailure(503, safe.code,
+          'El resultado es incierto. Comprueba el estado antes de reintentar. Salir no deshace un comando que pueda haberse aplicado.',
+          safe.retryAfterSeconds, safe.fields, safe.conflictingGroupIds) : safe);
         if (safe.status === 401 || safe.status === 403) { saved.current = undefined; denied(safe); }
       }
     } finally { busy.current = false; if (live.current) { setPending(false); notify(false); } }
   }
-  return { pending, error, message, run, changed() {
-    setError(current => current && ['OFFERING_VERSION_CONFLICT', 'OFFERING_STATE_CONFLICT'].includes(current.code) ? current : undefined);
+  return { pending, error, message, run, discard() {
+    if (busy.current) return;
+    saved.current = undefined; setError(undefined); setMessage(undefined);
+  }, changed() {
+    setError(current => current && (current.status === 503 || ['OFFERING_VERSION_CONFLICT', 'OFFERING_STATE_CONFLICT'].includes(current.code)) ? current : undefined);
     setMessage(undefined);
   } };
+}
+/** Modal nativo: foco contenido, Escape no interrumpe un envío y retorno a cargo del disparador. */
+export function OfferingConfirmation({ title, children, pending, cancel, confirm }: {
+  title: string; children: ReactNode; pending: boolean; cancel: () => void; confirm: () => void;
+}) {
+  const dialog = useRef<HTMLDialogElement>(null), titleId = useId();
+  useEffect(() => { const element = dialog.current!; element.showModal(); return () => { if (element.open) element.close(); }; }, []);
+  return <dialog ref={dialog} aria-labelledby={titleId} aria-busy={pending}
+    onCancel={event => { event.preventDefault(); if (!pending) cancel(); }}>
+    <h2 id={titleId}>{title}</h2>{children}
+    <button type="button" autoFocus disabled={pending} onClick={cancel}>Cancelar</button>
+    <button type="button" disabled={pending} onClick={confirm}>{pending ? 'Confirmando…' : title}</button>
+  </dialog>;
 }
 export function focusInvalid(form: RefObject<HTMLFormElement | null>) {
   requestAnimationFrame(() => form.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus());

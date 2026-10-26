@@ -1,8 +1,8 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T046 y T048/T049 completas. T047 pendiente de la interfaz;
-siguiente bloque T050/T051, sin adelantar auditoría ampliada ni checkpoint US3.
+**Estado**: T001–T051 completas. Siguiente bloque T052, auditoría ampliada;
+después T053/T054 para el checkpoint y documentación US3.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -14,7 +14,9 @@ su alcance de preparación. T031/T034 verificadas con implementación real de T0
 T038 conecta publicación/catálogo por HTTP y cierra los criterios integrados de
 T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
 originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
-T047 y T050–T074 permanecen pendientes. SC-002 humano sigue pendiente de T073.
+en ese checkpoint, T047 y T050–T074 permanecían pendientes. El cierre actual
+T047/T050/T051 se detalla abajo; T052–T074 siguen pendientes. SC-002 humano
+sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
 Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.md) y
@@ -42,7 +44,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [checkpoint US2 T042](evidence/us2.md) y
 [pruebas de mantenimiento T043–T047](evidence/t043-t047.md) y
 [transiciones y escritor real T048](evidence/t048.md) y
-[rutas reales y cierre HTTP T049](evidence/t049.md).
+[rutas reales y cierre HTTP T049](evidence/t049.md) e
+[interfaz editorial y conflictos T050/T051](evidence/t050-t051.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -53,8 +56,9 @@ La instrucción de generar tareas sucede a las etapas históricas descritas en s
 no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se autorizó
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
-anterior implementó y verificó las capas de T048. El actual conecta y verifica
-únicamente T049, cerrando T044/T048 con HTTP real, sin interfaz posterior. Reservas de
+anterior conectó y verificó T049, cerrando T044/T048 con HTTP real. El actual
+implementa y verifica únicamente la interfaz T050/T051, cerrando T047; no adelanta
+auditoría ampliada T052 ni checkpoint T053. Reservas de
 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
@@ -363,7 +367,7 @@ US3, incluyendo dos editores y dos publicaciones incompatibles. No requiere alum
 - [X] T044 [P] [US3] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-state.spec.ts`: withdraw/cancel y edición/republicación, padre retirado sin cambiar hijos ni liberar agenda PUBLISHED, curso bloqueado por revisión y recuperación retirando hijos; motivo solo admin y no DELETE (FR-007/008/011/012).
 - [X] T045 [P] [US3] Escribir PG en `apps/api/tests/integration/academic-offering-commands.spec.ts`: revisión obsoleta, altas/replay simultáneos, mismo payload/ID distinto actor, ID reutilizado con payload diferente, digest con destino/operación/revision, respuesta perdida/commit ambiguo, replay sin permisos y fallo de auditoría. Termina con cero duplicados/sobrescrituras y una auditoría por comando aceptado (FR-010/013/015; SC-006).
 - [X] T046 [P] [US3] Escribir PG en `apps/api/tests/integration/academic-offering-concurrency.spec.ts`: retiro/cancelación vs publicación, retiro de curso vs grupo, cursos/docentes cruzados, conjunto/assignación cambiante durante descubrimiento y agotamiento compartido de tres intentos. Confirmar esperas desde observador y estado final sin interbloqueo evitable ni falso conflicto por timeout (FR-004/008/015).
-- [ ] T047 [P] [US3] Escribir E2E en `apps/web/tests/e2e/academic-offering-maintenance.spec.ts`: ciclo SC-001 con dos grupos, dos administradores con formularios obsoletos, cancelación, guardar sin republicar y 503 incierto/reintento explícito. Termina con verificaciones móvil/teclado y formularios conservados (FR-008/013/014/015).
+- [X] T047 [P] [US3] Escribir E2E en `apps/web/tests/e2e/academic-offering-maintenance.spec.ts`: ciclo SC-001 con dos grupos, dos administradores con formularios obsoletos, cancelación, guardar sin republicar y 503 incierto/reintento explícito. Termina con verificaciones móvil/teclado y formularios conservados (FR-008/013/014/015).
 
 Avance T043–T047, 2026-10-23 y cierre 2026-10-25: pruebas preparadas y ejecutadas contra dominio,
 PostgreSQL/HTTP y navegador reales, sin implementar transiciones ni rutas ausentes.
@@ -402,8 +406,22 @@ T047 sigue pendiente de T050/T051; no se atribuye aprobación E2E a pruebas HTTP
 Regresión de identidad y conservación registradas en [T049](evidence/t049.md).
 Siguiente bloque coherente: T050/T051, interfaz editorial y conflictos/reintentos.
 
-- [ ] T050 [US3] Implementar confirmaciones de retiro/cancelación, motivo, edición tras retiro y republicación en `apps/web/src/features/academic-offering/admin-course-page.tsx`, `admin-group-page.tsx` y `offering-state.tsx`. Termina con curso/hijo diferenciados, cancelado solo lectura y T047 verde en ciclo editorial (FR-008/013/014).
-- [ ] T051 [US3] Completar resolución de conflictos y respuesta incierta en `apps/web/src/features/academic-offering/api.ts`, `api.test.ts` y `offering-state.tsx`: conservar intención exacta en memoria, comprobar estado, reintento manual igual ID, intención corregida nuevo ID, sin sobrescribir ni replay tras login. Termina con T045/T047 verdes (FR-013/015).
+- [X] T050 [US3] Implementar confirmaciones de retiro/cancelación, motivo, edición tras retiro y republicación en `apps/web/src/features/academic-offering/admin-course-page.tsx`, `admin-group-page.tsx` y `offering-state.tsx`. Termina con curso/hijo diferenciados, cancelado solo lectura y T047 verde en ciclo editorial (FR-008/013/014).
+- [X] T051 [US3] Completar resolución de conflictos y respuesta incierta en `apps/web/src/features/academic-offering/api.ts`, `api.test.ts` y `offering-state.tsx`: conservar intención exacta en memoria, comprobar estado, reintento manual igual ID, intención corregida nuevo ID, sin sobrescribir ni replay tras login. Termina con T045/T047 verdes (FR-013/015).
+
+Cierre T047/T050/T051, 2026-10-25: confirmaciones de retiro/cancelación, motivo
+obligatorio, cancelado solo lectura, edición después de retiro y republicación
+explícita. Se conservan intención/payload y formulario ante conflicto/503; comparar
+no adopta revisión, retry manual mantiene ID, corrección usa uno nuevo y login no
+reproduce comandos. UNIT web 169/169; PostgreSQL/HTTP 116/116, incluidos T045 18/18.
+T047: diez casos originales por dos perfiles, 20/20; cuatro nuevos de conflictos,
+8/8. Tipos, lint y builds aprobados. Solo se añadió espera de render en M01,
+sin cambiar asserts de negocio. Regresión previa: 75/76, B02 escritorio agotó
+15 s; repetición explícita sin cambios 2/2. Timeout y evidencia previa conservados,
+sin ampliar límites ni afirmar estabilidad. Véase [t050-t051.md](evidence/t050-t051.md).
+T052/T053/T054 pendientes; bootstrap, aceptación humana y capacidad sin resolver.
+PA-01–PA-05/E1, entorno manual, datos y decisiones futuras de reservas conservados.
+
 - [ ] T052 [US3] Añadir verificación de auditoría/replay y logs a `apps/api/tests/integration/academic-offering-audit.spec.ts`: actor/recurso/acción/momento/resultado, sin motivo/cuerpo/SQL, ledger y cambio atómicos, snapshot previo conservado y sin segundo hecho APPLIED en replay (FR-011/015; SC-006).
 - [ ] T053 [US3] Ejecutar matriz completa de diez escenarios US3 y regresión US1/US2, registrando `specs/002-oferta-academica/evidence/us3.md`; incluir casos efectivos comunes, contiguos, distintos docentes y dos admins, con consultas finales persistidas (FR-004/008/015; SC-001/004/006).
 - [ ] T054 [US3] Documentar ciclo editorial y recuperación de conflictos en `specs/002-oferta-academica/quickstart.md`, vinculando evidencia T053 y manteniendo comandos seguros; checkpoint aprobado solo si T043–T047/T052 pasan, sin efectos sobre matrícula ni reembolsos (FR-008/013/016).

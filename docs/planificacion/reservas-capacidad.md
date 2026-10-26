@@ -114,8 +114,13 @@ ambos historiales (`eafae88` y `061b183`); T035/T039–T041 quedan verificadas s
 automatizada US2 y su regresión. Las [pruebas US3 T043–T047](../../specs/002-oferta-academica/evidence/t043-t047.md)
 se conservan; el [escritor real T048](../../specs/002-oferta-academica/evidence/t048.md)
 verifica y cierra T043/T045/T046. Las [rutas T049](../../specs/002-oferta-academica/evidence/t049.md)
-cierran T044/T048/T049 con sus pruebas reales y políticas; T047 sigue pendiente
-del próximo bloque de interfaz T050/T051. La observación humana SC-002/T073 sigue
+cierran T044/T048/T049 con sus pruebas reales y políticas. La
+[interfaz T050/T051](../../specs/002-oferta-academica/evidence/t050-t051.md) cierra
+T047 con retiro/cancelación, revisión explícita y reintentos manuales verificados
+en escritorio/móvil. T001–T051 completas; siguiente T052, después checkpoint y
+documentación T053/T054. Se conserva el timeout B02 de regresión y su repetición
+aprobada sin ampliar límites; no acredita estabilidad ni cierre de bootstrap.
+La observación humana SC-002/T073 sigue
 pendiente. No se incorporan
 reservas, órdenes, matrícula o pagos al spec 002.
 Aquí no se cambia su plan ni sus

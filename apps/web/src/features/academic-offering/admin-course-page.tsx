@@ -6,6 +6,7 @@ import type { GroupFilters } from './api';
 import { CourseForm } from './course-form';
 import { GroupForm } from './group-form';
 import { PublicationAction } from './publication-action';
+import { MaintenanceAction } from './maintenance-action';
 import { LoadingState, OfferingLayout, stateLabels, useOfferingResource } from './offering-state';
 
 export function AdminCoursePage({ api, id, navigate }: { api: ApiClient; id: string; navigate: (path: string) => void }) {
@@ -24,6 +25,10 @@ export function AdminCoursePage({ api, id, navigate }: { api: ApiClient; id: str
           <PublicationAction value={resource.data} dirty={dirty} busy={busy} onBusy={setBusy} onInvalid={setErrors}
             prepare={() => client.prepareCoursePublication(id, resource.data!.revision)} onSaved={resource.accept} onDenied={resource.denied}
             load={() => client.course(id)} onReplace={value => { resource.accept(value); setFormVersion(version => version + 1); setErrors({}); }}/>
+          <MaintenanceAction value={resource.data} dirty={dirty} busy={busy} onBusy={setBusy}
+            withdraw={() => client.prepareCourseWithdrawal(id, resource.data!.revision)} onDenied={resource.denied} load={() => client.course(id)}
+            onSaved={value => { resource.accept(value); setFormVersion(version => version + 1); setDirty(false); setErrors({}); groups.reload(); }}
+            onReplace={value => { resource.accept(value); setFormVersion(version => version + 1); setDirty(false); setErrors({}); groups.reload(); }}/>
           <section aria-label="Grupos del curso"><h2>Grupos</h2><button type="button" disabled={busy} onClick={() => setCreating(true)}>Crear grupo</button>
             <form aria-label="Buscar grupos" onSubmit={event => { event.preventDefault(); setFilter({ page: 1, pageSize: 20, q: search.trim(), ...(state ? { state: state as GroupFilters['state'] } : {}) }); }}>
               <FormField id="group-search" label="Buscar grupo por nombre" value={search} onChange={event => setSearch(event.target.value)}/>

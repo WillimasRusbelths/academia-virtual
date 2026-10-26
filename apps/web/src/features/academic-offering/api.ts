@@ -167,6 +167,12 @@ export function academicOfferingApi(api: ApiClient) {
     prepareCourseEdit(id: string, expectedRevision: string, changes: Partial<CourseAttributes>) { return prepare(path(id, 'courses'), 'PATCH', attributes(changes, courseFields), readCourse, expectedRevision); },
     prepareCoursePublication(id: string, expectedRevision: string) { return prepare(path(id, 'courses') + '/publish', 'POST', {}, readCourse, expectedRevision); },
     prepareGroupPublication(id: string, expectedRevision: string) { return prepare(path(id, 'groups') + '/publish', 'POST', {}, readGroup, expectedRevision); },
+    prepareCourseWithdrawal(id: string, expectedRevision: string) { return prepare(path(id, 'courses') + '/withdraw', 'POST', {}, readCourse, expectedRevision); },
+    prepareGroupWithdrawal(id: string, expectedRevision: string) { return prepare(path(id, 'groups') + '/withdraw', 'POST', {}, readGroup, expectedRevision); },
+    prepareGroupCancellation(id: string, expectedRevision: string, cancellationReason: string) {
+      if (typeof cancellationReason !== 'string' || !cancellationReason.trim()) return unavailable();
+      return prepare(path(id, 'groups') + '/cancel', 'POST', { cancellationReason: cancellationReason.trim() }, readGroup, expectedRevision);
+    },
     prepareGroup(courseId: string, input: GroupAttributes) { return prepare(path(courseId, 'courses') + '/groups', 'POST', attributes(input, groupFields, true), readGroup); },
     prepareGroupEdit(id: string, expectedRevision: string, changes: Partial<GroupAttributes>) { return prepare(path(id, 'groups'), 'PATCH', attributes(changes, groupFields), readGroup, expectedRevision); },
     prepareSchedule(id: string, expectedRevision: string, schedule: readonly Slot[]) {
