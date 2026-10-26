@@ -33,3 +33,18 @@ export class PublicationCommands {
     return this.store.execute(actor, command, context);
   }
 }
+
+export type LifecycleCommand =
+  | (Extract<OfferingCommand, { operation: 'COURSE_PUBLISH' | 'COURSE_WITHDRAW' }> & { readonly operation: 'COURSE_WITHDRAW' })
+  | (Extract<OfferingCommand, { operation: 'GROUP_PUBLISH' | 'GROUP_WITHDRAW' }> & { readonly operation: 'GROUP_WITHDRAW' })
+  | Extract<OfferingCommand, { operation: 'GROUP_CANCEL' }>;
+export interface LifecycleStore {
+  execute(actor: SessionActor, command: LifecycleCommand, context: CommandContext): Promise<CommandResult>;
+}
+export class LifecycleCommands {
+  constructor(private readonly store: LifecycleStore) {}
+  async execute(actor: SessionActor, command: LifecycleCommand, context: CommandContext): Promise<CommandResult> {
+    if (!permits(actor.role, 'academic:manage')) throw new AuthorizationFailure('FORBIDDEN');
+    return this.store.execute(actor, command, context);
+  }
+}

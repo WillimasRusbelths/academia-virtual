@@ -111,10 +111,11 @@ Esa es la base histórica previa al bloque de continuidad. El merge `b0af757` co
 ambos historiales (`eafae88` y `061b183`); T035/T039–T041 quedan verificadas según
 [evidencia](../../specs/002-oferta-academica/evidence/t039-t041.md). El
 [checkpoint T042](../../specs/002-oferta-academica/evidence/us2.md) aprueba la verificación
-automatizada US2 y su regresión; T043–T074 permanecen pendientes, incluida la
-observación humana SC-002/T073. Las [pruebas US3 T043–T047](../../specs/002-oferta-academica/evidence/t043-t047.md)
-quedan preparadas y ejecutadas, pendientes de su comportamiento completo;
-sigue T048 y después sus capas HTTP/interfaz. No se incorporan
+automatizada US2 y su regresión. Las [pruebas US3 T043–T047](../../specs/002-oferta-academica/evidence/t043-t047.md)
+se conservan; el [escritor real T048](../../specs/002-oferta-academica/evidence/t048.md)
+verifica y cierra T043/T045/T046. T044/T047 siguen pendientes, y el cierre literal
+de T048 exige T044 HTTP verde mediante T049, próximo bloque. La observación humana
+SC-002/T073 y la interfaz posterior siguen pendientes. No se incorporan
 reservas, órdenes, matrícula o pagos al spec 002.
 Aquí no se cambia su plan ni sus
 checklists/criterios históricos de constitución 1.1.0; la enmienda 1.2.0 gobierna el

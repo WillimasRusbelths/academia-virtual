@@ -67,3 +67,20 @@ export function editGroup<T extends Group>(current: T, input: unknown): T {
   validateSchedule({ ...group, schedule: current.schedule ?? [] });
   return group;
 }
+
+export function withdrawGroup<T extends Group>(current: T): Omit<T, 'state'> & { readonly state: 'WITHDRAWN' } {
+  if (current.state !== 'PUBLISHED') throw new OfferingError({ code: 'OFFERING_STATE_CONFLICT' });
+  return { ...current, state: 'WITHDRAWN' };
+}
+export function cancellationReason(value: unknown): string {
+  if (typeof value !== 'string' || value.trim() === '') {
+    throw new OfferingError({ code: 'VALIDATION_ERROR', fields: ['cancellationReason'] });
+  }
+  return value.trim();
+}
+/** El instante lo aporta la aplicación desde el servidor, nunca un reloj del dominio. */
+export function cancelGroup<T extends Group>(current: T, detail: { cancellationReason: unknown; cancelledAt: string }):
+Omit<T, 'state' | 'cancellationReason' | 'cancelledAt'> & { readonly state: 'CANCELLED'; readonly cancellationReason: string; readonly cancelledAt: string } {
+  if (!['DRAFT', 'PUBLISHED', 'WITHDRAWN'].includes(current.state)) throw new OfferingError({ code: 'OFFERING_STATE_CONFLICT' });
+  return { ...current, state: 'CANCELLED', cancellationReason: cancellationReason(detail.cancellationReason), cancelledAt: detail.cancelledAt };
+}

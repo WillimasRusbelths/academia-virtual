@@ -7,9 +7,9 @@ import { OfferingError } from '../public/offer.js';
 import type { AdminCourse, AdminGroup, CommandResult, GroupState, Revision, UUID, Slot } from '../public/offer.js';
 import { offeringAudit } from './offering-audit.js';
 import type { AcademicAuditWriter } from './offering-audit.js';
-import type { PreparationCommand, PreparationStore, PublicationStore } from '../application/commands.js';
-import { createCourse, editCourse } from '../domain/course.js';
-import { assertGroupEditable, createGroup, editGroup } from '../domain/group.js';
+import type { PreparationCommand, PreparationStore, PublicationStore, LifecycleStore } from '../application/commands.js';
+import { createCourse, editCourse, withdrawCourse } from '../domain/course.js';
+import { assertGroupEditable, createGroup, editGroup, withdrawGroup, cancelGroup, cancellationReason } from '../domain/group.js';
 import { schedulesOverlap, validateSchedule } from '../domain/schedule.js';
 import { assertCoursePublication, groupVisibility, validateGroupPublication } from '../domain/visibility.js';
 import type { VisibilityInput, PublicationGroup } from '../domain/visibility.js';
@@ -314,6 +314,18 @@ async function scheduleConflicts(client: PoolClient, input: VisibilityInput): Pr
   return rows.rows.map(publicationInput).filter(other => schedulesOverlap(input.group, other.group)).map(other => other.group.id);
 }
 
+/** Descubrimiento compartido por publicación/retiro/cancelación; solo recursos propios.
+ * Captura y asignación actuales participan en los locks, incluso sin habilitación.
+ * Si cambian las referencias/conjunto, el protocolo revierte antes de redescubrir.
+ */
+async function editorialTopology(client: PoolClient, targetId: string, course: boolean) {
+  const rows = await client.query<{ id: string; courseId: string; teacherUserId: string | null; publishedTeacherUserId: string | null }>(
+    `SELECT id,"courseId","teacherUserId","publishedTeacherUserId" FROM "AcademicGroup"
+     WHERE ${course ? '"courseId"=$1 AND state=\'PUBLISHED\'' : 'id=$1'} ORDER BY id`, [targetId]);
+  return { accountIds: rows.rows.flatMap(row => [row.teacherUserId, row.publishedTeacherUserId]).filter((id): id is string => id !== null),
+    courseIds: course ? [targetId] : rows.rows.map(row => row.courseId), groupIds: course ? rows.rows.map(row => row.id) : [targetId] };
+}
+
 /** Publicación US2 con el mismo escritor, ledger, auditoría y presupuesto transaccional.
  * No se conecta a HTTP aquí, ni implementa retiro/cancelación o lecturas de catálogo.
  */
@@ -330,13 +342,7 @@ export function createPublicationStore(pool: Pool, authorization: AcademicTransa
       if (typeof expectedRevision !== 'string' || !/^[1-9]\d{0,18}$/.test(expectedRevision) || BigInt(expectedRevision) > 9223372036854775807n) {
         throw new OfferingError({ code: 'VALIDATION_ERROR', fields: ['expectedRevision'] });
       }
-      const discover = async (client: PoolClient) => {
-        const rows = await client.query<{ id: string; courseId: string; teacherUserId: string | null; publishedTeacherUserId: string | null }>(
-          `SELECT id,"courseId","teacherUserId","publishedTeacherUserId" FROM "AcademicGroup"
-           WHERE ${course ? '"courseId"=$1 AND state=\'PUBLISHED\'' : 'id=$1'} ORDER BY id`, [targetId]);
-        return { accountIds: rows.rows.flatMap(row => [row.teacherUserId, row.publishedTeacherUserId]).filter((id): id is string => id !== null),
-          courseIds: course ? [targetId] : rows.rows.map(row => row.courseId), groupIds: course ? rows.rows.map(row => row.id) : [targetId] };
-      };
+      const discover = (client: PoolClient) => editorialTopology(client, targetId, course);
       return write<Resource>({ actor, permission: 'academic:manage', commandId, requestId, operation: command.operation,
         targetKind: course ? 'COURSE' : 'GROUP', targetId, expectedRevision, payload: {}, discover, recheck: client => discover(client),
         project: course ? projectCourse : projectGroup,
@@ -367,6 +373,54 @@ export function createPublicationStore(pool: Pool, authorization: AcademicTransa
           if (conflicts.length) throw new OfferingError({ code: 'TEACHER_SCHEDULE_CONFLICT', conflictingGroupIds: conflicts });
           await client.query(`UPDATE "AcademicGroup" SET state='PUBLISHED',"publishedTeacherUserId"="teacherUserId",
             "publishedTeacherEligibilityVersion"=$2,revision=revision+1 WHERE id=$1`, [targetId, input.teacher!.eligibilityVersion.toString()]);
+          return { resource: await projectGroup(client, targetId), result: 'APPLIED', beforeState: before.state, beforeRevision: before.revision };
+        },
+      });
+    },
+  };
+}
+
+/** US3: un cambio de estado, resultado de comando y auditoría en el mismo commit.
+ * No exige habilitación docente para retirar/cancelar, ni renueva sus capturas.
+ * El instante de cancelación procede de PostgreSQL dentro de esta transacción.
+ */
+export function createLifecycleStore(pool: Pool, authorization: AcademicTransactionDependencies,
+  write: AcademicCommandWriter = createAcademicCommandWriter(pool, authorization)): LifecycleStore {
+  return {
+    async execute(actor, command, context) {
+      if (!['COURSE_WITHDRAW', 'GROUP_WITHDRAW', 'GROUP_CANCEL'].includes(command.operation)) {
+        throw new OfferingError({ code: 'VALIDATION_ERROR' });
+      }
+      const course = command.operation === 'COURSE_WITHDRAW';
+      keys(command, ['operation', 'commandId', 'expectedRevision', course ? 'courseId' : 'groupId',
+        ...(command.operation === 'GROUP_CANCEL' ? ['cancellationReason'] : [])]);
+      const targetId = reference(course ? command.courseId : command.groupId);
+      const commandId = reference(command.commandId), requestId = reference(context.requestId);
+      const expectedRevision = command.expectedRevision;
+      if (typeof expectedRevision !== 'string' || !/^[1-9]\d{0,18}$/.test(expectedRevision) || BigInt(expectedRevision) > 9223372036854775807n) {
+        throw new OfferingError({ code: 'VALIDATION_ERROR', fields: ['expectedRevision'] });
+      }
+      const payload = command.operation === 'GROUP_CANCEL' ? { cancellationReason: cancellationReason(command.cancellationReason) } : {};
+      const discover = (client: PoolClient) => editorialTopology(client, targetId, course);
+      return write<Resource>({ actor, permission: 'academic:manage', commandId, requestId, operation: command.operation,
+        targetKind: course ? 'COURSE' : 'GROUP', targetId, expectedRevision, payload, discover, recheck: client => discover(client),
+        project: course ? projectCourse : projectGroup,
+        async apply(client) {
+          if (course) {
+            const before = await projectCourse(client, targetId), next = withdrawCourse(before);
+            await client.query('UPDATE "AcademicCourse" SET state=$2,revision=revision+1 WHERE id=$1', [targetId, next.state]);
+            return { resource: await projectCourse(client, targetId), result: 'APPLIED', beforeState: before.state, beforeRevision: before.revision };
+          }
+          const before = await projectGroup(client, targetId), current = { ...before, teacherUserId: before.teacher?.id ?? null };
+          if (command.operation === 'GROUP_CANCEL') {
+            const now = (await client.query<{ at: Date }>('SELECT clock_timestamp() AS at')).rows[0].at.toISOString();
+            const next = cancelGroup(current, { cancellationReason: payload.cancellationReason, cancelledAt: now });
+            await client.query(`UPDATE "AcademicGroup" SET state=$2,"cancellationReason"=$3,"cancelledAt"=$4,revision=revision+1 WHERE id=$1`,
+              [targetId, next.state, next.cancellationReason, next.cancelledAt]);
+          } else {
+            const next = withdrawGroup(current);
+            await client.query('UPDATE "AcademicGroup" SET state=$2,revision=revision+1 WHERE id=$1', [targetId, next.state]);
+          }
           return { resource: await projectGroup(client, targetId), result: 'APPLIED', beforeState: before.state, beforeRevision: before.revision };
         },
       });

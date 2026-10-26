@@ -41,3 +41,9 @@ export function editCourse<T extends Course>(current: T, input: unknown): T {
     ...(Object.hasOwn(values, 'description') ? { description: description(values.description) } : {}),
   };
 }
+
+/** Retirar solo cambia el curso; sus hijos conservan estado, programación y captura. */
+export function withdrawCourse<T extends Course>(current: T): Omit<T, 'state'> & { readonly state: 'WITHDRAWN' } {
+  if (current.state !== 'PUBLISHED') throw new OfferingError({ code: 'OFFERING_STATE_CONFLICT' });
+  return { ...current, state: 'WITHDRAWN' };
+}
