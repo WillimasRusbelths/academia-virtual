@@ -1,9 +1,9 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T064 completas; interfaz US4 verificada, checkpoint T066 pendiente.
-T058 cerrada con T062–T064; T065–T074 siguen pendientes.
-Siguiente bloque: T065/T066, regresión integral de identidad y checkpoint US4.
+**Estado**: T001–T066 completas; checkpoint automatizado US4 aprobado.
+T065 verifica regresión de identidad; T066 conserva separados aceptación humana y capacidad.
+Siguiente bloque: T067/T068, integración en CI y puerta automática final.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -533,8 +533,22 @@ cero esquemas t_ residuales. T065/T066 y aceptación/capacidad siguen pendientes
 igual que bootstrap, T104/T108 y decisiones de reservas; PA-01–PA-05/E1 intactos.
 Detenido antes de T065.
 
-- [ ] T065 [US4] Ejecutar regresión de identidad afectada conforme a `specs/002-oferta-academica/quickstart.md` y registrar `specs/002-oferta-academica/evidence/identity-regression.md`: todas las configuraciones E2E originales y PG acceso/reset/bootstrap/sesión/último ADMIN, CSRF/CSP; resultados nuevos separados de evidencia 001 y bootstrap intermitente sigue abierto (FR-016; V-A12).
-- [ ] T066 [US4] Ejecutar checkpoint en `specs/002-oferta-academica/evidence/us4.md`: ocho escenarios US4, T055–T059 y T065, tabla completa SC-003 sin combinaciones omitidas, carrera en ambos órdenes y ocultamiento persistente tras reactivación. No cerrar con fallos de autorización/privacidad (FR-009–012/016; SC-003/004/005).
+- [X] T065 [US4] Ejecutar regresión de identidad afectada conforme a `specs/002-oferta-academica/quickstart.md` y registrar `specs/002-oferta-academica/evidence/identity-regression.md`: todas las configuraciones E2E originales y PG acceso/reset/bootstrap/sesión/último ADMIN, CSRF/CSP; resultados nuevos separados de evidencia 001 y bootstrap intermitente sigue abierto (FR-016; V-A12).
+- [X] T066 [US4] Ejecutar checkpoint en `specs/002-oferta-academica/evidence/us4.md`: ocho escenarios US4, T055–T059 y T065, tabla completa SC-003 sin combinaciones omitidas, carrera en ambos órdenes y ocultamiento persistente tras reactivación. No cerrar con fallos de autorización/privacidad (FR-009–012/016; SC-003/004/005).
+
+Avance T065/T066, 2026-10-26: regresión identidad 672/672 PG/HTTP
+y 203/203 E2E en diez configuraciones originales. Checkpoint US4
+695/695 PG/HTTP, T058/T059 24 casos únicos/48 ejecuciones aprobadas,
+harness adicional 2/2 separado y arquitectura 14/14; tipos/build API/web y lint verdes.
+Matriz SC-003 350 combinaciones actor/operación/estado y 84 pérdidas de acceso,
+sin omisiones. Fixture US6 corregida por FK aditiva, sin cambiar aserciones ni
+producto; error inicial del selector base y 12/14 del primer ADMIN preservados,
+con repeticiones completas aprobadas. [Identidad](evidence/identity-regression.md),
+[checkpoint](evidence/us4.md) y [matriz](evidence/us4-authorization-matrix.md).
+72 archivos protegidos y entorno/volúmenes manuales conservados; cero esquemas t_.
+PA-01–PA-05/E1 intactos; timeout D10 sin causa identificada y bootstrap abiertos;
+T104/T108, aceptación humana/integral y capacidad pendientes. T067–T074 pendientes.
+Detenido antes de T067.
 
 ## Fase 7: integración, documentación y aceptación (T067–T074)
 

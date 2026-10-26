@@ -29,7 +29,10 @@ async function bootstrapEnvironment(){
     return {context,async reset(){
       if(!/^t_[a-z0-9_]+$/.test(context.environment.databaseSchema))throw new Error('Restablecimiento de ensayo no permitido.');
       await scheduler.beforeApplicationShutdown();
-      await context.isolated.ownerQuery(`TRUNCATE "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+      // La migración aditiva incorpora FK a User: limpiar también sus tablas en este
+      // esquema ficticio, con lista explícita y sin CASCADE sobre datos compartidos.
+      await context.isolated.ownerQuery(`TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent",
+        "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
         INSERT INTO "SystemState" (id) VALUES (1);`);
       scheduler.onApplicationBootstrap();
     },cleanup};
