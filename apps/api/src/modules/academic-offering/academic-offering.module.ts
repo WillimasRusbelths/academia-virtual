@@ -3,12 +3,13 @@ import type { DynamicModule } from '@nestjs/common';
 import type { TeachingDirectory } from '../users/public/teaching-directory.js';
 import type { AcademicCommandWriter } from './infrastructure/offering-store.js';
 import type { PreparationCommands, PublicationCommands, LifecycleCommands } from './application/commands.js';
-import type { AdministrativeReads, CatalogReads } from './application/queries.js';
+import type { AdministrativeReads, CatalogReads, TeachingReads } from './application/queries.js';
 import { ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_PUBLICATION_COMMANDS, ACADEMIC_LIFECYCLE_COMMANDS } from './application/commands.js';
-import { ACADEMIC_ADMINISTRATIVE_QUERIES, ACADEMIC_CATALOG_QUERIES } from './application/queries.js';
+import { ACADEMIC_ADMINISTRATIVE_QUERIES, ACADEMIC_CATALOG_QUERIES, ACADEMIC_TEACHING_QUERIES } from './application/queries.js';
 import { AcademicAdminController } from './entrypoints/http/admin.controller.js';
 import { AcademicCatalogController } from './entrypoints/http/catalog.controller.js';
-export { ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_PUBLICATION_COMMANDS, ACADEMIC_LIFECYCLE_COMMANDS, ACADEMIC_ADMINISTRATIVE_QUERIES, ACADEMIC_CATALOG_QUERIES };
+import { AcademicTeachingController } from './entrypoints/http/teaching.controller.js';
+export { ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_PUBLICATION_COMMANDS, ACADEMIC_LIFECYCLE_COMMANDS, ACADEMIC_ADMINISTRATIVE_QUERIES, ACADEMIC_CATALOG_QUERIES, ACADEMIC_TEACHING_QUERIES };
 
 export const ACADEMIC_COMMAND_WRITER = Symbol('AcademicCommandWriter');
 export const ACADEMIC_TEACHING_DIRECTORY = Symbol('AcademicTeachingDirectory');
@@ -20,8 +21,9 @@ export const ACADEMIC_TEACHING_DIRECTORY = Symbol('AcademicTeachingDirectory');
 export class AcademicOfferingModule {
   static forRoot(writer: AcademicCommandWriter, directory: TeachingDirectory,
     preparation?: { readonly commands: PreparationCommands; readonly queries: AdministrativeReads;
-      readonly publication: PublicationCommands; readonly catalog: CatalogReads; readonly lifecycle: LifecycleCommands }): DynamicModule {
-    return { module: AcademicOfferingModule, controllers: preparation ? [AcademicAdminController, AcademicCatalogController] : [], providers: [
+      readonly publication: PublicationCommands; readonly catalog: CatalogReads; readonly lifecycle: LifecycleCommands;
+      readonly teaching: TeachingReads }): DynamicModule {
+    return { module: AcademicOfferingModule, controllers: preparation ? [AcademicAdminController, AcademicCatalogController, AcademicTeachingController] : [], providers: [
       { provide: ACADEMIC_COMMAND_WRITER, useValue: writer },
       { provide: ACADEMIC_TEACHING_DIRECTORY, useValue: directory },
       ...(preparation ? [
@@ -30,9 +32,10 @@ export class AcademicOfferingModule {
         { provide: ACADEMIC_PUBLICATION_COMMANDS, useValue: preparation.publication },
         { provide: ACADEMIC_LIFECYCLE_COMMANDS, useValue: preparation.lifecycle },
         { provide: ACADEMIC_CATALOG_QUERIES, useValue: preparation.catalog },
+        { provide: ACADEMIC_TEACHING_QUERIES, useValue: preparation.teaching },
       ] : []),
     ], exports: [ACADEMIC_COMMAND_WRITER, ACADEMIC_TEACHING_DIRECTORY,
       ...(preparation ? [ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_ADMINISTRATIVE_QUERIES,
-        ACADEMIC_PUBLICATION_COMMANDS, ACADEMIC_LIFECYCLE_COMMANDS, ACADEMIC_CATALOG_QUERIES] : [])] };
+        ACADEMIC_PUBLICATION_COMMANDS, ACADEMIC_LIFECYCLE_COMMANDS, ACADEMIC_CATALOG_QUERIES, ACADEMIC_TEACHING_QUERIES] : [])] };
   }
 }

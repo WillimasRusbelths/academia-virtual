@@ -1,10 +1,10 @@
 import type { Pool, PoolClient } from 'pg';
 import type { SessionRepository } from '../../authorization/public/session.js';
-import { AdministrativeQueries, CatalogQueries } from '../application/queries.js';
-import type { AdministrativeReads, CatalogReads } from '../application/queries.js';
+import { AdministrativeQueries, CatalogQueries, TeachingQueries } from '../application/queries.js';
+import type { AdministrativeReads, CatalogReads, TeachingReads } from '../application/queries.js';
 import type { NameQuery } from '../application/offering-store.js';
 import { OfferingError } from '../public/offer.js';
-import type { AdminCourse, AdminGroup, CatalogCourse, CatalogGroup, Page, TeacherCandidate } from '../public/offer.js';
+import type { AdminCourse, AdminGroup, CatalogCourse, CatalogGroup, Page, TeacherCandidate, TeachingGroup } from '../public/offer.js';
 
 // Superficie pública SQL de usuarios. Nunca consultar columnas privadas de User.
 const visible = `g.state='PUBLISHED' AND g."teacherUserId"=g."publishedTeacherUserId"
@@ -147,4 +147,39 @@ export function createCatalogQueries(pool: Pool, sessions: Pick<SessionRepositor
     },
   };
   return new CatalogQueries(reads, sessions);
+}
+
+// Contexto de curso cerrado, sin hermanos ni diagnóstico administrativo. No filtrar
+// por estado, captura o elegibilidad: el docente consulta su asignación vigente.
+const teachingGroupProjection = `SELECT g.id,
+  jsonb_build_object('id',c.id,'name',c.name,'description',c.description) AS course,
+  g.name,g.state,to_char(g."periodStart",'YYYY-MM-DD') AS "periodStart",
+  to_char(g."periodEnd",'YYYY-MM-DD') AS "periodEnd",g."timeZone",g.capacity,
+  NULL::integer AS occupancy,NULL::integer AS availability,'NOT_CALCULATED'::text AS "capacityStatus",
+  COALESCE((SELECT jsonb_agg(jsonb_build_object('dayOfWeek',s."dayOfWeek",
+    'startTime',lpad((s."startMinute"/60)::text,2,'0')||':'||lpad((s."startMinute"%60)::text,2,'0'),
+    'endTime',lpad((s."endMinute"/60)::text,2,'0')||':'||lpad((s."endMinute"%60)::text,2,'0'))
+    ORDER BY s."dayOfWeek",s."startMinute",s."endMinute") FROM "AcademicSlot" s WHERE s."groupId"=g.id),'[]'::jsonb) AS schedule,
+  jsonb_build_object('name',d.name) AS teacher
+  FROM "AcademicGroup" g JOIN "AcademicCourse" c ON c.id=g."courseId"
+  JOIN "AcademicTeacherDirectory" d ON d."userId"=g."teacherUserId"`;
+
+export function createTeachingQueries(pool: Pool, sessions: Pick<SessionRepository, 'accept'>): TeachingReads {
+  async function query<T>(sql: string, values: readonly unknown[]): Promise<T> {
+    try { return (await pool.query<T & Record<string, unknown>>(sql, [...values])).rows[0]; }
+    catch { throw new OfferingError({ code: 'TEMPORARILY_UNAVAILABLE' }); }
+  }
+  const reads: TeachingReads = {
+    async teachingGroups(actor, input) {
+      if (Object.keys(input).some(key => !['page', 'pageSize'].includes(key))) throw new OfferingError({ code: 'VALIDATION_ERROR' });
+      const result = await query<Pick<Page<TeachingGroup>, 'items' | 'total'>>(paginated(teachingGroupProjection,
+        `g."teacherUserId"=$4 AND $1::text=''`), [...page(input), actor.userId]);
+      return { ...result, page: input.page, pageSize: input.pageSize };
+    },
+    async teachingGroup(actor, id) {
+      return (await query<{ resource: TeachingGroup | null }>(`SELECT (SELECT to_jsonb(p)
+        FROM (${teachingGroupProjection} WHERE g.id=$1 AND g."teacherUserId"=$2) p) AS resource`, [id, actor.userId])).resource;
+    },
+  };
+  return new TeachingQueries(reads, sessions);
 }

@@ -123,14 +123,19 @@ reales. El [checkpoint US3 T053/T054](../../specs/002-oferta-academica/evidence/
 verifica los diez escenarios y regresión US1/US2, con guía editorial y corrección
 de avisos 503 sin cambios de negocio. T001–T054 completas. Las
 [pruebas PG/HTTP US4 T055–T057](../../specs/002-oferta-academica/evidence/t055-t057.md)
-ejecutan 516 casos únicos: 437 aprobados y 79 pendientes de consultas/rutas docentes
-T060/T061. T056 completa (11/11); T055/T057 permanecen pendientes. Regresión dirigida
+ejecutaron inicialmente 516 casos únicos: 437 aprobados y 79 pendientes de consultas/rutas
+docentes T060/T061. En ese avance, T056 completa (11/11) y T055/T057 pendientes. Regresión dirigida
 46/46, sin implementación de producto ni cambios de negocio. Las
 [pruebas E2E T058/T059](../../specs/002-oferta-academica/evidence/t058-t059.md)
 verifican T059 con seis casos únicos en escritorio/móvil (12 ejecuciones); T058
 conserva 18 casos únicos pendientes de las capas docentes, sin anticipar resultados
-de sus aserciones posteriores. No se modifican producto ni reglas de negocio.
-Siguiente bloque T060/T061: consultas propias y rutas HTTP.
+de sus aserciones posteriores. Ese bloque de pruebas no modificó producto ni reglas de negocio.
+El [backend propio T060/T061](../../specs/002-oferta-academica/evidence/t060-t061.md)
+implementa las consultas y dos rutas GET docentes, cerrando T055/T057 con todas sus
+aserciones: 547/547 PG/HTTP (516 conservadas y 31 adicionales), 335/335 UNIT/arquitectura
+y 129/129 regresión dirigida. Tipos, lint y compilación API/web aprobados. T058 sigue
+pendiente de las pantallas/navegación; sin nueva ejecución E2E, smokes o cargas.
+Siguiente bloque T062–T064: revisión administrativa, Mis grupos y navegación.
 La aceptación humana/integral permanece pendiente.
 Se conserva el timeout B02 de regresión y su repetición
 aprobada sin ampliar límites; no acredita estabilidad ni cierre de bootstrap.

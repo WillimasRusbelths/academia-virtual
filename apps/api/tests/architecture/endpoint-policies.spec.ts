@@ -71,6 +71,8 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
     'GET /api/v1/academic/courses/:id':'academic:read-published',
     'GET /api/v1/academic/courses/:courseId/groups':'academic:read-published',
     'GET /api/v1/academic/courses/:courseId/groups/:id':'academic:read-published',
+    'GET /api/v1/teaching/groups':'academic:read-own',
+    'GET /api/v1/teaching/groups/:id':'academic:read-own',
   });
 });
 

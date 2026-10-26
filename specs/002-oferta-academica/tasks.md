@@ -1,9 +1,9 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T054, T056 y T059 completas; checkpoint automatizado US3 aprobado.
-T055/T057 pendientes de consultas/rutas T060/T061; T058 pendiente de capas docentes.
-Siguiente bloque: T060/T061, consultas propias y rutas HTTP antes de las pantallas.
+**Estado**: T001–T057 y T059–T061 completas; checkpoint automatizado US3 aprobado.
+T058 pendiente de pantallas/navegación docente T063/T064; backend propio verificado.
+Siguiente bloque: T062–T064, revisión administrativa, Mis grupos e integración de rutas.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -17,8 +17,8 @@ T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
 originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
 en ese checkpoint, T047 y T050–T074 permanecían pendientes. El cierre actual
 T047/T050/T051, la ampliación T052 y el checkpoint T053/T054 se detallan abajo;
-T055/T057/T058 y T060–T074 siguen pendientes; T056 verificada con PostgreSQL real
-y T059 con recorridos reales de escritorio/móvil.
+T055/T057 cerradas con T060/T061 y todas sus aserciones; T058 y T062–T074 siguen
+pendientes. T059 conserva su cierre E2E previo, sin nueva ejecución en este bloque.
 SC-002 humano sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
@@ -52,7 +52,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [auditoría persistente y logs T052](evidence/t052.md) y
 [checkpoint US3 y guía T053/T054](evidence/us3.md) y
 [autorización, habilitación y privacidad T055–T057](evidence/t055-t057.md) y
-[recorridos docentes y revisión T058/T059](evidence/t058-t059.md).
+[recorridos docentes y revisión T058/T059](evidence/t058-t059.md) y
+[consultas/rutas propias y cierre T055/T057/T060/T061](evidence/t060-t061.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -67,8 +68,9 @@ T049 conectó y verificó HTTP real, cerrando T044/T048. El bloque T050/T051 ver
 la interfaz y cerró T047. T052 verificó auditoría/replay y logs. T053/T054 verificaron
 el checkpoint US3 y documentaron el ciclo editorial, incluyendo una corrección
 de textos 503 detectada por la regresión. T055–T057 prepararon pruebas PG/HTTP y
-verificaron T056. El bloque actual prepara E2E T058/T059 y verifica T059; T055/T057
-siguen pendientes de T060/T061 y T058 de las capas docentes. Reservas de
+verificaron T056. T058/T059 prepararon E2E y verificaron T059. El bloque actual
+implementa/verifica T060/T061 y cierra T055/T057, sin cambiar sus pruebas originales.
+T058 sigue pendiente de las capas web T063/T064. Reservas de
 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
@@ -468,9 +470,9 @@ Depende de US3 para retiro/republicación y conserva desde fundamentos la seguri
 Prueba independiente: administrador/alumno/docente propio/ajeno/visitante y cuentas
 activas/desactivadas con todos los estados académicos; ocho escenarios US4.
 
-- [ ] T055 [P] [US4] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-authorization.spec.ts`: matriz enumerada de cada ruta/método × actor × estado, docente asignado/ajeno, sesión revocada/expirada y cambio de rol; 401/403/404 y cero efectos/datos denegados (FR-009/010/016; SC-003).
+- [X] T055 [P] [US4] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-authorization.spec.ts`: matriz enumerada de cada ruta/método × actor × estado, docente asignado/ajeno, sesión revocada/expirada y cambio de rol; 401/403/404 y cero efectos/datos denegados (FR-009/010/016; SC-003).
 - [X] T056 [P] [US4] Escribir PG en `apps/api/tests/integration/academic-offering-teacher.spec.ts`: publicación vs pérdida de habilitación en ambos órdenes con barreras, pérdida→recuperación sin lecturas, recuperación sin republicar, reset sin ocultar, grupo cancelado no recuperable, publicar curso no limpia revisión. Termina con snapshot/generación/visibilidad final correctos (FR-007/010/012/016; SC-004).
-- [ ] T057 [P] [US4] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-privacy.spec.ts`: DTO/contadores/filtros por audiencia, docente propio en cualquier estado y contexto curso sin hermanos; no email, cuenta, generación, revisión ni motivo de cancelación; GET no muta ni habilita (FR-009–012; SC-003).
+- [X] T057 [P] [US4] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-privacy.spec.ts`: DTO/contadores/filtros por audiencia, docente propio en cualquier estado y contexto curso sin hermanos; no email, cuenta, generación, revisión ni motivo de cancelación; GET no muta ni habilita (FR-009–012; SC-003).
 Avance T055–T057, 2026-10-26: 516 casos únicos PG/HTTP ejecutados; 437 aprobados
 y 79 rojos por consultas/rutas docentes ausentes T060/T061. T056 completa con
 11/11, incluidas cuatro carreras observadas en ambos órdenes y generación/snapshot
@@ -499,8 +501,21 @@ casos/ejecuciones y límites en [evidencia](evidence/t058-t059.md).
 Siguiente bloque T060/T061. E1/PA-01–PA-05 intactos; bootstrap, capacidad, T065/T066
 y aceptación humana/integral pendientes.
 
-- [ ] T060 [US4] Completar consultas propias y diagnóstico admin en `apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts` y `application/queries.ts`: asignación actual por actor en misma sentencia, revisión derivada sin nuevo estado/flag mutable, proyecciones cerradas. Termina con T055/T057 verdes para lecturas (FR-009–012).
-- [ ] T061 [US4] Exponer `/teaching/groups` y `/:id` en `apps/api/src/modules/academic-offering/entrypoints/http/teaching.controller.ts`; academic:read-own, paginación y contexto autorizado, sin acciones de escritura ni consulta general de curso. Termina con T055/T057 y T017 verdes (FR-009/010/011).
+- [X] T060 [US4] Completar consultas propias y diagnóstico admin en `apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts` y `application/queries.ts`: asignación actual por actor en misma sentencia, revisión derivada sin nuevo estado/flag mutable, proyecciones cerradas. Termina con T055/T057 verdes para lecturas (FR-009–012).
+- [X] T061 [US4] Exponer `/teaching/groups` y `/:id` en `apps/api/src/modules/academic-offering/entrypoints/http/teaching.controller.ts`; academic:read-own, paginación y contexto autorizado, sin acciones de escritura ni consulta general de curso. Termina con T055/T057 y T017 verdes (FR-009/010/011).
+
+Avance T060/T061, 2026-10-26: consultas propias y dos rutas GET reales, con
+asignación vigente en la misma sentencia, DTO cerrado y sesión aceptada antes de
+entregar. Diagnóstico administrativo derivado conservado, sin flags nuevos.
+T055 completa 434/434; T057 completa 71/71; sus 79 casos antes bloqueados alcanzan
+todas las aserciones. T056 repite 11/11 y hay 31 verificaciones adicionales: total
+547/547 PG/HTTP del bloque, 335/335 UNIT/arquitectura y 129/129 regresión dirigida.
+Tipos, lint y compilación API/web aprobados. [Evidencia](evidence/t060-t061.md).
+T060/T061 completas; T058 y T062–T074 pendientes. Sin UI, migraciones, smokes ni
+cargas nuevas; entorno manual y 72 archivos protegidos conservados, cero esquemas
+t_ residuales. PA-01–PA-05/E1 intactos; bootstrap y aceptación/capacidad sin cerrar.
+Siguiente bloque T062–T064; detener antes de T062 en este avance.
+
 - [ ] T062 [US4] Completar asignación/revisión administrativa en `apps/web/src/features/academic-offering/admin-group-page.tsx` y `group-form.tsx`: referencia previa, «Docente no habilitado»/«Revisión docente requerida», edición solo tras retirar y publicación explícita. Termina con T059 verde y sin alterar reglas de identidad (FR-012/013/016).
 - [ ] T063 [US4] Crear `apps/web/src/features/academic-offering/teaching-groups-page.tsx` y `teaching-group-page.tsx`, sin controles de gestión ni incidentes privados; campos incompletos «Sin configurar». Termina con T058 verde tras integración de rutas (FR-009/011/013/014).
 - [ ] T064 [US4] Integrar Mis grupos y enlaces por rol en `apps/web/src/app/App.tsx`, `router.tsx`, `protected-route.tsx` y `apps/web/src/features/profile/home-page.tsx`; verificar limpieza/cancelación al revocar sesión en `apps/web/src/app/session.tsx` sin replay. Termina con T058/T059 verdes y regresión de acceso/perfil (FR-009/010/014/016).

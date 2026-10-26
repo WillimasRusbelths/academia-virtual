@@ -31,7 +31,7 @@ import { PostgresAccessChangeStore } from './modules/identity/infrastructure/acc
 import { PostgresPasswordResetStore } from './modules/identity/infrastructure/password-reset-store.js';
 import { AcademicOfferingModule } from './modules/academic-offering/academic-offering.module.js';
 import { createAcademicCommandWriter, createPreparationStore, createPublicationStore, createLifecycleStore } from './modules/academic-offering/infrastructure/offering-store.js';
-import { createAdministrativeQueries, createCatalogQueries } from './modules/academic-offering/infrastructure/offering-queries.js';
+import { createAdministrativeQueries, createCatalogQueries, createTeachingQueries } from './modules/academic-offering/infrastructure/offering-queries.js';
 import { PreparationCommands, PublicationCommands, LifecycleCommands } from './modules/academic-offering/application/commands.js';
 import { PostgresTeachingDirectory } from './modules/users/infrastructure/teaching-directory.js';
 
@@ -62,6 +62,7 @@ export class AppModule {
           publication: new PublicationCommands(createPublicationStore(database.pool, academicAuthorization, academicWriter)),
           lifecycle: new LifecycleCommands(createLifecycleStore(database.pool, academicAuthorization, academicWriter)),
           catalog: createCatalogQueries(database.pool, sessions),
+          teaching: createTeachingQueries(database.pool, sessions),
         })],
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
