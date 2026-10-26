@@ -113,9 +113,10 @@ ambos historiales (`eafae88` y `061b183`); T035/T039–T041 quedan verificadas s
 [checkpoint T042](../../specs/002-oferta-academica/evidence/us2.md) aprueba la verificación
 automatizada US2 y su regresión. Las [pruebas US3 T043–T047](../../specs/002-oferta-academica/evidence/t043-t047.md)
 se conservan; el [escritor real T048](../../specs/002-oferta-academica/evidence/t048.md)
-verifica y cierra T043/T045/T046. T044/T047 siguen pendientes, y el cierre literal
-de T048 exige T044 HTTP verde mediante T049, próximo bloque. La observación humana
-SC-002/T073 y la interfaz posterior siguen pendientes. No se incorporan
+verifica y cierra T043/T045/T046. Las [rutas T049](../../specs/002-oferta-academica/evidence/t049.md)
+cierran T044/T048/T049 con sus pruebas reales y políticas; T047 sigue pendiente
+del próximo bloque de interfaz T050/T051. La observación humana SC-002/T073 sigue
+pendiente. No se incorporan
 reservas, órdenes, matrícula o pagos al spec 002.
 Aquí no se cambia su plan ni sus
 checklists/criterios históricos de constitución 1.1.0; la enmienda 1.2.0 gobierna el

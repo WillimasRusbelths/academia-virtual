@@ -30,9 +30,9 @@ import { PostgresAccountCreationStore } from './modules/identity/infrastructure/
 import { PostgresAccessChangeStore } from './modules/identity/infrastructure/access-change-store.js';
 import { PostgresPasswordResetStore } from './modules/identity/infrastructure/password-reset-store.js';
 import { AcademicOfferingModule } from './modules/academic-offering/academic-offering.module.js';
-import { createAcademicCommandWriter, createPreparationStore, createPublicationStore } from './modules/academic-offering/infrastructure/offering-store.js';
+import { createAcademicCommandWriter, createPreparationStore, createPublicationStore, createLifecycleStore } from './modules/academic-offering/infrastructure/offering-store.js';
 import { createAdministrativeQueries, createCatalogQueries } from './modules/academic-offering/infrastructure/offering-queries.js';
-import { PreparationCommands, PublicationCommands } from './modules/academic-offering/application/commands.js';
+import { PreparationCommands, PublicationCommands, LifecycleCommands } from './modules/academic-offering/application/commands.js';
 import { PostgresTeachingDirectory } from './modules/users/infrastructure/teaching-directory.js';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
@@ -60,6 +60,7 @@ export class AppModule {
           commands: new PreparationCommands(createPreparationStore(database.pool, academicAuthorization, academicWriter)),
           queries: createAdministrativeQueries(database.pool, sessions),
           publication: new PublicationCommands(createPublicationStore(database.pool, academicAuthorization, academicWriter)),
+          lifecycle: new LifecycleCommands(createLifecycleStore(database.pool, academicAuthorization, academicWriter)),
           catalog: createCatalogQueries(database.pool, sessions),
         })],
       controllers: [HealthController], providers: [

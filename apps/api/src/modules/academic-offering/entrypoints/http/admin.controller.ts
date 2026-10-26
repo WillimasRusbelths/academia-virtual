@@ -1,8 +1,8 @@
 import { Body, Controller, Get, HttpCode, Inject, Param, Patch, Post, Put, Query, Req, SetMetadata } from '@nestjs/common';
 import { ACCESS_POLICY } from '../../../authorization/public/session.js';
 import type { SessionActor } from '../../../authorization/public/session.js';
-import { ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_PUBLICATION_COMMANDS } from '../../application/commands.js';
-import type { PreparationCommands, PublicationCommands } from '../../application/commands.js';
+import { ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_PUBLICATION_COMMANDS, ACADEMIC_LIFECYCLE_COMMANDS } from '../../application/commands.js';
+import type { PreparationCommands, PublicationCommands, LifecycleCommands } from '../../application/commands.js';
 import { ACADEMIC_ADMINISTRATIVE_QUERIES } from '../../application/queries.js';
 import type { AdministrativeReads } from '../../application/queries.js';
 import type { CourseQuery, GroupQuery, NameQuery } from '../../application/offering-store.js';
@@ -55,7 +55,30 @@ function body(request: Request, input: unknown, schema: Record<string, (value: u
 export class AcademicAdminController {
   constructor(@Inject(ACADEMIC_PREPARATION_COMMANDS) private readonly commands: PreparationCommands,
     @Inject(ACADEMIC_ADMINISTRATIVE_QUERIES) private readonly queries: AdministrativeReads,
-    @Inject(ACADEMIC_PUBLICATION_COMMANDS) private readonly publication: PublicationCommands) {}
+    @Inject(ACADEMIC_PUBLICATION_COMMANDS) private readonly publication: PublicationCommands,
+    @Inject(ACADEMIC_LIFECYCLE_COMMANDS) private readonly lifecycle: LifecycleCommands) {}
+  @Post('courses/:id/withdraw')
+  @HttpCode(200)
+  async withdrawCourse(@Req() request: Request, @Param('id') courseId: string, @Body() input: unknown, @Query() search: unknown) {
+    strictDto(search, {}); const values = body(request, input, {}, true);
+    return { data: await this.lifecycle.execute(request.actor, { operation: 'COURSE_WITHDRAW', courseId: id(courseId),
+      commandId: values.commandId as string, expectedRevision: values.expectedRevision as string }, { requestId: request.requestId! }) };
+  }
+  @Post('groups/:id/withdraw')
+  @HttpCode(200)
+  async withdrawGroup(@Req() request: Request, @Param('id') groupId: string, @Body() input: unknown, @Query() search: unknown) {
+    strictDto(search, {}); const values = body(request, input, {}, true);
+    return { data: await this.lifecycle.execute(request.actor, { operation: 'GROUP_WITHDRAW', groupId: id(groupId),
+      commandId: values.commandId as string, expectedRevision: values.expectedRevision as string }, { requestId: request.requestId! }) };
+  }
+  @Post('groups/:id/cancel')
+  @HttpCode(200)
+  async cancelGroup(@Req() request: Request, @Param('id') groupId: string, @Body() input: unknown, @Query() search: unknown) {
+    strictDto(search, {}); const values = body(request, input, { cancellationReason: text }, true);
+    return { data: await this.lifecycle.execute(request.actor, { operation: 'GROUP_CANCEL', groupId: id(groupId),
+      commandId: values.commandId as string, expectedRevision: values.expectedRevision as string,
+      cancellationReason: values.cancellationReason as string }, { requestId: request.requestId! }) };
+  }
   @Post('courses/:id/publish')
   @HttpCode(200)
   async publishCourse(@Req() request: Request, @Param('id') courseId: string, @Body() input: unknown, @Query() search: unknown) {
