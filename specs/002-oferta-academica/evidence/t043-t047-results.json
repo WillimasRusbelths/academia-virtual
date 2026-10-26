@@ -1,0 +1,4024 @@
+{
+  "date": "2026-10-25",
+  "startedDate": "2026-10-23",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "source": "32d3f80",
+  "constitution": "1.2.0",
+  "scope": [
+    "T043",
+    "T044",
+    "T045",
+    "T046",
+    "T047"
+  ],
+  "next": "T048",
+  "taskStatus": {
+    "T043": "Pending; tests prepared/executed, 8 of 27 behavior cases passed",
+    "T044": "Pending; 9 business + 1 auxiliary passed, 37 missing-route failures",
+    "T045": "Pending; 16 passed, 2 missing-writer failures",
+    "T046": "Pending; 5 academic races + 1 auxiliary passed, 6 races not reached",
+    "T047": "Pending; 3 of 10 unique cases passed on both viewports"
+  },
+  "commands": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-24T00:40:57.399Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-24T00:41:16.090Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "build",
+      "exitCode": 0,
+      "date": "2026-10-24T00:35:26.817Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "unit",
+      "exitCode": 1,
+      "date": "2026-10-24T00:36:00.789Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lifecycle-utc",
+      "exitCode": 1,
+      "date": "2026-10-24T00:36:20.347Z",
+      "timezone": "UTC"
+    },
+    {
+      "action": "integration",
+      "exitCode": 1,
+      "date": "2026-10-24T00:42:03.684Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser",
+      "exitCode": 1,
+      "date": "2026-10-26T00:23:59.757Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "suites": {
+    "apiUnit": {
+      "executions": 335,
+      "passed": 316,
+      "failed": 19,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "endpoint-policies.spec.ts",
+          "cases": [
+            {
+              "name": "T088: todos los endpoints compilados tienen la política explícita de su contrato",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T017 familias académicas: GET /api/v1/admin/academic/courses exige academic:manage y nunca admite public/ausencia/otra audiencia",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T017 familias académicas: GET /api/v1/academic/courses/:courseId/groups/:id exige academic:read-published y nunca admite public/ausencia/otra audiencia",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T017 familias académicas: GET /api/v1/teaching/groups/:id exige academic:read-own y nunca admite public/ausencia/otra audiencia",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "import-boundaries.spec.ts",
+          "cases": [
+            {
+              "name": "límites del monolito modular dominio no importa Nest ni infraestructura",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "límites del monolito modular aplicación usa dominio y otro módulo solo por public",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "límites del monolito modular frontend mantiene shared y features sin ciclos laterales",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "límites del monolito modular T017 oferta mantiene núcleo puro y superficies públicas, incluso en infraestructura",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "layers.spec.ts",
+          "cases": [
+            {
+              "name": "VA: dependencias del código real T017 oferta y directorio se incluyen en el grafo real, sin callbacks de identidad a oferta",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "VA: dependencias del código real todas las capas cumplen ESLint, incluido guard y superficies públicas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "VA: dependencias del código real el cierre transitivo del núcleo no alcanza IO, composición ni DTO HTTP",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "VA: dependencias del código real el grafo de archivos y las raíces de composición no tienen ciclos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "VA: dependencias del código real HTTP y CLI consumen aplicación; no comparten reglas a través de entradas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "VA: dependencias del código real las barreras rechazan escapes reales que el patrón de carpetas no cubría",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "course.test.ts",
+          "cases": [
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C01 alta incompleta: referencia del servidor estable, nombre recortado, DRAFT y descripción null",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C02 descripción null se normaliza a null en preparación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C02 descripción \"\" se normaliza a null en preparación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C02 descripción \" \\t\\n \" se normaliza a null en preparación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C03 recorta descripción; no interpreta HTML ni elimina contenido interno",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \"\" con error de campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \" \\t\\n \" con error de campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido null con error de campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido 123 con error de campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido undefined con error de campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual 42",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual {}",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C06 nombres repetidos permitidos, referencias distintas y sin límite nuevo de longitud",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C07 edita DRAFT sin publicar ni cambiar referencia",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C07 edita WITHDRAWN sin publicar ni cambiar referencia",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C08 PATCH de descripción conserva nombre; PATCH de nombre conserva descripción",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C09 publicado exige retiro antes de editar, aunque el cambio sea válido",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C10 cambio inválido no modifica parcialmente el curso recibido",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 curso — FR-001/002; V-A01 C11 curso solo posee datos académicos generales, sin capacidad, docente ni horario",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "group.test.ts",
+          "cases": [
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G01 omisión inicial permite DRAFT incompleto con capacidad null y zona explícita",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 1 se conserva exactamente",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 50 se conserva exactamente",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 25 se conserva exactamente",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada null, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada vacía, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada blanco, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada string 25, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada cero, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada negativa, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada fracción, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada 51, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada NaN, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada Infinity, no la confunde con omisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad null y conserva la configurada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad \"\" y conserva la configurada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 0 y conserva la configurada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad -1 y conserva la configurada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 1.5 y conserva la configurada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 51 y conserva la configurada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 1 sin publicar",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 50 sin publicar",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \"\" se rechaza por campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \" \\t\\n \" se rechaza por campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido null se rechaza por campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido 42 se rechaza por campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido undefined se rechaza por campo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de DRAFT conserva referencias y estado; omitir capacidad la conserva",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de WITHDRAWN conserva referencias y estado; omitir capacidad la conserva",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de PUBLISHED sin cambios parciales",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de CANCELLED sin cambios parciales",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G09 dos grupos del mismo curso son independientes, incluso con nombre repetido",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G10 periodo parcial válido permite preparación incompleta",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G12 grupo admite periodo inclusivo de un solo día real",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodStart inválido 2026-02-29",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodEnd inválido 2026-04-31",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza timeZone inválido UTC",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G14 edición rechaza periodo invertido y no aplica el nombre parcialmente",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G11 grupo no exige mínimo 40, código manual ni nombre único",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "lifecycle.test.ts",
+          "cases": [
+            {
+              "name": "M01 retirar curso publicado conserva datos, no muta entrada ni decide hijos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M02 retirar curso DRAFT es transición inválida, nunca NO_CHANGE",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M02 retirar curso WITHDRAWN es transición inválida, nunca NO_CHANGE",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M02 retirar curso CANCELLED es transición inválida, nunca NO_CHANGE",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M03 retirar grupo conserva snapshot/periodo/capacidad/franjas, sin reloj o revisión propios",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M04 retirar grupo DRAFT no es no-op",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M04 retirar grupo WITHDRAWN no es no-op",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M04 retirar grupo CANCELLED no es no-op",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M05 cancelar DRAFT conserva snapshot/datos y usa instante suministrado por aplicación",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M05 cancelar PUBLISHED conserva snapshot/datos y usa instante suministrado por aplicación",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M05 cancelar WITHDRAWN conserva snapshot/datos y usa instante suministrado por aplicación",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M06 cancelar otra vez nunca responde NO_CHANGE ni cambia el motivo",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 0 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 1 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 2 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 3 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 4 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 5 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 6 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M08 datos idénticos de curso DRAFT conservan estado y revisión para NO_CHANGE del escritor",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M09 grupo DRAFT: edición efectiva preserva captura previa y no publica",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M08 datos idénticos de curso WITHDRAWN conservan estado y revisión para NO_CHANGE del escritor",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M09 grupo WITHDRAWN: edición efectiva preserva captura previa y no publica",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M10 editar grupo PUBLISHED incluso con datos iguales se rechaza",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M10 editar grupo CANCELLED incluso con datos iguales se rechaza",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M11 curso publicado no admite edición idéntica; curso no tiene cancelación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M12 retirar el padre no vuelve editable al hijo publicado",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "rules-regression.test.ts",
+          "cases": [
+            {
+              "name": "R01 ordinal civil contrasta siglos y año contra oráculo UTC independiente, solo en tests",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R02 edición válida del curso conserva entrada congelada y referencia, sin publicar",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R03 editar borrador incompleto conserva omisión de capacidad; undefined enviado no configura",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R04 editar periodo con franjas conservadas revalida ocurrencias sin mutación parcial",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R05 edición retirada conserva snapshot, revisión recibida y estado; no renueva publicación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R06 comparación exige periodos completos; formas inválidas usan errores seguros del dominio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R07 fecha con salto de línea produce validación segura, no coerción ni TypeError",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R07 hora con salto de línea produce validación segura, no coerción ni TypeError",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R07 UUID con salto de línea produce validación segura, no coerción ni TypeError",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R07 franja ausente produce validación segura, no coerción ni TypeError",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "schedule.test.ts",
+          "cases": [
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S01 borrador permite cero franjas y periodo todavía incompleto",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial 2026-10-19/null valida las franjas sin exigir publicación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/2026-10-25 valida las franjas sin exigir publicación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/null valida las franjas sin exigir publicación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 1 ocurre en periodo de un día inclusivo 2026-10-19",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 2 ocurre en periodo de un día inclusivo 2026-10-20",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 3 ocurre en periodo de un día inclusivo 2026-10-21",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 4 ocurre en periodo de un día inclusivo 2026-10-22",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 5 ocurre en periodo de un día inclusivo 2026-10-23",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 6 ocurre en periodo de un día inclusivo 2026-10-24",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 7 ocurre en periodo de un día inclusivo 2026-10-25",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2024-02-29, incluidos bisiesto y cambio de año",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2000-02-29, incluidos bisiesto y cambio de año",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2026-12-31, incluidos bisiesto y cambio de año",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2027-01-01, incluidos bisiesto y cambio de año",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-02-29\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2100-02-29\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-04-31\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-13-01\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-00-10\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-00\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-1-9\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"19/10/2026\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-19T00:00:00Z\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"\", sin rollover ni zona de navegador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-02-30",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-11-31",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-10-25T00:00:00-05:00",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S07 rechaza periodo invertido aunque no haya franjas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"UTC\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/Bogota\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/New_York\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza null",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 0 sin coerción",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 8 sin coerción",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO -1 sin coerción",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 1.5 sin coerción",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO \"1\" sin coerción",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO null sin coerción",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–00:01",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 23:58–23:59",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–23:59",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"24:00\" fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"23:60\" fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"-1:00\" fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"9:00\" fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00:00\" fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00Z\" fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"\" fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial null fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial 1080 fuera del contrato HH:mm",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"24:00\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:60\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:00:00\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"\"",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final null",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 18:00–18:00",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 19:00–18:00",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:00–01:00",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:59–00:00",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 00:00–00:00",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 0 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 1 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 2 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 3 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:30\",\"endTime\":\"18:45\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 0 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 1 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"19:00\",\"endTime\":\"20:00\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 2 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 3 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S16 exige ocurrencia de CADA franja; una válida no oculta otra fuera de periodo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S17 periodo inclusivo sin lunes rechaza la franja; no basta con fechas ordenadas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S18 al cambiar el periodo se vuelve a validar el horario completo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O01 misma franja y periodo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O02 solapamiento parcial",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O03 contención de horas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O04 franjas contiguas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O05 horas separadas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O06 distinto día ISO",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O07 periodos disjuntos, mismas horas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O08 intersección de fechas sin lunes: c…",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O09 primera ocurrencia común justo en U…",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O10 único día compartido lunes 19 inclu…",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O11 único día compartido martes sin lun…",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O12 domingo ISO 7 en extremo inclusivo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O13 paso de domingo a lunes con ajuste …",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O14 coincidencia solo en segunda franja…",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O15 conjunto vacío no coincide",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O16 extremos horarios adyacentes 00:01",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O17 fecha bisiesta efectiva compartida",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O18 periodo de 400 años devuelve decisi…",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "visibility.test.ts",
+          "cases": [
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo DRAFT",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo PUBLISHED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo WITHDRAWN",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo CANCELLED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo DRAFT",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo PUBLISHED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo WITHDRAWN",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo CANCELLED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo DRAFT",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo PUBLISHED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo WITHDRAWN",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo CANCELLED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 sin publicación previa: oculta y revisión derivada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación quitada: oculta y revisión derivada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación sustituida: oculta y revisión derivada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 docente no habilitado: oculta y revisión derivada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 directorio sin asignado: oculta y revisión derivada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 cuenta recuperada con generación posterior: oculta y revisión derivada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V03 generación bigint no se compara redondeándola a number",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de rol sin consultas intermedias no rehabilita snapshot",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de estado sin consultas intermedias no rehabilita snapshot",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de verificación sin consultas intermedias no rehabilita snapshot",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V05 nombre/reset sin pérdida de habilitación conserva la visibilidad, no depende de authVersion",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V06 captura explícita nueva vuelve a habilitar grupo; no muta entrada ni cuenta",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso DRAFT sin hijos no visible",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso PUBLISHED sin hijos no visible",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso WITHDRAWN sin hijos no visible",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo DRAFT no visible",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo WITHDRAWN no visible",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo CANCELLED no visible",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V09 curso con hijos que requieren revisión no visible aunque editorialmente publicados",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V10 un hijo visible basta; hijos ocultos no se vuelven visibles",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre DRAFT oculta aunque hijo fuera apto",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre WITHDRAWN oculta aunque hijo fuera apto",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 1 no es ocupación ni disponibilidad",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 45 no es ocupación ni disponibilidad",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 50 no es ocupación ni disponibilidad",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V13 no proyecta metadatos editoriales, revisión, generación, IDs docentes o privados",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto WITHDRAWN",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto CANCELLED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V15 no proyecta generación invalidada y recuperada",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "T031 proyección pura mínima — FR-006/011 V16 proyectar no muta snapshot, horarios ni docente",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "offer.test.ts",
+          "cases": [
+            {
+              "name": "C01 DTO cerrados por audiencia, sin generación, credenciales ni datos de cuenta",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "C02 revisiones JSON decimales, sin capacidad de inscripción ficticia",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "C03 comandos explícitos, revisión en recursos existentes y sin actualización de snapshot desde cliente",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "C04 errores de negocio seguros; referencias solo en conflictos administrativos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "permissions.test.ts",
+          "cases": [
+            {
+              "name": "matriz académica ADMIN / academic:manage = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica ADMIN / academic:read-published = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica ADMIN / academic:read-own = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica STUDENT / academic:manage = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica STUDENT / academic:read-published = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica STUDENT / academic:read-own = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica TEACHER / academic:manage = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica TEACHER / academic:read-published = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz académica TEACHER / academic:read-own = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión ADMIN / academic:manage = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión ADMIN / academic:read-published = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión ADMIN / academic:read-own = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión STUDENT / academic:manage = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión STUDENT / academic:read-published = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión STUDENT / academic:read-own = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión TEACHER / academic:manage = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión TEACHER / academic:read-published = false",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "autorización backend por interfaz de sesión TEACHER / academic:read-own = true",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:manage, sin consultar repositorio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-published, sin consultar repositorio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-own, sin consultar repositorio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "roles desconocidos/visitante y permisos desconocidos siempre se deniegan",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "matriz de identidad: perfil propio para tres roles; administración solo ADMIN",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "operaciones y roles ajenos a la matriz se deniegan",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "bootstrap-admin.test.ts",
+          "cases": [
+            {
+              "name": "prepara hash/enlace antes del store y solo transmite material persistible, sin provisional",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "fallo de credenciales no inicia la transaccion ni emite un enlace",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "fallo de preparacion de enlace no toca store ni revela errores del adaptador",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "conserva rechazo irreversible de T028 sin inventar otro camino de inicializacion",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "issue-action-link.test.ts",
+          "cases": [
+            {
+              "name": "cuota antes de store; factory cifra enlace de origen fijo y no devuelve secreto",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "sin cuota no toca store, generador de payload ni cuenta",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "factory VERIFY_EMAIL conserva caducidad y elegibilidad de dominio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "factory RESET_PASSWORD conserva caducidad y elegibilidad de dominio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "reset-password.test.ts",
+          "cases": [
+            {
+              "name": "contraseña inválida no invoca hash, repositorio ni consumo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "token mal formado no invoca hash ni repositorio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "fallo de hash deja sin invocar el repositorio",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "repositorio que rechaza consumo produce únicamente InvalidActionLink",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "hash finaliza antes del repositorio; la regla pura exige verificación, propósito y caducidad vigentes",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "solicitar reutiliza emisión con propósito reset y responde igual con o sin entrega",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "cuota denegada conserva la espera definida por emisión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "access.test.ts",
+          "cases": [
+            {
+              "name": "elegibilidad exige cuenta activa, correo verificado y contraseña propia",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "sesión vence exactamente a 30 minutos; no cambia ni renueva sus fechas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "sesión vence a ocho horas aunque haya actividad reciente",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "acción VERIFY_EMAIL: propósito, destinatario, vigencia y uso único",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "acción RESET_PASSWORD: propósito, destinatario, vigencia y uso único",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "credencial provisional vence a 24 h; no exige correo para establecer clave, ni concede sesión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "account-administration.test.ts",
+          "cases": [
+            {
+              "name": "impide cambio propio role/STUDENT",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "impide retirar último ADMIN ACTIVE mediante role/STUDENT",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "impide cambio propio role/TEACHER",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "impide retirar último ADMIN ACTIVE mediante role/TEACHER",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "impide cambio propio status/DISABLED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "impide retirar último ADMIN ACTIVE mediante status/DISABLED",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "otro ADMIN puede retirarse cuando queda otro activo; no exige correo verificado para contar",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "no-op propio role no revoca ni restaura",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "no-op propio status no revoca ni restaura",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "desactivar revoca sesiones y acciones; cambiar rol solo sesiones",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "reactivar y no-op desactivado no reconstruyen sesiones, tokens ni provisional",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "ADMIN desactivado no cuenta como último activo para un cambio de rol",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "limits.test.ts",
+          "cases": [
+            {
+              "name": "quinto fallo bloquea 15 minutos; solicitudes rechazadas no prolongan bloqueo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "ventana móvil: frontera inferior excluida y ninguna actividad futura",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "cinco reservas en vuelo consumen capacidad; al vencer se convierten en fallos conservadores",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "éxito elimina fallos sin eliminar reservas de solicitudes concurrentes",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "login.test.ts",
+          "cases": [
+            {
+              "name": "revalidación de una credencial comprobada misma credencial y versión habilitadas",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "revalidación de una credencial comprobada rechaza cambio de estado",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "revalidación de una credencial comprobada rechaza cambio de correo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "revalidación de una credencial comprobada rechaza cambio de verificación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "revalidación de una credencial comprobada rechaza cambio de contraseña",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "revalidación de una credencial comprobada rechaza cambio de versión",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "revalidación de una credencial comprobada rechaza cambio de provisional",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "operator.test.ts",
+          "cases": [
+            {
+              "name": "alias operativo ASCII de 1 a 64, sin derivacion ni valor predeterminado",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (0)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (1)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (2)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (3)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (4)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (5)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (6)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rechaza alias invalido sin normalizarlo (7)",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "action-transaction.test.ts",
+          "cases": [
+            {
+              "name": "acuse de commit incierto devuelve error seguro sin repetir la operación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "dos conflictos abortados con rollback confirmado permiten un tercer intento",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "conflicto persistente no supera tres intentos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "sin rollback confirmado no reintenta y descarta el cliente fallido",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "delivery-policy.test.ts",
+          "cases": [
+            {
+              "name": "mínimo de 60 s exactos por destinatario y propósito",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "cinco por hora con ventana móvil, frontera exacta y Retry-After según ambos límites",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "veinte por origen sumando propósitos; la cuota limita aun con destinatario nuevo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "account.test.ts",
+          "cases": [
+            {
+              "name": "nombre Unicode: trim exterior y límites por caracteres, no bytes ni unidades UTF-16",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "correo: trim y minúscula simple, sin transformar alias ni puntos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "contraseñas preservan espacios, composición Unicode y contenido completo",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "rol único y estado admiten exclusivamente los enums",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        }
+      ]
+    },
+    "lifecycleUtc": {
+      "executions": 27,
+      "passed": 8,
+      "failed": 19,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "lifecycle.test.ts",
+          "cases": [
+            {
+              "name": "M01 retirar curso publicado conserva datos, no muta entrada ni decide hijos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M02 retirar curso DRAFT es transición inválida, nunca NO_CHANGE",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M02 retirar curso WITHDRAWN es transición inválida, nunca NO_CHANGE",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M02 retirar curso CANCELLED es transición inválida, nunca NO_CHANGE",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M03 retirar grupo conserva snapshot/periodo/capacidad/franjas, sin reloj o revisión propios",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M04 retirar grupo DRAFT no es no-op",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M04 retirar grupo WITHDRAWN no es no-op",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M04 retirar grupo CANCELLED no es no-op",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M05 cancelar DRAFT conserva snapshot/datos y usa instante suministrado por aplicación",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M05 cancelar PUBLISHED conserva snapshot/datos y usa instante suministrado por aplicación",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M05 cancelar WITHDRAWN conserva snapshot/datos y usa instante suministrado por aplicación",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M06 cancelar otra vez nunca responde NO_CHANGE ni cambia el motivo",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 0 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 1 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 2 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 3 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 4 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 5 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M07 motivo inválido 6 se rechaza sin normalizar a éxito",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing pure lifecycle rule (T048)",
+              "unreached": [
+                "transition result",
+                "immutability and snapshot preservation",
+                "validation or invalid-state error"
+              ]
+            },
+            {
+              "name": "M08 datos idénticos de curso DRAFT conservan estado y revisión para NO_CHANGE del escritor",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M09 grupo DRAFT: edición efectiva preserva captura previa y no publica",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M08 datos idénticos de curso WITHDRAWN conservan estado y revisión para NO_CHANGE del escritor",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M09 grupo WITHDRAWN: edición efectiva preserva captura previa y no publica",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M10 editar grupo PUBLISHED incluso con datos iguales se rechaza",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M10 editar grupo CANCELLED incluso con datos iguales se rechaza",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M11 curso publicado no admite edición idéntica; curso no tiene cancelación",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "M12 retirar el padre no vuelve editable al hijo publicado",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        }
+      ]
+    },
+    "integration": {
+      "executions": 77,
+      "passed": 32,
+      "failed": 45,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "academic-offering-commands.spec.ts",
+          "cases": [
+            {
+              "name": "K01 dos administradores/revisión 1: un cambio y un conflicto, cero sobrescrituras",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K02 alta simultánea mismo actor/commandId recupera mismo UUID y único efecto",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K03 igual payload/commandId con actor distinto corresponde a dos intenciones independientes",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K04 dos envíos simultáneos de edición idéntica: un ledger/evento y revisión 2",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K05 NO_CHANGE conserva agregado; comando aceptado tiene un ledger y un evento NO_CHANGE",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K06 replay retorna proyección actual y revisión aplicada original sin segundo evento",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K07 digest diferencia payload, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K07 digest diferencia target, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K07 digest diferencia operation, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K07 digest diferencia revision, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K08 replay reautoriza antes del ledger tras pérdida de role",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K08 replay reautoriza antes del ledger tras pérdida de session",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K09 fallo de auditoría real revierte datos y ledger; misma intención puede confirmarse después",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K10 COMMIT ambiguo before: no replay automático, resolución manual por mismo ID",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K10 COMMIT ambiguo after: no replay automático, resolución manual por mismo ID",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K11 cliente descarta respuesta HTTP de alta aplicada y la recupera sin UUID ni evento nuevos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "K12 COURSE_WITHDRAW: replay aceptado no es una segunda transición ni un segundo evento",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "accepted transition",
+                "idempotent replay",
+                "new-ID invalid transition"
+              ]
+            },
+            {
+              "name": "K12 GROUP_CANCEL: replay aceptado no es una segunda transición ni un segundo evento",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "accepted transition",
+                "idempotent replay",
+                "new-ID invalid transition"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-concurrency.spec.ts",
+          "cases": [
+            {
+              "name": "R01 GROUP_WITHDRAW/transition-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "observed wait barrier",
+                "competing outcomes",
+                "final state and ledger/audit"
+              ]
+            },
+            {
+              "name": "R01 GROUP_WITHDRAW/publication-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "observed wait barrier",
+                "competing outcomes",
+                "final state and ledger/audit"
+              ]
+            },
+            {
+              "name": "R01 GROUP_CANCEL/transition-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "observed wait barrier",
+                "competing outcomes",
+                "final state and ledger/audit"
+              ]
+            },
+            {
+              "name": "R01 GROUP_CANCEL/publication-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "observed wait barrier",
+                "competing outcomes",
+                "final state and ledger/audit"
+              ]
+            },
+            {
+              "name": "R02 retirar padre/publicar grupo course-first: mismo parent lock, sin ocultar revisión",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "observed wait barrier",
+                "competing outcomes",
+                "final state and ledger/audit"
+              ]
+            },
+            {
+              "name": "R02 retirar padre/publicar grupo group-first: mismo parent lock, sin ocultar revisión",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real lifecycle writer (T048)",
+              "unreached": [
+                "observed wait barrier",
+                "competing outcomes",
+                "final state and ledger/audit"
+              ]
+            },
+            {
+              "name": "R03 cursos con docentes cruzados: locks de cuentas ordenados, serialización sin deadlock",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R04 conjunto cambia tras descubrimiento: rollback antes de tomar docente nuevo y redescubrimiento real",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R05 cambio de conjunto + 40001 consumen un presupuesto único de tres intentos, luego commit",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R06 agotamiento por topología + dos abortos SQL reales: tres intentos, 503 y cero efectos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R07 asignación cambia mientras se espera User: redescubrir, rechazar revisión obsoleta y preservar commit ajeno",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "R08 controles auxiliares no se confunden con aceptación de mantenimiento: SQL independiente no muta en lectura",
+              "status": "passed",
+              "classification": "auxiliary-control",
+              "cause": null,
+              "unreached": []
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-state.spec.ts",
+          "cases": [
+            {
+              "name": "I01 control auxiliar: composición HTTP real, dos grupos visibles y fixture sin ledger fabricado",
+              "status": "passed",
+              "classification": "auxiliary-control",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S01 retirar curso oculta catálogo, conserva hijos/capturas y no libera su agenda PUBLISHED",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S02 hijo publicado de padre retirado sigue no editable; guardar no retira implícitamente",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S03 retirar/editar/guardar no republica; publicación explícita conserva captura hasta confirmación",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S04 cancelar DRAFT: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S04 cancelar PUBLISHED: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S04 cancelar WITHDRAWN: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S05 cancelado rechaza withdraw, sin NO_CHANGE o revisión nueva",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S05 cancelado rechaza cancel, sin NO_CHANGE o revisión nueva",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S05 cancelado rechaza publish, sin NO_CHANGE o revisión nueva",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S06 retirar courses/DRAFT inválido no es éxito sin cambios",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S06 retirar courses/WITHDRAWN inválido no es éxito sin cambios",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S06 retirar groups/DRAFT inválido no es éxito sin cambios",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S06 retirar groups/WITHDRAWN inválido no es éxito sin cambios",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S07 recuperación del curso bloqueado exige retirar hijos afectados y republicarlos explícitamente",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S08 motivo inválido \"\": 400 seguro y cero efectos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S08 motivo inválido \"  \": 400 seguro y cero efectos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S08 motivo inválido null: 400 seguro y cero efectos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S08 motivo inválido 1: 400 seguro y cero efectos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S09 withdraw denegado a STUDENT antes de entregar datos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S09 withdraw denegado a TEACHER antes de entregar datos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S09 withdraw denegado a VISITOR antes de entregar datos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S09 cancel denegado a STUDENT antes de entregar datos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S09 cancel denegado a TEACHER antes de entregar datos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S09 cancel denegado a VISITOR antes de entregar datos",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S10 motivo de cancelación solo admin, alumno recibe 404 uniforme",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S11 operación no ofrecida course-delete: 404 sin borrar datos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S11 operación no ofrecida group-delete: 404 sin borrar datos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S11 operación no ofrecida course-cancel: 404 sin borrar datos",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S12 motivo administrativo denegado a STUDENT, incluso por URL directa",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S12 motivo administrativo denegado a TEACHER, incluso por URL directa",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S12 motivo administrativo denegado a VISITOR, incluso por URL directa",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S13 cancelado rechaza PATCH de datos/franjas aunque sean iguales",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S13 cancelado rechaza PUT de datos/franjas aunque sean iguales",
+              "status": "passed",
+              "classification": "business-behavior",
+              "cause": null,
+              "unreached": []
+            },
+            {
+              "name": "S14 course-withdraw: body commandId no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 course-withdraw: body expectedRevision no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 course-withdraw: body state no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 course-withdraw: body stale no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-withdraw: body commandId no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-withdraw: body expectedRevision no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-withdraw: body state no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-withdraw: body stale no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-cancel: body commandId no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-cancel: body expectedRevision no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-cancel: body state no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S14 group-cancel: body stale no permite bypass del contrato",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            },
+            {
+              "name": "S15 cancelación no acepta instante enviado por cliente",
+              "status": "failed",
+              "classification": "expected-red",
+              "cause": "Missing real withdraw/cancel HTTP route (T048/T049)",
+              "unreached": [
+                "contract status and safe body",
+                "database and visibility assertions after transition",
+                "ledger/audit and rollback assertions"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "browser": {
+      "uniqueCases": 10,
+      "executions": 20,
+      "passed": 6,
+      "failed": 14,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "cases": [
+        {
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "desktop",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "desktop",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "desktop",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Administrative cancellation reason not rendered (T050)",
+          "unreached": [
+            "reason visible to administrator"
+          ]
+        },
+        {
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "desktop",
+          "status": "passed",
+          "classification": "business-behavior",
+          "cause": null,
+          "unreached": []
+        },
+        {
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "desktop",
+          "status": "passed",
+          "classification": "business-behavior",
+          "cause": null,
+          "unreached": []
+        },
+        {
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "desktop",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "desktop",
+          "status": "passed",
+          "classification": "business-behavior",
+          "cause": null,
+          "unreached": []
+        },
+        {
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "desktop",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "desktop",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "desktop",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "mobile",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "mobile",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "mobile",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Administrative cancellation reason not rendered (T050)",
+          "unreached": [
+            "reason visible to administrator"
+          ]
+        },
+        {
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "mobile",
+          "status": "passed",
+          "classification": "business-behavior",
+          "cause": null,
+          "unreached": []
+        },
+        {
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "mobile",
+          "status": "passed",
+          "classification": "business-behavior",
+          "cause": null,
+          "unreached": []
+        },
+        {
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "mobile",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "mobile",
+          "status": "passed",
+          "classification": "business-behavior",
+          "cause": null,
+          "unreached": []
+        },
+        {
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "mobile",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "mobile",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        },
+        {
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "mobile",
+          "status": "failed",
+          "classification": "expected-red",
+          "cause": "Missing maintenance action (T049/T050/T051)",
+          "unreached": [
+            "confirmation and validation",
+            "real transition response",
+            "post-transition state, replay and accessibility checks"
+          ]
+        }
+      ]
+    }
+  },
+  "counting": {
+    "newUniqueCases": 114,
+    "lifecycleUniqueCases": 27,
+    "lifecycleExecutions": 54,
+    "postgresUniqueCases": 77,
+    "postgresBusinessPassed": 30,
+    "postgresAuxiliaryPassed": 2,
+    "browserUniqueCases": 10,
+    "browserExecutions": 20,
+    "legacyUnitPassed": 308,
+    "architecturePassed": 14
+  },
+  "technicalIncidents": {
+    "initialTypes": "Broad union in edit fixture; narrowed to GROUP_EDIT, rerun passed",
+    "initialLint": "Unused import after splitting Vitest support; removed, rerun passed",
+    "initialIntegration": {
+      "executions": 77,
+      "passed": 30,
+      "failed": 47,
+      "invalidFixtureCases": [
+        "S04 DRAFT",
+        "S06 courses/DRAFT",
+        "S06 groups/DRAFT",
+        "R03",
+        "R07"
+      ],
+      "correction": "Seed draft state/assignment before publication; no disabled constraints or weakened assertions",
+      "finalPassed": 32,
+      "finalExpectedRed": 45
+    },
+    "interruptedE2e": "Second run ended without final report after 13 cases; Docker stopped at resumption; cause not established. Preserved log, zero residual t_ schemas on resume, full rerun completed.",
+    "documentationCheck": "Node spawnSync Git EPERM in sandbox; rerun with operational permission, no bypass of assertions",
+    "initialReportsPreserved": true
+  },
+  "transactionalProof": {
+    "existingCommandsOnly": true,
+    "oneLedgerAuditPerAcceptedCommand": true,
+    "noStaleOverwrite": true,
+    "replayReauthorization": true,
+    "commitBeforeAfterTransportFaults": true,
+    "auditFailureAtomicRollback": true,
+    "realSqlBarriers": true,
+    "independentObserver": true,
+    "topologyRestartBeforeNewTeacherLock": true,
+    "sharedThreeAttemptBudget": true,
+    "withdrawCancelRacesVerified": false,
+    "noGlobalMutexClaim": false,
+    "fixtureTopologyBoundaryDoesNotProveImplicitPublication": true
+  },
+  "preservation": {
+    "protectedFiles": 72,
+    "protectedChanged": 0,
+    "trackedFilesInspected": 613,
+    "original74TaskDefinitionsAndCheckboxesUnchanged": true,
+    "productionMigrationsConfigurationHistoricalEvidenceUnchanged": true,
+    "fiveClarificationsUnchanged": true,
+    "E1Preserved": true,
+    "environmentBefore": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-24T00:14:22.278641545Z",
+        "startedAt": "2026-10-24T00:00:02.804143172Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "environmentAfter": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-26T00:24:13.631538107Z",
+        "startedAt": "2026-10-26T00:17:58.274537581Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "docs": {
+    "date": "2026-10-25",
+    "documents": 32,
+    "localLinksChecked": 780,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true,
+    "temporaryValidatorEncodingIncident": "PowerShell default read corrupted a literal while updating date; regenerated from original with explicit UTF-8, assertions unchanged"
+  },
+  "limits": {
+    "T048Implemented": false,
+    "T049RoutesImplemented": false,
+    "T050T051UiImplemented": false,
+    "integralAcceptance": false,
+    "SC002Human": "Pending T073",
+    "T103": "Completed execution/report; capacity unapproved",
+    "T104": "Pending",
+    "T108": "Pending",
+    "bootstrap": "Historical finding open",
+    "capacity1000Approved": false,
+    "capacity2500Approved": false,
+    "registeredAccounts15000": "Requirement; not seeded/tested here",
+    "reservation24Hours": "Confirmed; future own spec",
+    "openDecisions": [
+      "RA-01",
+      "RA-02",
+      "RA-03",
+      "RA-04",
+      "RA-05",
+      "RA-06"
+    ],
+    "D04": "Open",
+    "D06Enrollment": "Open",
+    "smokesExecuted": false,
+    "capacityLoadsExecuted": false,
+    "awsVpsChanges": false
+  }
+}
