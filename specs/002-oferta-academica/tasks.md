@@ -1,8 +1,9 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T054 completas, checkpoint automatizado US3 aprobado.
-Siguiente bloque: pruebas de US4 desde T055; todavía no se implementan sus capas.
+**Estado**: T001–T054 y T056 completas; checkpoint automatizado US3 aprobado.
+T055/T057 preparadas y ejecutadas, pendientes de consultas/rutas T060/T061.
+Siguiente bloque: pruebas E2E T058/T059 antes de implementar las capas de US4.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -16,7 +17,7 @@ T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
 originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
 en ese checkpoint, T047 y T050–T074 permanecían pendientes. El cierre actual
 T047/T050/T051, la ampliación T052 y el checkpoint T053/T054 se detallan abajo;
-T055–T074 siguen pendientes.
+T055/T057–T074 siguen pendientes; T056 verificada con PostgreSQL real.
 SC-002 humano sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
@@ -48,7 +49,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [rutas reales y cierre HTTP T049](evidence/t049.md) e
 [interfaz editorial y conflictos T050/T051](evidence/t050-t051.md) y
 [auditoría persistente y logs T052](evidence/t052.md) y
-[checkpoint US3 y guía T053/T054](evidence/us3.md).
+[checkpoint US3 y guía T053/T054](evidence/us3.md) y
+[autorización, habilitación y privacidad T055–T057](evidence/t055-t057.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -60,9 +62,10 @@ no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se auto
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
 T049 conectó y verificó HTTP real, cerrando T044/T048. El bloque T050/T051 verificó
-la interfaz y cerró T047. T052 verificó auditoría/replay y logs. El actual ejecuta
-el checkpoint T053 y documenta el ciclo editorial T054, incluyendo una corrección
-de textos 503 detectada por la regresión, sin adelantar US4. Reservas de
+la interfaz y cerró T047. T052 verificó auditoría/replay y logs. T053/T054 verificaron
+el checkpoint US3 y documentaron el ciclo editorial, incluyendo una corrección
+de textos 503 detectada por la regresión. El bloque actual prepara las pruebas
+PG/HTTP T055–T057, verifica T056 y conserva T055/T057 pendientes de T060/T061. Reservas de
 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
@@ -463,8 +466,19 @@ Prueba independiente: administrador/alumno/docente propio/ajeno/visitante y cuen
 activas/desactivadas con todos los estados académicos; ocho escenarios US4.
 
 - [ ] T055 [P] [US4] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-authorization.spec.ts`: matriz enumerada de cada ruta/método × actor × estado, docente asignado/ajeno, sesión revocada/expirada y cambio de rol; 401/403/404 y cero efectos/datos denegados (FR-009/010/016; SC-003).
-- [ ] T056 [P] [US4] Escribir PG en `apps/api/tests/integration/academic-offering-teacher.spec.ts`: publicación vs pérdida de habilitación en ambos órdenes con barreras, pérdida→recuperación sin lecturas, recuperación sin republicar, reset sin ocultar, grupo cancelado no recuperable, publicar curso no limpia revisión. Termina con snapshot/generación/visibilidad final correctos (FR-007/010/012/016; SC-004).
+- [X] T056 [P] [US4] Escribir PG en `apps/api/tests/integration/academic-offering-teacher.spec.ts`: publicación vs pérdida de habilitación en ambos órdenes con barreras, pérdida→recuperación sin lecturas, recuperación sin republicar, reset sin ocultar, grupo cancelado no recuperable, publicar curso no limpia revisión. Termina con snapshot/generación/visibilidad final correctos (FR-007/010/012/016; SC-004).
 - [ ] T057 [P] [US4] Escribir PG/HTTP en `apps/api/tests/integration/academic-offering-privacy.spec.ts`: DTO/contadores/filtros por audiencia, docente propio en cualquier estado y contexto curso sin hermanos; no email, cuenta, generación, revisión ni motivo de cancelación; GET no muta ni habilita (FR-009–012; SC-003).
+Avance T055–T057, 2026-10-26: 516 casos únicos PG/HTTP ejecutados; 437 aprobados
+y 79 rojos por consultas/rutas docentes ausentes T060/T061. T056 completa con
+11/11, incluidas cuatro carreras observadas en ambos órdenes y generación/snapshot
+final. T055 conserva 48 casos y T057 31 casos pendientes: el control positivo
+docente falla antes de las aserciones posteriores; un 404 de ruta ausente no valida
+privacidad. Regresión dirigida 46/46; tipos, lint y compilación API aprobados.
+109 errores iniciales de fixtures corregidos y repetidos, sin contar como rojo
+válido. [Evidencia y resultados](evidence/t055-t057.md). Sin cambios de producto,
+esquema, entorno manual, decisiones PA-01–PA-05 ni E1. Siguiente T058/T059;
+checkpoint US4, aceptación humana, bootstrap y capacidad siguen pendientes.
+
 - [ ] T058 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teaching.spec.ts`: Mis grupos propios en todos los estados, revocación/cambio de rol con vista abierta, respuestas tardías descartadas, visitante y enlaces ajenos, móvil/teclado (FR-009/010/013/014).
 - [ ] T059 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teacher-review.spec.ts`: selector elegible/homónimos, desactivar y reactivar vía identidad existente, aviso solo admin, retirar/revisar/republicar explícitamente y consulta alumno; no crear roles/cuentas mediante asignación (FR-007/012/016).
 - [ ] T060 [US4] Completar consultas propias y diagnóstico admin en `apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts` y `application/queries.ts`: asignación actual por actor en misma sentencia, revisión derivada sin nuevo estado/flag mutable, proyecciones cerradas. Termina con T055/T057 verdes para lecturas (FR-009–012).

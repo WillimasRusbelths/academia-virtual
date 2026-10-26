@@ -1,0 +1,5360 @@
+{
+  "date": "2026-10-26",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "base": "ece7007",
+  "scope": [
+    "T055",
+    "T056",
+    "T057"
+  ],
+  "constitution": "1.2.0",
+  "checklist": {
+    "total": 16,
+    "passed": 16,
+    "modified": false
+  },
+  "taskStates": {
+    "T055": "pending T060/T061; tests written and executed",
+    "T056": "complete",
+    "T057": "pending T060/T061; tests written and executed"
+  },
+  "commands": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-26T12:24:56.357Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-26T12:25:14.559Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "us4",
+      "exitCode": 1,
+      "date": "2026-10-26T12:26:56.302Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "regression",
+      "exitCode": 0,
+      "date": "2026-10-26T12:27:35.088Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "final": {
+    "uniqueCases": 516,
+    "passed": 437,
+    "failed": 79,
+    "suites": [
+      {
+        "file": "academic-offering-authorization.spec.ts",
+        "total": 434,
+        "passed": 386,
+        "failed": 48,
+        "cases": [
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L A01 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A01 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A01 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A01 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A02 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A02 POST / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A02 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A02 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A03 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A03 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A03 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A03 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A04 PATCH / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A04 PATCH / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A04 PATCH / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A04 PATCH / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A05 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A05 POST / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A05 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A05 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A06 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A06 POST / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A06 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A06 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A07 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A07 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A07 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A07 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A08 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A08 POST / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A08 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A08 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A09 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A09 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A09 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A09 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A10 PATCH / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A10 PATCH / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A10 PATCH / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A10 PATCH / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A11 PUT / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A11 PUT / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A11 PUT / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A11 PUT / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A12 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A12 POST / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A12 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A12 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A13 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A13 POST / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A13 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A13 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A14 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A14 POST / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A14 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A14 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A15 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A15 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L A15 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A15 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C01 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C01 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L C01 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C01 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C02 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C02 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L C02 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C02 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C03 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C03 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L C03 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C03 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C04 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C04 GET / sesión expired",
+            "status": "passed"
+          },
+          {
+            "name": "L C04 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C04 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L T01 GET / sesión revoked",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L T01 GET / sesión expired",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L T01 GET / sesión role",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L T01 GET / sesión disabled",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L T02 GET / sesión revoked",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L T02 GET / sesión expired",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L T02 GET / sesión role",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "L T02 GET / sesión disabled",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-privacy.spec.ts",
+        "total": 71,
+        "passed": 40,
+        "failed": 31,
+        "cases": [
+          {
+            "name": "D curso DRAFT: DTO admin cerrado sin credenciales ni expansión de hermanos",
+            "status": "passed"
+          },
+          {
+            "name": "D curso PUBLISHED: DTO admin cerrado sin credenciales ni expansión de hermanos",
+            "status": "passed"
+          },
+          {
+            "name": "D curso WITHDRAWN: DTO admin cerrado sin credenciales ni expansión de hermanos",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo DRAFT: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo PUBLISHED: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo WITHDRAWN: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo CANCELLED: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos ADMIN/página 1: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos ADMIN/página 2: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos ADMIN/página 3: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos STUDENT/página 1: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos STUDENT/página 2: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos STUDENT/página 3: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 0: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 1: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 2: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 3: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 0: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 1: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 2: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 3: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/DRAFT: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/PUBLISHED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/WITHDRAWN: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/CANCELLED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/DRAFT: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/PUBLISHED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/WITHDRAWN: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/CANCELLED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C ADMIN/wrong-parent: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "C ADMIN/missing: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "C STUDENT/wrong-parent: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "C STUDENT/missing: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "T lista OWN/página 1: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OWN/página 2: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OWN/página 3: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OWN/página 4: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OWN/página 5: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OTHER/página 1: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OTHER/página 2: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OTHER/página 3: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OTHER/página 4: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T lista OTHER/página 5: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 0/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 0/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 0/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 0/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 1/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 1/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 1/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 1/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 2/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 2/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 2/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 2/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 3/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 3/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 3/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T detalle curso 3/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T incompleto: null y horario vacío son sin configurar, no disponibilidad ficticia",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T foreign: control positivo propio antes de denegación",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T missing: control positivo propio antes de denegación",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T course-route: control positivo propio antes de denegación",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "T reasignación actual: anterior captura no concede acceso; otro docente obtiene solo su grupo",
+            "status": "failed",
+            "cause": "T060/T061: falta ruta/consulta docente propia; control positivo esperaba 200 y obtuvo 404",
+            "downstreamAssertionsReached": false
+          },
+          {
+            "name": "S selector con homónimos: solo id/nombre elegibles, sin email/estado de cuenta",
+            "status": "passed"
+          },
+          {
+            "name": "V ADMIN/role: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V ADMIN/status: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V ADMIN/verification: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V STUDENT/role: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V STUDENT/status: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V STUDENT/verification: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-teacher.spec.ts",
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "R role/publication primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "R role/identity primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "R status/publication primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "R status/identity primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "G role: pérdida y recuperación sin lecturas conserva generación y exige republicación",
+            "status": "passed"
+          },
+          {
+            "name": "G status: pérdida y recuperación sin lecturas conserva generación y exige republicación",
+            "status": "passed"
+          },
+          {
+            "name": "G verification: pérdida y recuperación sin lecturas conserva generación y exige republicación",
+            "status": "passed"
+          },
+          {
+            "name": "P reset real revoca credenciales sin incrementar generación ni ocultar publicación",
+            "status": "passed"
+          },
+          {
+            "name": "C role: recuperar habilitación no recupera cancelado",
+            "status": "passed"
+          },
+          {
+            "name": "C status: recuperar habilitación no recupera cancelado",
+            "status": "passed"
+          },
+          {
+            "name": "V publicar curso no limpia revisión; retirar hijo y republicar explícitamente sí captura generación vigente",
+            "status": "passed"
+          }
+        ]
+      }
+    ]
+  },
+  "initial": {
+    "uniqueCases": 516,
+    "passed": 328,
+    "failed": 188,
+    "invalidPreparationFailures": {
+      "courseTransition": 55,
+      "groupTransition": 35,
+      "sessionExpiry": 19,
+      "total": 109
+    },
+    "behavioralFailures": 79,
+    "suites": [
+      {
+        "file": "academic-offering-authorization.spec.ts",
+        "total": 434,
+        "passed": 277,
+        "failed": 157,
+        "cases": [
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A01 GET /admin/academic/courses / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A02 POST /admin/academic/courses / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A03 GET /admin/academic/courses/:course / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A04 PATCH /admin/academic/courses/:course / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A05 POST /admin/academic/courses/:course/publish / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A06 POST /admin/academic/courses/:course/withdraw / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A07 GET /admin/academic/courses/:course/groups / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A08 POST /admin/academic/courses/:course/groups / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A09 GET /admin/academic/groups/:group / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A10 PATCH /admin/academic/groups/:group / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A11 PUT /admin/academic/groups/:group/schedule / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A12 POST /admin/academic/groups/:group/publish / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A13 POST /admin/academic/groups/:group/withdraw / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A14 POST /admin/academic/groups/:group/cancel / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M A15 GET /admin/academic/teachers / NA / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C01 GET /academic/courses / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C01 GET /academic/courses / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C02 GET /academic/courses/:course / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de curso inválida"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C03 GET /academic/courses/:course/groups / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / OWN",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "fixture: transición de grupo inválida"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / PUBLISHED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / WITHDRAWN / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / OWN",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / OTHER",
+            "status": "passed"
+          },
+          {
+            "name": "M C04 GET /academic/courses/:course/groups/:group / CANCELLED / VISITOR",
+            "status": "passed"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / PUBLISHED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / WITHDRAWN / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T01 GET /teaching/groups / CANCELLED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / DRAFT / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / PUBLISHED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / WITHDRAWN / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / ADMIN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / STUDENT",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / OWN",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / OTHER",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "M T02 GET /teaching/groups/:group / CANCELLED / VISITOR",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L A01 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A01 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A01 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A01 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A02 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A02 POST / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A02 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A02 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A03 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A03 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A03 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A03 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A04 PATCH / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A04 PATCH / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A04 PATCH / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A04 PATCH / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A05 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A05 POST / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A05 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A05 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A06 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A06 POST / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A06 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A06 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A07 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A07 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A07 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A07 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A08 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A08 POST / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A08 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A08 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A09 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A09 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A09 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A09 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A10 PATCH / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A10 PATCH / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A10 PATCH / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A10 PATCH / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A11 PUT / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A11 PUT / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A11 PUT / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A11 PUT / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A12 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A12 POST / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A12 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A12 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A13 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A13 POST / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A13 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A13 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A14 POST / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A14 POST / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A14 POST / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A14 POST / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L A15 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L A15 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L A15 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L A15 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C01 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C01 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L C01 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C01 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C02 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C02 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L C02 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C02 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C03 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C03 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L C03 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C03 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L C04 GET / sesión revoked",
+            "status": "passed"
+          },
+          {
+            "name": "L C04 GET / sesión expired",
+            "status": "failed",
+            "cause": "fixture: invariante de expiración de sesión"
+          },
+          {
+            "name": "L C04 GET / sesión role",
+            "status": "passed"
+          },
+          {
+            "name": "L C04 GET / sesión disabled",
+            "status": "passed"
+          },
+          {
+            "name": "L T01 GET / sesión revoked",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L T01 GET / sesión expired",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L T01 GET / sesión role",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L T01 GET / sesión disabled",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L T02 GET / sesión revoked",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L T02 GET / sesión expired",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L T02 GET / sesión role",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "L T02 GET / sesión disabled",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-privacy.spec.ts",
+        "total": 71,
+        "passed": 40,
+        "failed": 31,
+        "cases": [
+          {
+            "name": "D curso DRAFT: DTO admin cerrado sin credenciales ni expansión de hermanos",
+            "status": "passed"
+          },
+          {
+            "name": "D curso PUBLISHED: DTO admin cerrado sin credenciales ni expansión de hermanos",
+            "status": "passed"
+          },
+          {
+            "name": "D curso WITHDRAWN: DTO admin cerrado sin credenciales ni expansión de hermanos",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo DRAFT: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo PUBLISHED: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo WITHDRAWN: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "D grupo CANCELLED: diagnóstico solo admin y ninguna generación/cuenta completa",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos ADMIN/página 1: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos ADMIN/página 2: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos ADMIN/página 3: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos STUDENT/página 1: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos STUDENT/página 2: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C cursos STUDENT/página 3: filtro visible antes de conteo y paginación",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 0: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 1: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 2: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos ADMIN/curso 3: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 0: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 1: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 2: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C grupos STUDENT/curso 3: ocultos fuera de página/conteo",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/DRAFT: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/PUBLISHED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/WITHDRAWN: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle ADMIN/CANCELLED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/DRAFT: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/PUBLISHED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/WITHDRAWN: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C detalle STUDENT/CANCELLED: campos públicos o 404 indistinguible",
+            "status": "passed"
+          },
+          {
+            "name": "C ADMIN/wrong-parent: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "C ADMIN/missing: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "C STUDENT/wrong-parent: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "C STUDENT/missing: 404 sin causa privada",
+            "status": "passed"
+          },
+          {
+            "name": "T lista OWN/página 1: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OWN/página 2: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OWN/página 3: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OWN/página 4: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OWN/página 5: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OTHER/página 1: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OTHER/página 2: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OTHER/página 3: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OTHER/página 4: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T lista OTHER/página 5: asignación actual antes de conteo/página, GET no muta",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 0/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 0/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 0/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 0/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 1/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 1/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 1/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 1/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 2/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 2/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 2/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 2/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 3/DRAFT: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 3/PUBLISHED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 3/WITHDRAWN: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T detalle curso 3/CANCELLED: contexto cerrado, sin grupos hermanos o motivo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T incompleto: null y horario vacío son sin configurar, no disponibilidad ficticia",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T foreign: control positivo propio antes de denegación",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T missing: control positivo propio antes de denegación",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T course-route: control positivo propio antes de denegación",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "T reasignación actual: anterior captura no concede acceso; otro docente obtiene solo su grupo",
+            "status": "failed",
+            "cause": "T060/T061: control positivo docente ausente"
+          },
+          {
+            "name": "S selector con homónimos: solo id/nombre elegibles, sin email/estado de cuenta",
+            "status": "passed"
+          },
+          {
+            "name": "V ADMIN/role: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V ADMIN/status: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V ADMIN/verification: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V STUDENT/role: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V STUDENT/status: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          },
+          {
+            "name": "V STUDENT/verification: recuperación sin GET intermedio no filtra diagnóstico ni renueva snapshot",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-teacher.spec.ts",
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "R role/publication primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "R role/identity primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "R status/publication primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "R status/identity primero: barrera real, pérdida oculta y snapshot no se recupera",
+            "status": "passed"
+          },
+          {
+            "name": "G role: pérdida y recuperación sin lecturas conserva generación y exige republicación",
+            "status": "passed"
+          },
+          {
+            "name": "G status: pérdida y recuperación sin lecturas conserva generación y exige republicación",
+            "status": "passed"
+          },
+          {
+            "name": "G verification: pérdida y recuperación sin lecturas conserva generación y exige republicación",
+            "status": "passed"
+          },
+          {
+            "name": "P reset real revoca credenciales sin incrementar generación ni ocultar publicación",
+            "status": "passed"
+          },
+          {
+            "name": "C role: recuperar habilitación no recupera cancelado",
+            "status": "passed"
+          },
+          {
+            "name": "C status: recuperar habilitación no recupera cancelado",
+            "status": "passed"
+          },
+          {
+            "name": "V publicar curso no limpia revisión; retirar hijo y republicar explícitamente sí captura generación vigente",
+            "status": "passed"
+          }
+        ]
+      }
+    ]
+  },
+  "executions": {
+    "us4Unique": 516,
+    "us4Runs": 2,
+    "us4Executions": 1032,
+    "regressionSeparate": 46
+  },
+  "regression": {
+    "total": 46,
+    "passed": 46,
+    "failed": 0,
+    "suites": [
+      {
+        "file": "academic-offering-concurrency.spec.ts",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "R01 GROUP_WITHDRAW/transition-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+            "status": "passed"
+          },
+          {
+            "name": "R01 GROUP_WITHDRAW/publication-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+            "status": "passed"
+          },
+          {
+            "name": "R01 GROUP_CANCEL/transition-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+            "status": "passed"
+          },
+          {
+            "name": "R01 GROUP_CANCEL/publication-first: estado confirmado decide agenda, nunca timeout como falso conflicto",
+            "status": "passed"
+          },
+          {
+            "name": "R02 retirar padre/publicar grupo course-first: mismo parent lock, sin ocultar revisión",
+            "status": "passed"
+          },
+          {
+            "name": "R02 retirar padre/publicar grupo group-first: mismo parent lock, sin ocultar revisión",
+            "status": "passed"
+          },
+          {
+            "name": "R03 cursos con docentes cruzados: locks de cuentas ordenados, serialización sin deadlock",
+            "status": "passed"
+          },
+          {
+            "name": "R04 conjunto cambia tras descubrimiento: rollback antes de tomar docente nuevo y redescubrimiento real",
+            "status": "passed"
+          },
+          {
+            "name": "R05 cambio de conjunto + 40001 consumen un presupuesto único de tres intentos, luego commit",
+            "status": "passed"
+          },
+          {
+            "name": "R06 agotamiento por topología + dos abortos SQL reales: tres intentos, 503 y cero efectos",
+            "status": "passed"
+          },
+          {
+            "name": "R07 asignación cambia mientras se espera User: redescubrir, rechazar revisión obsoleta y preservar commit ajeno",
+            "status": "passed"
+          },
+          {
+            "name": "R08 controles auxiliares no se confunden con aceptación de mantenimiento: SQL independiente no muta en lectura",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-eligibility.spec.ts",
+        "total": 18,
+        "passed": 18,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "E01 INSERT ordinario inicia generación 0 para docente elegible",
+            "status": "passed"
+          },
+          {
+            "name": "E02 perder rol docente hacia STUDENT incrementa exactamente una vez",
+            "status": "passed"
+          },
+          {
+            "name": "E02 perder rol docente hacia ADMIN incrementa exactamente una vez",
+            "status": "passed"
+          },
+          {
+            "name": "E03 desactivar incrementa una vez; cambios posteriores mientras sigue inhabilitado no incrementan",
+            "status": "passed"
+          },
+          {
+            "name": "E04 perder verificación también invalida generación sin depender de consultas",
+            "status": "passed"
+          },
+          {
+            "name": "E05 recuperación de role conserva generación nueva; snapshot anterior sigue inválido",
+            "status": "passed"
+          },
+          {
+            "name": "E05 recuperación de status conserva generación nueva; snapshot anterior sigue inválido",
+            "status": "passed"
+          },
+          {
+            "name": "E05 recuperación de verification conserva generación nueva; snapshot anterior sigue inválido",
+            "status": "passed"
+          },
+          {
+            "name": "E06 dos pérdidas separadas por recuperación avanzan a generación 2, sin reciclarla",
+            "status": "passed"
+          },
+          {
+            "name": "E07 cambio de nombre y UPDATE no-op no invalidan publicación docente",
+            "status": "passed"
+          },
+          {
+            "name": "E08 una cuenta que nunca fue elegible no incrementa por desactivación",
+            "status": "passed"
+          },
+          {
+            "name": "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=false",
+            "status": "passed"
+          },
+          {
+            "name": "E09 UPDATE no permite sustituir generación enviada por el escritor; pérdida=true",
+            "status": "passed"
+          },
+          {
+            "name": "E10 reset real revoca sesión y aumenta authVersion sin aumentar generación docente",
+            "status": "passed"
+          },
+          {
+            "name": "E11 cambio de acceso real confirma generación, revocación y auditoría juntos",
+            "status": "passed"
+          },
+          {
+            "name": "E12 fallo de auditoría revierte acceso, generación y revocación en una sola transacción",
+            "status": "passed"
+          },
+          {
+            "name": "E13 overflow bigint aborta pérdida de habilitación sin reciclar generación ni alterar la fila",
+            "status": "passed"
+          },
+          {
+            "name": "E14 recuperar habilitación no actualiza snapshot ni estado/revision de un grupo publicado",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-publication-races.spec.ts",
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "cases": [
+          {
+            "name": "T034 controles de barreras PostgreSQL; NO protocolo de publicación aprobado I01 dos clientes y observador independiente identifican espera real por User",
+            "status": "passed"
+          },
+          {
+            "name": "T034 controles de barreras PostgreSQL; NO protocolo de publicación aprobado I02 READ COMMITTED: sentencia nueva después del lock observa commit ajeno",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R01 primer administrador 0: un éxito y un conflicto, snapshot posterior al lock",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R01 primer administrador 1: un éxito y un conflicto, snapshot posterior al lock",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R02 docentes/cursos/actores distintos no esperan un mutex global",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R03 frontera franjas contiguas",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R03 frontera día semanal distinto",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R03 frontera fechas disjuntas",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R03 frontera periodos se cruzan sin lunes común",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R03 frontera lunes efectivo solo en extremo incluido",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R04 otro PUBLISHED bloquea aunque padre retirado",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R04 otro PUBLISHED bloquea aunque revisión requerida",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R05 grupo WITHDRAWN no bloquea agenda",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R05 grupo CANCELLED no bloquea agenda",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R06 dos solicitudes simultáneas del mismo comando confirman un solo efecto",
+            "status": "passed"
+          },
+          {
+            "name": "T034 publicaciones reales concurrentes — FR-004/007/015; SC-004/006 R07 desactivación confirma mientras publicación espera: revalidar tras bloqueo y cero efectos",
+            "status": "passed"
+          }
+        ]
+      }
+    ],
+    "auxiliaryControls": [
+      "I01: observador y espera por User",
+      "I02: READ COMMITTED tras lock",
+      "R08: lectura SQL independiente sin mutación"
+    ]
+  },
+  "authorization": {
+    "matrixCases": 350,
+    "sessionCases": 84,
+    "routeMethods": 21,
+    "manifest": [
+      {
+        "id": "A01",
+        "method": "GET",
+        "path": "/admin/academic/courses",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A02",
+        "method": "POST",
+        "path": "/admin/academic/courses",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A03",
+        "method": "GET",
+        "path": "/admin/academic/courses/:course",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A04",
+        "method": "PATCH",
+        "path": "/admin/academic/courses/:course",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A05",
+        "method": "POST",
+        "path": "/admin/academic/courses/:course/publish",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A06",
+        "method": "POST",
+        "path": "/admin/academic/courses/:course/withdraw",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A07",
+        "method": "GET",
+        "path": "/admin/academic/courses/:course/groups",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A08",
+        "method": "POST",
+        "path": "/admin/academic/courses/:course/groups",
+        "family": "admin",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A09",
+        "method": "GET",
+        "path": "/admin/academic/groups/:group",
+        "family": "admin",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A10",
+        "method": "PATCH",
+        "path": "/admin/academic/groups/:group",
+        "family": "admin",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A11",
+        "method": "PUT",
+        "path": "/admin/academic/groups/:group/schedule",
+        "family": "admin",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A12",
+        "method": "POST",
+        "path": "/admin/academic/groups/:group/publish",
+        "family": "admin",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A13",
+        "method": "POST",
+        "path": "/admin/academic/groups/:group/withdraw",
+        "family": "admin",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A14",
+        "method": "POST",
+        "path": "/admin/academic/groups/:group/cancel",
+        "family": "admin",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "A15",
+        "method": "GET",
+        "path": "/admin/academic/teachers",
+        "family": "admin",
+        "scope": "directory",
+        "states": [
+          "NA"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "C01",
+        "method": "GET",
+        "path": "/academic/courses",
+        "family": "catalog",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "C02",
+        "method": "GET",
+        "path": "/academic/courses/:course",
+        "family": "catalog",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "C03",
+        "method": "GET",
+        "path": "/academic/courses/:course/groups",
+        "family": "catalog",
+        "scope": "course",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "C04",
+        "method": "GET",
+        "path": "/academic/courses/:course/groups/:group",
+        "family": "catalog",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "T01",
+        "method": "GET",
+        "path": "/teaching/groups",
+        "family": "teaching",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      },
+      {
+        "id": "T02",
+        "method": "GET",
+        "path": "/teaching/groups/:group",
+        "family": "teaching",
+        "scope": "group",
+        "states": [
+          "DRAFT",
+          "PUBLISHED",
+          "WITHDRAWN",
+          "CANCELLED"
+        ],
+        "actors": [
+          "ADMIN",
+          "STUDENT",
+          "OWN",
+          "OTHER",
+          "VISITOR"
+        ]
+      }
+    ],
+    "notes": [
+      "Estado del recurso objetivo; no producto cartesiano completo de curso y grupo",
+      "Curso CANCELLED y estado editorial del directorio no aplican",
+      "Los 48 casos docentes exigen control propio positivo antes de denegaciones"
+    ]
+  },
+  "safety": {
+    "protectedFilesCompared": 72,
+    "protectedFilesUnchanged": true,
+    "trackedExistingChanges": [
+      "docs/planificacion/reservas-capacidad.md",
+      "specs/002-oferta-academica/tasks.md"
+    ],
+    "taskDescriptionsUnchanged": 74,
+    "checkboxChanges": [
+      "T056"
+    ],
+    "manualMetadataUnchanged": true,
+    "volumesUnchanged": true,
+    "environmentBefore": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-26T12:03:23.357685501Z",
+        "startedAt": "2026-10-26T11:44:17.809207453Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "environmentAfter": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-26T12:29:49.829154286Z",
+        "startedAt": "2026-10-26T12:12:47.818009306Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "limitations": [
+    "79 casos docentes bloqueados; aserciones posteriores no alcanzadas",
+    "Sin E2E, carga, smokes ni aceptación humana en este bloque",
+    "2500 concurrentes objetivo sin demostrar; T103 ejecución/informe conservados sin capacidad aprobada",
+    "Bootstrap, T104/T108, D04 y matrícula D06 pendientes",
+    "Reservas de 24 horas en spec futuro; decisiones abiertas conservadas"
+  ],
+  "nextBlock": [
+    "T058",
+    "T059"
+  ],
+  "documentation": {
+    "date": "2026-10-26",
+    "documents": 32,
+    "localLinksChecked": 798,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  },
+  "rawReports": [
+    {
+      "privatePath": ".cache/academic-offering-validation/t055-t057-reports/initial-us4.json",
+      "sha256": "a1fabda619969db852da1aeb615fc99dda3065dd618ffed7bcc32f7a9c0ed58e"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t055-t057-reports/us4.json",
+      "sha256": "b32844c188855f6eb1eb52eefa81e0f92ba2d112153e902568f72c71d775d0fd"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t055-t057-reports/regression.json",
+      "sha256": "eddf64dda87d9b788493e0e4dcb96aa6c2f0ff71ca0006f8a265d599013ec3ab"
+    }
+  ]
+}

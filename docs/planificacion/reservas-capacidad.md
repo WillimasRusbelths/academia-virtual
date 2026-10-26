@@ -121,8 +121,12 @@ en escritorio/móvil. La [ampliación de auditoría T052](../../specs/002-oferta
 verifica hechos mínimos, atomicidad, snapshots, replay y logs privados con HTTP/PG
 reales. El [checkpoint US3 T053/T054](../../specs/002-oferta-academica/evidence/us3.md)
 verifica los diez escenarios y regresión US1/US2, con guía editorial y corrección
-de avisos 503 sin cambios de negocio. T001–T054 completas; siguientes pruebas de
-US4 desde T055. La aceptación humana/integral permanece pendiente.
+de avisos 503 sin cambios de negocio. T001–T054 completas. Las
+[pruebas PG/HTTP US4 T055–T057](../../specs/002-oferta-academica/evidence/t055-t057.md)
+ejecutan 516 casos únicos: 437 aprobados y 79 pendientes de consultas/rutas docentes
+T060/T061. T056 completa (11/11); T055/T057 permanecen pendientes. Regresión dirigida
+46/46, sin implementación de producto ni cambios de negocio. Siguiente bloque:
+pruebas E2E T058/T059. La aceptación humana/integral permanece pendiente.
 Se conserva el timeout B02 de regresión y su repetición
 aprobada sin ampliar límites; no acredita estabilidad ni cierre de bootstrap.
 La observación humana SC-002/T073 sigue
