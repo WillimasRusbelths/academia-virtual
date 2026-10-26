@@ -49,7 +49,7 @@ test('D06 enlace ajeno exige control propio positivo y ofrece no disponible sin 
 for(const target of ['list','detail'])test(`D07 visitante ${target}: acceso exige login sin consulta docente`,async({page,offering})=>{
   const seed=await teachingSeed(offering),reads:string[]=[];page.on('request',r=>{if(r.url().includes('/api/v1/teaching/'))reads.push(r.url());});
   await page.goto(target==='list'?'/mis-grupos':`/mis-grupos/${seed.groupId}`);await expect(page.getByRole('heading',{level:1})).toBeVisible();
-  expect(new URL(page.url()).pathname,'T064 pendiente: ruta docente protegida requiere login').toBe('/login');expect(reads).toHaveLength(0);
+  await expect(page,'La hidratación de sesión debe terminar en acceso, sin consultar grupos').toHaveURL('http://localhost:5173/login');expect(reads).toHaveLength(0);
   expect(await page.getByText('Turno A',{exact:true}).count()).toBe(0);
 });
 for(const role of ['ADMIN','STUDENT'] as const)test(`D08 ${role}: denegación segura de ruta docente y retorno a inicio`,async({page,offering})=>{

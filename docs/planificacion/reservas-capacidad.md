@@ -133,9 +133,14 @@ de sus aserciones posteriores. Ese bloque de pruebas no modificó producto ni re
 El [backend propio T060/T061](../../specs/002-oferta-academica/evidence/t060-t061.md)
 implementa las consultas y dos rutas GET docentes, cerrando T055/T057 con todas sus
 aserciones: 547/547 PG/HTTP (516 conservadas y 31 adicionales), 335/335 UNIT/arquitectura
-y 129/129 regresión dirigida. Tipos, lint y compilación API/web aprobados. T058 sigue
-pendiente de las pantallas/navegación; sin nueva ejecución E2E, smokes o cargas.
-Siguiente bloque T062–T064: revisión administrativa, Mis grupos y navegación.
+y 129/129 regresión dirigida. Tipos, lint y compilación API/web aprobados. En ese avance,
+T058 quedó pendiente de las pantallas/navegación y no se repitieron E2E, smokes o cargas.
+La [interfaz T062–T064](../../specs/002-oferta-academica/evidence/t062-t064.md)
+cierra T058 con referencia docente anterior, Mis grupos y navegación/limpieza de
+sesión: T058/T059 48/48 ejecuciones finales (24 casos únicos), acceso 21/21 y perfil
+8/8, UNIT web 188/188; tipos, lint y compilación API/web aprobados. Backend y reglas
+conservados, sin cargas nuevas. Siguiente bloque T065/T066: regresión integral de
+identidad y checkpoint US4; no se declara aceptación integral ni capacidad.
 La aceptación humana/integral permanece pendiente.
 Se conserva el timeout B02 de regresión y su repetición
 aprobada sin ampliar límites; no acredita estabilidad ni cierre de bootstrap.

@@ -42,7 +42,7 @@ export function SessionProvider({children}:{readonly children:ReactNode}) {
   async function logout() {
     const started=++generation.current;setLoading(true);setError(undefined);
     try {await api.request('/auth/logout',{method:'POST'});
-      if(started===generation.current){current.current=null;setUser(null);setLoading(false);setNotice(undefined);navigate('/login',true);}}
+      if(started===generation.current){api.cancelPending();current.current=null;setUser(null);setLoading(false);setNotice(undefined);navigate('/login',true);}}
     catch(failure){if(started===generation.current){setLoading(false);setError(safeFailure(failure));}}
   }
   const refreshRef=useRef(refresh);refreshRef.current=refresh;

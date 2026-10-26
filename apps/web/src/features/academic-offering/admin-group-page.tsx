@@ -20,6 +20,7 @@ export function AdminGroupPage({ api, id, navigate }: { api: ApiClient; id: stri
         <p>{resource.data.cancellationReason}</p><p>Cancelación confirmada: {resource.data.cancelledAt}</p></section>}
       {resource.data.teacher && !resource.data.teacher.eligible && <p>Docente no habilitado: {resource.data.teacher.name}</p>}
       {resource.data.teacherReviewRequired && <p>Revisión docente requerida. Recuperar habilitación no republica el grupo.</p>}
+      {resource.data.lastPublishedTeacherId && <p>Docente de la última publicación: <a href={`/admin/cuentas/${resource.data.lastPublishedTeacherId}`}>Consultar cuenta de referencia</a></p>}
       <GroupForm key={`group-${formVersion}`} client={client} courseId={resource.data.courseId} initial={resource.data} busy={busy} onBusy={setBusy}
         onDirty={setDirtyGroup} externalErrors={errors} onSaved={value => { resource.accept(value); setErrors({}); }} onCancel={() => navigate(`/admin/oferta/cursos/${resource.data!.courseId}`)} onDenied={resource.denied}
         onReplace={value => { resource.accept(value); setFormVersion(value => value + 1); }}/>

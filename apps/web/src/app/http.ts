@@ -29,11 +29,13 @@ const uuid='[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
 const uuidPattern=new RegExp('^'+uuid+'$','i');
 const academicPath=new RegExp('^/admin/academic/(?:courses(?:/'+uuid+'(?:/groups|/publish)?)?|groups/'+uuid+'(?:/schedule|/publish)?|teachers)$','i');
 const catalogPath=new RegExp('^/academic/courses(?:/'+uuid+'(?:/groups(?:/'+uuid+')?)?)?$','i');
+const teachingPath=new RegExp('^/teaching/groups(?:/'+uuid+')?$','i');
 function queryFields(path:string):readonly string[] {
   if(path==='/admin/users')return ['q','role','status','page','pageSize'];
   if(path==='/admin/academic/courses'||new RegExp('^/admin/academic/courses/'+uuid+'/groups$','i').test(path))return ['q','state','page','pageSize'];
   if(path==='/admin/academic/teachers')return ['q','page','pageSize'];
   if(path==='/academic/courses')return ['q','page','pageSize'];
+  if(path==='/teaching/groups')return ['page','pageSize'];
   if(new RegExp('^/academic/courses/'+uuid+'/groups$','i').test(path))return ['page','pageSize'];
   return [];
 }
@@ -46,7 +48,7 @@ async function failure(response:Response,path:string):Promise<ApiFailure> {
   try { raw = await response.json(); } catch { return unavailable(); }
   const error = object(object(raw)?.error);
   const code = error?.code;
-  const adminAcademic=academicPath.test(path);const academic=adminAcademic||catalogPath.test(path);
+  const adminAcademic=academicPath.test(path);const academic=adminAcademic||catalogPath.test(path)||teachingPath.test(path);
   const allowedCodes=adminAcademic&&response.status===409?academicConflicts:
     academic&&response.status===400?['VALIDATION_ERROR']:
       academic&&response.status===401?['AUTH_REQUIRED']:codes[response.status];
@@ -64,10 +66,12 @@ async function failure(response:Response,path:string):Promise<ApiFailure> {
 }
 
 /** Sin caché, almacenamiento de secretos ni replay. El navegador gestiona la cookie HttpOnly. */
-export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch = fetch):ApiClient {
+export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch = fetch):ApiClient & { cancelPending():void } {
   let generation = 0;
   const pending = new Set<AbortController>();
+  const cancelPending = () => { generation++; for (const operation of pending) operation.abort(); };
   return {
+    cancelPending,
     async request<T>(path:string,options:ApiRequest = {}):Promise<T|undefined> {
       if (!/^\/[A-Za-z0-9/_-]+$/.test(path) || path.includes('//')) throw unavailable();
       const query=new URLSearchParams();
@@ -96,8 +100,7 @@ export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch 
           const error = await failure(response,path);
           if (controller.signal.aborted || generation!==started) throw new RequestCancelled();
           if (error.code==='AUTH_REQUIRED') {
-            generation++;
-            for (const operation of pending) operation.abort();
+            cancelPending();
             onAuthRequired();
           }
           throw error;

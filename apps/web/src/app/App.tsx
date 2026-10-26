@@ -19,6 +19,8 @@ import { AdminGroupPage } from '../features/academic-offering/admin-group-page';
 import { CatalogPage } from '../features/academic-offering/catalog-page';
 import { CoursePage } from '../features/academic-offering/course-page';
 import { GroupPage } from '../features/academic-offering/group-page';
+import { TeachingGroupsPage } from '../features/academic-offering/teaching-groups-page';
+import { TeachingGroupPage } from '../features/academic-offering/teaching-group-page';
 export function App() {
   return <SessionProvider><SessionRoutes/></SessionProvider>;
 }
@@ -45,5 +47,7 @@ function SessionRoutes() {
     {path:'/oferta',access:'student',element:<CatalogPage api={session.api}/>},
     {path:'/oferta/cursos/:id',access:'student',render:params=><CoursePage api={session.api} id={params.id}/>},
     {path:'/oferta/cursos/:courseId/grupos/:id',access:'student',render:params=><GroupPage api={session.api} courseId={params.courseId} id={params.id}/>},
+    {path:'/mis-grupos',access:'teacher',element:<TeachingGroupsPage api={session.api}/>},
+    {path:'/mis-grupos/:id',access:'teacher',render:params=><TeachingGroupPage api={session.api} id={params.id}/>},
   ]}/>;
 }

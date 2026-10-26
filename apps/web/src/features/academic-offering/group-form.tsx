@@ -62,6 +62,7 @@ export function GroupForm({ client, courseId, initial, busy = false, onBusy = ()
       <FormField id="group-end" label="Fecha de fin" type="date" value={draft.periodEnd} error={error('periodEnd')} disabled={disabled} onChange={event => change('periodEnd', event.target.value)}/></div>
     <p>Zona horaria: America/Lima. Fechas extremas incluidas. Los datos omitidos del borrador quedan sin configurar.</p>
     <fieldset disabled={disabled}><legend>Asignación docente</legend>
+      <p>Asignar un docente no crea cuentas ni cambia sus permisos.</p>
       <FormField id="teacher-search" label="Buscar docente por nombre" value={search} disabled={teachers.loading} onChange={event => setSearch(event.target.value)}
         onKeyDown={event => { if (event.key === 'Enter' && !event.nativeEvent.isComposing) { event.preventDefault(); searchTeachers(); } }}/>
       <button type="button" disabled={teachers.loading} onClick={searchTeachers}>Buscar docente</button>

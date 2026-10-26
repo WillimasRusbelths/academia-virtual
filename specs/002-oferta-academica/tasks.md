@@ -1,9 +1,9 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T057 y T059–T061 completas; checkpoint automatizado US3 aprobado.
-T058 pendiente de pantallas/navegación docente T063/T064; backend propio verificado.
-Siguiente bloque: T062–T064, revisión administrativa, Mis grupos e integración de rutas.
+**Estado**: T001–T064 completas; interfaz US4 verificada, checkpoint T066 pendiente.
+T058 cerrada con T062–T064; T065–T074 siguen pendientes.
+Siguiente bloque: T065/T066, regresión integral de identidad y checkpoint US4.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -17,8 +17,8 @@ T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
 originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
 en ese checkpoint, T047 y T050–T074 permanecían pendientes. El cierre actual
 T047/T050/T051, la ampliación T052 y el checkpoint T053/T054 se detallan abajo;
-T055/T057 cerradas con T060/T061 y todas sus aserciones; T058 y T062–T074 siguen
-pendientes. T059 conserva su cierre E2E previo, sin nueva ejecución en este bloque.
+T055/T057 cerradas con T060/T061; T058/T059 verificadas de nuevo con T062–T064.
+Los criterios de T058 alcanzan sus aserciones posteriores; T065–T074 siguen pendientes.
 SC-002 humano sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
@@ -53,7 +53,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [checkpoint US3 y guía T053/T054](evidence/us3.md) y
 [autorización, habilitación y privacidad T055–T057](evidence/t055-t057.md) y
 [recorridos docentes y revisión T058/T059](evidence/t058-t059.md) y
-[consultas/rutas propias y cierre T055/T057/T060/T061](evidence/t060-t061.md).
+[consultas/rutas propias y cierre T055/T057/T060/T061](evidence/t060-t061.md) y
+[interfaz docente y cierre T058/T062–T064](evidence/t062-t064.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -68,9 +69,9 @@ T049 conectó y verificó HTTP real, cerrando T044/T048. El bloque T050/T051 ver
 la interfaz y cerró T047. T052 verificó auditoría/replay y logs. T053/T054 verificaron
 el checkpoint US3 y documentaron el ciclo editorial, incluyendo una corrección
 de textos 503 detectada por la regresión. T055–T057 prepararon pruebas PG/HTTP y
-verificaron T056. T058/T059 prepararon E2E y verificaron T059. El bloque actual
-implementa/verifica T060/T061 y cierra T055/T057, sin cambiar sus pruebas originales.
-T058 sigue pendiente de las capas web T063/T064. Reservas de
+verificaron T056. T058/T059 prepararon E2E y verificaron T059. T060/T061 cerraron
+T055/T057. El bloque actual implementa/verifica T062–T064 y cierra T058 con todas
+sus aserciones; conserva la regresión integral/checkpoint T065/T066 pendientes. Reservas de
 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
@@ -484,7 +485,7 @@ válido. [Evidencia y resultados](evidence/t055-t057.md). Sin cambios de product
 esquema, entorno manual, decisiones PA-01–PA-05 ni E1. Siguiente T058/T059;
 checkpoint US4, aceptación humana, bootstrap y capacidad siguen pendientes.
 
-- [ ] T058 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teaching.spec.ts`: Mis grupos propios en todos los estados, revocación/cambio de rol con vista abierta, respuestas tardías descartadas, visitante y enlaces ajenos, móvil/teclado (FR-009/010/013/014).
+- [X] T058 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teaching.spec.ts`: Mis grupos propios en todos los estados, revocación/cambio de rol con vista abierta, respuestas tardías descartadas, visitante y enlaces ajenos, móvil/teclado (FR-009/010/013/014).
 - [X] T059 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teacher-review.spec.ts`: selector elegible/homónimos, desactivar y reactivar vía identidad existente, aviso solo admin, retirar/revisar/republicar explícitamente y consulta alumno; no crear roles/cuentas mediante asignación (FR-007/012/016).
 
 Avance T058/T059, 2026-10-26: pruebas E2E preparadas antes de sus capas docentes.
@@ -516,9 +517,22 @@ cargas nuevas; entorno manual y 72 archivos protegidos conservados, cero esquema
 t_ residuales. PA-01–PA-05/E1 intactos; bootstrap y aceptación/capacidad sin cerrar.
 Siguiente bloque T062–T064; detener antes de T062 en este avance.
 
-- [ ] T062 [US4] Completar asignación/revisión administrativa en `apps/web/src/features/academic-offering/admin-group-page.tsx` y `group-form.tsx`: referencia previa, «Docente no habilitado»/«Revisión docente requerida», edición solo tras retirar y publicación explícita. Termina con T059 verde y sin alterar reglas de identidad (FR-012/013/016).
-- [ ] T063 [US4] Crear `apps/web/src/features/academic-offering/teaching-groups-page.tsx` y `teaching-group-page.tsx`, sin controles de gestión ni incidentes privados; campos incompletos «Sin configurar». Termina con T058 verde tras integración de rutas (FR-009/011/013/014).
-- [ ] T064 [US4] Integrar Mis grupos y enlaces por rol en `apps/web/src/app/App.tsx`, `router.tsx`, `protected-route.tsx` y `apps/web/src/features/profile/home-page.tsx`; verificar limpieza/cancelación al revocar sesión en `apps/web/src/app/session.tsx` sin replay. Termina con T058/T059 verdes y regresión de acceso/perfil (FR-009/010/014/016).
+- [X] T062 [US4] Completar asignación/revisión administrativa en `apps/web/src/features/academic-offering/admin-group-page.tsx` y `group-form.tsx`: referencia previa, «Docente no habilitado»/«Revisión docente requerida», edición solo tras retirar y publicación explícita. Termina con T059 verde y sin alterar reglas de identidad (FR-012/013/016).
+- [X] T063 [US4] Crear `apps/web/src/features/academic-offering/teaching-groups-page.tsx` y `teaching-group-page.tsx`, sin controles de gestión ni incidentes privados; campos incompletos «Sin configurar». Termina con T058 verde tras integración de rutas (FR-009/011/013/014).
+- [X] T064 [US4] Integrar Mis grupos y enlaces por rol en `apps/web/src/app/App.tsx`, `router.tsx`, `protected-route.tsx` y `apps/web/src/features/profile/home-page.tsx`; verificar limpieza/cancelación al revocar sesión en `apps/web/src/app/session.tsx` sin replay. Termina con T058/T059 verdes y regresión de acceso/perfil (FR-009/010/014/016).
+
+Avance T062–T064, 2026-10-26: referencia docente anterior y avisos administrativos,
+vistas propias con DTO cerrado, navegación por rol y cancelación de peticiones al
+confirmar logout. T058/T059 finales 48/48 ejecuciones (24 casos únicos), login 21/21
+y perfil 8/8 con configuraciones originales; UNIT web 188/188, tipos/lint y compilación
+API/web aprobados. T058 completa; T062/T063/T064 completas. Los cuatro fallos iniciales
+D07 por lectura inmediata de URL se conservan y corrigen esperando el destino exacto
+tras /me; sin debilitar aserciones ni ampliar límites. [Evidencia](evidence/t062-t064.md).
+Backend, 72 archivos protegidos, datos/configuración/volúmenes manuales conservados;
+cero esquemas t_ residuales. T065/T066 y aceptación/capacidad siguen pendientes,
+igual que bootstrap, T104/T108 y decisiones de reservas; PA-01–PA-05/E1 intactos.
+Detenido antes de T065.
+
 - [ ] T065 [US4] Ejecutar regresión de identidad afectada conforme a `specs/002-oferta-academica/quickstart.md` y registrar `specs/002-oferta-academica/evidence/identity-regression.md`: todas las configuraciones E2E originales y PG acceso/reset/bootstrap/sesión/último ADMIN, CSRF/CSP; resultados nuevos separados de evidencia 001 y bootstrap intermitente sigue abierto (FR-016; V-A12).
 - [ ] T066 [US4] Ejecutar checkpoint en `specs/002-oferta-academica/evidence/us4.md`: ocho escenarios US4, T055–T059 y T065, tabla completa SC-003 sin combinaciones omitidas, carrera en ambos órdenes y ocultamiento persistente tras reactivación. No cerrar con fallos de autorización/privacidad (FR-009–012/016; SC-003/004/005).
 

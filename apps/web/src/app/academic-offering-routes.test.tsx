@@ -4,7 +4,7 @@ import { isProtectedPath, matchRoute, permitsRoute } from './router';
 import { HomePage } from '../features/profile/home-page';
 const id = '00000000-0000-4000-8000-000000000001';
 test.each(['/admin/oferta', `/admin/oferta/cursos/${id}`, `/admin/oferta/grupos/${id}`,
-  '/oferta', `/oferta/cursos/${id}`, `/oferta/cursos/${id}/grupos/${id}`])('hidrata sesión en acceso directo %s', path => {
+  '/oferta', `/oferta/cursos/${id}`, `/oferta/cursos/${id}/grupos/${id}`, '/mis-grupos', `/mis-grupos/${id}`])('hidrata sesión en acceso directo %s', path => {
   expect(isProtectedPath(path)).toBe(true);
 });
 test.each(['STUDENT', 'TEACHER', 'ADMIN'] as const)('políticas de audiencia %s', role => {
@@ -25,4 +25,5 @@ test.each(['STUDENT','TEACHER','ADMIN'] as const)('inicio conserva perfil/cierre
   expect(output).toContain('Mi perfil'); expect(output).toContain('Cerrar sesión');
   expect(output.includes('Gestionar oferta')).toBe(role === 'ADMIN'); expect(output.includes('Gestionar cuentas')).toBe(role === 'ADMIN');
   expect(output.includes('Consultar oferta')).toBe(role !== 'TEACHER');
+  expect(output.includes('Mis grupos')).toBe(role === 'TEACHER');
 });

@@ -23,6 +23,12 @@ export interface CatalogGroup {
   readonly timeZone: 'America/Lima'; readonly capacity: number; readonly occupancy: null; readonly availability: null;
   readonly capacityStatus: 'NOT_CALCULATED'; readonly schedule: readonly Slot[]; readonly teacher: { readonly name: string };
 }
+export interface TeachingGroup {
+  readonly id: string; readonly course: { readonly id: string; readonly name: string; readonly description: string | null };
+  readonly name: string; readonly state: GroupState; readonly periodStart: string | null; readonly periodEnd: string | null;
+  readonly timeZone: 'America/Lima'; readonly capacity: number | null; readonly occupancy: null; readonly availability: null;
+  readonly capacityStatus: 'NOT_CALCULATED'; readonly schedule: readonly Slot[]; readonly teacher: { readonly name: string };
+}
 export interface Page<T> { readonly items: readonly T[]; readonly page: number; readonly pageSize: number; readonly total: number }
 export interface NameFilters { readonly q?: string; readonly page?: number; readonly pageSize?: number }
 export interface CourseFilters extends NameFilters { readonly state?: CourseState }
@@ -114,6 +120,18 @@ function page<T>(value: unknown, decode: (value: unknown) => T): Page<T> {
     || row.items.length > Number(row.pageSize) || row.items.length > Number(row.total)) return unavailable();
   return Object.freeze({ items: Object.freeze(Array.from(row.items, decode)), page: row.page as number, pageSize: row.pageSize as number, total: row.total as number });
 }
+function teachingGroup(value: unknown): TeachingGroup {
+  const row = object(value, ['id','course','name','state','periodStart','periodEnd','timeZone','capacity','occupancy','availability','capacityStatus','schedule','teacher']);
+  const course = object(row.course, ['id','name','description']), teacher = object(row.teacher, ['name']);
+  if (!isUuid(row.id) || !isUuid(course.id) || !name(course.name) || !(course.description === null || name(course.description))
+    || !name(row.name) || typeof row.state !== 'string' || !['DRAFT','PUBLISHED','WITHDRAWN','CANCELLED'].includes(row.state)
+    || !(row.periodStart === null || date(row.periodStart)) || !(row.periodEnd === null || date(row.periodEnd))
+    || (typeof row.periodStart === 'string' && typeof row.periodEnd === 'string' && row.periodStart > row.periodEnd)
+    || row.timeZone !== 'America/Lima' || !(row.capacity === null || (Number.isInteger(row.capacity) && Number(row.capacity) >= 1 && Number(row.capacity) <= 50))
+    || row.occupancy !== null || row.availability !== null || row.capacityStatus !== 'NOT_CALCULATED' || !Array.isArray(row.schedule) || !name(teacher.name)) return unavailable();
+  return Object.freeze({ ...row, course: Object.freeze({ ...course }), teacher: Object.freeze({ ...teacher }),
+    schedule: Object.freeze(Array.from(row.schedule, slot)) }) as unknown as TeachingGroup;
+}
 function path(id: string, kind: 'courses' | 'groups') {
   if (!isUuid(id)) return unavailable();
   return `/admin/academic/${kind}/${id.toLowerCase()}`;
@@ -149,6 +167,14 @@ export function academicOfferingApi(api: ApiClient) {
   }
   const courseFields = ['name','description']; const groupFields = ['name','periodStart','periodEnd','timeZone','capacity','teacherUserId'];
   return {
+    async teachingGroups(filters: Pick<NameFilters, 'page' | 'pageSize'> = {}, signal?: AbortSignal) {
+      return page(await api.request('/teaching/groups', { query: { ...filters }, signal }), teachingGroup);
+    },
+    async teachingGroup(id: string, signal?: AbortSignal) {
+      if (!isUuid(id)) return unavailable();
+      const value = teachingGroup(await api.request(`/teaching/groups/${id.toLowerCase()}`, { signal }));
+      if (value.id !== id.toLowerCase()) return unavailable(); return value;
+    },
     async catalog(filters: NameFilters = {}, signal?: AbortSignal) { return page(await api.request('/academic/courses', { query: { ...filters }, signal }), catalogCourse); },
     async catalogCourse(id: string, signal?: AbortSignal) { return catalogCourse(await api.request(path(id, 'courses').replace('/admin', ''), { signal })); },
     async catalogGroups(id: string, filters: Pick<NameFilters, 'page' | 'pageSize'> = {}, signal?: AbortSignal) {

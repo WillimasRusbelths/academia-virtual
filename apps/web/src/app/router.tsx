@@ -9,7 +9,8 @@ export interface AppRoute { readonly path:string; readonly access?:RouteAccess;r
 export function isProtectedPath(path:string):boolean {
   return path==='/inicio'||path==='/perfil'||path==='/admin/cuentas'||matchRoute('/admin/cuentas/:id',path)!==null
     ||path==='/admin/oferta'||matchRoute('/admin/oferta/cursos/:id',path)!==null||matchRoute('/admin/oferta/grupos/:id',path)!==null
-    ||path==='/oferta'||matchRoute('/oferta/cursos/:id',path)!==null||matchRoute('/oferta/cursos/:courseId/grupos/:id',path)!==null;
+    ||path==='/oferta'||matchRoute('/oferta/cursos/:id',path)!==null||matchRoute('/oferta/cursos/:courseId/grupos/:id',path)!==null
+    ||path==='/mis-grupos'||matchRoute('/mis-grupos/:id',path)!==null;
 }
 export function matchRoute(pattern:string,path:string):Readonly<Record<string,string>>|null {
   const parts=pattern.split('/');const actual=path.split('/');const parameters:Record<string,string>={};
