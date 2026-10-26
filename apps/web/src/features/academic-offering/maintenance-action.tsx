@@ -42,7 +42,7 @@ export function MaintenanceAction<T extends AdminCourse | AdminGroup>({ value, d
         </form></> : <p>{group ? 'El grupo dejará de ofrecerse y podrá editarse. Su publicación posterior requiere otra confirmación.'
           : 'El curso y sus grupos dejarán de ofrecerse al alumno. No cambia el estado ni se libera la programación de sus grupos publicados.'}</p>}
       <Feedback error={command.error}/>
-      {command.error?.status === 503 && <p>El resultado es incierto. Comprueba el estado o confirma de nuevo para repetir la misma intención. Salir no deshace un comando que pueda haberse aplicado.</p>}
+      {command.error?.status === 503 && <p>Puedes comprobar el estado o confirmar de nuevo para repetir la misma intención.</p>}
       {command.error && [409, 503].includes(command.error.status) && <OfferingReview load={load} denied={onDenied} disabled={command.pending}
         replace={saved => { command.discard(); close(); onReplace(saved); }}/>}
     </OfferingConfirmation>}

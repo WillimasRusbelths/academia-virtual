@@ -53,7 +53,7 @@ export function useOfferingCommand<T>() {
       if (live.current && !(failure instanceof RequestCancelled)) {
         const safe = safeFailure(failure);
         setError(safe.status === 503 ? new ApiFailure(503, safe.code,
-          'El resultado es incierto. Comprueba el estado antes de reintentar. Salir no deshace un comando que pueda haberse aplicado.',
+          'Servicio temporalmente no disponible. El resultado es incierto. Comprueba el estado antes de reintentar. Salir no deshace un comando que pueda haberse aplicado.',
           safe.retryAfterSeconds, safe.fields, safe.conflictingGroupIds) : safe);
         if (safe.status === 401 || safe.status === 403) { saved.current = undefined; denied(safe); }
       }

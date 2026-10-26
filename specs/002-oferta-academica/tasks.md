@@ -1,8 +1,8 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T052 completas. Siguiente bloque T053/T054 para el checkpoint
-y documentación US3; todavía no se inicia US4.
+**Estado**: T001–T054 completas, checkpoint automatizado US3 aprobado.
+Siguiente bloque: pruebas de US4 desde T055; todavía no se implementan sus capas.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -15,7 +15,8 @@ T038 conecta publicación/catálogo por HTTP y cierra los criterios integrados d
 T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
 originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
 en ese checkpoint, T047 y T050–T074 permanecían pendientes. El cierre actual
-T047/T050/T051 y la ampliación T052 se detallan abajo; T053–T074 siguen pendientes.
+T047/T050/T051, la ampliación T052 y el checkpoint T053/T054 se detallan abajo;
+T055–T074 siguen pendientes.
 SC-002 humano sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
@@ -46,7 +47,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [transiciones y escritor real T048](evidence/t048.md) y
 [rutas reales y cierre HTTP T049](evidence/t049.md) e
 [interfaz editorial y conflictos T050/T051](evidence/t050-t051.md) y
-[auditoría persistente y logs T052](evidence/t052.md).
+[auditoría persistente y logs T052](evidence/t052.md) y
+[checkpoint US3 y guía T053/T054](evidence/us3.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -58,8 +60,9 @@ no cambia su negocio. Después de escribir y ejecutar T005/T006 en rojo, se auto
 T007/T008 para implementar/verificar modelo y migración aditiva, y después únicamente
 T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El bloque
 T049 conectó y verificó HTTP real, cerrando T044/T048. El bloque T050/T051 verificó
-la interfaz y cerró T047. El actual verifica únicamente auditoría/replay y logs T052;
-no adelanta el checkpoint T053 ni la documentación T054. Reservas de
+la interfaz y cerró T047. T052 verificó auditoría/replay y logs. El actual ejecuta
+el checkpoint T053 y documenta el ciclo editorial T054, incluyendo una corrección
+de textos 503 detectada por la regresión, sin adelantar US4. Reservas de
 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
@@ -436,8 +439,22 @@ iniciales y 28 finales son repeticiones, no 56 casos únicos. Evidencia en
 [t052.md](evidence/t052.md). T053/T054 pendientes, igual que US4, aceptación humana,
 bootstrap y capacidad; PA-01–PA-05/E1 y entorno manual conservados.
 
-- [ ] T053 [US3] Ejecutar matriz completa de diez escenarios US3 y regresión US1/US2, registrando `specs/002-oferta-academica/evidence/us3.md`; incluir casos efectivos comunes, contiguos, distintos docentes y dos admins, con consultas finales persistidas (FR-004/008/015; SC-001/004/006).
-- [ ] T054 [US3] Documentar ciclo editorial y recuperación de conflictos en `specs/002-oferta-academica/quickstart.md`, vinculando evidencia T053 y manteniendo comandos seguros; checkpoint aprobado solo si T043–T047/T052 pasan, sin efectos sobre matrícula ni reembolsos (FR-008/013/016).
+- [X] T053 [US3] Ejecutar matriz completa de diez escenarios US3 y regresión US1/US2, registrando `specs/002-oferta-academica/evidence/us3.md`; incluir casos efectivos comunes, contiguos, distintos docentes y dos admins, con consultas finales persistidas (FR-004/008/015; SC-001/004/006).
+- [X] T054 [US3] Documentar ciclo editorial y recuperación de conflictos en `specs/002-oferta-academica/quickstart.md`, vinculando evidencia T053 y manteniendo comandos seguros; checkpoint aprobado solo si T043–T047/T052 pasan, sin efectos sobre matrícula ni reembolsos (FR-008/013/016).
+
+Cierre T053/T054, 2026-10-26 (inicio 2026-10-25): diez escenarios US3 trazados y
+T043–T047/T052 verdes. API UNIT 335/335, incluidas 14 de arquitectura; lifecycle
+27/27 también en UTC, mismos casos. PostgreSQL/HTTP 579/579 en 16 archivos, con
+controles de contexto/protocolo separados de la aceptación académica. Web UNIT
+169/169 y E2E completos 120/120: 60 únicos, 118 ejecuciones funcionales y dos del
+harness. Tipos, lint y builds aprobados. Se preservan el lote inicial interrumpido
+y cuatro fallos reproducidos P03/U04 antes de corregir tres mensajes 503: aviso
+único de incertidumbre y descripción temporal conservados; pruebas/aserciones y
+límites intactos. Guía editorial actualizada con comandos originales preservados.
+Evidencia en [us3.md](evidence/us3.md). Cambio autorizado de la guía entre los 72
+archivos de referencia; los otros 71 intactos. Entorno manual/volúmenes conservados,
+cero esquemas t_ residuales. PA-01–PA-05/E1 intactos; bootstrap, SC-002 humano,
+T104/T108 y capacidad siguen pendientes. Detenido antes de T055.
 
 ## Fase 6: US4 — Asignación y permisos vigentes (P2, T055–T066)
 

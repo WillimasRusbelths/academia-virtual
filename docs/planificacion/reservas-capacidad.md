@@ -119,7 +119,10 @@ cierran T044/T048/T049 con sus pruebas reales y políticas. La
 T047 con retiro/cancelación, revisión explícita y reintentos manuales verificados
 en escritorio/móvil. La [ampliación de auditoría T052](../../specs/002-oferta-academica/evidence/t052.md)
 verifica hechos mínimos, atomicidad, snapshots, replay y logs privados con HTTP/PG
-reales. T001–T052 completas; siguiente bloque checkpoint y documentación T053/T054.
+reales. El [checkpoint US3 T053/T054](../../specs/002-oferta-academica/evidence/us3.md)
+verifica los diez escenarios y regresión US1/US2, con guía editorial y corrección
+de avisos 503 sin cambios de negocio. T001–T054 completas; siguientes pruebas de
+US4 desde T055. La aceptación humana/integral permanece pendiente.
 Se conserva el timeout B02 de regresión y su repetición
 aprobada sin ampliar límites; no acredita estabilidad ni cierre de bootstrap.
 La observación humana SC-002/T073 sigue

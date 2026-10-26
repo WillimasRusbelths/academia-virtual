@@ -1,8 +1,9 @@
 # Guía de verificación local — oferta académica
 
-**Estado**: receta futura para después de implementar. En esta etapa solo se revisó
-documentación: no se arrancaron servicios, generaron clientes, migraron datos ni
-ejecutaron suites. No confundir estos comandos con resultados aprobados.
+**Estado**: guía actualizada hasta el ciclo editorial US3. La receta original de
+instalación nueva permanece como procedimiento, no como ejecución sobre datos manuales.
+Las comprobaciones de T053 y sus límites están en [checkpoint US3](evidence/us3.md)
+y [resultados](evidence/us3-results.json); la aceptación integral y US4 siguen pendientes.
 
 Seguir [plan](plan.md), [modelo](data-model.md), [HTTP](contracts/api.md),
 [interfaz](contracts/ui.md) e [integración](contracts/integration.md).
@@ -10,8 +11,8 @@ El estado heredado está en [aceptación de identidad](../001-identidad-acceso-r
 
 ## Prerrequisitos
 
-- Implementación y futura migración revisadas, scripts npm actuales y nuevos tests
-  disponibles. El plan por sí solo no hace que las rutas funcionen.
+- Fuente implementada y migraciones revisadas, scripts npm y pruebas de la revisión
+  elegida disponibles. El plan por sí solo no hace que las rutas funcionen.
 - Docker Desktop Linux/Compose compatible con `!reset`, Node/npm de imágenes y red
   de construcción disponible. No actualizar stack para acomodar un fallo de prueba.
 - **Copia nueva** de la fuente implementada con lockfile, documentación 002 pendiente
@@ -26,6 +27,72 @@ El estado heredado está en [aceptación de identidad](../001-identidad-acceso-r
   volúmenes, .cache y evidencia originales. No usar su proyecto `academia-local`.
 - No ejecutar bootstrap en un entorno ya inicializado ni purgas, db push, reset o
   `down -v`. El mantenimiento existente sigue siendo explícito.
+
+## Ciclo editorial — T054
+
+Usar únicamente cuentas ficticias del entorno aislado. Para reanudar una instalación
+de pruebas existente, seguir su [inventario y guardas](evidence/environment.md):
+conservar configuración y volumen; no ejecutar la receta de configuración nueva
+que aparece después sobre una copia ya configurada. Los wrappers privados del
+[checkpoint T053](evidence/us3.md) comprueban el destino antes de arrancar servicios.
+No iniciar ni autenticar pruebas contra `academia-local`.
+
+### Retirar, corregir y republicar
+
+1. Como ADMIN, desde Inicio abrir **Gestionar oferta**, elegir curso y, si corresponde,
+   su grupo. Contrastar estado guardado con «Visible/No visible para alumnos»; son
+   conceptos diferentes. Horarios semanales en America/Lima; capacidad máxima no
+   representa ocupación, disponibilidad ni una reserva.
+2. Antes de modificar un recurso Publicado, elegir **Retirar curso** o **Retirar
+   grupo** y revisar su confirmación. Cancelar la confirmación no escribe y devuelve
+   el foco al control. Las acciones de transición requieren guardar o descartar
+   ediciones previas; no publican datos de un formulario sin guardar.
+3. Retirar un curso oculta el curso y todos sus grupos al alumno, pero conserva
+   estados, snapshots y programación de los hijos. Un hijo todavía Publicado exige
+   su **propio retiro** antes de editarlo y sigue bloqueando agenda docente.
+4. Editar curso/grupo retirado y guardar. El grupo permite configurar periodo,
+   capacidad entera 1–50, docente y horario. Franjas del mismo día, sin cruzar
+   medianoche, con ocurrencia efectiva en el periodo incluido; contiguas permitidas.
+   Guardar no republica ni renueva la captura de habilitación docente.
+5. Elegir **Publicar curso/grupo** como acción separada y confirmar el resumen.
+   Publicar el curso revalida sus hijos Publicados sin cambiar sus snapshots ni
+   publicar los borradores. Publicar el grupo requiere padre publicado, integridad,
+   docente habilitado y ausencia de conflicto efectivo con otro grupo Publicado
+   del mismo docente; grupos ocultos por padre retirado o revisión también bloquean.
+6. Como STUDENT, desde Inicio abrir **Consultar oferta** y comprobar curso y grupos
+   publicados visibles. Un enlace previo a oferta retirada/cancelada responde
+   «Oferta no disponible», sin mostrar motivos administrativos. No se calcula
+   disponibilidad: se informa capacidad máxima y ocupación/disponibilidad no calculadas.
+
+Si publicar el curso informa grupos bloqueados, abrir las referencias administrativas
+seguras y retirar los afectados. Publicar primero el curso válido, revisar/sustituir
+asignaciones y publicar cada grupo explícitamente. Recuperar rol o activar la cuenta
+del docente no republica; publicar el curso tampoco confirma esa revisión. Un grupo
+Cancelado conserva su condición terminal. No crear cuentas ni cambiar roles desde
+el selector docente. La consulta docente «Mis grupos» permanece en el trabajo US4.
+
+### Cancelar un grupo
+
+Elegir **Cancelar grupo**, escribir el motivo obligatorio y confirmar. El servidor
+registra el instante; el navegador no lo decide. Se conserva la consulta administrativa
+del motivo y los datos, pero no se permite editar, retirar, recuperar o republicar
+el grupo. No hay cancelación de curso ni DELETE. La cancelación no implica reembolso,
+traslado, matrícula, reserva o cancelación de clases en este incremento.
+
+### Resolver conflicto o respuesta incierta
+
+| Situación | Recuperación explícita |
+| --- | --- |
+| 409 de revisión | Conservar entradas. **Consultar datos guardados** permite comparar sin adoptar esa revisión ni sobrescribir. Solo **Descartar edición y cargar datos guardados** reemplaza conscientemente la edición; revisar y preparar otra intención con ID nuevo si corresponde. |
+| 409 de estado | Comprobar el estado guardado y respetar retiro previo o cancelación terminal. No cambiar expectedRevision a ciegas ni convertir transición inválida en NO_CHANGE. |
+| 503 o respuesta perdida | El resultado es incierto: puede haber commit. Comprobar estado o repetir **manualmente** la misma intención conservada en memoria, con idénticos ID/payload. Corregir una intención prepara ID nuevo. No atribuir rollback solo por un error de transporte. |
+| Salir después de 503 | El aviso recuerda que salir no deshace un comando que pueda haberse aplicado. Cerrar/reabrir la confirmación conserva la intención incierta en esa vista; cambiar de ruta o recargar pierde la intención en memoria. Antes de crear otra, consultar el estado persistido. |
+| Sesión perdida | Se descarta la intención privada y se vuelve a acceso. Tras login, consultar datos; no se reenvía un comando automáticamente. |
+
+No hay autosave, replay automático, almacenamiento de intenciones en localStorage
+ni reemplazo silencioso de revisión. Durante un envío, no confirmar otro comando
+ni interpretar cancelar navegación como garantía de rollback. Conservar el mismo
+commandId solo para repetir exactamente la intención, no para corregirla.
 
 ## Proyecto aislado con configuración nueva
 
@@ -68,10 +135,12 @@ El nombre único selecciona volumen nuevo; regression elimina publicaciones de p
 y usa APP_ENV=test. Mailpit solo recibe destinatarios ficticios @example.test.
 No imprimir `docker compose config` completo ni variables/URLs privadas.
 
-## Generación y migración futuras, solo en ese proyecto
+## Generación y migración, solo en ese proyecto
 
-La nueva migración será aditiva posterior a las cuatro de identidad. No ejecutar esto
-hasta que exista SQL revisado. Las imágenes construidas ya deben incorporar los clientes
+La migración existente `0005_academic_offering` es aditiva posterior a las cuatro
+de identidad; su revisión y ensayo están en [T007/T008](evidence/t007-t008.md).
+Revisar el SQL de la revisión elegida y aplicar esta receta solo al proyecto aislado.
+Las imágenes construidas ya deben incorporar los clientes
 y compilación actuales; generar en un contenedor efímero valida el proceso, no modifica
 la imagen de otro contenedor.
 
@@ -86,9 +155,9 @@ if ($LASTEXITCODE -ne 0) { throw 'API/web no disponibles.' }
 docker @trial ps
 ```
 
-No usar db:migrate:dev en test. Su modo create-only requiere desarrollo y BD sombra
-cuyos permisos aún deben validarse al preparar la migración; eso no bloquea redactar
-tareas. No conceder CREATEDB al runtime ni usar la base manual como sombra.
+No usar db:migrate:dev en test. Para futuras migraciones, create-only requiere
+desarrollo y BD sombra exclusiva con permisos previamente revisados. No conceder
+CREATEDB al runtime ni usar la base manual como sombra.
 
 En integración, reutilizar `identityDatabase` y el entorno
 `t_<suite>_<random>` del harness existente: propietario aplica migraciones y runtime
@@ -97,7 +166,9 @@ o datos originales buscando coincidencias amplias de nombre.
 
 ## Pruebas unitarias, arquitectura y PostgreSQL
 
-Comandos existentes; después de implementar deberán incluir los archivos nuevos.
+Comandos existentes con descubrimiento de los archivos actuales. El subconjunto
+efectivamente ejecutado en T053 se enumera en [su evidencia](evidence/us3.md);
+esta receta completa no equivale a dar por aprobada la puerta final T068.
 
 ```powershell
 docker @trial exec -T api npm run test:unit --workspace apps/api -- --maxWorkers=1
@@ -134,11 +205,12 @@ Comprobar desde conexión observadora independiente las esperas reales; usar el 
 `apps/api/tests/support/locks.ts`. No hacer la observación con la transacción bloqueada
 ni usar sleeps como única barrera. Conservar resultados y aserciones del estado final.
 
-## E2E de oferta — configuración futura
+## E2E de oferta — configuración existente
 
-Archivo previsto `apps/web/playwright.academic-offering.config.ts`, aún inexistente
-al escribir el plan. Debe reutilizar fixtures de composición real, esquemas aislados,
-origen loopback, credenciales ficticias y proyectos móvil/escritorio como identidad.
+Archivo `apps/web/playwright.academic-offering.config.ts`: fixtures de composición
+real, esquemas aislados, origen loopback, credenciales ficticias y proyectos
+móvil/escritorio. La configuración completa ejecuta los recorridos implementados;
+no acredita por adelantado las vistas o la matriz de autorización pendientes de US4.
 
 La fixture deberá arrancar API/Nest y web dentro del runner para sus esquemas; no
 autenticar contra la API manual. La base externa PLAYWRIGHT_BASE_URL del Compose no
@@ -149,9 +221,11 @@ docker @trial --profile tests run --rm --no-deps --entrypoint sh browser-tests -
 if ($LASTEXITCODE -ne 0) { throw 'E2E de oferta no aprobado.' }
 ```
 
-Esperado: recorridos A–E de [ui.md](contracts/ui.md), V-A10, validación por campo,
+Cobertura final requerida: recorridos A–E de [ui.md](contracts/ui.md), V-A10, validación por campo,
 vacío/fallo, datos persistentes tras recargar, teclado/móvil, accesos directos denegados,
-grupo no disponible y privacidad. Capturas y trazas solo ficticias, privadas e ignoradas.
+grupo no disponible y privacidad. US4 aún debe completar sus recorridos; los resultados
+actuales se limitan a los checkpoints registrados. Capturas y trazas solo ficticias,
+privadas e ignoradas.
 
 ## Regresión de identidad
 
@@ -188,7 +262,7 @@ Ensayo incremental V-A11:
 1. En otro esquema/proyecto ficticio, aplicar solo 0001–0004 de la revisión previa.
 2. Crear fixtures de identidad por sus mecanismos de test y registrar huellas privadas
    de cuentas, sesiones, tokens, auditoría y SystemState; sin imprimir secretos.
-3. Aplicar únicamente la futura migración nueva y verificar invariantes/privilegios.
+3. Aplicar únicamente `0005_academic_offering` y verificar invariantes/privilegios.
 4. Comprobar iguales las huellas de identidad salvo la nueva columna técnica default0;
    después probar las secuencias de generación docente.
 5. Ensayar rollback transaccional de fallos y recuperación a BD nueva según
@@ -203,8 +277,8 @@ acceso y oferta antes de reabrir, además de invalidar credenciales restauradas.
 
 Registrar revisión/fuente exacta incluida su parte no versionada, lockfile, imágenes,
 configuración sin secretos, comandos/códigos de salida, suites y casos realmente
-ejecutados, fallos/omisiones, tiempos observados y límites. Futuras evidencias del spec
-pueden vivir bajo evidence/; no crearlas con resultados ficticios ahora.
+ejecutados, fallos/omisiones, tiempos observados y límites. Registrar evidencia bajo
+evidence/ con resultados reales; no presentar una receta como una prueba ejecutada.
 
 ```powershell
 docker @trial stop

@@ -59,7 +59,7 @@ export function PublicationAction<T extends AdminCourse | AdminGroup>({ value, d
         {group.teacherReviewRequired && <p>La habilitación recuperada requiere revisión y esta publicación explícita.</p>}
       </> : <><p>{(value as AdminCourse).description}</p><p>Publicar el curso no publica sus grupos. Solo será visible cuando tenga grupos visibles.</p></>}
       <Feedback error={command.error}/>
-      {command.error?.status === 503 && <p>El resultado es incierto. Confirmar de nuevo repite la misma intención; salir no deshace un comando que pueda haberse aplicado.</p>}
+      {command.error?.status === 503 && <p>Confirmar de nuevo repite la misma intención.</p>}
       {!!command.error?.conflictingGroupIds.length && <ul aria-label="Grupos que requieren revisión">{command.error.conflictingGroupIds.map(id =>
         <li key={id}><a href={`/admin/oferta/grupos/${id}`}>Revisar grupo {id}</a></li>)}</ul>}
       {command.error && [409, 503].includes(command.error.status) && <OfferingReview load={load} denied={onDenied} disabled={command.pending}
