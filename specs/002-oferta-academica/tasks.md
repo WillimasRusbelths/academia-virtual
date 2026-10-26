@@ -1,9 +1,9 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T054 y T056 completas; checkpoint automatizado US3 aprobado.
-T055/T057 preparadas y ejecutadas, pendientes de consultas/rutas T060/T061.
-Siguiente bloque: pruebas E2E T058/T059 antes de implementar las capas de US4.
+**Estado**: T001–T054, T056 y T059 completas; checkpoint automatizado US3 aprobado.
+T055/T057 pendientes de consultas/rutas T060/T061; T058 pendiente de capas docentes.
+Siguiente bloque: T060/T061, consultas propias y rutas HTTP antes de las pantallas.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -17,7 +17,8 @@ T032/T033/T036/T037. T035 cierra con la interfaz T039–T041 y sus diez casos
 originales en escritorio/móvil. T042 aprueba el checkpoint automatizado US2;
 en ese checkpoint, T047 y T050–T074 permanecían pendientes. El cierre actual
 T047/T050/T051, la ampliación T052 y el checkpoint T053/T054 se detallan abajo;
-T055/T057–T074 siguen pendientes; T056 verificada con PostgreSQL real.
+T055/T057/T058 y T060–T074 siguen pendientes; T056 verificada con PostgreSQL real
+y T059 con recorridos reales de escritorio/móvil.
 SC-002 humano sigue pendiente de T073.
 Hallazgo histórico de bootstrap abierto.
 T005/T006 pasaron sus 42 pruebas originales tras implementar T007/T008.
@@ -50,7 +51,8 @@ Se conservan las cinco aclaraciones. Evidencia: [inventario](evidence/baseline.m
 [interfaz editorial y conflictos T050/T051](evidence/t050-t051.md) y
 [auditoría persistente y logs T052](evidence/t052.md) y
 [checkpoint US3 y guía T053/T054](evidence/us3.md) y
-[autorización, habilitación y privacidad T055–T057](evidence/t055-t057.md).
+[autorización, habilitación y privacidad T055–T057](evidence/t055-t057.md) y
+[recorridos docentes y revisión T058/T059](evidence/t058-t059.md).
 **Input**: [spec](spec.md), [plan](plan.md), [investigación](research.md),
 [modelo](data-model.md), [API](contracts/api.md), [integración](contracts/integration.md),
 [UI](contracts/ui.md), [guía local](quickstart.md) y constitución histórica 1.1.0.
@@ -64,8 +66,9 @@ T009/T010 para interfaces y contratos, y T011/T012 para permisos/pruebas. El blo
 T049 conectó y verificó HTTP real, cerrando T044/T048. El bloque T050/T051 verificó
 la interfaz y cerró T047. T052 verificó auditoría/replay y logs. T053/T054 verificaron
 el checkpoint US3 y documentaron el ciclo editorial, incluyendo una corrección
-de textos 503 detectada por la regresión. El bloque actual prepara las pruebas
-PG/HTTP T055–T057, verifica T056 y conserva T055/T057 pendientes de T060/T061. Reservas de
+de textos 503 detectada por la regresión. T055–T057 prepararon pruebas PG/HTTP y
+verificaron T056. El bloque actual prepara E2E T058/T059 y verifica T059; T055/T057
+siguen pendientes de T060/T061 y T058 de las capas docentes. Reservas de
 24 horas pertenecen al futuro spec propio.
 Las demás tareas siguen siendo destinos futuros;
 este cierre no acredita aceptación integral ni capacidad concurrente.
@@ -480,7 +483,22 @@ esquema, entorno manual, decisiones PA-01–PA-05 ni E1. Siguiente T058/T059;
 checkpoint US4, aceptación humana, bootstrap y capacidad siguen pendientes.
 
 - [ ] T058 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teaching.spec.ts`: Mis grupos propios en todos los estados, revocación/cambio de rol con vista abierta, respuestas tardías descartadas, visitante y enlaces ajenos, móvil/teclado (FR-009/010/013/014).
-- [ ] T059 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teacher-review.spec.ts`: selector elegible/homónimos, desactivar y reactivar vía identidad existente, aviso solo admin, retirar/revisar/republicar explícitamente y consulta alumno; no crear roles/cuentas mediante asignación (FR-007/012/016).
+- [X] T059 [P] [US4] Escribir E2E en `apps/web/tests/e2e/academic-offering-teacher-review.spec.ts`: selector elegible/homónimos, desactivar y reactivar vía identidad existente, aviso solo admin, retirar/revisar/republicar explícitamente y consulta alumno; no crear roles/cuentas mediante asignación (FR-007/012/016).
+
+Avance T058/T059, 2026-10-26: pruebas E2E preparadas antes de sus capas docentes.
+T059 completa: seis casos únicos aprobados en escritorio y móvil (12 ejecuciones),
+con identidad, HTTP y PostgreSQL reales. T058 conserva 18 casos únicos pendientes;
+la ejecución final completa suma 48 ejecuciones, 12 aprobadas y 36 rojos esperados,
+sin omisiones, errores de preparación ni timeouts finales;
+sus aserciones posteriores requieren T060/T061/T063/T064. No se adelantan esas tareas.
+El escenario de privacidad docente permanece como D12 de T058, sin añadir a T059
+una dependencia de la UI docente. Tipos, lint y compilación API/web aprobados;
+un control auxiliar del harness pasa en ambos tamaños. Fixture inicial de vacío
+corregido para retirar antes de reasignar. Resultados completos, diferencias entre
+casos/ejecuciones y límites en [evidencia](evidence/t058-t059.md).
+Siguiente bloque T060/T061. E1/PA-01–PA-05 intactos; bootstrap, capacidad, T065/T066
+y aceptación humana/integral pendientes.
+
 - [ ] T060 [US4] Completar consultas propias y diagnóstico admin en `apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts` y `application/queries.ts`: asignación actual por actor en misma sentencia, revisión derivada sin nuevo estado/flag mutable, proyecciones cerradas. Termina con T055/T057 verdes para lecturas (FR-009–012).
 - [ ] T061 [US4] Exponer `/teaching/groups` y `/:id` en `apps/api/src/modules/academic-offering/entrypoints/http/teaching.controller.ts`; academic:read-own, paginación y contexto autorizado, sin acciones de escritura ni consulta general de curso. Termina con T055/T057 y T017 verdes (FR-009/010/011).
 - [ ] T062 [US4] Completar asignación/revisión administrativa en `apps/web/src/features/academic-offering/admin-group-page.tsx` y `group-form.tsx`: referencia previa, «Docente no habilitado»/«Revisión docente requerida», edición solo tras retirar y publicación explícita. Termina con T059 verde y sin alterar reglas de identidad (FR-012/013/016).
