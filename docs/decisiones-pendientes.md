@@ -1,6 +1,6 @@
 # Decisiones pendientes
 
-**Vigente al 2026-10-29**: al menos 15 000 cuentas, objetivo no demostrado de 2500
+**Vigente al 2026-10-30**: al menos 15 000 cuentas, objetivo no demostrado de 2500
 activos concurrentes y reserva previa al pago de 24 h exactas desde confirmación
 servidor. Pago verificado confirma matrícula; vencimiento sin pago libera cupo por
 conciliación consistente. S/300 total. [Requisitos, escenarios y tareas futuras](planificacion/reservas-capacidad.md).
@@ -10,6 +10,13 @@ La dirección VPS/acceso controlado es propuesta, AWS diferido. El seguimiento d
 Decisiones abiertas o parcialmente resueltas según cada fila.
 La elección de Izipay está resuelta; sus condiciones e integración siguen pendientes.
 Una propuesta no equivale a una regla aprobada, una contratación ni una capacidad demostrada.
+
+Respuestas parciales del responsable el 2026-10-30, registradas en
+[003](../specs/003-reservas-ordenes-matricula/spec.md): reservas de varios cursos
+todas juntas o ninguna y referencia de pago cuando el servidor termina de verificarlo.
+No aprueban composición/pago de orden, identidad de matrícula, precio, resultado
+exactamente al vencer, pagos tardíos/reembolsos, cancelación o abuso. RA-01/RA-03
+quedan parciales y las demás cuestiones abiertas; el plazo sigue siendo 24 h exactas.
 
 Antes de implementar una funcionalidad, sus decisiones bloqueantes deben resolverse o
 delimitarse en su especificación. Cada resolución registrará fecha, responsable, criterio,
@@ -21,7 +28,7 @@ evidencia y especificaciones afectadas. Las reglas obligatorias de la
 | D01 | Regla de pago | Propuesta: un pago por el total de la orden y matrícula por cada curso. ¿La activación es atómica? ¿Qué sucede si un curso pierde disponibilidad tras el cobro? | Regla validada y casos de aceptación de éxito, rechazo, pago tardío y falta de cupos antes de implementar órdenes/pagos. |
 | D02 | Pasarela: parcialmente resuelta | Izipay elegida para el MVP el 2026-09-23 por el responsable del proyecto; reemplaza la candidatura inicial de Culqi. Pendientes: tarifas finales, límites, acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada. Integración no implementada. | Confirmar las condiciones para la modalidad contratada, definir verificación del proveedor y validar en su entorno de pruebas. Mantener pagos simulados para carga y separar al proveedor de órdenes/matrículas; no asumir capacidad ilimitada. |
 | D03 | Vigencia de matrícula | ¿Por período, fechas del curso o duración desde el pago? ¿Qué ocurre al cancelar o finalizar? | Estados y fechas que determinen acceso a materiales, chat y video. |
-| D04 | Reservas: parcialmente resuelta | Confirmado 2026-10-23: reservar antes de pagar; 24 h exactas desde confirmación del servidor; pago verificado confirma matrícula y vencimiento sin pago libera cupo por conciliación consistente. Pendientes varios cursos/atomicidad, identidad de reserva, carrera pago-vencimiento y abuso. | RC-03–RC-06/RA-01–RA-06/RE-01–RE-10 del plan vigente. Aprobar políticas restantes antes de implementar; no extender plazo por reconexión, reinicio o worker atrasado ni contar capacidad configurada como disponible. |
+| D04 | Reservas: parcialmente resuelta | Confirmado 2026-10-23: reserva previa al pago, 24 h exactas, pago verificado confirma matrícula y vencimiento libera cupo por conciliación consistente. El 2026-10-30 se confirman reservas conjuntas todas o ninguna y referencia al terminar verificación servidor. Pendientes composición de orden/pago, identidad, límite exacto/resolución tardía, cancelación y abuso. | RC-03–RC-06/RA-01–RA-06/RE-01–RE-10 del plan vigente y respuestas de 003. Aprobar políticas restantes antes de implementar; sin extensión por reconexión/reinicio/proceso atrasado ni capacidad ficticia. |
 | D05 | Reembolsos | ¿Se admiten, en qué condiciones y por curso o por orden? ¿Cómo afectan matrícula y cupos? | Política validada y comportamiento definido antes de implementar cancelaciones o reembolsos. |
 | D06 | Horarios: oferta delimitada, matrícula pendiente | PA-05 del spec 002 resuelve programación docente semanal America/Lima, adyacencia y conflictos efectivos al publicar. ¿Se impide matrícula del alumno en cursos solapados y qué pasa ante cambios? | Conservar 002/E1; compatibilidad y efectos sobre reservas/matrículas requieren decisión en futuro spec, no quedan resueltos por describir horarios. |
 | D07 | Video y ancho de banda | YouTube Live con OBS es la elección vigente DA03/DEC01. Faltan validar calidad, latencia, simultaneidad, consumo y viabilidad dentro del presupuesto. | Prueba temprana de emisión y reproducción, tráfico observable, limitaciones y estimación sustentada de costo; integración no implementada. |

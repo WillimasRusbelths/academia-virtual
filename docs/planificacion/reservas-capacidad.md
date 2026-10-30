@@ -32,13 +32,18 @@ reserva/matrícula y el ámbito curso/grupo se aprobarán en el futuro spec (D01
 
 ## Decisiones todavía abiertas
 
-RC-04 cierra únicamente la duración. No se atribuye aprobación a estas alternativas:
+RC-04 cierra únicamente la duración. El 2026-10-30 el responsable confirmó dos
+aspectos parciales durante [specify de 003](../../specs/003-reservas-ordenes-matricula/spec.md):
+reservas de varios cursos todas juntas o ninguna (RA-01) e instante en que el
+servidor termina de verificar el pago como referencia temporal (RA-03). No aprobó
+con ello composición/pago de orden, comparación en el instante exacto, resolución
+tardía, precios o las demás decisiones. El resto permanece abierto:
 
 | ID | Decisión pendiente | Preguntas para aclaración; bloqueo |
 | --- | --- | --- |
-| RA-01 | Varios cursos y orden | ¿Reserva conjunta atómica o parcial? ¿Un pago total o pagos por curso? ¿Cómo se reparte/cancela una orden parcial? D01/D04; bloquea agregado/atomicidad de la orden. |
+| RA-01 | Varios cursos y orden: parcial | Confirmado 2026-10-30: reservas todas juntas o ninguna. Pendientes composición de orden/pago, identidad de matrícula y cambios/cancelación; un pago total sigue siendo propuesta. D01/D04. |
 | RA-02 | Orden de llegada | ¿FIFO, sorteo, turnos u otra regla? ¿Qué instante y desempate decide prioridad? D14: no hay política FIFO aprobada ni promesa de justicia de los locks. |
-| RA-03 | Pago en límite/vencimiento | ¿Tiempo de autorización del proveedor, captura, verificación o recepción? ¿Qué pasa con una notificación recibida exactamente al vencimiento o después? Aprobar comparación temporal y conciliación, sin tolerancia inventada. |
+| RA-03 | Pago en límite/vencimiento: parcial | Confirmado 2026-10-30: referencia cuando el servidor termina de verificar el pago. Pendientes comparación exactamente al vencimiento y resolución tardía con RA-04; no se extienden 24 horas ni se inventa tolerancia. |
 | RA-04 | Reembolsos y pagos tardíos | ¿Reintegrar, conciliar manualmente, ofrecer otra plaza u otra resolución si el cupo se reasignó? No confirmar ciegamente una matrícula ni prometer reembolso automático. D02/D05. |
 | RA-05 | Cancelaciones y cambios | ¿Quién cancela reserva/orden/matrícula? ¿Qué pasa si el administrador cancela un grupo con reservas o pagos? ¿Cambios de grupo/horario? D03/D05/D06; la cancelación editorial terminal de 002 no resuelve sus efectos económicos. |
 | RA-06 | Bloqueo abusivo de cupos | D15: ¿límite por alumno, grupo, tiempo, reservas reiteradas o penalizaciones? ¿Excepciones y recuperación? No se imponen cuotas ni sanciones de negocio aquí. Las protecciones de identidad existentes permanecen. |

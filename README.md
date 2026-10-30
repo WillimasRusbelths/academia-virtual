@@ -54,9 +54,13 @@ H-CAP-01 se [corrigió y verificó automáticamente](specs/002-oferta-academica/
 el catálogo inicial indica ocupación/disponibilidad no calculadas. Esto no sustituye T073/SC-002 humano.
 Reservas, órdenes y matrícula requieren su propio spec y no amplían 002;
 no hay integración de pagos/video ni despliegue acreditado.
-RP001 prepara el [inventario de interfaces y dependencias](specs/003-reservas-ordenes-matricula/research.md)
-desde adca8e6, sin crear todavía la especificación ni implementar reservas. El siguiente
-bloque es RP002/specify; RA-01–RA-06 y la aceptación humana de 002 siguen pendientes.
+RP001 conserva el [inventario](specs/003-reservas-ordenes-matricula/research.md) desde adca8e6;
+RP002 prepara el [borrador 003](specs/003-reservas-ordenes-matricula/spec.md) y su
+[checklist](specs/003-reservas-ordenes-matricula/checklists/requirements.md), 10/16 y sin aprobación para plan.
+Se confirman reservas de varios cursos todas juntas o ninguna y referencia temporal
+al terminar la verificación del pago en servidor. Los demás aspectos de RA-01/03,
+RA-02/04/05/06 y precios/permisos siguen pendientes de RP003/clarify. No hay reservas
+implementadas; la aceptación humana de 002 sigue aplazada.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
