@@ -1,16 +1,26 @@
 # Backlog trazable — reservas, matrícula y VPS
 
-Planificación del 2026-10-23; CT001 verificada en el bloque de continuidad de oferta.
-El resto permanece pendiente y no autoriza implementar reservas, matrícula ni VPS.
+Planificación del 2026-10-23; CT001 verificada en el bloque de continuidad de oferta
+y RP001 en el inventario del 2026-10-30. Las otras 20 tareas permanecen pendientes;
+este backlog no autoriza implementar reservas, matrícula ni VPS.
 [Requisitos RC, decisiones RA y escenarios RE](reservas-capacidad.md).
-Rutas `specs/003-reservas-ordenes-matricula/` propuestas, no creadas: verificar
-numeración/convención al iniciar Spec Kit. No sustituye tasks.md del futuro spec.
+Numeración 003 confirmada: `specs/003-reservas-ordenes-matricula/research.md` contiene
+solo el inventario RP001 y su evidencia. RP002 debe reutilizar explícitamente ese
+directorio al iniciar Spec Kit; todavía no hay spec ni tasks.md de implementación.
 Las tareas de oferta [002](../../specs/002-oferta-academica/tasks.md) conservan IDs,
 checkboxes y dependencias; este backlog no las mezcla ni renumera.
 
 ## Especificación futura
 
-- [ ] RP001 Inventariar interfaces/estado real de oferta e identidad en `specs/003-reservas-ordenes-matricula/research.md`, con base, pendientes reales de 002 al iniciar ese spec y contratos consumibles; sin cerrar tareas de 002. Dep.: revisión del checkpoint disponible. RC-03/05; RE-09/10.
+- [X] RP001 Inventariar interfaces/estado real de oferta e identidad en `specs/003-reservas-ordenes-matricula/research.md`, con base, pendientes reales de 002 al iniciar ese spec y contratos consumibles; sin cerrar tareas de 002. Dep.: revisión del checkpoint disponible. RC-03/05; RE-09/10.
+
+RP001: [inventario](../../specs/003-reservas-ordenes-matricula/research.md) y
+[revisión](../../specs/003-reservas-ordenes-matricula/evidence/rp001-results.json),
+base adca8e6 desde oferta, rama `docs/003-reservas-inventario`. Contratos públicos,
+dependencias ausentes y RA-01–RA-06 diferenciados; T073/T074 de 002 siguen pendientes.
+Sin pruebas nuevas de producto ni operaciones sobre bases/entornos. RP002 es el
+siguiente bloque; no se ejecuta specify/clarify/plan en RP001.
+
 - [ ] RP002 Ejecutar specify y redactar `specs/003-reservas-ordenes-matricula/spec.md` y checklist con RC-01–RC-07, historias priorizadas de reserva/orden/pago verificado/matrícula y RE-01–RE-10; distinguir lo confirmado de RA-01–RA-06, sin implementación. Dep.: RP001.
 - [ ] RP003 Ejecutar clarify y registrar respuestas RA-01–RA-06 en el futuro `spec.md`: reserva múltiple/atomicidad, prioridad, pago exacto/tardío, reembolsos, cancelación y abuso; conservar bloqueos si faltan respuestas. Dep.: RP002; D01/D03–D06.
 - [ ] RP004 Planificar contratos públicos, identidad de reserva/orden/matrícula y estados en futuros `plan.md`, `data-model.md` y `contracts/`; confirmar disponibilidad/consumo de capacidad y migración aditiva después de RP003, sin alterar cuentas o evidencia de 002. Dep.: RP003; RC-03/05/06, RE-01/02/09.

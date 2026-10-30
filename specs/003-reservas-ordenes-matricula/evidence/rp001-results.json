@@ -1,0 +1,361 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "task": "RP001",
+  "status": "COMPLETE_DOCUMENTARY_INVENTORY",
+  "branch": "docs/003-reservas-inventario",
+  "baseCommit": "adca8e6d6d3bafe66906a513dd4923de37df8c84",
+  "baseBranch": "feat/002-oferta-academica",
+  "interfaces": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12"
+  ],
+  "coverage": [
+    "RC-03",
+    "RC-05",
+    "RE-09",
+    "RE-10"
+  ],
+  "decisions": {
+    "confirmed": "RC-01–RC-07",
+    "open": [
+      "RA-01",
+      "RA-02",
+      "RA-03",
+      "RA-04",
+      "RA-05",
+      "RA-06"
+    ],
+    "approvedNewBusinessRules": 0
+  },
+  "findings": [
+    {
+      "id": "INV-DOC-01",
+      "severity": "MEDIA",
+      "status": "RECORDED_PENDING_DOCUMENT_SYNC",
+      "scope": "Síntesis de actores/RF conserva estado anterior a 002; usar PA-01–PA-05 y evidencia real.",
+      "businessDecisionChanged": false
+    }
+  ],
+  "checks": {
+    "documentaryOnly": true,
+    "interfacesInventoried": 12,
+    "backlog": {
+      "total": 22,
+      "complete": 2,
+      "pending": 20,
+      "onlyMarkChanged": "RP001",
+      "originalDescriptionsUnchanged": true
+    },
+    "spec002": {
+      "total": 74,
+      "complete": 72,
+      "pending": [
+        "T073",
+        "T074"
+      ],
+      "unchanged": true
+    },
+    "spec001": {
+      "T103": "COMPLETE_REPORT_CAPACITY_NOT_APPROVED",
+      "T104": "PENDING",
+      "T108": "PENDING",
+      "unchanged": true
+    },
+    "models": {
+      "identityMailRate": 8,
+      "academic": 5,
+      "total": 13,
+      "noAcademicReservationOrderPaymentEnrollment": true
+    },
+    "migrationsUnchanged": 5,
+    "conservation": {
+      "trackedBaseline": 677,
+      "otherTrackedUnchanged": 675,
+      "protectedUnchanged": 72,
+      "offeringBranchUnchanged": "adca8e6d6d3bafe66906a513dd4923de37df8c84",
+      "featurePointerUnchanged": "specs/002-oferta-academica",
+      "mergeParentsPreserved": 2
+    },
+    "documentation": {
+      "documents": 19,
+      "localLinksChecked": 450,
+      "introducedBrokenLinks": [],
+      "preexistingBrokenLinks": []
+    },
+    "productTestsExecuted": 0,
+    "servicesOperated": false,
+    "sqlExecuted": false,
+    "loadsExecuted": false,
+    "remoteCiExecuted": false,
+    "extensionHooksPresent": false,
+    "sensitiveValuesDetected": 0
+  },
+  "limits": {
+    "specCreated": false,
+    "planCreated": false,
+    "implementationTasksCreated": false,
+    "reservationsImplemented": false,
+    "humanAcceptance": false,
+    "capacity1000Approved": false,
+    "capacity2500Approved": false,
+    "awsAdopted": false
+  },
+  "nextTask": "RP002",
+  "sourceHashes": [
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "da2fd352f8392f711e0fd045c9e8048f2804c8776fdf41d0fbf447f7bedf535e"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "sha256": "23a1903ff98ebe71c858d6123c1286f18ea184a6bbd5f111fcca69c67d82b7f3"
+    },
+    {
+      "path": "docs/alcance-mvp.md",
+      "sha256": "2742d5021e67ce427e43bca59e1505da1eaaf19e26b8d0601e3e9b774c63050f"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/01-actores.md",
+      "sha256": "bfa7c4cb354cf5401b0886fb7eb3c1d6209604d79772648fb461f28f1ba12443"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/02-historias-del-usuario.md",
+      "sha256": "da6d66e1ef996c0b7a580c48dc08555b1b49eabb0d364f8b3015815b0641f6d3"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+      "sha256": "a3d0478b778135688242f4a2bf30b97e081d6f4348b6047025dbe13d69026188"
+    },
+    {
+      "path": "docs/planificacion/reservas-capacidad.md",
+      "sha256": "9266167395ccd6f6f7cd9e6bd4bfaef75593e04e5eb9baf67c30c0c411ab3402"
+    },
+    {
+      "path": "docs/decisiones-pendientes.md",
+      "sha256": "d053e574072132108527ed896500961fb4cdb382b356de017df46296c358dec6"
+    },
+    {
+      "path": "specs/002-oferta-academica/tasks.md",
+      "sha256": "4d346f4eac72ee4576f722c560c5e02c9bee60b34bba0e003b235f9135a53f26"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/human-acceptance.md",
+      "sha256": "6fa5e06237428970922d2cb3983b9899fbeb85461e65e439ff936431b66d03d7"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/acceptance.md",
+      "sha256": "4bd3409ba372a84a08c2bb4e86a2a1446bc0111c6ab913c224ef3b2fbfa2d514"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/h-cap-01.md",
+      "sha256": "b983df6be6c9f4eb88d166b547ed34ddb5013ab20e3f904f418741021049e958"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/automated.md",
+      "sha256": "8dbcd4b6789fb57c1f34da984d6152cfb035ccea87efbdb61fa28dd7f86f6ae5"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/recovery.md",
+      "sha256": "b5e52c1d89656ef49f2fd11203e45c5a59916b671145505ec8065e1c33b0466f"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load-resources.md",
+      "sha256": "fbf9f9c71ca3b00614957cf855a799bd6c5d660b22d5f6e708a838abade62a79"
+    },
+    {
+      "path": "apps/api/src/modules/authorization/public/session.ts",
+      "sha256": "0b6018177ec96f51afa6e5af4df1a76a57d84a47e0fbead92fcc3e6d770a3b47"
+    },
+    {
+      "path": "apps/api/src/modules/authorization/domain/permissions.ts",
+      "sha256": "39126550c24027764973b91ef3d8d02076e8687ae582dd2cb10196f553e81401"
+    },
+    {
+      "path": "apps/api/src/modules/authorization/entrypoints/http/access.guard.ts",
+      "sha256": "cbf658caed1e8a7a25c9ff7006eab0ef1ce7755e75e8c351d0810ab457274b3b"
+    },
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "f61a3a0228a382c023cdd032cb4d5e9aad0a8f57eea90181fc1add72eff3e1f2"
+    },
+    {
+      "path": "apps/api/src/modules/identity/public/access.ts",
+      "sha256": "da94e4b7e50bdf7b5543467e0f14587a4703028c51eeb8809df056c4cdb36bb9"
+    },
+    {
+      "path": "apps/api/src/modules/identity/infrastructure/session-store.ts",
+      "sha256": "f4bee98e6947489841519a0b33f723ca4b3cc123d4e6b2642817734b37faec95"
+    },
+    {
+      "path": "apps/api/src/modules/users/public/account.ts",
+      "sha256": "9640c47f45545affcf53157c66faa1c4bb6a7407c2a14686f64230549f672eda"
+    },
+    {
+      "path": "apps/api/src/modules/users/public/teaching-directory.ts",
+      "sha256": "fbb44e4596d3a181d6e57805c28cb4147370be99028dbaad7021b549465f3629"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/public/offer.ts",
+      "sha256": "8f6e51a1d53e31e221a6fb7497ae68f6f44a2c59503b3c1bdb8c43f2607afba7"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/entrypoints/http/catalog.controller.ts",
+      "sha256": "953d5e342799758c7cb23dfa6033d0151faf80dc8d8838fe77f17acf980d76f8"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/application/queries.ts",
+      "sha256": "5f7aab3c9b87d935af6cedd4b0e81a4099830a03b1540fdc6df671bab239630c"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/offering-queries.ts",
+      "sha256": "d5741aa2d79683e07a5afd9b6f35cb1211841b8c7974885ad3885a4b7e1ae512"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "sha256": "af1e7ff0ebba9a287774d54f8ce1680c493abc9197ab7955ea3149823c72ef4e"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/account-transaction.ts",
+      "sha256": "d26d51003ac0b755ed75f1536d496b3e935604769b344103726337de24b4202e"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/account-locks.ts",
+      "sha256": "a8ae108bda9e013ac5b60be1644e60ba4efe27de20abec3926e9996bda96ffe0"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/academic-transaction.ts",
+      "sha256": "9328bea2f04972283127b85292d7b6c3fd99a155611e4797fbd6e1025d29a028"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/offering-store.ts",
+      "sha256": "94a17f35d8b96ab451dc390657a38cadd66280d54c55ce42ae7334a916c79c2b"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/offering-audit.ts",
+      "sha256": "6d6c2eb5c0c0d3ec13656bb825167aa29569171fca672669f3fa4dc0a2b83a33"
+    },
+    {
+      "path": "apps/api/src/http/transport.ts",
+      "sha256": "d1b6cc54be67f406ee7cc2265b4b5c068d42c10f1ad9e844b4bfdc4f85d556eb"
+    },
+    {
+      "path": "apps/api/src/http/error.filter.ts",
+      "sha256": "9c71f3e6e962c4fd98d4b7d7a29a9ffeb3b95ffa135970b928d106b0d1a9cddc"
+    },
+    {
+      "path": "apps/web/src/shared/api-client.ts",
+      "sha256": "83a15a4ec23424eec2c197f6c23cf5c322634cac20df52a50957c8360d507d9c"
+    },
+    {
+      "path": "apps/web/src/app/http.ts",
+      "sha256": "fb447d2d2389f93b79f95c5095e0e7c1e06fdb8c6c176d54525c3a606da21496"
+    },
+    {
+      "path": "apps/web/src/app/router.tsx",
+      "sha256": "33cd515c2692533383ff72fa3fd928c53a755a9a248c04bf40be34cc2306cccb"
+    },
+    {
+      "path": "apps/web/src/features/academic-offering/api.ts",
+      "sha256": "cdb35cf388ebdb216e32871fe32299366bb1bb536124f44d3ebac11490171884"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/database.ts",
+      "sha256": "b086768e64ce59ccc73d07c59b8e274b2c8bc82f1bf042eb97dc347fd74fbf23"
+    },
+    {
+      "path": "apps/api/src/modules/mail/infrastructure/delivery-scheduler.ts",
+      "sha256": "78112b83f997c04960a5d61ab13085dc8b49040b4044142c802bf090175ef822"
+    },
+    {
+      "path": "ops/lint/import-boundaries.mjs",
+      "sha256": "3c537d7ebc26ad98a72a7b6df9b033653b7a8acb432d90f74ef38a45bf72b96b"
+    },
+    {
+      "path": "apps/api/prisma/migrations/0001_identity_users/migration.sql",
+      "sha256": "2aae97237b026bfad595e65cdbd40cfe97be23a2c279e2b0ad8d951f5db5142a"
+    },
+    {
+      "path": "apps/api/prisma/migrations/0005_academic_offering/migration.sql",
+      "sha256": "deef3e283d56e40a1fa30343b05b70137df35471763275fdf31126a4c5e36e21"
+    },
+    {
+      "path": "package.json",
+      "sha256": "e2d826847218232a7cd72e715ca2028f58891abe1cf70a078060041264e9c20e"
+    },
+    {
+      "path": "apps/api/package.json",
+      "sha256": "dec85d38a17c1e225237e676360ba87f5daee432d8d01ed2639c502a68ba50e3"
+    },
+    {
+      "path": "apps/web/package.json",
+      "sha256": "5f170668727bb6ca2f1eb17569e0d59d8d1bb2e2c6eac53e9c760554800a4d08"
+    },
+    {
+      "path": ".github/workflows/v00-linux.yml",
+      "sha256": "f6390d6595d4effe6bbaaa3162267b2f5a3ae5d70f1c0b77085998fb21a06cd4"
+    },
+    {
+      "path": "apps/api/tests/support/identity-database.ts",
+      "sha256": "fdc85896e4751f09bcfc78ad60f3f4a28011be875c721dde0ac87049fb457372"
+    },
+    {
+      "path": "apps/api/tests/support/academic-offering.ts",
+      "sha256": "3a937ee73fe5414f07cfd29e779c10f09b0aa2ad74e41bd71ce49f81d314dc9f"
+    },
+    {
+      "path": "apps/api/tests/support/locks.ts",
+      "sha256": "1412bd5b4042975c0186a3ad1a07ba26a15de0b9974674f606741ceafb833a8c"
+    },
+    {
+      "path": "apps/api/tests/integration/academic-offering-commands.spec.ts",
+      "sha256": "38ab245cabf60d7ccfdc91791ec5d74768a91ba165af60e4c2260df6f6830012"
+    },
+    {
+      "path": "apps/api/tests/integration/academic-offering-concurrency.spec.ts",
+      "sha256": "3f24e2c8c01e415b8367bae255fd3c09bb6520d1fd6e5820d567cdf2f844d96f"
+    },
+    {
+      "path": "apps/web/tests/support/academic-offering-fixture.ts",
+      "sha256": "f6d42faf299c3e6eb7c7909c9b09a27e64e3163b6434e8ad684f8b286c874ca9"
+    },
+    {
+      "path": "apps/web/playwright.academic-offering.config.ts",
+      "sha256": "86869d54e41678c8b5a30f62d75faf0cf4fc7bd0bdf0944c05989748c13b3ddb"
+    },
+    {
+      "path": "ops/recovery/rehearse-academic.ps1",
+      "sha256": "a3b81377dbc275564fc3400a86eed4a0962b9fb17b7f23d4990efe5ff01dac52"
+    },
+    {
+      "path": "docs/planificacion/evidence/2026-10-23-smokes.md",
+      "sha256": "87362bc4100b954ee9e0df35d7c8359e337d1c9fe01c879611db9fc10eca95df"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load.md",
+      "sha256": "11b5366a93dd904a48648bf8444adbd9a0c89ae54bb301516b02ccc2c00b568c"
+    },
+    {
+      "path": "load-tests/identity/followup-local.js",
+      "sha256": "7a149e393830759ad4809cbb7a3bb5d0337d7b6d3d217f43f5dca18a3ff1ebfb"
+    },
+    {
+      "path": ".specify/init-options.json",
+      "sha256": "a011ab349924869981cd6fcb474b46266037e617fb9c3f0e7a0b56dbe5718c67"
+    },
+    {
+      "path": ".specify/scripts/powershell/create-new-feature.ps1",
+      "sha256": "305bbc2cf67f92caed6940c11df73d75891e5678a1c0321c963d045e1ae4a218"
+    }
+  ]
+}

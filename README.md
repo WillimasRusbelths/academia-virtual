@@ -3,7 +3,7 @@
 Proyecto de academia virtual para un trabajo final de curso, con desarrollo local
 mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-29:** React/NestJS y PostgreSQL, monolito modular y Docker Compose local.
+**Estado al 2026-10-30:** React/NestJS y PostgreSQL, monolito modular y Docker Compose local.
 Requisitos confirmados: **al menos 15 000 cuentas registradas**, objetivo de **2500
 usuarios concurrentes activos todavía sin demostrar**, y reserva de cupo previa al pago
 por **24 horas exactas desde confirmación del servidor**. Pago verificado confirma
@@ -54,6 +54,9 @@ H-CAP-01 se [corrigió y verificó automáticamente](specs/002-oferta-academica/
 el catálogo inicial indica ocupación/disponibilidad no calculadas. Esto no sustituye T073/SC-002 humano.
 Reservas, órdenes y matrícula requieren su propio spec y no amplían 002;
 no hay integración de pagos/video ni despliegue acreditado.
+RP001 prepara el [inventario de interfaces y dependencias](specs/003-reservas-ordenes-matricula/research.md)
+desde adca8e6, sin crear todavía la especificación ni implementar reservas. El siguiente
+bloque es RP002/specify; RA-01–RA-06 y la aceptación humana de 002 siguen pendientes.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
