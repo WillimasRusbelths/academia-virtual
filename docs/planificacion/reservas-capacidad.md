@@ -155,7 +155,12 @@ verifican UNIT API 335/335, web 188/188, PG/API/compatibilidad
 1972/1972, crypto/mail 2/2, E2E identidad 203/203 y oferta
 168/168 (84 casos únicos). Prueba de auditoría adaptada al contrato de logging
 aprobado, conservando fallos iniciales y repeticiones; sin cambios de producto.
-T001–T068 completas; siguiente T069, ensayo incremental y recuperación aislados.
+En ese checkpoint T001–T068 estaban completas. El [ensayo T069](../../specs/002-oferta-academica/evidence/recovery.md)
+completa actualización incremental y restauración aisladas: cuatro fases aprobadas,
+identidad y oferta consistentes, invalidación de credenciales y revisión de tres
+decisiones ficticias posteriores al backup. RTO observado 55.19 s y ventana superior
+no protegida 64.68 s, sin SLA aprobado ni cierre de D13. T001–T069 completas;
+siguiente bloque T070–T072, documentación y protocolo humano.
 CI remoto pendiente de ejecutar, timeout existente conservado y sin aceptación
 integral/humana ni capacidad acreditada. Reservas de 24 h siguen en su spec futuro.
 No se declara aceptación integral ni capacidad.

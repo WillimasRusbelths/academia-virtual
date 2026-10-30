@@ -1,0 +1,623 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "base": "666dc118a55654c3b0b1c51197677b1311712de2",
+  "productionCodeChanged": false,
+  "migrationsChanged": false,
+  "checklist": {
+    "complete": 16,
+    "pending": 0,
+    "modified": false
+  },
+  "protectedUnchanged": 72,
+  "source": [
+    {
+      "path": "apps/api/tests/recovery/academic-rehearsal.spec.ts",
+      "sha256": "f3c278257b8f1ddddf8894d14fde52b64f36f45a7dd4434e497e15b858b71110"
+    },
+    {
+      "path": "apps/api/tests/recovery/academic-snapshot.ts",
+      "sha256": "a3cbf794c14dd0721deb803ecb959fe1bf4998db073be10a70f175348472cdbb",
+      "testedSha256": "9ddfab0cdd3a299c050f469bdfb8969efa43e9442d5bdd26066d037e9bc3636c"
+    },
+    {
+      "path": "ops/recovery/rehearse-academic.ps1",
+      "sha256": "a3b81377dbc275564fc3400a86eed4a0962b9fb17b7f23d4990efe5ff01dac52",
+      "testedSha256": "2883af060cac54e9a548de36436919f442098e532e8aebaeaedba6682040bf59"
+    }
+  ],
+  "reused": [
+    {
+      "path": "ops/recovery/backup.ps1",
+      "sha256": "cbd248365e9865016ddc4cabb57fc8099112496aa73c43b953e8db799b519c6a"
+    },
+    {
+      "path": "ops/recovery/restore-check.ps1",
+      "sha256": "084dcebc9231c241f9d3e9a1bcefcf6d2b2b8b68787bc84ecacadb2c09e5909a"
+    },
+    {
+      "path": "ops/recovery/check-guards.ps1",
+      "sha256": "0eab07fe434f28851340299b4c6ed99bb70f90fe3fb4caf3c1421bf62d3fab97"
+    },
+    {
+      "path": "ops/recovery/archive.mjs",
+      "sha256": "fcb3c721405d3913688ff8a098db4ac19d8a679b53190d05284994edca6dc63c"
+    },
+    {
+      "path": "ops/recovery/archive.test.mjs",
+      "sha256": "3f2d109dceede06a7601987aeabca27b49d6e6d4c9c6d789c4b8c4825c33cab6"
+    },
+    {
+      "path": "ops/recovery/common.ps1",
+      "sha256": "0466f47c059dffcd6bf3ebce981d1d8f242e540b1ddf4aef753e08d3b42c5085"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "6f2c05e1f0f7fa2e0f084ac7977f4360e9260814728e0590db82bced925a6292"
+    },
+    {
+      "path": "apps/api/tsconfig.json",
+      "sha256": "e21dbbef6c91d42b67a5efcf8831ae1db7cd528be39655368342692d09c95a7e"
+    }
+  ],
+  "checks": {
+    "node": "v22.23.1",
+    "npm": "10.9.8",
+    "checks": [
+      {
+        "command": [
+          "npm",
+          "run",
+          "db:generate"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "lint",
+          "--workspace",
+          "apps/api"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "apps/api"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "exec",
+          "--workspace",
+          "apps/api",
+          "--",
+          "tsc",
+          "--ignoreConfig",
+          "--allowJs",
+          "--checkJs",
+          "false",
+          "--noEmit",
+          "--target",
+          "ES2023",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--strict",
+          "--experimentalDecorators",
+          "--emitDecoratorMetadata",
+          "--esModuleInterop",
+          "--skipLibCheck",
+          "tests/recovery/academic-rehearsal.spec.ts",
+          "tests/recovery/academic-snapshot.ts"
+        ],
+        "exitCode": 0
+      }
+    ],
+    "sourceTsconfig": {
+      "compilerOptions": {
+        "target": "ES2023",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "strict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "declaration": true,
+        "outDir": "dist",
+        "rootDir": ".",
+        "types": [
+          "node"
+        ]
+      },
+      "include": [
+        "src/**/*.ts"
+      ],
+      "exclude": [
+        "src/**/*.test.ts"
+      ]
+    },
+    "at": "2026-10-30T00:28:18.049Z"
+  },
+  "phases": [
+    {
+      "phase": "legacy",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "T069 recuperación real: legacy",
+          "status": "passed",
+          "durationMs": 2650.086288
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-recovery-20b834abdb1a/legacy-tests.json",
+        "sha256": "db86336481226c77846a79fd8560976cad3686f4c54312a8ac6cbd02884abdff"
+      }
+    },
+    {
+      "phase": "upgrade",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "T069 recuperación real: upgrade",
+          "status": "passed",
+          "durationMs": 4074.4738720000005
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-recovery-20b834abdb1a/upgrade-tests.json",
+        "sha256": "bf12ae28d337d2cb7c8b11e1a6c7dbbe094d48c21edcd228362af9e1fc99ae8f"
+      }
+    },
+    {
+      "phase": "postbackup",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "T069 recuperación real: postbackup",
+          "status": "passed",
+          "durationMs": 738.1635379999998
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-recovery-20b834abdb1a/postbackup-tests.json",
+        "sha256": "af4518ec0d857a37ee564f3790a79708f24f73a7e1f7f17ee1406fc65bfbe07d"
+      }
+    },
+    {
+      "phase": "restore",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "T069 recuperación real: restore",
+          "status": "passed",
+          "durationMs": 4623.435326999999
+        }
+      ],
+      "report": {
+        "path": ".cache/academic-recovery-20b834abdb1a/restore-tests.json",
+        "sha256": "d650dd73b9742dd8b90ccbb4cac36c8eebedac56490abe07a61a67cda1710658"
+      }
+    }
+  ],
+  "summary": {
+    "project": "academic-recovery-20b834abdb1a",
+    "oldRevision": "666dc118a55654c3b0b1c51197677b1311712de2",
+    "candidateRevision": "666dc118a55654c3b0b1c51197677b1311712de2",
+    "candidateMigrationSha256": "2a8d81ab2a22385583f91232df44f43a8819188ebf37560d381c74035aae57cf",
+    "failedMigrationVerified": true,
+    "backup": {
+      "format": "ACADBKP1",
+      "postgresMajor": 16,
+      "revision": "666dc118a55654c3b0b1c51197677b1311712de2",
+      "startedAt": "2026-10-30T00:23:57.0901337Z",
+      "completedAt": "2026-10-30T00:23:58.2765960Z",
+      "plainSha256": "2beb011c6740a1fbcf1144a47221e7b998a89467263ae9c2a7a2a1fd4b5cf92c",
+      "cipherSha256": "f52166bd2eaf7f7ecdbd1ff36fab6776ac5179e30eb07db60ecb98c949162b50",
+      "cipherBytes": 80700,
+      "restored": false
+    },
+    "restore": {
+      "database": "recovery_20b834abdb1a_test",
+      "revision": "666dc118a55654c3b0b1c51197677b1311712de2",
+      "startedAt": "2026-10-30T00:25:04.3865418Z",
+      "completedAt": "2026-10-30T00:25:10.8028171Z",
+      "archiveSha256": "f52166bd2eaf7f7ecdbd1ff36fab6776ac5179e30eb07db60ecb98c949162b50",
+      "restored": true,
+      "trafficReady": false
+    },
+    "failureAt": "2026-10-30T00:25:01.7738570Z",
+    "finishedAt": "2026-10-30T00:25:56.9614660Z",
+    "rpoUpperSeconds": 64.6837233,
+    "rtoSeconds": 55.187608999999995,
+    "knownLostChanges": 3,
+    "legacyBackup": {
+      "format": "ACADBKP1",
+      "postgresMajor": 16,
+      "revision": "666dc118a55654c3b0b1c51197677b1311712de2",
+      "startedAt": "2026-10-30T00:23:26.9879662Z",
+      "completedAt": "2026-10-30T00:23:28.1846317Z",
+      "plainSha256": "4f8927c89e596ae0b305d3a0dc45d5fc412d3a46cf88dcf3aec4eff01689931d",
+      "cipherSha256": "f416d728c3d97487ed5248a7d4e45095b9da368098a6e79f892bdbfda600b1c4",
+      "cipherBytes": 47243,
+      "restored": false
+    },
+    "automated": true,
+    "manualAcceptance": false
+  },
+  "upgrade": {
+    "identityPreserved": true,
+    "migrations": 5,
+    "accounts": 12,
+    "teacherGeneration": "1",
+    "staleGroupHidden": true,
+    "explicitlyReviewedGroupVisible": true,
+    "cancelledTerminal": true,
+    "counts": {
+      "AcademicAuditEvent": "14",
+      "AcademicCommand": "14",
+      "AcademicCourse": "1",
+      "AcademicGroup": "3",
+      "AcademicSlot": "3",
+      "ActionToken": "2",
+      "AuditEvent": "3",
+      "MailDelivery": "2",
+      "RateBucket": "0",
+      "RateEvent": "0",
+      "Session": "6",
+      "SystemState": "1",
+      "User": "12",
+      "_prisma_migrations": "5"
+    }
+  },
+  "restore": {
+    "matchingRows": true,
+    "matchingSchemaConstraintsFunctionsViewsAndGrants": true,
+    "migrationsAfterRestore": 5,
+    "academicRowsPreservedByInvalidation": true,
+    "ledgerReplay": true,
+    "differentIntentRejected": true,
+    "oldCredentialsRejected": true,
+    "newRoleLogins": true,
+    "denials": true,
+    "restartMode": "separate-node-process",
+    "staleMailSent": 0,
+    "knownLostChanges": 3,
+    "reviewedAndReappliedFictitiousDecisions": 3,
+    "teacherGeneration": "2",
+    "cancelledTerminal": true,
+    "invalidated": {
+      "sessions": 4,
+      "tokens": 2,
+      "mail": 2
+    },
+    "trafficReady": false,
+    "at": "2026-10-30T00:25:56.471Z"
+  },
+  "guards": {
+    "passed": 5,
+    "failed": 0,
+    "existingDatabasePreserved": true,
+    "invalidInputCreatedDatabase": false,
+    "partialPlaintextRemoved": true
+  },
+  "legacy": {
+    "migrations": 4,
+    "accounts": 12,
+    "identityFingerprintRecorded": true
+  },
+  "postbackup": {
+    "knownLostChanges": 3,
+    "teacherDisabled": true,
+    "groupCancelled": true,
+    "studentRenamed": true,
+    "at": "2026-10-30T00:24:54.533Z"
+  },
+  "environmentBefore": {
+    "manualDb": {
+      "status": "exited",
+      "finishedAt": "2026-10-18T21:58:41.760194769Z",
+      "startedAt": "2026-10-18T19:19:45.837265111Z"
+    },
+    "manualSqlExecuted": false,
+    "volumes": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ]
+  },
+  "environmentAfter": {
+    "volumes": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "projects": [
+      {
+        "volumeRetained": true,
+        "project": "academic-recovery-ad92578a43bb",
+        "services": [
+          "academic-recovery-ad92578a43bb-db-1 exited",
+          "academic-recovery-ad92578a43bb-mailpit-1 exited"
+        ]
+      },
+      {
+        "volumeRetained": true,
+        "project": "academic-recovery-ddabc3344536",
+        "services": [
+          "academic-recovery-ddabc3344536-db-1 exited",
+          "academic-recovery-ddabc3344536-mailpit-1 exited"
+        ]
+      },
+      {
+        "volumeRetained": true,
+        "project": "academic-recovery-935f65fdd447",
+        "services": [
+          "academic-recovery-935f65fdd447-db-1 exited",
+          "academic-recovery-935f65fdd447-mailpit-1 exited"
+        ]
+      },
+      {
+        "volumeRetained": true,
+        "project": "academic-recovery-20b834abdb1a",
+        "services": [
+          "academic-recovery-20b834abdb1a-db-1 exited",
+          "academic-recovery-20b834abdb1a-mailpit-1 exited"
+        ]
+      }
+    ],
+    "manualDb": {
+      "status": "exited",
+      "finishedAt": "2026-10-18T21:58:41.760194769Z",
+      "startedAt": "2026-10-18T19:19:45.837265111Z"
+    },
+    "images": [
+      {
+        "digests": [
+          "academia-local-api@sha256:c1cb1ac44556058ef8f6e0726b0c1f74b69b20f8812676d8ef9fa1520ba52a2b"
+        ],
+        "name": "academia-local-api:latest",
+        "id": "sha256:c1cb1ac44556058ef8f6e0726b0c1f74b69b20f8812676d8ef9fa1520ba52a2b"
+      },
+      {
+        "digests": [
+          "postgres@sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
+        ],
+        "name": "postgres:16.14-bookworm",
+        "id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
+      },
+      {
+        "digests": [
+          "axllent/mailpit@sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d"
+        ],
+        "name": "axllent/mailpit:v1.31.3",
+        "id": "sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d"
+      }
+    ],
+    "manualSqlExecuted": false,
+    "platform": "29.8.1 8 CPUs 7236878336 bytes"
+  },
+  "archiveControls": {
+    "uniqueCases": 7,
+    "passed": 7,
+    "report": {
+      "path": ".cache/academic-recovery-preparation/archive-controls.log",
+      "sha256": "9ddfd61f6278915d14616875fd45da99c14fd04cc0593a68c9a302491e5841c9"
+    },
+    "sandboxAttempt": {
+      "loadedCases": 0,
+      "reason": "Node test subprocess spawn EPERM; operational restriction, not a cipher failure",
+      "report": {
+        "path": ".cache/academic-recovery-preparation/archive-controls-sandbox.log",
+        "sha256": "398349612bdd73a71929ed87f9bd68dd893b92177ae09536d9a3b6a3159d6383"
+      }
+    }
+  },
+  "timeControls": {
+    "uniqueCases": 2,
+    "passed": 2,
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/recovery/check-time.ps1"
+  },
+  "attempts": [
+    {
+      "project": "academic-recovery-ad92578a43bb",
+      "phase": "preflight",
+      "cause": "TS5112 command invocation, then TS7016 declarations/resolution in directed preflight; no recovery test credited",
+      "artifacts": [
+        {
+          "path": ".cache/academic-recovery-ad92578a43bb/types.log",
+          "sha256": "5b766b55df5bc15c215149742c8fe88d72a584cb45f5422c7edca1594b6d0cb5"
+        },
+        {
+          "path": ".cache/academic-recovery-ad92578a43bb/types-corrected.log",
+          "sha256": "9920b464a8a633b0293b54c244db958ab66b29696b5686614f6242e557c2d295"
+        }
+      ],
+      "fullRehearsalApproved": false
+    },
+    {
+      "project": "academic-recovery-ddabc3344536",
+      "phase": "legacy",
+      "cause": "Fixture mail link did not match the approved template; corrected, not a business failure",
+      "artifacts": [
+        {
+          "path": ".cache/academic-recovery-ddabc3344536/legacy-tests.json",
+          "sha256": "3488c8f10f280e520bc22842f5a5431276aedc5e96ed19d496cf8003544e0ad8"
+        }
+      ],
+      "fullRehearsalApproved": false
+    },
+    {
+      "project": "academic-recovery-935f65fdd447",
+      "phase": "upgrade",
+      "cause": "Fixture used PATCH for identity status; contract requires PUT. Legacy passed but full rehearsal failed",
+      "artifacts": [
+        {
+          "path": ".cache/academic-recovery-935f65fdd447/legacy-tests.json",
+          "sha256": "c82878717fa292124efb3ea5fe284d550f642e70528216c1543e6a0785b3dbbf"
+        },
+        {
+          "path": ".cache/academic-recovery-935f65fdd447/upgrade-tests.json",
+          "sha256": "2c5e0aadff69799f13d34e200ea70d1a6cfe6f61d795e2ac5e700a68fa156df9"
+        }
+      ],
+      "fullRehearsalApproved": false
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/summary.json",
+      "sha256": "b8d95de62562d4129acc824d35532cc1bbb2f1bb2aa1fb6a34f370e89ee8a6d9"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/legacy-summary.json",
+      "sha256": "557a4695d029829197370779f3837f841046f1610888760a8e227f4d47c52246"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/upgrade-summary.json",
+      "sha256": "45512164d8af6e4df875cb4931680ff4ea036f61982a0591ce135865e1c46644"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/postbackup-summary.json",
+      "sha256": "886673503f7df008725aa5735ea0688d8d7b989a32b50d55fd2345ae3486f5b8"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/restore-summary.json",
+      "sha256": "7e7c2d55d775c9470ebb8504dfd6099a14c28bb9b0990d3752eff6df345f7547"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/guards-summary.json",
+      "sha256": "eaa81c86df367fa9cf91b8a2f752bb4c137961eab9d73f1084d0c72728634d96"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/failed-migration.log",
+      "sha256": "a95d8c15ea2d7702345bc7ff59a667c14ac925cae5f3069d8b55eb78ac9ea511"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/failed.sql",
+      "sha256": "2a8d81ab2a22385583f91232df44f43a8819188ebf37560d381c74035aae57cf"
+    },
+    {
+      "path": ".cache/academic-recovery-20b834abdb1a/final-checks.json",
+      "sha256": "57b9d50b3452d25b059c41bba5418589a16efb4ae452ba4ad232559a476ce419"
+    }
+  ],
+  "legacyBackupRestored": false,
+  "mainBackupRestored": true,
+  "humanAcceptance": false,
+  "publicTrafficOpened": false,
+  "remoteCiRun": false,
+  "capacityValidated": false,
+  "open": [
+    "D13 custody/location/operational SLA",
+    "T104",
+    "T108",
+    "historical bootstrap",
+    "historical E2E D10 timeout",
+    "external SMTP",
+    "SC-002/T073 participant",
+    "integral acceptance",
+    "D04/D06 enrollment",
+    "2500 active concurrent capacity"
+  ],
+  "documentValidation": {
+    "date": "2026-10-29",
+    "documents": 33,
+    "localLinksChecked": 830,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  },
+  "preservationAudit": {
+    "date": "2026-10-29",
+    "protectedUnchanged": 72,
+    "originalTaskDescriptionsUnchanged": 74,
+    "onlyTaskMarked": "T069",
+    "originalRecoveryProcedurePreserved": true,
+    "privateProjects": 4,
+    "allPrivateArtifactsIgnored": true,
+    "plaintextDumpsRemaining": 0,
+    "secretsDetected": 0,
+    "extensionsPresent": false
+  },
+  "powershellSyntaxChecked": true,
+  "deliberateFailureCause": {
+    "configurationOrConnectionFailure": false,
+    "postgresLogEvidence": [
+      "2026-10-30 00:25:01.243 UTC [1241] ERROR:  function recovery_deliberate_missing_function() does not exist at character 9"
+    ],
+    "occurrences": 1,
+    "sqlstatePrinted": false,
+    "prismaDiagnostic": "current transaction is aborted",
+    "primaryServerError": "function recovery_deliberate_missing_function() does not exist",
+    "reportSha256": "bd191242c594b0fe4c08ee62a57841eecda2f3d2ddb8f2086d794a8997d6066f"
+  },
+  "finalFormatting": {
+    "changes": [
+      {
+        "path": "apps/api/tests/recovery/academic-snapshot.ts",
+        "testedSha256": "9ddfab0cdd3a299c050f469bdfb8969efa43e9442d5bdd26066d037e9bc3636c",
+        "committedSha256": "a3cbf794c14dd0721deb803ecb959fe1bf4998db073be10a70f175348472cdbb",
+        "normalization": "CRLF to LF and trailing blank lines only",
+        "semanticChange": false
+      },
+      {
+        "path": "ops/recovery/rehearse-academic.ps1",
+        "testedSha256": "2883af060cac54e9a548de36436919f442098e532e8aebaeaedba6682040bf59",
+        "committedSha256": "a3b81377dbc275564fc3400a86eed4a0962b9fb17b7f23d4990efe5ff01dac52",
+        "normalization": "CRLF to LF and trailing blank lines only",
+        "semanticChange": false
+      }
+    ],
+    "functionalSuiteRepeated": false,
+    "reason": "Only line endings and blank EOF lines normalized after staged whitespace check; tested bytes retained by hash"
+  }
+}

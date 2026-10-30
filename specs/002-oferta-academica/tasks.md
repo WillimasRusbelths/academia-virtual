@@ -1,9 +1,9 @@
-# Tasks: oferta académica
+﻿# Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T068 completas; puerta automática local aprobada, CI remoto sin ejecutar.
-T069–T074, aceptación humana/integral y capacidad permanecen pendientes.
-Siguiente bloque: T069, ensayo incremental y recuperación en destino ficticio.
+**Estado**: T001–T069 completas; puerta local y ensayo de recuperación aprobados.
+T070–T074, CI remoto, aceptación humana/integral y capacidad permanecen pendientes.
+Siguiente bloque: T070–T072, documentación vigente y protocolo humano.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -574,7 +574,23 @@ capacidad ni aceptación integral. T069 sigue pendiente de restauración operati
 72 archivos protegidos y entorno/volúmenes manuales conservados; cero esquemas t_.
 Detenido antes de T069.
 
-- [ ] T069 Ensayar actualización incremental y recuperación en destino ficticio según `ops/recovery/README.md`, registrando `specs/002-oferta-academica/evidence/recovery.md`: backup/restore consistente de generaciones/snapshots/ledger, credenciales restauradas invalidadas y revisión de decisiones posteriores al backup; comparar identidad y preservar volúmenes manuales. Sin prometer downgrade o recuperación de cambios fuera del RPO; D13 no se cierra por este ensayo (FR-016; constitución X).
+- [X] T069 Ensayar actualización incremental y recuperación en destino ficticio según `ops/recovery/README.md`, registrando `specs/002-oferta-academica/evidence/recovery.md`: backup/restore consistente de generaciones/snapshots/ledger, credenciales restauradas invalidadas y revisión de decisiones posteriores al backup; comparar identidad y preservar volúmenes manuales. Sin prometer downgrade o recuperación de cambios fuera del RPO; D13 no se cierra por este ensayo (FR-016; constitución X).
+
+Avance T069, 2026-10-29: actualización Prisma 0001–0004 → 0005 con identidad
+conservada; cuatro fases reales aprobadas (1/1 cada una), backup cifrado/restore
+a BD nueva y comparación de catorce tablas/esquema/grants. Invalidación de
+4 sesiones, 2 enlaces y 2 correos sin alterar ledger/auditoría académicos; replay,
+conflictos y reinicio verificados. Tres decisiones ficticias posteriores al
+backup revisadas/reaplicadas explícitamente. Cifrado 7/7, guardas 5/5 y tiempos
+2/2 son controles auxiliares separados. Intentos de preparación fallidos y sus
+correcciones conservados; [ensayo](evidence/recovery.md) y
+[resultados](evidence/recovery-results.json). RTO observado 55.19 s, ventana superior
+no protegida 64.68 s; sin SLA ni cierre D13, sin reapertura pública.
+72 archivos protegidos, entorno manual y volúmenes previos conservados; proyectos
+ficticios detenidos con sus volúmenes retenidos. Bootstrap, D10 histórico,
+T104/T108, SMTP real, aceptación humana/integral y capacidad siguen pendientes.
+Detenido antes de T070.
+
 - [ ] T070 Actualizar `README.md`, `docs/alcance-mvp.md` y `ops/local/architecture.md` con estado efectivamente implementado/verificado, navegación, módulo y límites, enlazando spec/evidencia. No convertir planes o tests omitidos en capacidad acreditada ni reescribir evidencia 001 (FR-014/016).
 - [ ] T071 Actualizar `docs/decisiones-pendientes.md` y `specs/002-oferta-academica/quickstart.md` con delimitación D04, D06 matrícula, D10/D13, T104/T108, SMTP real y bootstrap; PA-01–05 siguen aprobadas. Conservar video/alojamiento y cargas diferidas; registrar bloqueo real sin sustituir reglas (FR-006/016).
 - [ ] T072 Preparar protocolo humano en `specs/002-oferta-academica/evidence/human-acceptance.md`: alumno real recorre desde inicio y reconoce sin ayuda curso/grupo/días/horas/fechas/zona/capacidad de dos grupos, sin nuevas muestras/porcentajes impuestos; datos ficticios, acceso loopback exclusivo y observación pendiente hasta ejecución (FR-006/009/014; SC-002, V-A13).

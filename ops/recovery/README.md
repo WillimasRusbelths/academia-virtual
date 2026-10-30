@@ -131,3 +131,45 @@ de fases directamente contra desarrollo/manual ni reutilizar sus cuentas.
 Referencias oficiales: [pg_dump 16](https://www.postgresql.org/docs/16/app-pgdump.html),
 [pg_restore 16](https://www.postgresql.org/docs/16/app-pgrestore.html),
 [crypto de Node](https://nodejs.org/docs/latest-v22.x/api/crypto.html).
+
+## Ensayo de oferta académica (T069)
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ops/recovery/rehearse-academic.ps1
+```
+
+Usa los mismos scripts de cifrado, respaldo, guardas y restauración. Crea un proyecto
+`academic-recovery-*` exclusivo, red interna sin puertos y volumen nuevo retenido;
+no reutiliza cuentas, claves, bases ni volúmenes manuales. Requiere la imagen local
+de API indicada por `-ApiImage` (por defecto `academia-local-api:latest`). Monta las
+fuentes, Prisma y tsconfig actuales; no instala servicios ni ejecuta cargas.
+
+Las fases explícitas de `academic-rehearsal.spec.ts` comprueban:
+
+1. Migraciones 0001–0004 mediante Prisma y doce cuentas ficticias; respaldo cifrado
+   previo a la incorporación académica.
+2. Aplicación aditiva de 0005 con las mismas huellas de identidad; publicación real,
+   pérdida/recuperación docente, revisión explícita y cancelación terminal.
+3. Backup consistente con escritores/worker detenidos, incluidos generación,
+   snapshots, ledger y auditoría. Dos entregas sintéticas permanecen retenidas para
+   comprobar su cancelación al invalidar el estado restaurado, sin enviarlas.
+4. Tres decisiones ficticias posteriores al backup y una migración inválida 0006
+   solo en una copia temporal de Prisma. Se exige fallo real y ausencia de tabla
+   parcial; no se modifica ninguna migración aplicada ni se usa migrate resolve.
+5. Restauración transaccional a una base nueva; comparación de filas, esquema,
+   restricciones, funciones, vistas y permisos; deploy compatible sin cambios.
+6. Invalidación real de sesiones/enlaces/correo antes de abrir tráfico; conservación
+   del ledger y auditoría académicos, replay y rechazo de intención diferente.
+   Revisión y reaplicación controlada de las tres decisiones ficticias perdidas,
+   accesos por rol y reinicio mediante otro proceso Node.
+
+Los archivos de `.cache/academic-recovery-*`, dumps, claves y `handoff.json` son
+privados. Las fases generan reportes saneados `*-summary.json`; el resumen final
+solo existe si todas completaron sus aserciones. Los fallos se conservan y los
+servicios se detienen en `finally`, sin borrar volúmenes. Ninguna fase abre tráfico
+público. Registrar revisión y hashes del código no versionado que se haya ensayado.
+
+Este ensayo no recupera automáticamente cambios posteriores al backup: los tres
+cambios se conocen por el registro privado del ensayo. Sus tiempos observados no
+establecen un SLA ni cierran D13. La evidencia efectiva y sus limitaciones se
+registran en [T069](../../specs/002-oferta-academica/evidence/recovery.md).
