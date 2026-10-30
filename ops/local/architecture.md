@@ -61,9 +61,11 @@ E2E de las cuatro historias e identidad. T069 prueba migración incremental, res
 a BD nueva, invalidación y revisión de decisiones posteriores al backup. Son
 resultados de esas revisiones, no ejecuciones nuevas por documentar.
 T067 añade E2E al job existente; CI remoto y su duración no están acreditados.
-La revisión estática T072 identifica H-CAP-01, aviso no calculado ausente en el
-catálogo inicial; [protocolo](../../specs/002-oferta-academica/evidence/human-acceptance.md).
-No se considera SC-002 demostrado por esos pases automáticos.
+La revisión estática T072 identificó H-CAP-01 en el catálogo inicial. La
+[corrección posterior](../../specs/002-oferta-academica/evidence/h-cap-01.md) añade el
+aviso de ocupación/disponibilidad no calculadas en CatalogPage, sin modificar
+OfferingLayout ni las capas de API/datos. El [protocolo](../../specs/002-oferta-academica/evidence/human-acceptance.md)
+sigue sin ejecutar: SC-002 no se demuestra por los pases automáticos.
 
 Sin nuevos servicios, Redis, pools, infraestructura AWS, reservas/matrícula/pagos,
 materiales, video o chat. Compose manual y datos/configuración existentes se

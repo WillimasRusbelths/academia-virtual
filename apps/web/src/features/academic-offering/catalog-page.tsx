@@ -16,6 +16,7 @@ export function CatalogPage({ api }: { api: ApiClient }) {
   const [search, setSearch] = useState(''); const [filter, setFilter] = useState({ q: '', page: 1, pageSize: 20 });
   const load = useCallback((signal: AbortSignal) => client.catalog(filter, signal), [client, filter]); const resource = useOfferingResource(load);
   return <OfferingLayout catalog title="Oferta académica"><p>Consulta los cursos y compara sus grupos publicados.</p>
+    <p>Ocupación y disponibilidad no calculadas</p>
     <form aria-label="Buscar oferta" onSubmit={event => { event.preventDefault(); setFilter({ ...filter, q: search.trim(), page: 1 }); }}>
       <FormField id="catalog-search" label="Buscar curso por nombre" value={search} onChange={event => setSearch(event.target.value)}/>
       <button type="submit">Buscar cursos</button>

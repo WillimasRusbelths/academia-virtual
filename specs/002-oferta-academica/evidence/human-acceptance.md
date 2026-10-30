@@ -4,6 +4,9 @@ Preparado el 2026-10-29 (America/Lima), T072. **No ejecutado**.
 No hay participante, sesión ni resultado humano registrados. T073 y SC-002 permanecen
 pendientes; este documento no acredita aceptación integral ni capacidad concurrente.
 
+El 2026-10-29 el responsable indicó que la observación se realizará después.
+No se fija una fecha ni se registran participantes o resultados por anticipado.
+
 ## Objetivo y fuente de aceptación
 
 [SC-002](../spec.md), FR-006/009/014 y V-A13 del [plan](../plan.md): un alumno llega
@@ -20,18 +23,19 @@ de diez personas y sus criterios propios; este recorrido no lo cierra.
 
 ## Brecha de interfaz identificada antes de la sesión
 
-**H-CAP-01 — abierta, severidad media, SC-002/FR-006.** Revisión estática de la base
+**H-CAP-01 — corregida y verificada automáticamente; severidad original media, SC-002/FR-006.** Hallazgo histórico por revisión estática de la base
 49fcf16: [CatalogPage](../../../apps/web/src/features/academic-offering/catalog-page.tsx)
 no contiene el aviso de ocupación/disponibilidad no calculadas, y
 [OfferingLayout](../../../apps/web/src/features/academic-offering/offering-state.tsx)
 tampoco lo añade. Las vistas de curso/grupo sí usan el aviso desde
 [GroupSummary](../../../apps/web/src/features/academic-offering/course-page.tsx).
 
-SC-002 exige el aviso en las vistas del recorrido. No se redefine ese criterio ni
-se considera aprobada la vista inicial por pasar los E2E existentes. Corregir y
-verificar esta brecha en un bloque de interfaz antes de pretender aprobar SC-002;
-registrar la revisión corregida en T073. Esta etapa documental no modifica código
-ni añade resultados humanos. El hallazgo no altera PA-01–PA-05/E1.
+SC-002 exige el aviso en las vistas del recorrido. T072 lo dejó pendiente y no
+modificó código ni registró resultados humanos. La [corrección posterior](h-cap-01.md)
+añade el aviso a CatalogPage y verifica el catálogo con PostgreSQL/API reales. Se
+conserva el descubrimiento original: los pases no sustituyen la observación humana.
+Registrar en T073 la revisión efectivamente observada; todavía no hay sesión ni
+aprobación de SC-002. No se altera PA-01–PA-05/E1.
 
 ## Preparación a cargo del responsable, todavía pendiente
 
@@ -147,7 +151,7 @@ preparación se separa de una dificultad de uso; no atribuir un dato inexistente
 | Fecha/hora y alias de responsable/participante | Pendiente |
 | Revisión exacta, navegador y ventana | Pendiente |
 | Proyecto/puerto loopback y guardas comprobadas | Pendiente |
-| H-CAP-01: revisión corregida y verificación | Abierta; pendiente |
+| H-CAP-01: revisión corregida y verificación | Corrección automática en [h-cap-01.md](h-cap-01.md); revisión de la sesión humana pendiente |
 | Datos realmente publicados antes del recorrido | Pendiente |
 | Inicio del recorrido desde Inicio | Sin observar |
 | Incidentes operativos separados de usabilidad | Sin observar |

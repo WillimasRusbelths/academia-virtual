@@ -163,8 +163,8 @@ no protegida 64.68 s, sin SLA aprobado ni cierre de D13. En ese punto T001–T06
 estaban completas. [T070–T072](../../specs/002-oferta-academica/evidence/t070-t072.md)
 actualizan estado/documentación y preparan [observación humana](../../specs/002-oferta-academica/evidence/human-acceptance.md),
 sin ejecutarla ni cambiar reglas, código, cuentas o configuración manual.
-T001–T072 completas; H-CAP-01 registra aviso ausente en catálogo inicial, por
-corregir antes de aceptar SC-002. T073 requiere alumno real y T074 evidencia integral.
+T001–T072 completas. [H-CAP-01 corregido y verificado automáticamente](../../specs/002-oferta-academica/evidence/h-cap-01.md),
+conservando el hallazgo original. T073 requiere alumno real y T074 evidencia integral.
 CI remoto pendiente de ejecutar, timeout existente conservado y sin aceptación
 integral/humana ni capacidad acreditada. Reservas de 24 h siguen en su spec futuro.
 No se declara aceptación integral ni capacidad.

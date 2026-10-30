@@ -7,7 +7,7 @@ y [T069](evidence/recovery.md) la actualización/recuperación aisladas. No son 
 ejecuciones al revisar esta guía. CI remoto, [observación humana](evidence/human-acceptance.md)
 T073 y aceptación integral T074 pendientes. T070–T072 preparan documentación/protocolo.
 La receta de instalación nueva no se ejecuta sobre datos manuales ni sustituye la
-evidencia; H-CAP-01 sigue abierto para el aviso del catálogo inicial.
+evidencia; [H-CAP-01 corregido y verificado](evidence/h-cap-01.md) para el aviso del catálogo inicial.
 
 Constitución vigente 1.2.0. El plan/contratos conservan el registro de diseño y sus
 formulaciones futuras: no son el informe de estado actual. PA-01–PA-05/E1 se
@@ -294,7 +294,7 @@ libres mediante un overlay de prueba revisado; no modificar el Compose/puertos d
 entorno manual. Hasta disponer de ese recorrido, registrar SC-002 humano pendiente.
 No inventar observaciones, porcentajes ni un estudio de diez personas para este spec.
 El [protocolo T072](evidence/human-acceptance.md) contiene datos previstos, guardas,
-instrucción neutral, registro y brecha H-CAP-01; sesión/participante/resultados
+instrucción neutral, registro e historial H-CAP-01 corregido automáticamente; sesión/participante/resultados
 siguen sin completar. T104 de identidad exige sus propios diez participantes.
 
 Resultado ya ejecutado de actualización/restore: [T069](evidence/recovery.md),

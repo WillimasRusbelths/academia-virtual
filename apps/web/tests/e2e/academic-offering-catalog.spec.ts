@@ -16,6 +16,7 @@ async function catalog(page: Page) {
   const link = page.getByRole('link', { name: /^(consultar )?oferta$/i });
   expect(await link.count(), 'T041 pendiente: enlace a catálogo ausente tras identidad válida').toBe(1);
   await activate(page, link); await expect(page).toHaveURL(/\/oferta$/);
+  await expect(page.getByText('Ocupación y disponibilidad no calculadas', { exact: true })).toBeVisible();
 }
 async function publication(page: Page, kind: 'curso'|'grupo') {
   const button = page.getByRole('button', { name: `Publicar ${kind}`, exact: true });
@@ -97,10 +98,12 @@ test('B05 US2.5 fallo SQL real y reintento manual; nunca vacío ficticio', async
   try {
     const response = page.waitForResponse(r => new URL(r.url()).pathname === '/api/v1/academic/courses'); await page.reload(); expect((await response).status()).toBe(503);
     await expect(page.getByRole('alert')).toBeVisible(); await expect(page.getByText('No hay oferta publicada', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('Ocupación y disponibilidad no calculadas', { exact: true })).toBeVisible();
   } finally { await offering.context.isolated.ownerQuery(`GRANT SELECT ON "AcademicCourse" TO "${role}"`); }
   const response = page.waitForResponse(r => new URL(r.url()).pathname === '/api/v1/academic/courses');
   await activate(page, page.getByRole('button', { name: 'Reintentar', exact: true })); expect((await response).status()).toBe(200);
   await expect(page.getByText('No hay oferta publicada', { exact: true })).toBeVisible();
+  await expect(page.getByText('Ocupación y disponibilidad no calculadas', { exact: true })).toBeVisible();
 });
 for (const target of ['grupo','curso'] as const) test(`B06 US2.6 retirada de ${target}: enlace previo no disponible, sin causa privada`, async ({ page, offering }) => {
   const ids = await academicCatalogSeed(offering); await compare(page, offering, ids);

@@ -2,8 +2,8 @@
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
 **Estado**: T001–T072 completas; documentación y protocolo humano preparados.
-T073/T074, H-CAP-01, CI remoto, aceptación humana/integral y capacidad pendientes.
-Siguiente bloque: corregir H-CAP-01 y verificarlo; T073 con alumno real, luego T074.
+T073/T074, CI remoto, aceptación humana/integral y capacidad pendientes.
+H-CAP-01 corregido y verificado automáticamente; siguiente bloque: T073 con alumno real, luego T074.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -604,12 +604,18 @@ siete bloques PowerShell parseados, no ejecutados. Links/coherencia y conservaci
 comprobados en [informe](evidence/t070-t072.md) y
 [resultados](evidence/t070-t072-results.json). Se corrigió una duplicación del
 quickstart antes del commit; no cambiaron reglas ni código.
-**H-CAP-01 (MEDIA) abierto**: CatalogPage/OfferingLayout no presentan el aviso
+**Hallazgo histórico de T072: H-CAP-01 (MEDIA), abierto en esa revisión**: CatalogPage/OfferingLayout no presentan el aviso
 no calculado de SC-002; curso/grupo sí. Corrección de interfaz fuera de este
 bloque, necesaria antes de aceptar SC-002. T073 requiere alumno real y T074
 evidencia completa. [Protocolo y registro sin observar](evidence/human-acceptance.md).
 Sin cambios de datos, configuración manual, pruebas de carga ni evidencia histórica.
 Detenido antes de T073; no se atribuye aceptación integral ni capacidad.
+
+Corrección posterior H-CAP-01: CatalogPage añade el aviso no calculado sin
+condicionarlo a los resultados. E2E de catálogo y regresión web verificados en
+[informe](evidence/h-cap-01.md) y [resultados](evidence/h-cap-01-results.json).
+No se modifica ninguna marca ni criterio de las 74 tareas: T073/SC-002 requieren
+alumno real; T074 sigue pendiente. No se cierra bootstrap ni capacidad.
 
 - [ ] T073 Realizar observación humana con responsable y alumno, registrar resultado real en `specs/002-oferta-academica/evidence/human-acceptance.md`. Si no hay participante, mantener esta tarea sin marcar y SC-002 pendiente, identificando esa dependencia; el agente o Playwright no sustituyen al alumno (SC-002).
 - [ ] T074 Elaborar cierre en `specs/002-oferta-academica/evidence/acceptance.md`: matriz FR/SC, cuatro checkpoints, constitución I/II/IV/IX/X/XI, resultados automáticos y humanos separados, cambios/configuración conservados y riesgos heredados. Si T073 u otra puerta falta, declarar aceptación parcial y mantener esta tarea pendiente; cero afirmaciones de 1000 concurrentes, sin despliegue implícito (FR-016; SC-001–006).

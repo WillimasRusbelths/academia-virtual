@@ -55,8 +55,8 @@ siguen pendientes. Cargas completas y evaluación VPS según su etapa/rúbrica;
 video/protección/alojamiento D07–D09 conservan su trazabilidad, sin implementación.
 
 [Protocolo humano](../specs/002-oferta-academica/evidence/human-acceptance.md):
-preparado, no ejecutado. La brecha H-CAP-01 y la falta de participante impiden
-atribuir aceptación humana/integral; no se amplía alcance ni se cambian reglas.
+preparado, no ejecutado. [H-CAP-01 corregido y verificado](../specs/002-oferta-academica/evidence/h-cap-01.md);
+la observación aplazada por el responsable mantiene pendiente la aceptación humana/integral. No se amplía alcance ni se cambian reglas.
 
 ## Decisiones confirmadas y pendientes — 2026-10-23
 
@@ -96,8 +96,8 @@ Oferta 002 conserva las cinco aclaraciones/E1, cuatro checkpoints automáticos,
 [T068](../specs/002-oferta-academica/evidence/automated.md) y
 [T069](../specs/002-oferta-academica/evidence/recovery.md). T070–T072 actualizan
 documentación/protocolo; T073 requiere alumno real y T074 evidencia integral.
-No se declara cerrado SC-002; H-CAP-01 del protocolo registra el aviso ausente en
-el catálogo inicial y exige revisar la interfaz antes de aceptar ese criterio.
+No se declara cerrado SC-002: H-CAP-01 conserva su descubrimiento y corrección
+automática documentados; T073 aún requiere la observación real del alumno.
 Preparar el siguiente spec de reservas/órdenes/matrícula sin implementarlo todavía.
 Obtener la rúbrica (D10) e investigar video, protección y alojamiento (D07–D09)
 sigue siendo prioritario. Son riesgos que pueden modificar el diseño y el escenario
