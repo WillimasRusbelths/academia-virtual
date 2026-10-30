@@ -4,6 +4,8 @@
 **Estado**: T001–T072 completas; documentación y protocolo humano preparados.
 T073/T074, CI remoto, aceptación humana/integral y capacidad pendientes.
 H-CAP-01 corregido y verificado automáticamente; siguiente bloque: T073 con alumno real, luego T074.
+Cierre parcial T074 preparado en [acceptance.md](evidence/acceptance.md), sin
+observación humana ni cambio de marcas; el responsable aplazó T073.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -619,6 +621,14 @@ alumno real; T074 sigue pendiente. No se cierra bootstrap ni capacidad.
 
 - [ ] T073 Realizar observación humana con responsable y alumno, registrar resultado real en `specs/002-oferta-academica/evidence/human-acceptance.md`. Si no hay participante, mantener esta tarea sin marcar y SC-002 pendiente, identificando esa dependencia; el agente o Playwright no sustituyen al alumno (SC-002).
 - [ ] T074 Elaborar cierre en `specs/002-oferta-academica/evidence/acceptance.md`: matriz FR/SC, cuatro checkpoints, constitución I/II/IV/IX/X/XI, resultados automáticos y humanos separados, cambios/configuración conservados y riesgos heredados. Si T073 u otra puerta falta, declarar aceptación parcial y mantener esta tarea pendiente; cero afirmaciones de 1000 concurrentes, sin despliegue implícito (FR-016; SC-001–006).
+
+Avance parcial T074, 2026-10-29: [cierre](evidence/acceptance.md) con los 16 FR,
+seis SC, cuatro checkpoints y constitución 1.2.0; resultados históricos separados
+de las comprobaciones documentales de este bloque. SC-002/V-A13 y T073 siguen
+pendientes por observación aplazada; T074 conserva su marca pendiente. Sin pruebas
+de producto nuevas ni operaciones en entornos o bases. Evidencia de revisión:
+[índice y resultados](evidence/acceptance-review-results.json). Se conservan las
+74 descripciones/marcas, PA-01–PA-05, E1, datos/configuración y evidencia histórica.
 
 ## Dependencias y orden de ejecución
 

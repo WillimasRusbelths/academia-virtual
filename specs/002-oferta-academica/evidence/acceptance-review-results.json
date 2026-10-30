@@ -1,0 +1,570 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "baseCommit": "d9c8059e9054e74dafde5aba8669b20ba21e4418",
+  "status": "ACEPTACION_PARCIAL_T074_PENDIENTE",
+  "scope": "Revisión documental de evidencia histórica; sin ejecución de producto, servicios, migraciones ni cargas.",
+  "tasks": {
+    "total": 74,
+    "completed": 72,
+    "pending": [
+      "T073",
+      "T074"
+    ],
+    "changedMarks": [],
+    "humanObservationDeferredByUser": true
+  },
+  "requirements": [
+    {
+      "id": "FR-001",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Crear, listar, consultar y editar; persistencia e independencia de grupos.",
+      "verification": [
+        "V-A01",
+        "V-A10"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-002",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Datos de curso separados de grupo; referencia y pertenencia estables, hermano sin cambios.",
+      "verification": [
+        "V-A01"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/t023.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-003",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Fechas inclusivas, días/horas semanales y America/Lima explícita.",
+      "verification": [
+        "V-A02"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/t023.md",
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-004",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Ocurrencias efectivas, medianoche, adyacencia y conflictos docentes al publicar/republicar, también concurrentes.",
+      "verification": [
+        "V-A02",
+        "V-A07",
+        "V-A08"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/t023.md",
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-005",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Enteros 1–50; omisión inicial frente a valor inválido; retirar antes de cambiar capacidad publicada.",
+      "verification": [
+        "V-A03"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/t023.md",
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-006",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Capacidad configurada sin ocupación/disponibilidad ficticias; aviso también en catálogo inicial tras H-CAP-01.",
+      "verification": [
+        "V-A03",
+        "V-A10",
+        "V-A13"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/h-cap-01.md"
+      ],
+      "humanObservationPending": true
+    },
+    {
+      "id": "FR-007",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Validación backend, confirmación, un docente habilitado y curso publicado; publicación de grupos explícita.",
+      "verification": [
+        "V-A01",
+        "V-A06",
+        "V-A07"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-008",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Retiro previo, hijos conservados, republicación validada y cancelación terminal sin efectos económicos.",
+      "verification": [
+        "V-A01",
+        "V-A08"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-009",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Inicio→oferta y comparación; docente solo Mis grupos; visitante denegado.",
+      "verification": [
+        "V-A04",
+        "V-A10",
+        "V-A13"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/h-cap-01.md"
+      ],
+      "humanObservationPending": true
+    },
+    {
+      "id": "FR-010",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Backend revalida sesión/rol/habilitación y pertenencia; matriz y accesos directos permitidos/denegados.",
+      "verification": [
+        "V-A04",
+        "V-A06",
+        "V-A08",
+        "V-A12"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/us4-authorization-matrix.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-011",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "DTO/directorio mínimos, filtros antes de paginar, sin correo, credenciales ni causas privadas.",
+      "verification": [
+        "V-A05"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-012",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Pérdida y recuperación de habilitación no republican; revisión persistente y publicación explícita; cancelación terminal.",
+      "verification": [
+        "V-A06",
+        "V-A08"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-013",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Carga/vacío/error/reintento, revisión y resultado incierto, sesión perdida, entradas conservadas y cancelar sin escribir.",
+      "verification": [
+        "V-A05",
+        "V-A09",
+        "V-A10"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md",
+        "specs/002-oferta-academica/evidence/h-cap-01.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-014",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Teclado, móvil/escritorio, foco/etiquetas/errores y navegación existente.",
+      "verification": [
+        "V-A10",
+        "V-A12"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md",
+        "specs/002-oferta-academica/evidence/h-cap-01.md"
+      ],
+      "humanObservationPending": true
+    },
+    {
+      "id": "FR-015",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Locks observados, revisiones, commandId, replay reautorizado y atomicidad de negocio/ledger/auditoría sin secretos.",
+      "verification": [
+        "V-A05",
+        "V-A07",
+        "V-A08",
+        "V-A09"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/t014.md",
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/automated.md",
+        "specs/002-oferta-academica/evidence/recovery.md"
+      ],
+      "humanObservationPending": false
+    },
+    {
+      "id": "FR-016",
+      "status": "EVIDENCIA_AUTOMATICA_REGISTRADA",
+      "scope": "Regresión de identidad, migración incremental/restore y conservación de datos/evidencia; pendientes explícitos.",
+      "verification": [
+        "V-A06",
+        "V-A11",
+        "V-A12"
+      ],
+      "evidence": [
+        "specs/002-oferta-academica/evidence/identity-regression.md",
+        "specs/002-oferta-academica/evidence/automated.md",
+        "specs/002-oferta-academica/evidence/recovery.md",
+        "specs/002-oferta-academica/evidence/h-cap-01.md"
+      ],
+      "humanObservationPending": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "status": "DEMOSTRADO_EN_ALCANCE_AUTOMATIZADO",
+      "scope": "Crear/revisar/publicar/retirar/corregir/republicar curso y dos grupos; recarga e independencia.",
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ]
+    },
+    {
+      "id": "SC-002",
+      "status": "PENDIENTE_OBSERVACION_HUMANA",
+      "scope": "Recorrido y avisos automatizados; falta alumno real que identifique sin ayuda los datos de dos grupos. H-CAP-01 corregido; T073 aplazada.",
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/h-cap-01.md",
+        "specs/002-oferta-academica/evidence/human-acceptance.md"
+      ]
+    },
+    {
+      "id": "SC-003",
+      "status": "DEMOSTRADO_EN_MATRIZ_AUTOMATIZADA",
+      "scope": "21 rutas/métodos, cinco perfiles de actor: 350 combinaciones de estado y 84 pérdidas de acceso, sin datos/efectos denegados.",
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/us4-authorization-matrix.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ]
+    },
+    {
+      "id": "SC-004",
+      "status": "DEMOSTRADO_EN_FRONTERAS_AUTOMATIZADAS",
+      "scope": "Horarios/capacidad/estados/habilitación, rechazo sin cambios parciales y ocultamiento vigente. No incluye conflictos de matrícula.",
+      "evidence": [
+        "specs/002-oferta-academica/evidence/t023.md",
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ]
+    },
+    {
+      "id": "SC-005",
+      "status": "DEMOSTRADO_EN_RECORRIDOS_AUTOMATIZADOS",
+      "scope": "US1–US4 en móvil/escritorio y teclado con vacíos/errores/conflictos/éxitos; sin órdenes/pagos/matrícula.",
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us1.md",
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/us4.md",
+        "specs/002-oferta-academica/evidence/automated.md"
+      ]
+    },
+    {
+      "id": "SC-006",
+      "status": "DEMOSTRADO_EN_CARRERAS_Y_REINTENTOS_AUTOMATIZADOS",
+      "scope": "Ediciones concurrentes, repetición/commit ambiguo y atribución mínima; sin sobrescritura silenciosa ni duplicados en los casos registrados.",
+      "evidence": [
+        "specs/002-oferta-academica/evidence/us2.md",
+        "specs/002-oferta-academica/evidence/us3.md",
+        "specs/002-oferta-academica/evidence/automated.md",
+        "specs/002-oferta-academica/evidence/recovery.md"
+      ]
+    }
+  ],
+  "sources": [
+    "specs/002-oferta-academica/evidence/us1.md",
+    "specs/002-oferta-academica/evidence/us3.md",
+    "specs/002-oferta-academica/evidence/automated.md",
+    "specs/002-oferta-academica/evidence/t023.md",
+    "specs/002-oferta-academica/evidence/us2.md",
+    "specs/002-oferta-academica/evidence/h-cap-01.md",
+    "specs/002-oferta-academica/evidence/us4.md",
+    "specs/002-oferta-academica/evidence/us4-authorization-matrix.md",
+    "specs/002-oferta-academica/evidence/t014.md",
+    "specs/002-oferta-academica/evidence/recovery.md",
+    "specs/002-oferta-academica/evidence/identity-regression.md",
+    "specs/002-oferta-academica/evidence/human-acceptance.md",
+    "specs/002-oferta-academica/spec.md",
+    "specs/002-oferta-academica/plan.md",
+    "specs/002-oferta-academica/research.md",
+    "specs/002-oferta-academica/data-model.md",
+    "specs/002-oferta-academica/contracts/api.md",
+    "specs/002-oferta-academica/contracts/integration.md",
+    "specs/002-oferta-academica/contracts/ui.md",
+    "specs/002-oferta-academica/quickstart.md",
+    "specs/002-oferta-academica/tasks.md",
+    "specs/002-oferta-academica/checklists/requirements.md",
+    ".specify/memory/constitution.md",
+    "docs/planificacion/reservas-capacidad.md",
+    "docs/planificacion/tasks.md",
+    "specs/001-identidad-acceso-roles/tasks.md"
+  ],
+  "newProductTestsExecuted": 0,
+  "humanAcceptance": false,
+  "capacityValidated": false,
+  "remoteCiExecuted": false,
+  "checks": {
+    "prerequisites": "PASS",
+    "checklist": {
+      "total": 16,
+      "checked": 16,
+      "pending": 0
+    },
+    "coverage": {
+      "functionalRequirements": 16,
+      "successCriteria": 6,
+      "verificationIds": 13,
+      "checkpoints": 4,
+      "humanCriterion": "SC-002 pending"
+    },
+    "historicalMetricsCrossChecked": true,
+    "conservation": {
+      "trackedBaseline": 675,
+      "otherTrackedUnchanged": 673,
+      "protectedUnchanged": 72,
+      "taskDescriptionsAndMarksUnchanged": 74,
+      "historyAncestorsVerified": 6,
+      "codeOrMigrationChanged": false,
+      "manualEnvironmentOperated": false,
+      "dockerStarted": false,
+      "sqlExecuted": false
+    },
+    "documentation": {
+      "documents": 28,
+      "localLinksChecked": 544,
+      "introducedBrokenLinks": [],
+      "preexistingBrokenLinks": []
+    },
+    "extensionHooksPresent": false,
+    "sensitiveValuesDetected": 0
+  },
+  "historicalMetrics": {
+    "attribution": "Recorded earlier; not rerun in this review",
+    "T068": {
+      "productBase": "3a94331",
+      "unitApi": 335,
+      "unitWeb": 188,
+      "integration": 1972,
+      "cryptoMail": 2,
+      "e2eIdentityExecutions": 203,
+      "e2eOfferingExecutions": 168,
+      "e2eOfferingUniqueCases": 84
+    },
+    "H_CAP_01": {
+      "commit": "d9c8059",
+      "e2eExecutions": 20,
+      "e2eUniqueCases": 10,
+      "unitWeb": 188
+    },
+    "T069": {
+      "commit": "49fcf16",
+      "mainBackupRestored": true,
+      "legacyBackupRestored": false
+    }
+  },
+  "sourceHashes": [
+    {
+      "path": "specs/002-oferta-academica/evidence/us1.md",
+      "sha256": "02ee7c004e9b5bd5a5edce0eb3c3d29f0cf3ae8f44309a52246b909b41d66b1d"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us3.md",
+      "sha256": "8454e209770dbe1dc4f01f8f811d754ec051857f959844b358daff91470cb9d7"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/automated.md",
+      "sha256": "8dbcd4b6789fb57c1f34da984d6152cfb035ccea87efbdb61fa28dd7f86f6ae5"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t023.md",
+      "sha256": "bfb659e2ac164f24e604b039f8407d2ba914e1b60c643a3dd018898802dfaf9c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us2.md",
+      "sha256": "3fd1ec9d8632b4b042ea94f9a72cd21939418838f434d08f22ac54689838daaa"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/h-cap-01.md",
+      "sha256": "b983df6be6c9f4eb88d166b547ed34ddb5013ab20e3f904f418741021049e958"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us4.md",
+      "sha256": "4dc149425f7db5eb8498e359f9ce6a2e92f86ab57acf6b10175178b4a551abe1"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us4-authorization-matrix.md",
+      "sha256": "ff3c01d039de70d115096f5023748485b99e37afe04a63779d96129f3c922150"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t014.md",
+      "sha256": "c2953939aca008bcdb1121adeccebec53f9f8ba0d46336c8b2e3f450825e7fbe"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/recovery.md",
+      "sha256": "b5e52c1d89656ef49f2fd11203e45c5a59916b671145505ec8065e1c33b0466f"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/identity-regression.md",
+      "sha256": "32c2e669c72c05232e481762b858c4e10e51045b790d58c58f29fc979deee50b"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/human-acceptance.md",
+      "sha256": "6fa5e06237428970922d2cb3983b9899fbeb85461e65e439ff936431b66d03d7"
+    },
+    {
+      "path": "specs/002-oferta-academica/spec.md",
+      "sha256": "38ac3e76389e4701d7216e611c8e3bd09780fd99ea719546b02c74342f985742"
+    },
+    {
+      "path": "specs/002-oferta-academica/plan.md",
+      "sha256": "2ffc85635b3a5dbefae6ee97b508700e65d2f2958ed65bb930af481652773855"
+    },
+    {
+      "path": "specs/002-oferta-academica/research.md",
+      "sha256": "8c04b8d90c4e59a63102f5d19479685740abe12fba7913d572a942fc1a7caf00"
+    },
+    {
+      "path": "specs/002-oferta-academica/data-model.md",
+      "sha256": "a65c3c39f6dafb3b2a434464fccc6c842f72bbdadb5b8829d76b6ee8889b7a92"
+    },
+    {
+      "path": "specs/002-oferta-academica/contracts/api.md",
+      "sha256": "3396290a32e310167a9345333e1c3b4cee3cd01d3dd1375456401c1e59f935b2"
+    },
+    {
+      "path": "specs/002-oferta-academica/contracts/integration.md",
+      "sha256": "aa029b7f51566ef15f9b2e7953d56d9d8dba66ac812ac2e915a56d0bb7c06e20"
+    },
+    {
+      "path": "specs/002-oferta-academica/contracts/ui.md",
+      "sha256": "cf65b321722abcc17480a6346d727e85bf6203b16446ffabc9ea807020a98839"
+    },
+    {
+      "path": "specs/002-oferta-academica/quickstart.md",
+      "sha256": "15bb888f26d70fde074afc7f4b8d79a387b225bee22347baf44a03534f4d15b3"
+    },
+    {
+      "path": "specs/002-oferta-academica/tasks.md",
+      "sha256": "4d346f4eac72ee4576f722c560c5e02c9bee60b34bba0e003b235f9135a53f26"
+    },
+    {
+      "path": "specs/002-oferta-academica/checklists/requirements.md",
+      "sha256": "57130545640fa955077275bba08793dd9d0a4416907985332c880cc635874511"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "sha256": "23a1903ff98ebe71c858d6123c1286f18ea184a6bbd5f111fcca69c67d82b7f3"
+    },
+    {
+      "path": "docs/planificacion/reservas-capacidad.md",
+      "sha256": "9266167395ccd6f6f7cd9e6bd4bfaef75593e04e5eb9baf67c30c0c411ab3402"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "20ebdf61c18131348920795ce92b041a3e570dcf9079b9d0b9768858f5531803"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/tasks.md",
+      "sha256": "ea40918842c5a6ba379cb3320723b6c35847459d9f8b8d42f0018b9a4059485c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us1-results.json",
+      "sha256": "e10c9168cc8cf85876e4b48e743628630e2f99f9e99a83069fc83148f920c76a"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us2-results.json",
+      "sha256": "c81178a258dac0a9675383fc4cd9504beb38b196b7e640aaf64e04f6aeccaf58"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us3-results.json",
+      "sha256": "11006e18446ea9163b9db3fcaaa6b9a969b0d1abce53119ea40325794d1d20ef"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us4-results.json",
+      "sha256": "259f3ce5bd314667b4873801db3e34f3aa45a296775e2d667e5fb4a0b1679603"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/automated-results.json",
+      "sha256": "10bc2f623d5946ea46f84be601d2f94819c2a213e0ad4bcb452a3453aad09f6c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/recovery-results.json",
+      "sha256": "de2aabbf3b62bad037aaaeee873d0e7b41785b01db7c4683100a57375fd90040"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/h-cap-01-results.json",
+      "sha256": "627458131ceb2aca437bff7919e8576e1f0e179ae2728dfe4614575a375d9c21"
+    }
+  ]
+}

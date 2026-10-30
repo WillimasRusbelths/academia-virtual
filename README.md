@@ -48,6 +48,8 @@ E2E de oferta al workflow; CI remoto y suficiencia de su límite de tiempo pendi
 Las cinco aclaraciones y E1 siguen vigentes. T070–T072 actualizan documentación y
 preparan el [protocolo humano](specs/002-oferta-academica/evidence/human-acceptance.md);
 T073 requiere participante y T074 permanece pendiente de evidencia integral.
+El [cierre parcial T074](specs/002-oferta-academica/evidence/acceptance.md) reúne
+la matriz FR/SC y las limitaciones; T073 sigue aplazada y ambas tareas sin marcar.
 H-CAP-01 se [corrigió y verificó automáticamente](specs/002-oferta-academica/evidence/h-cap-01.md):
 el catálogo inicial indica ocupación/disponibilidad no calculadas. Esto no sustituye T073/SC-002 humano.
 Reservas, órdenes y matrícula requieren su propio spec y no amplían 002;
