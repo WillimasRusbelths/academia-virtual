@@ -159,8 +159,12 @@ En ese checkpoint T001–T068 estaban completas. El [ensayo T069](../../specs/00
 completa actualización incremental y restauración aisladas: cuatro fases aprobadas,
 identidad y oferta consistentes, invalidación de credenciales y revisión de tres
 decisiones ficticias posteriores al backup. RTO observado 55.19 s y ventana superior
-no protegida 64.68 s, sin SLA aprobado ni cierre de D13. T001–T069 completas;
-siguiente bloque T070–T072, documentación y protocolo humano.
+no protegida 64.68 s, sin SLA aprobado ni cierre de D13. En ese punto T001–T069
+estaban completas. [T070–T072](../../specs/002-oferta-academica/evidence/t070-t072.md)
+actualizan estado/documentación y preparan [observación humana](../../specs/002-oferta-academica/evidence/human-acceptance.md),
+sin ejecutarla ni cambiar reglas, código, cuentas o configuración manual.
+T001–T072 completas; H-CAP-01 registra aviso ausente en catálogo inicial, por
+corregir antes de aceptar SC-002. T073 requiere alumno real y T074 evidencia integral.
 CI remoto pendiente de ejecutar, timeout existente conservado y sin aceptación
 integral/humana ni capacidad acreditada. Reservas de 24 h siguen en su spec futuro.
 No se declara aceptación integral ni capacidad.

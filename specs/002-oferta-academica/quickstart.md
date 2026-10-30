@@ -1,9 +1,17 @@
 # Guía de verificación local — oferta académica
 
-**Estado**: guía actualizada hasta el ciclo editorial US3. La receta original de
-instalación nueva permanece como procedimiento, no como ejecución sobre datos manuales.
-Las comprobaciones de T053 y sus límites están en [checkpoint US3](evidence/us3.md)
-y [resultados](evidence/us3-results.json); la aceptación integral y US4 siguen pendientes.
+**Estado al 2026-10-29**: cuatro historias con checkpoints automáticos aprobados:
+[US1](evidence/us1.md), [US2](evidence/us2.md), [US3](evidence/us3.md),
+[US4](evidence/us4.md). [T068](evidence/automated.md) conserva la puerta local completa
+y [T069](evidence/recovery.md) la actualización/recuperación aisladas. No son nuevas
+ejecuciones al revisar esta guía. CI remoto, [observación humana](evidence/human-acceptance.md)
+T073 y aceptación integral T074 pendientes. T070–T072 preparan documentación/protocolo.
+La receta de instalación nueva no se ejecuta sobre datos manuales ni sustituye la
+evidencia; H-CAP-01 sigue abierto para el aviso del catálogo inicial.
+
+Constitución vigente 1.2.0. El plan/contratos conservan el registro de diseño y sus
+formulaciones futuras: no son el informe de estado actual. PA-01–PA-05/E1 se
+mantienen; reservas de 24 h, órdenes y matrícula pertenecen al futuro spec.
 
 Seguir [plan](plan.md), [modelo](data-model.md), [HTTP](contracts/api.md),
 [interfaz](contracts/ui.md) e [integración](contracts/integration.md).
@@ -69,7 +77,8 @@ seguras y retirar los afectados. Publicar primero el curso válido, revisar/sust
 asignaciones y publicar cada grupo explícitamente. Recuperar rol o activar la cuenta
 del docente no republica; publicar el curso tampoco confirma esa revisión. Un grupo
 Cancelado conserva su condición terminal. No crear cuentas ni cambiar roles desde
-el selector docente. La consulta docente «Mis grupos» permanece en el trabajo US4.
+el selector docente. La consulta docente «Mis grupos» está implementada y verificada
+automáticamente en US4; la observación humana SC-002 sigue pendiente.
 
 ### Cancelar un grupo
 
@@ -93,6 +102,16 @@ No hay autosave, replay automático, almacenamiento de intenciones en localStora
 ni reemplazo silencioso de revisión. Durante un envío, no confirmar otro comando
 ni interpretar cancelar navegación como garantía de rollback. Conservar el mismo
 commandId solo para repetir exactamente la intención, no para corregirla.
+
+## Consulta docente — US4
+
+Desde Inicio, TEACHER abre **Mis grupos** (/mis-grupos); lista/detalle incluyen
+solo asignaciones propias, incluso incompletas/retiradas/canceladas, con contexto
+de curso y «Sin configurar» cuando corresponde. Sin edición ni motivos privados.
+Un enlace ajeno no revela datos; ADMIN/STUDENT no acceden a estas rutas. Pérdida de
+sesión limpia la vista y el nuevo acceso no repite intenciones. Las respuestas
+tardías tras logout se descartan; el timeout histórico del caso E2E D10 conserva
+su investigación pendiente pese a los pases posteriores.
 
 ## Proyecto aislado con configuración nueva
 
@@ -166,9 +185,10 @@ o datos originales buscando coincidencias amplias de nombre.
 
 ## Pruebas unitarias, arquitectura y PostgreSQL
 
-Comandos existentes con descubrimiento de los archivos actuales. El subconjunto
-efectivamente ejecutado en T053 se enumera en [su evidencia](evidence/us3.md);
-esta receta completa no equivale a dar por aprobada la puerta final T068.
+Comandos existentes con descubrimiento de los archivos actuales. Los subconjuntos
+históricos de T053 se conservan en [su evidencia](evidence/us3.md); la puerta local
+completa y sus resultados/soporte operativo están en [T068](evidence/automated.md).
+Esta receta no acredita otra ejecución ni una nueva revisión funcional.
 
 ```powershell
 docker @trial exec -T api npm run test:unit --workspace apps/api -- --maxWorkers=1
@@ -210,9 +230,10 @@ ni usar sleeps como única barrera. Conservar resultados y aserciones del estado
 Archivo `apps/web/playwright.academic-offering.config.ts`: fixtures de composición
 real, esquemas aislados, origen loopback, credenciales ficticias y proyectos
 móvil/escritorio. La configuración completa ejecuta los recorridos implementados;
-no acredita por adelantado las vistas o la matriz de autorización pendientes de US4.
+incluye las cuatro historias y la matriz de autorización implementada de US4.
+T068 ejecutó 168 pruebas (84 casos, desktop/mobile); no sustituye SC-002 humano.
 
-La fixture deberá arrancar API/Nest y web dentro del runner para sus esquemas; no
+La fixture arranca API/Nest y web dentro del runner para sus esquemas; no
 autenticar contra la API manual. La base externa PLAYWRIGHT_BASE_URL del Compose no
 debe sustituir el origen/servidor de esa fixture, igual que en las suites de identidad.
 
@@ -223,8 +244,8 @@ if ($LASTEXITCODE -ne 0) { throw 'E2E de oferta no aprobado.' }
 
 Cobertura final requerida: recorridos A–E de [ui.md](contracts/ui.md), V-A10, validación por campo,
 vacío/fallo, datos persistentes tras recargar, teclado/móvil, accesos directos denegados,
-grupo no disponible y privacidad. US4 aún debe completar sus recorridos; los resultados
-actuales se limitan a los checkpoints registrados. Capturas y trazas solo ficticias,
+grupo no disponible y privacidad. Los resultados automáticos de US4 están en
+[T066](evidence/us4.md) y T068; T073/SC-002 no se han observado. Capturas y trazas solo ficticias,
 privadas e ignoradas.
 
 ## Regresión de identidad
@@ -236,7 +257,7 @@ son históricos, no resultados esperados rígidos del incremento nuevo.
 
 ```powershell
 $identityRegression = @'
-npm run test:e2e --workspace apps/web -- --config playwright.config.ts harness.spec.ts foundations.spec.ts || exit 1
+env -u PLAYWRIGHT_BASE_URL npm run test:e2e --workspace apps/web -- --config playwright.config.ts '(^|/)harness\.spec\.ts$' '(^|/)foundations\.spec\.ts$' || exit 1
 for suite in identity registration first-admin admin-users password-reset security profile accessibility login-timing; do
   npm run test:e2e --workspace apps/web -- --config playwright.$suite.config.ts || exit 1
 done
@@ -244,6 +265,21 @@ done
 docker @trial --profile tests run --rm --no-deps --entrypoint sh browser-tests -c $identityRegression
 if ($LASTEXITCODE -ne 0) { throw 'Regresión de identidad no aprobada.' }
 ```
+
+El patrón base usa los dos nombres **anclados** de T067 para no capturar
+academic-offering-harness.spec.ts con otra configuración. Se retira solo en ese
+runner la variable PLAYWRIGHT_BASE_URL: la configuración base inicia su propio
+preview loopback y rechaza reutilizar servidor. Las configuraciones de identidad/oferta restantes
+conservan sus fixtures/orígenes. Es una receta revisada, no ejecutada en T071;
+T068 conserva su ejecución y launcher exactos, sin atribuirles otra invocación.
+
+La suite de correo de integración consulta 127.0.0.1:3000/health/ready. No retirar
+la API aislada arrancada en la sección anterior ni apuntarla al entorno manual.
+Si se ejecuta integración en un runner efímero con solo DB/Mailpit, ese runner
+requiere AppModule/transporte reales en su propio loopback: T068 registra el
+globalSetup y su esquema exclusivo, sin mocks ni afirmar que una API externa
+responde al localhost del runner. Fallo de readiness es operativo, no una prueba
+académica en rojo.
 
 Conservar guardas de sesión/CSRF/CSP, cuenta ADMIN única, revocación, último ADMIN,
 registro, verificación, recuperación y privacidad. Un nuevo bootstrap 23/23 tampoco
@@ -257,6 +293,14 @@ exclusivo con cuentas ficticias y exposición loopback en puertos previamente co
 libres mediante un overlay de prueba revisado; no modificar el Compose/puertos del
 entorno manual. Hasta disponer de ese recorrido, registrar SC-002 humano pendiente.
 No inventar observaciones, porcentajes ni un estudio de diez personas para este spec.
+El [protocolo T072](evidence/human-acceptance.md) contiene datos previstos, guardas,
+instrucción neutral, registro y brecha H-CAP-01; sesión/participante/resultados
+siguen sin completar. T104 de identidad exige sus propios diez participantes.
+
+Resultado ya ejecutado de actualización/restore: [T069](evidence/recovery.md),
+comando reproducible y [procedimiento](../../ops/recovery/README.md#ensayo-de-oferta-académica-t069).
+Cuatro fases aprobadas, 4 sesiones/2 enlaces/2 correos invalidados y decisiones
+posteriores revisadas; D13 no se cierra por sus tiempos locales observados.
 
 Ensayo incremental V-A11:
 1. En otro esquema/proyecto ficticio, aplicar solo 0001–0004 de la revisión previa.
@@ -272,6 +316,27 @@ Ensayo incremental V-A11:
 No ejecutar este ensayo sobre los datos manuales ni editar migraciones aplicadas.
 La restauración no reconstruye cambios administrativos posteriores al backup: revisar
 acceso y oferta antes de reabrir, además de invalidar credenciales restauradas.
+
+## Delimitaciones y puertas pendientes
+
+- **D04**: la reserva previa por 24 h exactas está confirmada para el futuro spec.
+  Capacidad máxima 1–50 no reserva, consume ni libera cupos. Varios cursos, prioridad,
+  pago al límite/tardío, reembolso/cancelación y abuso conservan decisiones abiertas.
+- **D06**: America/Lima, medianoche, ocurrencias, adyacencia y publicaciones
+  incompatibles del docente están definidos/verificados en 002. Compatibilidad de
+  matrícula del alumno y cambios posteriores no están resueltos.
+- **D10/rúbrica**: población ≥15 000 y objetivo de 2500 activos sin demostrar.
+  T103 es informe/ejecución histórica completa, con capacidad sin aprobar. Mantener
+  cargas completas para su etapa y generador k6 externo al VPS; no ejecutarlas aquí.
+- **D13**: T069 verifica restore ficticio, no custodia externa, responsable, retención
+  operada ni SLA. Antes de demo persistente/publicación revisar destino real.
+- **T104/T108**: pendientes de identidad, sin modificarlos. Bootstrap intermitente
+  abierto; no hay credenciales predeterminadas para sortearlo ni un pase que lo cierre.
+- **SMTP externo**, video/protección/alojamiento y CI remoto pendientes. Mailpit local
+  aprobado no demuestra correo externo. No desplegar ni adoptar AWS en este bloque.
+
+[Decisiones vigentes](../../docs/decisiones-pendientes.md) y
+[reservas/capacidad](../../docs/planificacion/reservas-capacidad.md).
 
 ## Registro y detención
 

@@ -1,6 +1,6 @@
 # Decisiones pendientes
 
-**Vigente al 2026-10-23**: al menos 15 000 cuentas, objetivo no demostrado de 2500
+**Vigente al 2026-10-29**: al menos 15 000 cuentas, objetivo no demostrado de 2500
 activos concurrentes y reserva previa al pago de 24 h exactas desde confirmación
 servidor. Pago verificado confirma matrícula; vencimiento sin pago libera cupo por
 conciliación consistente. S/300 total. [Requisitos, escenarios y tareas futuras](planificacion/reservas-capacidad.md).
@@ -30,9 +30,33 @@ evidencia y especificaciones afectadas. Las reglas obligatorias de la
 | D10 | Criterios de evaluación | Objetivo vigente: 2500 usuarios concurrentes activos; población ≥15 000 cuentas. Falta acordar ventana/mezcla/duración, RPS/peticiones en vuelo, capacidad de reservas y umbrales/rúbrica. | VP002/VP007: evidencia del VPS y generador separado; distinguir reservas/matrícula, chat y video. T103 conserva perfiles/umbrales históricos de 1000 y capacidad sin aprobar. |
 | D11 | Identidad y permisos | Correo verificado, recuperación, un rol, gestión administrativa y revocación implementados según [identidad](../specs/001-identidad-acceso-roles/spec.md). Permisos académicos de PA-01 en 002, sin permisos de matrícula implícitos. | Checkpoints verificados; T104/T108 y bootstrap histórico abiertos, SMTP real/costo pendiente. No confundir aceptación técnica local con aceptación integral. |
 | D12 | Materiales y paneles | Faltan formatos, tamaños, almacenamiento y operaciones mínimas por rol. | Alcance acotado por funcionalidad compatible con el plazo y el presupuesto. |
-| D13 | Actualización y recuperación | Faltan ubicación/retención de respaldos, responsables y tiempos aceptables de recuperación. | Procedimiento y restauración comprobada antes de una demo con datos persistentes o publicación. |
+| D13 | Actualización y recuperación: operación pendiente | Procedimiento local y restore aislado de identidad/oferta comprobados en T069; faltan custodia/ubicación externa, responsable, retención operada y objetivos RPO/RTO aprobados. | [T069](../specs/002-oferta-academica/evidence/recovery.md) no cierra D13: tiempos observados no son SLA. Antes de demo persistente/publicación, revisar esas condiciones y el destino real, sin prometer downgrade ni cambios posteriores al backup. |
 | D14 | Prioridad en apertura | ¿FIFO, turnos u otra política; qué instante y desempate fija orden de llegada? Acceso controlado no es reserva ni prioridad aprobada. | RA-02/VP003; regla explícita y casos de espera, rechazo, reconexión y último cupo antes de implementar. |
 | D15 | Bloqueo abusivo de cupos | ¿Cuántas reservas por cuenta/grupo y qué ocurre ante reiteración o abandono? ¿Excepciones, penalizaciones y recuperación? | RA-06; política aprobada y pruebas RE-10, sin inventar límites ni debilitar cuotas de seguridad de identidad. |
+
+## Delimitación de oferta y pendientes heredados — 2026-10-29
+
+PA-01–PA-05 siguen aprobadas: permisos por actor, retiro antes de editar,
+republicación explícita, cancelación terminal, habilitación/revisión docente,
+capacidad 1–50 y horarios America/Lima. [Spec 002](../specs/002-oferta-academica/spec.md)
+y sus evidencias concretan estas reglas, sin resolver reservas/matrícula.
+D04 mantiene la reserva previa de 24 h confirmada; capacidad configurada no ocupa
+ni libera inventario. D06 solo delimita solapamientos internos y publicaciones
+docentes; conflictos y cambios de matrícula del alumno siguen abiertos.
+
+T103 permanece completa como ejecución/informe histórico de 1000, con capacidad
+sin aprobar. T104 (diez personas, identidad) y T108 siguen pendientes; T073
+(alumno y oferta) es otra observación y no los sustituye. Bootstrap intermitente
+conserva causa pendiente aunque sus repeticiones pasen. El timeout del **caso E2E
+D10** sigue abierto, distinto de la **decisión D10** sobre rúbrica/capacidad; tampoco
+se cierra por T068. CI remoto no ejecutado, límite de 20 minutos sin validar remoto.
+Mailpit/SMTP local están comprobados; SMTP externo, costo/entrega y D13 operativo
+siguen pendientes. Cargas completas y evaluación VPS según su etapa/rúbrica;
+video/protección/alojamiento D07–D09 conservan su trazabilidad, sin implementación.
+
+[Protocolo humano](../specs/002-oferta-academica/evidence/human-acceptance.md):
+preparado, no ejecutado. La brecha H-CAP-01 y la falta de participante impiden
+atribuir aceptación humana/integral; no se amplía alcance ni se cambian reglas.
 
 ## Decisiones confirmadas y pendientes — 2026-10-23
 
@@ -68,7 +92,12 @@ de la carga; no autoriza contratar servicios.
 
 ## Prioridades
 
-Continuar oferta 002 desde T039, conservando cinco aclaraciones/E1 y su evidencia.
+Oferta 002 conserva las cinco aclaraciones/E1, cuatro checkpoints automáticos,
+[T068](../specs/002-oferta-academica/evidence/automated.md) y
+[T069](../specs/002-oferta-academica/evidence/recovery.md). T070–T072 actualizan
+documentación/protocolo; T073 requiere alumno real y T074 evidencia integral.
+No se declara cerrado SC-002; H-CAP-01 del protocolo registra el aviso ausente en
+el catálogo inicial y exige revisar la interfaz antes de aceptar ese criterio.
 Preparar el siguiente spec de reservas/órdenes/matrícula sin implementarlo todavía.
 Obtener la rúbrica (D10) e investigar video, protección y alojamiento (D07–D09)
 sigue siendo prioritario. Son riesgos que pueden modificar el diseño y el escenario

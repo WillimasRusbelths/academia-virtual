@@ -3,7 +3,7 @@
 Proyecto de academia virtual para un trabajo final de curso, con desarrollo local
 mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-23:** React/NestJS y PostgreSQL, monolito modular y Docker Compose local.
+**Estado al 2026-10-29:** React/NestJS y PostgreSQL, monolito modular y Docker Compose local.
 Requisitos confirmados: **al menos 15 000 cuentas registradas**, objetivo de **2500
 usuarios concurrentes activos todavía sin demostrar**, y reserva de cupo previa al pago
 por **24 horas exactas desde confirmación del servidor**. Pago verificado confirma
@@ -36,9 +36,20 @@ restringida y activación mediante contraseña propia y correo verificado, compr
 checkpoint funcional comprobado, incluidas revocación, carreras administrativas y V04-B.
 [US7: recuperación de contraseña](specs/001-identidad-acceso-roles/evidence/us7.md) tiene su checkpoint
 funcional comprobado en API y navegador, con revocación de sesiones y recuperación tras provisional vencida.
-Oferta académica está en desarrollo: [002](specs/002-oferta-academica/tasks.md) conserva
-T001–T034/T036–T038 completas en `eafae88`; T035 y T039–T074 siguen pendientes.
-Las cinco aclaraciones y E1 se conservan; el siguiente bloque de implementación es T039.
+Oferta académica [002](specs/002-oferta-academica/tasks.md) tiene sus cuatro historias
+implementadas y verificadas automáticamente. [T068](specs/002-oferta-academica/evidence/automated.md)
+registra UNIT API 335/335, web 188/188, PostgreSQL/HTTP 1972/1972, crypto/mail 2/2,
+E2E identidad 203/203 y oferta 168/168 (84 casos en dos proyectos). Son resultados
+de esa revisión, no pruebas nuevas ejecutadas al actualizar esta documentación.
+[T069](specs/002-oferta-academica/evidence/recovery.md) verifica migración incremental
+y restore aislado con invalidación de credenciales, ledger/auditoría y decisiones
+posteriores al backup. [T067](specs/002-oferta-academica/evidence/t067.md) incorpora
+E2E de oferta al workflow; CI remoto y suficiencia de su límite de tiempo pendientes.
+Las cinco aclaraciones y E1 siguen vigentes. T070–T072 actualizan documentación y
+preparan el [protocolo humano](specs/002-oferta-academica/evidence/human-acceptance.md);
+T073 requiere participante y T074 permanece pendiente de evidencia integral.
+El protocolo registra H-CAP-01: falta el aviso de ocupación/disponibilidad no
+calculadas en el catálogo inicial; corregirlo antes de aprobar SC-002.
 Reservas, órdenes y matrícula requieren su propio spec y no amplían 002;
 no hay integración de pagos/video ni despliegue acreditado.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
@@ -46,7 +57,8 @@ La configuración por entorno y el esquema de identidad con cuatro migraciones c
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
 se reutilizan en US1 y US2.
 Las [sesiones, autorización y protecciones HTTP](specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md)
-respaldan los flujos implementados; las verificaciones finales de identidad siguen pendientes.
+respaldan los flujos implementados; T104/T108 conservan pendientes la observación humana
+y la aceptación integral de identidad. La regresión técnica posterior está en T068.
 El objetivo vigente de 2500 usuarios concurrentes activos está pendiente de validación.
 Las pruebas históricas de 1000 se conservan completas, con sus fallos y límites.
 
@@ -54,6 +66,27 @@ El presupuesto de infraestructura y servicios es **S/300 en total**, destinado a
 y pruebas necesarias, no a financiar una operación permanente. Al menos 15 000 cuentas
 no equivalen a usuarios activos, peticiones en vuelo ni reservas. La capacidad configurada
 por grupo es de 1–50 según PA-04 de 002; ocupación/disponibilidad no se calculan todavía.
+
+## Oferta académica implementada
+
+Desde **Inicio**, el administrador abre **Gestionar oferta** (`/admin/oferta`):
+prepara cursos y grupos, asigna docente habilitado, configura periodo/franjas y
+capacidad 1–50; publica, retira, corrige y republica explícitamente, o cancela un
+grupo de forma terminal. El alumno usa **Consultar oferta** (`/oferta`) para ver
+solo oferta publicada visible. El administrador puede consultar esa misma proyección.
+El docente usa **Mis grupos** (`/mis-grupos`), únicamente sus asignaciones en cualquier
+estado y sin gestión; el visitante no accede. Perfil, cuentas y cierre se conservan.
+
+Backend comprueba permisos/pertenencia; la navegación no sustituye autorización.
+Horarios en America/Lima, sin cruce de medianoche, con franjas contiguas permitidas.
+Perder habilitación docente oculta la oferta afectada; recuperarla exige revisión y
+republicación. Capacidad máxima no equivale a plazas libres: ocupación/disponibilidad
+no calculadas, sin acciones de reservar, pagar o matricularse.
+
+[Guía local](specs/002-oferta-academica/quickstart.md),
+[arquitectura vigente](ops/local/architecture.md) y
+[alcance y límites](docs/alcance-mvp.md). La migración 0005 es aditiva; conservar las
+cuatro migraciones de identidad y seguir recuperación antes de datos persistentes.
 
 ## Ejecución local
 
@@ -89,7 +122,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Decisiones pendientes](docs/decisiones-pendientes.md): reglas y riesgos por resolver.
 - [Planificación vigente de reservas/capacidad](docs/planificacion/reservas-capacidad.md):
   24 horas confirmadas, escenarios, pendientes, VPS propuesto y continuidad de los specs.
-- [Oferta académica en desarrollo](specs/002-oferta-academica/tasks.md): avances y evidencia intactos.
+- [Oferta académica](specs/002-oferta-academica/tasks.md): cuatro historias con evidencia automática; aceptación humana/integral pendiente.
 - [Identidad, autenticación y acceso por roles](specs/001-identidad-acceso-roles/spec.md):
   primera especificación revisada, con correo verificado, recuperación por correo, un rol
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
@@ -143,7 +176,7 @@ React, TypeScript y Vite para el frontend; NestJS como monolito modular con Type
 PostgreSQL 16.14 y Prisma, con Mailpit 1.31.3 para correo local. Compose construye las
 imágenes Linux de API/web con `npm ci` y conserva los datos de PostgreSQL en un volumen.
 La API y la web incorporan los flujos de acceso/cierre y registro/verificación de identidad;
-la oferta académica está parcialmente implementada y verificada en 002, sin reservas/matrícula.
+la oferta académica tiene sus cuatro historias verificadas automáticamente en 002, sin reservas/matrícula.
 
 Socket.IO autorizado por clase sigue propuesto. YouTube Live con OBS es la elección
 de video del MVP según DA03 y DEC01; integración y control de acceso pendientes.

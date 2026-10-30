@@ -1,0 +1,245 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "base": "49fcf16dfef03d2890f5513f76761e3209c1c82c",
+  "completed": [
+    "T070",
+    "T071",
+    "T072"
+  ],
+  "pending": [
+    "T073",
+    "T074"
+  ],
+  "checklist": {
+    "total": 16,
+    "complete": 16,
+    "modified": false
+  },
+  "documentValidation": {
+    "date": "2026-10-29",
+    "documents": 35,
+    "localLinksChecked": 892,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  },
+  "powershellSnippets": {
+    "blocks": 7,
+    "allSyntaxValid": true,
+    "commandsExecuted": false,
+    "items": [
+      {
+        "path": "specs/002-oferta-academica/quickstart.md",
+        "errors": 0,
+        "block": 1,
+        "executed": false
+      },
+      {
+        "path": "specs/002-oferta-academica/quickstart.md",
+        "errors": 0,
+        "block": 2,
+        "executed": false
+      },
+      {
+        "path": "specs/002-oferta-academica/quickstart.md",
+        "errors": 0,
+        "block": 3,
+        "executed": false
+      },
+      {
+        "path": "specs/002-oferta-academica/quickstart.md",
+        "errors": 0,
+        "block": 4,
+        "executed": false
+      },
+      {
+        "path": "specs/002-oferta-academica/quickstart.md",
+        "errors": 0,
+        "block": 5,
+        "executed": false
+      },
+      {
+        "path": "specs/002-oferta-academica/quickstart.md",
+        "errors": 0,
+        "block": 6,
+        "executed": false
+      },
+      {
+        "path": "specs/002-oferta-academica/evidence/human-acceptance.md",
+        "errors": 0,
+        "block": 1,
+        "executed": false
+      }
+    ]
+  },
+  "composeConfigOnly": {
+    "configurationValidated": true,
+    "apiTestMode": true,
+    "appOrigin": "http://localhost:55173",
+    "volumeCreated": false,
+    "command": "docker compose config --format json; explicit test env and isolated project name",
+    "portAvailabilityChecked": false,
+    "dbMailpitApiPorts": 0,
+    "humanSessionExecuted": false,
+    "volumeName": "academic-human-config-check_postgres_data",
+    "onlyWebPort": {
+      "target": 5173,
+      "published": "55173",
+      "hostIp": "127.0.0.1"
+    },
+    "servicesStarted": false
+  },
+  "selectorChecks": {
+    "matchesOriginalHarness": true,
+    "matchesFoundations": true,
+    "excludesAcademicHarness": true,
+    "matchesExistingWorkflow": true,
+    "playwrightExecuted": false
+  },
+  "finding": {
+    "id": "H-CAP-01",
+    "severity": "MEDIA",
+    "status": "OPEN",
+    "criterion": "SC-002 / FR-006",
+    "basis": "Static source review; not a human observation",
+    "catalogueNoticeMissing": true,
+    "layoutNoticeMissing": true,
+    "courseAndGroupNoticePresent": true,
+    "source": [
+      {
+        "path": "apps/web/src/features/academic-offering/catalog-page.tsx",
+        "sha256": "a3845742c2706ccc6a8d140d0215668e993b9c416f315e31e4491a28a69b1d24"
+      },
+      {
+        "path": "apps/web/src/features/academic-offering/offering-state.tsx",
+        "sha256": "62944825c29d03bfa3ed8dad1c225c68df4847ca4a535292cce9e98ef780b79b"
+      },
+      {
+        "path": "apps/web/src/features/academic-offering/course-page.tsx",
+        "sha256": "31f566de4d9097115c009b0a108a4280380e482a5a1303797c667f4fb17d2add"
+      }
+    ]
+  },
+  "preservation": {
+    "trackedFilesInspected": 670,
+    "protectedFilesInspected": 72,
+    "protectedUnchanged": 71,
+    "authorizedProtectedDocumentationChange": "specs/002-oferta-academica/quickstart.md (T071)",
+    "originalTaskDescriptionsUnchanged": 74,
+    "onlyTaskMarksChanged": [
+      "T070",
+      "T071",
+      "T072"
+    ],
+    "originalReadmeHistoryPreserved": true,
+    "originalArchitectureHistoryPreserved": true,
+    "firstSpecAndAllPriorEvidenceUnchanged": true,
+    "productionCodeChanged": false,
+    "migrationsChanged": false,
+    "manualConfigurationChanged": false,
+    "sqlExecuted": false,
+    "servicesStarted": false,
+    "loadsExecuted": false,
+    "privateConfigIgnored": true,
+    "secretsDetected": 0
+  },
+  "reviewCorrection": {
+    "duplicatedQuickstartSectionRemoved": true,
+    "finalHeadingUniquenessVerified": true,
+    "finalChecksRepeated": true,
+    "initialSyntaxBlocks": 9,
+    "finalSyntaxBlocks": 7
+  },
+  "human": {
+    "protocolPrepared": true,
+    "sessionExecuted": false,
+    "participantProvided": false,
+    "accountsCreated": false,
+    "portAvailabilityChecked": false,
+    "SC002Demonstrated": false
+  },
+  "extensionsPresent": false,
+  "newFunctionalTestsExecuted": 0,
+  "remoteCiRun": false,
+  "capacityValidated": false,
+  "open": [
+    "H-CAP-01",
+    "T073/SC-002 real student",
+    "T074 integral acceptance",
+    "T104",
+    "T108",
+    "historical bootstrap",
+    "historical E2E D10 timeout",
+    "external SMTP",
+    "D13 operational conditions",
+    "D10 capacity rubric",
+    "2500 active concurrent objective",
+    "D04/D06 enrollment decisions"
+  ],
+  "documentSources": [
+    {
+      "path": "README.md",
+      "workspaceSha256": "49c289e120dec0db27d466fecb2558bd785b75106eb6853d2703ff1ff0cb8d07"
+    },
+    {
+      "path": "docs/alcance-mvp.md",
+      "workspaceSha256": "fc9b6d1dfc4db165def55430593b8fbffad5f0b7b16fe65f716858278ca47fad"
+    },
+    {
+      "path": "ops/local/architecture.md",
+      "workspaceSha256": "28dfd4dfe922124425063443e343f36cec6b4c19fe274394c94aa77cd8b4afd5"
+    },
+    {
+      "path": "docs/decisiones-pendientes.md",
+      "workspaceSha256": "8b30bdfd87c2548917adc91b6bbafa74a09c4afa806755ce971d416e87b199e9"
+    },
+    {
+      "path": "specs/002-oferta-academica/quickstart.md",
+      "workspaceSha256": "069311df6b49160b91bbf3588325cfe7afc3149a30102271462f29248e7c8835"
+    },
+    {
+      "path": "specs/002-oferta-academica/tasks.md",
+      "workspaceSha256": "787e90cf51007f34a47e7e79c8db43b1ab225e671a2b5cba85f4b7bb8c4fede9"
+    },
+    {
+      "path": "docs/planificacion/reservas-capacidad.md",
+      "workspaceSha256": "30eef45aa73c33d22ccc4c9d3dba40a2707a068e214d78e13bc9de4f08990c31"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/human-acceptance.md",
+      "workspaceSha256": "c15acc40dd70e2a7905df5a117fef302eb264d4e05e5f459b89e0f4f1f71a380"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t070-t072.md",
+      "workspaceSha256": "afe053e8386d5212b1ce8991f1dc5ff18e4114638f078818c952ec7c60033187"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".cache/documentation-t070-t072/docs-check.json",
+      "sha256": "47cb79fa39cdb0d9ea053e4baf27a0b80c8c9d0b009cb3a856a6889e372ebd7f"
+    },
+    {
+      "path": ".cache/documentation-t070-t072/snippet-check.json",
+      "sha256": "5a8685480a1b19da984573a552ae34c56fe7c9fbe6fd526d0d259a6239bf1d3f"
+    },
+    {
+      "path": ".cache/documentation-t070-t072/compose-check.json",
+      "sha256": "39b241c7dd830dd5a4258c65d24ab5f59dc6bc528ec23cb3dc5635c28c0f0ae5"
+    }
+  ]
+}

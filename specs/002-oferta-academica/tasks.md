@@ -1,9 +1,9 @@
 ﻿# Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T069 completas; puerta local y ensayo de recuperación aprobados.
-T070–T074, CI remoto, aceptación humana/integral y capacidad permanecen pendientes.
-Siguiente bloque: T070–T072, documentación vigente y protocolo humano.
+**Estado**: T001–T072 completas; documentación y protocolo humano preparados.
+T073/T074, H-CAP-01, CI remoto, aceptación humana/integral y capacidad pendientes.
+Siguiente bloque: corregir H-CAP-01 y verificarlo; T073 con alumno real, luego T074.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -591,9 +591,26 @@ ficticios detenidos con sus volúmenes retenidos. Bootstrap, D10 histórico,
 T104/T108, SMTP real, aceptación humana/integral y capacidad siguen pendientes.
 Detenido antes de T070.
 
-- [ ] T070 Actualizar `README.md`, `docs/alcance-mvp.md` y `ops/local/architecture.md` con estado efectivamente implementado/verificado, navegación, módulo y límites, enlazando spec/evidencia. No convertir planes o tests omitidos en capacidad acreditada ni reescribir evidencia 001 (FR-014/016).
-- [ ] T071 Actualizar `docs/decisiones-pendientes.md` y `specs/002-oferta-academica/quickstart.md` con delimitación D04, D06 matrícula, D10/D13, T104/T108, SMTP real y bootstrap; PA-01–05 siguen aprobadas. Conservar video/alojamiento y cargas diferidas; registrar bloqueo real sin sustituir reglas (FR-006/016).
-- [ ] T072 Preparar protocolo humano en `specs/002-oferta-academica/evidence/human-acceptance.md`: alumno real recorre desde inicio y reconoce sin ayuda curso/grupo/días/horas/fechas/zona/capacidad de dos grupos, sin nuevas muestras/porcentajes impuestos; datos ficticios, acceso loopback exclusivo y observación pendiente hasta ejecución (FR-006/009/014; SC-002, V-A13).
+- [X] T070 Actualizar `README.md`, `docs/alcance-mvp.md` y `ops/local/architecture.md` con estado efectivamente implementado/verificado, navegación, módulo y límites, enlazando spec/evidencia. No convertir planes o tests omitidos en capacidad acreditada ni reescribir evidencia 001 (FR-014/016).
+- [X] T071 Actualizar `docs/decisiones-pendientes.md` y `specs/002-oferta-academica/quickstart.md` con delimitación D04, D06 matrícula, D10/D13, T104/T108, SMTP real y bootstrap; PA-01–05 siguen aprobadas. Conservar video/alojamiento y cargas diferidas; registrar bloqueo real sin sustituir reglas (FR-006/016).
+- [X] T072 Preparar protocolo humano en `specs/002-oferta-academica/evidence/human-acceptance.md`: alumno real recorre desde inicio y reconoce sin ayuda curso/grupo/días/horas/fechas/zona/capacidad de dos grupos, sin nuevas muestras/porcentajes impuestos; datos ficticios, acceso loopback exclusivo y observación pendiente hasta ejecución (FR-006/009/014; SC-002, V-A13).
+Avance T070–T072, 2026-10-29: README, alcance y arquitectura reflejan cuatro
+historias automáticas y T068/T069 sin atribuir nueva ejecución. Quickstart y
+decisiones distinguen D04/D06, D10 de rúbrica frente al caso E2E homónimo, D13,
+SMTP externo, T104/T108 y bootstrap. Protocolo humano SC-002/V-A13 preparado,
+sin participante ni observación, sin porcentajes/plazos nuevos. Revisión de
+Compose solo de configuración: web loopback y volumen propio, sin arranque;
+siete bloques PowerShell parseados, no ejecutados. Links/coherencia y conservación
+comprobados en [informe](evidence/t070-t072.md) y
+[resultados](evidence/t070-t072-results.json). Se corrigió una duplicación del
+quickstart antes del commit; no cambiaron reglas ni código.
+**H-CAP-01 (MEDIA) abierto**: CatalogPage/OfferingLayout no presentan el aviso
+no calculado de SC-002; curso/grupo sí. Corrección de interfaz fuera de este
+bloque, necesaria antes de aceptar SC-002. T073 requiere alumno real y T074
+evidencia completa. [Protocolo y registro sin observar](evidence/human-acceptance.md).
+Sin cambios de datos, configuración manual, pruebas de carga ni evidencia histórica.
+Detenido antes de T073; no se atribuye aceptación integral ni capacidad.
+
 - [ ] T073 Realizar observación humana con responsable y alumno, registrar resultado real en `specs/002-oferta-academica/evidence/human-acceptance.md`. Si no hay participante, mantener esta tarea sin marcar y SC-002 pendiente, identificando esa dependencia; el agente o Playwright no sustituyen al alumno (SC-002).
 - [ ] T074 Elaborar cierre en `specs/002-oferta-academica/evidence/acceptance.md`: matriz FR/SC, cuatro checkpoints, constitución I/II/IV/IX/X/XI, resultados automáticos y humanos separados, cambios/configuración conservados y riesgos heredados. Si T073 u otra puerta falta, declarar aceptación parcial y mantener esta tarea pendiente; cero afirmaciones de 1000 concurrentes, sin despliegue implícito (FR-016; SC-001–006).
 

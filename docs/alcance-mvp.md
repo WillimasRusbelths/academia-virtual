@@ -1,10 +1,12 @@
 # Alcance del MVP de academia-virtual
 
-**Vigente al 2026-10-23**, según solicitud confirmada y
+**Vigente al 2026-10-29**, según solicitud confirmada y
 [constitución 1.2.0](../.specify/memory/constitution.md). Identidad conserva sus
 checkpoints y aceptación integral pendiente; oferta [002](../specs/002-oferta-academica/tasks.md)
-está en desarrollo hasta T038. Reservas/matrícula/pagos/video y capacidad objetivo no
-están demostrados. [Planificación detallada](planificacion/reservas-capacidad.md) y
+tiene sus cuatro historias con [puerta automática aprobada](../specs/002-oferta-academica/evidence/automated.md)
+y [recuperación aislada verificada](../specs/002-oferta-academica/evidence/recovery.md).
+Su observación humana SC-002/T073 y aceptación integral siguen pendientes.
+Reservas/matrícula/pagos/video y capacidad objetivo no están demostrados. [Planificación detallada](planificacion/reservas-capacidad.md) y
 [backlog](planificacion/tasks.md). Evidencia histórica de 1000 intacta, T103 ejecución/informe completa.
 
 ## Objetivo y restricciones
@@ -26,7 +28,7 @@ gratuitos ni precios todavía no comprobados.
 | Área | Alcance previsto | Pendiente de definir |
 | --- | --- | --- |
 | Identidad | Registro, verificación, sesiones, recuperación y administración implementados; un rol y permisos backend. | T104/T108, bootstrap histórico, SMTP real/costo; no aceptación integral. |
-| Oferta académica | Spec 002: cursos/grupos, horarios America/Lima, capacidad 1–50 y publicación; avances T038 conservados. | T035/T039–T074 de 002; matrícula/solapamientos del alumno aparte D06. |
+| Oferta académica | Cuatro historias implementadas: preparación, publicación/consulta, mantenimiento y grupos propios del docente; horarios America/Lima, capacidad 1–50, revisión docente, retiro previo y cancelación terminal. | T073 humano, T074 integral y brecha H-CAP-01 (aviso ausente en catálogo inicial); documentación/protocolo T070–T072 preparados. D04 y conflictos de matrícula D06 en otro spec; capacidad no es disponibilidad. |
 | Reserva, orden y matrícula | Reserva previa al pago por 24 h exactas desde confirmación servidor; pago verificado confirma matrícula; vencimiento sin pago libera cupo por conciliación consistente. Precios/conceptos/total calculados por servidor. | Identidad de reserva/matrícula, varios cursos/atomicidad, prioridad, pago al límite/tardío, reembolsos/cancelaciones y abuso; no se implementa aquí. |
 | Pago | Propuesta: un pago por el total de la orden y matrícula por cada curso adquirido. Izipay elegida para el MVP; integración no implementada. | Validación de la regla de pago, tarifas finales, límites, acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada. |
 | Materiales | Acceso a materiales por curso sujeto a autorización. | Formatos, límites, almacenamiento y reglas de publicación. |
@@ -35,8 +37,11 @@ gratuitos ni precios todavía no comprobados.
 
 ## Exclusiones de esta etapa y del MVP
 
-Este bloque actualiza planificación, prepara un perfil local sin ejecutarlo y ejecuta
-solo dos smokes de identidad. No implementa matrícula, contrata servicios ni despliega.
+Este bloque T070–T072 actualiza documentación y prepara observación humana; no
+ejecuta esa observación, smokes, cargas ni implementa matrícula o infraestructura.
+Los [smokes de planificación](planificacion/evidence/2026-10-23-smokes.md), el perfil
+local 10/25 preparado y la evidencia histórica de carga conservan sus estados.
+No se contratan servicios ni se despliega.
 
 Quedan fuera del MVP, salvo modificación explícita del alcance:
 
@@ -50,14 +55,14 @@ Quedan fuera del MVP, salvo modificación explícita del alcance:
 ## Propuesta técnica inicial
 
 Las elecciones siguientes distinguen base técnica e implementación funcional.
-Docker Compose y los servicios locales cuentan con validación registrada; los flujos
-de negocio y las integraciones externas permanecen pendientes.
+Docker Compose, identidad y oferta cuentan con validación local registrada. Los
+dominios de reservas/matrícula y las integraciones externas permanecen pendientes.
 
 | Componente | Propuesta | Validación necesaria |
 | --- | --- | --- |
-| Frontend | React, TypeScript y Vite. | Flujos mínimos y compatibilidad de reproducción. |
-| Backend | NestJS y TypeScript; monolito modular. | Límites de módulos, autorización y comportamiento concurrente. |
-| Datos | PostgreSQL y Prisma. | Transacciones, restricciones, migraciones y restauración. |
+| Frontend | React, TypeScript y Vite; identidad y oferta integradas. | Recorridos E2E locales comprobados; SC-002 humano, reproducción/video y aceptación integral pendientes. |
+| Backend | NestJS y TypeScript; monolito modular, con identidad/usuarios/autorización/oferta. | Reglas, permisos y carreras académicas verificadas en T068; capacidad concurrente global no demostrada. |
+| Datos | PostgreSQL y Prisma; cuatro migraciones de identidad más 0005 académica aditiva. | Transacciones/restricciones verificadas y restore ficticio T069; D13 operativo y datos persistentes requieren revisión. |
 | Chat | Socket.IO con autorización por clase. | Aislamiento de clases, reconexión y carga definida. |
 | Video | OBS del docente → YouTube Live, elección DA03/DEC01 para el MVP. | Integración, acceso directo, permisos vencidos y compatibilidad con RF16; latencia, consumo y costo. |
 | Entorno local | Docker Compose con PostgreSQL, Mailpit, API y web. | Arranque y verificaciones locales comprobados en `47c8338`; no acredita funcionalidades ni producción. |
