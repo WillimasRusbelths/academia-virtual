@@ -22,7 +22,7 @@ resolver los motivos indicados. No se modifican checklists de 001/002.
 - [ ] Los requisitos son verificables y no ambiguos en todo su alcance.
 - [ ] Todos los criterios de éxito son medibles con condiciones de evaluación definidas.
 - [X] Los criterios de éxito son independientes de la tecnología.
-- [ ] Todos los escenarios de aceptación tienen reglas de resultado definidas.
+- [x] Todos los escenarios de aceptación tienen reglas de resultado definidas.
 - [X] Los casos límite están identificados, incluidos RE-01–RE-10.
 - [X] El alcance está delimitado.
 - [X] Las dependencias y supuestos están identificados.

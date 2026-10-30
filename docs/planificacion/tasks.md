@@ -1,12 +1,14 @@
 # Backlog trazable — reservas, matrícula y VPS
 
 Planificación del 2026-10-23; CT001 verificada en continuidad de oferta, RP001 en el
-inventario y RP002 como borrador/checklist del 2026-10-30. Las otras 19 tareas siguen pendientes;
+inventario, RP002 como borrador/checklist y RP003 con tres rondas de aclaración del
+2026-10-30. Hay cuatro tareas documentales/continuidad completas y 18 pendientes;
 este backlog no autoriza implementar reservas, matrícula ni VPS.
 [Requisitos RC, decisiones RA y escenarios RE](reservas-capacidad.md).
 Numeración 003 confirmada: se conservan el inventario RP001 y su evidencia; RP002
-añade `spec.md` y checklist en ese directorio. Borrador con aclaraciones pendientes,
-sin plan ni tasks.md de implementación. No está habilitado para planificación.
+añade `spec.md` y checklist en ese directorio. RP003 resuelve/delimita el núcleo
+funcional; siguiente bloque recomendado RP004/plan, con puertas D02/D05/D10/D13
+explícitas y sin aprobación global. Aún sin plan ni tasks.md de implementación.
 Las tareas de oferta [002](../../specs/002-oferta-academica/tasks.md) conservan IDs,
 checkboxes y dependencias; este backlog no las mezcla ni renumera.
 
@@ -30,11 +32,11 @@ Cuatro historias, 24 FR, ocho SC y diez casos RE; checklist 10/16, seis pendient
 sin declaración de preparación para plan ni aceptación funcional. Se registran dos
 respuestas parciales: reservas todas juntas o ninguna y referencia al terminar
 verificación servidor; composición de orden/pago, límite exacto/tardío, precios y
-demás reglas quedaban abiertos en ese checkpoint. RP003 está ahora en curso;
+demás reglas quedaban abiertos en ese checkpoint. En el cierre RP002, RP003 quedaba pendiente;
 las respuestas siguientes actualizan el spec sin reescribir la evidencia RP002.
 Sin migraciones ni código.
 
-- [ ] RP003 Ejecutar clarify y registrar respuestas RA-01–RA-06 en el futuro `spec.md`: reserva múltiple/atomicidad, prioridad, pago exacto/tardío, reembolsos, cancelación y abuso; conservar bloqueos si faltan respuestas. Dep.: RP002; D01/D03–D06.
+- [X] RP003 Ejecutar clarify y registrar respuestas RA-01–RA-06 en el futuro `spec.md`: reserva múltiple/atomicidad, prioridad, pago exacto/tardío, reembolsos, cancelación y abuso; conservar bloqueos si faltan respuestas. Dep.: RP002; D01/D03–D06.
 
 RP003, primera ronda del 2026-10-30: cinco preguntas y cinco respuestas integradas en el
 [spec](../../specs/003-reservas-ordenes-matricula/spec.md): precio por curso en PEN
@@ -63,10 +65,30 @@ incidencia/seguimiento sin devolución/traslado/asignación manual; resolución 
 previa a cobros reales y seguimiento sin cerrar incidencia ni desbloquear cancelación.
 Checklist **11/16 → 11/16**, sin nuevas casillas ni regresiones; notas históricas
 conservadas. Constitución 1.2.1 sincroniza aprobación existente, sin cambiar principios.
-RP003 sigue pendiente por condiciones de oferta PD-02, cancelación/cambios RA-05,
+Al cerrar la segunda ronda, RP003 seguía pendiente por condiciones de oferta PD-02, cancelación/cambios RA-05,
 reiteraciones/excepciones RA-06 y conflictos D06. D10/D13 conservan sus etapas.
 Siguiente bloque: otra ronda de clarify sobre esos bloqueos; todavía sin plan,
 tareas de implementación ni código. [Revisión de segunda ronda](../../specs/003-reservas-ordenes-matricula/evidence/rp003-round2-results.json).
+
+RP003, tercera ronda del 2026-10-30, base 9b0706c: cinco preguntas y cinco
+respuestas nuevas, conservando las diez anteriores y todos los informes históricos.
+Se confirman elegibilidad/corte de inicio PD-02, pausa de pago/confirmación por
+ocultamiento sin acortar/extender compromisos, exclusión de cancelación/modificación
+voluntaria y nueva intención tras vencer sin penalización/espera adicional por abandono.
+RA-05 precisa bloqueantes vigentes y permite textos/docente según 002, protegiendo
+curso/período/horarios/capacidad y conservando historial finalizado sin reactivarlo.
+D06 impide solapamientos efectivos propios incluso ocultos; contiguos permitidos,
+vencidos/finalizados excluidos, sin parcialidad y con incidencia si ya hay pago.
+RA-01–RA-06/PD-01–PD-03 resueltas o delimitadas: RP003 completa en su alcance de
+aclaración, sin implementación. Checklist **11/16 → 12/16**: pasan los resultados
+de escenarios; sin regresiones. Quedan cuatro criterios globales pendientes por
+condiciones de evaluación D10 y dependencias externas/operativas. Las notas del
+checklist conservan el checkpoint RP002 por la instrucción de solo cambiar marcas.
+No representan el estado corriente; esta revisión y el spec lo actualizan.
+D02/sandbox, política/procedimiento económico antes de cobros reales, D10/capacidad
+y D13/operación permanecen como puertas. Siguiente bloque: RP004/plan del núcleo
+funcional, sin implementar ni prometer capacidad o habilitar cobros.
+[Revisión de tercera ronda](../../specs/003-reservas-ordenes-matricula/evidence/rp003-round3-results.json).
 
 - [ ] RP004 Planificar contratos públicos, identidad de reserva/orden/matrícula y estados en futuros `plan.md`, `data-model.md` y `contracts/`; confirmar disponibilidad/consumo de capacidad y migración aditiva después de RP003, sin alterar cuentas o evidencia de 002. Dep.: RP003; RC-03/05/06, RE-01/02/09.
 - [ ] RP005 Diseñar en futuros `research.md`/`data-model.md` plazo persistido de 86 400 segundos, reloj servidor, límites exactos, reinicio y ejecución diferida idempotente; ninguna extensión por reintento/desconexión/worker retrasado. Dep.: RP003/RP004; RC-04, RE-03–RE-06.

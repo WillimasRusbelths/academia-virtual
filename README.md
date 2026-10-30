@@ -57,23 +57,30 @@ no hay integración de pagos/video ni despliegue acreditado.
 RP001 conserva el [inventario](specs/003-reservas-ordenes-matricula/research.md) desde adca8e6;
 RP002 prepara el [borrador 003](specs/003-reservas-ordenes-matricula/spec.md) y su
 [checklist](specs/003-reservas-ordenes-matricula/checklists/requirements.md), 10/16 y sin aprobación para plan.
-RP003 registra dos rondas de cinco respuestas en el [spec 003](specs/003-reservas-ordenes-matricula/spec.md).
-Se conservan las 24 horas, precio por curso/PEN fijado por administrador, orden
-con precio conservado, reserva conjunta, pago total, matrícula por curso y bloqueo
-de cancelación de grupos con compromisos. La segunda ronda confirma prioridad
-por admisión de solicitudes autenticadas y válidas en servidor, desempate por
-secuencia única y un solo grupo por curso; no otra reserva con reserva/matrícula
-vigente del curso. Alumno opera lo propio; administrador consulta todos y registra
-seguimiento; docente/visitante sin acceso financiero. Matrícula vigente desde
-confirmación por pago hasta terminar la fecha final del grupo en America/Lima.
-Pago tardío o sin plaza válida: en conciliación sin matrícula; seguimiento no
-resuelve la incidencia. Devoluciones/traslados/asignaciones manuales quedan fuera;
-política y procedimiento económicos obligatorios antes de cobros reales.
-Condiciones de oferta, cambios/cancelación voluntaria, reiteraciones/excepciones
-y conflictos de matrícula D06 siguen pendientes; no se habilita el plan.
-Checklist 11/16, notas/evidencia anteriores conservadas. Constitución 1.2.1 corrige
-solo el estado de aprobación del pago total. No hay reservas implementadas;
-la aceptación humana de 002 sigue aplazada.
+RP003 completa tres rondas de cinco respuestas en el [spec 003](specs/003-reservas-ordenes-matricula/spec.md),
+con las quince respuestas conservadas. Se mantienen 24 horas exactas, precio por
+curso/PEN conservado, reserva conjunta, orden desglosada/pago total, una orden con
+reservas vigentes por alumno y un grupo por curso, sin duplicar compromisos vigentes.
+La admisión autenticada/válida registrada por servidor define la prioridad.
+Solo se confirman nuevas reservas antes de las 00:00 de la fecha inicial del grupo,
+en America/Lima, con curso/grupo publicados y visibles, docente/revisión vigente,
+precio definido y capacidad real. Se impiden solapamientos efectivos de la selección
+y de compromisos vigentes propios, aunque estén ocultos; se permiten franjas contiguas.
+Retirar oferta o perder habilitación conserva compromisos y plazo, pero bloquea
+iniciar pago y confirmar matrículas de toda la orden si algún grupo está oculto;
+pago verificado entonces queda en conciliación sin matrícula. Revisión/republicación
+explícitas permiten pagar el plazo restante, sin renovar ni resolver incidencias.
+Con reservas/matrículas vigentes o incidencias sin resolver solo se permiten textos
+y sustitución docente siguiendo 002; se bloquean curso, período, horarios, capacidad
+y cancelación. Historial finalizado no bloquea ni se reactiva por edición/republicación.
+Sin cancelación/modificación voluntaria de compromisos; tras vencer sin pago se puede
+intentar de nuevo, sin sanción ni espera adicional por abandono y sin renovar la misma intención.
+Las reglas funcionales quedan resueltas o delimitadas; siguiente bloque RP004/plan
+funcional con puertas explícitas de Izipay, resolución económica antes de cobros reales,
+D10/capacidad y D13/operación. Checklist **11/16 → 12/16**, sin regresiones; sus notas
+históricas se conservan. No es aprobación global ni implementación de reservas.
+Constitución 1.2.1 intacta; la aceptación humana de 002 sigue aplazada.
+[Revisión de tercera ronda](specs/003-reservas-ordenes-matricula/evidence/rp003-round3-results.json).
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
@@ -186,8 +193,9 @@ clases emitidas por el docente con chat para alumnos; y paneles básicos por rol
 RP003 confirma una orden desglosada, un pago total y una matrícula por curso/grupo
 elegido; reserva de varios cursos toda junta o ninguna y 24 horas exactas.
 La prioridad registrada por servidor, unicidad vigente por curso, matriz financiera
-y vigencia de matrícula también están confirmadas. Las políticas restantes y la
-integración siguen pendientes; no se atribuye implementación. **Izipay es la pasarela elegida para el MVP** desde el
+y vigencia de matrícula también están confirmadas. El alcance funcional está aclarado o delimitado; integración,
+resolución económica antes de cobros reales, capacidad y operación siguen sus puertas.
+No se atribuye implementación. **Izipay es la pasarela elegida para el MVP** desde el
 2026-09-23 y sustituye a Culqi, que figuraba como candidata inicial. La integración no está
 implementada; siguen pendientes tarifas finales, límites, acceso al entorno de pruebas y
 habilitación de Yape para la modalidad contratada. No se asume capacidad ilimitada.

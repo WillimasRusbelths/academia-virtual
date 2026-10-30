@@ -4,8 +4,9 @@
 
 **Created**: 2026-10-30, America/Lima.
 
-**Status**: Borrador con dos rondas RP003 de cinco aclaraciones cada una integradas;
-bloqueos pendientes, no habilitado para plan ni implementación.
+**Status**: Reglas funcionales aclaradas/delimitadas tras tres rondas RP003 de cinco
+respuestas cada una. Sin plan ni implementación; aprobación global de capacidad,
+integración del proveedor y operación pendientes en sus etapas.
 
 **Input**: El alumno reserva antes de pagar; la reserva confirmada por el servidor
 conserva el cupo durante exactamente 24 horas. El pago verificado confirma matrícula;
@@ -26,7 +27,9 @@ Los requisitos de esta etapa describen comportamiento futuro, no capacidad insta
 Las alternativas y cuestiones abiertas no son decisiones aprobadas. No se suplen con
 valores por defecto, ni con el orden de ejecución que casualmente produzca el sistema.
 El plan y las tareas de implementación esperan a resolver o delimitar explícitamente
-los bloqueos de esta sección. D04 queda parcialmente confirmada y D06 matrícula sigue abierta.
+los bloqueos de esta sección. Las reglas funcionales de D04/D06 quedan resueltas o
+delimitadas para este incremento; puertas económicas, de capacidad y operación no
+quedan aprobadas por cerrar las aclaraciones.
 
 | ID | Confirmado | Límite de la confirmación |
 | --- | --- | --- |
@@ -69,20 +72,30 @@ una sola vez; no se reabren las decisiones anteriores.
 - Q: ¿Qué debe hacer este incremento con un pago verificado al vencer o después, o que no tenga una plaza válida para confirmar matrícula? → A: Opción A: registrar incidencia, mostrar al alumno pago en conciliación sin matrícula y permitir seguimiento administrativo. Este incremento no ejecuta devoluciones, traslados ni asignaciones manuales; política y procedimiento de resolución económica deben aprobarse antes de cobros reales. Anotar seguimiento no presenta la incidencia como resuelta.
 - Q: ¿Hasta cuándo debe considerarse vigente una matrícula confirmada por pago? → A: Opción A: desde que se confirma por pago verificado hasta terminar la fecha final del grupo, en America/Lima; al concluir esa fecha deja de estar vigente y conserva su historial. No reabre oferta ni aprueba cancelaciones o reembolsos. La reserva previa conserva sus 24 horas exactas.
 
+Tercera ronda RP003, iniciada desde `9b0706c`: máximo cinco preguntas adicionales;
+las diez respuestas anteriores y sus evidencias se conservan.
+
+- Q: ¿Hasta cuándo pueden confirmarse nuevas reservas de un grupo publicado? → A: Opción A: solo antes de las 00:00 de la fecha de inicio del grupo, en America/Lima. Al confirmar se exigen curso y grupo publicados y visibles según 002, docente habilitado con revisión vigente, precio en PEN definido, capacidad real y las validaciones ya aprobadas. Las reservas ya confirmadas conservan sus 24 horas exactas aunque comience el período del grupo.
+- Q: ¿Qué debe ocurrir con las reservas y matrículas ya confirmadas si se retira la oferta o el docente pierde habilitación? → A: Opción A: reservas conservan sus 24 horas y plazas hasta pago válido o vencimiento. Si algún grupo no es visible, se bloquea iniciar pago y confirmar matrículas de la orden completa; un pago verificado en esa situación queda en conciliación sin matrícula. Recuperar visibilidad mediante revisión/publicación explícitas de 002 permite pagar dentro del plazo restante. Las matrículas confirmadas conservan vigencia e historial, sin revocación, devolución ni traslado automáticos.
+- Q: ¿Qué podrá hacer el alumno si quiere abandonar o cambiar una reserva antes de pagar? → A: Opción A: este incremento no permite cancelar o modificar voluntariamente reserva, orden o matrícula confirmada. Sin pago se espera al vencimiento; después puede intentarse otra reserva según condiciones vigentes, sin penalización ni espera adicional por abandono. Repetir la misma intención no renueva plazo. Una orden con reservas vigentes por alumno y un grupo por curso; controles adicionales sobre varias cuentas y excepciones manuales diferidos.
+- Q: ¿Qué podrá modificar o cancelar el administrador en un grupo que tiene compromisos o solo conserva historial? → A: Opción A: bloquean reservas vigentes, matrículas vigentes e incidencias de pago sin resolver; historial finalizado solo no bloquea, conserva condiciones/fechas originales y no se reactiva por edición/republicación. Con bloqueantes, permitir nombre/descripción y docente siguiendo retiro, revisión, validaciones y republicación de 002; impedir cambiar curso, período, horarios o capacidad y cancelar. Sin bloqueantes, edición y cancelación terminal de 002, con historial conservado.
+- Q: ¿Debe impedirse que un alumno reserve o confirme matrícula en grupos cuyos horarios se solapan? → A: Opción A: comprobar selección entre sí y contra reservas/matrículas vigentes del alumno, aunque ocultas; conflicto solo con fecha efectiva común y horas que se intersectan en America/Lima, permitiendo franjas contiguas. Historial finalizado y reservas vencidas no bloquean; rechazar el conjunto sin confirmación parcial y, si ya existe pago verificado, aplicar incidencia RA-04 sin matrícula.
+
 ### Registro de decisiones parciales y pendientes
 
 | ID | Cuestión abierta y efecto | Requisitos/escenarios afectados |
 | --- | --- | --- |
-| RA-01 | Confirmadas la reserva de varios cursos todas juntas o ninguna y, en RP003, una orden desglosada con un pago total y una matrícula por cada curso incluido, vinculada al grupo elegido. PD-02 limita a un grupo por curso y rechaza nueva reserva con reserva/matrícula vigente del curso; vigencia confirmada en D03 y cancelaciones/cambios pendientes RA-05. | US1/US2; FR-003/005/006/008/010/011; RE-01/02. |
+| RA-01 | Confirmadas la reserva de varios cursos todas juntas o ninguna y, en RP003, una orden desglosada con un pago total y una matrícula por cada curso incluido, vinculada al grupo elegido. PD-02 limita a un grupo por curso y rechaza nueva reserva con reserva/matrícula vigente del curso; vigencia confirmada en D03 y cancelaciones/cambios delimitados en RA-05. | US1/US2; FR-003/005/006/008/010/011; RE-01/02. |
 | RA-02 | Confirmada en la segunda ronda RP003: prioridad por orden de admisión en el servidor de solicitudes autenticadas y válidas; desempate por secuencia única del servidor. Clic, inicio de sesión y reloj del alumno no dan prioridad ni reservan cupo. La selección de varios cursos sigue siendo toda junta o ninguna. | US1; FR-010/012/023; RE-02. |
 | RA-03 | Confirmada: referencia cuando el servidor termina de verificar el pago, estrictamente antes del vencimiento para confirmar matrícula. Exactamente al vencer o después se registra incidencia, sin matrícula ni reembolso automáticos ni extensión de las 24 horas. | US2/US3; FR-007/008/009/013; RE-05/08. |
 | RA-04 | Delimitada en la segunda ronda RP003: pago verificado al vencer o después, o sin plaza válida, queda como incidencia; alumno ve pago en conciliación sin matrícula y administrador registra seguimiento. Sin devoluciones, traslados ni asignaciones manuales en este incremento. Seguimiento no resuelve la incidencia. Política/procedimiento de resolución económica pendientes y obligatorios antes de cobros reales; no se da por aprobada una devolución ni su operación con Izipay. | US2/US4; FR-008/009/013/014/017/019/024; RE-07/08/09. |
-| RA-05 | Parcialmente confirmada en RP003: impedir cancelar un grupo mientras tenga reservas vigentes, matrículas o incidencias de pago sin resolver; resolver primero esos compromisos conforme a políticas autorizadas, conservando antecedentes. Cancelación terminal de 002 se conserva. Siguen pendientes cancelación voluntaria de reserva/orden/matrícula, cambios de grupo/horario, resolución de compromisos y efectos económicos. | US4; FR-014/015/021; RE-09. |
-| RA-06 | Parcialmente confirmada en RP003: una sola orden con reservas vigentes por alumno, con varios cursos posibles; otra solo cuando la anterior deje de tener reservas vigentes por pago, vencimiento o cancelación según reglas aprobadas. Repetir la misma intención recupera la orden existente. Reiteraciones, varias cuentas, excepciones y sanciones siguen pendientes, sin límites adicionales por defecto. No se aprueba con ello la cancelación voluntaria. | FR-003/011/015/020; RE-01/10. |
+| RA-05 | Confirmada/delimitada: sin cancelación/modificación voluntaria de compromisos. Reservas vigentes, matrículas vigentes e incidencias de pago sin resolver impiden cancelar grupo o cambiar curso/período/horarios/capacidad. Permitir nombre/descripción/docente con retiro, revisión, validación y republicación 002. Sin bloqueantes, edición/cancelación terminal 002; historial finalizado no bloquea, no se reescribe ni reactiva y conserva condiciones/fechas originales. Economía fuera del incremento RA-04. | US4; FR-008/014/019/021; RE-09. |
+| RA-06 | Delimitada: una orden con reservas vigentes por alumno, un grupo por curso y rechazo con reserva/matrícula vigente del curso; misma intención recupera resultado sin renovar plazo. Sin cancelación/modificación voluntaria; tras vencer puede intentarse nueva reserva según condiciones actuales, sin penalización ni espera adicional por abandono. Controles adicionales sobre varias cuentas y excepciones manuales diferidos, sin afirmar protección integral contra abuso; cuotas de identidad conservadas. | FR-003/011/015/020; RE-01/10. |
 | PD-01 | Confirmada en RP003: el administrador fija precio por curso en soles (PEN). La orden conserva el precio confirmado durante las 24 horas de reserva; cambios de precio se aplican a nuevas reservas. Aún sin implementar. | US1/US2; FR-005/006/007; RF11/RF12. |
-| PD-02 | Parcialmente confirmada: una matrícula por curso de la orden y su grupo elegido; cada selección contiene un solo grupo por curso. Se rechaza nueva reserva si el alumno ya tiene reserva o matrícula vigente del curso, también en otro grupo; repetir la misma intención recupera su resultado. Vigencia/finalización confirmadas D03. Siguen pendientes condiciones de oferta reservable y efectos de retiro, cambio o pérdida de habilitación sobre compromisos existentes, con RA-05/D06. | FR-001/003/008/011/013/021; RE-01/02/09. |
+| PD-02 | Confirmada para este incremento: un grupo por curso, unicidad vigente alumno/curso y vigencia D03. Nueva reserva antes de las 00:00 de fecha inicial America/Lima con curso/grupo publicados/visibles 002, docente/revisión vigentes, precio PEN definido y capacidad real. Inicio del período no acorta reserva. Retiro/pérdida de habilitación conservan plazo/plazas y matrículas previas; grupo oculto bloquea pago/confirmación de toda la orden, pago verificado va a conciliación. Recuperación expresa de visibilidad permite pagar plazo restante; mantenimiento RA-05 y compatibilidad D06 aprobados. | FR-001/003/008/010/011/013/021; RE-01/02/09. |
 | PD-03 | Confirmada la matriz de este incremento: alumno reserva/inicia pago/consulta solo lo propio; administrador fija precios, consulta compromisos e incidencias de todos y registra seguimiento. Docente y visitante sin acceso financiero. Confirmación manual de pagos/matrículas, devoluciones y cancelaciones de compromisos no quedan habilitadas sin política específica aprobada RA-04/05. Ver matriz de operaciones y FR-015/016/019. | US1/US2/US4; FR-005/015/016/019/020; RE-10. |
-| D03 | Confirmada vigencia ordinaria: desde confirmación por pago verificado hasta terminar la fecha final del grupo en America/Lima; después no vigente, con historial conservado. No reabre oferta ni aprueba cancelaciones/reembolsos. Cambios posteriores de fechas y demás efectos siguen RA-05/PD-02; el acceso a materiales/video queda en sus propios specs. | US2; FR-008/011/018; SC-003; RE-01/09. |
+| D03 | Confirmada vigencia ordinaria: desde pago verificado hasta fin de fecha final del grupo America/Lima, después no vigente, historial conservado. RA-05 impide cambiar período con bloqueantes; una vez finalizado, historial conserva fechas/condiciones originales y no se reactiva por edición/republicación. Sin reapertura ni devolución implícitas; materiales/video en sus propios specs. | US2/US4; FR-008/011/014/018/021; SC-003; RE-01/09. |
+| D06 | Confirmada para reserva/matrícula: impedir solapamientos efectivos en America/Lima dentro de la selección y contra compromisos vigentes propios, incluso ocultos; misma fecha efectiva y horas intersectadas, contiguos permitidos. Vencidos/finalizados no bloquean. Rechazar conjunto sin parcialidad; pago verificado incompatible queda en incidencia RA-04 sin matrícula. Cambios de horarios con bloqueantes prohibidos RA-05. | US1/US2; FR-001/008/010/021; SC-003/005; RE-02/08/09. |
 
 PD-01–PD-03 identifican vacíos derivados de RP001; no sustituyen ni renumeran RA-01–RA-06.
 Las marcas priorizan preguntas de alcance y dinero; las filas parciales o pendientes
@@ -94,13 +107,36 @@ alumno/curso de PD-02 y la matriz PD-03 de consulta/seguimiento y operaciones pr
 RA-04 se delimita a incidencia y seguimiento, sin habilitar cobros reales antes de
 aprobar su resolución económica. D03 define vigencia desde confirmación por pago
 hasta fin de la fecha final del grupo en America/Lima. Esta segunda ronda cierra
-cinco preguntas y cinco respuestas; se difieren por ese límite RA-05/06 restantes,
+cinco preguntas y cinco respuestas; se difirieron por ese límite RA-05/06 restantes,
 condiciones de oferta de PD-02 y D06. D10/D13 conservan sus etapas y puertas de
-capacidad/operación. Son bloqueos para las partes afectadas, no valores por defecto
-ni permiso para avanzar al plan. La
+capacidad/operación. En ese cierre parcial eran bloqueos para las partes afectadas,
+sin valores por defecto ni permiso para avanzar al plan. La
 cancelación de grupos conserva el bloqueo aprobado; no queda aprobada una operación
-para resolver matrículas, devolver pagos o transferir alumnos. La siguiente ronda
-de aclaración debe resolver o delimitar expresamente esos pendientes antes de RP004.
+para resolver matrículas, devolver pagos o transferir alumnos. Quedaba por resolver
+o delimitar esos pendientes en la tercera ronda antes de RP004.
+La tercera ronda confirma las condiciones de nueva reserva PD-02: comprobación al
+confirmar, oferta publicada/visible y habilitación/revisión vigentes, precio PEN,
+capacidad real y confirmación antes de la fecha inicial del grupo en America/Lima.
+Retiro o pérdida de habilitación conservan reservas/plazas y matrículas anteriores;
+oferta oculta bloquea pago/confirmación de toda la orden, sin pausar el plazo. Pagos
+verificados en esa situación quedan en conciliación; revisión y republicación
+explícitas permiten pagar el plazo restante, sin resolver incidencias por sí mismas.
+No se habilitan cancelaciones/modificaciones voluntarias; nueva reserva tras vencer
+se somete a condiciones actuales, sin penalización/espera por abandono. RA-06 queda
+delimitada a sus controles aprobados, con varias cuentas/excepciones diferidas sin
+garantía integral antiabuso. RA-05 precisa que bloquean reservas/matrículas vigentes
+e incidencias sin resolver: solo textos y docente pueden cambiar con bloqueantes,
+siguiendo 002; curso/período/horarios/capacidad y cancelación se impiden. Historial
+finalizado no bloquea, conserva condiciones/fechas y no se reactiva por editar.
+La quinta respuesta resuelve D06 para reserva/matrícula: impedir solapamientos
+efectivos con selección y compromisos vigentes propios, aunque ocultos; permitir
+contiguos y excluir vencidos/finalizados. La tercera ronda cierra cinco preguntas
+y cinco respuestas, sin reabrir las diez anteriores. RA-01–RA-06 y PD-01–PD-03 quedan
+resueltas o delimitadas para el núcleo funcional. No se amplía alcance a resolución
+económica, varias cuentas/excepciones ni aprendizaje. D02/sandbox, política económica
+antes de cobros reales, D10/rúbrica/capacidad y D13/operación conservan sus puertas.
+El siguiente paso es preparar el plan del núcleo funcional registrando esas
+dependencias; no representa aprobación global de capacidad ni habilita implementar.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -125,7 +161,8 @@ y un pago total. Comprobar prioridad por admisión de solicitudes autenticadas y
 válidas en el servidor, con desempate por secuencia única; comprobar que otra reserva
 o matrícula vigente del curso impide una nueva reserva, también en otro grupo.
 La matrícula es vigente desde confirmación por pago hasta terminar la fecha final
-del grupo en America/Lima; las condiciones de elegibilidad siguen pendientes PD-02.
+del grupo en America/Lima. Probar el límite de nueva reserva a las 00:00 de su
+fecha inicial en America/Lima y todas las condiciones actuales de PD-02 al confirmar.
 
 **Acceptance Scenarios**:
 
@@ -171,6 +208,24 @@ del grupo en America/Lima; las condiciones de elegibilidad siguen pendientes PD-
     otra plaza ni crear otra orden; la repetición de la misma intención recupera
     el resultado existente. La vigencia de matrícula aplica D03: desde confirmación
     por pago hasta terminar la fecha final del grupo en America/Lima.
+13. **Given** una oferta que cumple publicación/visibilidad de 002, docente habilitado
+    con revisión vigente, precio PEN definido, capacidad real y demás validaciones,
+    **When** se confirma antes, exactamente a las 00:00 o después de la fecha inicial
+    del grupo en America/Lima, **Then** solo el primer caso permite una nueva reserva;
+    los otros se rechazan sin orden ni reservas parciales, aunque se admitieran antes.
+14. **Given** una consulta anterior con oferta visible, **When** al confirmar falta
+    publicación/visibilidad, habilitación/revisión vigente, precio definido o capacidad
+    real, **Then** no se confirma ninguna reserva del conjunto ni se retienen plazas
+    por la petición rechazada; los datos del dispositivo no sustituyen esa comprobación.
+15. **Given** una reserva confirmada antes del límite, **When** comienza el período
+    del grupo o se consulta/repite la misma intención después, **Then** conserva su
+    resultado y vencimiento originales de 24 horas; no se trata como una nueva reserva.
+16. **Given** grupos de la selección que comparten fecha efectiva y horas, o uno
+    que coincide así con reserva/matrícula vigente del alumno, incluso oculta,
+    **When** confirma, **Then** se rechaza todo el conjunto sin reservas parciales.
+17. **Given** franjas contiguas o períodos superpuestos sin fecha efectiva común,
+    **When** cumple las demás condiciones y confirma, **Then** no se rechaza por
+    solapamiento. Reservas vencidas e historial finalizado no bloquean por horario.
 
 ### User Story 2 - Pagar y obtener matrícula confirmada (Priority: P1)
 
@@ -217,6 +272,25 @@ automáticos. La resolución económica posterior sigue pendiente en RA-04.
    **Then** es vigente desde la confirmación por pago hasta antes de las 00:00 del
    día siguiente a esa fecha; desde ese límite deja de estar vigente y conserva
    antecedentes. No se reabre oferta ni se ejecutan cancelaciones o reembolsos.
+9. **Given** una reserva confirmada y curso retirado o grupo oculto por pérdida de
+   habilitación docente, **When** intenta iniciar el pago o se verifica uno ya iniciado,
+   **Then** no se inicia otro pago ni se confirma matrícula de ningún curso de la
+   orden completa; un pago verificado queda en conciliación sin matrícula. La reserva
+   conserva plazas y vencimiento originales hasta pago válido o vencimiento.
+10. **Given** una reserva aún vigente cuya oferta recupera visibilidad por revisión
+    y publicación explícitas de 002, **When** paga dentro del plazo restante,
+    **Then** se aplican las condiciones de pago aprobadas, sin nuevas 24 horas ni
+    nueva reserva por haber empezado el período. Republicar no resuelve una incidencia
+    económica ya registrada ni confirma por sí mismo matrícula o un nuevo cobro.
+11. **Given** matrícula confirmada antes de retirar oferta o perder habilitación
+    el docente, **When** el titular la consulta, **Then** conserva vigencia ordinaria
+    e historial; no se revoca, devuelve dinero o traslada automáticamente y se
+    mantienen las comprobaciones de titularidad sin exponer causas privadas del docente.
+12. **Given** una orden con sus reservas confirmadas, **When** se verifica pago,
+    **Then** se comprueba compatibilidad efectiva sin considerar las reservas de
+    esa misma orden como un conflicto contra sí mismas. Si existe otro compromiso
+    vigente incompatible, no confirma parcialmente matrículas y el pago verificado
+    queda en conciliación sin matrícula conforme a RA-04.
 
 ### User Story 3 - Vencer y liberar sin perder consistencia (Priority: P1)
 
@@ -269,7 +343,7 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
    no ve compromisos ni datos personales o financieros de otro alumno.
 2. **Given** actor sin sesión o sin permiso vigente, **When** pide leer o modificar
    un compromiso por su referencia, **Then** se deniega sin revelar datos privados ni ocupar/liberar cupos.
-3. **Given** un grupo con reservas vigentes, matrículas o incidencias de pago sin
+3. **Given** un grupo con reservas vigentes, matrículas vigentes o incidencias de pago sin
    resolver, **When** el administrador intenta cancelarlo, **Then** se impide la
    cancelación sin modificar grupo ni compromisos y conservando antecedentes.
    Primero deben resolverse conforme a políticas autorizadas; no se inventan
@@ -291,21 +365,40 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
    seguimiento, **Then** sigue pendiente de resolución económica, no se habilita
    matrícula, devolución, traslado o asignación manual y no se elimina el bloqueo
    de cancelación de grupo por esa incidencia.
+9. **Given** reserva, orden o matrícula confirmada, **When** un actor intenta una
+   cancelación o modificación voluntaria de ese compromiso, **Then** no se permite
+   en este incremento ni se libera plaza manualmente. Un alumno que no paga ve el
+   plazo original y puede consultar, sin promesa de cambio o cancelación anticipada.
+10. **Given** una reserva vencida sin pago válido, **When** el alumno solicita otra
+    con una nueva intención, **Then** se evalúan las condiciones y admisión actuales,
+    sin sanción ni espera adicional por abandono; no se garantiza plaza ni se
+    reutiliza la reserva vencida. Repetir la intención anterior recupera su resultado.
+11. **Given** un grupo con reserva vigente, matrícula vigente o incidencia de pago
+    sin resolver, **When** el administrador intenta cambiar curso, período, horarios
+    o capacidad, o cancelar el grupo, **Then** se rechaza sin cambios parciales.
+12. **Given** ese grupo con compromisos, **When** se cambia nombre/descripción o
+    se sustituye/confirma docente, **Then** se exige retirar antes, habilitación,
+    revisión y validaciones de 002; solo republicación explícita puede devolver
+    visibilidad, sin alterar compromisos ni resolver incidencias por esa operación.
+13. **Given** un grupo que solo conserva historial finalizado sin bloqueantes,
+    **When** se edita/republica o cancela según 002, **Then** ese historial no impide
+    la operación y conserva condiciones/fechas originales sin volver a estar vigente;
+    cancelar sigue siendo terminal. Ninguna operación borra antecedentes.
 
 ### Edge Cases
 
 | ID de origen | Caso a verificar y resultado exigido o decisión bloqueante |
 | --- | --- |
 | RE-01 | Doble clic, timeout y duplicado simultáneo: un efecto, referencias/plazo conservados. Una selección contiene un grupo por curso; una nueva intención se rechaza si existe reserva o matrícula vigente del curso, incluso en otro grupo. Matrícula vigente desde confirmación por pago hasta fin de fecha final del grupo en America/Lima; conservar historial al terminar. |
-| RE-02 | Último cupo con dos alumnos: prioridad por admisión de solicitudes autenticadas y válidas en servidor, empate por secuencia única; no por clic/login/reloj cliente ni por terminación accidental de peticiones. No sobreventa; si cambia oferta al confirmar, condiciones pendientes PD-02. |
+| RE-02 | Último cupo: prioridad por admisión autenticada/válida y secuencia servidor, sin sobreventa. Revalidar al confirmar publicación/visibilidad 002, docente/revisión, precio PEN, capacidad real y límite antes de las 00:00 de fecha inicial America/Lima. Consulta o admisión anterior no asegura reserva; el comienzo del período no acorta reservas confirmadas. Compatibilidad efectiva D06 y efectos posteriores de retiro/cambio según PD-02/RA-05 confirmados. |
 | RE-03 | Cierre/desconexión tras confirmar o pagar: recuperar resultado persistido sin reiniciar plazo ni repetir consumo. |
 | RE-04 | Reinicio antes/después de confirmación, pago o vencimiento: reconstruir estado; nada depende de sesión o proceso abierto. |
 | RE-05 | Instante anterior, exacto y posterior a 24 h; reloj del alumno alterado: solo verificación terminada antes permite matrícula; al vencer o después, incidencia sin matrícula/reembolso automáticos ni extensión. |
 | RE-06 | Conciliación retrasada, repetida o simultánea y reasignación: una liberación y estado final consistente, sin plazo adicional. |
 | RE-07 | Pago alterado, duplicado o fuera de orden: verificar origen/orden/importe/moneda y evitar doble matrícula/consumo. |
 | RE-08 | Pago iniciado antes pero verificado al vencer o después, incluso por notificación tardía, o pago verificado sin plaza válida: incidencia, alumno ve pago en conciliación sin matrícula, seguimiento administrativo sin resolución ni extensión. Verificación terminada antes no se vuelve tardía por consultar después. Sin devolución/traslado/asignación manual en este incremento; política económica previa a cobros reales RA-04. |
-| RE-09 | Intento de cancelar grupo con reserva vigente, matrícula o incidencia de pago sin resolver: impedir cancelación sin cambios parciales ni pérdida de historial, también si concurre con otro compromiso. Retiro/cambio docente/horario y resolución de compromisos siguen RA-05/PD-02, sin efectos económicos supuestos. |
-| RE-10 | Varias intenciones simultáneas del mismo alumno: como máximo una orden con reservas vigentes, sin plazas retenidas por la intención rechazada. Referencia ajena/rol cambiado/sesión revocada: permisos actuales. Reiteraciones, varias cuentas y excepciones aún pendientes RA-06. |
+| RE-09 | Bloqueantes son reservas/matrículas vigentes e incidencias de pago sin resolver: impedir cambio de curso/período/horarios/capacidad y cancelación; permitir textos/docente siguiendo 002. Historial finalizado solo no bloquea ni se reactiva por editar, con condiciones/fechas conservadas. Retiro/pérdida de habilitación conserva plazo/plazas/matrículas previas; oferta oculta bloquea pago/confirmación de toda la orden. Republicar solo habilita plazo restante, sin resolución económica ni efectos automáticos. |
+| RE-10 | Varias intenciones simultáneas: una orden con reservas vigentes por alumno, sin plazas por intención rechazada; sin cancelación/modificación voluntaria ni renovación por repetir. Tras vencer, nueva intención según condiciones actuales, sin penalización/espera adicional por abandono; referencia ajena/rol cambiado/sesión revocada denegados. Controles sobre varias cuentas/excepciones diferidos, sin protección integral antiabuso acreditada. |
 
 ## Requirements *(mandatory)*
 
@@ -313,8 +406,14 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
 
 - **FR-001**: El alumno DEBE poder consultar oferta y solicitar reserva de un grupo
   por curso, con condiciones vigentes comprobadas por el servidor al confirmar.
-  Las condiciones de oferta reservable aún pendientes se resuelven en PD-02;
-  una consulta anterior o datos del dispositivo no bastan para autorizarla.
+  DEBEN estar publicados y visibles curso/grupo según 002, con docente habilitado y
+  revisión vigente, precio en PEN definido, capacidad real y demás validaciones
+  aprobadas. Una nueva reserva DEBE confirmarse antes de las 00:00 de la fecha inicial
+  del grupo en America/Lima; al llegar a ese límite o después se rechaza sin efectos
+  parciales. Una consulta o admisión anterior y datos del dispositivo no bastan para
+  autorizarla. El inicio del período no acorta las 24 horas de reservas ya confirmadas.
+  DEBE comprobarse compatibilidad efectiva de horarios de D06 antes de confirmar,
+  sin confiar en que el catálogo o la selección del dispositivo la hayan comprobado.
 - **FR-002**: Capacidad configurada, ocupación, reservas y disponibilidad DEBEN
   distinguirse; la capacidad configurada conserva el rango 1–50 de PA-04. Solo
   presentar disponibilidad cuando exista cálculo real según las
@@ -326,6 +425,8 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
   desglosada con un pago total según RA-01. Solo una orden con reservas vigentes
   por alumno según RA-06. Cada selección contiene un solo grupo por curso; se
   rechaza nueva reserva con reserva o matrícula vigente del curso según PD-02.
+  No se permite modificar voluntariamente una reserva, orden o matrícula confirmada
+  en este incremento; no se reescribe una intención previa para cambiar la selección.
 - **FR-004**: Una reserva confirmada DEBE durar exactamente 24 horas, 86 400 segundos
   desde su confirmación por el servidor. Inicio y vencimiento se conservan aun con
   desconexión, cierre, repetición o reinicio; no se reinicia ni amplía ese plazo.
@@ -350,12 +451,21 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
   del alumno por curso. La matrícula DEBE ser vigente desde confirmación por pago
   hasta terminar la fecha final del grupo en America/Lima; después deja de estar
   vigente y conserva su historial, sin reabrir oferta, cancelar o devolver pagos.
-  Cambios posteriores de fechas siguen pendientes RA-05/PD-02. Un pago
+  El período del grupo no puede cambiar con bloqueantes RA-05; historial finalizado
+  conserva sus condiciones/fechas originales y no se reactiva por editar el grupo. Un pago
   verificado al vencer o después queda como incidencia según RA-03;
   y un pago verificado sin plaza válida también queda como incidencia: alumno ve
   pago en conciliación sin matrícula y administrador puede registrar seguimiento.
   No ejecutar devoluciones, traslados ni asignaciones manuales en este incremento;
   política y procedimiento económicos DEBEN aprobarse antes de cobros reales.
+  Si algún grupo deja de ser visible por retiro o pérdida de habilitación docente,
+  DEBE bloquearse iniciar pago y confirmar matrículas de toda la orden; un pago
+  verificado entonces queda en conciliación sin matrícula. Volver a ser visible
+  mediante revisión/publicación explícitas de 002 permite pagar dentro del plazo
+  restante, sin resolver por ello una incidencia previa ni confirmar un nuevo cobro.
+  DEBE revalidarse compatibilidad efectiva D06 para el conjunto, sin contar sus
+  propias reservas como conflictos consigo mismas. Un conflicto con otro compromiso
+  vigente produce incidencia RA-04 sin matrícula, nunca confirmación parcial.
 - **FR-009**: Vencimiento sin pago válido DEBE liberar el cupo conforme a conciliación
   consistente. Un proceso retrasado no extiende la reserva; repeticiones no liberan
   dos veces. Al vencer o después, una verificación terminada no renueva la reserva
@@ -363,7 +473,9 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
 - **FR-010**: Confirmación de reserva, orden y efectos sobre inventario DEBEN
   conservarse o rechazarse sin cambios parciales: varios cursos se reservan todos
   juntos o ninguno, vinculados a una orden desglosada con un pago total.
-  Matrícula y liberación mantienen consistencia conforme a las reglas que se aprueben.
+  Matrícula y liberación mantienen consistencia conforme a las reglas aprobadas.
+  Oferta oculta en cualquiera de los grupos impide confirmar matrículas de toda
+  la orden; no se confirma ni cobra parcialmente el conjunto por ese motivo.
 - **FR-011**: Misma intención repetida, simultánea o con respuesta perdida DEBE
   conservar un solo efecto, referencias y plazo; un contenido distinto no se acepta
   silenciosamente como la repetición anterior. Una nueva intención DEBE rechazarse
@@ -383,18 +495,25 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
   extensión del plazo. Incidencia y seguimiento no alteran por sí mismos inventario,
   matrícula ni resolución económica; esta última queda fuera del incremento RA-04.
 - **FR-014**: El servidor DEBE impedir cancelar un grupo mientras existan reservas
-  vigentes, matrículas o incidencias de pago sin resolver, sin cambios parciales y
+  vigentes, matrículas vigentes o incidencias de pago sin resolver, sin cambios parciales y
   conservando antecedentes. Primero deben resolverse esos compromisos conforme a
   políticas autorizadas; se conserva la cancelación terminal de grupos de 002.
-  Cancelación voluntaria de reserva/orden/matrícula, cambios de grupo/horario,
-  efectos económicos y responsables de resolución siguen pendientes en RA-04/05.
+  Cancelar o modificar voluntariamente reserva/orden/matrícula confirmada NO DEBE
+  permitirse en este incremento ni liberar plazas manualmente por esa petición.
+  Sin pago se espera vencimiento. Con esos bloqueantes DEBE impedirse cambiar el
+  curso del grupo, período, horarios y capacidad; solo nombre/descripción/docente
+  admiten cambio siguiendo retiro previo, revisión, validaciones y republicación
+  explícita de 002. Sin bloqueantes se aplican edición/cancelación terminal de 002;
+  historial finalizado por sí solo no bloquea, conserva condiciones/fechas originales
+  y no se reactiva por editar/republicar. Economía fuera del incremento RA-04.
 - **FR-015**: El servidor DEBE comprobar cuenta, sesión, rol, permiso vigente y
   propiedad en cada operación según la matriz PD-03: alumno reserva, inicia pago y
   consulta solo lo propio; administrador fija precios, consulta compromisos e
   incidencias de todos y registra seguimiento; docente y visitante sin acceso
   financiero. Denegar lo no concedido por defecto, sin cambios ni datos ajenos;
-  gestionar oferta no concede otros permisos financieros. No habilitar confirmación
-  manual de pago/matrícula, devolución o cancelación de compromisos sin política aprobada.
+  gestionar oferta no concede otros permisos financieros. Confirmación manual de
+  pago/matrícula, devolución y cancelación/modificación voluntaria de compromisos
+  no están habilitadas en este incremento.
 - **FR-016**: Cada actor DEBE recibir solo datos necesarios y autorizados. No exponer
   credenciales, secretos de verificación o datos sensibles del medio de pago en vistas,
   mensajes ni registros; causas privadas de identidad/oferta no se trasladan al alumno.
@@ -419,17 +538,32 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
 - **FR-020**: El servidor DEBE impedir más de una orden con reservas vigentes por
   alumno, también ante intenciones distintas simultáneas. Puede incluir varios
   cursos; otra orden requiere que la anterior deje de tener reservas vigentes por
-  pago, vencimiento o cancelación según reglas aprobadas. Consultar o repetir la
+  pago válido o vencimiento; no existe cancelación voluntaria en este incremento.
+  Consultar o repetir la
   misma intención recupera la existente sin otro efecto. Los rechazos no retienen
-  plazas ni filtran datos. Reiteraciones, varias cuentas, excepciones y sanciones
-  siguen pendientes en RA-06; cuotas de identidad no las sustituyen. Esta regla
-  no concede permiso de cancelación voluntaria ni define su efecto económico.
+  plazas ni filtran datos. Tras vencer sin pago válido, una nueva intención DEBE
+  evaluarse según condiciones actuales, sin sanción ni espera adicional por abandono;
+  la misma intención anterior solo recupera su resultado, sin renovarlo. No se
+  permiten cambios/cancelaciones voluntarias para liberar y volver a reservar.
+  Controles adicionales sobre varias cuentas y excepciones manuales quedan diferidos,
+  sin garantías de protección integral contra abuso ni relajación de cuotas de identidad.
 - **FR-021**: DEBEN conservarse identidad y reglas PA-01–PA-05/E1 de oferta. Los
-  efectos sobre compromisos existentes cuando se retira/cancela/cambia oferta o pierde
-  habilitación el docente siguen RA-05/PD-02; la cancelación con compromisos
+  retiros y pérdidas de habilitación DEBEN conservar las 24 horas/plazas de reservas
+  confirmadas hasta pago válido o vencimiento y la vigencia/historial de matrículas
+  anteriores, sin revocación, devolución ni traslado automáticos. Mientras algún
+  grupo esté oculto, aplicar bloqueo de pago/confirmación de toda la orden FR-008.
+  Recuperar habilitación no restaura visibilidad automáticamente; revisión y
+  publicación explícitas de 002 permiten pagar solo el plazo restante. Ni ocultar
+  ni republicar reinician el plazo o resuelven una incidencia económica. Cambios de
+  datos con compromisos cumplen RA-05/FR-014; cancelación con compromisos
   bloqueantes se impide según FR-014, incluso si concurre con su confirmación.
-  Horarios America/Lima no resuelven
-  conflictos de matrícula del alumno, que permanecen en D06.
+  Al reservar y confirmar matrícula DEBE impedirse solapamiento efectivo en
+  America/Lima entre grupos de la selección y con reservas/matrículas vigentes del
+  alumno, incluso ocultas. Solo hay conflicto con fecha efectiva de ocurrencia común
+  y horas intersectadas; franjas contiguas se permiten y compartir período no basta.
+  Excluir compromisos vencidos/finalizados y no comparar una orden contra sus propias
+  reservas al convertirlas. Rechazar el conjunto sin parcialidad; pago verificado
+  incompatible sigue RA-04, sin matrícula. Esto amplía D06 en 003 y conserva PA-05/E1 de 002.
 - **FR-022**: DEBEN conservarse cuentas, configuración, datos y evidencia existentes;
   comprobar regresiones afectadas y recuperación antes de operar datos persistentes.
   No declarar resueltos T073/T074, T104/T108, bootstrap o pendientes de operación por
@@ -456,7 +590,7 @@ RA-04/05; registrar seguimiento no resuelve una incidencia ni desbloquea la canc
 | Registrar seguimiento de incidencias | Sí | No | No | No |
 | Confirmar manualmente pago o matrícula | No habilitado | No | No | No |
 | Devolver dinero, trasladar o asignar plazas manualmente | Fuera de este incremento RA-04 | No | No | No |
-| Cancelar compromisos voluntariamente | No habilitado; política RA-05 pendiente | No habilitado | No | No |
+| Cancelar o modificar compromisos voluntariamente | Fuera de este incremento | Fuera de este incremento | No | No |
 | Cancelar grupo de oferta | Según 002 y bloqueo FR-014 | No | No | No |
 
 La verificación del proveedor y conciliación del servidor siguen FR-007–013; no
@@ -466,11 +600,16 @@ denegación financiera al docente no altera sus grupos propios autorizados en 00
 ### Key Entities *(include if feature involves data)*
 
 - **Oferta reservable**: referencia al curso/grupo existente y condiciones vigentes
-  de PD-02; capacidad configurada no equivale a plazas garantizadas.
+  de PD-02: curso/grupo publicados y visibles según 002, docente habilitado/revisión
+  vigente, precio PEN definido, capacidad real y confirmación antes de las 00:00 de
+  la fecha inicial del grupo en America/Lima. Capacidad configurada no garantiza plaza.
 - **Reserva**: compromiso confirmado de titular y oferta, referencia estable, inicio,
   vencimiento exacto y resultado; solo un grupo por curso en la selección. Una
   reserva o matrícula vigente del alumno/curso impide una nueva reserva, también
   en otro grupo; repetir la misma intención recupera su resultado.
+  Retiro o pérdida de habilitación no acortan/extienden sus 24 horas ni liberan sus
+  plazas antes de pago válido o vencimiento; mientras esté oculta la oferta se
+  impide iniciar pago o confirmar matrículas de la orden completa.
 - **Solicitud admitida**: petición autenticada y válida con orden de admisión
   registrado por el servidor y secuencia única de desempate según RA-02. La admisión
   no es una reserva confirmada ni inicia sus 24 horas.
@@ -489,7 +628,11 @@ denegación financiera al docente no altera sus grupos propios autorizados en 00
   del alumno/curso impide otra reserva del curso, también en otro grupo. Vigente
   desde confirmación por pago hasta terminar la fecha final del grupo en America/Lima
   (antes de las 00:00 del día siguiente); después no vigente y con historial.
-  Cambios de fechas y efectos sobre compromisos siguen pendientes RA-05/PD-02.
+  RA-05 impide cambiar fechas del grupo con bloqueantes; el historial finalizado
+  conserva condiciones/fechas originales y no vuelve a estar vigente por editar
+  o republicar el grupo, sin crear otra matrícula por esa operación.
+  Retirar oferta o perder habilitación docente no revocan una matrícula ya confirmada
+  ni producen por sí mismos devolución o traslado; el titular conserva su consulta.
 - **Resultado de conciliación**: relación de hechos de reserva/pago/vencimiento/
   reasignación y resolución conforme a RA-03/04/05, preservando antecedentes.
 - **Seguimiento de incidencia**: anotación del administrador vinculada al compromiso,
@@ -510,6 +653,12 @@ está demostrado en RP002/RP003; un criterio condicionado no se da por aprobado.
 - **SC-001**: En cada reserva confirmada de los escenarios aprobados, el alumno
   identifica referencia, oferta e inicio/vencimiento; su diferencia es exactamente
   86 400 segundos. Desconexión/reinicio/repetición no cambian ese valor (US1/US3).
+  Hay cero nuevas reservas confirmadas a partir de las 00:00 de la fecha inicial del
+  grupo America/Lima o sin alguna condición vigente de FR-001. Consulta/admisión
+  anterior no evita el rechazo; el inicio del período produce cero acortamientos
+  del plazo de reservas ya confirmadas.
+  Retiro/pérdida de habilitación producen cero reinicios o acortamientos del plazo;
+  republicar después de vencer produce cero reservas reactivadas por ese hecho.
 - **SC-002**: En el 100 % de casos de importe manipulado, cambio de precio durante
   reserva y selección conjunta de cursos, el desglose de la única orden y su pago
   total en PEN corresponden a los precios por curso confirmados y conservados 24 horas;
@@ -525,6 +674,13 @@ está demostrado en RP002/RP003; un criterio condicionado no se da por aprobado.
   por pago hasta antes de las 00:00 del día siguiente a la fecha final del grupo
   en America/Lima; desde ese límite hay cero matrículas presentadas como vigentes
   por ese período y se conserva el historial, sin reapertura ni reembolso implícitos.
+  Oferta oculta en cualquier grupo produce cero inicios de pago y cero matrículas
+  para la orden completa; pagos verificados entonces quedan en conciliación. Cero
+  revocaciones automáticas de matrículas anteriores por retiro/pérdida de habilitación.
+  Hay cero reservas/matrículas confirmadas con solapamiento efectivo D06, cero
+  confirmaciones parciales por incompatibilidad y cero rechazos de horarios solo
+  por adyacencia, período común sin ocurrencia compartida o historial finalizado.
+  Convertir reservas de la misma orden no produce un falso conflicto contra sí mismas.
 - **SC-004**: En los casos antes/al llegar/después del vencimiento, con retraso,
   repetición y reinicio, hay cero extensiones de plazo y cero dobles liberaciones;
   el inventario final coincide con los compromisos válidos. El 100 % de pagos cuya
@@ -537,8 +693,13 @@ está demostrado en RP002/RP003; un criterio condicionado no se da por aprobado.
   confirmada para esa plaza; en todos los órdenes de carrera aprobados de pago/
   vencimiento/reasignación/cancelación hay cero sobreventas y cero pérdida de trazabilidad.
   Un conjunto de cursos que no puede reservarse completo deja cero reservas parciales.
-  El 100 % de intentos de cancelar grupo con reserva vigente, matrícula o incidencia
+  El 100 % de intentos de cancelar grupo con reserva vigente, matrícula vigente o incidencia
   de pago sin resolver deja cero cancelaciones y cero cambios en sus compromisos.
+  Esos bloqueantes producen cero cambios de curso/período/horarios/capacidad.
+  Textos/docente cumplen 002; con solo historial finalizado sin bloqueantes, edición
+  o cancelación admitidas no reescriben condiciones/fechas ni reactivan matrículas.
+  Competencia simultánea de solicitudes DEBE conservar las comprobaciones de cupo,
+  titularidad, vigencia y compatibilidad efectiva, sin sobreventa ni resultados parciales.
   En el 100 % de casos de último cupo con solicitudes autenticadas y válidas, se
   respeta el orden de admisión servidor y su secuencia única de desempate, también
   cuando clic, reloj del alumno o finalización de peticiones sugieren otro orden.
@@ -550,6 +711,10 @@ está demostrado en RP002/RP003; un criterio condicionado no se da por aprobado.
   Todo seguimiento administrativo conserva actor y momento, con cero cambios de
   pago, matrícula, reserva o plazo por anotarlo; docente/visitante no acceden a datos
   financieros y el alumno no obtiene datos ajenos ni permisos administrativos.
+  Intentos de cancelar/modificar compromisos confirmados producen cero cambios y
+  cero liberaciones manuales. Tras vencer, cero sanciones/esperas nuevas por abandono;
+  una nueva intención se evalúa con condiciones actuales, sin prometer plaza o
+  renovar una intención anterior. No se acredita protección frente a varias cuentas.
 - **SC-007**: Los cuatro recorridos se verifican con teclado y móvil/escritorio,
   incluidos vacío, error y resultado incierto; cero confirmaciones de reserva,
   matrícula o nuevo plazo sin respaldo del servidor. Observación humana y evidencia
@@ -592,7 +757,9 @@ está demostrado en RP002/RP003; un criterio condicionado no se da por aprobado.
   SMTP externo, CI remoto, D10/D13 y video/protección/alojamiento siguen pendientes.
 - Alcance de este incremento futuro: reserva, orden, pago verificado, matrícula,
   vencimiento y registro/seguimiento de incidencias de conciliación aprobados.
-  Quedan fuera devoluciones, traslados, asignaciones manuales de plazas, materiales,
+  Quedan fuera cancelaciones/modificaciones voluntarias de compromisos, controles
+  adicionales sobre varias cuentas y excepciones manuales, devoluciones, traslados,
+  asignaciones manuales de plazas, materiales,
   clases, video/chat, sustitución de identidad/oferta, infraestructura AWS y paneles
   no necesarios al recorrido. RA-04 bloquea cobros reales hasta aprobar política y
   procedimiento de resolución económica, además de verificar la integración Izipay.
@@ -607,7 +774,7 @@ está demostrado en RP002/RP003; un criterio condicionado no se da por aprobado.
 | HU10 / RF11 / RC-03/04 | US1/US3 | FR-001–006/009–013/017/018 | SC-001/002/004/005/007 |
 | HU11 / RF12/13 / RC-05/06 | US2/US3 | FR-007–014/018/019/024 | SC-003/004/005 |
 | RF08/09 y constitución II/VI/IX | US1–US4 | FR-010/011/015/016/019/020/022 | SC-005/006/007 |
-| Oferta 002, D04/D06, RE-09/10 | US1/US4 | FR-001/002/012/014/015/020/021 | SC-005/006/007 |
+| Oferta 002, D04/D06, RE-09/10 | US1/US2/US4 | FR-001/002/008/012/014/015/020/021 | SC-003/005/006/007 |
 | RC-01/02/07, constitución XI | Transversal | FR-023/024 | SC-008 |
 
 RE-01–RE-10 están desglosados en Edge Cases. Las dos respuestas de specify se
@@ -615,9 +782,17 @@ conservan; RP003 confirma PD-01, composición de orden/pago/matrículas de RA-01
 límite estricto/incidencia de RA-03, una orden con reservas vigentes por alumno de
 RA-06 y bloqueo de cancelación con compromisos de RA-05. Resolución económica de
 RA-04 queda fuera del incremento salvo incidencia/seguimiento y bloquea cobros
-reales hasta aprobar política/procedimiento; el resto de RA-05/06, condiciones de
-oferta de PD-02 y D06 siguen pendientes. La segunda ronda confirma prioridad por
+reales hasta aprobar política/procedimiento; D06 queda resuelta en 003 para
+reserva/matrícula sin ampliar el alcance de horarios de 002 ni modificar su evidencia.
+La segunda ronda confirma prioridad por
 admisión y desempate de RA-02, unicidad
 vigente del alumno/curso de PD-02 y la matriz de consulta/seguimiento y operaciones
-propias de PD-03, delimita RA-04 y confirma vigencia/finalización ordinarias D03. No se
+propias de PD-03, delimita RA-04 y confirma vigencia/finalización ordinarias D03.
+La tercera ronda confirma condiciones de nueva reserva PD-02, límite anterior a
+fecha inicial America/Lima y efectos de retiro/pérdida de habilitación sin renovar
+plazo ni revocar matrículas anteriores; excluye cancelación/modificación voluntaria
+y delimita reiteraciones sin sanción/espera por abandono, con varias cuentas y
+excepciones manuales diferidas. RA-05 confirma mantenimiento protegido con bloqueantes
+y conservación sin reactivación de historial finalizado, y D06 impide conflictos
+efectivos propios sin rechazar adyacencias o historial finalizado. No se
 atribuye aprobación a alternativas no respondidas.
