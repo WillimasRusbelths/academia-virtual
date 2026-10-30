@@ -62,7 +62,7 @@ jobs:
         run: >-
           docker compose --profile tests run --rm --no-deps browser-tests
           npm run test:e2e --workspace @academia/web --
-          --config playwright.config.ts harness.spec.ts foundations.spec.ts
+          --config playwright.config.ts '(^|/)harness\.spec\.ts$' '(^|/)foundations\.spec\.ts$'
       - name: E2E - acceso y sesiones
         run: >-
           docker compose --profile tests run --rm --no-deps browser-tests
@@ -99,6 +99,10 @@ jobs:
         run: >-
           docker compose --profile tests run --rm --no-deps browser-tests
           npm run test:e2e --workspace @academia/web -- --config playwright.login-timing.config.ts
+      - name: E2E - oferta académica
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.academic-offering.config.ts
       - name: Auditar dependencias - informativo
         continue-on-error: true
         run: docker compose exec -T api npm audit --json

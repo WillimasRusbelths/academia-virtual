@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "eslint src tests playwright.config.ts vite.config.ts eslint.config.js",
+    "lint": "eslint src tests playwright.config.ts playwright.academic-offering.config.ts vite.config.ts eslint.config.js",
     "build": "tsc --noEmit && vite build",
     "dev": "vite",
     "preview": "vite preview",

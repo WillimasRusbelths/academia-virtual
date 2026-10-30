@@ -149,7 +149,15 @@ completa SC-003 de 350 combinaciones + 84 pérdidas de acceso. Informes iniciale
 y repeticiones aprobadas conservados, sin cambiar negocio ni código de producto.
 D10 conserva un timeout intermitente abierto, no reproducido en seis diagnósticos
 y la repetición completa.
-T001–T066 completas; siguiente bloque T067/T068 (CI y puerta automática final).
+En ese checkpoint T001–T066 estaban completas. La [integración CI T067](../../specs/002-oferta-academica/evidence/t067.md)
+y [puerta automática local T068](../../specs/002-oferta-academica/evidence/automated.md)
+verifican UNIT API 335/335, web 188/188, PG/API/compatibilidad
+1972/1972, crypto/mail 2/2, E2E identidad 203/203 y oferta
+168/168 (84 casos únicos). Prueba de auditoría adaptada al contrato de logging
+aprobado, conservando fallos iniciales y repeticiones; sin cambios de producto.
+T001–T068 completas; siguiente T069, ensayo incremental y recuperación aislados.
+CI remoto pendiente de ejecutar, timeout existente conservado y sin aceptación
+integral/humana ni capacidad acreditada. Reservas de 24 h siguen en su spec futuro.
 No se declara aceptación integral ni capacidad.
 La aceptación humana/integral permanece pendiente.
 Se conserva el timeout B02 de regresión y su repetición

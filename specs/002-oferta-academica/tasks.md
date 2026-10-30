@@ -1,9 +1,9 @@
 # Tasks: oferta académica
 
 **Rama**: `feat/002-oferta-academica`. **Fecha**: 2026-10-19.
-**Estado**: T001–T066 completas; checkpoint automatizado US4 aprobado.
-T065 verifica regresión de identidad; T066 conserva separados aceptación humana y capacidad.
-Siguiente bloque: T067/T068, integración en CI y puerta automática final.
+**Estado**: T001–T068 completas; puerta automática local aprobada, CI remoto sin ejecutar.
+T069–T074, aceptación humana/integral y capacidad permanecen pendientes.
+Siguiente bloque: T069, ensayo incremental y recuperación en destino ficticio.
 Checkpoint de fundamentos T018 aprobado el
 2026-10-20 con integración API completa y puertas T005/T006/T012/T017 verdes.
 T019/T020 verificadas con reglas reales de T023 y aserciones completas en UTC y
@@ -555,8 +555,25 @@ Detenido antes de T067.
 Depende de los cuatro checkpoints. Separar siempre evidencia automática, humana y
 condiciones operativas pendientes; ninguna marca se obtiene por redactar este documento.
 
-- [ ] T067 Incorporar un paso E2E de oferta en `.github/workflows/v00-linux.yml` usando `npm run test:e2e --workspace @academia/web -- --config playwright.academic-offering.config.ts`; conservar suites originales, Compose y job existente. Confirmar descubrimiento automático de UNIT/PG, incluir nueva config en lint de `apps/web/package.json` si queda fuera y no aumentar timeouts sin diagnóstico (FR-014/016).
-- [ ] T068 Ejecutar puerta automática final y registrar `specs/002-oferta-academica/evidence/automated.md`: lint/build, UNIT API/web, probe/check, integración PostgreSQL, crypto-mail, E2E oferta e identidad siguiendo quickstart; adjuntar resultados de CI disponible sin afirmar ejecución remota inexistente. Registrar todos V-A01–A12, fallos/omisiones, revisión exacta y estado final de carreras (FR-001–016; SC-001/003–006).
+- [X] T067 Incorporar un paso E2E de oferta en `.github/workflows/v00-linux.yml` usando `npm run test:e2e --workspace @academia/web -- --config playwright.academic-offering.config.ts`; conservar suites originales, Compose y job existente. Confirmar descubrimiento automático de UNIT/PG, incluir nueva config en lint de `apps/web/package.json` si queda fuera y no aumentar timeouts sin diagnóstico (FR-014/016).
+- [X] T068 Ejecutar puerta automática final y registrar `specs/002-oferta-academica/evidence/automated.md`: lint/build, UNIT API/web, probe/check, integración PostgreSQL, crypto-mail, E2E oferta e identidad siguiendo quickstart; adjuntar resultados de CI disponible sin afirmar ejecución remota inexistente. Registrar todos V-A01–A12, fallos/omisiones, revisión exacta y estado final de carreras (FR-001–016; SC-001/003–006).
+
+Avance T067/T068, cierre 2026-10-29 (ejecuciones 26–29): CI incorpora E2E de oferta y lint de su configuración,
+conservando job, suites y timeout de 20 minutos. Selector base corregido por
+colisión de nombres; sin cambios de negocio o producto. UNIT API 335/335, web
+188/188, integración completa 1972/1972, crypto/mail 2/2,
+E2E identidad 203/203 y oferta 168/168 (84 casos únicos) aprobados;
+Prisma/probe, lint y build verdes. Auditoría de logs de la prueba histórica
+adaptada a las extensiones académicas ya aprobadas, con listas separadas y control
+negativo real de PII. Lote inicial 1966/1971 con cinco fallos, dirigidas 6/6 y
+repetición completa conservados, sin debilitar canarios ni saltar casos.
+[CI](evidence/t067.md), [puerta automática](evidence/automated.md) y
+[resultados](evidence/automated-results.json). CI remoto no ejecutado; no se atribuye
+capacidad ni aceptación integral. T069 sigue pendiente de restauración operativa
+(V-A11/V-A12); bootstrap y caso E2E D10 continúan abiertos. PA-01–PA-05/E1,
+72 archivos protegidos y entorno/volúmenes manuales conservados; cero esquemas t_.
+Detenido antes de T069.
+
 - [ ] T069 Ensayar actualización incremental y recuperación en destino ficticio según `ops/recovery/README.md`, registrando `specs/002-oferta-academica/evidence/recovery.md`: backup/restore consistente de generaciones/snapshots/ledger, credenciales restauradas invalidadas y revisión de decisiones posteriores al backup; comparar identidad y preservar volúmenes manuales. Sin prometer downgrade o recuperación de cambios fuera del RPO; D13 no se cierra por este ensayo (FR-016; constitución X).
 - [ ] T070 Actualizar `README.md`, `docs/alcance-mvp.md` y `ops/local/architecture.md` con estado efectivamente implementado/verificado, navegación, módulo y límites, enlazando spec/evidencia. No convertir planes o tests omitidos en capacidad acreditada ni reescribir evidencia 001 (FR-014/016).
 - [ ] T071 Actualizar `docs/decisiones-pendientes.md` y `specs/002-oferta-academica/quickstart.md` con delimitación D04, D06 matrícula, D10/D13, T104/T108, SMTP real y bootstrap; PA-01–05 siguen aprobadas. Conservar video/alojamiento y cargas diferidas; registrar bloqueo real sin sustituir reglas (FR-006/016).
