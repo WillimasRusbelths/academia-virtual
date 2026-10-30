@@ -57,17 +57,23 @@ no hay integración de pagos/video ni despliegue acreditado.
 RP001 conserva el [inventario](specs/003-reservas-ordenes-matricula/research.md) desde adca8e6;
 RP002 prepara el [borrador 003](specs/003-reservas-ordenes-matricula/spec.md) y su
 [checklist](specs/003-reservas-ordenes-matricula/checklists/requirements.md), 10/16 y sin aprobación para plan.
-RP003/clarify registra cinco respuestas: precio por curso fijado por administrador en PEN y
-conservado en la orden durante las 24 horas; una orden desglosada, un pago total y
-una matrícula por curso, vinculada al grupo elegido. Las reservas de varios cursos
-se confirman todas juntas o ninguna. Solo verificación terminada antes de vencer
-permite matrícula; al vencer o después queda incidencia sin matrícula/reembolso
-automáticos ni extensión. Solo una orden con reservas vigentes por alumno; se
-impide cancelar grupos con reservas vigentes, matrículas o incidencias de pago
-sin resolver. Prioridad, resolución económica, otras cancelaciones, reiteraciones,
-unicidad entre compras y demás permisos siguen pendientes. El checklist actual es
-11/16; las notas y evidencia RP002 conservan su revisión anterior. No hay reservas
-implementadas; la aceptación humana de 002 sigue aplazada.
+RP003 registra dos rondas de cinco respuestas en el [spec 003](specs/003-reservas-ordenes-matricula/spec.md).
+Se conservan las 24 horas, precio por curso/PEN fijado por administrador, orden
+con precio conservado, reserva conjunta, pago total, matrícula por curso y bloqueo
+de cancelación de grupos con compromisos. La segunda ronda confirma prioridad
+por admisión de solicitudes autenticadas y válidas en servidor, desempate por
+secuencia única y un solo grupo por curso; no otra reserva con reserva/matrícula
+vigente del curso. Alumno opera lo propio; administrador consulta todos y registra
+seguimiento; docente/visitante sin acceso financiero. Matrícula vigente desde
+confirmación por pago hasta terminar la fecha final del grupo en America/Lima.
+Pago tardío o sin plaza válida: en conciliación sin matrícula; seguimiento no
+resuelve la incidencia. Devoluciones/traslados/asignaciones manuales quedan fuera;
+política y procedimiento económicos obligatorios antes de cobros reales.
+Condiciones de oferta, cambios/cancelación voluntaria, reiteraciones/excepciones
+y conflictos de matrícula D06 siguen pendientes; no se habilita el plan.
+Checklist 11/16, notas/evidencia anteriores conservadas. Constitución 1.2.1 corrige
+solo el estado de aprobación del pago total. No hay reservas implementadas;
+la aceptación humana de 002 sigue aplazada.
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
@@ -177,9 +183,11 @@ Autenticación para administrador, docente y alumno; cursos, grupos, horarios y 
 reserva previa de 24 h, órdenes con conceptos y total; matrículas y pagos verificados; materiales;
 clases emitidas por el docente con chat para alumnos; y paneles básicos por rol.
 
-Se propone un pago por el total de cada orden y una matrícula por cada curso adquirido.
-Esta regla y la reserva de varios cursos requieren validación; las 24 h sí están
-confirmadas. **Izipay es la pasarela elegida para el MVP** desde el
+RP003 confirma una orden desglosada, un pago total y una matrícula por curso/grupo
+elegido; reserva de varios cursos toda junta o ninguna y 24 horas exactas.
+La prioridad registrada por servidor, unicidad vigente por curso, matriz financiera
+y vigencia de matrícula también están confirmadas. Las políticas restantes y la
+integración siguen pendientes; no se atribuye implementación. **Izipay es la pasarela elegida para el MVP** desde el
 2026-09-23 y sustituye a Culqi, que figuraba como candidata inicial. La integración no está
 implementada; siguen pendientes tarifas finales, límites, acceso al entorno de pruebas y
 habilitación de Yape para la modalidad contratada. No se asume capacidad ilimitada.

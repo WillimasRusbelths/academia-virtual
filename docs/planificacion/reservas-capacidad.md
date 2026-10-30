@@ -27,8 +27,10 @@ Oferta 002 conserva PA-04: entero 1–50 por grupo, sin ocupación/disponibilida
 
 Invariantes a especificar/probar: inventario nunca negativo ni sobrevendido; no contar
 una misma plaza dos veces al convertir reserva en matrícula; repetir una intención o
-notificación no duplica efectos; liberar una reserva una sola vez. La identidad de
-reserva/matrícula y el ámbito curso/grupo se aprobarán en el futuro spec (D01/D03/D04).
+notificación no duplica efectos; liberar una reserva una sola vez. RP003 confirma un grupo por curso en cada selección y rechazo de nueva reserva si
+el alumno tiene reserva o matrícula vigente del curso, también en otro grupo.
+Matrícula vigente desde confirmación por pago hasta terminar fecha final del grupo
+en America/Lima; después no vigente, con historial, sin reabrir oferta.
 
 ## Decisiones todavía abiertas
 
@@ -45,14 +47,21 @@ de vencer para matrícula. Al vencer o después queda incidencia sin matrícula 
 reembolso automáticos ni extensión. También se aprueban una sola orden con reservas
 vigentes por alumno y bloquear cancelación de grupo con reservas vigentes,
 matrículas o incidencias de pago sin resolver. Se completan cinco respuestas de la
-sesión; RP003 sigue pendiente por los bloqueos restantes, sin habilitar el plan:
+primera ronda. Una segunda ronda de cinco respuestas confirma prioridad por
+admisión autenticada/válida y secuencia de desempate servidor, unicidad vigente
+alumno/curso, matriz financiera PD-03 y vigencia de matrícula D03. RA-04 se delimita
+al registro/seguimiento, sin resolución económica en el incremento; aprobar política
+y procedimiento antes de cobros reales. RP003 sigue pendiente por condiciones de
+oferta, cancelación/cambios, reiteraciones/excepciones y D06, sin habilitar el plan.
+Constitución vigente 1.2.1: sincroniza estado ya aprobado del pago total; evidencias
+históricas de 1.2.0 conservadas.
 
 | ID | Decisión pendiente | Preguntas para aclaración; bloqueo |
 | --- | --- | --- |
-| RA-01 | Varios cursos y orden: confirmada | Confirmado 2026-10-30: reservas todas juntas o ninguna; en RP003 se aprueban una orden desglosada, un pago total y una matrícula por curso vinculada al grupo elegido. Unicidad entre compras/condiciones siguen en PD-02 de 003 y cambios/cancelación en RA-05. D01/D04 aún parciales. |
-| RA-02 | Orden de llegada | ¿FIFO, sorteo, turnos u otra regla? ¿Qué instante y desempate decide prioridad? D14: no hay política FIFO aprobada ni promesa de justicia de los locks. |
+| RA-01 | Varios cursos y orden: confirmada | Reservas todas juntas o ninguna, orden desglosada, pago total y matrícula por curso/grupo elegido. PD-02 confirma un grupo por curso y rechazo con reserva/matrícula vigente; D03 vigencia desde confirmación por pago hasta fin de fecha final del grupo en America/Lima. Condiciones de oferta y cambios/cancelación siguen PD-02/RA-05. |
+| RA-02 | Prioridad: confirmada | Orden de admisión servidor de solicitudes autenticadas y válidas; empate por secuencia única del servidor. Clic, login y reloj del alumno no dan prioridad ni reservan. Debe diseñarse/verificarse; no depende del orden accidental de locks o finalización. D14/VP003. |
 | RA-03 | Pago en límite/vencimiento: confirmada | Referencia cuando el servidor termina de verificar el pago; solo si termina antes de vencer permite matrícula. Exactamente al vencer o después: incidencia sin matrícula ni reembolso automáticos, sin extender 24 horas. Resolución económica sigue en RA-04. |
-| RA-04 | Reembolsos y pagos tardíos: parcial | Confirmada incidencia al vencer o después, sin matrícula/reembolso automáticos. Pendientes resolución económica, responsables y otros pagos sin plaza; no se promete reintegro ni traslado. D02/D05. |
+| RA-04 | Incidencia delimitada; resolución económica diferida | Pago verificado al vencer/después o sin plaza válida: incidencia y pago en conciliación sin matrícula; administrador registra seguimiento, sin resolver por anotarlo. Fuera del incremento devoluciones/traslados/asignaciones manuales. Política/procedimiento económicos obligatorios antes de cobros reales. D02/D05. |
 | RA-05 | Cancelaciones y cambios: parcial | Se impide cancelar grupo con reservas vigentes, matrículas o incidencias de pago sin resolver; resolver antes los compromisos conforme a políticas autorizadas y conservar antecedentes. Pendientes cancelación voluntaria de reserva/orden/matrícula, cambios y efectos económicos/responsables D03/D05/D06. Cancelación terminal de 002 conservada. |
 | RA-06 | Bloqueo abusivo de cupos: parcial | Una sola orden con reservas vigentes por alumno, con varios cursos posibles; otra solo al dejar la anterior de tener reservas vigentes por pago, vencimiento o cancelación conforme a reglas aprobadas. Repetir la misma intención recupera la existente. No aprueba cancelación voluntaria, reiteraciones, excepciones, varias cuentas ni sanciones. D15 y protecciones de identidad conservados. |
 
@@ -60,21 +69,23 @@ La conciliación debe cerrar RC-06 sin modificar RC-04: distinguir vencimiento d
 reserva, inicio del pago, verificación terminada y momento de consultar el resultado.
 La verificación terminada al vencer o después no renueva la reserva ni impide su
 liberación; deja incidencia sin matrícula/reembolso automáticos. La resolución
-económica y otros pagos sin plaza siguen bloqueados por RA-04, sin sobreventa ni
-extensión de las 24 horas. PD-02 de 003 conserva las condiciones de elegibilidad.
+económica queda fuera del incremento y exige política/procedimiento aprobados antes
+de cobros reales. Los pagos sin plaza válida también quedan en conciliación sin
+matrícula; seguimiento no los resuelve ni permite cancelar el grupo afectado. Sin
+sobreventa ni extensión. PD-02 conserva pendientes las condiciones de elegibilidad.
 
 ## Escenarios obligatorios del futuro spec
 
 | ID | Escenario | Resultado exigido o decisión necesaria |
 | --- | --- | --- |
-| RE-01 | Doble clic, reintento por timeout, duplicado simultáneo | Misma intención no reserva ni cobra dos veces; persistencia de idempotencia y unicidad de negocio según RA-01. |
-| RE-02 | Dos alumnos compiten por el último cupo | Como máximo uno obtiene esa plaza; respuesta y estado final transaccionales, sin depender del frontend. Prioridad según RA-02, pendiente. |
+| RE-01 | Doble clic, reintento por timeout, duplicado simultáneo | Misma intención recupera resultado sin reservar/cobrar dos veces; un grupo por curso y ninguna nueva reserva con reserva/matrícula vigente del curso, también en otro grupo. Vigencia ordinaria D03 aprobada. |
+| RE-02 | Dos alumnos compiten por el último cupo | Como máximo uno obtiene plaza respetando orden de admisión autenticada/válida en servidor y secuencia única de desempate, sin prioridad por clic/login/reloj cliente; verificar estado final y reserva conjunta toda o ninguna. |
 | RE-03 | Desconexión antes/después del commit o respuesta perdida | Consultar resultado existente de forma autorizada; desconectar no cancela ni reinicia las 24 h. No reenvío ciego ni duplicación. |
 | RE-04 | Reinicio de API/BD/conciliador | Plazo e intención persistidos, reconciliación reanudable y efectos una sola vez; no cron exclusivo en memoria del proceso o navegador. |
 | RE-05 | Instante anterior, exacto y posterior a 24 h | Fecha límite calculada por servidor, no por zona de horarios America/Lima. Solo verificación terminada antes de vencer permite matrícula; al vencer o después, incidencia sin matrícula/reembolso automáticos ni extensión. Controles de reloj de prueba no cambian duración. |
 | RE-06 | Reserva vencida sin pago, proceso retrasado o repetido | Liberación correcta/idempotente, inventario final reconciliado; el retraso de limpieza no convierte una reserva vencida en vigente. Política detallada pendiente. |
 | RE-07 | Pago duplicado, fuera de orden o alterado | Verificación de autenticidad/orden/importe/moneda; no doble matrícula/doble consumo, rechazo de alteración. Sandbox separado, no proveedor real durante k6. |
-| RE-08 | Pago al vencer, tardío o notificado después | Aplicar límite estricto RA-03 según fin de verificación servidor, no inicio del pago/hora del navegador. Demostrar ambos órdenes de carrera y estado final; resolución económica/otros pagos sin plaza siguen pendientes RA-04. |
+| RE-08 | Pago al vencer, tardío o sin plaza válida | Fin de verificación servidor decide límite estricto RA-03; incidencia y pago en conciliación sin matrícula para el titular. Seguimiento no resuelve, devuelve, traslada ni asigna manualmente. RA-04 difiere resolución económica con política/procedimiento previos a cobros reales. |
 | RE-09 | Intento de cancelar grupo con compromisos | Bloquear cancelación con reserva vigente, matrícula o incidencia de pago sin resolver, también si concurre con su confirmación; no cambios parciales ni pérdida de historial. Otras cancelaciones/cambios siguen pendientes RA-05, sin reembolso/traslado automático. |
 | RE-10 | Reservas masivas, reiteradas y acceso no autorizado | Como máximo una orden con reservas vigentes por alumno ante intenciones distintas simultáneas; repetir la misma intención recupera resultado. Reiteraciones/varias cuentas/excepciones pendientes. Permisos vigentes, sin plazas por peticiones rechazadas ni datos ajenos. |
 

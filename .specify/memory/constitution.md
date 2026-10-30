@@ -114,8 +114,10 @@ no se rebautiza como validación de 2500 ni se elimina por el nuevo objetivo.
 - El MVP comprende autenticación y roles; cursos, grupos, horarios y cupos; selección de
   varios cursos con órdenes desglosadas; matrículas; materiales; clases emitidas por el
   docente con participación de alumnos solo mediante chat; y paneles básicos por rol.
-- Un pago por el total de la orden y una matrícula por cada curso adquirido constituyen
-  una **propuesta pendiente de validación**, no una regla ya aprobada.
+- Un pago por el total de la orden y una matrícula por cada curso adquirido, vinculada
+  al grupo elegido, son reglas **confirmadas por el responsable el 2026-10-30** en
+  RP003 del spec 003. Sustituyen su estado anterior de propuesta pendiente; esta
+  confirmación no aprueba otras decisiones, cuyo estado se registra en el spec aplicable.
 - La integración de Izipay DEBE permanecer separada de las reglas de órdenes y matrículas,
   para permitir cambiar de pasarela sin redefinir esas reglas. La elección del proveedor
   NO resuelve las decisiones de reservas, vigencia, reembolsos ni confirmación de pagos.
@@ -190,4 +192,15 @@ incompatible; MINOR para añadir principios o ampliar materialmente las obligaci
 PATCH para aclaraciones y correcciones sin cambio de obligaciones. La versión 1.0.0
 corresponde a la primera adopción, en sustitución de una plantilla sin ratificar.
 
-**Versión**: 1.2.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-10-23
+Enmienda documental **1.2.1**, 2026-10-30: corrige el desfase entre «propuesta
+pendiente de validación» y la respuesta explícita del responsable en
+[RP003, primera ronda](../../specs/003-reservas-ordenes-matricula/spec.md#clarifications),
+conservada en el commit `5dc380e`: una orden desglosada, un pago total y una matrícula
+por curso vinculada al grupo elegido. Es PATCH porque sincroniza el estado de esa
+aprobación sin alterar los principios I–XI ni sus criterios de evaluación. El impacto
+y las adaptaciones son documentales: actualizar referencias vigentes y conservar
+evidencias anteriores con su versión original; sin cambios de código, esquema, datos,
+plantillas o configuración. Las demás decisiones y puertas conservan sus propios
+estados y aprobaciones, sin aceptación funcional ni capacidad acreditada.
+
+**Versión**: 1.2.1 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-10-30

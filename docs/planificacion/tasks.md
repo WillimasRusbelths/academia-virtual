@@ -36,7 +36,7 @@ Sin migraciones ni código.
 
 - [ ] RP003 Ejecutar clarify y registrar respuestas RA-01–RA-06 en el futuro `spec.md`: reserva múltiple/atomicidad, prioridad, pago exacto/tardío, reembolsos, cancelación y abuso; conservar bloqueos si faltan respuestas. Dep.: RP002; D01/D03–D06.
 
-RP003, sesión del 2026-10-30: cinco preguntas y cinco respuestas integradas en el
+RP003, primera ronda del 2026-10-30: cinco preguntas y cinco respuestas integradas en el
 [spec](../../specs/003-reservas-ordenes-matricula/spec.md): precio por curso en PEN
 fijado por administrador y conservado 24 h; una orden desglosada/un pago total/una
 matrícula por curso y grupo elegido; verificación terminada antes de vencer,
@@ -46,12 +46,27 @@ vigentes, matrículas o incidencias de pago sin resolver. Checklist
 10/16 → 11/16: desaparecen las marcas de aclaración, pero permanecen cinco
 criterios pendientes y otras reglas abiertas. Las notas del checklist son el
 registro RP002 conservado; sus marcas se reevaluaron contra el spec actualizado.
-RP003 sigue pendiente: se alcanza el máximo de cinco preguntas por sesión y se
-difieren prioridad RA-02, resolución económica/responsables RA-04, cancelación
+En el cierre de esa primera ronda RP003 seguía pendiente: alcanzado el máximo
+de cinco preguntas, se diferían prioridad RA-02, resolución económica/responsables RA-04, cancelación
 voluntaria/cambios/resto de RA-05, reiteraciones/excepciones/resto de RA-06,
 condiciones/unicidad PD-02, matriz PD-03 y D03/D06/D10/D13. La siguiente ronda de
 clarify debe resolver o delimitar expresamente estos bloqueos; no habilita RP004/plan
 ni implementación. [Revisión documental RP003](../../specs/003-reservas-ordenes-matricula/evidence/rp003-results.json).
+
+RP003, segunda ronda del 2026-10-30: otras cinco preguntas y cinco respuestas,
+con base 5dc380e; las cinco respuestas previas y su JSON quedan intactos. Se
+confirman RA-02 (admisión autenticada/válida y secuencia servidor), unicidad vigente
+alumno/curso y un grupo por curso, matriz PD-03 (alumno propio, administrador consulta
+y seguimiento; docente/visitante sin acceso financiero) y vigencia D03 (confirmación
+por pago hasta fin de fecha final del grupo America/Lima). RA-04 se delimita a
+incidencia/seguimiento sin devolución/traslado/asignación manual; resolución económica
+previa a cobros reales y seguimiento sin cerrar incidencia ni desbloquear cancelación.
+Checklist **11/16 → 11/16**, sin nuevas casillas ni regresiones; notas históricas
+conservadas. Constitución 1.2.1 sincroniza aprobación existente, sin cambiar principios.
+RP003 sigue pendiente por condiciones de oferta PD-02, cancelación/cambios RA-05,
+reiteraciones/excepciones RA-06 y conflictos D06. D10/D13 conservan sus etapas.
+Siguiente bloque: otra ronda de clarify sobre esos bloqueos; todavía sin plan,
+tareas de implementación ni código. [Revisión de segunda ronda](../../specs/003-reservas-ordenes-matricula/evidence/rp003-round2-results.json).
 
 - [ ] RP004 Planificar contratos públicos, identidad de reserva/orden/matrícula y estados en futuros `plan.md`, `data-model.md` y `contracts/`; confirmar disponibilidad/consumo de capacidad y migración aditiva después de RP003, sin alterar cuentas o evidencia de 002. Dep.: RP003; RC-03/05/06, RE-01/02/09.
 - [ ] RP005 Diseñar en futuros `research.md`/`data-model.md` plazo persistido de 86 400 segundos, reloj servidor, límites exactos, reinicio y ejecución diferida idempotente; ninguna extensión por reintento/desconexión/worker retrasado. Dep.: RP003/RP004; RC-04, RE-03–RE-06.
