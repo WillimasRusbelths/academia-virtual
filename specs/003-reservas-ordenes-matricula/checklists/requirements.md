@@ -18,7 +18,7 @@ resolver los motivos indicados. No se modifican checklists de 001/002.
 
 ## Requirement Completeness
 
-- [ ] No quedan marcas [NEEDS CLARIFICATION].
+- [x] No quedan marcas [NEEDS CLARIFICATION].
 - [ ] Los requisitos son verificables y no ambiguos en todo su alcance.
 - [ ] Todos los criterios de éxito son medibles con condiciones de evaluación definidas.
 - [X] Los criterios de éxito son independientes de la tecnología.

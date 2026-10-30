@@ -1,0 +1,280 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "task": "RP003",
+  "status": "FIVE_CLARIFICATIONS_RECORDED_BUSINESS_GATES_OPEN",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "baseCommit": "9436bfdde3ea4527e497e0901ca9ecc60d25b6f4",
+  "skill": "speckit-clarify",
+  "specFile": "specs/003-reservas-ordenes-matricula/spec.md",
+  "checklistFile": "specs/003-reservas-ordenes-matricula/checklists/requirements.md",
+  "questions": {
+    "maximum": 5,
+    "asked": 5,
+    "answered": 5,
+    "pending": null,
+    "approved": [
+      {
+        "number": 1,
+        "id": "PD-01",
+        "question": "¿Cómo debe fijarse y mantenerse el precio que paga el alumno durante su reserva?",
+        "selected": "A",
+        "approved": "Administrador fija precio por curso en PEN; orden conserva precio confirmado durante 24 horas de reserva; cambios para nuevas reservas."
+      },
+      {
+        "number": 2,
+        "id": "RA-01",
+        "question": "¿Cómo deben organizarse la orden, el pago y las matrículas cuando el alumno reserva varios cursos?",
+        "selected": "A",
+        "approved": "Una orden desglosada, un pago total y una matrícula por cada curso incluido, vinculada al grupo elegido."
+      },
+      {
+        "number": 3,
+        "id": "RA-03/RA-04",
+        "question": "¿Qué debe ocurrir si el servidor termina de verificar el pago exactamente al vencer las 24 horas de reserva o después?",
+        "selected": "A",
+        "approved": "Solo verificación terminada antes del vencimiento permite matrícula; al vencer o después, incidencia sin matrícula ni reembolso automáticos ni extensión."
+      },
+      {
+        "number": 4,
+        "id": "RA-06",
+        "question": "¿Puede un alumno mantener más de una orden con reservas vigentes al mismo tiempo?",
+        "selected": "A",
+        "approved": "Una sola orden con reservas vigentes por alumno; puede incluir varios cursos; otra al pagar, vencer o cancelar segun reglas aprobadas. Misma intención recupera la existente. Reiteraciones/excepciones no aprobadas."
+      },
+      {
+        "number": 5,
+        "id": "RA-05",
+        "question": "¿Qué debe ocurrir si el administrador intenta cancelar un grupo que tiene reservas vigentes, matrículas o incidencias de pago sin resolver?",
+        "selected": "A",
+        "approved": "Impedir cancelación mientras existan reservas vigentes, matrículas o incidencias de pago sin resolver; resolver primero conforme a políticas autorizadas, conservando antecedentes."
+      }
+    ]
+  },
+  "coverage": {
+    "functional": {
+      "status": "Deferred",
+      "reason": "Permisos, elegibilidad y cancelaciones voluntarias todavía requieren aprobación."
+    },
+    "domain": {
+      "status": "Deferred",
+      "reason": "Unicidad entre compras, vigencia y efectos de cambios siguen en PD-02/D03/D06."
+    },
+    "interaction": {
+      "status": "Clear",
+      "reason": "Cuatro recorridos, error/vacío/resultado incierto y móvil/teclado definidos."
+    },
+    "nonfunctional": {
+      "status": "Deferred",
+      "reason": "D10/rúbrica, medición de 2500 y D13 operativo se conservan pendientes para su etapa."
+    },
+    "integration": {
+      "status": "Deferred",
+      "reason": "Condiciones/sandbox del proveedor y contratos técnicos corresponden a D02/RP004, sin implementarlos."
+    },
+    "edgeCases": {
+      "status": "Deferred",
+      "reason": "Prioridad, resolución económica, reiteraciones y excepciones exceden cinco preguntas."
+    },
+    "constraints": {
+      "status": "Clear",
+      "reason": "24 h exactas, S/300 total, separación de specs y preservación de evidencia explícitos."
+    },
+    "terminology": {
+      "status": "Clear",
+      "reason": "Reserva, orden, pago, matrícula, capacidad/ocupación/disponibilidad y métricas diferenciados."
+    },
+    "completion": {
+      "status": "Deferred",
+      "reason": "Cinco criterios del checklist condicionados por reglas/D10; no se habilita plan."
+    },
+    "placeholders": {
+      "status": "Deferred",
+      "reason": "Cero marcas NEEDS CLARIFICATION; filas abiertas RA-02/04/05/06 y PD-02/03 permanecen explícitas."
+    }
+  },
+  "deferred": [
+    "RA-02 prioridad y desempate",
+    "RA-04 resolución económica/responsables y otros pagos sin plaza",
+    "RA-05 cancelación voluntaria, cambios y resolución de compromisos",
+    "RA-06 reiteraciones, varias cuentas, excepciones y sanciones",
+    "PD-02 identidad, unicidad entre compras, elegibilidad, retiro y habilitación docente",
+    "PD-03 matriz financiera/académica y responsables",
+    "D03 vigencia de matrícula",
+    "D06 conflictos de matrícula",
+    "D10 rúbrica/capacidad en su etapa",
+    "D13 operación/recuperación en su etapa"
+  ],
+  "sectionsTouched": [
+    "Status",
+    "Alcance confirmado y decisiones abiertas",
+    "Clarifications",
+    "User Scenarios & Testing",
+    "Edge Cases",
+    "Functional Requirements",
+    "Key Entities",
+    "Measurable Outcomes",
+    "Dependencias y restricciones",
+    "Trazabilidad"
+  ],
+  "quality": {
+    "before": "10/16",
+    "after": "11/16",
+    "newlyPassing": [
+      "No quedan marcas [NEEDS CLARIFICATION]."
+    ],
+    "regressions": [],
+    "stillUnchecked": [
+      "Los requisitos son verificables y no ambiguos en todo su alcance.",
+      "Todos los criterios de éxito son medibles con condiciones de evaluación definidas.",
+      "Todos los escenarios de aceptación tienen reglas de resultado definidas.",
+      "Todos los requisitos funcionales tienen criterios de aceptación completos.",
+      "La funcionalidad especificada permite evaluar todos los resultados de éxito sin reglas pendientes."
+    ],
+    "readyForPlan": false,
+    "notes": "Checklist notes and RP001/RP002 reports remain historical snapshots; only markers re-evaluated."
+  },
+  "structure": {
+    "stories": 4,
+    "functionalRequirements": 24,
+    "successCriteria": 8,
+    "confirmedRequirementIds": 7,
+    "scenarioIds": 10,
+    "RAEntries": 6,
+    "additionalDecisionEntries": 3,
+    "clarificationMarkers": 0,
+    "sessionAnswerBullets": 5
+  },
+  "backlog": {
+    "total": 22,
+    "complete": 3,
+    "pending": 19,
+    "RP003": "PENDING",
+    "originalTaskLinesPreserved": true
+  },
+  "preservation": {
+    "trackedBaseline": 682,
+    "otherTrackedUnchanged": 673,
+    "protectedUnchanged": 72,
+    "spec001And002Unchanged": true,
+    "RP001AndRP002EvidenceUnchanged": true,
+    "offeringBranch": "adca8e6",
+    "inventoryBranch": "d2676fd",
+    "constitution": "1.2.0",
+    "codeMigrationsConfigAndFixturesUnchanged": true
+  },
+  "documentation": {
+    "documents": 88,
+    "localLinksChecked": 1356,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": []
+  },
+  "limits": {
+    "productTestsExecuted": 0,
+    "servicesOperated": false,
+    "sqlExecuted": false,
+    "smokesExecuted": false,
+    "capacityRunsExecuted": false,
+    "businessDefaultsInvented": false,
+    "implementationStarted": false,
+    "capacity2500Approved": false,
+    "humanAcceptance": false,
+    "T103": "COMPLETE_REPORT_WITHOUT_APPROVED_CAPACITY",
+    "T104": "PENDING",
+    "T108": "PENDING",
+    "T073": "PENDING",
+    "T074": "PENDING",
+    "bootstrap": "OPEN",
+    "AWSAdopted": false
+  },
+  "workflow": {
+    "featureDirectory": "specs/003-reservas-ordenes-matricula",
+    "extensionHooksPresent": false,
+    "planCreated": false,
+    "implementationTasksCreated": false,
+    "next": "Continue speckit-clarify; no plan until blocking rules resolved or explicitly delimited"
+  },
+  "reviewCommands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .specify/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly",
+      "scope": "Once at RP003 session startup; feature 003 resolved"
+    },
+    {
+      "command": "node .cache/reservas-rp003/review.mjs",
+      "scope": "Local document, link, checklist, Git ancestry and protected-file verification"
+    },
+    {
+      "command": "git diff --check",
+      "scope": "Whitespace check; exit 0"
+    }
+  ],
+  "extensionHooks": {
+    "beforeClarify": "SKIPPED_FILE_ABSENT",
+    "afterClarify": "SKIPPED_FILE_ABSENT"
+  },
+  "findings": [
+    {
+      "id": "RP003-B01",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "detail": "Priority, commercial eligibility/uniqueness and permissions need further clarification before affected design."
+    },
+    {
+      "id": "RP003-B02",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "detail": "Economic resolution, voluntary cancellation, changes, reiteration and exception policies are only partially approved."
+    },
+    {
+      "id": "RP003-O01",
+      "severity": "MEDIUM",
+      "status": "DEFERRED_TO_PLANNED_STAGE",
+      "detail": "D10 evaluation and D13 operation retain their existing gates; no capacity or production acceptance."
+    },
+    {
+      "id": "INV-DOC-01",
+      "severity": "MEDIUM",
+      "status": "PRESERVED",
+      "detail": "Legacy offer-state summaries in actor/HU/RF documents still refer to older checkpoints; spec002 and its evidence remain authoritative. HU10/HU11 and RF11-RF13 synchronized only for the new approved business scope."
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "README.md",
+      "sha256": "d841ba96fa6ea83860bfd66a980ed44c67dfeec7c3f5d8a6ce34f2b6099263b0"
+    },
+    {
+      "path": "docs/decisiones-pendientes.md",
+      "sha256": "8d4e97c6048182509a113af89562aca3f6303448e5a35301eb8ad95c4bf07181"
+    },
+    {
+      "path": "docs/planificacion/reservas-capacidad.md",
+      "sha256": "de9b2e0b68ee976d873d65035b3d6b11b98ac7718f6ddd47b0446491d7e868f8"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "a569c69a1271ca1f45844dfe85c7434d6ecd1f299c19795fd32ba0b6a00c3546"
+    },
+    {
+      "path": "docs/alcance-mvp.md",
+      "sha256": "ea762bad26fab9e109591fa418f667b62b3ca5319952fafdd5282c059f0c51e7"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/02-historias-del-usuario.md",
+      "sha256": "de7647827385bb3f4faea2791b71d28b11b27ebad2e76aafc5ac75faa8d36bba"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+      "sha256": "4e6312be138601e69d3de1da90dec397a1dab1e058ef2dd5626701ab848315ff"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/spec.md",
+      "sha256": "eae470d55e7bc46f90ff4e3176f291f5a8cbc0df286971bab6745b52c6c47f71"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/checklists/requirements.md",
+      "sha256": "67b05dfe11322701fc055536b8d74c2956d6400990661bae5e7cad87b95cbd48"
+    }
+  ],
+  "sensitiveValuesDetected": 0
+}

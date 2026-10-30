@@ -18,6 +18,19 @@ No aprueban composición/pago de orden, identidad de matrícula, precio, resulta
 exactamente al vencer, pagos tardíos/reembolsos, cancelación o abuso. RA-01/RA-03
 quedan parciales y las demás cuestiones abiertas; el plazo sigue siendo 24 h exactas.
 
+En RP003/clarify, el mismo día, se aprueban cinco reglas adicionales: el administrador
+fija precio por curso en PEN, conservado durante las 24 horas de reserva; una orden
+desglosada con un pago total y una matrícula por curso vinculada al grupo elegido;
+y verificación terminada estrictamente antes del vencimiento para confirmar matrícula.
+Al vencer o después se registra incidencia, sin matrícula ni reembolso automáticos
+ni extensión del plazo. Además, solo una orden con reservas vigentes por alumno
+(puede incluir varios cursos), y se impide cancelar grupos con reservas vigentes,
+matrículas o incidencias de pago sin resolver. Estas respuestas actualizan PD-01 y
+RA-01/03; RA-04/05/06 quedan parciales. No aprueban cancelación voluntaria,
+penalizaciones, excepciones ni resolución económica. RP003 conserva bloqueos tras
+cinco preguntas/respuestas; se requiere otra ronda de aclaración antes del plan.
+No hay implementación de reservas/pagos/matrícula.
+
 Antes de implementar una funcionalidad, sus decisiones bloqueantes deben resolverse o
 delimitarse en su especificación. Cada resolución registrará fecha, responsable, criterio,
 evidencia y especificaciones afectadas. Las reglas obligatorias de la
@@ -25,10 +38,10 @@ evidencia y especificaciones afectadas. Las reglas obligatorias de la
 
 | ID | Tema | Propuesta o pregunta por resolver | Evidencia o condición de cierre |
 | --- | --- | --- | --- |
-| D01 | Regla de pago | Propuesta: un pago por el total de la orden y matrícula por cada curso. ¿La activación es atómica? ¿Qué sucede si un curso pierde disponibilidad tras el cobro? | Regla validada y casos de aceptación de éxito, rechazo, pago tardío y falta de cupos antes de implementar órdenes/pagos. |
+| D01 | Regla de pago: parcialmente resuelta | Confirmado en RP003: una orden desglosada, un pago total y una matrícula por curso vinculada al grupo elegido. Precio por curso en PEN fijado por administrador y conservado 24 h. Verificación terminada antes de vencer; al vencer o después, incidencia sin matrícula/reembolso automáticos. Pendientes efectos ante pérdida de elegibilidad, vigencia/unicidad entre compras y resolución económica; no se da por cerrado el protocolo de confirmación. | Conservar respuestas de 003 y completar condiciones/casos de éxito, rechazo, incidencia tardía y falta de cupos antes de implementar órdenes/pagos. |
 | D02 | Pasarela: parcialmente resuelta | Izipay elegida para el MVP el 2026-09-23 por el responsable del proyecto; reemplaza la candidatura inicial de Culqi. Pendientes: tarifas finales, límites, acceso al entorno de pruebas y habilitación de Yape para la modalidad contratada. Integración no implementada. | Confirmar las condiciones para la modalidad contratada, definir verificación del proveedor y validar en su entorno de pruebas. Mantener pagos simulados para carga y separar al proveedor de órdenes/matrículas; no asumir capacidad ilimitada. |
 | D03 | Vigencia de matrícula | ¿Por período, fechas del curso o duración desde el pago? ¿Qué ocurre al cancelar o finalizar? | Estados y fechas que determinen acceso a materiales, chat y video. |
-| D04 | Reservas: parcialmente resuelta | Confirmado 2026-10-23: reserva previa al pago, 24 h exactas, pago verificado confirma matrícula y vencimiento libera cupo por conciliación consistente. El 2026-10-30 se confirman reservas conjuntas todas o ninguna y referencia al terminar verificación servidor. Pendientes composición de orden/pago, identidad, límite exacto/resolución tardía, cancelación y abuso. | RC-03–RC-06/RA-01–RA-06/RE-01–RE-10 del plan vigente y respuestas de 003. Aprobar políticas restantes antes de implementar; sin extensión por reconexión/reinicio/proceso atrasado ni capacidad ficticia. |
+| D04 | Reservas: parcialmente resuelta | Confirmado 2026-10-23: reserva previa al pago, 24 h exactas, pago verificado confirma matrícula y vencimiento libera cupo por conciliación consistente. El 2026-10-30 se confirman reservas conjuntas todas o ninguna, orden desglosada con pago total/matrícula por curso y referencia al terminar verificación servidor estrictamente antes de vencer. Al vencer o después, incidencia sin matrícula/reembolso automáticos. Solo una orden con reservas vigentes por alumno; no cancelar grupos con compromisos bloqueantes. Pendientes prioridad, unicidad entre compras, resolución económica, otras cancelaciones y reiteraciones/excepciones de abuso. | RC-03–RC-06/RA-01–RA-06/RE-01–RE-10 del plan vigente y respuestas de 003. Aprobar políticas restantes antes de implementar; sin extensión por reconexión/reinicio/proceso atrasado ni capacidad ficticia. |
 | D05 | Reembolsos | ¿Se admiten, en qué condiciones y por curso o por orden? ¿Cómo afectan matrícula y cupos? | Política validada y comportamiento definido antes de implementar cancelaciones o reembolsos. |
 | D06 | Horarios: oferta delimitada, matrícula pendiente | PA-05 del spec 002 resuelve programación docente semanal America/Lima, adyacencia y conflictos efectivos al publicar. ¿Se impide matrícula del alumno en cursos solapados y qué pasa ante cambios? | Conservar 002/E1; compatibilidad y efectos sobre reservas/matrículas requieren decisión en futuro spec, no quedan resueltos por describir horarios. |
 | D07 | Video y ancho de banda | YouTube Live con OBS es la elección vigente DA03/DEC01. Faltan validar calidad, latencia, simultaneidad, consumo y viabilidad dentro del presupuesto. | Prueba temprana de emisión y reproducción, tráfico observable, limitaciones y estimación sustentada de costo; integración no implementada. |
@@ -39,7 +52,7 @@ evidencia y especificaciones afectadas. Las reglas obligatorias de la
 | D12 | Materiales y paneles | Faltan formatos, tamaños, almacenamiento y operaciones mínimas por rol. | Alcance acotado por funcionalidad compatible con el plazo y el presupuesto. |
 | D13 | Actualización y recuperación: operación pendiente | Procedimiento local y restore aislado de identidad/oferta comprobados en T069; faltan custodia/ubicación externa, responsable, retención operada y objetivos RPO/RTO aprobados. | [T069](../specs/002-oferta-academica/evidence/recovery.md) no cierra D13: tiempos observados no son SLA. Antes de demo persistente/publicación, revisar esas condiciones y el destino real, sin prometer downgrade ni cambios posteriores al backup. |
 | D14 | Prioridad en apertura | ¿FIFO, turnos u otra política; qué instante y desempate fija orden de llegada? Acceso controlado no es reserva ni prioridad aprobada. | RA-02/VP003; regla explícita y casos de espera, rechazo, reconexión y último cupo antes de implementar. |
-| D15 | Bloqueo abusivo de cupos | ¿Cuántas reservas por cuenta/grupo y qué ocurre ante reiteración o abandono? ¿Excepciones, penalizaciones y recuperación? | RA-06; política aprobada y pruebas RE-10, sin inventar límites ni debilitar cuotas de seguridad de identidad. |
+| D15 | Bloqueo abusivo de cupos: parcialmente resuelta | RP003 aprueba una sola orden con reservas vigentes por alumno, con varios cursos posibles; repetir la misma intención recupera la existente. Pendientes límites adicionales por curso/grupo, reiteración/abandono, varias cuentas, excepciones, penalizaciones y recuperación. No concede cancelación voluntaria. | RA-06; conservar límite aprobado y completar política/pruebas RE-10, sin inventar otras cuotas ni debilitar seguridad de identidad. |
 
 ## Delimitación de oferta y pendientes heredados — 2026-10-29
 
