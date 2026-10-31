@@ -2,13 +2,15 @@
 
 Planificación del 2026-10-23; CT001 verificada en continuidad de oferta, RP001 en el
 inventario, RP002 como borrador/checklist, RP003 con tres rondas de aclaración y RP004
-como plan base del 2026-10-30. Hay cinco tareas documentales/continuidad completas y 17 pendientes;
+como plan base y RP005 como diseño temporal del 2026-10-30. Hay seis tareas
+documentales/continuidad completas y 16 pendientes;
 este backlog no autoriza implementar reservas, matrícula ni VPS.
 [Requisitos RC, decisiones RA y escenarios RE](reservas-capacidad.md).
 Numeración 003 confirmada: se conservan el inventario RP001 y su evidencia; RP002
 añade `spec.md` y checklist en ese directorio. RP003 resuelve/delimita el núcleo
 funcional; RP004 prepara plan/modelo/contratos/guía, con puertas D02/D05/D10/D13
-explícitas y sin aprobación global. RP005/RP006 siguen pendientes de diseño especializado;
+explícitas y sin aprobación global. RP005 concreta reloj y worker; RP006 sigue pendiente
+de conciliación especializada;
 todavía no existe tasks.md de implementación ni se ejecuta código o migraciones.
 Las tareas de oferta [002](../../specs/002-oferta-academica/tasks.md) conservan IDs,
 checkboxes y dependencias; este backlog no las mezcla ni renumera.
@@ -111,7 +113,27 @@ reales, D10/capacidad y D13/operación permanecen abiertos en sus etapas.
 Siguiente bloque: RP005; después RP006, RV001 y RP007, sin saltar a implementación.
 [Evidencia documental](../../specs/003-reservas-ordenes-matricula/evidence/rp004-results.json).
 
-- [ ] RP005 Diseñar en futuros `research.md`/`data-model.md` plazo persistido de 86 400 segundos, reloj servidor, límites exactos, reinicio y ejecución diferida idempotente; ninguna extensión por reintento/desconexión/worker retrasado. Dep.: RP003/RP004; RC-04, RE-03–RE-06.
+- [X] RP005 Diseñar en futuros `research.md`/`data-model.md` plazo persistido de 86 400 segundos, reloj servidor, límites exactos, reinicio y ejecución diferida idempotente; ninguna extensión por reintento/desconexión/worker retrasado. Dep.: RP003/RP004; RC-04, RE-03–RE-06.
+
+RP005 completa solo diseño de reloj/límites y ejecución diferida:
+[contrato T01–T07](../../specs/003-reservas-ordenes-matricula/contracts/time.md),
+[modelo actualizado](../../specs/003-reservas-ordenes-matricula/data-model.md) y
+[25 IDs de comprobación futura](../../specs/003-reservas-ordenes-matricula/temporal-verification.md).
+Captura única tras locks/recheck, timestamptz(6)/bigint microsegundos y UTC textual
+exacto; período civil America/Lima separado del plazo fijo de 86 400 segundos.
+Normalización de orden completa compartida con worker, mismo token en normalización
+oportuna/reserva nueva, efecto único y momento de procesamiento separado de expiresAt.
+Barrido finito con horizonte/cursor orientativos, single-flight y presupuesto único;
+55P03 no crea reintento inmediato. Reloj de pared exige salud operativa D13: fallar
+seguro ante retroceso detectado, sin prometer detectar todo salto o extender plazo.
+Sin código, SQL, servicios, pruebas de producto ni nuevas reglas de negocio.
+RP006 sigue pendiente para pago verificado sin conciliar, recibo durable y carreras
+con vencimiento/reasignación. No se supone ausencia de pago ni retención adicional.
+RV001/RP007, D02/sandbox, economía antes de cobros reales, D10/capacidad, D13 y los
+pendientes heredados no se cierran. Spec/quince respuestas/checklist12/16 intactos.
+[Revisión documental RP005](../../specs/003-reservas-ordenes-matricula/evidence/rp005-results.json).
+Siguiente bloque vigente: RP006, sin adelantar implementación.
+
 - [ ] RP006 Diseñar en futuros `contracts/`/`research.md` conciliación de pago/vencimiento/reasignación, con fuente temporal y precedencia aprobadas, resultado verificable de pagos tardíos y doble notificación; bloquear diseño no aprobado. Dep.: RP003/RP005; RA-03/04, RC-05/06, RE-07/08.
 - [ ] RP007 Generar tareas del futuro spec con pruebas antes de implementación y analizar correspondencia `spec.md`/`plan.md`/`tasks.md`; no producir migraciones/código hasta decisiones y puertas constitucionales completas. Dep.: RP004–RP006.
 

@@ -219,3 +219,36 @@ La investigación completa, fuentes primarias y decisiones R01–R08 están en e
 [contratos](contracts/integration.md) y [guía local](quickstart.md) son diseño futuro,
 sin ejecución de producto. Reloj/worker RP005 y conciliación RP006 continúan pendientes
 de revisión especializada antes de tareas; D02/D05/D10/D13 conservan sus puertas.
+
+## Precisión temporal — RP005, 2026-10-30
+
+Los registros anteriores RP001/RP004 conservan íntegro su contenido. El diseño
+corriente temporal es [T01–T07](contracts/time.md), con [matriz TV01–TV25](temporal-verification.md).
+Tres agentes investigaron en modo solo lectura; no hubo cambios de código ni ensayos.
+
+**Decisión**: timestamptz(6), bigint microsegundos y UTC de seis fracciones; captura
+única después de todos los locks/recheck y plazo fijo de 86 400 segundos. Normalización
+oportuna y confirmación comparten token; trabajador independiente usa el suyo.
+**Motivo**: impedir pérdida de precisión y decisiones con hora anterior a una espera.
+**Alternativas descartadas**: Date/float para decidir, parser pg global, reloj de
+inicio de transacción o del navegador y sumar un día civil como duración de reserva.
+
+**Decisión**: normalización conjunta idempotente, expirationProcessedAt separado del
+vencimiento efectivo y clave de efecto ORDER_EXPIRED/orderId sin ledger del timer.
+Worker en mismo proceso/pool, single-flight, sondeo inicial de 5 s, lote 20 y concurrencia 1
+como parámetros técnicos; horizonte finito de barrido y cursor orientativo.
+**Motivo**: recuperación desde órdenes persistidas sin extender 24 h ni postergar otras
+candidatas indefinidamente. **Alternativas descartadas**: timer por alumno, cola/lease
+extra, bucles de reintentos anidados o copiar política SMTP. 55P03 no es reintento inmediato.
+
+**Decisión**: preservar epoch negativo, límite derivado del año 10000 y snapshots
+civiles originales; reloj confiable como dependencia operativa D13. Ante retroceso
+conocido, fallo seguro sin mover plazos; no prometer detección universal de saltos.
+**Motivo**: UTC, precisión y terminales no convierten reloj de pared en monotónico.
+**Alternativas descartadas**: offset -05 constante para todo el calendario, saturación,
+watermark lógico como tiempo real o modificación de expiresAt para compensar errores.
+
+Fuentes primarias, justificación y límites están en el contrato. RP006 conserva
+verificación pendiente, recibo durable y conciliación/reasignación; no se da por
+resuelto ese protocolo por definir el reloj/worker. D02/D05/D10/D13 y aceptación
+humana/capacidad mantienen sus puertas. Sin tareas de implementación ni migraciones.

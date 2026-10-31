@@ -3,6 +3,8 @@
 Diseño, no interfaces implementadas. [Reglas](../spec.md), [modelo](../data-model.md),
 [decisiones técnicas](../research-rp004.md). Dominio/aplicación/public sin Nest,
 Prisma, pg ni imports de infraestructura. Entre módulos, solo superficies public.
+RP005 concreta [autoridad/precisión temporal y normalización](time.md), sin cerrar
+los hechos verificados pendientes ni las carreras de pago de RP006.
 
 ## Dueños y capacidades
 
@@ -14,6 +16,7 @@ Prisma, pg ni imports de infraestructura. Entre módulos, solo superficies publi
 | EnrollmentStore / ReservationCoordinator | aplicación enrollment → adaptadores propios | Confirmar selección/orden/reservas, consultar estados, registrar resultados/auditoría y ejecutar decisiones atómicas. No devolver conexión a la aplicación. |
 | PaymentGateway | enrollment/public/payments.ts → aplicación/adaptador | Iniciación idempotente y evidencia verificada normalizada para orden/importe/moneda. Adaptador real D02 separado de simulación exclusiva de pruebas. No acepta éxito del navegador. |
 | Acceso actual | authorization/public/session.ts + users/public/account.ts | SessionActor/Permission/tipos existentes; ampliar permisos según matriz del API. Revalidación dentro de transacción se ensambla en composición, sin ampliar SessionRepository con PoolClient. |
+| TemporalDecision / ExpirationNormalizer | aplicación enrollment → adaptador de la misma unidad de trabajo | Token exacto en microsegundos capturado después de todos los locks/recheck. Normalización oportuna recibe el mismo token de la nueva selección; worker independiente obtiene otro en su propia transacción. No reloj cliente, parser global o nueva transacción anidada. |
 
 AppModule e infraestructura de coordinación construyen participantes de cada módulo
 ligados al mismo PoolClient. Los callbacks reciben solo capacidades puras, efímeras
@@ -136,8 +139,9 @@ el pago ni inventar devolución. Una incidencia no libera por sí sola reservas 
 del vencimiento, no resuelve economía y no autoriza un segundo cobro. La lectura de
 vigencia no depende del worker; su materialización posterior debe ser idempotente.
 
-RP005 debe concretar captura/precisión temporal, worker y pruebas de límites/reinicio.
-RP006 debe completar recibo durable de verificación, carreras con liberación/reasignación,
+RP005 define captura/precisión temporal, worker y matriz pendiente de ejecución de
+límites/reinicio en time.md y temporal-verification.md. RP006 debe completar recibo
+durable de verificación, carreras con liberación/reasignación,
 fallo tras verificación externa e iniciación ambigua del proveedor. No mantener locks
 de BD durante llamadas externas ni asumir que una fecha anterior permite recuperar
 una plaza reasignada. La matriz completa y esos detalles son puerta antes de tareas

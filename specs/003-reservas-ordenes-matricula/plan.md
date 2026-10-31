@@ -4,9 +4,10 @@
 **Spec**: [spec.md](spec.md), quince aclaraciones conservadas.
 
 **Input**: RC-01–RC-07, HU10/HU11, RF11–RF13 y RA-01–RA-06/PD-01–PD-03.
-**Estado**: RP004, plan base y artefactos de fases 0/1 preparados. Diseño técnico,
-sin código, migraciones, servicios ni pruebas de producto ejecutados. RP005/RP006
-continúan pendientes de diseño especializado antes de tareas de implementación.
+**Estado**: RP004, plan base y artefactos de fases 0/1 preparados; RP005 concreta
+reloj/límites y normalización diferida. Diseño técnico sin código, migraciones,
+servicios ni pruebas de producto ejecutados. RP006 continúa pendiente de diseño
+especializado antes de tareas de implementación.
 
 ## Summary
 
@@ -37,6 +38,8 @@ package-lock sin actualizaciones ni nuevos servicios. Ningún SDK Izipay elegido
 **Storage**: PostgreSQL 16.14 registrado en entorno aislado; mismo pool. Prisma para
 modelos/migraciones futuras y pg para coordinación transaccional existente. Nuevas
 tablas aditivas después de 0005, sin modificar migraciones aplicadas ni datos actuales.
+RP005: timestamptz(6), bigint de microsegundos y cadenas UTC de seis fracciones;
+sin Date intermedio ni parser global. Duración fija de 86_400_000_000 microsegundos.
 
 **Testing**: Vitest 5.0.2 (dominio, arquitectura, PG/HTTP), Playwright 1.63.0. Harness
 real con schemas t_ de test, fixtures ficticios y permisos de migración separados.
@@ -66,14 +69,15 @@ definirán/medirán por separado. No ejecutar el perfil 10/25 ni cargas completa
 ## Constitution Check
 
 Constitución vigente 1.2.1, sin enmienda. Se revisó antes de investigar y después
-del diseño. Conforme por diseño no significa probado en código o aprobado globalmente.
+del diseño, incluida la revisión temporal RP005. Conforme por diseño no significa
+probado en código o aprobado globalmente.
 
-| Principio / puerta | Antes de fase 0 | Después de fase 1 de RP004 |
+| Principio / puerta | Antes de fase 0 | Después de fase 1 y precisión RP005 |
 | --- | --- | --- |
-| I. Incrementos Spec Kit | Spec y quince respuestas; núcleo aclarado/delimitado | Plan/modelo/contratos/guía. RP005/006 y después tareas/análisis antes de implementar; sin salto de etapa. |
+| I. Incrementos Spec Kit | Spec y quince respuestas; núcleo aclarado/delimitado | Plan/modelo/contratos/guía y diseño temporal RP005. RP006 y después tareas/análisis antes de implementar; sin salto de etapa. |
 | II. Autorización backend | Roles y sesiones actuales reutilizables | Matriz propia, pertenencia, reautorización y errores seguros; docente/visitante sin acceso financiero. Pruebas permitidas/denegadas previstas. |
 | III. Precios confiables | PD-01 y pago total aprobados | Precio explícito PEN, cálculo servidor y snapshots; importe cliente no es autoridad. Sin gratuidad, descuento o mínimos comerciales inferidos. |
-| IV. Cupos/matrículas | 24 h, unicidad, prioridad, cancelación/abuso delimitados | Locks comunes, inventario real y atomicidad; RP005/006 detallan reloj/conciliación antes de implementación. Último cupo no demostrado aún. |
+| IV. Cupos/matrículas | 24 h, unicidad, prioridad, cancelación/abuso delimitados | RP005 fija reloj preciso, token único y worker idempotente; RP006 debe completar conciliación. Locks/inventario/atomicidad son diseño, no último cupo demostrado. |
 | V. Confirmación de pagos | Izipay elegido, integración ausente | Puerto separado, sin confianza en navegador. Adaptador auténtico y sandbox siguen D02/RP006; no cobros reales. |
 | VI. Idempotencia | Repetición y pago duplicado obligatorios | Identidades persistidas sin ledgers duplicados; resultado/auditoría atómicos. Matriz de notificaciones y verificación diferida pendiente RP006. |
 | VII. Pruebas separadas | Carga simulada, proveedor fuera de carga | Simulador solo fixtures; sandbox real separado y obligatorio para integración. No SDK/firma/endpoints inventados. |
@@ -83,7 +87,7 @@ del diseño. Conforme por diseño no significa probado en código o aprobado glo
 | XI. Capacidad demostrable | T103 informe completo, capacidad no aprobada | D10/2500/escenario pendiente; sin nuevos ensayos ni rebautizar evidencia de 1000. S/300 total conservado. |
 | Arquitectura y costo | Monolito/pool/Compose existentes | Sin infraestructura nueva; coordinadoras en PostgreSQL con cuello de botella explícito, pendiente de medición. |
 
-**Resultado**: no excepciones constitucionales nuevas necesarias para RP004. La
+**Resultado**: no excepciones constitucionales nuevas necesarias para RP004/RP005. La
 delimitación explícita permite diseñar el núcleo funcional. No habilita producir
 implementación de pagos con protocolo inconcluso, cobros reales, demo persistente,
 publicación o aceptación de capacidad. No se elude una puerta pendiente con un mock.
@@ -100,9 +104,10 @@ specs/003-reservas-ordenes-matricula/
 ├── research-rp004.md              # decisiones actuales R01–R08 y fuentes
 ├── plan.md
 ├── data-model.md
-├── contracts/{api,integration,ui}.md
+├── contracts/{api,integration,ui,time}.md
+├── temporal-verification.md       # 25 casos de diseño, no pruebas ejecutadas
 ├── quickstart.md
-└── evidence/rp004-results.json    # revisión documental, no tests de producto
+└── evidence/{rp004,rp005}-results.json # revisiones documentales
 ```
 
 No se crea tasks.md del spec, SQL ni código. Este árbol es la salida documental.
@@ -201,7 +206,8 @@ configuración y datos manuales. No ejecutar nuevas migraciones durante planific
 Reutilizar scripts y Actions con ajuste mínimo para futura suite E2E; no ampliar el
 timeout de 20 min sin investigar. Smoke de identidad solo cuando cambien sus flujos.
 
-1. RP005: cerrar reloj, límites, normalización y worker/reinicio con matriz verificable.
+1. RP005: diseño de reloj, límites, normalización y worker/reinicio completado;
+   T01–T07 y TV01–TV25 no acreditan implementación o ensayos.
 2. RP006: cerrar conciliación, recibo durable, deduplicación y carreras pago/vencimiento/
    reasignación; D02/sandbox y política económica siguen puertas para cobros reales.
 3. RV001 y RP007: matriz completa, `$speckit-tasks` y `$speckit-analyze`; después,
@@ -211,6 +217,31 @@ timeout de 20 min sin investigar. Smoke de identidad solo cuando cambien sus flu
 No se cierran T073/T074 de oferta ni T104/T108 de identidad. T103 mantiene ejecución/
 informe sin capacidad aprobada. Bootstrap, timeouts históricos de arquitectura/B02/D10
 E2E, CI remoto, SMTP externo e INV-DOC-01 conservan sus pendientes reales.
+
+### Actualización RP005 — reloj y ejecución diferida
+
+[T01–T07](contracts/time.md) definen captura única después de todos los locks/recheck;
+la normalización oportuna recibe el mismo token que confirma la selección nueva.
+Un intento con rollback descarta su instante tentativo; replay/reinicio conserva
+confirmedAt/expiresAt persistidos, sin extender plazo. Límites inicial/final se
+convierten desde calendario civil America/Lima y se conservan en snapshots originales.
+
+El worker comparte una única normalización de orden completa, con efecto/auditoría
+únicos ORDER_EXPIRED/orderId y expirationProcessedAt separado del vencimiento efectivo.
+Sondeo inicial cada 5 s, lote 20 y concurrencia local 1 son parámetros técnicos,
+no gracia ni rendimiento aceptado. Barrido con horizonte finito y cursor orientativo,
+single-flight, arranque/cierre en el proceso/pool existentes; sin otra cola o lease.
+Se prevén application/expire-reservations.ts e infrastructure/expiration-{store,scheduler}.ts
+en enrollment, y pruebas bajo las rutas ya previstas. No se crean esos archivos ahora.
+
+[TV01–TV25](temporal-verification.md) registran límites, precisión, reinicio, worker
+retrasado/concurrente y fallos, sin ejecución. accountTransaction mantiene un solo
+presupuesto: 55P03 no añade reintento inmediato. Retroceso detectado del reloj implica
+indisponibilidad segura sin mover plazos; sincronización/detección operativa D13
+siguen siendo prerrequisitos, sin promesa de resistencia universal a saltos del host.
+RP006 debe cerrar verificación pendiente y carrera financiera antes de escritores;
+no se interpreta PENDING_RECONCILIATION como pago ausente o retención adicional.
+Siguiente bloque vigente: RP006; después RV001 y RP007.
 
 ## Complexity Tracking
 

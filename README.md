@@ -88,8 +88,14 @@ RP004 añade [plan](specs/003-reservas-ordenes-matricula/plan.md),
 [guía local futura](specs/003-reservas-ordenes-matricula/quickstart.md), sin código,
 SQL ni ensayos nuevos. Integra oferta/identidad mediante participantes públicos,
 admisión/despacho persistidos, inventario real y snapshots históricos.
-Siguiente bloque: **RP005**, reloj/límites/worker; después **RP006**, conciliación y
-carreras de pago/vencimiento. No se generan tareas de implementación antes de cerrar
+RP005 concreta [reloj/límites/worker](specs/003-reservas-ordenes-matricula/contracts/time.md)
+y [25 IDs de comprobación futura](specs/003-reservas-ordenes-matricula/temporal-verification.md):
+precisión exacta, instante único posterior a locks y materialización idempotente,
+sin cambiar el plazo ni ejecutar pruebas. Conserva salud horaria D13 y dependencia
+de pagos verificados pendientes, sin resolverlos por omisión.
+[Revisión documental RP005](specs/003-reservas-ordenes-matricula/evidence/rp005-results.json).
+Siguiente bloque: **RP006**, conciliación y carreras de pago/vencimiento.
+No se generan tareas de implementación antes de cerrar
 esos diseños y su matriz de verificación.
 [Revisión documental RP004](specs/003-reservas-ordenes-matricula/evidence/rp004-results.json).
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con

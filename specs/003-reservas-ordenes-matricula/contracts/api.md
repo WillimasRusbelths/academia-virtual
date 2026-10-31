@@ -84,6 +84,10 @@ añade `paymentAllowed=false` y mensaje genérico de oferta no disponible, sin e
 de cuenta, motivo privado o generación docente. No enviar referencias de sesión.
 
 Importes y revisiones: cadenas exactas; timestamps UTC; horario civil America/Lima.
+RP005 precisa los timestamps financieros como UTC con seis cifras fraccionarias;
+los límites derivados admiten año ISO ampliado. Lectores conservan su precisión,
+sin Date intermedio para decidir vigencia, igualdad o permiso de pago. Los tipos
+temporales históricos de identidad/oferta no cambian por este contrato 003.
 La validación de representación no aprueba mínimos, descuentos o gratuidad. Un importe
 cero explícito no da matrícula por omitir pago; modalidades cobrables y límites reales
 se verifican con proveedor en D02/RP006, antes de habilitar ese camino.

@@ -105,6 +105,12 @@ realmente incluidos. Vitest ejecutado no sustituye esa comprobación de tipos.
 
 RV001 debe completar detalle y trazabilidad especializada tras RP006. Esta matriz
 es guía de preparación, no tarea de pruebas implementada o aprobada.
+RP005 añade [contrato temporal](contracts/time.md) y [25 casos de diseño](temporal-verification.md):
+microsegundos antes/igual/después, mismo token tras locks, epoch negativo/año ampliado,
+worker detenido/concurrente, barrido acotado y recuperación de COMMIT incierto.
+No ejecutar esos casos en esta etapa ni confundir los 25 IDs con tests preparados.
+Para evidencia futura registrar versión de PostgreSQL/tzdata y salud de reloj;
+un retroceso arbitrario no queda resuelto por un estado terminal o contador local.
 
 | Nivel | Casos exigidos | Trazabilidad |
 | --- | --- | --- |

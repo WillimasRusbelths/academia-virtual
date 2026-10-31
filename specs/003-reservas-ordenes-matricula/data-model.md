@@ -1,16 +1,19 @@
 # Modelo de datos previsto — reservas, órdenes y matrícula
 
-**RP004, 2026-10-30**. Diseño aditivo, sin esquema generado ni aplicado.
+**RP004/RP005, 2026-10-30**. Diseño aditivo, sin esquema generado ni aplicado.
 Fuentes: [spec](spec.md), [investigación](research-rp004.md),
-[integración](contracts/integration.md). Reloj/worker RP005 y conciliación RP006
-permanecen pendientes de diseño especializado y revisión antes de tareas.
+[integración](contracts/integration.md) y [contrato temporal RP005](contracts/time.md).
+Reloj/worker definidos por diseño; conciliación RP006 permanece pendiente de diseño
+especializado y revisión antes de tareas. Ninguna garantía se presenta como ejecutada.
 
 ## Convenciones e identidades
 
 - UUID para entidades, intención y comando; revisiones positivas bigints representadas
   como cadenas. Identidad del alumno proviene de la sesión, nunca del cuerpo.
-- Instantes UTC persistidos; fechas civiles `YYYY-MM-DD`, franjas semanales y zona
-  America/Lima conservadas. RP005 fija precisión uniforme de captura/serialización.
+- Instantes UTC persistidos en timestamptz(6), bigint de microsegundos en dominio y
+  cadenas UTC de seis fracciones en transporte; sin Date intermedio ni parser global.
+  Fechas civiles `YYYY-MM-DD`, franjas y America/Lima conservadas. Límites derivados
+  admiten ISO ampliado para año 10000; epoch negativo se conserva sin truncamiento.
 - Dinero exacto PEN en unidades menores enteras; transporte mediante cadena decimal
   canónica. No flotantes, precio implícito, impuestos, descuentos o mínimos inventados.
   Ausencia de precio es distinta de un importe explícito; cero no activa matrícula.
@@ -27,8 +30,8 @@ permanecen pendientes de diseño especializado y revisión antes de tareas.
 | AdmissionSequence | id fijo, nextSequence | Fila creada por migración; contador transaccional, bloqueo hasta COMMIT de admisión. No secuencia de PostgreSQL como sustituto de prioridad durable. |
 | DispatchState | id fijo | Coordinadora distinta, sin reloj de negocio ni lease de cupo. Mutex hasta COMMIT de la decisión de la cabeza. |
 | ReservationRequest | id, studentId, intentionId, selectionDigest, groupIds canónicos, admittedAt, admissionSequence, actorSessionReference, authVersion, state, decisionCode, decidedAt | UNIQUE(studentId,intentionId), UNIQUE(admissionSequence). Orden derivada de EnrollmentOrder.requestId único, sin FK inversa redundante. Misma selección/intención recupera resultado. No guardar cookie o token. |
-| EnrollmentOrder | id, studentId, requestId, currency, totalMinor, state, revision, confirmedAt, expiresAt | UNIQUE(requestId). RESERVED, ENROLLED o EXPIRED. Inicio/vencimiento inmutables; diferencia exacta 86 400 s. Una orden con reservas vigentes por alumno. |
-| EnrollmentOrderItem | id, orderId, courseId, groupId, priceMinor, courseName, groupName, periodStart, periodEnd, timeZone, scheduleSnapshot | UNIQUE(orderId,courseId). Un grupo del curso por selección. Detalle, dinero y condiciones originales inmutables. Relación curso/grupo comprobada bajo locks del dueño oferta. |
+| EnrollmentOrder | id, studentId, requestId, currency, totalMinor, state, revision, confirmedAt, expiresAt, expirationProcessedAt nullable | UNIQUE(requestId). RESERVED, ENROLLED o EXPIRED. Inicio/vencimiento inmutables; diferencia exacta 86 400 s. expirationProcessedAt registra materialización, no instante efectivo del vencimiento. Una orden con reservas vigentes por alumno. |
+| EnrollmentOrderItem | id, orderId, courseId, groupId, priceMinor, courseName, groupName, periodStart, periodEnd, timeZone, groupStartAt, enrollmentValidUntil, scheduleSnapshot | UNIQUE(orderId,courseId). Un grupo del curso por selección. Detalle, dinero y condiciones originales inmutables. Límites civiles convertidos al confirmar reserva y conservados con el snapshot; matrícula copia su límite original, no lo recalcula tras cambios de tzdata. Relación curso/grupo comprobada bajo locks del dueño oferta. |
 | SeatReservation | id, orderItemId, state | UNIQUE(orderItemId). Usa confirmedAt/expiresAt de su orden; no copiar relojes divergentes. CONFIRMED, CONVERTED, EXPIRED. |
 | PaymentAttempt | id, orderId, studentId, initiationId, payloadDigest, state, providerReference nullable, createdAt | UNIQUE(studentId,initiationId) y FK compuesta (orderId,studentId) a la orden/titular. Iniciación recuperable; estado pendiente no es pago verificado. Protocolo externo completo en RP006/D02. |
 | VerifiedPayment | id, provider, providerPaymentId, orderId, amountMinor, currency, receivedAt, verificationFinishedAt, reconciliationState, reconciledAt nullable, normalizedEvidenceReference | UNIQUE(provider,providerPaymentId). Evidencia auténtica e inmutable; sin cuerpo arbitrario de callback, tarjeta, tokens o secretos. Resultado de verificación inválida no crea un pago verificado. |
@@ -36,7 +39,7 @@ permanecen pendientes de diseño especializado y revisión antes de tareas.
 | PaymentIncident | id, orderId, verifiedPaymentId, reason, affectedGroupIds, openedAt | Una incidencia por hecho/motivo normalizado, no una por notificación duplicada. Abierta; sin transición de resolución económica en este incremento. |
 | IncidentFollowUp | id, incidentId, adminUserId, commandId, recordedAt, content | Append-only; UNIQUE(actor,commandId) en ledger. No modifica compromisos ni resuelve incidencia. Proyección administrativa y resumen del alumno separados. |
 | EnrollmentCommand | actorKind, actorReference, commandId, operation, payloadDigest, outcomeCode, resourceReferences, resultingRevision, appliedAt | Clave (actorKind,actorReference,commandId); operación incluida en digest, sin namespace separado. Misma clave y operación diferente: conflicto. No reutilizar AcademicCommand ni duplicar payload privado en resultado. |
-| EnrollmentAuditEvent | id, actorKind/reference, operation, targetKind/id, commandId o providerEventId, requestId, occurredAt, before/afterRevision, result | Evento mínimo e inmutable; misma transacción que decisión/cambio/resultado. No fingir targetUserId ni acción GROUP_EDIT. |
+| EnrollmentAuditEvent | id, actorKind/reference, operation, targetKind/id, commandId o providerEventId, effectKey nullable, requestId, occurredAt, before/afterRevision, result | Evento mínimo e inmutable; misma transacción que decisión/cambio/resultado. Para expiración, effectKey único (ORDER_EXPIRED,orderId); sin otro ledger del timer ni auditoría por cada sondeo. No fingir targetUserId ni acción GROUP_EDIT. |
 
 PaymentAttempt conserva studentId obtenido de su orden para materializar esa UNIQUE,
 comprobado mediante FK compuesta; nunca recibido del cliente como autoridad.
@@ -94,11 +97,18 @@ tablas. Mismo lock protege D06: selección entre sí y contra compromisos propio
 vigentes, incluidos ocultos, con fechas/franjas originales y excluyendo vencidos.
 Al convertir, excluir las reservas de esa misma orden como falso autoconflicto.
 
-CHECK locales previstos: forma de estados/moneda, revisión positiva, relación exacta
-de plazo, períodos/snapshots coherentes y campos obligatorios por estado. Agregados
+CHECK locales previstos: forma de estados/moneda, revisión positiva, diferencia exacta
+de 86 400 segundos entre instantes de reserva (no un día civil), períodos/snapshots
+coherentes y campos obligatorios por estado. expirationProcessedAt solo se escribe
+en la transición materializada y no cambia expiresAt. Agregados
 como suma del total, capacidad y transiciones cruzadas se validan en la transacción;
 no prometer que un CHECK entre filas los garantiza. Las pruebas deben intentar violar
 también UNIQUE/FK/CHECK reales mediante el rol de pruebas autorizado.
+
+Worker y normalización oportuna usan la misma capacidad, identidad de efecto y token
+temporal por unidad de trabajo, conforme a T02/T05. Pago verificado pendiente de
+conciliación no se trata como ausencia de pago; los casos que dependen de ese hecho
+siguen RP006. No se implementa una retención de seguridad después del vencimiento.
 
 ## Oferta, habilitación y mantenimiento
 

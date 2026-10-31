@@ -39,6 +39,10 @@ Rutas UI previstas: `/reservar`, `/mis-ordenes`, `/mis-ordenes/:id`,
 Orden conserva detalle/precio originales y plazo exactamente confirmado. Mostrar
 `serverNow` para orientar el contador; reloj local solo ayuda visual, no decide vigencia.
 No recalcular inicio desde apertura, sesión, clic o recepción de respuesta.
+Conservar la cadena temporal exacta de seis fracciones de 003. Redondear solo para
+presentación; no clasificar el límite mediante un Date truncado o el contador local.
+Los límites derivados en año ISO ampliado se leen sin saturar fechas. El servidor
+puede informar vencimiento efectivo antes de su materialización por el worker.
 
 Iniciar pago es acción explícita recuperable. Distinguir inicio pendiente, pago sin
 verificar, matrícula confirmada, vencimiento y «Pago en conciliación, sin matrícula».
