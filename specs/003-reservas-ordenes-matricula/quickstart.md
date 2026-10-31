@@ -103,7 +103,8 @@ realmente incluidos. Vitest ejecutado no sustituye esa comprobación de tipos.
 
 ## Matriz base de comprobaciones pendientes
 
-RV001 debe completar detalle y trazabilidad integrada con RP006 ya diseñado. Esta matriz
+[RV001](verification.md) integra detalle/trazabilidad y [RP007](tasks.md) ordena
+las tareas, todavía pendientes de implementación. Esta matriz
 es guía de preparación, no tarea de pruebas implementada o aprobada.
 RP005 añade [contrato temporal](contracts/time.md) y [25 casos de diseño](temporal-verification.md):
 microsegundos antes/igual/después, mismo token tras locks, epoch negativo/año ampliado,

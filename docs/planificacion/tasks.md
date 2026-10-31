@@ -2,16 +2,18 @@
 
 Planificación del 2026-10-23; CT001 verificada en continuidad de oferta, RP001 en el
 inventario, RP002 como borrador/checklist, RP003 con tres rondas de aclaración y RP004
-como plan base, RP005 temporal y RP006 de conciliación del 2026-10-30. Hay siete tareas
-documentales/continuidad completas y 15 pendientes;
+como plan base, RP005 temporal, RP006 de conciliación y RV001 de verificación
+y RP007 de tareas/análisis del 2026-10-30. Hay nueve tareas documentales/continuidad
+completas y 13 pendientes;
 este backlog no autoriza implementar reservas, matrícula ni VPS.
 [Requisitos RC, decisiones RA y escenarios RE](reservas-capacidad.md).
 Numeración 003 confirmada: se conservan el inventario RP001 y su evidencia; RP002
 añade `spec.md` y checklist en ese directorio. RP003 resuelve/delimita el núcleo
 funcional; RP004 prepara plan/modelo/contratos/guía, con puertas D02/D05/D10/D13
 explícitas y sin aprobación global. RP005 concreta reloj/worker y RP006 conciliación;
-RV001 integrará las matrices antes de RP007;
-todavía no existe tasks.md de implementación ni se ejecuta código o migraciones.
+RV001 integra las matrices y RP007 genera tareas/análisis;
+tasks.md de implementación ya está generado, con todas sus tareas pendientes.
+No se ejecuta código ni migraciones.
 Las tareas de oferta [002](../../specs/002-oferta-academica/tasks.md) conservan IDs,
 checkboxes y dependencias; este backlog no las mezcla ni renumera.
 
@@ -148,13 +150,31 @@ Lectores esperan locks y proyectan después, sin cifras transitorias o locks tar
 Los30IDs son diseño de casos, cero tests implementados/ejecutados; TV03/25 tienen diseño,
 no aprobación por ejecución. Evidencia histórica, spec/quince respuestas/checklist12/16,
 constitución1.2.1 y entornos intactos. D02/sandbox, política económica, D10/D13 y pendientes
-humanos/bootstrap siguen abiertos. Siguiente bloque vigente: RV001; después RP007.
+humanos/bootstrap siguen abiertos. Al cierre de RP006, seguía RV001 y después RP007.
 
-- [ ] RP007 Generar tareas del futuro spec con pruebas antes de implementación y analizar correspondencia `spec.md`/`plan.md`/`tasks.md`; no producir migraciones/código hasta decisiones y puertas constitucionales completas. Dep.: RP004–RP006.
+- [X] RP007 Generar tareas del futuro spec con pruebas antes de implementación y analizar correspondencia `spec.md`/`plan.md`/`tasks.md`; no producir migraciones/código hasta decisiones y puertas constitucionales completas. Dep.: RP004–RP006.
+
+RP007 completa generación de [94tareas](../../specs/003-reservas-ordenes-matricula/tasks.md)
+y análisis de consistencia de solo lectura:24FR/8SC/47escenarios/10RE con cobertura,
+sin ciclos/dependencias inexistentes o nuevas contradicciones críticas/altas/medias.
+Siete fases:4preparación,18fundamentos,20US1,17US2,10US3,14US4 y11transversales.
+Todas las tareas de implementación siguen pendientes;26marcas[P] condicionadas a sus
+prerrequisitos. Se sincronizó solo el Status técnico del spec, sin cambiar las quince
+respuestas, requisitos o reglas. [Evidencia del bloque](../../specs/003-reservas-ordenes-matricula/evidence/rv001-rp007-results.json).
+Primer bloque de implementación recomendado: T001–T004. D02/sandbox, economía antes
+de cobros reales, D10/D13, bootstrap y pendientes humanos001/002 permanecen abiertos.
 
 ## Verificación a incluir en las tareas futuras
 
-- [ ] RV001 Definir UNIT/PG/HTTP/E2E en futuro `verification.md` para RC-03–RC-06 y RE-01–RE-10, con trazabilidad, permisos por actor y privacidad; separar automatización de aceptación humana. Dep.: RP004/RP006.
+- [X] RV001 Definir UNIT/PG/HTTP/E2E en futuro `verification.md` para RC-03–RC-06 y RE-01–RE-10, con trazabilidad, permisos por actor y privacidad; separar automatización de aceptación humana. Dep.: RP004/RP006.
+
+RV001 completa únicamente [diseño de verificación](../../specs/003-reservas-ordenes-matricula/verification.md):
+24FR,8SC,47escenarios y10RE con niveles UNIT/PG/HTTP/E2E, privacidad/roles,
+TV/PV sin doble conteo, sandbox/humanos/capacidad separados. Cero pruebas de producto
+preparadas o ejecutadas por redactar esa matriz. RV002–RV004 conservan sus casillas
+pendientes y se trazan a las tareas concretas del spec003. RP007 completa generación
+y análisis de las94tareas; no hay implementación/migraciones o cargas aquí.
+
 - [ ] RV002 Preparar pruebas PG reales con barreras/estado final en futuras `apps/api/tests/integration/reservations-*.spec.ts`: último cupo, duplicado, pago vs vencimiento en ambos órdenes, rollback de auditoría y reinicio; sin simulaciones de atomicidad ni pools manuales. Dep.: RP007/RV001 y diseño aprobado; RE-01–RE-08.
 - [ ] RV003 Preparar pruebas de pago duplicado/alterado/tardío y cancelación de grupo en futura `apps/api/tests/integration/enrollment-payments.spec.ts` según RA-04/05; carga con pagos simulados, adaptador Izipay en sandbox aparte. Dep.: RP006/RP007; RC-05/06, RE-07–RE-09; D02/D05.
 - [ ] RV004 Preparar pruebas de abuso/operaciones denegadas según RA-06 en futura `apps/api/tests/integration/reservation-authorization.spec.ts` y E2E reserva→pago→matrícula/expiración en futura `apps/web/tests/e2e/enrollment.spec.ts`; no inventar sanciones, ventanas o cuotas, ni automatizar reenvíos al iniciar sesión. Dep.: RP003/RP007; RE-03/10.

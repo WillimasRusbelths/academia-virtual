@@ -5,8 +5,9 @@
 **Created**: 2026-10-30, America/Lima.
 
 **Status**: Reglas funcionales aclaradas/delimitadas tras tres rondas RP003 de cinco
-respuestas cada una. Sin plan ni implementación; aprobación global de capacidad,
-integración del proveedor y operación pendientes en sus etapas.
+respuestas cada una. Plan, contratos, matriz de verificación y tareas preparados;
+sin implementación. Aprobación global de capacidad, integración del proveedor y
+operación pendientes en sus etapas.
 
 **Input**: El alumno reserva antes de pagar; la reserva confirmada por el servidor
 conserva el cupo durante exactamente 24 horas. El pago verificado confirma matrícula;

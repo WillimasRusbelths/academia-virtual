@@ -6,7 +6,8 @@
 **Input**: RC-01–RC-07, HU10/HU11, RF11–RF13 y RA-01–RA-06/PD-01–PD-03.
 **Estado**: RP004–RP006, diseño base, reloj/worker y conciliación preparados.
 Diseño técnico sin código, migraciones, servicios ni pruebas de producto ejecutados.
-RV001 debe integrar la matriz de verificación antes de RP007/tareas/análisis.
+RV001 integra la [verificación](verification.md); RP007 genera [tareas](tasks.md)
+y requiere análisis de consistencia antes de implementar. No acredita pruebas de producto.
 
 ## Summary
 
@@ -107,11 +108,13 @@ specs/003-reservas-ordenes-matricula/
 ├── contracts/{api,integration,ui,time,payments}.md
 ├── temporal-verification.md       # 25 IDs temporales de diseño
 ├── payment-verification.md        # 30 IDs financieros de diseño, cero ejecuciones
+├── verification.md               # cobertura integrada, RV001
+├── tasks.md                      # tareas por historia, RP007
 ├── quickstart.md
 └── evidence/{rp004,rp005,rp006}-results.json # revisiones documentales
 ```
 
-No se crea tasks.md del spec, SQL ni código. Este árbol es la salida documental.
+RP007 añade tasks.md del spec. No se crea SQL ni código; este árbol es salida documental.
 
 ### Source Code (repository root)
 
@@ -177,8 +180,9 @@ finalizado conserva período/franjas/validUntil originales y no se reactiva al e
 ## Verificación y trazabilidad
 
 La [guía local](quickstart.md) define prerrequisitos y recorridos futuros, y separa
-UNIT/PG/HTTP/E2E de controles auxiliares, sandbox y observación humana. RV001 debe
-completar la matriz especializada tras RP006 antes de generar tareas.
+UNIT/PG/HTTP/E2E de controles auxiliares, sandbox y observación humana.
+[RV001](verification.md) integra24FR/8SC/47escenarios/10RE y los IDs TV/PV;
+[tareas RP007](tasks.md) mantienen pendientes todas las implementaciones.
 
 | Requisitos | Historias / casos | Artefactos y comprobación prevista |
 | --- | --- | --- |
@@ -274,7 +278,24 @@ ahora; recibos/intentos reutilizan proceso/pool y fairness T06 con sus claves pr
 sin otro servicio, lease que autorice cobro o ledger económico duplicado.
 [PV01–PV30](payment-verification.md) son familias de casos pendientes de preparar,
 no 30 pruebas implementadas. TV03/TV25 quedan definidos por diseño, no por ejecución.
-Siguiente bloque vigente: RV001; después RP007. Ninguna puerta externa queda aprobada.
+RV001 y generación RP007 completan las salidas documentales; el análisis debe
+comprobar su consistencia antes de implementar. Ninguna puerta externa queda aprobada.
+
+### Preparación de implementación RV001/RP007
+
+La matriz verification.md une niveles, fuentes RC/HU/RF,24FR/8SC,47escenarios y10RE
+con TV/PV sin tratarlos como tests ejecutados. tasks.md define94tareas pendientes,
+con criterios, rutas, dependencias, pruebas antes del comportamiento y checkpoints.
+Guard de compromisos T017 antes de reservas; normalizador real T032 antes de una
+nueva orden, schedulerUS3 después. Precio backend compartido T022, UI completaUS4.
+El núcleo local de pagos no suplanta D02 y permite verificar US3/US4 sin esperar
+el adaptador externo. No habilita cobros reales sin economía aprobada.
+
+Se sincroniza solo el Status técnico del spec que aún decía «Sin plan»; las quince
+respuestas, requisitos, escenarios y reglas conservan su contenido. Primer bloque
+recomendado tras análisis: T001–T004, sin avanzar automáticamente al resto.
+T084 separa checkpoint técnico de T094 integral y de D02/HUMANA/D10/D13. Los
+pendientes históricos y la evidencia001/002 siguen abiertos y conservados.
 
 ## Complexity Tracking
 

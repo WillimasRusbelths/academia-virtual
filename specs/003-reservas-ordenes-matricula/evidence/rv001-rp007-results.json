@@ -1,0 +1,411 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "tasks": [
+    "RV001",
+    "RP007"
+  ],
+  "status": "PLANIFICACION_COMPLETA_IMPLEMENTACION_PENDIENTE",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "baseCommit": "106ee9a2cae047da3673eb48ea4821ee61994fdd",
+  "skills": [
+    "speckit-tasks",
+    "speckit-analyze"
+  ],
+  "setup": {
+    "tasks": {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File D:/Proyectos/academia-virtual/.specify/scripts/powershell/setup-tasks.ps1 -Json",
+      "exitCode": 0,
+      "featureDir": "specs/003-reservas-ordenes-matricula",
+      "templateContentConsumed": true
+    },
+    "analysis": {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File D:/Proyectos/academia-virtual/.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireSpec -RequireTasks -IncludeTasks",
+      "exitCode": 0,
+      "runOnce": true
+    }
+  },
+  "artifacts": {
+    "verification": "specs/003-reservas-ordenes-matricula/verification.md",
+    "tasks": "specs/003-reservas-ordenes-matricula/tasks.md",
+    "updated": [
+      "README.md",
+      "docs/planificacion/tasks.md",
+      "specs/003-reservas-ordenes-matricula/spec.md",
+      "specs/003-reservas-ordenes-matricula/plan.md",
+      "specs/003-reservas-ordenes-matricula/quickstart.md"
+    ]
+  },
+  "generatedTasks": {
+    "total": 94,
+    "complete": 0,
+    "pending": 94,
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Preparación",
+        "tasks": 4,
+        "range": "T001-T004"
+      },
+      {
+        "phase": 2,
+        "name": "Fundamentos",
+        "tasks": 18,
+        "range": "T005-T022"
+      },
+      {
+        "phase": 3,
+        "name": "US1 P1",
+        "tasks": 20,
+        "range": "T023-T042"
+      },
+      {
+        "phase": 4,
+        "name": "US2 P1",
+        "tasks": 17,
+        "range": "T043-T059"
+      },
+      {
+        "phase": 5,
+        "name": "US3 P1",
+        "tasks": 10,
+        "range": "T060-T069"
+      },
+      {
+        "phase": 6,
+        "name": "US4 P2",
+        "tasks": 14,
+        "range": "T070-T083"
+      },
+      {
+        "phase": 7,
+        "name": "Transversal/puertas",
+        "tasks": 11,
+        "range": "T084-T094"
+      }
+    ],
+    "byStory": {
+      "US1": 20,
+      "US2": 17,
+      "US3": 10,
+      "US4": 14
+    },
+    "parallel": 26,
+    "parallelIds": [
+      "T005",
+      "T006",
+      "T011",
+      "T013",
+      "T016",
+      "T019",
+      "T021",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028",
+      "T043",
+      "T044",
+      "T045",
+      "T046",
+      "T047",
+      "T060",
+      "T061",
+      "T062",
+      "T070",
+      "T071",
+      "T072",
+      "T087",
+      "T088"
+    ],
+    "formatValidated": true,
+    "dependencyGraphAcyclic": true,
+    "missingDependencies": 0,
+    "taskDescriptionsIncludePathsDependenciesAndMeasurableCompletion": true,
+    "quotedModelEntities": 15,
+    "redPhasePreparationNotBehaviorApproval": true,
+    "firstBlock": "T001-T004",
+    "MVP": "Fundamentos y US1 local: reserva y orden consultables sin habilitar cobros; D13 antes de demo persistente."
+  },
+  "verification": {
+    "functionalRequirements": 24,
+    "successCriteria": 8,
+    "acceptanceScenarios": 47,
+    "acceptanceByStory": {
+      "US1": 17,
+      "US2": 12,
+      "US3": 5,
+      "US4": 13
+    },
+    "edgeCases": 10,
+    "temporalIdsPreserved": 25,
+    "financialDesignFamiliesPreserved": 30,
+    "designIdsNotAssertedAsUniqueTests": true,
+    "levels": [
+      "UNIT",
+      "POSTGRESQL_REAL",
+      "HTTP_REAL",
+      "E2E",
+      "SANDBOX_SEPARADO",
+      "HUMANA",
+      "OPERACION24H",
+      "VPS_POSTERIOR"
+    ],
+    "confirmedSources": [
+      "RC-03",
+      "RC-04",
+      "RC-05",
+      "RC-06",
+      "HU10",
+      "HU11",
+      "RF11",
+      "RF12",
+      "RF13"
+    ],
+    "allCasesUnimplementedAndUnexecuted": true
+  },
+  "analysis": {
+    "skill": "speckit-analyze",
+    "execution": "SOLO_LECTURA",
+    "coreArtifactsUnchangedDuringAndAfterAnalysis": true,
+    "artifactHashes": {
+      "specs/003-reservas-ordenes-matricula/spec.md": "a43d766e1b7c3534f67429568ac3ed3939e01e4c4784f59ec6fce462294b3d77",
+      "specs/003-reservas-ordenes-matricula/plan.md": "394b89cfaa85a0cf44869b8b8cc46541032db7d9914ed05a4a95a42851557556",
+      "specs/003-reservas-ordenes-matricula/tasks.md": "a3b7c24caa0e5d521a8b269b7655edae9fec81f3fd1f643e8b7f376d49322039",
+      "specs/003-reservas-ordenes-matricula/verification.md": "6ff0f8bb46b2619cf455025b6cd3e262fefce2095307e9b61c8055a9a48f68ae",
+      ".specify/memory/constitution.md": "09f1e8a1ce63f354575860a85cd12ae20ab5c537f5ef4662d901f997fba1081a"
+    },
+    "newFindings": [],
+    "severityCounts": {
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 0,
+      "LOW": 0
+    },
+    "requirementsCoverage": "24/24",
+    "successCriteriaCoverage": "8/8 con puertas explícitas; SC-008 no aprobado",
+    "acceptanceCoverage": "47/47 por rangos completos",
+    "edgeCoverage": "10/10",
+    "coveragePercent": 100,
+    "coverageMeans": "Tareas previstas y correspondencia semántica revisadas; no comportamiento demostrado.",
+    "unmappedTasks": 0,
+    "missingDependencies": 0,
+    "cycles": 0,
+    "ambiguitiesIntroduced": 0,
+    "duplicationsRequiringRemediation": 0,
+    "constitutionConflicts": 0,
+    "inheritedFinding": {
+      "id": "INV-DOC-01",
+      "severity": "MEDIA_HISTORICA",
+      "state": "ABIERTO",
+      "followUp": "T087 sincroniza fuentes tras comportamiento verificado, sin afirmar corrección hoy."
+    },
+    "semanticReview": [
+      "Admisión durable y despacho RA-02 separados; no nextval/SKIP LOCKED como prueba de prioridad.",
+      "Guard T017 antes de reservas y descripción T018; precio backend T022 compartido, UI completa US4.",
+      "Normalizador real compartido T032 antes de crear otra orden, mismo token de la unión; US3 añade scheduler, no otro algoritmo/ledger.",
+      "Recibo técnico separado de pago terminal; finalización/negocio/resultado/auditoría atómicos y lectura postlocks.",
+      "Replay autorizado antes de condiciones mutables; respuesta tardía no rebaja terminal; recuperación no cobra de nuevo.",
+      "Scope económico, dinero incompatible y referencia desconocida conservados sin adjudicar alumno/grupos arbitrarios.",
+      "Núcleo local permite US3/US4 sin esperar D02; T055 local y T059 proveedor separados.",
+      "Checkpoint técnico T084 no completa humanos, D13 o D10; aceptación integral T094 depende de evidencia."
+    ],
+    "reportDeliveredInConversation": true,
+    "analysisDidNotWriteReportFile": true,
+    "outerWorkflowRecordedCompletionAfterReadOnlyAnalysis": true
+  },
+  "constitution": {
+    "version": "1.2.1",
+    "unchanged": true,
+    "principlesReviewed": 11,
+    "exceptionsRequired": false,
+    "scope": "Conforme por planificación; no implementación, integración real, operación, capacidad o cobros aprobados."
+  },
+  "preservation": {
+    "trackedBaseline": 699,
+    "otherTrackedUnchanged": 694,
+    "protectedUnchanged": 72,
+    "clarificationsPreservedVerbatim": 15,
+    "specChange": "Solo Status técnico sin plan→plan/contratos/verificación/tareas preparados; todo el resto idéntico.",
+    "checklistUnchanged": "12/16",
+    "researchByteForByteUnchanged": true,
+    "allPriorEvidenceUnchanged": true,
+    "spec001Spec002CodeSchemaMigrationsConfigurationAccountsFixturesUntouched": true,
+    "manualAndIsolatedServicesVolumesNotOperated": true,
+    "migrationsExisting": 5,
+    "T103": "COMPLETA_EJECUCION_INFORME_CAPACIDAD_SIN_APROBAR",
+    "T104": "PENDIENTE",
+    "T108": "PENDIENTE",
+    "T073_002": "PENDIENTE",
+    "T074_002": "PENDIENTE",
+    "bootstrap": "ABIERTO"
+  },
+  "backlog": {
+    "total": 22,
+    "complete": 9,
+    "pending": 13,
+    "onlyMarkersChanged": [
+      "RV001",
+      "RP007"
+    ],
+    "allDescriptionsPreserved": true,
+    "RV002": "PENDIENTE",
+    "RV003": "PENDIENTE",
+    "RV004": "PENDIENTE"
+  },
+  "documentation": {
+    "documentsChecked": 85,
+    "localLinksChecked": 1406,
+    "brokenLinks": 0,
+    "markdownTables": 16,
+    "guidePowerShellSyntax": {
+      "blocks": 4,
+      "parseErrors": 0,
+      "executed": false
+    },
+    "coreArtifactsReadOnlyAnalysisHashesUnchanged": true,
+    "sensitiveValuesDetected": 0,
+    "whitespaceErrors": 0
+  },
+  "commands": [
+    {
+      "command": "setup-tasks.ps1 -Json",
+      "exitCode": 0
+    },
+    {
+      "command": "check-prerequisites.ps1 -Json -RequireSpec -RequireTasks -IncludeTasks",
+      "exitCode": 0
+    },
+    {
+      "command": "node .cache/reservas-rv001-rp007/check.mjs",
+      "exitCode": 0,
+      "purpose": "Control documental de formato/IDs/rutas/dependencias/cobertura/enlaces/preservación, no suite de producto."
+    },
+    {
+      "command": "PowerShell Parser::ParseInput sobre cuatro bloques de quickstart",
+      "parseErrors": 0,
+      "commandsInBlocksExecuted": false
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "finalTrackingCorrection": "La revisión del diff detectó una frase heredada del backlog que aún decía no existe tasks.md; se sincronizó antes del commit. No se alteraron los artefactos analizados.",
+  "draftCorrectionsBeforeAnalysis": [
+    {
+      "severity": "MEDIA",
+      "detail": "Guard común y normalización oportuna ubicados antes de reservas, sin depender de UIUS4 o schedulerUS3."
+    },
+    {
+      "severity": "BAJA",
+      "detail": "Estado del spec aún decía Sin plan; sincronizado solo su Status técnico."
+    },
+    {
+      "severity": "BAJA",
+      "detail": "Ruta abreviada de T018 detectada por control; completada sin cambiar regla."
+    },
+    {
+      "severity": "BAJA",
+      "detail": "Rangos RC/HU/RF y47escenarios/TV/PV integrados explícitamente sin doble conteo."
+    }
+  ],
+  "auxiliaryCorrections": [
+    {
+      "kind": "VERIFICADOR_NAMESPACE",
+      "detail": "Dos ejecuciones se detuvieron al interpretar T104/T108 y luego T103 históricos001 como tareas003. Se corrigió namespace contrastando las tareas reales, sin cambiar expectativas."
+    },
+    {
+      "kind": "ANALISIS_LECTURA",
+      "detail": "Primer regex de ordinales devolvió0 por anclaje de fin de línea; corregido mediante separación de historias, confirmó17/12/5/13. Ninguna escritura durante análisis."
+    },
+    {
+      "kind": "INVOCACION_TOOL",
+      "detail": "Una llamada de lectura no llegó a ejecutarse por delimitación JavaScript; repetida correctamente. No fue fallo de producto."
+    }
+  ],
+  "hooks": {
+    "beforeTasks": "NO_EXTENSION_FILE",
+    "afterTasks": "NO_EXTENSION_FILE",
+    "beforeAnalyze": "NO_EXTENSION_FILE",
+    "afterAnalyze": "NO_EXTENSION_FILE"
+  },
+  "externalGates": [
+    {
+      "id": "D02",
+      "state": "PENDIENTE",
+      "tasks": "T056-T059",
+      "missing": "Modalidad, acceso sandbox, autenticidad, IDs/dinero, consulta/idempotencia, recuperación y garantías reales del proveedor."
+    },
+    {
+      "id": "D05_RA04",
+      "state": "PENDIENTE_ANTES_DE_COBROS_REALES",
+      "missing": "Política/procedimiento económicos autorizados; seguimiento no resuelve ni devuelve dinero."
+    },
+    {
+      "id": "HUMANA",
+      "state": "PENDIENTE",
+      "tasks": "T042/T083/T089",
+      "missing": "Participantes/observación reales; no sustituye humanos001/002."
+    },
+    {
+      "id": "D13",
+      "state": "PENDIENTE",
+      "tasks": "T086/T090",
+      "missing": "Restore, salud temporal, custodia/retención/RPO/RTO y ensayo24h real antes de demo persistente/publicación."
+    },
+    {
+      "id": "D10",
+      "state": "PENDIENTE",
+      "tasks": "T091-T093 y VP001-VP008",
+      "missing": "Rúbrica/escenario/infraestructura/presupuesto/autorización y evidencia de2500activos; no extrapolar1000 históricos."
+    }
+  ],
+  "limits": {
+    "implementationStarted": false,
+    "productTestsExecuted": 0,
+    "npmCommandsExecuted": 0,
+    "sqlExecuted": false,
+    "migrationsGenerated": false,
+    "servicesOperated": false,
+    "smokesExecuted": false,
+    "loadExecuted": false,
+    "realChargesEnabled": false,
+    "capacity1000Approved": false,
+    "capacity2500Approved": false,
+    "AWSAdopted": false,
+    "servicesContracted": false
+  },
+  "next": "Implementar únicamente T001-T004 con speckit-implement: inventario, entorno aislado, fixtures y runner/tipado; detenerse antes de T005.",
+  "sourceHashes": [
+    {
+      "path": "README.md",
+      "sha256": "5c435187f4a886280bcd6c8a3db303a48fafe12645d1885c5c91d61f82ffe2a0"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "66c310db23a2e0379a15fb3c7f0552ea59d91ea9c61f78fd654b0f66c72c0f8d"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/spec.md",
+      "sha256": "a43d766e1b7c3534f67429568ac3ed3939e01e4c4784f59ec6fce462294b3d77"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/plan.md",
+      "sha256": "394b89cfaa85a0cf44869b8b8cc46541032db7d9914ed05a4a95a42851557556"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/quickstart.md",
+      "sha256": "199aa9a073d0f9b4093efa07f6487f165d9dad0305d7c11a57f3e3ef723be609"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/tasks.md",
+      "sha256": "a3b7c24caa0e5d521a8b269b7655edae9fec81f3fd1f643e8b7f376d49322039"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/verification.md",
+      "sha256": "6ff0f8bb46b2619cf455025b6cd3e262fefce2095307e9b61c8055a9a48f68ae"
+    }
+  ]
+}

@@ -99,7 +99,12 @@ y [30 IDs financieros futuros](specs/003-reservas-ordenes-matricula/payment-veri
 recibo técnico separado del pago final atómico, iniciación incierta recuperable y
 lecturas coordinadas. No es implementación, sandbox ni aprobación de cobros.
 [Revisión documental RP006](specs/003-reservas-ordenes-matricula/evidence/rp006-results.json).
-Siguiente bloque: **RV001**, matriz integrada de verificación; después RP007/tareas/análisis.
+RV001 prepara la [matriz integrada](specs/003-reservas-ordenes-matricula/verification.md)
+y RP007 las [94 tareas pendientes](specs/003-reservas-ordenes-matricula/tasks.md),
+con pruebas/checkpoints y puertas externas separadas. El análisis de consistencia
+no detectó contradicciones nuevas críticas/altas/medias; no acredita comportamiento.
+[Revisión RV001/RP007](specs/003-reservas-ordenes-matricula/evidence/rv001-rp007-results.json).
+Primer bloque recomendado de implementación: **T001–T004**.
 [Revisión documental RP004](specs/003-reservas-ordenes-matricula/evidence/rp004-results.json).
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
