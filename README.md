@@ -75,12 +75,23 @@ y sustitución docente siguiendo 002; se bloquean curso, período, horarios, cap
 y cancelación. Historial finalizado no bloquea ni se reactiva por edición/republicación.
 Sin cancelación/modificación voluntaria de compromisos; tras vencer sin pago se puede
 intentar de nuevo, sin sanción ni espera adicional por abandono y sin renovar la misma intención.
-Las reglas funcionales quedan resueltas o delimitadas; siguiente bloque RP004/plan
+Las reglas funcionales quedan resueltas o delimitadas; RP004 prepara el plan base
 funcional con puertas explícitas de Izipay, resolución económica antes de cobros reales,
 D10/capacidad y D13/operación. Checklist **11/16 → 12/16**, sin regresiones; sus notas
 históricas se conservan. No es aprobación global ni implementación de reservas.
 Constitución 1.2.1 intacta; la aceptación humana de 002 sigue aplazada.
 [Revisión de tercera ronda](specs/003-reservas-ordenes-matricula/evidence/rp003-round3-results.json).
+RP004 añade [plan](specs/003-reservas-ordenes-matricula/plan.md),
+[investigación técnica](specs/003-reservas-ordenes-matricula/research-rp004.md),
+[modelo](specs/003-reservas-ordenes-matricula/data-model.md),
+[contratos](specs/003-reservas-ordenes-matricula/contracts/integration.md) y
+[guía local futura](specs/003-reservas-ordenes-matricula/quickstart.md), sin código,
+SQL ni ensayos nuevos. Integra oferta/identidad mediante participantes públicos,
+admisión/despacho persistidos, inventario real y snapshots históricos.
+Siguiente bloque: **RP005**, reloj/límites/worker; después **RP006**, conciliación y
+carreras de pago/vencimiento. No se generan tareas de implementación antes de cerrar
+esos diseños y su matriz de verificación.
+[Revisión documental RP004](specs/003-reservas-ordenes-matricula/evidence/rp004-results.json).
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)

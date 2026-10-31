@@ -199,3 +199,23 @@ por RP001. Resolver rama `feat/003-reservas-ordenes-matricula` y puntero con el
 procedimiento de Spec Kit vigente; no renumerar a 004 ni sobrescribir investigación.
 La rama documental se basa en 002 para disponer de código real; esto no integra
 002 en main ni autoriza cerrar sus dos tareas humanas/integrales pendientes.
+
+## Investigación de fase 0 — RP004, 2026-10-30
+
+El inventario anterior se conserva íntegro como registro RP001. El estado corriente
+de negocio está en [spec.md](spec.md), con quince aclaraciones; la constitución
+vigente es 1.2.1. No se reinterpretan sus antiguos pendientes como reglas actuales.
+
+**Decisión**: monolito/pool existentes, participantes públicos ligados a una misma
+transacción, admisión y despacho persistidos con coordinadoras independientes,
+conteo real bajo locks y snapshots históricos sin reactivación.
+**Motivo**: cumplir prioridad, atomicidad, privacidad y continuidad aprobadas sin
+consumir cupos mediante un GET ni duplicar autoridades.
+**Alternativas consideradas**: cola en memoria, nextval como prioridad de commits,
+SKIP LOCKED en despacho, contador de ocupación duplicado y transacciones anidadas.
+
+La investigación completa, fuentes primarias y decisiones R01–R08 están en el
+[suplemento RP004](research-rp004.md). [Plan](plan.md), [datos](data-model.md),
+[contratos](contracts/integration.md) y [guía local](quickstart.md) son diseño futuro,
+sin ejecución de producto. Reloj/worker RP005 y conciliación RP006 continúan pendientes
+de revisión especializada antes de tareas; D02/D05/D10/D13 conservan sus puertas.

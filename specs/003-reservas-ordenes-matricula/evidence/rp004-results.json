@@ -1,0 +1,268 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "task": "RP004",
+  "status": "PLAN_BASE_Y_ARTEFACTOS_PREPARADOS_SIN_IMPLEMENTACION",
+  "baseCommit": "a1de79b734c6cfe7649b60847012ead66d741215",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "skill": "speckit-plan",
+  "setup": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File D:/Proyectos/academia-virtual/.specify/scripts/powershell/setup-plan.ps1 -Json",
+    "exitCode": 0,
+    "featureDirectory": "specs/003-reservas-ordenes-matricula",
+    "helperBranchAlias": "003-reservas-ordenes-matricula",
+    "actualGitBranch": "feat/003-reservas-ordenes-matricula",
+    "templateResolved": true
+  },
+  "agents": {
+    "research": 3,
+    "readOnly": true,
+    "researchAreas": [
+      "Protocolo transaccional y prioridad",
+      "Modelo de datos e identidades",
+      "Contratos y verificación local"
+    ],
+    "designReviewCompleted": true,
+    "servicesOrTestsExecuted": false
+  },
+  "artifacts": [
+    "specs/003-reservas-ordenes-matricula/plan.md",
+    "specs/003-reservas-ordenes-matricula/research.md",
+    "specs/003-reservas-ordenes-matricula/research-rp004.md",
+    "specs/003-reservas-ordenes-matricula/data-model.md",
+    "specs/003-reservas-ordenes-matricula/contracts/api.md",
+    "specs/003-reservas-ordenes-matricula/contracts/integration.md",
+    "specs/003-reservas-ordenes-matricula/contracts/ui.md",
+    "specs/003-reservas-ordenes-matricula/quickstart.md"
+  ],
+  "technicalDecisions": [
+    "Módulo enrollment en monolito/pool existentes, participantes públicos ligados a una misma transacción.",
+    "Coordinadoras independientes de admisión y despacho persistidos; no saltar cabeza ni usar nextval como orden de commits.",
+    "Conteo real de reservas/matrículas vigentes bajo locks, sin contador mutable ni claims duplicados.",
+    "Snapshots originales e historial no reactivable; guard RA05 en escritor real.",
+    "Identidades persistentes sin copiar decisiones en dos ledgers; resultado/auditoría atómicos.",
+    "Proyección reservable separada de DTO002; preview no vinculante y recuperación propia de solicitudes.",
+    "Migración futura aditiva después de0005; sin SQL ni cambio actual."
+  ],
+  "spec": {
+    "stories": 4,
+    "functionalRequirements": 24,
+    "successCriteria": 8,
+    "edgeCases": 10,
+    "answersPreservedVerbatim": 15,
+    "fileBytesUnchanged": true,
+    "qualityChecklistUnchanged": "12/16"
+  },
+  "constitution": {
+    "version": "1.2.1",
+    "allElevenPrinciplesReviewedBeforePhase0AndAfterPhase1": true,
+    "fileBytesUnchanged": true,
+    "newExceptionsRequired": false,
+    "assessment": "Conforme por diseño dentro del núcleo funcional delimitado; sin aprobación global de capacidad, proveedor, economía u operación."
+  },
+  "backlog": {
+    "total": 22,
+    "complete": 5,
+    "pending": 17,
+    "onlyMarkerChanged": "RP004",
+    "originalDescriptionsPreserved": true,
+    "RP005": "PENDIENTE",
+    "RP006": "PENDIENTE",
+    "RV001": "PENDIENTE",
+    "RP007": "PENDIENTE"
+  },
+  "designReview": {
+    "criticalRemaining": 0,
+    "highRemainingInRP004": 0,
+    "corrected": [
+      {
+        "id": "P004-01",
+        "severity": "MEDIA",
+        "detail": "Recuperación de ADMITTED sin intención conservada en dispositivo: listado propio paginado y consulta tras reingreso."
+      },
+      {
+        "id": "P004-02",
+        "severity": "MEDIA",
+        "detail": "Total previo obtenido del servidor: preview no vinculante, sin admisión/prioridad/precio congelado/cupo."
+      },
+      {
+        "id": "P004-03",
+        "severity": "MEDIA",
+        "detail": "Clave única de comando por actor+commandId, operación en digest; conflicto entre operaciones."
+      },
+      {
+        "id": "P004-04",
+        "severity": "MEDIA",
+        "detail": "Una sola autoridad de relación solicitud/orden: EnrollmentOrder.requestId único, sin FK inversa redundante."
+      },
+      {
+        "id": "P004-05",
+        "severity": "MEDIA",
+        "detail": "Corte, vigencias y cupos evaluados con mismo confirmedAt definitivo; captura especializada sigue RP005."
+      },
+      {
+        "id": "P004-06",
+        "severity": "BAJA",
+        "detail": "Disponibilidad/preview en instantánea consistente con evaluatedAt; no sumar lecturas de momentos distintos."
+      },
+      {
+        "id": "P004-07",
+        "severity": "BAJA",
+        "detail": "Build no cubre todos los soportes/tests/config; guía exige typecheck explícito al crearlos."
+      }
+    ],
+    "notSpeckitAnalyze": true
+  },
+  "deferred": [
+    {
+      "id": "RP005",
+      "detail": "Precisión/captura de reloj, normalización, worker y matriz de límites/reinicio antes de implementación."
+    },
+    {
+      "id": "RP006",
+      "detail": "Recibo durable y protocolo especializado de verificación/conciliación/reasignación, iniciación incierta y matriz de carreras."
+    },
+    {
+      "id": "D02",
+      "detail": "Condiciones/modalidad/tarifas/límites/sandbox e integración Izipay, sin SDK/firma/URL inventados."
+    },
+    {
+      "id": "RA04-D05",
+      "detail": "Política/procedimiento de resolución económica aprobados antes de cobros reales; seguimiento no resuelve."
+    },
+    {
+      "id": "D10",
+      "detail": "Escenario/rúbrica y aceptación de2500 pendientes; no umbrales inventados."
+    },
+    {
+      "id": "D13",
+      "detail": "Custodia/retención/responsable/RPO/RTO y recuperación antes de demo persistente/publicación."
+    },
+    {
+      "id": "INV-DOC-01",
+      "detail": "Desfase histórico de resúmenes de oferta preservado; spec002/evidencia son autoridad."
+    }
+  ],
+  "preservation": {
+    "trackedBaseline": 685,
+    "otherTrackedUnchanged": 682,
+    "protectedFilesUnchanged": 72,
+    "RP001OriginalPrefixByteForBytePreserved": true,
+    "spec001And002AndPriorEvidenceUnchanged": true,
+    "codeSchemaMigrationsConfigAccountsFixturesAndVolumesUnchanged": true,
+    "existingMigrations": 5,
+    "offeringBranch": "adca8e6",
+    "inventoryBranch": "d2676fd"
+  },
+  "documentation": {
+    "documents": 80,
+    "localLinksChecked": 1319,
+    "brokenLocalLinks": [],
+    "all24FRTraced": true,
+    "fencedBlocksBalanced": true,
+    "unfilledScaffolding": 0,
+    "sensitiveValuesDetected": 0,
+    "quickstartPowerShellSyntax": {
+      "blocks": 4,
+      "parseErrors": 0,
+      "executed": false
+    },
+    "markdownTablesChecked": 10
+  },
+  "commands": [
+    {
+      "command": "setup-plan.ps1 -Json",
+      "result": "0, plantilla creada y rutas resueltas."
+    },
+    {
+      "command": "node .cache/reservas-rp004/review.mjs",
+      "result": "0, artefactos, cobertura, enlaces, backlog, conservación, secretos y scripts comprobados."
+    },
+    {
+      "command": "git diff --check",
+      "result": "0, sin errores de whitespace; avisos LF/CRLF no son fallos."
+    },
+    {
+      "command": "PowerShell Parser::ParseInput de los cuatro bloques quickstart",
+      "result": "0 errores de sintaxis; ningún bloque ejecutado."
+    }
+  ],
+  "auxiliaryCorrections": [
+    {
+      "kind": "LECTURA_DE_RUTA",
+      "detail": "Se corrigieron rutas de lectura no existentes (ci.yml/validation.ts) usando workflow real y validadores existentes; no eran pruebas de producto."
+    },
+    {
+      "kind": "FORMATO_DE_PATCH",
+      "detail": "Un patch con delete/add del mismo plan y otro con contexto sobrante se rechazaron antes de escrituras; se corrigieron sin cambiar datos o código."
+    }
+  ],
+  "hooks": {
+    "beforePlan": "NO_EXTENSION_FILE",
+    "afterPlan": "NO_EXTENSION_FILE"
+  },
+  "limits": {
+    "productTestsExecuted": 0,
+    "npmCommandsExecuted": 0,
+    "sqlExecuted": false,
+    "servicesOperated": false,
+    "smokesExecuted": false,
+    "loadRunsExecuted": false,
+    "migrationsGenerated": false,
+    "implementationStarted": false,
+    "implementationTasksCreated": false,
+    "capacity2500Approved": false,
+    "realChargesEnabled": false,
+    "AWSAdopted": false,
+    "humanAcceptance": false,
+    "T103": "EJECUCION_INFORME_COMPLETOS_CAPACIDAD_SIN_APROBAR",
+    "T104": "PENDIENTE",
+    "T108": "PENDIENTE",
+    "T073": "PENDIENTE",
+    "T074": "PENDIENTE",
+    "bootstrap": "ABIERTO"
+  },
+  "next": "RP005: diseño especializado de reloj, límites y worker; después RP006, RV001 y RP007, sin implementar todavía.",
+  "sourceHashes": [
+    {
+      "path": "specs/003-reservas-ordenes-matricula/plan.md",
+      "sha256": "df048975207ac33060eff63f4738ae08cf973d2a217d6485c75e17747f283d93"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/research.md",
+      "sha256": "b5baf4abf8db6131de78862270ee5a17c598a19d07ea5d16dbefa6866b71e647"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/research-rp004.md",
+      "sha256": "a5bf8f1c20b997aceed314bd68ed49d92f9a4ddada7c049473e694fad82fc693"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/data-model.md",
+      "sha256": "0d06c858343dad87f54cfb19710da710c2841b8a3a89421766a1390ae05e7a18"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/api.md",
+      "sha256": "acfeb41bb53adcfe4b4dad58f3eb71e3c674efcabe972ceca803e27268506c45"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/integration.md",
+      "sha256": "28961c4c994253ca42afa6a3175b7a17f7b457cc43e4d652e0630d64b2584934"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/ui.md",
+      "sha256": "c8263a29b724e874c478e37c2f23e38f1006235a8076f74dac8617e6d0e7c82c"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/quickstart.md",
+      "sha256": "eef1126d33ac09f4d66c5ac63a579b1ef5f4df66f87a57675a44044f667bf33b"
+    },
+    {
+      "path": "README.md",
+      "sha256": "91c71900e21f86b0c1e1e107411fb74e0db9f7b8a467119dc08d01e8f6ac170c"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "05b24d456776db12c3ae52e702435a67d1f7237b69b6d6511bc2b1aa77abd2d2"
+    }
+  ]
+}

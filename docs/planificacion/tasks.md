@@ -1,14 +1,15 @@
 # Backlog trazable — reservas, matrícula y VPS
 
 Planificación del 2026-10-23; CT001 verificada en continuidad de oferta, RP001 en el
-inventario, RP002 como borrador/checklist y RP003 con tres rondas de aclaración del
-2026-10-30. Hay cuatro tareas documentales/continuidad completas y 18 pendientes;
+inventario, RP002 como borrador/checklist, RP003 con tres rondas de aclaración y RP004
+como plan base del 2026-10-30. Hay cinco tareas documentales/continuidad completas y 17 pendientes;
 este backlog no autoriza implementar reservas, matrícula ni VPS.
 [Requisitos RC, decisiones RA y escenarios RE](reservas-capacidad.md).
 Numeración 003 confirmada: se conservan el inventario RP001 y su evidencia; RP002
 añade `spec.md` y checklist en ese directorio. RP003 resuelve/delimita el núcleo
-funcional; siguiente bloque recomendado RP004/plan, con puertas D02/D05/D10/D13
-explícitas y sin aprobación global. Aún sin plan ni tasks.md de implementación.
+funcional; RP004 prepara plan/modelo/contratos/guía, con puertas D02/D05/D10/D13
+explícitas y sin aprobación global. RP005/RP006 siguen pendientes de diseño especializado;
+todavía no existe tasks.md de implementación ni se ejecuta código o migraciones.
 Las tareas de oferta [002](../../specs/002-oferta-academica/tasks.md) conservan IDs,
 checkboxes y dependencias; este backlog no las mezcla ni renumera.
 
@@ -90,7 +91,26 @@ y D13/operación permanecen como puertas. Siguiente bloque: RP004/plan del núcl
 funcional, sin implementar ni prometer capacidad o habilitar cobros.
 [Revisión de tercera ronda](../../specs/003-reservas-ordenes-matricula/evidence/rp003-round3-results.json).
 
-- [ ] RP004 Planificar contratos públicos, identidad de reserva/orden/matrícula y estados en futuros `plan.md`, `data-model.md` y `contracts/`; confirmar disponibilidad/consumo de capacidad y migración aditiva después de RP003, sin alterar cuentas o evidencia de 002. Dep.: RP003; RC-03/05/06, RE-01/02/09.
+- [X] RP004 Planificar contratos públicos, identidad de reserva/orden/matrícula y estados en futuros `plan.md`, `data-model.md` y `contracts/`; confirmar disponibilidad/consumo de capacidad y migración aditiva después de RP003, sin alterar cuentas o evidencia de 002. Dep.: RP003; RC-03/05/06, RE-01/02/09.
+
+RP004 completa únicamente diseño base: [plan](../../specs/003-reservas-ordenes-matricula/plan.md),
+[investigación](../../specs/003-reservas-ordenes-matricula/research-rp004.md),
+[datos](../../specs/003-reservas-ordenes-matricula/data-model.md),
+[contratos](../../specs/003-reservas-ordenes-matricula/contracts/integration.md) y
+[guía local futura](../../specs/003-reservas-ordenes-matricula/quickstart.md).
+RP001 se conserva íntegro dentro de research con un anexo actual; quince respuestas,
+checklist 12/16 y constitución 1.2.1 sin cambios. Se diseñan participantes públicos
+de una misma transacción, dos coordinadoras de admisión/despacho, inventario desde
+compromisos vigentes, identidades idempotentes y snapshots no reactivables.
+Migración solo prevista después de 0005, sin SQL generado/aplicado. Autorización,
+privacidad y pruebas UNIT/PG/HTTP/E2E trazadas; no son resultados de producto.
+RP005 y RP006 conservan sus casillas pendientes: falta diseño especializado de reloj,
+worker/normalización y matriz completa de verificación/conciliación/reasignación.
+RV001 y RP007 tampoco se cierran por esta guía. D02/sandbox, economía antes de cobros
+reales, D10/capacidad y D13/operación permanecen abiertos en sus etapas.
+Siguiente bloque: RP005; después RP006, RV001 y RP007, sin saltar a implementación.
+[Evidencia documental](../../specs/003-reservas-ordenes-matricula/evidence/rp004-results.json).
+
 - [ ] RP005 Diseñar en futuros `research.md`/`data-model.md` plazo persistido de 86 400 segundos, reloj servidor, límites exactos, reinicio y ejecución diferida idempotente; ninguna extensión por reintento/desconexión/worker retrasado. Dep.: RP003/RP004; RC-04, RE-03–RE-06.
 - [ ] RP006 Diseñar en futuros `contracts/`/`research.md` conciliación de pago/vencimiento/reasignación, con fuente temporal y precedencia aprobadas, resultado verificable de pagos tardíos y doble notificación; bloquear diseño no aprobado. Dep.: RP003/RP005; RA-03/04, RC-05/06, RE-07/08.
 - [ ] RP007 Generar tareas del futuro spec con pruebas antes de implementación y analizar correspondencia `spec.md`/`plan.md`/`tasks.md`; no producir migraciones/código hasta decisiones y puertas constitucionales completas. Dep.: RP004–RP006.
