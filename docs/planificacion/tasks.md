@@ -2,15 +2,15 @@
 
 Planificación del 2026-10-23; CT001 verificada en continuidad de oferta, RP001 en el
 inventario, RP002 como borrador/checklist, RP003 con tres rondas de aclaración y RP004
-como plan base y RP005 como diseño temporal del 2026-10-30. Hay seis tareas
-documentales/continuidad completas y 16 pendientes;
+como plan base, RP005 temporal y RP006 de conciliación del 2026-10-30. Hay siete tareas
+documentales/continuidad completas y 15 pendientes;
 este backlog no autoriza implementar reservas, matrícula ni VPS.
 [Requisitos RC, decisiones RA y escenarios RE](reservas-capacidad.md).
 Numeración 003 confirmada: se conservan el inventario RP001 y su evidencia; RP002
 añade `spec.md` y checklist en ese directorio. RP003 resuelve/delimita el núcleo
 funcional; RP004 prepara plan/modelo/contratos/guía, con puertas D02/D05/D10/D13
-explícitas y sin aprobación global. RP005 concreta reloj y worker; RP006 sigue pendiente
-de conciliación especializada;
+explícitas y sin aprobación global. RP005 concreta reloj/worker y RP006 conciliación;
+RV001 integrará las matrices antes de RP007;
 todavía no existe tasks.md de implementación ni se ejecuta código o migraciones.
 Las tareas de oferta [002](../../specs/002-oferta-academica/tasks.md) conservan IDs,
 checkboxes y dependencias; este backlog no las mezcla ni renumera.
@@ -132,9 +132,24 @@ con vencimiento/reasignación. No se supone ausencia de pago ni retención adici
 RV001/RP007, D02/sandbox, economía antes de cobros reales, D10/capacidad, D13 y los
 pendientes heredados no se cierran. Spec/quince respuestas/checklist12/16 intactos.
 [Revisión documental RP005](../../specs/003-reservas-ordenes-matricula/evidence/rp005-results.json).
-Siguiente bloque vigente: RP006, sin adelantar implementación.
+Siguiente bloque al cierre de RP005: RP006, sin adelantar implementación.
 
-- [ ] RP006 Diseñar en futuros `contracts/`/`research.md` conciliación de pago/vencimiento/reasignación, con fuente temporal y precedencia aprobadas, resultado verificable de pagos tardíos y doble notificación; bloquear diseño no aprobado. Dep.: RP003/RP005; RA-03/04, RC-05/06, RE-07/08.
+- [X] RP006 Diseñar en futuros `contracts/`/`research.md` conciliación de pago/vencimiento/reasignación, con fuente temporal y precedencia aprobadas, resultado verificable de pagos tardíos y doble notificación; bloquear diseño no aprobado. Dep.: RP003/RP005; RA-03/04, RC-05/06, RE-07/08.
+
+RP006 completa solo diseño de conciliación: [P01–P07](../../specs/003-reservas-ordenes-matricula/contracts/payments.md),
+[modelo](../../specs/003-reservas-ordenes-matricula/data-model.md),
+[PV01–PV30](../../specs/003-reservas-ordenes-matricula/payment-verification.md) y
+[revisión documental](../../specs/003-reservas-ordenes-matricula/evidence/rp006-results.json).
+Se reemplaza explícitamente el estado provisional de pago final pendiente por recibo
+técnico durable y finalización/efectos/auditoría atómicos, sin extender las24h o cambiar
+reglas aprobadas. Replay autorizado antes de condiciones mutables, respuestas tardías
+condicionales e iniciación incierta recuperable; identidad económica con scope confiable.
+Lectores esperan locks y proyectan después, sin cifras transitorias o locks tardíos.
+Los30IDs son diseño de casos, cero tests implementados/ejecutados; TV03/25 tienen diseño,
+no aprobación por ejecución. Evidencia histórica, spec/quince respuestas/checklist12/16,
+constitución1.2.1 y entornos intactos. D02/sandbox, política económica, D10/D13 y pendientes
+humanos/bootstrap siguen abiertos. Siguiente bloque vigente: RV001; después RP007.
+
 - [ ] RP007 Generar tareas del futuro spec con pruebas antes de implementación y analizar correspondencia `spec.md`/`plan.md`/`tasks.md`; no producir migraciones/código hasta decisiones y puertas constitucionales completas. Dep.: RP004–RP006.
 
 ## Verificación a incluir en las tareas futuras

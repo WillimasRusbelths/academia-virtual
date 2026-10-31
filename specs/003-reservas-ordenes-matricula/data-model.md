@@ -1,10 +1,11 @@
 # Modelo de datos previsto — reservas, órdenes y matrícula
 
-**RP004/RP005, 2026-10-30**. Diseño aditivo, sin esquema generado ni aplicado.
+**RP004/RP005/RP006, 2026-10-30**. Diseño aditivo, sin esquema generado ni aplicado.
 Fuentes: [spec](spec.md), [investigación](research-rp004.md),
 [integración](contracts/integration.md) y [contrato temporal RP005](contracts/time.md).
-Reloj/worker definidos por diseño; conciliación RP006 permanece pendiente de diseño
-especializado y revisión antes de tareas. Ninguna garantía se presenta como ejecutada.
+Reloj/worker y [conciliación RP006](contracts/payments.md) definidos por diseño;
+RV001 integrará las comprobaciones antes de tareas. Ninguna garantía se presenta
+como ejecutada. Se corrige explícitamente el estado provisional de pago pendiente.
 
 ## Convenciones e identidades
 
@@ -14,9 +15,11 @@ especializado y revisión antes de tareas. Ninguna garantía se presenta como ej
   cadenas UTC de seis fracciones en transporte; sin Date intermedio ni parser global.
   Fechas civiles `YYYY-MM-DD`, franjas y America/Lima conservadas. Límites derivados
   admiten ISO ampliado para año 10000; epoch negativo se conserva sin truncamiento.
-- Dinero exacto PEN en unidades menores enteras; transporte mediante cadena decimal
+- Precios/órdenes exactos PEN en unidades menores enteras; transporte mediante cadena decimal
   canónica. No flotantes, precio implícito, impuestos, descuentos o mínimos inventados.
   Ausencia de precio es distinta de un importe explícito; cero no activa matrícula.
+  Evidencia económica auténtica incompatible conserva importe/escala/moneda reales,
+  sin fingir PEN ni hacerla aplicable a una orden por ello.
 - Referencias a User/AcademicCourse/AcademicGroup con RESTRICT; sin borrado en cascada
   de antecedentes. SQL de un módulo accede solo a sus datos, mediante puertos para otros.
 - Estados siguientes son representación técnica de reglas aprobadas, no operaciones
@@ -33,10 +36,11 @@ especializado y revisión antes de tareas. Ninguna garantía se presenta como ej
 | EnrollmentOrder | id, studentId, requestId, currency, totalMinor, state, revision, confirmedAt, expiresAt, expirationProcessedAt nullable | UNIQUE(requestId). RESERVED, ENROLLED o EXPIRED. Inicio/vencimiento inmutables; diferencia exacta 86 400 s. expirationProcessedAt registra materialización, no instante efectivo del vencimiento. Una orden con reservas vigentes por alumno. |
 | EnrollmentOrderItem | id, orderId, courseId, groupId, priceMinor, courseName, groupName, periodStart, periodEnd, timeZone, groupStartAt, enrollmentValidUntil, scheduleSnapshot | UNIQUE(orderId,courseId). Un grupo del curso por selección. Detalle, dinero y condiciones originales inmutables. Límites civiles convertidos al confirmar reserva y conservados con el snapshot; matrícula copia su límite original, no lo recalcula tras cambios de tzdata. Relación curso/grupo comprobada bajo locks del dueño oferta. |
 | SeatReservation | id, orderItemId, state | UNIQUE(orderItemId). Usa confirmedAt/expiresAt de su orden; no copiar relojes divergentes. CONFIRMED, CONVERTED, EXPIRED. |
-| PaymentAttempt | id, orderId, studentId, initiationId, payloadDigest, state, providerReference nullable, createdAt | UNIQUE(studentId,initiationId) y FK compuesta (orderId,studentId) a la orden/titular. Iniciación recuperable; estado pendiente no es pago verificado. Protocolo externo completo en RP006/D02. |
-| VerifiedPayment | id, provider, providerPaymentId, orderId, amountMinor, currency, receivedAt, verificationFinishedAt, reconciliationState, reconciledAt nullable, normalizedEvidenceReference | UNIQUE(provider,providerPaymentId). Evidencia auténtica e inmutable; sin cuerpo arbitrario de callback, tarjeta, tokens o secretos. Resultado de verificación inválida no crea un pago verificado. |
+| PaymentAttempt | id, orderId, studentId, initiationId, payloadDigest, state, merchantReference, externalIdempotencyKey, providerScope, providerReference nullable, createdAt | UNIQUE(studentId,initiationId), FK compuesta (orderId,studentId). Una iniciación no resuelta por orden, referencia/clave estables antes de red. Replay conserva resultado y nunca despacha otra llamada. |
+| ProviderReceipt | id, providerScope, deliveryKey nullable, merchantReferenceHint, providerPaymentIdHint, normalizedEvidenceReference/digest, receivedAt, externalObservedAt nullable, state, processedAt nullable, terminalPaymentId nullable | Entrada/trabajo durable mínimo, no ledger económico. Sin FK provisional a orden que introduzca locks recibo→orden. Deduplicación de entrega solo si D02 acredita ámbito; recepción no es verificación final ni extiende reserva. |
+| VerifiedPayment | id, providerScope, providerPaymentId, orderId nullable, amount exacto y escala, currency real, merchantReference, verificationFinishedAt, reconciliationState, normalizedEvidenceReference | UNIQUE(providerScope,providerPaymentId), scope configurado proveedor/comercio/entorno. Solo APPLIED o INCIDENT terminales, confirmados con efectos/auditoría. APPLIED exige asociación/total/PEN exactos; hecho auténtico incompatible conserva valores reales como INCIDENT. Sin cuerpo arbitrario, tarjeta, tokens o secretos. |
 | Enrollment | id, orderItemId, studentId, courseId, groupId, paymentId, confirmedAt, originalPeriodStart, originalPeriodEnd, timeZone, scheduleSnapshot, validUntil | UNIQUE(orderItemId). Pago aplicado a una sola orden y matrícula por cada detalle. validUntil es 00:00 del día siguiente a fecha final original, America/Lima convertido a UTC. |
-| PaymentIncident | id, orderId, verifiedPaymentId, reason, affectedGroupIds, openedAt | Una incidencia por hecho/motivo normalizado, no una por notificación duplicada. Abierta; sin transición de resolución económica en este incremento. |
+| PaymentIncident | id, orderId nullable, verifiedPaymentId, reason, affectedGroupIds, openedAt | Una incidencia por hecho/motivo, abierta, sin resolución económica. Solo asociación confiable vincula titular/grupos; referencia desconocida no adjudica alumno, usa grupos vacíos y no bloquea oferta arbitraria. Seguimiento administrativo mínimo. |
 | IncidentFollowUp | id, incidentId, adminUserId, commandId, recordedAt, content | Append-only; UNIQUE(actor,commandId) en ledger. No modifica compromisos ni resuelve incidencia. Proyección administrativa y resumen del alumno separados. |
 | EnrollmentCommand | actorKind, actorReference, commandId, operation, payloadDigest, outcomeCode, resourceReferences, resultingRevision, appliedAt | Clave (actorKind,actorReference,commandId); operación incluida en digest, sin namespace separado. Misma clave y operación diferente: conflicto. No reutilizar AcademicCommand ni duplicar payload privado en resultado. |
 | EnrollmentAuditEvent | id, actorKind/reference, operation, targetKind/id, commandId o providerEventId, effectKey nullable, requestId, occurredAt, before/afterRevision, result | Evento mínimo e inmutable; misma transacción que decisión/cambio/resultado. Para expiración, effectKey único (ORDER_EXPIRED,orderId); sin otro ledger del timer ni auditoría por cada sondeo. No fingir targetUserId ni acción GROUP_EDIT. |
@@ -58,7 +62,10 @@ en dos ledgers. La auditoría añade trazabilidad, no otra identidad del comando
 | Orden | RESERVED → EXPIRED | Vencimiento sin pago aplicable; materialización idempotente. Instante efectivo no depende de ejecución del worker. |
 | Reserva | CONFIRMED → CONVERTED | Matrícula del detalle confirmada en la misma transacción, sin ocupar segunda plaza. |
 | Reserva | CONFIRMED → EXPIRED | No retiene desde expiresAt aunque aún espere materialización. No cancelación ni renovación. |
-| Pago verificado | PENDING_RECONCILIATION → APPLIED o INCIDENT | RP006 define recibo durable, punto de decisión y recuperación. Incidencia no crea matrícula ni modifica por sí sola plazo o inventario. |
+| Intento | SUBMITTING → PENDING, INITIATION_UNKNOWN o FAILED_NO_CHARGE; recuperación de INITIATION_UNKNOWN/PENDING → PENDING o FAILED_NO_CHARGE | Estados internos. Recuperar por consulta auténtica; FAILED_NO_CHARGE solo ante prueba definitiva de ausencia de movimiento, nunca por timeout/404 aislado. Solo entonces admite otro intento explícito con condiciones originales. No regresiones desde resultado económico terminal. Garantías reales D02 pendientes. |
+| Intento conciliado | Estado no resuelto → APPLIED o INCIDENT | Referencia al resultado VerifiedPayment canónico dentro de su misma transacción; no otra autoridad económica. Una respuesta externa tardía no lo rebaja. |
+| Recibo técnico | RECEIVED → PROCESSED | Puede sobrevivir rollback financiero sin verificationFinishedAt. Consulta externa fuera de locks; asociación final y referencia terminal en la transacción común. |
+| Pago verificado | Creación terminal APPLIED o INCIDENT | Terminar contrastes locales, capturar t y confirmar hecho, resultado, conversión/incidencia y auditoría juntos. Sin estado durable PENDING_RECONCILIATION. Replay conserva asociación/fecha; no reaplica. |
 | Matrícula | vigente → finalizada por tiempo | confirmedAt <= t < validUntil. Historial siempre conservado; no estado reactivo al editar grupo. |
 | Incidencia | abierta → abierta con seguimiento | Sin cierre económico, devolución, traslado ni matrícula manual. |
 
@@ -79,11 +86,15 @@ En un mismo instante autoritativo t:
 - Oferta oculta conserva retenciones/ocupación. Vencidas e historial terminado no
   consumen; una incidencia aislada no crea consumo. Consulta real lleva evaluatedAt
   y una sentencia/instantánea consistente para visibilidad, capacidad y conteos,
-  sin sumar lecturas READ COMMITTED de momentos distintos.
+  después de esperar locks críticos según P06; no sumar momentos distintos.
 
 Capacidad 1–50 y relación curso/grupo siguen perteneciendo a oferta. El lock de grupo
-serializa todos los cambios que afectan la fórmula; una lectura de catálogo no lo
-hace. No hay contador mutable ni tabla adicional de claims que duplique autoridad.
+serializa todos los cambios que afectan la fórmula. Los lectores críticos 003 esperan
+cursos/grupos FOR SHARE y órdenes pertinentes bajo orden común, tras actor/sesión;
+proyectan en otra sentencia READ COMMITTED con evaluatedAt posterior. Referencias
+finales deben estar cubiertas; topología nueva requiere redescubrimiento, no locks
+tardíos. Evita disponibilidad transitoria durante conversión que cruza el límite.
+No hay contador mutable ni tabla adicional de claims que duplique autoridad.
 
 Una orden activa por alumno: índice único parcial sobre estado RESERVED como defensa,
 con normalización de la anterior vencida bajo lock del alumno y de todos sus grupos
@@ -106,9 +117,10 @@ no prometer que un CHECK entre filas los garantiza. Las pruebas deben intentar v
 también UNIQUE/FK/CHECK reales mediante el rol de pruebas autorizado.
 
 Worker y normalización oportuna usan la misma capacidad, identidad de efecto y token
-temporal por unidad de trabajo, conforme a T02/T05. Pago verificado pendiente de
-conciliación no se trata como ausencia de pago; los casos que dependen de ese hecho
-siguen RP006. No se implementa una retención de seguridad después del vencimiento.
+temporal por unidad de trabajo, conforme a T02/T05 y P05. Recibo técnico pendiente
+no es pago final y no extiende plazo. Un pago final no queda durable sin sus efectos;
+rollback conserva recibo previo, descarta t y recuperación consulta identidad económica
+antes de reejecutar. No se implementa retención de seguridad tras el vencimiento.
 
 ## Oferta, habilitación y mantenimiento
 
@@ -131,7 +143,8 @@ siguen RP006. No se implementa una retención de seguridad después del vencimie
 
 Índices: solicitud por estado/secuencia; orden por titular/estado/expiresAt; detalle
 por grupo/curso/orden; reserva por detalle/estado; matrícula por titular/curso/validUntil
-y grupo/validUntil; pago por orden y clave proveedor; incidencia por grupo/abierta y
+y grupo/validUntil; pago por orden y clave económica con scope; recibo por
+estado/receivedAt/id e intento por estado/createdAt/id y orden; incidencia por grupo/abierta y
 orden; auditoría por recurso/instante. No índices dependientes del reloj ni JSON de
 credenciales. Medir planes con fixtures antes de ampliar índices.
 

@@ -252,3 +252,51 @@ Fuentes primarias, justificación y límites están en el contrato. RP006 conser
 verificación pendiente, recibo durable y conciliación/reasignación; no se da por
 resuelto ese protocolo por definir el reloj/worker. D02/D05/D10/D13 y aceptación
 humana/capacidad mantienen sus puertas. Sin tareas de implementación ni migraciones.
+
+## Conciliación y recuperación — RP006, 2026-10-30
+
+Los registros RP001/RP004/RP005 anteriores se conservan íntegros. Tres agentes
+investigaron y revisaron en solo lectura. El diseño vigente está en
+[P01–P07](contracts/payments.md), [modelo](data-model.md) y
+[PV01–PV30](payment-verification.md), no en una implementación financiera existente.
+
+**Decisión**: ProviderReceipt durable para evidencia/trabajo técnico, separado de
+VerifiedPayment terminal APPLIED/INCIDENT. Completar contrastes locales contra orden
+bajo locks y capturar verificationFinishedAt al terminarlos; confirmar fecha final,
+resultado, conversión/incidencia y auditoría en una sola transacción.
+**Motivo**: elimina la ventana del estado provisional PENDING_RECONCILIATION entre
+verificación y asignación; recepción no prueba aplicación ni obtiene plazo adicional.
+**Alternativas descartadas**: gracia después de24h, resucitar plaza reasignada, fechar
+verificación con la recepción o confirmar un resultado final sin efectos atómicos.
+
+**Decisión**: red fuera de locks; intento/identidad externa estables antes de iniciar,
+recuperación por consulta/idempotencia real, terminalidad protegida por transición
+condicional. Replay autorizado antes de condiciones mutables; nueva clave con intento
+incierto recupera el canónico, sin otra iniciación aceptada o cobro.
+**Motivo**: timeout/reinicio no prueba ausencia de movimiento; respuesta tardía no puede
+rebajar un pago procesado por callback/consulta. **Alternativas descartadas**: reenvío
+ciego al vencer lease, nuevo intento por404 aislado y confiar en éxito del navegador.
+
+**Decisión**: scope económico confiable proveedor/comercio/entorno, inmutabilidad de
+asociación y dinero; preservar hechos auténticos incompatibles como incidencia. Una
+referencia desconocida no adjudica alumno/grupos ni permite asignación manual.
+**Motivo**: no perder dinero investigable ni provocar bloqueo arbitrario de oferta.
+**Alternativas descartadas**: identidad por entrega como única deduplicación, FK falsa,
+forzar moneda PEN de un hecho incompatible o sobreescribir un pago previo.
+
+**Decisión**: lectores críticos esperan locks de actor/sesión, cursos/grupos FOR SHARE
+y órdenes pertinentes; nueva sentencia READ COMMITTED proyecta después de esperar.
+Sin upgrades/locks tardíos; topología nueva obliga a redescubrir con el presupuesto común.
+**Motivo**: conversión iniciada antes de expiresAt puede confirmar después: MVCC sin
+coordinar podría mostrar reserva vencida sin matrícula aún visible. Coste pendiente D10.
+**Alternativas descartadas**: sumar snapshots distintos, evaluatedAt anterior al lock,
+CTE de bloqueo/proyección o inventario ficticio mientras se espera.
+
+Fuentes primarias consultadas están enlazadas en payments.md: PostgreSQL16 aislamiento,
+locks y reloj; transacción con mismo cliente node-postgres. Son fundamento de diseño,
+no evidencia de protocolo. Revisión corrigió replay antes de caducidad/ocultamiento,
+respuesta de iniciación tardía y claves propias de barrido de recibos/intentos.
+Sin regla comercial nueva ni excepción constitucional. Spec/quince respuestas y
+constitución1.2.1 intactos. D02/sandbox real, economía antes de cobros, D10/D13,
+bootstrap y aceptaciones humanas conservan sus puertas. RV001 es el siguiente bloque;
+no tareas de implementación, código, SQL, servicios, smokes o cargas en RP006.

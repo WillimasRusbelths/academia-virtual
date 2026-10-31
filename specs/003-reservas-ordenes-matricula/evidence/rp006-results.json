@@ -1,0 +1,260 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "task": "RP006",
+  "status": "DISENO_CONCILIACION_COMPLETO_SIN_IMPLEMENTACION",
+  "baseCommit": "80060faa02c31852820eda9d831cabffa4cb1698",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "skill": "speckit-plan",
+  "setup": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File D:/Proyectos/academia-virtual/.specify/scripts/powershell/setup-plan.ps1 -Json",
+    "exitCode": 0,
+    "existingPlanPreserved": true,
+    "helperBranchAlias": "003-reservas-ordenes-matricula",
+    "actualGitBranch": "feat/003-reservas-ordenes-matricula"
+  },
+  "artifacts": [
+    "specs/003-reservas-ordenes-matricula/plan.md",
+    "specs/003-reservas-ordenes-matricula/research.md",
+    "specs/003-reservas-ordenes-matricula/data-model.md",
+    "specs/003-reservas-ordenes-matricula/quickstart.md",
+    "specs/003-reservas-ordenes-matricula/contracts/api.md",
+    "specs/003-reservas-ordenes-matricula/contracts/integration.md",
+    "specs/003-reservas-ordenes-matricula/contracts/ui.md",
+    "specs/003-reservas-ordenes-matricula/contracts/time.md",
+    "specs/003-reservas-ordenes-matricula/temporal-verification.md",
+    "specs/003-reservas-ordenes-matricula/contracts/payments.md",
+    "specs/003-reservas-ordenes-matricula/payment-verification.md"
+  ],
+  "agents": {
+    "researchers": 3,
+    "readOnly": true,
+    "initialResearchAndCriticalReview": true,
+    "newCriticalOrHighDesignBlockers": 0
+  },
+  "decisions": [
+    "ProviderReceipt durable separado de pago final; no VerifiedPayment final durable con efectos pendientes.",
+    "Contrastes finales locales, instante final y resultado APPLIED/INCIDENT, conversión/incidencia y auditoría en una transacción.",
+    "Red fuera de locks; intento y claves estables antes de llamada. Incierto exige consulta/idempotencia externa acreditada D02.",
+    "Replay autorizado precede condiciones mutables; respuesta tardía no regresa resultado terminal ni autoriza otro cobro.",
+    "Unicidad económica por proveedor/comercio/entorno confiables; conservar dinero incompatible y referencia desconocida sin FK falsa o bloqueo arbitrario.",
+    "Expiración/reasignación no se revierten por recibo previo; sin gracia, backdating, devolución o asignación manual.",
+    "Lectores críticos coordinados mediante locks y proyección en otra sentencia READ COMMITTED; coste pendiente de medición."
+  ],
+  "spec": {
+    "fileBytesUnchanged": true,
+    "answersPreservedVerbatim": 15,
+    "stories": 4,
+    "functionalRequirements": 24,
+    "successCriteria": 8,
+    "qualityChecklistUnchanged": "12/16"
+  },
+  "constitution": {
+    "version": "1.2.1",
+    "fileBytesUnchanged": true,
+    "allElevenPrinciplesReviewedBeforeAndAfterDesign": true,
+    "newExceptionsRequired": false,
+    "assessment": "Conforme por diseño dentro de RP006; no acredita integración real, cobros, operación o capacidad."
+  },
+  "backlog": {
+    "total": 22,
+    "complete": 7,
+    "pending": 15,
+    "onlyMarkerChanged": "RP006",
+    "descriptionsPreserved": true,
+    "RV001": "PENDIENTE",
+    "RP007": "PENDIENTE"
+  },
+  "verification": {
+    "financialDesignFamilies": 30,
+    "financialRange": "PV01-PV30",
+    "temporalDesignIdsPreserved": 25,
+    "implementedTests": 0,
+    "executedTests": 0,
+    "TV03TV25": "DISENO_DEFINIDO_EJECUCION_PENDIENTE",
+    "variantsNotCountedAsExecutions": true,
+    "humanAcceptance": false
+  },
+  "designReview": {
+    "notSpeckitAnalyze": true,
+    "corrections": [
+      {
+        "id": "P006-01",
+        "severity": "MEDIA",
+        "detail": "Pago finalmente verificado y aplicación diferidos podían competir con vencimiento/reasignación; recibo técnico separado y finalización atómica."
+      },
+      {
+        "id": "P006-02",
+        "severity": "MEDIA",
+        "detail": "Lectura sin espera podía mostrar cupo transitorio al cruzar límite mientras conversión no confirma; locks críticos y nueva sentencia."
+      },
+      {
+        "id": "P006-03",
+        "severity": "MEDIA",
+        "detail": "Respuesta de iniciación tardía podía rebajar resultado terminal; relectura/transición condicional y variante PV22."
+      },
+      {
+        "id": "P006-04",
+        "severity": "MEDIA",
+        "detail": "Replay debe recuperarse antes de caducidad/visibilidad nuevas, tras autorización actual."
+      },
+      {
+        "id": "P006-05",
+        "severity": "BAJA",
+        "detail": "Ámbito económico confiable, dinero incompatible y referencia desconocida sin adjudicación de grupos."
+      },
+      {
+        "id": "P006-06",
+        "severity": "BAJA",
+        "detail": "Claves propias recibos/intentos para barridos finitos; nueva initiationId recupera intento canónico sin fingir otra aceptación."
+      },
+      {
+        "id": "P006-07",
+        "severity": "BAJA",
+        "detail": "Modelo expresa recuperación de estados INITIATION_UNKNOWN/PENDING mediante consulta auténtica, sin regresiones terminales."
+      }
+    ],
+    "remainingDesignBlockersInRP006": 0
+  },
+  "preservation": {
+    "trackedBaseline": 696,
+    "otherTrackedUnchanged": 685,
+    "protectedFilesUnchanged": 72,
+    "previousResearchPrefixByteForBytePreserved": true,
+    "priorRP001ThroughRP005ReportsUnchanged": true,
+    "spec001And002Unchanged": true,
+    "constitutionAndClarificationsUnchanged": true,
+    "codeSchemaMigrationsConfigurationAccountsFixturesUntouched": true,
+    "servicesAndVolumesNotOperated": true,
+    "existingMigrations": 5
+  },
+  "documentation": {
+    "documents": 84,
+    "localLinksChecked": 1376,
+    "brokenLocalLinks": [],
+    "markdownTablesChecked": 16,
+    "quickstartPowerShellSyntax": {
+      "blocks": 4,
+      "parseErrors": 0,
+      "executed": false
+    },
+    "unfilledScaffolding": 0,
+    "sensitiveValuesDetected": 0,
+    "all24FRTraceabilityPreserved": true
+  },
+  "commands": [
+    {
+      "command": "setup-plan.ps1 -Json",
+      "result": "0; plan existente conservado y directorio003 resuelto."
+    },
+    {
+      "command": "node .cache/reservas-rp006/review.mjs",
+      "result": "0; artefactos/invariantes documentales, IDs, enlaces, tablas, preservación, backlog y secretos verificados."
+    },
+    {
+      "command": "PowerShell Parser::ParseInput sobre cuatro bloques de quickstart",
+      "result": "0 errores; ningún comando de los bloques ejecutado."
+    },
+    {
+      "command": "git diff --check",
+      "result": "0; sin errores de whitespace. Avisos LF/CRLF no son fallos."
+    }
+  ],
+  "auxiliaryCorrections": [
+    {
+      "kind": "VERIFICADOR_DOCUMENTAL",
+      "detail": "Primera ejecución detenida por buscar ningún en minúscula cuando el contrato usa Ningún. Corregida coincidencia de capitalización, sin cambiar el contrato ni expectativas de negocio; repetición completa."
+    },
+    {
+      "kind": "LECTURA_DOCUMENTAL",
+      "detail": "Una lectura inicial usó integration.md en raíz del spec en vez de contracts/integration.md; ruta corregida y documento leído. No fue prueba de producto."
+    }
+  ],
+  "hooks": {
+    "beforePlan": "NO_EXTENSION_FILE",
+    "afterPlan": "NO_EXTENSION_FILE"
+  },
+  "deferred": [
+    "RV001 y RP007: matriz integral, tareas y análisis posteriores.",
+    "D02/sandbox: modalidad, autenticidad, identidades, consulta/idempotencia de inciertos, límites y recuperación reales del proveedor.",
+    "D05/RA04: política/procedimiento económicos antes de cobros reales.",
+    "D10: rúbrica/escenario y2500 activos aún pendientes; S/300 total y≥15000cuentas no demuestran concurrencia.",
+    "D13: salud temporal operativa, recuperación/custodia/retención/RPO/RTO antes de demo persistente/publicación.",
+    "Bootstrap, T104/T108, T073/T074, CI remoto, SMTP externo, timeouts históricos e INV-DOC-01 conservados."
+  ],
+  "limits": {
+    "productTestsExecuted": 0,
+    "sqlExecuted": false,
+    "npmCommandsExecuted": 0,
+    "servicesOperated": false,
+    "smokesExecuted": false,
+    "loadRunsExecuted": false,
+    "migrationsGenerated": false,
+    "implementationStarted": false,
+    "implementationTasksCreated": false,
+    "capacity2500Approved": false,
+    "realChargesEnabled": false,
+    "AWSAdopted": false,
+    "T103": "INFORME_EJECUTADO_CAPACIDAD_SIN_APROBAR",
+    "T104": "PENDIENTE",
+    "T108": "PENDIENTE",
+    "T073": "PENDIENTE",
+    "T074": "PENDIENTE",
+    "bootstrap": "ABIERTO"
+  },
+  "next": "RV001: matriz integrada UNIT/PG/HTTP/E2E de requisitos, escenarios, permisos, privacidad y evidencia humana, sin implementar.",
+  "sourceHashes": [
+    {
+      "path": "specs/003-reservas-ordenes-matricula/plan.md",
+      "sha256": "f608bc128b180fd748a29b2e1ba48a231a24134d65a577d1576a8bf9aba38e30"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/research.md",
+      "sha256": "05d1deac06cae81a33fb21bb22358cd6b415daf9403a550fc1a444eac54bcd3c"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/data-model.md",
+      "sha256": "bc34303402301caee53a2a3ece9592db6e8dde95ce7d44c177e307552bf6a5ca"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/quickstart.md",
+      "sha256": "b7eab1ff7c34ea8c1d5080e4fc067c546f59beec287b768664afeac34a9d944d"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/api.md",
+      "sha256": "39602d91362509c7b0f2ac0f8256cb0da516a39af948d571885c289c0736b504"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/integration.md",
+      "sha256": "77bd715bf66188d27c1898823894d2984723fe576356e2d39a3d3e0d8d8264b1"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/ui.md",
+      "sha256": "b18e1483d363fdb6e4249f6879864a7d660382eb38681f7ae49a7cd559be9de3"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/time.md",
+      "sha256": "c722e5d5e83ca7a9118cc55218c708a03c700b3e7028fda5a37561ae00dd85c2"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/temporal-verification.md",
+      "sha256": "ebd1c32457e5d9b1b0435fd6bb562f2f540ad3686738f84e61bb1693448eed52"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/payments.md",
+      "sha256": "fe135c48716de0383e677c152812ad8eeb1146403eae5c31c069f4329d0f2bd6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/payment-verification.md",
+      "sha256": "0cf794a87d651db80707af212de37be0c8d9ca18fd1f943cbc9d08c7af7c9caf"
+    },
+    {
+      "path": "README.md",
+      "sha256": "0bbf8ea02a7f9cc94ee47f6d99d62707509a9e030c3272140c17e93936612ee0"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "1e191a2391943dd39fca0856139a2f79ed505f92a644b073d410434f63ff3964"
+    }
+  ]
+}

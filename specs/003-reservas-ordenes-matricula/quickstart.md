@@ -1,9 +1,9 @@
 # Guía de verificación local futura — reservas, órdenes y matrícula
 
-**RP004, 2026-10-30. No ejecutada.** Aún no existen las rutas, fixtures, migración
+**RP004–RP006, 2026-10-30. No ejecutada.** Aún no existen las rutas, fixtures, migración
 o suites 003. Reutilizar los comandos existentes solo tras implementar el bloque
-correspondiente y completar RP005/RP006/tareas/análisis. La revisión documental de
-RP004 no acredita estos recorridos ni el estado vivo de la instalación aislada.
+correspondiente y completar RV001/tareas/análisis. El diseño RP005/RP006 está
+preparado; su revisión no acredita recorridos ni estado vivo de la instalación aislada.
 
 Fuentes: [plan](plan.md), [datos](data-model.md), [HTTP](contracts/api.md),
 [integración](contracts/integration.md), [UI](contracts/ui.md) y
@@ -103,12 +103,16 @@ realmente incluidos. Vitest ejecutado no sustituye esa comprobación de tipos.
 
 ## Matriz base de comprobaciones pendientes
 
-RV001 debe completar detalle y trazabilidad especializada tras RP006. Esta matriz
+RV001 debe completar detalle y trazabilidad integrada con RP006 ya diseñado. Esta matriz
 es guía de preparación, no tarea de pruebas implementada o aprobada.
 RP005 añade [contrato temporal](contracts/time.md) y [25 casos de diseño](temporal-verification.md):
 microsegundos antes/igual/después, mismo token tras locks, epoch negativo/año ampliado,
 worker detenido/concurrente, barrido acotado y recuperación de COMMIT incierto.
-No ejecutar esos casos en esta etapa ni confundir los 25 IDs con tests preparados.
+[RP006](contracts/payments.md) añade [PV01–PV30](payment-verification.md):
+recibo técnico, verificación/efectos atómicos, dinero/IDs incompatibles, respuestas
+tardías, inciertos y lectores frente a conversión. Son 30 familias de diseño, no
+pruebas preparadas o ejecutadas. Integrar con TV03/TV25 sin duplicar conteos.
+No ejecutar esos casos en esta etapa ni confundir los IDs con tests preparados.
 Para evidencia futura registrar versión de PostgreSQL/tzdata y salud de reloj;
 un retroceso arbitrario no queda resuelto por un estado terminal o contador local.
 
@@ -119,7 +123,7 @@ un retroceso arbitrario no queda resuelto por un estado terminal o contador loca
 | PG real | Admisiones y commits intentados fuera de orden, cabeza bloqueada/reinicio, último cupo/multigrupo, una orden/curso, precio concurrente, rollback escritura/resultado/auditoría y COMMIT incierto | FR-005/006/010–013/019/020; SC-002/004–006; RE-01–08 |
 | PG real | Reserva/pago frente a retiro/habilitación/revisión/edición/cancelación; worker retrasado, nueva intención tras vencer, snapshots e incompatibilidad propia oculta | FR-001/008/014/020/021; SC-001/003–006; RE-02/05/06/08–10 |
 | HTTP real | Matriz/propiedad/reautorización/replay, CSRF/origen, dinero/titular/reloj manipulados; allowlists por ruta y privacidad | FR-005/011/015/016; SC-002/006; RE-01/10 |
-| PG/HTTP pago | Verificación/límite/vencimiento/reasignación, duplicados y datos alterados; efectos totales; seguimiento no resuelve | FR-007–014/019/024; SC-003–006; RE-05–09; completar RP006 |
+| PG/HTTP pago | Verificación/límite/vencimiento/reasignación, duplicados y datos alterados; efectos totales; seguimiento no resuelve | FR-007–014/019/024; SC-003–006; RE-05–09; P01–P07/PV01–PV30 |
 | E2E real | Cuatro recorridos, vacíos/error/incierto, teclado y móvil/escritorio, ocultamiento, plazo, consulta e historial | FR-017/018/021/022; SC-001–007 |
 | Sandbox separado | Autenticidad/orden/importe/moneda, válidos/inválidos/no confirmados/duplicados con proveedor; sin carga | FR-007/024, D02, principios V–VII |
 | Humana | Comprensión/uso de cuatro recorridos, participantes y observación reales, separada de automatización | SC-007; no sustituye T073/T074/T104/T108 |

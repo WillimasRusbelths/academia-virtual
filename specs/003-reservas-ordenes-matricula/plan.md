@@ -4,10 +4,9 @@
 **Spec**: [spec.md](spec.md), quince aclaraciones conservadas.
 
 **Input**: RC-01–RC-07, HU10/HU11, RF11–RF13 y RA-01–RA-06/PD-01–PD-03.
-**Estado**: RP004, plan base y artefactos de fases 0/1 preparados; RP005 concreta
-reloj/límites y normalización diferida. Diseño técnico sin código, migraciones,
-servicios ni pruebas de producto ejecutados. RP006 continúa pendiente de diseño
-especializado antes de tareas de implementación.
+**Estado**: RP004–RP006, diseño base, reloj/worker y conciliación preparados.
+Diseño técnico sin código, migraciones, servicios ni pruebas de producto ejecutados.
+RV001 debe integrar la matriz de verificación antes de RP007/tareas/análisis.
 
 ## Summary
 
@@ -23,7 +22,8 @@ Visibilidad puede bloquear pago/confirmación sin liberar reservas o revocar mat
 Snapshots originales evitan que editar/republicar reactive historial finalizado.
 
 Se conserva el [inventario RP001](research.md) íntegro y se anexa investigación nueva;
-las decisiones actuales están en [R01–R08](research-rp004.md). Los documentos 001/002
+las decisiones base están en [R01–R08](research-rp004.md), precisadas por
+[T01–T07](contracts/time.md) y [P01–P07](contracts/payments.md). Los documentos 001/002
 y sus resultados históricos no se reescriben para atribuirles comportamiento financiero.
 El checklist global conserva 12/16 y puertas explícitas: este plan no aprueba capacidad,
 pasarela, economía ni operación. Se planifica únicamente la parte funcional aclarada.
@@ -69,17 +69,17 @@ definirán/medirán por separado. No ejecutar el perfil 10/25 ni cargas completa
 ## Constitution Check
 
 Constitución vigente 1.2.1, sin enmienda. Se revisó antes de investigar y después
-del diseño, incluida la revisión temporal RP005. Conforme por diseño no significa
+del diseño, incluidas las revisiones temporal RP005 y financiera RP006. Conforme por diseño no significa
 probado en código o aprobado globalmente.
 
-| Principio / puerta | Antes de fase 0 | Después de fase 1 y precisión RP005 |
+| Principio / puerta | Antes de fase 0 | Después de fase 1 y precisiones RP005/RP006 |
 | --- | --- | --- |
-| I. Incrementos Spec Kit | Spec y quince respuestas; núcleo aclarado/delimitado | Plan/modelo/contratos/guía y diseño temporal RP005. RP006 y después tareas/análisis antes de implementar; sin salto de etapa. |
+| I. Incrementos Spec Kit | Spec y quince respuestas; núcleo aclarado/delimitado | Plan/modelo/contratos/guía, reloj y conciliación diseñados. RV001, tareas/análisis antes de implementar; sin salto de etapa. |
 | II. Autorización backend | Roles y sesiones actuales reutilizables | Matriz propia, pertenencia, reautorización y errores seguros; docente/visitante sin acceso financiero. Pruebas permitidas/denegadas previstas. |
 | III. Precios confiables | PD-01 y pago total aprobados | Precio explícito PEN, cálculo servidor y snapshots; importe cliente no es autoridad. Sin gratuidad, descuento o mínimos comerciales inferidos. |
-| IV. Cupos/matrículas | 24 h, unicidad, prioridad, cancelación/abuso delimitados | RP005 fija reloj preciso, token único y worker idempotente; RP006 debe completar conciliación. Locks/inventario/atomicidad son diseño, no último cupo demostrado. |
-| V. Confirmación de pagos | Izipay elegido, integración ausente | Puerto separado, sin confianza en navegador. Adaptador auténtico y sandbox siguen D02/RP006; no cobros reales. |
-| VI. Idempotencia | Repetición y pago duplicado obligatorios | Identidades persistidas sin ledgers duplicados; resultado/auditoría atómicos. Matriz de notificaciones y verificación diferida pendiente RP006. |
+| IV. Cupos/matrículas | 24 h, unicidad, prioridad, cancelación/abuso delimitados | Reloj preciso, worker y pago final atómico con efectos/auditoría. Recibo técnico no extiende plazo; lectores coordinados. Diseño, no último cupo demostrado. |
+| V. Confirmación de pagos | Izipay elegido, integración ausente | Puerto separado, sin confianza en navegador. Adaptador auténtico y sandbox siguen D02; P01–P07 no acreditan Izipay ni cobros reales. |
+| VI. Idempotencia | Repetición y pago duplicado obligatorios | Identidades persistidas sin ledgers duplicados; resultado/auditoría atómicos. PV01–PV30 incluyen duplicados, inciertos y respuestas tardías, todavía sin ejecución. |
 | VII. Pruebas separadas | Carga simulada, proveedor fuera de carga | Simulador solo fixtures; sandbox real separado y obligatorio para integración. No SDK/firma/endpoints inventados. |
 | VIII. Video protegido | Fuera del incremento | Sin cambios de permisos o infraestructura de video; D07/D08 pendientes. |
 | IX. Entornos separados | 72 archivos protegidos y entorno aislado documentados | Preservación verificada documentalmente; guía conserva configuración/volumen y evita cuentas manuales. Sin secretos versionados. |
@@ -87,9 +87,9 @@ probado en código o aprobado globalmente.
 | XI. Capacidad demostrable | T103 informe completo, capacidad no aprobada | D10/2500/escenario pendiente; sin nuevos ensayos ni rebautizar evidencia de 1000. S/300 total conservado. |
 | Arquitectura y costo | Monolito/pool/Compose existentes | Sin infraestructura nueva; coordinadoras en PostgreSQL con cuello de botella explícito, pendiente de medición. |
 
-**Resultado**: no excepciones constitucionales nuevas necesarias para RP004/RP005. La
+**Resultado**: no excepciones constitucionales nuevas necesarias para RP004–RP006. La
 delimitación explícita permite diseñar el núcleo funcional. No habilita producir
-implementación de pagos con protocolo inconcluso, cobros reales, demo persistente,
+implementación antes de RV001/RP007, integración sin evidencia D02, cobros reales, demo persistente,
 publicación o aceptación de capacidad. No se elude una puerta pendiente con un mock.
 
 ## Project Structure
@@ -104,10 +104,11 @@ specs/003-reservas-ordenes-matricula/
 ├── research-rp004.md              # decisiones actuales R01–R08 y fuentes
 ├── plan.md
 ├── data-model.md
-├── contracts/{api,integration,ui,time}.md
-├── temporal-verification.md       # 25 casos de diseño, no pruebas ejecutadas
+├── contracts/{api,integration,ui,time,payments}.md
+├── temporal-verification.md       # 25 IDs temporales de diseño
+├── payment-verification.md        # 30 IDs financieros de diseño, cero ejecuciones
 ├── quickstart.md
-└── evidence/{rp004,rp005}-results.json # revisiones documentales
+└── evidence/{rp004,rp005,rp006}-results.json # revisiones documentales
 ```
 
 No se crea tasks.md del spec, SQL ni código. Este árbol es la salida documental.
@@ -158,7 +159,7 @@ histórico se modifica para habilitar traslado.
 | Historia | Componente y comportamiento | Dependencias |
 | --- | --- | --- |
 | US1 P1 | Admisión ordenada, selección revalidada, reserva/orden/precio/snapshots atómicos; disponibilidad real | Identidad, participante de oferta, calendario público, modelo/migración; RP005 para reloj exacto. |
-| US2 P1 | Iniciación idempotente, pago verificado total y conversión conjunta; incidencia sin matrícula si no aplica | US1, puerto proveedor, RP006/D02; simulación no aprueba proveedor real ni cobros. |
+| US2 P1 | Iniciación idempotente, pago verificado total y conversión conjunta; incidencia sin matrícula si no aplica | US1, puerto proveedor, P01–P07, D02; simulación no aprueba proveedor real ni cobros. |
 | US3 P1 | Vigencia exacta, liberación efectiva y materialización idempotente, recuperación tras reinicio | US1, RP005/RP006 y matriz de carreras. |
 | US4 P2 | Consulta propia/administrativa mínima, precio y seguimiento append-only; guard de mantenimiento protegido | Identidad/propiedad, agregados previos, incidencias; no facultades económicas manuales. |
 
@@ -208,8 +209,8 @@ timeout de 20 min sin investigar. Smoke de identidad solo cuando cambien sus flu
 
 1. RP005: diseño de reloj, límites, normalización y worker/reinicio completado;
    T01–T07 y TV01–TV25 no acreditan implementación o ensayos.
-2. RP006: cerrar conciliación, recibo durable, deduplicación y carreras pago/vencimiento/
-   reasignación; D02/sandbox y política económica siguen puertas para cobros reales.
+2. RP006: conciliación, recibo durable, deduplicación y carreras pago/vencimiento/
+   reasignación diseñados en P01–P07/PV01–PV30; D02/sandbox y economía siguen puertas.
 3. RV001 y RP007: matriz completa, `$speckit-tasks` y `$speckit-analyze`; después,
    implementación por bloques autorizados y pruebas antes de comportamiento.
 4. VPS/2500 solo en VP001–008, con k6 desde otro equipo, presupuesto y D10 acordados.
@@ -239,9 +240,41 @@ retrasado/concurrente y fallos, sin ejecución. accountTransaction mantiene un s
 presupuesto: 55P03 no añade reintento inmediato. Retroceso detectado del reloj implica
 indisponibilidad segura sin mover plazos; sincronización/detección operativa D13
 siguen siendo prerrequisitos, sin promesa de resistencia universal a saltos del host.
-RP006 debe cerrar verificación pendiente y carrera financiera antes de escritores;
-no se interpreta PENDING_RECONCILIATION como pago ausente o retención adicional.
-Siguiente bloque vigente: RP006; después RV001 y RP007.
+La precisión RP006 siguiente reemplaza explícitamente el estado provisional de pago
+pendiente; los informes RP004/RP005 conservan su contenido histórico.
+
+### Actualización RP006 — conciliación atómica y recuperación
+
+[P01–P07](contracts/payments.md) separan ProviderReceipt (trabajo técnico durable)
+de VerifiedPayment (resultado económico terminal APPLIED/INCIDENT). Contrastes finales
+locales bajo locks, captura de verificationFinishedAt y resultado/efectos/auditoría
+comparten una transacción. Un recibo anterior al vencimiento no obtiene prioridad
+financiera ni retiene después del plazo; rollback descarta fecha final tentativa.
+
+Se corrige el estado provisional PENDING_RECONCILIATION: no habrá un pago finalmente
+verificado durable con aplicación aplazada. Esto cierra una brecha de diseño de RP004/5,
+sin cambiar las quince reglas aprobadas. Red fuera de locks, iniciación persistida
+antes de llamar, identidad externa estable y recuperación de inciertos acreditable D02.
+Replay reautoriza antes de recuperar, pero precede condiciones mutables de acción nueva.
+Respuesta tardía se actualiza condicionalmente y no rebaja APPLIED/INCIDENT.
+
+La identidad económica incluye proveedor/comercio/entorno confiables; duplicados no
+reasignan pagos. Hechos auténticos incompatibles conservan dinero real como incidencia;
+referencia desconocida no adjudica titular ni bloquea grupos arbitrarios. COMMIT ambiguo
+consulta resultado. Sin devoluciones, asignaciones manuales ni política económica implícita.
+
+Lectores críticos esperan actor/sesión y cursos/grupos FOR SHARE/órdenes cubiertas,
+sin upgrades o mutaciones; otra sentencia READ COMMITTED proyecta evaluatedAt y conteos.
+Evita cifras transitorias durante conversión que cruza el vencimiento. El coste de
+locks de lectura se medirá D10; no demuestra capacidad ni cambia consultas históricas002.
+
+Se prevén application/payment-verification.ts e infrastructure/{payment-receipts,
+payment-recovery,payment-gateway}.ts además de los puertos anteriores. No se crean
+ahora; recibos/intentos reutilizan proceso/pool y fairness T06 con sus claves propias,
+sin otro servicio, lease que autorice cobro o ledger económico duplicado.
+[PV01–PV30](payment-verification.md) son familias de casos pendientes de preparar,
+no 30 pruebas implementadas. TV03/TV25 quedan definidos por diseño, no por ejecución.
+Siguiente bloque vigente: RV001; después RP007. Ninguna puerta externa queda aprobada.
 
 ## Complexity Tracking
 

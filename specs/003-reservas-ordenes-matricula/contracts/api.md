@@ -1,6 +1,6 @@
 # Contrato HTTP previsto — reservas, órdenes y matrícula
 
-RP004, diseño. Ninguna ruta nueva existe por este documento. Base `/api/v1`, cookie
+RP004/RP005/RP006, diseño. Ninguna ruta nueva existe por este documento. Base `/api/v1`, cookie
 HttpOnly existente, autorización backend y revalidación transaccional en escrituras.
 Fuentes: [spec](../spec.md), [modelo](../data-model.md), [integración](integration.md).
 
@@ -47,7 +47,7 @@ Las rutas propias no aceptan studentId del navegador como autoridad.
 | GET /enrollment/orders | read-own; page/pageSize | Órdenes propias vigentes e históricas, con estado y resumen de incidencia, sin datos ajenos. |
 | GET /enrollment/orders/current | read-own | Orden con reservas vigentes o null; no la confunde con una orden histórica pagada. |
 | GET /enrollment/orders/:orderId | read-own | Detalle original, importes, inicio/vencimiento, serverNow y estado confirmado. Oferta oculta no impide consultar compromisos propios. |
-| POST /enrollment/orders/:orderId/payment-attempts | initiationId; pay-own | Intento de pago recuperable. Solo si reservas vigentes y todos los grupos visibles; no confirmación de pago/matrícula. Puerto real bloqueado hasta D02/RP006. |
+| POST /enrollment/orders/:orderId/payment-attempts | initiationId; pay-own | Replay autorizado recupera intento canónico antes de condiciones mutables. Nueva iniciación exige reservas vigentes y grupos visibles; incierto no autoriza otro cobro. Sin confirmación de matrícula; adaptador real sigue D02. |
 | GET /enrollment/enrollments | read-own; page/pageSize | Matrículas propias, vigencia efectiva/historial y período original. No amplía acceso a materiales/clases. |
 | GET /enrollment/enrollments/:enrollmentId | read-own | Matrícula propia con curso/grupo/fechas/franjas originales, sin reactivación por editar oferta. |
 | GET /admin/enrollment/orders | read-all; page/pageSize, studentId opcional | Consulta administrativa de todos, con identificación mínima necesaria para investigar; sin secretos ni datos de tarjeta. |
@@ -61,7 +61,9 @@ la decisión de reserva revalida todo bajo locks. No se comunica que la oferta f
 ya está garantizada. La lista existente 002 mantiene su contrato; el acceso a selección
 se integra desde app mediante la proyección nueva, sin imports internos entre features.
 Oferta/preview usan una instantánea consistente con evaluatedAt para precios, estado,
-capacidad y conteos; no mezclan lecturas de distintos momentos. Preview no admite
+capacidad y conteos después de locks críticos y recheck según [P06](payments.md);
+la proyección usa otra sentencia READ COMMITTED. Referencias nuevas exigen
+redescubrimiento; espera fallida produce 503 sin cifras ficticias. Preview no admite
 intención ni sustituye las validaciones al confirmar. Su POST conserva CSRF/origen.
 
 Para solicitudes se envían groupIds únicos canónicos; el servidor resuelve curso,
@@ -90,7 +92,7 @@ sin Date intermedio para decidir vigencia, igualdad o permiso de pago. Los tipos
 temporales históricos de identidad/oferta no cambian por este contrato 003.
 La validación de representación no aprueba mínimos, descuentos o gratuidad. Un importe
 cero explícito no da matrícula por omitir pago; modalidades cobrables y límites reales
-se verifican con proveedor en D02/RP006, antes de habilitar ese camino.
+se verifican con proveedor en D02, antes de habilitar ese camino.
 
 Cada audiencia tiene proyección cerrada; no serializar filas por spread. Matrículas
 y órdenes ocultan referencias internas de verificación y cuerpos del proveedor. Las
@@ -100,8 +102,15 @@ este recibe el estado «Pago en conciliación, sin matrícula» y el resumen aut
 Idempotencia sin mecanismos duplicados: ReservationRequest es ledger de la intención;
 PaymentAttempt es ledger de iniciación; EnrollmentCommand registra precio/seguimiento
 por (actorKind,actorReference,commandId), incluyendo operación en digest. Verificación
-se deduplica por (provider,providerPaymentId). Auditoría no es otro ledger de resultados.
+se deduplica por (providerScope,providerPaymentId), scope confiable de proveedor,
+comercio y entorno. ProviderReceipt es trabajo técnico, no otro resultado económico.
+Auditoría no es otro ledger de resultados.
 Repetir requiere permiso actual y mismo contenido; nunca amplía plazo o crea otro cobro.
+Resolver replay de iniciación antes de revalidar vigencia/visibilidad para nueva acción.
+Otra initiationId con intento no resuelto recupera el intento canónico, sin aceptar
+otra iniciación ni disparar red. Respuesta tardía no rebaja resultado terminal.
+DTO seguro distingue operación incierta, pago pendiente y matrícula/incidencia;
+no expone claves externas, recibos, firmas, evidencias o causas privadas.
 
 ## Errores seguros y estado incierto
 
@@ -140,8 +149,13 @@ Sin DELETE/PATCH de compromisos, cancelación voluntaria, matrícula/confirmaci�
 resolución económica, reembolso o traslado. La gestión de oferta sigue sus rutas 002
 con guard RA-05, revisión y descripción opcional prevista; nunca desactiva el guard.
 
-No se define URL/firma/SDK Izipay ficticio. RP006/D02 deben concretar recepción auténtica,
-correlación de orden, verificación normalizada y recuperación. El puerto de aplicación
-solo acepta hechos verificados del adaptador técnico. Un simulador existe exclusivamente
+No se define URL/firma/SDK Izipay ficticio. [P03–P07](payments.md) definen recepción
+durable mínima, correlación, finalización atómica y recuperación; D02 debe acreditar
+modalidad/autenticidad/IDs/idempotencia/consulta/acuse reales antes de habilitar ruta.
+Entrada técnica SYSTEM no depende de sesión viva del alumno. Falsas entradas no crean
+pago ni bloqueantes financieros; un hecho auténtico sin orden confiable queda solo
+en consulta administrativa mínima, sin titular o grupos adjudicados arbitrariamente.
+Excepción de transporte del callback será estrecha y autenticada, sin ampliar permisos.
+Un simulador existe exclusivamente
 en fixtures de test y nunca expone una ruta de aprobación accesible en producción.
 No desactivar Origin/CSRF para todas las mutaciones por necesidades del proveedor.

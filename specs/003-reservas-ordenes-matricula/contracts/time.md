@@ -2,8 +2,8 @@
 
 **2026-10-30, America/Lima. Diseño sin implementar.** Fuentes: [spec](../spec.md),
 [modelo](../data-model.md), [integración](integration.md). RP005 precisa el plazo,
-la autoridad del reloj, recuperación y ejecución diferida; no cierra la conciliación
-de pagos de RP006 ni crea una ruta de cancelación, extensión o confirmación manual.
+la autoridad del reloj, recuperación y ejecución diferida. [RP006](payments.md)
+completa conciliación sin cancelación, extensión o confirmación manual.
 
 ## T01 — Representación exacta
 
@@ -64,7 +64,7 @@ worker, fecha del proveedor o inicio de petición como origen de las 24 horas.
 | Reserva vigente | Estado CONFIRMED no convertido/terminal y confirmedAt <= t < expiresAt. |
 | Reserva vencida | t >= expiresAt, sin pago aplicado que la haya convertido. El worker no decide cuándo empieza ese vencimiento. |
 | Nueva reserva admisible temporalmente | t < medianoche de periodStart en America/Lima. Igualdad rechaza; consulta/admisión anterior no cambia el corte. |
-| Pago admisible temporalmente | verificationFinishedAt < expiresAt. Igualdad o posterior: incidencia RA-04 sin matrícula. Aplicabilidad completa sigue RP006. |
+| Pago admisible temporalmente | verificationFinishedAt < expiresAt. Igualdad o posterior: incidencia RA-04 sin matrícula. Aplicabilidad completa según P05 de RP006. |
 | Matrícula vigente | confirmedAt <= t < originalValidUntil, calculado a partir de fecha final original. |
 
 Para inicio, convertir la fecha civil a medianoche con la zona explícita America/Lima.
@@ -91,6 +91,11 @@ oferta visible y demás condiciones aprobadas. Ninguna republicación reinicia e
 **Decisión**: cada consulta/preview usa una instantánea consistente y un solo
 evaluatedAt. Capacidad, retenciones, matrículas y disponibilidad se evalúan con él;
 no combinar conteos de sentencias READ COMMITTED de momentos distintos.
+P06 añade coordinación necesaria: actor/sesión primero, cursos/grupos FOR SHARE
+ordenados y órdenes pertinentes; después, otra sentencia READ COMMITTED captura
+evaluatedAt/proyección. Nada de upgrades, locks tardíos o normalización desde GET.
+Si referencias finales quedan fuera de la topología cubierta, redescubrir. Así no
+se muestra un cupo transitorio al cruzar expiresAt mientras conversión espera COMMIT.
 
 Una orden aún RESERVED en almacenamiento puede presentarse vencida según su plazo
 efectivo, sin afirmar que el worker ya materializó el cambio. No exponer detalles
@@ -118,8 +123,9 @@ Secuencia de normalización:
    filas financieras en el orden común. Worker usa capacidad SYSTEM de composición,
    sin sesión administrativa ficticia ni SYSTEM aceptado del navegador.
 3. Releer/recheck después de locks. Capturar t definitivo; comprobar estados actuales
-   y decisión del participante de conciliación. PENDING_RECONCILIATION no equivale
-   por defecto a «sin pago aplicable»: ver frontera RP006 abajo.
+   y resultado financiero confirmado. RP006 no deja un pago final pendiente de
+   aplicar: recibo técnico pendiente no extiende plazo; una conversión en vuelo
+   comparte locks, y su resultado se relee después de esperar.
 4. Si corresponde vencimiento sin pago aplicable y t >= expiresAt, cambiar orden y
    todas sus reservas juntas a EXPIRED, incrementar revisión una vez y guardar
    expirationProcessedAt=t. El instante efectivo sigue siendo expiresAt, inmutable.
@@ -202,13 +208,13 @@ requiere control/evidencia D13, sin cambiar duración o condiciones de negocio.
 | Ningún pago verificado; solo intento iniciado/pendiente | No extiende plazo. Vencimiento cuando corresponde, conservando intento/antecedentes. |
 | Pago ya aplicado, orden ENROLLED | No expirar ni revocar matrícula. |
 | Pago clasificado como incidencia | No extiende reserva. Vencer retención cuando corresponda conserva incidencia abierta y bloqueo académico. |
-| VerifiedPayment PENDING_RECONCILIATION | Requiere participante/protocolo RP006 bajo los mismos locks. No asumir que es aplicable, inválido o tardío; no sobrescribirlo ni normalizarlo ciegamente. |
+| Solo ProviderReceipt RECEIVED, aún sin verificación final | No es VerifiedPayment pendiente ni extiende plazo. Expirar cuando corresponde; finalización posterior usa su propio t y no revive una plaza reasignada. |
 
-La última dependencia bloquea implementar esos escritores hasta RP006. No significa
-retención de seguridad después de las 24 horas: la vigencia temporal no se amplía.
-RP006 debe coordinar recepción durable, fin de verificación, aplicación, liberación
-y reasignación antes de habilitar consultas/escritores que dependan de esa decisión.
-RP005 no inventa precedencia financiera ni se adjudica la aprobación de esa carrera.
+P01–P07 cierran por diseño la dependencia provisional de RP005: recibo durable separado,
+verificación final y efectos/auditoría atómicos, deduplicación y lectores coordinados.
+No hay retención de seguridad después de las 24 horas ni precedencia por recepción.
+[PV01–PV30](../payment-verification.md) incluyen carreras; RV001/RP007 e implementación
+y ejecución reales siguen pendientes. No atribuir resultados a esta corrección.
 
 ## Fuentes y verificación futura
 

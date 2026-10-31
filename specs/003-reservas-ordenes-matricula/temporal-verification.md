@@ -3,13 +3,13 @@
 Diseño de comprobaciones, **cero casos implementados o ejecutados** en RP005.
 [Contrato temporal T01–T07](contracts/time.md), [plan](plan.md) y
 [guía local](quickstart.md). Los IDs TV son casos de diseño, no tareas nuevas ni
-marcas de aceptación. RV001 integrará la matriz completa después de RP006.
+marcas de aceptación. RP006 añade P01–P07/PV01–PV30; RV001 integrará la matriz completa.
 
 | ID | Nivel futuro | Preparación / acción | Expectativa verificable | Trazabilidad |
 | --- | --- | --- | --- | --- |
 | TV01 | UNIT | Confirmación con seis fracciones | expiresAtUs − confirmedAtUs = 86_400_000_000n, sin redondeo ni día civil | T01/03; FR-004; SC-001 |
 | TV02 | UNIT/PG | t=expiresAt−1µs, igual y +1µs | Solo el primero vigente; igualdad/posterior vencidos | T01/03; FR-004/009; RE-05 |
-| TV03 | UNIT/PG | Fin de verificación −1µs, igual y +1µs del vencimiento | Comparación temporal estricta; resultado financiero completo depende de RP006 | T03/07; FR-007; RE-05/08 |
+| TV03 | UNIT/PG | Fin de verificación −1µs, igual y +1µs del vencimiento | Comparación estricta; resultado financiero diseñado en P05/PV02–PV03, ejecución pendiente | T03/07; FR-007; RE-05/08 |
 | TV04 | UNIT/PG | Nueva reserva −1µs, igual y +1µs de medianoche inicial Lima | Solo antes permite confirmar; consulta/admisión anterior no evita rechazo | T02/03; FR-001; SC-001 |
 | TV05 | UNIT/PG | Fin original de matrícula −1µs, igual y +1µs | Vigente solo antes; historial conservado | T03; FR-008; SC-003 |
 | TV06 | PG | Bloquear grupo hasta cruzar el corte de inicio | Captura después de espera; rechazo total, ningún confirmedAt anterior reutilizado | T02; FR-001/010; RE-02 |
@@ -31,7 +31,7 @@ marcas de aceptación. RV001 integrará la matriz completa después de RP006.
 | TV22 | HTTP/E2E | Alterar reloj/zona cliente, recargar y volver a acceder | Plazo servidor intacto; recuperar solicitud/orden; no reenvío automático ni éxito por contador local | T02/04; FR-017/018; RE-03 |
 | TV23 | PG/HTTP | Ocultar/republicar oferta o cambiar fechas después del historial | Cero renovación; período/límite original histórico intacto, no reactivación | T03/05; FR-021; RE-09 |
 | TV24 | UNIT/PG/operación | Retroceso de reloj detectado y estado terminal previo | Fallo seguro sin cambiar expiresAt ni reactivar; no afirmar detección universal o 24h físicas ante reloj no confiable | T07; FR-004/022; D13 |
-| TV25 | PG/HTTP diferido | Pago PENDING_RECONCILIATION frente a expiración/reasignación | Debe cerrarse en RP006; no normalizar ciegamente, ni inventar retención extra, ni atribuir aprobación ahora | T07; FR-007/009/013; RE-07/08 |
+| TV25 | PG/HTTP | Recibo técnico pendiente o finalizador frente a expiración/reasignación | P01/P05/P06 y PV03–PV10 definen atomicidad/carreras; sin retención extra, ejecución pendiente | T07; FR-007/009/013; RE-07/08 |
 
 En cada caso registrar preparación, versión, descubrimiento real, aserciones alcanzadas,
 estado final y limitaciones. UNIT prueba reglas puras; integración usa PostgreSQL y
@@ -45,7 +45,8 @@ pruebas; estos 25 IDs no son una afirmación de 25 tests ejecutados. Separar cas
 probar límites: reloj controlado en test no acredita un ensayo operacional de 24 h.
 Las referencias esperadas de conversión civil se contrastarán con fixtures revisadas
 y versión de tzdata, evitando que una aserción copie simplemente la misma fórmula
-de la implementación. TV25 y el resultado completo de TV03 siguen RP006.
+de la implementación. TV25 y el resultado completo de TV03 se diseñan en
+[P01–P07](contracts/payments.md) y [PV01–PV30](payment-verification.md), sin ejecución.
 
 No ejecutar estos ensayos, smokes, perfiles 10/25 ni cargas durante RP005. Integración
 Izipay/sandbox, economía antes de cobros reales, D10/capacidad, D13, bootstrap y

@@ -1,4 +1,4 @@
-# Contrato de interfaz previsto — RP004
+# Contrato de interfaz previsto — RP004/RP005/RP006
 
 Diseño futuro de cuatro historias. [Spec](../spec.md), [HTTP](api.md),
 [integración](integration.md). Sin páginas implementadas en este bloque.
@@ -47,13 +47,18 @@ puede informar vencimiento efectivo antes de su materialización por el worker.
 Iniciar pago es acción explícita recuperable. Distinguir inicio pendiente, pago sin
 verificar, matrícula confirmada, vencimiento y «Pago en conciliación, sin matrícula».
 Redirección exitosa del proveedor nunca confirma matrícula por sí sola.
+Una iniciación SUBMITTING/INITIATION_UNKNOWN ofrece consultar/recuperar el intento
+canónico, sin otro botón que cree cobro nuevo. Una repetición autorizada conserva
+el resultado aunque cambien plazo/visibilidad; no reinicia el plazo. Respuesta tardía
+no vuelve pendiente un resultado ya terminal. Recibo técnico no se presenta como
+pago finalmente verificado ni obtiene matrícula o tiempo extra.
 
 Si algún grupo está oculto: indicar que el pago/confirmación de la orden completa no
 están permitidos, conservar consulta y plazo, sin causas privadas. Republicación
 explícita puede habilitar pagar el plazo restante, sin ofrecer otras 24 h ni resolver
 incidencias o iniciar otro cobro por ese hecho. Matrículas anteriores siguen consultables.
 
-El camino de proveedor real permanece bloqueado hasta D02/RP006 y política económica
+El camino de proveedor real permanece bloqueado hasta evidencia real D02 y política económica
 aprobada. La demostración con fixtures identifica claramente pagos simulados; no se
 presenta como integración o cobro real ni se publica un botón de simulación en producción.
 

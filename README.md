@@ -92,11 +92,14 @@ RP005 concreta [reloj/límites/worker](specs/003-reservas-ordenes-matricula/cont
 y [25 IDs de comprobación futura](specs/003-reservas-ordenes-matricula/temporal-verification.md):
 precisión exacta, instante único posterior a locks y materialización idempotente,
 sin cambiar el plazo ni ejecutar pruebas. Conserva salud horaria D13 y dependencia
-de pagos verificados pendientes, sin resolverlos por omisión.
+de pagos verificados pendientes en aquel checkpoint; RP006 lo precisa a continuación.
 [Revisión documental RP005](specs/003-reservas-ordenes-matricula/evidence/rp005-results.json).
-Siguiente bloque: **RP006**, conciliación y carreras de pago/vencimiento.
-No se generan tareas de implementación antes de cerrar
-esos diseños y su matriz de verificación.
+RP006 diseña [conciliación/recuperación](specs/003-reservas-ordenes-matricula/contracts/payments.md)
+y [30 IDs financieros futuros](specs/003-reservas-ordenes-matricula/payment-verification.md):
+recibo técnico separado del pago final atómico, iniciación incierta recuperable y
+lecturas coordinadas. No es implementación, sandbox ni aprobación de cobros.
+[Revisión documental RP006](specs/003-reservas-ordenes-matricula/evidence/rp006-results.json).
+Siguiente bloque: **RV001**, matriz integrada de verificación; después RP007/tareas/análisis.
 [Revisión documental RP004](specs/003-reservas-ordenes-matricula/evidence/rp004-results.json).
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
