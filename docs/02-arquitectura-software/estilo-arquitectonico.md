@@ -66,41 +66,80 @@ La vista representa el diseño previsto sobre la base técnica existente. Las l�
 ```mermaid
 flowchart TB
     subgraph actores["Actores"]
+        direction LR
         alumno["Alumno"]
         docente["Docente"]
         administrador["Administrador"]
     end
 
-    web["Aplicación web<br/>React / Vite"]
-
-    subgraph backend["Backend monolítico · NestJS"]
-        api["Presentación<br/>API REST"]
-        subgraph negocio["Lógica de negocio · módulos previstos"]
-            cuentas["Identidad y acceso<br/>Usuarios · autorización · correo · auditoría"]
-            academia["Oferta y aprendizaje<br/>Cursos · materiales · clases · chat · paneles"]
-            cobros["Órdenes y matrículas<br/>Pagos · cupos"]
-        end
-        datos["Acceso a datos<br/>Adaptadores Prisma/pg previstos"]
+    subgraph presentacion["Capa de presentación"]
+        direction LR
+        web["Aplicación web<br/>React, TypeScript y Vite"]
+        api["API REST<br/>NestJS"]
+        gateway["Gateway de chat<br/>Socket.IO previsto"]
     end
 
-    postgres[("PostgreSQL")]
+    subgraph negocio["Capa de lógica de negocio"]
+        direction TB
+        identidad["Identidad y usuarios"]
+        academico["Cursos y materiales"]
+        matriculas["Matrículas"]
+        pagos["Pagos"]
+        aula["Clases en vivo y chat"]
+        administracion["Administración y paneles"]
+        entregas["Correo · módulo previsto"]
+    end
 
-    subgraph externos["Servicios externos al backend"]
+    subgraph datos["Capa de datos"]
+        direction LR
+        persistencia["Persistencia prevista<br/>Prisma/pg"]
+        postgres[("PostgreSQL")]
+        archivos["Materiales<br/>Almacenamiento por definir"]
+    end
+
+    subgraph externos["Servicios externos"]
+        direction LR
         izipay["Izipay<br/>Integración pendiente"]
-        smtp["Correo<br/>Mailpit local / SMTP externo previsto"]
-        youtube["YouTube Live<br/>Emisión con OBS prevista"]
+        correo["Servicio de correo<br/>SMTP pendiente / Mailpit local validado"]
+        youtube["YouTube Live<br/>Acceso por validar"]
+        obs["OBS Studio<br/>Emisión prevista"]
     end
 
-    alumno -.-> web
-    docente -.-> web
-    administrador -.-> web
-    web -.->|"HTTP / JSON"| api
-    api -.-> negocio
-    negocio -.-> datos
-    datos -.-> postgres
-    cuentas -.->|"Correo"| smtp
-    cobros -.->|"Pagos"| izipay
-    academia -.->|"Clases: coordinación"| youtube
+    alumno --> web
+    docente --> web
+    administrador --> web
+
+    web -->|"HTTPS / JSON"| api
+    web -->|"conexión en tiempo real"| gateway
+
+    api --> identidad
+    api --> academico
+    api --> matriculas
+    api --> pagos
+    api --> aula
+    api --> administracion
+    gateway --> aula
+
+    matriculas -->|"solicita procesamiento"| pagos
+
+    identidad --> persistencia
+    academico --> persistencia
+    matriculas --> persistencia
+    pagos --> persistencia
+    aula --> persistencia
+    administracion --> persistencia
+    entregas --> persistencia
+
+    persistencia --> postgres
+    academico --> archivos
+
+    identidad -->|"programa entregas"| entregas
+    entregas -.->|"adaptador SMTP"| correo
+    pagos -.->|"procesamiento de pagos"| izipay
+    aula -.->|"acceso a la transmisión"| youtube
+    docente -.->|"emisión de video"| obs
+    obs -.->|"transmisión"| youtube
+    youtube -.->|"reproducción de video"| web
 ```
 
 Las flechas representan colaboración en ejecución, no dirección de importaciones. Los proveedores se conectan a los módulos consumidores. La base web/API y PostgreSQL existen; el recorrido por módulos y adaptadores de negocio está previsto. Mailpit está validado como servicio local, mientras que SMTP externo, Izipay y video no cuentan con integración funcional comprobada. El flujo de emisión y reproducción se explica en la sección de comunicación para mantener compacta esta vista.
