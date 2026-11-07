@@ -87,7 +87,7 @@ flowchart TB
         pagos["Pagos"]
         aula["Clases en vivo y chat"]
         administracion["Administración y paneles"]
-        entregas["Correo · módulo previsto"]
+        entregas["Correo"]
     end
 
     subgraph datos["Capa de datos"]
