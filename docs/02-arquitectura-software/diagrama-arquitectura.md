@@ -30,7 +30,8 @@ flowchart TB
         direction TB
         identidad["Identidad y usuarios"]
         academico["Cursos y materiales"]
-        matriculas["Matrículas y pagos"]
+        matriculas["Matrículas"]
+        pagos["Pagos"]
         aula["Clases en vivo y chat"]
         administracion["Administración y paneles"]
         entregas["Correo · módulo previsto"]
@@ -61,13 +62,17 @@ flowchart TB
     api --> identidad
     api --> academico
     api --> matriculas
+    api --> pagos
     api --> aula
     api --> administracion
     gateway --> aula
 
+    matriculas -->|"solicita procesamiento"| pagos
+
     identidad --> persistencia
     academico --> persistencia
     matriculas --> persistencia
+    pagos --> persistencia
     aula --> persistencia
     administracion --> persistencia
     entregas --> persistencia
@@ -77,7 +82,7 @@ flowchart TB
 
     identidad -->|"programa entregas"| entregas
     entregas -.->|"adaptador SMTP"| correo
-    matriculas -.->|"procesamiento de pagos"| izipay
+    pagos -.->|"procesamiento de pagos"| izipay
     aula -.->|"acceso a la transmisión"| youtube
     docente -.->|"emisión de video"| obs
     obs -.->|"transmisión"| youtube
