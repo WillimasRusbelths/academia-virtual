@@ -1,10 +1,5 @@
 # Enfoque arquitectónico
 
-> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
-> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
-> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
-> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
-
 Clean Architecture organiza las responsabilidades y dependencias internas de Academia Virtual. Complementa el [estilo monolítico por capas](estilo-arquitectonico.md): los módulos del backend permanecen dentro de una misma aplicación NestJS. Se conservan React/Vite, PostgreSQL y Docker Compose; el enfoque no exige cambiar esas tecnologías ni dividir el sistema en servicios independientes.
 
 La elección responde a **DA07**, mantenibilidad y evolución modular, y a **R01**, estructura y dependencias internas, del [registro de decisiones arquitectónicas](../01-analisis-de-sistema/07-decisiones-arquitectonicas.md). Según los [drivers vigentes](../01-analisis-de-sistema/06-driver-arquitectonicos.md), modificar una funcionalidad debe afectar solo a los módulos necesarios. El [plan de identidad](../../specs/001-identidad-acceso-roles/plan.md) concreta los límites que permiten mantener reglas de negocio independientes del transporte, la persistencia y los proveedores.
@@ -99,4 +94,4 @@ El plan propone módulos de identidad, usuarios, autorización, correo y auditor
 
 Las [pruebas de límites de importación](../../apps/api/tests/architecture/import-boundaries.spec.ts) utilizan fragmentos y nombres de archivo de ensayo para comprobar reglas. Esos nombres no acreditan módulos funcionales creados. La [revisión de arquitectura](../../ops/local/architecture.md) aporta los controles existentes y la [verificación de identidad](../../specs/001-identidad-acceso-roles/verification.md) mantiene pendientes los escenarios funcionales.
 
-Docker Compose tiene [validación local registrada](../../ops/docker/verification.md) para PostgreSQL, Mailpit, API y web en el commit `47c8338`. Esta evidencia no demuestra la aplicación completa del enfoque ni las integraciones funcionales. La mantenibilidad de los módulos futuros deberá comprobarse al implementarlos; los 2500 usuarios concurrentes activos continúan como objetivo pendiente de pruebas de carga.
+Docker Compose tiene [validación local registrada](../../ops/docker/verification.md) para PostgreSQL, Mailpit, API y web en el commit `47c8338`. Esta evidencia no demuestra la aplicación completa del enfoque ni las integraciones funcionales. La mantenibilidad de los módulos futuros deberá comprobarse al implementarlos; los 1000 usuarios concurrentes continúan como objetivo pendiente de pruebas de carga.

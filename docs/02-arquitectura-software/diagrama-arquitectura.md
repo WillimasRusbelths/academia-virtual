@@ -1,10 +1,5 @@
 # Diagrama de arquitectura de Academia Virtual
 
-> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
-> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
-> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
-> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
-
 ## Descripción general
 
 Academia Virtual emplea una arquitectura de tres capas: presentación, lógica de negocio y datos. Esta separación permite distribuir las responsabilidades del sistema, facilitar su mantenimiento y evitar que las interfaces de usuario accedan directamente a la base de datos.
@@ -35,7 +30,8 @@ flowchart TB
         direction TB
         identidad["Identidad y usuarios"]
         academico["Cursos y materiales"]
-        matriculas["Matrículas y pagos"]
+        matriculas["Matrículas"]
+        pagos["Pagos"]
         aula["Clases en vivo y chat"]
         administracion["Administración y paneles"]
         entregas["Correo · módulo previsto"]
@@ -66,13 +62,17 @@ flowchart TB
     api --> identidad
     api --> academico
     api --> matriculas
+    api --> pagos
     api --> aula
     api --> administracion
     gateway --> aula
 
+    matriculas -->|"solicita procesamiento"| pagos
+
     identidad --> persistencia
     academico --> persistencia
     matriculas --> persistencia
+    pagos --> persistencia
     aula --> persistencia
     administracion --> persistencia
     entregas --> persistencia
@@ -82,7 +82,7 @@ flowchart TB
 
     identidad -->|"programa entregas"| entregas
     entregas -.->|"adaptador SMTP"| correo
-    matriculas -.->|"procesamiento de pagos"| izipay
+    pagos -.->|"procesamiento de pagos"| izipay
     aula -.->|"acceso a la transmisión"| youtube
     docente -.->|"emisión de video"| obs
     obs -.->|"transmisión"| youtube
@@ -141,7 +141,7 @@ PostgreSQL conserva los datos del sistema, pero no se comunica directamente con 
 
 El proyecto cuenta con la estructura inicial del frontend y la API: React muestra «En preparación» y NestJS compone ProbeModule para `GET /health/live`. PostgreSQL, Mailpit, API y web funcionan en el entorno local Docker Compose validado en el commit `47c8338`, según la [evidencia registrada](../../ops/docker/verification.md). Los módulos funcionales se implementarán progresivamente de acuerdo con las historias y requisitos.
 
-La capacidad para soportar 2500 usuarios concurrentes activos deberá comprobarse mediante pruebas de carga. Las integraciones con Izipay, correo de producción, YouTube Live y almacenamiento de materiales también requieren implementación y validación.
+La capacidad para soportar 1000 usuarios concurrentes deberá comprobarse mediante pruebas de carga. Las integraciones con Izipay, correo de producción, YouTube Live y almacenamiento de materiales también requieren implementación y validación.
 
 La protección de video exige comprobar acceso directo y permisos vencidos. Una página autenticada o un enlace oculto no demuestran ese control; la compatibilidad con las condiciones de RF16 permanece pendiente. La operación local tampoco demuestra disponibilidad de producción ni restauración de respaldos.
 

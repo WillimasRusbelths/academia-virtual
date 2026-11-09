@@ -1,10 +1,5 @@
 # Estilo arquitectónico
 
-> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
-> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
-> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
-> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
-
 ## 1. Estilo seleccionado
 
 Academia Virtual adopta un **monolito por capas, organizado internamente en módulos**, conforme a R01 de las [decisiones arquitectónicas](../01-analisis-de-sistema/07-decisiones-arquitectonicas.md). El backend NestJS constituye una sola aplicación: sus módulos se componen y ejecutan dentro del mismo proceso, con colaboración interna mediante interfaces públicas. Los módulos no son servicios desplegados de forma independiente.
@@ -25,7 +20,7 @@ La elección responde a los [drivers vigentes](../01-analisis-de-sistema/06-driv
 | DA01, DA09 | R02, R03, R05 | Las entradas REST adaptan el transporte; los casos de uso aplican autorización y consistencia. La separación evita que la interfaz web sea responsable de los permisos definitivos. |
 | DA02 | D02 | Un backend y PostgreSQL permiten coordinar transacciones e idempotencia para pagos y matrículas. Las reglas comerciales pendientes deben resolverse antes de implementar estas operaciones. |
 | DA03, DA06 | DEC01, R07, R08 | Los módulos consumidores acceden a video, pagos y correo mediante límites de integración. Los detalles de proveedores no deben introducirse en las reglas del dominio. |
-| DA05 | R10 | La capacidad debe demostrarse mediante carga y mediciones. El estilo no garantiza por sí mismo 2500 usuarios concurrentes activos. |
+| DA05 | R10 | La capacidad debe demostrarse mediante carga y mediciones. El estilo no garantiza por sí mismo 1000 usuarios concurrentes. |
 | DA08, DA10 | D13, R11, R12 | Persistencia, recuperación y operación reproducible necesitan procedimientos propios. Docker Compose facilita el entorno local, pero no acredita respaldo ni disponibilidad de producción. |
 
 ## 3. Componentes principales y estado
@@ -42,7 +37,7 @@ La [arquitectura inicial](arquitectura-inicial.md) aporta la vista general del a
 | Izipay, correo externo y YouTube Live con OBS | D02, R07 y DEC01 del registro de decisiones | Integraciones funcionales pendientes. Mailpit funciona como servicio de captura local; no demuestra entrega externa. |
 | Entorno Docker Compose | [Verificación local](../../ops/docker/verification.md) | PostgreSQL, Mailpit, API y web validados en el commit `47c8338`. |
 
-Los paquetes instalados y las pruebas de compatibilidad no equivalen a funcionalidades implementadas. Identidad, pagos, video, recuperación y la prueba de 2500 activos concurrentes permanecen pendientes de aceptación funcional.
+Los paquetes instalados y las pruebas de compatibilidad no equivalen a funcionalidades implementadas. Identidad, pagos, video, recuperación y la prueba de 1000 concurrentes permanecen pendientes de aceptación funcional.
 
 ## 4. Responsabilidades de las capas
 
@@ -71,41 +66,80 @@ La vista representa el diseño previsto sobre la base técnica existente. Las l�
 ```mermaid
 flowchart TB
     subgraph actores["Actores"]
+        direction LR
         alumno["Alumno"]
         docente["Docente"]
         administrador["Administrador"]
     end
 
-    web["Aplicación web<br/>React / Vite"]
-
-    subgraph backend["Backend monolítico · NestJS"]
-        api["Presentación<br/>API REST"]
-        subgraph negocio["Lógica de negocio · módulos previstos"]
-            cuentas["Identidad y acceso<br/>Usuarios · autorización · correo · auditoría"]
-            academia["Oferta y aprendizaje<br/>Cursos · materiales · clases · chat · paneles"]
-            cobros["Órdenes y matrículas<br/>Pagos · cupos"]
-        end
-        datos["Acceso a datos<br/>Adaptadores Prisma/pg previstos"]
+    subgraph presentacion["Capa de presentación"]
+        direction LR
+        web["Aplicación web<br/>React, TypeScript y Vite"]
+        api["API REST<br/>NestJS"]
+        gateway["Gateway de chat<br/>Socket.IO previsto"]
     end
 
-    postgres[("PostgreSQL")]
+    subgraph negocio["Capa de lógica de negocio"]
+        direction TB
+        identidad["Identidad y usuarios"]
+        academico["Cursos y materiales"]
+        matriculas["Matrículas"]
+        pagos["Pagos"]
+        aula["Clases en vivo y chat"]
+        administracion["Administración y paneles"]
+        entregas["Correo"]
+    end
 
-    subgraph externos["Servicios externos al backend"]
+    subgraph datos["Capa de datos"]
+        direction LR
+        persistencia["Persistencia prevista<br/>Prisma/pg"]
+        postgres[("PostgreSQL")]
+        archivos["Materiales<br/>Almacenamiento por definir"]
+    end
+
+    subgraph externos["Servicios externos"]
+        direction LR
         izipay["Izipay<br/>Integración pendiente"]
-        smtp["Correo<br/>Mailpit local / SMTP externo previsto"]
-        youtube["YouTube Live<br/>Emisión con OBS prevista"]
+        correo["Servicio de correo<br/>SMTP pendiente / Mailpit local validado"]
+        youtube["YouTube Live<br/>Acceso por validar"]
+        obs["OBS Studio<br/>Emisión prevista"]
     end
 
-    alumno -.-> web
-    docente -.-> web
-    administrador -.-> web
-    web -.->|"HTTP / JSON"| api
-    api -.-> negocio
-    negocio -.-> datos
-    datos -.-> postgres
-    cuentas -.->|"Correo"| smtp
-    cobros -.->|"Pagos"| izipay
-    academia -.->|"Clases: coordinación"| youtube
+    alumno --> web
+    docente --> web
+    administrador --> web
+
+    web -->|"HTTPS / JSON"| api
+    web -->|"conexión en tiempo real"| gateway
+
+    api --> identidad
+    api --> academico
+    api --> matriculas
+    api --> pagos
+    api --> aula
+    api --> administracion
+    gateway --> aula
+
+    matriculas -->|"solicita procesamiento"| pagos
+
+    identidad --> persistencia
+    academico --> persistencia
+    matriculas --> persistencia
+    pagos --> persistencia
+    aula --> persistencia
+    administracion --> persistencia
+    entregas --> persistencia
+
+    persistencia --> postgres
+    academico --> archivos
+
+    identidad -->|"programa entregas"| entregas
+    entregas -.->|"adaptador SMTP"| correo
+    pagos -.->|"procesamiento de pagos"| izipay
+    aula -.->|"acceso a la transmisión"| youtube
+    docente -.->|"emisión de video"| obs
+    obs -.->|"transmisión"| youtube
+    youtube -.->|"reproducción de video"| web
 ```
 
 Las flechas representan colaboración en ejecución, no dirección de importaciones. Los proveedores se conectan a los módulos consumidores. La base web/API y PostgreSQL existen; el recorrido por módulos y adaptadores de negocio está previsto. Mailpit está validado como servicio local, mientras que SMTP externo, Izipay y video no cuentan con integración funcional comprobada. El flujo de emisión y reproducción se explica en la sección de comunicación para mantener compacta esta vista.
@@ -116,4 +150,4 @@ La aplicación única reduce la complejidad de despliegue y coordinación para e
 
 El backend comparte proceso y recursos: un fallo o saturación puede afectar a varios módulos, y su despliegue se realiza como unidad. La modularidad requiere disciplina en los contratos y las dependencias; no surge únicamente de separar carpetas. Las reglas comerciales, las integraciones y las políticas de recuperación pendientes limitan lo que puede demostrarse actualmente.
 
-El rendimiento y la escalabilidad deben evaluarse con pruebas reproducibles. Los **2500 usuarios concurrentes activos siguen siendo un objetivo por demostrar**. Caché o escalamiento horizontal solo pueden considerarse posibilidades por validar a partir de mediciones, no capacidades implementadas. Docker Compose tiene validación local registrada y no demuestra disponibilidad, recuperación ni capacidad de producción.
+El rendimiento y la escalabilidad deben evaluarse con pruebas reproducibles. Los **1000 usuarios concurrentes siguen siendo un objetivo por demostrar**. Caché o escalamiento horizontal solo pueden considerarse posibilidades por validar a partir de mediciones, no capacidades implementadas. Docker Compose tiene validación local registrada y no demuestra disponibilidad, recuperación ni capacidad de producción.
