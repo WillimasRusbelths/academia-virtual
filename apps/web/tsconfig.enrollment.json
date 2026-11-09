@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["node"]
+  },
+  "include": [
+    "playwright.enrollment.config.ts",
+    "tests/support/enrollment-fixture.ts",
+    "tests/e2e/enrollment-*.spec.ts",
+    "../api/tests/support/enrollment.ts",
+    "../api/tests/integration/enrollment-harness.spec.ts",
+    "../api/src/modules/enrollment/domain/*.test.ts",
+    "../api/tests/support/enrollment-migration.ts",
+    "../api/tests/integration/enrollment-migration.spec.ts"
+  ]
+}

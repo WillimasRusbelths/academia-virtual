@@ -27,7 +27,9 @@ test('M02 deploy vacío incorpora una migración posterior a las cuatro de ident
   expect(names[0] > identityMigrations[3]).toBe(true);
   const applied = await context.database.pool.query<{ migration_name: string }>(
     'SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name');
-  expect(applied.rows.map(row => row.migration_name)).toEqual([...identityMigrations, ...names]);
+  const historical = [...identityMigrations, ...names];
+  expect(applied.rows.slice(0, historical.length).map(row => row.migration_name)).toEqual(historical);
+  expect(applied.rows.slice(historical.length).every(row => row.migration_name > names[0])).toBe(true);
 });
 
 test('M03 deploy vacío crea cinco tablas académicas vacías y generación bigint default 0', async () => {

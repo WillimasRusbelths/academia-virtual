@@ -1,0 +1,45 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "../..",
+    "allowJs": true,
+    "checkJs": false
+  },
+  "files": [
+    "src/modules/authorization/domain/permissions.test.ts",
+    "src/modules/enrollment/domain/reservation.test.ts",
+    "src/modules/enrollment/domain/order.test.ts",
+    "src/modules/enrollment/domain/compatibility.test.ts",
+    "src/modules/enrollment/domain/payment-verification.test.ts",
+    "src/modules/enrollment/domain/payment-invariants.test.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "tests/contracts/enrollment.spec.ts",
+    "tests/integration/enrollment-boundaries.spec.ts",
+    "tests/integration/enrollment-authorization.spec.ts",
+    "tests/integration/enrollment-foundation.spec.ts",
+    "tests/integration/enrollment-audit.spec.ts",
+    "tests/integration/enrollment-maintenance.spec.ts",
+    "tests/integration/enrollment-errors.spec.ts",
+    "tests/integration/enrollment-prices.spec.ts",
+    "tests/integration/reservations-admission.spec.ts",
+    "tests/integration/reservations-dispatch.spec.ts",
+    "tests/integration/enrollment-queries.spec.ts",
+    "tests/integration/reservations-execution.spec.ts",
+    "tests/integration/enrollment-read-persistence.spec.ts",
+    "tests/integration/enrollment-http.spec.ts",
+    "tests/integration/enrollment-composition.spec.ts",
+    "tests/integration/enrollment-payments.spec.ts",
+    "tests/integration/enrollment-payment-attempts.spec.ts",
+    "tests/integration/enrollment-payment-http.spec.ts",
+    "tests/integration/enrollment-payment-initiation.spec.ts",
+    "tests/integration/enrollment-payment-recovery.spec.ts",
+    "tests/integration/enrollment-payment-upgrade.spec.ts",
+    "tests/integration/enrollment-student-payments.spec.ts"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ]
+}

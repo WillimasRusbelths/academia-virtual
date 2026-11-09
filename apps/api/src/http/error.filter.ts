@@ -17,6 +17,8 @@ import { AccessTargetMissing, AccessCommandInvalid } from '../modules/identity/a
 import { OfferingError, OFFERING_ERROR_MESSAGES } from '../modules/academic-offering/public/offer.js';
 import { academicRouteTargets } from '../infrastructure/logging/security-events.js';
 import type { Role } from '../modules/users/public/account.js';
+import { EnrollmentError, ENROLLMENT_ERROR_MESSAGES } from '../modules/enrollment/public/errors.js';
+import { enrollmentRoute, enrollmentFamily, enrollmentConflictCodes } from '../infrastructure/http/enrollment-contract.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -50,7 +52,7 @@ const codes: Record<number, readonly string[]> = {
   400:['VALIDATION_ERROR','INVALID_ACTION_LINK'],401:['AUTH_REQUIRED','INVALID_CREDENTIALS'],
   403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],409:['ACCOUNT_CONFLICT','ADMIN_INVARIANT',
     'OFFERING_VERSION_CONFLICT','OFFERING_STATE_CONFLICT','TEACHER_NOT_ELIGIBLE','TEACHER_SCHEDULE_CONFLICT',
-    'COURSE_PUBLICATION_BLOCKED','IDEMPOTENCY_CONFLICT'],
+    'COURSE_PUBLICATION_BLOCKED','GROUP_COMMITMENTS_BLOCK_OPERATION','IDEMPOTENCY_CONFLICT'],
   413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE'],
 };
 const fieldNames=['name','email','password','provisionalPassword','newPassword','role','status','token'];
@@ -58,7 +60,7 @@ const academicFields=['name','description','periodStart','periodEnd','timeZone',
   'cancellationReason','expectedRevision','commandId','q','state','page','pageSize'];
 const academicStatuses = { VALIDATION_ERROR:400, AUTH_REQUIRED:401, FORBIDDEN:403, REQUEST_NOT_ALLOWED:403,
   NOT_FOUND:404, OFFERING_VERSION_CONFLICT:409, OFFERING_STATE_CONFLICT:409, TEACHER_NOT_ELIGIBLE:409,
-  TEACHER_SCHEDULE_CONFLICT:409, COURSE_PUBLICATION_BLOCKED:409, IDEMPOTENCY_CONFLICT:409, TEMPORARILY_UNAVAILABLE:503 };
+  TEACHER_SCHEDULE_CONFLICT:409, COURSE_PUBLICATION_BLOCKED:409, GROUP_COMMITMENTS_BLOCK_OPERATION:409, IDEMPOTENCY_CONFLICT:409, TEMPORARILY_UNAVAILABLE:503 };
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** Lista permitida de salida: jamás serializa causas, cuerpos o mensajes de adaptadores. */
@@ -76,7 +78,16 @@ export class SafeErrorFilter implements ExceptionFilter {
     const template = typeof request.route?.path === 'string' ? request.route.path.replace(/^\/api\/v1(?=\/)/, '') : '';
     const route = Object.hasOwn(academicRouteTargets, template) ? academicRouteTargets[template] : undefined;
     const academic = route !== undefined || error instanceof OfferingError;
-    if (error instanceof OfferingError) {
+    const enrollment = enrollmentRoute(request.method,template);
+    const financial = enrollment !== undefined || enrollmentFamily(template) || error instanceof EnrollmentError;
+    const financialAudience = enrollment !== undefined && request.actor?.role === enrollment.role;
+    if (error instanceof EnrollmentError) {
+      code = error.code;
+      status = code==='VALIDATION_ERROR'?400:code==='AUTH_REQUIRED'?401:code==='FORBIDDEN'||code==='REQUEST_NOT_ALLOWED'?403:
+        code==='NOT_FOUND'?404:enrollmentConflictCodes.includes(error.code)?409:503;
+      if(code==='VALIDATION_ERROR'&&Array.isArray(error.failure.fields))fields=error.failure.fields
+        .filter(field=>typeof field==='string').map(field=>({field,message:'Campo inválido.'}));
+    } else if (error instanceof OfferingError) {
       code = error.code; status = Object.hasOwn(academicStatuses, error.code) ? academicStatuses[error.code] : 503;
       const failure = error.failure;
       if ((failure.code === 'VALIDATION_ERROR' || failure.code === 'TEACHER_NOT_ELIGIBLE') && Array.isArray(failure.fields)) {
@@ -113,8 +124,16 @@ export class SafeErrorFilter implements ExceptionFilter {
     } else if (error instanceof HttpException && error.getStatus() === 404) {
       status = 404; code = 'NOT_FOUND';
     }
-    if (!codes[status]?.includes(code)) { status=503;code='TEMPORARILY_UNAVAILABLE'; }
-    if (fields) fields=(status === 400 && code === 'VALIDATION_ERROR' || status === 409 && code === 'TEACHER_NOT_ELIGIBLE') && Array.isArray(fields)
+    const permitted:readonly string[]|undefined = financial ? status===409 && financialAudience ? enrollment.conflicts :
+      ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],
+        413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[status] : codes[status];
+    if (!permitted?.includes(code)) { status=503;code='TEMPORARILY_UNAVAILABLE'; }
+    if(financial){
+      const allowed:readonly string[]=status===400&&code==='VALIDATION_ERROR'&&financialAudience?enrollment.fields:[];
+      const names=Array.isArray(fields)?[...new Set(fields.flatMap(value=>value&&typeof value.field==='string'&&allowed.includes(value.field)?[value.field]:[]))]:[];
+      fields=names.length?names.map(field=>({field,message:'Campo inválido.'})):undefined;
+      conflictingGroupIds=undefined;
+    } else if (fields) fields=(status === 400 && code === 'VALIDATION_ERROR' || status === 409 && code === 'TEACHER_NOT_ELIGIBLE') && Array.isArray(fields)
       ?fields.filter(field => field && typeof field.field==='string' && (code === 'TEACHER_NOT_ELIGIBLE'
         ?field.field === 'teacherUserId':(academic?academicFields:fieldNames).includes(field.field)))
         .map(field => ({field:field.field,message:'Campo inválido.'})):undefined;
@@ -125,20 +144,22 @@ export class SafeErrorFilter implements ExceptionFilter {
       const authentication = status===401 && code==='INVALID_CREDENTIALS';
       try {
         this.logs.record({category:status===503?'OPERATION':'SECURITY',
-          action:status===503?'RUNTIME_FAILURE':status===409?'ADMIN_COMMAND_REJECTED':authentication?'AUTHENTICATION_FAILED':'ACCESS_DENIED',
+          action:status===503?'RUNTIME_FAILURE':status===409?financial?'ENROLLMENT_COMMAND_REJECTED':'ADMIN_COMMAND_REJECTED':authentication?'AUTHENTICATION_FAILED':'ACCESS_DENIED',
           result:status===503?'FAILED':'DENIED',reasonCode:code,
           actorKind:request.actor && !authentication?'ACCOUNT':'ANONYMOUS',
           ...(request.actor && !authentication?{actorUserId:request.actor.userId}:{}),
-          targetKind:route?.kind ?? (!academic && request.params?.id!==undefined?'USER_REFERENCE':'NONE'),
-          ...(route?.param && request.params?.[route.param]!==undefined?{requestedTargetId:request.params[route.param]}
-            :!academic && request.params?.id!==undefined?{requestedTargetId:request.params.id}:{}),
-          ...(route?{routeTemplate:template}:{}),
-          ...(academic && request.actor && typeof request.commandId==='string' && uuid.test(request.commandId)?{commandId:request.commandId}:{})},requestId);
+          targetKind:financial?enrollment?.targetKind??'NONE':route?.kind ?? (!academic && request.params?.id!==undefined?'USER_REFERENCE':'NONE'),
+          ...(financial?enrollment?.param&&request.params?.[enrollment.param]!==undefined?{requestedTargetId:request.params[enrollment.param]}:{}:
+            route?.param && request.params?.[route.param]!==undefined?{requestedTargetId:request.params[route.param]}
+              :!academic && request.params?.id!==undefined?{requestedTargetId:request.params.id}:{}),
+          ...(financial?enrollment?{routeTemplate:template}:{}:route?{routeTemplate:template}:{}),
+          ...((financial?enrollment?.command&&financialAudience:academic) && request.actor && typeof request.commandId==='string' && uuid.test(request.commandId)?{commandId:request.commandId}:{})},requestId);
       } catch { /* El canal privado nunca cambia la respuesta pública. */ }
     }
     response.setHeader('Cache-Control', 'no-store');
     response.setHeader('Referrer-Policy', 'no-referrer');
-    const message = academic && Object.hasOwn(OFFERING_ERROR_MESSAGES,code)
+    const message = financial && Object.hasOwn(ENROLLMENT_ERROR_MESSAGES,code)
+      ? ENROLLMENT_ERROR_MESSAGES[code as keyof typeof ENROLLMENT_ERROR_MESSAGES] : academic && Object.hasOwn(OFFERING_ERROR_MESSAGES,code)
       ? OFFERING_ERROR_MESSAGES[code as keyof typeof OFFERING_ERROR_MESSAGES] : messages[status] ?? 'Solicitud no aceptada.';
     response.status(status).json({ error: { code, message, requestId, ...(fields ? { fields } : {}),
       ...(status === 409 && conflictingGroupIds ? { conflictingGroupIds } : {}) } });

@@ -34,6 +34,16 @@ import { createAcademicCommandWriter, createPreparationStore, createPublicationS
 import { createAdministrativeQueries, createCatalogQueries, createTeachingQueries } from './modules/academic-offering/infrastructure/offering-queries.js';
 import { PreparationCommands, PublicationCommands, LifecycleCommands } from './modules/academic-offering/application/commands.js';
 import { PostgresTeachingDirectory } from './modules/users/infrastructure/teaching-directory.js';
+import { createGroupCommitmentPolicy } from './modules/enrollment/infrastructure/commitments.js';
+import { EnrollmentModule } from './modules/enrollment/enrollment.module.js';
+import { EnrollmentPrices } from './modules/enrollment/application/prices.js';
+import { createEnrollmentPriceStore,createPaymentAttempts } from './modules/enrollment/infrastructure/enrollment-store.js';
+import { createCourseReferenceParticipant, createReservationOfferingParticipant } from './modules/academic-offering/infrastructure/reservation-participant.js';
+import { createEnrollmentQueries } from './modules/enrollment/infrastructure/queries.js';
+import { createReservationAdmission } from './modules/enrollment/infrastructure/admission.js';
+import { createReservationDispatcher } from './modules/enrollment/infrastructure/dispatch.js';
+
+export const RESERVATION_DISPATCH_LIFECYCLE='RESERVATION_DISPATCH_LIFECYCLE';
 
 // Raíz de composición del único proceso. Los módulos funcionales se añadirán al necesitarlos.
 @Module({})
@@ -42,7 +52,8 @@ export class AppModule {
     const rates = new PostgresRateStore(database.pool, environment.rateHmacKey);
     const sessions=new PostgresSessionStore(database.pool);const cookie=new SessionCookie(environment);
     const academicAuthorization = { revalidateInTransaction: sessions.revalidateInTransaction.bind(sessions) };
-    const academicWriter = createAcademicCommandWriter(database.pool, academicAuthorization);
+    const dispatcher=createReservationDispatcher(database.pool,academicAuthorization,createReservationOfferingParticipant);
+    const academicWriter = createAcademicCommandWriter(database.pool, academicAuthorization, { commitments: createGroupCommitmentPolicy });
     const mutations={authorization:sessions,audit:new PostgresAuditWriter()};
     const cipher=createPayloadCipher(environment);
     const links=new IssueActionLink(new PostgresActionTokenStore(database.pool),rates,accessSecrets,cipher,environment.appOrigin);
@@ -50,6 +61,9 @@ export class AppModule {
       new PostgresDeliveryEligibility(database.pool), cipher, createSmtpTransport(environment));
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(sessions,cookie),
+        EnrollmentModule.forRoot(new EnrollmentPrices(createEnrollmentPriceStore(database.pool,academicAuthorization,createCourseReferenceParticipant)),
+          createEnrollmentQueries(database.pool,academicAuthorization,createReservationOfferingParticipant),createReservationAdmission(database.pool,academicAuthorization),
+          (gateway,configuration)=>createPaymentAttempts(database.pool,academicAuthorization,createReservationOfferingParticipant,gateway,configuration)),
         IdentityModule.forRoot(new PostgresLoginStore(database.pool),rates,sessions,cookie,
           new PostgresRegistrationStore(database.pool),links,new PostgresVerificationStore(database.pool),new PostgresInitialPasswordStore(database.pool),
           new PostgresAccountCreationStore(database.pool,mutations),new PostgresAccessChangeStore(database.pool,mutations),
@@ -67,6 +81,11 @@ export class AppModule {
       controllers: [HealthController], providers: [
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
         { provide: 'MAIL_DELIVERY_SCHEDULER', useValue: new DeliveryScheduler(deliveries) },
+        { provide: RESERVATION_DISPATCH_LIFECYCLE, useValue: {
+          onApplicationBootstrap: () => dispatcher.start(),
+          // Nest completa esta fase antes de DATABASE_LIFECYCLE.onApplicationShutdown.
+          beforeApplicationShutdown: () => dispatcher.stop(),
+        } },
         { provide: READINESS, useValue: { async check() { await database.pool.query('SELECT 1'); } } },
         { provide: 'DATABASE_LIFECYCLE', useValue: { onApplicationShutdown: () => database.close() } },
       ] };

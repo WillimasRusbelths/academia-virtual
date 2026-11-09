@@ -9,7 +9,7 @@ export interface AdminCourse {
   readonly revision: string; readonly studentVisible: boolean; readonly createdAt: string; readonly updatedAt: string;
 }
 export interface AdminGroup {
-  readonly id: string; readonly courseId: string; readonly name: string; readonly state: GroupState; readonly revision: string;
+  readonly id: string; readonly courseId: string; readonly name: string; readonly description: string | null; readonly state: GroupState; readonly revision: string;
   readonly periodStart: string | null; readonly periodEnd: string | null; readonly timeZone: 'America/Lima';
   readonly capacity: number | null; readonly occupancy: null; readonly availability: null; readonly capacityStatus: 'NOT_CALCULATED';
   readonly schedule: readonly Slot[]; readonly teacher: { readonly id: string; readonly name: string; readonly eligible: boolean } | null;
@@ -35,7 +35,7 @@ export interface CourseFilters extends NameFilters { readonly state?: CourseStat
 export interface GroupFilters extends NameFilters { readonly state?: GroupState }
 export interface CourseAttributes { readonly name: string; readonly description?: string | null }
 export interface GroupAttributes {
-  readonly name: string; readonly periodStart?: string; readonly periodEnd?: string; readonly timeZone?: 'America/Lima';
+  readonly name: string; readonly description?: string | null; readonly periodStart?: string; readonly periodEnd?: string; readonly timeZone?: 'America/Lima';
   readonly capacity?: number; readonly teacherUserId?: string | null;
 }
 export interface CommandResult<T> {
@@ -81,9 +81,9 @@ function readCourse(value: unknown): AdminCourse {
   return Object.freeze({ ...row }) as unknown as AdminCourse;
 }
 function readGroup(value: unknown): AdminGroup {
-  const row = object(value, ['id','courseId','name','state','revision','periodStart','periodEnd','timeZone','capacity','occupancy','availability',
+  const row = object(value, ['id','courseId','name','description','state','revision','periodStart','periodEnd','timeZone','capacity','occupancy','availability',
     'capacityStatus','schedule','teacher','teacherReviewRequired','studentVisible','cancellationReason','cancelledAt','lastPublishedTeacherId','createdAt','updatedAt']);
-  if (!isUuid(row.id) || !isUuid(row.courseId) || !name(row.name) || typeof row.state !== 'string' || !['DRAFT','PUBLISHED','WITHDRAWN','CANCELLED'].includes(row.state)
+  if (!isUuid(row.id) || !isUuid(row.courseId) || !name(row.name) || !(row.description === null || name(row.description)) || typeof row.state !== 'string' || !['DRAFT','PUBLISHED','WITHDRAWN','CANCELLED'].includes(row.state)
     || !revision(row.revision) || !(row.periodStart === null || date(row.periodStart)) || !(row.periodEnd === null || date(row.periodEnd))
     || row.timeZone !== 'America/Lima' || !(row.capacity === null || (typeof row.capacity === 'number' && Number.isInteger(row.capacity) && row.capacity >= 1 && row.capacity <= 50))
     || row.occupancy !== null || row.availability !== null || row.capacityStatus !== 'NOT_CALCULATED' || !Array.isArray(row.schedule)
@@ -165,7 +165,7 @@ export function academicOfferingApi(api: ApiClient) {
       return Object.freeze({ resource: decode(row.resource), command: Object.freeze({ ...command }) }) as unknown as CommandResult<T>;
     } });
   }
-  const courseFields = ['name','description']; const groupFields = ['name','periodStart','periodEnd','timeZone','capacity','teacherUserId'];
+  const courseFields = ['name','description']; const groupFields = ['name','description','periodStart','periodEnd','timeZone','capacity','teacherUserId'];
   return {
     async teachingGroups(filters: Pick<NameFilters, 'page' | 'pageSize'> = {}, signal?: AbortSignal) {
       return page(await api.request('/teaching/groups', { query: { ...filters }, signal }), teachingGroup);

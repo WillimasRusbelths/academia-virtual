@@ -11,6 +11,7 @@ export function HomePage({user,loading,error,onLogout,onRefresh}:{readonly user:
     {user&&<><p>{user.name}</p><p>{labels[user.role]}</p>
       <nav aria-label="Navegación de inicio">
         <p><a href="/perfil">Mi perfil</a></p>
+        {user.role==='STUDENT'&&<><p><a href="/reservar">Reservar cursos</a></p><p><a href="/mis-ordenes">Mis órdenes</a></p><p><a href="/mis-matriculas">Mis matrículas</a></p></>}
         {user.role==='TEACHER'&&<p><a href="/mis-grupos">Mis grupos</a></p>}
         {user.role!=='TEACHER'&&<p><a href="/oferta">Consultar oferta</a></p>}
         {user.role==='ADMIN'&&<p><a href="/admin/cuentas">Gestionar cuentas</a></p>}

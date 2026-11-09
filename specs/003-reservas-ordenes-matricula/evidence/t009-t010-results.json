@@ -1,0 +1,4210 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Lima",
+  "tasks": [
+    "T009",
+    "T010"
+  ],
+  "status": "REGLAS_EXACTAS_Y_CONTRATOS_VERIFICADOS",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "initialLocalFiles": 726,
+  "protectedFiles": 74,
+  "validation": {
+    "unitUtc": {
+      "total": 95,
+      "passed": 95,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 3.45380224609375
+    },
+    "unitLima": {
+      "total": 95,
+      "passed": 95,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 3.32285107421875
+    },
+    "core": {
+      "total": 430,
+      "passed": 430,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 21.911745361328126
+    },
+    "boundaries": {
+      "total": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 15.706833740234375
+    },
+    "originalT005CasesPassed": 84,
+    "originalT005TestsUnchanged": true,
+    "uniqueFinalCases": 458,
+    "finalExecutions": 648,
+    "auxiliaryExecutions": 27,
+    "totalExecutions": 675,
+    "failed": 0,
+    "skipped": 0,
+    "gregorianSamplesWithinOneCase": 144,
+    "pgCasesWithDatabase": 20,
+    "pureEpochCasesInPgFile": 8,
+    "lint": "PASS ambos workspaces",
+    "build": "PASS ambos workspaces",
+    "selectiveTypes": "PASS web/API; última suite PG también comprobada en host",
+    "initialTypecheck": "Auxiliar env.mjs sin declaración; config selectiva admite JS existente y mantiene TS strict. Repetición PASS."
+  },
+  "implementation": {
+    "instant": "bigint microsegundos, UTC seis fracciones, piso en epoch negativo, año ISO ampliado",
+    "reservationDurationUs": "86400000000",
+    "calendar": "0001–9999; límite exclusivo +010000; conversión America/Lima en PostgreSQL",
+    "money": "PEN exacto; ausencia distinta de cero; cero sin matrícula",
+    "originalBounds": "Persistidos y leídos sin reconvertir la oferta actual",
+    "offeringParticipant": "Mismo cliente por composición, snapshot congelado, sin transacción/locks propios",
+    "effectiveSchedule": "Delegación al único predicado D06 existente del dueño",
+    "authorization": "Contrato de composición; permisos y ejecución real T011–T014",
+    "publicConnectionTypes": false,
+    "globalParserChanges": false,
+    "newMigrations": 0,
+    "newDependencies": 0
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "containersBeforeStop": [
+    {
+      "service": "db",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "mounts": [
+        {
+          "type": "bind",
+          "name": null,
+          "target": "/docker-entrypoint-initdb.d/01-academia.sql",
+          "readOnly": true
+        },
+        {
+          "type": "volume",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data",
+          "target": "/var/lib/postgresql/data",
+          "readOnly": false
+        }
+      ]
+    },
+    {
+      "service": "mailpit",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d",
+      "mounts": []
+    }
+  ],
+  "postgresql": "16.14",
+  "tzdata": "2026b-0+deb12u1",
+  "connectionTimeZones": [
+    "UTC",
+    "America/Lima",
+    "Asia/Tokyo"
+  ],
+  "images": {
+    "initial": "sha256:5eb9bd69a87f40740b5ac01a5d1ae150856814512712326a52dd880a125f8c49",
+    "final": "sha256:b40272aaeb8e065917c5fce9fb82f071cddf81bc71d052b6b1fc8a23cd662565",
+    "initialSuites": [
+      "unit-utc",
+      "unit-lima",
+      "core",
+      "checks"
+    ],
+    "finalSuites": [
+      "migration"
+    ],
+    "sourceDifference": [
+      "apps/api/tests/integration/enrollment-boundaries.spec.ts"
+    ]
+  },
+  "cleanup": {
+    "schemasAfterInitialPass": 0,
+    "schemasAfterFinalPass": 0,
+    "db": "stopped",
+    "mailpit": "stopped",
+    "volumePreserved": true,
+    "manualEnvironmentOperated": false
+  },
+  "preservation": {
+    "historicalMigrations": 6,
+    "protectedFiles": 74,
+    "previousEvidenceUnchanged": true,
+    "envUnchanged": true,
+    "lockfileUnchanged": true,
+    "clarifications": 15,
+    "checklist": "12/16 conservado"
+  },
+  "limitations": [
+    "Sin protocolo transaccional/locks/token real T014",
+    "Permisos financieros y reautorización efectiva T011–T012 pendientes",
+    "Sin rutas/worker/pasarela real; D02 sigue pendiente",
+    "No E2E ni integración completa; no CI general verde",
+    "Sin capacidad, cobros reales o aceptación humana"
+  ],
+  "commands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action config",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action sync",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action build",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action up",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action unit-utc",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action unit-lima",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action pg",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action checks",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action api",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action state",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action inspect",
+      "exit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t009-t010/run.ps1 -Action stop",
+      "exit": 0
+    }
+  ],
+  "rawReports": [
+    {
+      "path": ".cache/reservas-t009-t010/reports/unit-utc.json",
+      "sha256": "ce61ccbc7965df455182c78e9302b4af9d17ac48fb974bb6f7d182449f6b4b9c",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t009-t010/reports/unit-lima.json",
+      "sha256": "5f7ce0b8bc70f2d465bc5696ab42a51eba927cc1c01550d02f39bd15c846fa30",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t009-t010/reports/core.json",
+      "sha256": "79e148d9e54f00bf9ba2f050186275bd0477f881696d5a64e43213b704a45feb",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t009-t010/reports/migration.json",
+      "sha256": "c8ab4f0da6b08be0527c43b82fe26c93a8d6cc00bb7f8d0fdec6280d5f183984",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t009-t010/reports/boundaries-initial.json",
+      "sha256": "e6b92a0878ff71e1aa57d9c92aaaac6f8d15c9f530e0b44fd34cbcfed8bdce45",
+      "private": true
+    }
+  ],
+  "sourceManifest": {
+    "path": ".cache/reservas-t009-t010/source-manifest.json",
+    "count": 729,
+    "sha256": "e00ae1690ccb4382a42eb868b21df1daa4840697664dbf6fbf0881aadd478886",
+    "private": true
+  },
+  "sourceHashes": [
+    {
+      "path": "apps/api/src/modules/enrollment/domain/instant.ts",
+      "sha256": "99e18c68e12a547be15d6d71849135a919026a5f18bd546ce0633004dfca9b48"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/calendar.ts",
+      "sha256": "99b674c2acc5055e3b820a8b762141cb418b7c99b671e75220aed0eed389a3df"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/money.ts",
+      "sha256": "96bd04963eadfbcc0a0d3ccfa321212e95ad94c3a1a37c3aef14a288c9b18462"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/public/schedule.ts",
+      "sha256": "51bb81bf14b785207be697123e8579fcdea88b65543c068beb1cdadc9a644aa4"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/public/reservation-boundary.ts",
+      "sha256": "07c6d6cc2f2440c481d982fecae11c6369b8666475859e9546439737cf75b881"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/reservation-participant.ts",
+      "sha256": "dc9ce2be728dd49f248257c0921c263d4e54cbd3386ec13229fd735c8175ee72"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/public/enrollment.ts",
+      "sha256": "c6440ac1b91cf9c6b97b61a0893c3dc4ff02315960f256e331e6d88989e529bf"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/public/commitments.ts",
+      "sha256": "1e4b3974489a9317b5688142c17e75b222d49d733e74e9a6129332158336f01d"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/public/payments.ts",
+      "sha256": "4ab93e2b1cd431d75c959f4a9fdcbdf553537a536b8b94a2a6cc3231a3aae95a"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/application/ports.ts",
+      "sha256": "c1b2bc4224ca6918cb7ad90e9097df159c76ca8f249f542fb69c8b30995a9402"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/temporal.ts",
+      "sha256": "317dc98caf457c4762cd8a34701aec3f8f21fd9c9481fe12c30c9fef69d733c9"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "sha256": "0efe1c0aa2df42d7e33873d88d4396aef5965d97ab346d64e288ea4785688bf6"
+    },
+    {
+      "path": "apps/api/tests/contracts/enrollment.spec.ts",
+      "sha256": "1cba8a7503fa75397042822441ee7d2bbc2a044a1c2d830e0349e1d3a2f37650"
+    },
+    {
+      "path": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "sha256": "97367b275411eb37f7dc3b3a01e146b2b0b2f136c292b164b11271d5627b043b"
+    },
+    {
+      "path": "apps/api/tsconfig.enrollment.json",
+      "sha256": "be4d611d1d97f2183398fcbc126d2112e9ac501efed669aebd2b9afa30daa1ea"
+    }
+  ],
+  "unitCases": [
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 contratos de dueño: selección sin precios/reloj y participantes sin conexión",
+      "status": "passed",
+      "durationMs": 9.42521099999999
+    },
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 evidencia externa no se presenta como conciliación ni matrícula",
+      "status": "passed",
+      "durationMs": 0.923012999999969
+    },
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 superficie pública D06 compara ocurrencias efectivas y permite adyacencia",
+      "status": "passed",
+      "durationMs": 11.436443000000054
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 0001-01-01",
+      "status": "passed",
+      "durationMs": 14.347301000000016
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 1900-02-28",
+      "status": "passed",
+      "durationMs": 1.2660350000000449
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2000-02-29",
+      "status": "passed",
+      "durationMs": 0.7038220000000592
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2024-02-29",
+      "status": "passed",
+      "durationMs": 0.9982240000000502
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 9999-12-31",
+      "status": "passed",
+      "durationMs": 1.080361000000039
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-01-31",
+      "status": "passed",
+      "durationMs": 0.8863209999999526
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-28",
+      "status": "passed",
+      "durationMs": 1.037238000000002
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-29",
+      "status": "passed",
+      "durationMs": 0.759048000000007
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 1900-02-28",
+      "status": "passed",
+      "durationMs": 1.8833020000000715
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2000-02-28",
+      "status": "passed",
+      "durationMs": 5.535818999999947
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-12-31",
+      "status": "passed",
+      "durationMs": 2.3826119999999946
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 0001-01-01",
+      "status": "passed",
+      "durationMs": 0.5934720000000198
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 9999-12-31",
+      "status": "passed",
+      "durationMs": 0.6409029999999802
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: bisiesto imposible",
+      "status": "passed",
+      "durationMs": 1.064591000000064
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: fecha imposible",
+      "status": "passed",
+      "durationMs": 0.5557599999999638
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año cero",
+      "status": "passed",
+      "durationMs": 0.7056460000000015
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año civil fuera de rango",
+      "status": "passed",
+      "durationMs": 0.6818309999999883
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: sin ceros",
+      "status": "passed",
+      "durationMs": 0.7770019999999249
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: timestamp",
+      "status": "passed",
+      "durationMs": 0.47830199999998513
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: null",
+      "status": "passed",
+      "durationMs": 0.34562900000003083
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: número",
+      "status": "passed",
+      "durationMs": 0.7080809999999929
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 no normaliza una fecha final inválida al calcular su límite",
+      "status": "passed",
+      "durationMs": 0.8023009999999431
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 ciclos gregorianos y microsegundos sobreviven un round trip en todo el rango",
+      "status": "passed",
+      "durationMs": 68.509818
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +000001-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 1.847251999999969
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +009999-12-31T23:59:59.999999Z",
+      "status": "passed",
+      "durationMs": 1.2481510000000071
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +010000-02-30T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 1.446374999999989
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico 2000-01-01T00:00:60.000000Z",
+      "status": "passed",
+      "durationMs": 2.414431000000036
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico 2000-01-01T00:00:00.000000Z\n",
+      "status": "passed",
+      "durationMs": 0.5916380000000458
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 formatter falla fuera del rango de representación, sin saturar",
+      "status": "passed",
+      "durationMs": 1.9302119999999832
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 sumas no ocultan importes negativos o entradas internas no bigint",
+      "status": "passed",
+      "durationMs": 1.5944150000000263
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 4.982344000000012
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000001Z",
+      "status": "passed",
+      "durationMs": 1.0259379999999965
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:59.999999Z",
+      "status": "passed",
+      "durationMs": 1.5458129999999528
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:58.999999Z",
+      "status": "passed",
+      "durationMs": 1.6780209999999443
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 0001-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 1.88149999999996
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 2000-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.82062499999995
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto +010000-01-01T05:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 4.336612000000059
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 0n",
+      "status": "passed",
+      "durationMs": 3.1771810000000187
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1n",
+      "status": "passed",
+      "durationMs": 3.1819189999999935
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1000001n",
+      "status": "passed",
+      "durationMs": 1.969255999999973
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 999999n",
+      "status": "passed",
+      "durationMs": 1.7160339999999223
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 1000000n",
+      "status": "passed",
+      "durationMs": 1.5996809999999186
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 253402318800000000n",
+      "status": "passed",
+      "durationMs": 6.129795999999942
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 0n",
+      "status": "passed",
+      "durationMs": 0.5107540000000199
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1n",
+      "status": "passed",
+      "durationMs": 0.6204639999999699
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 999999n",
+      "status": "passed",
+      "durationMs": 0.4965469999999641
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1000001n",
+      "status": "passed",
+      "durationMs": 0.3939820000000509
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: antes del inicio",
+      "status": "passed",
+      "durationMs": 0.5512810000000172
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: inicio inclusivo",
+      "status": "passed",
+      "durationMs": 0.3952629999999999
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: un microsegundo antes del fin",
+      "status": "passed",
+      "durationMs": 0.14233100000001286
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: fin exclusivo",
+      "status": "passed",
+      "durationMs": 0.08941100000004099
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: después del fin",
+      "status": "passed",
+      "durationMs": 0.09041200000001481
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: antes",
+      "status": "passed",
+      "durationMs": 0.27325199999995675
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: igual",
+      "status": "passed",
+      "durationMs": 0.1363499999999931
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: después",
+      "status": "passed",
+      "durationMs": 0.08872900000005757
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.6732440000000679
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito negativo sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.29933100000005197
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza NaN sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.18771800000001804
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número infinito sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.1665379999999459
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza null sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.16930300000001353
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.16692799999998442
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza precisión sobrante sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.19605400000000373
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fecha imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.6135099999999056
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza mes imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 1.8248510000000806
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza hora imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 1.8099889999999732
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza año cero sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 5.8488439999999855
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza offset no canónico sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 1.024744999999939
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fracción no canónica sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.9135129999999663
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 conserva acarreo al siguiente segundo, sin pasar por Date",
+      "status": "passed",
+      "durationMs": 0.8854089999999815
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 0",
+      "status": "passed",
+      "durationMs": 3.296649000000002
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 1",
+      "status": "passed",
+      "durationMs": 0.7039730000000191
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 12500",
+      "status": "passed",
+      "durationMs": 0.5846450000000232
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 9007199254740993",
+      "status": "passed",
+      "durationMs": 1.0437299999999823
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: negativo",
+      "status": "passed",
+      "durationMs": 0.9707220000000234
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: decimal",
+      "status": "passed",
+      "durationMs": 0.4032889999999725
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: exponente",
+      "status": "passed",
+      "durationMs": 0.6368039999999837
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: ceros iniciales",
+      "status": "passed",
+      "durationMs": 0.33583099999998467
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: signo positivo",
+      "status": "passed",
+      "durationMs": 1.6470010000000457
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: vacío",
+      "status": "passed",
+      "durationMs": 0.5820200000000568
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: espacio",
+      "status": "passed",
+      "durationMs": 0.5577840000000833
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: número",
+      "status": "passed",
+      "durationMs": 0.18715700000007018
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: null",
+      "status": "passed",
+      "durationMs": 0.28771900000003825
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: NaN",
+      "status": "passed",
+      "durationMs": 0.29597400000000107
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: infinito",
+      "status": "passed",
+      "durationMs": 0.29821900000001733
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN suma por servidor más allá de Number.MAX_SAFE_INTEGER",
+      "status": "passed",
+      "durationMs": 0.621063999999933
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "ausencia de precio es explícita y no se sustituye por cero",
+      "status": "passed",
+      "durationMs": 0.5360929999999371
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN cero explícito conserva representación sin inferir matrícula gratuita",
+      "status": "passed",
+      "durationMs": 2.0193420000000515
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN precio exacto conserva moneda",
+      "status": "passed",
+      "durationMs": 0.7186810000000605
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena USD",
+      "status": "passed",
+      "durationMs": 1.0094820000000482
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena pen",
+      "status": "passed",
+      "durationMs": 0.39446300000008705
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena ",
+      "status": "passed",
+      "durationMs": 0.6347190000000182
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena null",
+      "status": "passed",
+      "durationMs": 0.4192990000000236
+    }
+  ],
+  "limaCases": [
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 contratos de dueño: selección sin precios/reloj y participantes sin conexión",
+      "status": "passed",
+      "durationMs": 13.395140999999967
+    },
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 evidencia externa no se presenta como conciliación ni matrícula",
+      "status": "passed",
+      "durationMs": 0.989353000000051
+    },
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 superficie pública D06 compara ocurrencias efectivas y permite adyacencia",
+      "status": "passed",
+      "durationMs": 4.4654030000000375
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 0001-01-01",
+      "status": "passed",
+      "durationMs": 6.732429999999965
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 1900-02-28",
+      "status": "passed",
+      "durationMs": 1.1488509999999792
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2000-02-29",
+      "status": "passed",
+      "durationMs": 2.7271220000000085
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2024-02-29",
+      "status": "passed",
+      "durationMs": 0.8081920000000196
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 9999-12-31",
+      "status": "passed",
+      "durationMs": 1.168136000000004
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-01-31",
+      "status": "passed",
+      "durationMs": 2.2294630000000097
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-28",
+      "status": "passed",
+      "durationMs": 2.257444000000021
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-29",
+      "status": "passed",
+      "durationMs": 1.2176330000000348
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 1900-02-28",
+      "status": "passed",
+      "durationMs": 2.41019799999998
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2000-02-28",
+      "status": "passed",
+      "durationMs": 0.755281000000025
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-12-31",
+      "status": "passed",
+      "durationMs": 1.3355320000000006
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 0001-01-01",
+      "status": "passed",
+      "durationMs": 0.463594999999998
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 9999-12-31",
+      "status": "passed",
+      "durationMs": 0.30134499999996933
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: bisiesto imposible",
+      "status": "passed",
+      "durationMs": 0.664447999999993
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: fecha imposible",
+      "status": "passed",
+      "durationMs": 0.5109249999999861
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año cero",
+      "status": "passed",
+      "durationMs": 0.7753789999999867
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año civil fuera de rango",
+      "status": "passed",
+      "durationMs": 0.7555509999999686
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: sin ceros",
+      "status": "passed",
+      "durationMs": 0.419050000000027
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: timestamp",
+      "status": "passed",
+      "durationMs": 1.0498629999999594
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: null",
+      "status": "passed",
+      "durationMs": 0.6095730000000117
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: número",
+      "status": "passed",
+      "durationMs": 0.6284499999999866
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 no normaliza una fecha final inválida al calcular su límite",
+      "status": "passed",
+      "durationMs": 0.8510830000000169
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 ciclos gregorianos y microsegundos sobreviven un round trip en todo el rango",
+      "status": "passed",
+      "durationMs": 64.29762
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +000001-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 1.6958549999999946
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +009999-12-31T23:59:59.999999Z",
+      "status": "passed",
+      "durationMs": 0.5904960000000301
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +010000-02-30T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.8844869999999787
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico 2000-01-01T00:00:60.000000Z",
+      "status": "passed",
+      "durationMs": 0.623279000000025
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico 2000-01-01T00:00:00.000000Z\n",
+      "status": "passed",
+      "durationMs": 0.5105130000000031
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 formatter falla fuera del rango de representación, sin saturar",
+      "status": "passed",
+      "durationMs": 1.1345549999999776
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 sumas no ocultan importes negativos o entradas internas no bigint",
+      "status": "passed",
+      "durationMs": 1.5461090000000013
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 5.060643000000027
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000001Z",
+      "status": "passed",
+      "durationMs": 0.5333770000000868
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:59.999999Z",
+      "status": "passed",
+      "durationMs": 0.36040700000000925
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:58.999999Z",
+      "status": "passed",
+      "durationMs": 0.7439490000000433
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 0001-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.7786749999999074
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 2000-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.9704909999999245
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto +010000-01-01T05:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 1.0053269999999657
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 0n",
+      "status": "passed",
+      "durationMs": 3.3141219999999976
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1n",
+      "status": "passed",
+      "durationMs": 3.795611000000008
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1000001n",
+      "status": "passed",
+      "durationMs": 2.09848199999999
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 999999n",
+      "status": "passed",
+      "durationMs": 1.4010579999999209
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 1000000n",
+      "status": "passed",
+      "durationMs": 1.2826559999999745
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 253402318800000000n",
+      "status": "passed",
+      "durationMs": 3.3211070000000973
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 0n",
+      "status": "passed",
+      "durationMs": 0.4352200000000721
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1n",
+      "status": "passed",
+      "durationMs": 0.26621799999998075
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 999999n",
+      "status": "passed",
+      "durationMs": 0.19270800000003874
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1000001n",
+      "status": "passed",
+      "durationMs": 0.13845400000002428
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: antes del inicio",
+      "status": "passed",
+      "durationMs": 0.16899200000000292
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: inicio inclusivo",
+      "status": "passed",
+      "durationMs": 0.07741799999996601
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: un microsegundo antes del fin",
+      "status": "passed",
+      "durationMs": 0.06851100000005772
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: fin exclusivo",
+      "status": "passed",
+      "durationMs": 0.06890199999998003
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: después del fin",
+      "status": "passed",
+      "durationMs": 0.06699700000001485
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: antes",
+      "status": "passed",
+      "durationMs": 0.1310199999999213
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: igual",
+      "status": "passed",
+      "durationMs": 0.07607499999994616
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: después",
+      "status": "passed",
+      "durationMs": 0.06962299999997867
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.255867999999964
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito negativo sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.2890710000000354
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza NaN sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.12454700000000685
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número infinito sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.08476199999995515
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza null sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.07981199999994715
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.12811499999997977
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza precisión sobrante sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.15862299999992047
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fecha imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.2355290000000423
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza mes imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.2947630000001027
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza hora imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.17318099999999959
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza año cero sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.10411899999996876
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza offset no canónico sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.0847119999999677
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fracción no canónica sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.08433100000002014
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 conserva acarreo al siguiente segundo, sin pasar por Date",
+      "status": "passed",
+      "durationMs": 0.28330000000005384
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 0",
+      "status": "passed",
+      "durationMs": 4.051549000000023
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 1",
+      "status": "passed",
+      "durationMs": 0.5942039999999906
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 12500",
+      "status": "passed",
+      "durationMs": 0.6978009999999131
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 9007199254740993",
+      "status": "passed",
+      "durationMs": 0.5918589999999995
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: negativo",
+      "status": "passed",
+      "durationMs": 0.7468939999999975
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: decimal",
+      "status": "passed",
+      "durationMs": 0.4610800000000381
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: exponente",
+      "status": "passed",
+      "durationMs": 0.7114970000000085
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: ceros iniciales",
+      "status": "passed",
+      "durationMs": 0.5708890000000792
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: signo positivo",
+      "status": "passed",
+      "durationMs": 1.3023950000000468
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: vacío",
+      "status": "passed",
+      "durationMs": 1.0249949999999899
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: espacio",
+      "status": "passed",
+      "durationMs": 0.4922990000000027
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: número",
+      "status": "passed",
+      "durationMs": 0.20138500000007298
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: null",
+      "status": "passed",
+      "durationMs": 0.15058699999997316
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: NaN",
+      "status": "passed",
+      "durationMs": 0.1364409999999907
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: infinito",
+      "status": "passed",
+      "durationMs": 0.2826390000000174
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN suma por servidor más allá de Number.MAX_SAFE_INTEGER",
+      "status": "passed",
+      "durationMs": 0.5136489999999867
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "ausencia de precio es explícita y no se sustituye por cero",
+      "status": "passed",
+      "durationMs": 0.5381370000000061
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN cero explícito conserva representación sin inferir matrícula gratuita",
+      "status": "passed",
+      "durationMs": 1.423815999999988
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN precio exacto conserva moneda",
+      "status": "passed",
+      "durationMs": 0.5342090000000326
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena USD",
+      "status": "passed",
+      "durationMs": 0.38589600000000246
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena pen",
+      "status": "passed",
+      "durationMs": 0.3700460000000021
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena ",
+      "status": "passed",
+      "durationMs": 0.16795000000001892
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena null",
+      "status": "passed",
+      "durationMs": 0.11548000000004777
+    }
+  ],
+  "coreCases": [
+    {
+      "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+      "name": "T088: todos los endpoints compilados tienen la política explícita de su contrato",
+      "status": "passed",
+      "durationMs": 1229.9723589999999
+    },
+    {
+      "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+      "name": "T017 familias académicas: GET /api/v1/admin/academic/courses exige academic:manage y nunca admite public/ausencia/otra audiencia",
+      "status": "passed",
+      "durationMs": 1.473225000000184
+    },
+    {
+      "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+      "name": "T017 familias académicas: GET /api/v1/academic/courses/:courseId/groups/:id exige academic:read-published y nunca admite public/ausencia/otra audiencia",
+      "status": "passed",
+      "durationMs": 1.0341270000003533
+    },
+    {
+      "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+      "name": "T017 familias académicas: GET /api/v1/teaching/groups/:id exige academic:read-own y nunca admite public/ausencia/otra audiencia",
+      "status": "passed",
+      "durationMs": 1.3880439999998089
+    },
+    {
+      "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+      "name": "límites del monolito modular dominio no importa Nest ni infraestructura",
+      "status": "passed",
+      "durationMs": 113.46024800000004
+    },
+    {
+      "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+      "name": "límites del monolito modular aplicación usa dominio y otro módulo solo por public",
+      "status": "passed",
+      "durationMs": 10.471158000000003
+    },
+    {
+      "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+      "name": "límites del monolito modular frontend mantiene shared y features sin ciclos laterales",
+      "status": "passed",
+      "durationMs": 10.218549000000053
+    },
+    {
+      "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+      "name": "límites del monolito modular T017 oferta mantiene núcleo puro y superficies públicas, incluso en infraestructura",
+      "status": "passed",
+      "durationMs": 49.891399999999976
+    },
+    {
+      "file": "apps/api/tests/architecture/layers.spec.ts",
+      "name": "VA: dependencias del código real T017 oferta y directorio se incluyen en el grafo real, sin callbacks de identidad a oferta",
+      "status": "passed",
+      "durationMs": 13.521072000000004
+    },
+    {
+      "file": "apps/api/tests/architecture/layers.spec.ts",
+      "name": "VA: dependencias del código real todas las capas cumplen ESLint, incluido guard y superficies públicas",
+      "status": "passed",
+      "durationMs": 5348.686422000001
+    },
+    {
+      "file": "apps/api/tests/architecture/layers.spec.ts",
+      "name": "VA: dependencias del código real el cierre transitivo del núcleo no alcanza IO, composición ni DTO HTTP",
+      "status": "passed",
+      "durationMs": 7.099150999998528
+    },
+    {
+      "file": "apps/api/tests/architecture/layers.spec.ts",
+      "name": "VA: dependencias del código real el grafo de archivos y las raíces de composición no tienen ciclos",
+      "status": "passed",
+      "durationMs": 13.108696999999665
+    },
+    {
+      "file": "apps/api/tests/architecture/layers.spec.ts",
+      "name": "VA: dependencias del código real HTTP y CLI consumen aplicación; no comparten reglas a través de entradas",
+      "status": "passed",
+      "durationMs": 4.338921999999002
+    },
+    {
+      "file": "apps/api/tests/architecture/layers.spec.ts",
+      "name": "VA: dependencias del código real las barreras rechazan escapes reales que el patrón de carpetas no cubría",
+      "status": "passed",
+      "durationMs": 23.935503000000608
+    },
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 contratos de dueño: selección sin precios/reloj y participantes sin conexión",
+      "status": "passed",
+      "durationMs": 4.651128
+    },
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 evidencia externa no se presenta como conciliación ni matrícula",
+      "status": "passed",
+      "durationMs": 0.324309999999997
+    },
+    {
+      "file": "apps/api/tests/contracts/enrollment.spec.ts",
+      "name": "T010 superficie pública D06 compara ocurrencias efectivas y permite adyacencia",
+      "status": "passed",
+      "durationMs": 1.1766259999999988
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica ADMIN / academic:manage = true",
+      "status": "passed",
+      "durationMs": 3.741073999999969
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica ADMIN / academic:read-published = true",
+      "status": "passed",
+      "durationMs": 0.32907799999998133
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica ADMIN / academic:read-own = false",
+      "status": "passed",
+      "durationMs": 0.33907500000003665
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica STUDENT / academic:manage = false",
+      "status": "passed",
+      "durationMs": 0.35853800000001
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica STUDENT / academic:read-published = true",
+      "status": "passed",
+      "durationMs": 0.2563250000000039
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica STUDENT / academic:read-own = false",
+      "status": "passed",
+      "durationMs": 0.1496429999999691
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica TEACHER / academic:manage = false",
+      "status": "passed",
+      "durationMs": 0.31482399999998734
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica TEACHER / academic:read-published = false",
+      "status": "passed",
+      "durationMs": 0.3177689999999984
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz académica TEACHER / academic:read-own = true",
+      "status": "passed",
+      "durationMs": 1.1390910000000076
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión ADMIN / academic:manage = true",
+      "status": "passed",
+      "durationMs": 0.7138710000000401
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión ADMIN / academic:read-published = true",
+      "status": "passed",
+      "durationMs": 0.27943399999998064
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión ADMIN / academic:read-own = false",
+      "status": "passed",
+      "durationMs": 2.222578999999996
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión STUDENT / academic:manage = false",
+      "status": "passed",
+      "durationMs": 0.3952499999999759
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión STUDENT / academic:read-published = true",
+      "status": "passed",
+      "durationMs": 0.13132300000000896
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión STUDENT / academic:read-own = false",
+      "status": "passed",
+      "durationMs": 0.4410780000000045
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión TEACHER / academic:manage = false",
+      "status": "passed",
+      "durationMs": 0.4423699999999826
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión TEACHER / academic:read-published = false",
+      "status": "passed",
+      "durationMs": 0.269566999999995
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "autorización backend por interfaz de sesión TEACHER / academic:read-own = true",
+      "status": "passed",
+      "durationMs": 0.18343100000004142
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:manage, sin consultar repositorio",
+      "status": "passed",
+      "durationMs": 0.6931250000000091
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-published, sin consultar repositorio",
+      "status": "passed",
+      "durationMs": 0.6438919999999939
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "visitante sin sesión recibe AUTH_REQUIRED en academic:read-own, sin consultar repositorio",
+      "status": "passed",
+      "durationMs": 0.49839600000001383
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "roles desconocidos/visitante y permisos desconocidos siempre se deniegan",
+      "status": "passed",
+      "durationMs": 0.9824560000000133
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "matriz de identidad: perfil propio para tres roles; administración solo ADMIN",
+      "status": "passed",
+      "durationMs": 0.3869760000000042
+    },
+    {
+      "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "name": "operaciones y roles ajenos a la matriz se deniegan",
+      "status": "passed",
+      "durationMs": 0.20033999999998287
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+      "name": "prepara hash/enlace antes del store y solo transmite material persistible, sin provisional",
+      "status": "passed",
+      "durationMs": 6.582652999999993
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+      "name": "fallo de credenciales no inicia la transaccion ni emite un enlace",
+      "status": "passed",
+      "durationMs": 3.5570220000000177
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+      "name": "fallo de preparacion de enlace no toca store ni revela errores del adaptador",
+      "status": "passed",
+      "durationMs": 3.029377000000011
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+      "name": "conserva rechazo irreversible de T028 sin inventar otro camino de inicializacion",
+      "status": "passed",
+      "durationMs": 3.177932999999996
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+      "name": "cuota antes de store; factory cifra enlace de origen fijo y no devuelve secreto",
+      "status": "passed",
+      "durationMs": 8.687713000000002
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+      "name": "sin cuota no toca store, generador de payload ni cuenta",
+      "status": "passed",
+      "durationMs": 2.886806000000007
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+      "name": "factory VERIFY_EMAIL conserva caducidad y elegibilidad de dominio",
+      "status": "passed",
+      "durationMs": 2.864167000000009
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+      "name": "factory RESET_PASSWORD conserva caducidad y elegibilidad de dominio",
+      "status": "passed",
+      "durationMs": 1.8719759999999894
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+      "name": "contraseña inválida no invoca hash, repositorio ni consumo",
+      "status": "passed",
+      "durationMs": 7.805046000000004
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+      "name": "token mal formado no invoca hash ni repositorio",
+      "status": "passed",
+      "durationMs": 1.4703529999999887
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+      "name": "fallo de hash deja sin invocar el repositorio",
+      "status": "passed",
+      "durationMs": 1.981601000000012
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+      "name": "repositorio que rechaza consumo produce únicamente InvalidActionLink",
+      "status": "passed",
+      "durationMs": 2.9948499999999854
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+      "name": "hash finaliza antes del repositorio; la regla pura exige verificación, propósito y caducidad vigentes",
+      "status": "passed",
+      "durationMs": 2.0328680000000077
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+      "name": "solicitar reutiliza emisión con propósito reset y responde igual con o sin entrega",
+      "status": "passed",
+      "durationMs": 0.7767369999999687
+    },
+    {
+      "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+      "name": "cuota denegada conserva la espera definida por emisión",
+      "status": "passed",
+      "durationMs": 1.836996000000056
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/access.test.ts",
+      "name": "elegibilidad exige cuenta activa, correo verificado y contraseña propia",
+      "status": "passed",
+      "durationMs": 6.649686999999972
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/access.test.ts",
+      "name": "sesión vence exactamente a 30 minutos; no cambia ni renueva sus fechas",
+      "status": "passed",
+      "durationMs": 1.278347999999994
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/access.test.ts",
+      "name": "sesión vence a ocho horas aunque haya actividad reciente",
+      "status": "passed",
+      "durationMs": 0.5662100000000123
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/access.test.ts",
+      "name": "acción VERIFY_EMAIL: propósito, destinatario, vigencia y uso único",
+      "status": "passed",
+      "durationMs": 1.058985000000007
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/access.test.ts",
+      "name": "acción RESET_PASSWORD: propósito, destinatario, vigencia y uso único",
+      "status": "passed",
+      "durationMs": 0.8585860000000025
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/access.test.ts",
+      "name": "credencial provisional vence a 24 h; no exige correo para establecer clave, ni concede sesión",
+      "status": "passed",
+      "durationMs": 1.0718479999999886
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "impide cambio propio role/STUDENT",
+      "status": "passed",
+      "durationMs": 2.2826709999999935
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "impide retirar último ADMIN ACTIVE mediante role/STUDENT",
+      "status": "passed",
+      "durationMs": 0.5312810000000354
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "impide cambio propio role/TEACHER",
+      "status": "passed",
+      "durationMs": 0.19707399999998643
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "impide retirar último ADMIN ACTIVE mediante role/TEACHER",
+      "status": "passed",
+      "durationMs": 0.29581099999995786
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "impide cambio propio status/DISABLED",
+      "status": "passed",
+      "durationMs": 0.2826299999999833
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "impide retirar último ADMIN ACTIVE mediante status/DISABLED",
+      "status": "passed",
+      "durationMs": 0.3188509999999951
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "otro ADMIN puede retirarse cuando queda otro activo; no exige correo verificado para contar",
+      "status": "passed",
+      "durationMs": 1.1506410000000074
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "no-op propio role no revoca ni restaura",
+      "status": "passed",
+      "durationMs": 0.8208819999999832
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "no-op propio status no revoca ni restaura",
+      "status": "passed",
+      "durationMs": 1.4803509999999847
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "desactivar revoca sesiones y acciones; cambiar rol solo sesiones",
+      "status": "passed",
+      "durationMs": 0.9519040000000132
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "reactivar y no-op desactivado no reconstruyen sesiones, tokens ni provisional",
+      "status": "passed",
+      "durationMs": 1.3028900000000476
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+      "name": "ADMIN desactivado no cuenta como último activo para un cambio de rol",
+      "status": "passed",
+      "durationMs": 0.6003079999999841
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+      "name": "quinto fallo bloquea 15 minutos; solicitudes rechazadas no prolongan bloqueo",
+      "status": "passed",
+      "durationMs": 9.660893999999985
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+      "name": "ventana móvil: frontera inferior excluida y ninguna actividad futura",
+      "status": "passed",
+      "durationMs": 4.154856999999993
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+      "name": "cinco reservas en vuelo consumen capacidad; al vencer se convierten en fallos conservadores",
+      "status": "passed",
+      "durationMs": 1.8963860000000068
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+      "name": "éxito elimina fallos sin eliminar reservas de solicitudes concurrentes",
+      "status": "passed",
+      "durationMs": 1.601144999999974
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/login.test.ts",
+      "name": "revalidación de una credencial comprobada misma credencial y versión habilitadas",
+      "status": "passed",
+      "durationMs": 5.347027999999966
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/login.test.ts",
+      "name": "revalidación de una credencial comprobada rechaza cambio de estado",
+      "status": "passed",
+      "durationMs": 1.3352770000000191
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/login.test.ts",
+      "name": "revalidación de una credencial comprobada rechaza cambio de correo",
+      "status": "passed",
+      "durationMs": 0.9198180000000207
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/login.test.ts",
+      "name": "revalidación de una credencial comprobada rechaza cambio de verificación",
+      "status": "passed",
+      "durationMs": 1.0117559999999912
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/login.test.ts",
+      "name": "revalidación de una credencial comprobada rechaza cambio de contraseña",
+      "status": "passed",
+      "durationMs": 1.4699169999999526
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/login.test.ts",
+      "name": "revalidación de una credencial comprobada rechaza cambio de versión",
+      "status": "passed",
+      "durationMs": 1.5550539999999842
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/login.test.ts",
+      "name": "revalidación de una credencial comprobada rechaza cambio de provisional",
+      "status": "passed",
+      "durationMs": 1.1429809999999634
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "alias operativo ASCII de 1 a 64, sin derivacion ni valor predeterminado",
+      "status": "passed",
+      "durationMs": 3.913140999999996
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (0)",
+      "status": "passed",
+      "durationMs": 0.7382590000000846
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (1)",
+      "status": "passed",
+      "durationMs": 0.2508829999999307
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (2)",
+      "status": "passed",
+      "durationMs": 0.27546000000006643
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (3)",
+      "status": "passed",
+      "durationMs": 0.27293599999995877
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (4)",
+      "status": "passed",
+      "durationMs": 0.15888600000005226
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (5)",
+      "status": "passed",
+      "durationMs": 0.2902119999999968
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (6)",
+      "status": "passed",
+      "durationMs": 0.18554599999993115
+    },
+    {
+      "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+      "name": "rechaza alias invalido sin normalizarlo (7)",
+      "status": "passed",
+      "durationMs": 0.7454689999999573
+    },
+    {
+      "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+      "name": "acuse de commit incierto devuelve error seguro sin repetir la operación",
+      "status": "passed",
+      "durationMs": 5.227415000000008
+    },
+    {
+      "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+      "name": "dos conflictos abortados con rollback confirmado permiten un tercer intento",
+      "status": "passed",
+      "durationMs": 31.19851699999998
+    },
+    {
+      "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+      "name": "conflicto persistente no supera tres intentos",
+      "status": "passed",
+      "durationMs": 42.926716
+    },
+    {
+      "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+      "name": "sin rollback confirmado no reintenta y descarta el cliente fallido",
+      "status": "passed",
+      "durationMs": 2.8767480000000205
+    },
+    {
+      "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+      "name": "mínimo de 60 s exactos por destinatario y propósito",
+      "status": "passed",
+      "durationMs": 6.473879000000011
+    },
+    {
+      "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+      "name": "cinco por hora con ventana móvil, frontera exacta y Retry-After según ambos límites",
+      "status": "passed",
+      "durationMs": 2.095234000000005
+    },
+    {
+      "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+      "name": "veinte por origen sumando propósitos; la cuota limita aun con destinatario nuevo",
+      "status": "passed",
+      "durationMs": 4.513337999999976
+    },
+    {
+      "file": "apps/api/src/modules/users/domain/account.test.ts",
+      "name": "nombre Unicode: trim exterior y límites por caracteres, no bytes ni unidades UTF-16",
+      "status": "passed",
+      "durationMs": 14.541453999999987
+    },
+    {
+      "file": "apps/api/src/modules/users/domain/account.test.ts",
+      "name": "correo: trim y minúscula simple, sin transformar alias ni puntos",
+      "status": "passed",
+      "durationMs": 4.892636999999979
+    },
+    {
+      "file": "apps/api/src/modules/users/domain/account.test.ts",
+      "name": "contraseñas preservan espacios, composición Unicode y contenido completo",
+      "status": "passed",
+      "durationMs": 2.0046800000000076
+    },
+    {
+      "file": "apps/api/src/modules/users/domain/account.test.ts",
+      "name": "rol único y estado admiten exclusivamente los enums",
+      "status": "passed",
+      "durationMs": 2.296875
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 0001-01-01",
+      "status": "passed",
+      "durationMs": 3.7469239999999786
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 1900-02-28",
+      "status": "passed",
+      "durationMs": 1.030979000000002
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2000-02-29",
+      "status": "passed",
+      "durationMs": 0.2936880000000315
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2024-02-29",
+      "status": "passed",
+      "durationMs": 0.4469179999999824
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 9999-12-31",
+      "status": "passed",
+      "durationMs": 0.3555530000000431
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-01-31",
+      "status": "passed",
+      "durationMs": 0.7736340000000155
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-28",
+      "status": "passed",
+      "durationMs": 0.2901319999999714
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-29",
+      "status": "passed",
+      "durationMs": 0.4034550000000081
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 1900-02-28",
+      "status": "passed",
+      "durationMs": 0.8980329999999981
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2000-02-28",
+      "status": "passed",
+      "durationMs": 0.5193599999999492
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-12-31",
+      "status": "passed",
+      "durationMs": 0.7907309999999939
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 0001-01-01",
+      "status": "passed",
+      "durationMs": 0.20768199999997705
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 9999-12-31",
+      "status": "passed",
+      "durationMs": 0.12695500000000948
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: bisiesto imposible",
+      "status": "passed",
+      "durationMs": 0.5633050000000139
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: fecha imposible",
+      "status": "passed",
+      "durationMs": 0.29431900000003
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año cero",
+      "status": "passed",
+      "durationMs": 0.3673130000000242
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año civil fuera de rango",
+      "status": "passed",
+      "durationMs": 0.18085600000000568
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: sin ceros",
+      "status": "passed",
+      "durationMs": 0.13591000000002396
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: timestamp",
+      "status": "passed",
+      "durationMs": 0.27706000000000586
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: null",
+      "status": "passed",
+      "durationMs": 0.1037759999999821
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: número",
+      "status": "passed",
+      "durationMs": 0.2407379999999648
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 no normaliza una fecha final inválida al calcular su límite",
+      "status": "passed",
+      "durationMs": 0.5375419999999735
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 ciclos gregorianos y microsegundos sobreviven un round trip en todo el rango",
+      "status": "passed",
+      "durationMs": 31.871628999999984
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +000001-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 1.2287399999999593
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +009999-12-31T23:59:59.999999Z",
+      "status": "passed",
+      "durationMs": 0.33847400000001926
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico +010000-02-30T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.32509099999998625
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico 2000-01-01T00:00:60.000000Z",
+      "status": "passed",
+      "durationMs": 0.8201710000000162
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 rechaza transporte no canónico 2000-01-01T00:00:00.000000Z\n",
+      "status": "passed",
+      "durationMs": 0.518429000000026
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 formatter falla fuera del rango de representación, sin saturar",
+      "status": "passed",
+      "durationMs": 0.7413070000000062
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+      "name": "T009 sumas no ocultan importes negativos o entradas internas no bigint",
+      "status": "passed",
+      "durationMs": 0.7405259999999885
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 4.677572000000026
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000001Z",
+      "status": "passed",
+      "durationMs": 0.6918929999999932
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:59.999999Z",
+      "status": "passed",
+      "durationMs": 0.5597690000000171
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:58.999999Z",
+      "status": "passed",
+      "durationMs": 0.8598879999999554
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 0001-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.5254810000000134
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 2000-01-01T00:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.43925500000000284
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto +010000-01-01T05:00:00.000000Z",
+      "status": "passed",
+      "durationMs": 0.5862350000000447
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 0n",
+      "status": "passed",
+      "durationMs": 2.1334170000000086
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1n",
+      "status": "passed",
+      "durationMs": 2.3798059999999737
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1000001n",
+      "status": "passed",
+      "durationMs": 1.5602660000000128
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 999999n",
+      "status": "passed",
+      "durationMs": 1.2512520000000222
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 1000000n",
+      "status": "passed",
+      "durationMs": 3.2741040000000226
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 253402318800000000n",
+      "status": "passed",
+      "durationMs": 0.27014800000000605
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 0n",
+      "status": "passed",
+      "durationMs": 0.22669400000000905
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1n",
+      "status": "passed",
+      "durationMs": 0.08083699999997407
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 999999n",
+      "status": "passed",
+      "durationMs": 0.16464899999999716
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1000001n",
+      "status": "passed",
+      "durationMs": 0.09589299999998957
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: antes del inicio",
+      "status": "passed",
+      "durationMs": 0.19691399999999248
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: inicio inclusivo",
+      "status": "passed",
+      "durationMs": 0.13191299999999728
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: un microsegundo antes del fin",
+      "status": "passed",
+      "durationMs": 0.07820199999997612
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: fin exclusivo",
+      "status": "passed",
+      "durationMs": 0.06581099999999651
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: después del fin",
+      "status": "passed",
+      "durationMs": 0.06520100000000184
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: antes",
+      "status": "passed",
+      "durationMs": 0.1538110000000188
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: igual",
+      "status": "passed",
+      "durationMs": 0.06945699999999988
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: después",
+      "status": "passed",
+      "durationMs": 0.0630769999999643
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.2730329999999981
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito negativo sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.1039260000000013
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza NaN sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.08155799999997271
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número infinito sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.24580700000001343
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza null sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.1245710000000031
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.08133800000001656
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza precisión sobrante sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.0846840000000384
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fecha imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.11620700000003126
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza mes imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.09242599999998902
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza hora imposible sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.09902800000003253
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza año cero sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.13022100000000592
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza offset no canónico sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.085775999999953
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fracción no canónica sin normalizar/redondear",
+      "status": "passed",
+      "durationMs": 0.07801299999999856
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 conserva acarreo al siguiente segundo, sin pasar por Date",
+      "status": "passed",
+      "durationMs": 0.26623200000000224
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 0",
+      "status": "passed",
+      "durationMs": 3.725717000000003
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 1",
+      "status": "passed",
+      "durationMs": 0.44658699999999385
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 12500",
+      "status": "passed",
+      "durationMs": 0.28272000000001185
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 9007199254740993",
+      "status": "passed",
+      "durationMs": 0.6013200000000154
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: negativo",
+      "status": "passed",
+      "durationMs": 0.7842599999999891
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: decimal",
+      "status": "passed",
+      "durationMs": 0.33689099999998007
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: exponente",
+      "status": "passed",
+      "durationMs": 0.5574450000000013
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: ceros iniciales",
+      "status": "passed",
+      "durationMs": 0.2552029999999945
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: signo positivo",
+      "status": "passed",
+      "durationMs": 1.1092109999999877
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: vacío",
+      "status": "passed",
+      "durationMs": 0.46136200000000827
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: espacio",
+      "status": "passed",
+      "durationMs": 0.2618539999999996
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: número",
+      "status": "passed",
+      "durationMs": 0.12738600000000133
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: null",
+      "status": "passed",
+      "durationMs": 0.2157060000000115
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: NaN",
+      "status": "passed",
+      "durationMs": 0.6179480000000126
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: infinito",
+      "status": "passed",
+      "durationMs": 0.3080630000000042
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN suma por servidor más allá de Number.MAX_SAFE_INTEGER",
+      "status": "passed",
+      "durationMs": 0.7188289999999995
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "ausencia de precio es explícita y no se sustituye por cero",
+      "status": "passed",
+      "durationMs": 0.5615820000000156
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN cero explícito conserva representación sin inferir matrícula gratuita",
+      "status": "passed",
+      "durationMs": 2.5067619999999806
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN precio exacto conserva moneda",
+      "status": "passed",
+      "durationMs": 1.0424170000000004
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena USD",
+      "status": "passed",
+      "durationMs": 0.6348459999999818
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena pen",
+      "status": "passed",
+      "durationMs": 0.28957100000002356
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena ",
+      "status": "passed",
+      "durationMs": 0.1294900000000041
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena null",
+      "status": "passed",
+      "durationMs": 0.11237000000002695
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C01 alta incompleta: referencia del servidor estable, nombre recortado, DRAFT y descripción null",
+      "status": "passed",
+      "durationMs": 5.660795000000007
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción null se normaliza a null en preparación",
+      "status": "passed",
+      "durationMs": 0.9086110000000076
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \"\" se normaliza a null en preparación",
+      "status": "passed",
+      "durationMs": 0.5029630000000225
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C02 descripción \" \\t\\n \" se normaliza a null en preparación",
+      "status": "passed",
+      "durationMs": 0.40149100000002136
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C03 recorta descripción; no interpreta HTML ni elimina contenido interno",
+      "status": "passed",
+      "durationMs": 1.133562999999981
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \"\" con error de campo",
+      "status": "passed",
+      "durationMs": 2.9110560000000305
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido \" \\t\\n \" con error de campo",
+      "status": "passed",
+      "durationMs": 1.3228429999999776
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido null con error de campo",
+      "status": "passed",
+      "durationMs": 1.5326689999999985
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido 123 con error de campo",
+      "status": "passed",
+      "durationMs": 1.4851749999999697
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C04 rechaza nombre inválido undefined con error de campo",
+      "status": "passed",
+      "durationMs": 0.6530270000000087
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual 42",
+      "status": "passed",
+      "durationMs": 0.49944700000003195
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual false",
+      "status": "passed",
+      "durationMs": 0.31240999999999985
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C05 rechaza descripción no textual {}",
+      "status": "passed",
+      "durationMs": 0.24028700000002345
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C06 nombres repetidos permitidos, referencias distintas y sin límite nuevo de longitud",
+      "status": "passed",
+      "durationMs": 0.904213000000027
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita DRAFT sin publicar ni cambiar referencia",
+      "status": "passed",
+      "durationMs": 0.44668699999999717
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C07 edita WITHDRAWN sin publicar ni cambiar referencia",
+      "status": "passed",
+      "durationMs": 0.2023229999999785
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C08 PATCH de descripción conserva nombre; PATCH de nombre conserva descripción",
+      "status": "passed",
+      "durationMs": 0.5379320000000121
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C09 publicado exige retiro antes de editar, aunque el cambio sea válido",
+      "status": "passed",
+      "durationMs": 0.6974430000000211
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C10 cambio inválido no modifica parcialmente el curso recibido",
+      "status": "passed",
+      "durationMs": 0.6236480000000029
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+      "name": "T019 curso — FR-001/002; V-A01 C11 curso solo posee datos académicos generales, sin capacidad, docente ni horario",
+      "status": "passed",
+      "durationMs": 1.337176999999997
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G01 omisión inicial permite DRAFT incompleto con capacidad null y zona explícita",
+      "status": "passed",
+      "durationMs": 8.591490000000022
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 1 se conserva exactamente",
+      "status": "passed",
+      "durationMs": 2.0913059999999746
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 50 se conserva exactamente",
+      "status": "passed",
+      "durationMs": 0.63524799999999
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G02 capacidad configurada válida 25 se conserva exactamente",
+      "status": "passed",
+      "durationMs": 0.39526999999998225
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada null, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 2.016885000000002
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada vacía, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 1.0053550000000087
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada blanco, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 0.8188089999999875
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada string 25, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 0.7039439999999786
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada cero, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 1.9482039999999756
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada negativa, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 0.5915929999999889
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada fracción, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 0.68597299999999
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada 51, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 0.5658190000000332
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada NaN, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 0.8512440000000083
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G03 alta rechaza capacidad enviada Infinity, no la confunde con omisión",
+      "status": "passed",
+      "durationMs": 0.8531259999999747
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad null y conserva la configurada",
+      "status": "passed",
+      "durationMs": 1.5113929999999982
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad \"\" y conserva la configurada",
+      "status": "passed",
+      "durationMs": 0.746565999999973
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 0 y conserva la configurada",
+      "status": "passed",
+      "durationMs": 0.5193909999999846
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad -1 y conserva la configurada",
+      "status": "passed",
+      "durationMs": 0.7065079999999853
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 1.5 y conserva la configurada",
+      "status": "passed",
+      "durationMs": 0.6194099999999594
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G04 edición rechaza capacidad 51 y conserva la configurada",
+      "status": "passed",
+      "durationMs": 0.3428210000000149
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 1 sin publicar",
+      "status": "passed",
+      "durationMs": 0.6407570000000078
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G05 edición configura el extremo válido 50 sin publicar",
+      "status": "passed",
+      "durationMs": 1.2184610000000475
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \"\" se rechaza por campo",
+      "status": "passed",
+      "durationMs": 0.7257099999999923
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido \" \\t\\n \" se rechaza por campo",
+      "status": "passed",
+      "durationMs": 0.3247610000000236
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido null se rechaza por campo",
+      "status": "passed",
+      "durationMs": 0.4000490000000241
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido 42 se rechaza por campo",
+      "status": "passed",
+      "durationMs": 0.39656300000001465
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G06 nombre inválido undefined se rechaza por campo",
+      "status": "passed",
+      "durationMs": 0.36500899999998637
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de DRAFT conserva referencias y estado; omitir capacidad la conserva",
+      "status": "passed",
+      "durationMs": 0.6051259999999843
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G07 edición de WITHDRAWN conserva referencias y estado; omitir capacidad la conserva",
+      "status": "passed",
+      "durationMs": 0.6655790000000366
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de PUBLISHED sin cambios parciales",
+      "status": "passed",
+      "durationMs": 0.955900999999983
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G08 rechaza edición de CANCELLED sin cambios parciales",
+      "status": "passed",
+      "durationMs": 3.470659000000012
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G09 dos grupos del mismo curso son independientes, incluso con nombre repetido",
+      "status": "passed",
+      "durationMs": 1.3397919999999885
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G10 periodo parcial válido permite preparación incompleta",
+      "status": "passed",
+      "durationMs": 0.9688629999999989
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G12 grupo admite periodo inclusivo de un solo día real",
+      "status": "passed",
+      "durationMs": 0.3685350000000085
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodStart inválido 2026-02-29",
+      "status": "passed",
+      "durationMs": 0.5711880000000065
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza periodEnd inválido 2026-04-31",
+      "status": "passed",
+      "durationMs": 0.6497620000000097
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G13 grupo rechaza timeZone inválido UTC",
+      "status": "passed",
+      "durationMs": 0.7979829999999879
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G14 edición rechaza periodo invertido y no aplica el nombre parcialmente",
+      "status": "passed",
+      "durationMs": 1.0218429999999898
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+      "name": "T019 grupo — FR-001/002/005; PA-02/04; V-A01/A03 G11 grupo no exige mínimo 40, código manual ni nombre único",
+      "status": "passed",
+      "durationMs": 0.8163839999999709
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M01 retirar curso publicado conserva datos, no muta entrada ni decide hijos",
+      "status": "passed",
+      "durationMs": 7.421379000000002
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M02 retirar curso DRAFT es transición inválida, nunca NO_CHANGE",
+      "status": "passed",
+      "durationMs": 0.9404550000000427
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M02 retirar curso WITHDRAWN es transición inválida, nunca NO_CHANGE",
+      "status": "passed",
+      "durationMs": 0.3216349999999579
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M02 retirar curso CANCELLED es transición inválida, nunca NO_CHANGE",
+      "status": "passed",
+      "durationMs": 0.48609399999998004
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M03 retirar grupo conserva snapshot/periodo/capacidad/franjas, sin reloj o revisión propios",
+      "status": "passed",
+      "durationMs": 0.9911000000000172
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M04 retirar grupo DRAFT no es no-op",
+      "status": "passed",
+      "durationMs": 0.6441519999999628
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M04 retirar grupo WITHDRAWN no es no-op",
+      "status": "passed",
+      "durationMs": 0.4468880000000013
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M04 retirar grupo CANCELLED no es no-op",
+      "status": "passed",
+      "durationMs": 0.2917150000000106
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M05 cancelar DRAFT conserva snapshot/datos y usa instante suministrado por aplicación",
+      "status": "passed",
+      "durationMs": 1.2105530000000044
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M05 cancelar PUBLISHED conserva snapshot/datos y usa instante suministrado por aplicación",
+      "status": "passed",
+      "durationMs": 0.7857030000000123
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M05 cancelar WITHDRAWN conserva snapshot/datos y usa instante suministrado por aplicación",
+      "status": "passed",
+      "durationMs": 0.4522770000000378
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M06 cancelar otra vez nunca responde NO_CHANGE ni cambia el motivo",
+      "status": "passed",
+      "durationMs": 0.4178690000000529
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M07 motivo inválido 0 se rechaza sin normalizar a éxito",
+      "status": "passed",
+      "durationMs": 0.49692299999998113
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M07 motivo inválido 1 se rechaza sin normalizar a éxito",
+      "status": "passed",
+      "durationMs": 0.3317430000000172
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M07 motivo inválido 2 se rechaza sin normalizar a éxito",
+      "status": "passed",
+      "durationMs": 0.33186299999999846
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M07 motivo inválido 3 se rechaza sin normalizar a éxito",
+      "status": "passed",
+      "durationMs": 0.2754169999999476
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M07 motivo inválido 4 se rechaza sin normalizar a éxito",
+      "status": "passed",
+      "durationMs": 0.45496700000001056
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M07 motivo inválido 5 se rechaza sin normalizar a éxito",
+      "status": "passed",
+      "durationMs": 0.3226469999999608
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M07 motivo inválido 6 se rechaza sin normalizar a éxito",
+      "status": "passed",
+      "durationMs": 0.18555500000002212
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M08 datos idénticos de curso DRAFT conservan estado y revisión para NO_CHANGE del escritor",
+      "status": "passed",
+      "durationMs": 0.6113569999999982
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M09 grupo DRAFT: edición efectiva preserva captura previa y no publica",
+      "status": "passed",
+      "durationMs": 1.2122850000000085
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M08 datos idénticos de curso WITHDRAWN conservan estado y revisión para NO_CHANGE del escritor",
+      "status": "passed",
+      "durationMs": 0.17369400000001178
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M09 grupo WITHDRAWN: edición efectiva preserva captura previa y no publica",
+      "status": "passed",
+      "durationMs": 0.3780709999999772
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M10 editar grupo PUBLISHED incluso con datos iguales se rechaza",
+      "status": "passed",
+      "durationMs": 0.28152699999998276
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M10 editar grupo CANCELLED incluso con datos iguales se rechaza",
+      "status": "passed",
+      "durationMs": 0.13618100000002187
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M11 curso publicado no admite edición idéntica; curso no tiene cancelación",
+      "status": "passed",
+      "durationMs": 0.2775310000000104
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+      "name": "M12 retirar el padre no vuelve editable al hijo publicado",
+      "status": "passed",
+      "durationMs": 0.21929199999999582
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R01 ordinal civil contrasta siglos y año contra oráculo UTC independiente, solo en tests",
+      "status": "passed",
+      "durationMs": 4.623130000000003
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R02 edición válida del curso conserva entrada congelada y referencia, sin publicar",
+      "status": "passed",
+      "durationMs": 1.500805000000014
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R03 editar borrador incompleto conserva omisión de capacidad; undefined enviado no configura",
+      "status": "passed",
+      "durationMs": 2.5354699999999752
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R04 editar periodo con franjas conservadas revalida ocurrencias sin mutación parcial",
+      "status": "passed",
+      "durationMs": 1.2311579999999935
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R05 edición retirada conserva snapshot, revisión recibida y estado; no renueva publicación",
+      "status": "passed",
+      "durationMs": 1.0709860000000049
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R06 comparación exige periodos completos; formas inválidas usan errores seguros del dominio",
+      "status": "passed",
+      "durationMs": 1.5959869999999796
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R07 fecha con salto de línea produce validación segura, no coerción ni TypeError",
+      "status": "passed",
+      "durationMs": 1.1328409999999849
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R07 hora con salto de línea produce validación segura, no coerción ni TypeError",
+      "status": "passed",
+      "durationMs": 0.8735320000000115
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R07 UUID con salto de línea produce validación segura, no coerción ni TypeError",
+      "status": "passed",
+      "durationMs": 2.2585699999999633
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+      "name": "R07 franja ausente produce validación segura, no coerción ni TypeError",
+      "status": "passed",
+      "durationMs": 0.702822000000026
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S01 borrador permite cero franjas y periodo todavía incompleto",
+      "status": "passed",
+      "durationMs": 10.527860000000032
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial 2026-10-19/null valida las franjas sin exigir publicación",
+      "status": "passed",
+      "durationMs": 3.600514999999973
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/2026-10-25 valida las franjas sin exigir publicación",
+      "status": "passed",
+      "durationMs": 1.374029999999948
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S02 periodo parcial null/null valida las franjas sin exigir publicación",
+      "status": "passed",
+      "durationMs": 1.056807000000049
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 1 ocurre en periodo de un día inclusivo 2026-10-19",
+      "status": "passed",
+      "durationMs": 1.8091559999999163
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 2 ocurre en periodo de un día inclusivo 2026-10-20",
+      "status": "passed",
+      "durationMs": 2.421179000000052
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 3 ocurre en periodo de un día inclusivo 2026-10-21",
+      "status": "passed",
+      "durationMs": 1.7812900000000127
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 4 ocurre en periodo de un día inclusivo 2026-10-22",
+      "status": "passed",
+      "durationMs": 1.3405350000000453
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 5 ocurre en periodo de un día inclusivo 2026-10-23",
+      "status": "passed",
+      "durationMs": 2.362173000000098
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 6 ocurre en periodo de un día inclusivo 2026-10-24",
+      "status": "passed",
+      "durationMs": 1.2784739999999601
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S03 día ISO 7 ocurre en periodo de un día inclusivo 2026-10-25",
+      "status": "passed",
+      "durationMs": 1.1384680000001026
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2024-02-29, incluidos bisiesto y cambio de año",
+      "status": "passed",
+      "durationMs": 0.9253079999999727
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2000-02-29, incluidos bisiesto y cambio de año",
+      "status": "passed",
+      "durationMs": 0.7465969999999515
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2026-12-31, incluidos bisiesto y cambio de año",
+      "status": "passed",
+      "durationMs": 0.641501000000062
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S04 fecha civil real 2027-01-01, incluidos bisiesto y cambio de año",
+      "status": "passed",
+      "durationMs": 0.4354249999998956
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-02-29\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 6.176582999999937
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2100-02-29\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 1.6012529999999288
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-04-31\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 0.8919230000000198
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-13-01\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 1.879754000000048
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-00-10\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 1.0785700000000134
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-00\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 0.814420000000041
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-1-9\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 0.5463640000000396
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"19/10/2026\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 0.8065649999999778
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"2026-10-19T00:00:00Z\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 0.9768599999999878
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S05 rechaza inicio civil inválido \"\", sin rollover ni zona de navegador",
+      "status": "passed",
+      "durationMs": 0.8610120000000734
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-02-30",
+      "status": "passed",
+      "durationMs": 0.9261599999999817
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-11-31",
+      "status": "passed",
+      "durationMs": 0.8677450000000135
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S06 rechaza fin civil inválido 2026-10-25T00:00:00-05:00",
+      "status": "passed",
+      "durationMs": 0.7535000000000309
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S07 rechaza periodo invertido aunque no haya franjas",
+      "status": "passed",
+      "durationMs": 1.2597560000000385
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"UTC\"",
+      "status": "passed",
+      "durationMs": 0.9043179999999893
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/Bogota\"",
+      "status": "passed",
+      "durationMs": 0.8189690000000382
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"America/New_York\"",
+      "status": "passed",
+      "durationMs": 0.8619539999999688
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza \"\"",
+      "status": "passed",
+      "durationMs": 0.8159739999999829
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S08 solo admite America/Lima, rechaza null",
+      "status": "passed",
+      "durationMs": 1.059812000000079
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 0 sin coerción",
+      "status": "passed",
+      "durationMs": 1.5056090000000495
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 8 sin coerción",
+      "status": "passed",
+      "durationMs": 1.7169599999999718
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO -1 sin coerción",
+      "status": "passed",
+      "durationMs": 1.5980600000000322
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO 1.5 sin coerción",
+      "status": "passed",
+      "durationMs": 1.2206690000000435
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO \"1\" sin coerción",
+      "status": "passed",
+      "durationMs": 0.980466999999976
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S09 rechaza día ISO null sin coerción",
+      "status": "passed",
+      "durationMs": 0.8399310000000924
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–00:01",
+      "status": "passed",
+      "durationMs": 1.5840440000000626
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 23:58–23:59",
+      "status": "passed",
+      "durationMs": 1.0774869999999055
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S10 acepta extremos dentro del día 00:00–23:59",
+      "status": "passed",
+      "durationMs": 1.5405580000000327
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"24:00\" fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 1.7105609999999842
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"23:60\" fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 1.9440199999999095
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"-1:00\" fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 0.7097949999999855
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"9:00\" fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 0.8829160000000229
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00:00\" fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 0.7413169999999809
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"18:00Z\" fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 0.7078910000000178
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial \"\" fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 0.6583930000000464
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial null fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 1.0386310000000094
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S11 rechaza hora inicial 1080 fuera del contrato HH:mm",
+      "status": "passed",
+      "durationMs": 0.7090939999999364
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"24:00\"",
+      "status": "passed",
+      "durationMs": 1.7295689999999695
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:60\"",
+      "status": "passed",
+      "durationMs": 0.8154220000000123
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"19:00:00\"",
+      "status": "passed",
+      "durationMs": 0.598606000000018
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final \"\"",
+      "status": "passed",
+      "durationMs": 0.3402479999999741
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S12 rechaza hora final null",
+      "status": "passed",
+      "durationMs": 0.3162919999999758
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 18:00–18:00",
+      "status": "passed",
+      "durationMs": 0.960256999999956
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 19:00–18:00",
+      "status": "passed",
+      "durationMs": 0.677361000000019
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:00–01:00",
+      "status": "passed",
+      "durationMs": 0.7661150000000134
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 23:59–00:00",
+      "status": "passed",
+      "durationMs": 0.5898990000000595
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S13 rechaza fin igual/invertido o medianoche 00:00–00:00",
+      "status": "passed",
+      "durationMs": 0.5512330000000247
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 0 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "passed",
+      "durationMs": 0.6753570000000764
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 1 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "passed",
+      "durationMs": 0.8320360000000164
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 2 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "passed",
+      "durationMs": 0.6882120000000214
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S14 caso 3 rechaza duplicados y solapamiento interno, incluso contención y orden inverso ({\"dayOfWeek\":1,\"startTime\":\"18:30\",\"endTime\":\"18:45\"})",
+      "status": "passed",
+      "durationMs": 0.9240959999999632
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 0 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "passed",
+      "durationMs": 1.0765259999999444
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 1 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"19:00\",\"endTime\":\"20:00\"})",
+      "status": "passed",
+      "durationMs": 0.7642919999999549
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 2 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "passed",
+      "durationMs": 0.8180680000000393
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S15 caso 3 permite adyacencia en ambos órdenes, distinto día o separación ({\"dayOfWeek\":1,\"startTime\":\"18:00\",\"endTime\":\"19:00\"})",
+      "status": "passed",
+      "durationMs": 0.8153429999999844
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S16 exige ocurrencia de CADA franja; una válida no oculta otra fuera de periodo",
+      "status": "passed",
+      "durationMs": 1.111735000000067
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S17 periodo inclusivo sin lunes rechaza la franja; no basta con fechas ordenadas",
+      "status": "passed",
+      "durationMs": 1.6243920000000571
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 validación semanal — FR-003/004; PA-05; V-A02 S18 al cambiar el periodo se vuelve a validar el horario completo",
+      "status": "passed",
+      "durationMs": 2.0256709999999885
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O01 misma franja y periodo",
+      "status": "passed",
+      "durationMs": 11.072920999999951
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O02 solapamiento parcial",
+      "status": "passed",
+      "durationMs": 0.9658980000000383
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O03 contención de horas",
+      "status": "passed",
+      "durationMs": 1.2136950000000297
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O04 franjas contiguas",
+      "status": "passed",
+      "durationMs": 1.0089389999999412
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O05 horas separadas",
+      "status": "passed",
+      "durationMs": 1.3865890000000718
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O06 distinto día ISO",
+      "status": "passed",
+      "durationMs": 0.5319050000000516
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O07 periodos disjuntos, mismas horas",
+      "status": "passed",
+      "durationMs": 0.33015899999998055
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O08 intersección de fechas sin lunes: c…",
+      "status": "passed",
+      "durationMs": 0.731249000000048
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O09 primera ocurrencia común justo en U…",
+      "status": "passed",
+      "durationMs": 0.8079480000000103
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O10 único día compartido lunes 19 inclu…",
+      "status": "passed",
+      "durationMs": 0.5713119999999208
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O11 único día compartido martes sin lun…",
+      "status": "passed",
+      "durationMs": 0.7746219999999084
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O12 domingo ISO 7 en extremo inclusivo",
+      "status": "passed",
+      "durationMs": 0.6726720000000341
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O13 paso de domingo a lunes con ajuste …",
+      "status": "passed",
+      "durationMs": 0.6993250000000444
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O14 coincidencia solo en segunda franja…",
+      "status": "passed",
+      "durationMs": 0.9083850000000666
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O15 conjunto vacío no coincide",
+      "status": "passed",
+      "durationMs": 2.834934999999973
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O16 extremos horarios adyacentes 00:01",
+      "status": "passed",
+      "durationMs": 0.8264139999999998
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O17 fecha bisiesta efectiva compartida",
+      "status": "passed",
+      "durationMs": 0.9002800000000661
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+      "name": "T020 coincidencia efectiva — fórmula de R05/modelo; sin política de publicación O18 periodo de 400 años devuelve decisi…",
+      "status": "passed",
+      "durationMs": 0.7430799999999635
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo DRAFT",
+      "status": "passed",
+      "durationMs": 7.4673649999999725
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo PUBLISHED",
+      "status": "passed",
+      "durationMs": 1.4961499999999432
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo WITHDRAWN",
+      "status": "passed",
+      "durationMs": 1.2409779999999273
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre DRAFT, hijo CANCELLED",
+      "status": "passed",
+      "durationMs": 1.8405709999999544
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo DRAFT",
+      "status": "passed",
+      "durationMs": 5.418588999999997
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo PUBLISHED",
+      "status": "passed",
+      "durationMs": 1.1996280000000752
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo WITHDRAWN",
+      "status": "passed",
+      "durationMs": 0.9799560000000156
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre PUBLISHED, hijo CANCELLED",
+      "status": "passed",
+      "durationMs": 0.8277769999999691
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo DRAFT",
+      "status": "passed",
+      "durationMs": 2.2435990000000174
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo PUBLISHED",
+      "status": "passed",
+      "durationMs": 1.3012569999999641
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo WITHDRAWN",
+      "status": "passed",
+      "durationMs": 1.2709580000000642
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V01 padre WITHDRAWN, hijo CANCELLED",
+      "status": "passed",
+      "durationMs": 0.6751970000000256
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 sin publicación previa: oculta y revisión derivada",
+      "status": "passed",
+      "durationMs": 3.5172799999999143
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación quitada: oculta y revisión derivada",
+      "status": "passed",
+      "durationMs": 1.2284040000000687
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 asignación sustituida: oculta y revisión derivada",
+      "status": "passed",
+      "durationMs": 1.2156489999999849
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 docente no habilitado: oculta y revisión derivada",
+      "status": "passed",
+      "durationMs": 2.281609000000003
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 directorio sin asignado: oculta y revisión derivada",
+      "status": "passed",
+      "durationMs": 1.7712609999999813
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V02 cuenta recuperada con generación posterior: oculta y revisión derivada",
+      "status": "passed",
+      "durationMs": 0.8639379999999619
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V03 generación bigint no se compara redondeándola a number",
+      "status": "passed",
+      "durationMs": 2.106901000000107
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de rol sin consultas intermedias no rehabilita snapshot",
+      "status": "passed",
+      "durationMs": 3.0482609999999113
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de estado sin consultas intermedias no rehabilita snapshot",
+      "status": "passed",
+      "durationMs": 2.5991920000000164
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V04 pérdida/recuperación de verificación sin consultas intermedias no rehabilita snapshot",
+      "status": "passed",
+      "durationMs": 1.2954920000000811
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V05 nombre/reset sin pérdida de habilitación conserva la visibilidad, no depende de authVersion",
+      "status": "passed",
+      "durationMs": 3.6136300000000574
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V06 captura explícita nueva vuelve a habilitar grupo; no muta entrada ni cuenta",
+      "status": "passed",
+      "durationMs": 1.3021589999999605
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso DRAFT sin hijos no visible",
+      "status": "passed",
+      "durationMs": 0.982752000000005
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso PUBLISHED sin hijos no visible",
+      "status": "passed",
+      "durationMs": 0.5671750000000202
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V07 curso WITHDRAWN sin hijos no visible",
+      "status": "passed",
+      "durationMs": 0.44285999999999603
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo DRAFT no visible",
+      "status": "passed",
+      "durationMs": 0.9851959999999735
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo WITHDRAWN no visible",
+      "status": "passed",
+      "durationMs": 0.45028500000000804
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V08 curso publicado solo con hijo CANCELLED no visible",
+      "status": "passed",
+      "durationMs": 0.39052700000002005
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V09 curso con hijos que requieren revisión no visible aunque editorialmente publicados",
+      "status": "passed",
+      "durationMs": 0.829960999999912
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V10 un hijo visible basta; hijos ocultos no se vuelven visibles",
+      "status": "passed",
+      "durationMs": 1.7197510000000875
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre DRAFT oculta aunque hijo fuera apto",
+      "status": "passed",
+      "durationMs": 1.020014999999944
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 visibilidad pura — FR-007/009/012; V-A05/A06 V11 padre WITHDRAWN oculta aunque hijo fuera apto",
+      "status": "passed",
+      "durationMs": 0.5593800000000329
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 1 no es ocupación ni disponibilidad",
+      "status": "passed",
+      "durationMs": 1.0136720000000423
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 45 no es ocupación ni disponibilidad",
+      "status": "passed",
+      "durationMs": 0.6915390000000343
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V12 capacidad 50 no es ocupación ni disponibilidad",
+      "status": "passed",
+      "durationMs": 0.806679000000031
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V13 no proyecta metadatos editoriales, revisión, generación, IDs docentes o privados",
+      "status": "passed",
+      "durationMs": 4.26267299999995
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto WITHDRAWN",
+      "status": "passed",
+      "durationMs": 0.6565399999999499
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V14 no proyecta grupo oculto CANCELLED",
+      "status": "passed",
+      "durationMs": 0.28374799999994593
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V15 no proyecta generación invalidada y recuperada",
+      "status": "passed",
+      "durationMs": 0.27706399999999576
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+      "name": "T031 proyección pura mínima — FR-006/011 V16 proyectar no muta snapshot, horarios ni docente",
+      "status": "passed",
+      "durationMs": 0.34448700000007193
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+      "name": "C01 DTO cerrados por audiencia, sin generación, credenciales ni datos de cuenta",
+      "status": "passed",
+      "durationMs": 3.370564999999999
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+      "name": "C02 revisiones JSON decimales, sin capacidad de inscripción ficticia",
+      "status": "passed",
+      "durationMs": 0.803953000000007
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+      "name": "C03 comandos explícitos, revisión en recursos existentes y sin actualización de snapshot desde cliente",
+      "status": "passed",
+      "durationMs": 1.6222999999999956
+    },
+    {
+      "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+      "name": "C04 errores de negocio seguros; referencias solo en conflictos administrativos",
+      "status": "passed",
+      "durationMs": 2.9564880000000073
+    }
+  ],
+  "boundaryCases": [
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 0001-01-01 con conexión UTC",
+      "status": "passed",
+      "durationMs": 724.644085
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 1800-01-01 con conexión UTC",
+      "status": "passed",
+      "durationMs": 636.28179
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 1990-02-01 con conexión UTC",
+      "status": "passed",
+      "durationMs": 703.7699500000003
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 9999-12-31 con conexión UTC",
+      "status": "passed",
+      "durationMs": 611.4610239999997
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 0001-01-01 con conexión America/Lima",
+      "status": "passed",
+      "durationMs": 391.5232659999997
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 1800-01-01 con conexión America/Lima",
+      "status": "passed",
+      "durationMs": 369.4389239999996
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 1990-02-01 con conexión America/Lima",
+      "status": "passed",
+      "durationMs": 393.75223800000003
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 9999-12-31 con conexión America/Lima",
+      "status": "passed",
+      "durationMs": 484.35643099999925
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 0001-01-01 con conexión Asia/Tokyo",
+      "status": "passed",
+      "durationMs": 466.0574609999994
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 1800-01-01 con conexión Asia/Tokyo",
+      "status": "passed",
+      "durationMs": 576.8019560000002
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 1990-02-01 con conexión Asia/Tokyo",
+      "status": "passed",
+      "durationMs": 535.0962639999998
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 límites originales de 9999-12-31 con conexión Asia/Tokyo",
+      "status": "passed",
+      "durationMs": 509.9079730000003
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 persistencia timestamptz(6) exacta 1969-12-31T23:59:59.999999Z y plazo fijo",
+      "status": "passed",
+      "durationMs": 1444.1975090000005
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 persistencia timestamptz(6) exacta 0001-01-01T00:00:00.000001Z y plazo fijo",
+      "status": "passed",
+      "durationMs": 1337.8048120000003
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 persistencia timestamptz(6) exacta 2026-11-01T00:00:00.123456Z y plazo fijo",
+      "status": "passed",
+      "durationMs": 1115.6794740000005
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 persistencia timestamptz(6) exacta +010000-01-01T05:00:00.000000Z y plazo fijo",
+      "status": "passed",
+      "durationMs": 1338.7413529999994
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 entradas civiles inválidas no llegan a consulta PG",
+      "status": "passed",
+      "durationMs": 773.2074069999999
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea -0",
+      "status": "passed",
+      "durationMs": 3.2206420000002254
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea 01",
+      "status": "passed",
+      "durationMs": 1.2281960000000254
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea 1.000000",
+      "status": "passed",
+      "durationMs": 0.7873580000014044
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea NaN",
+      "status": "passed",
+      "durationMs": 0.41659599999911734
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea Infinity",
+      "status": "passed",
+      "durationMs": 0.19044600000052014
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea 1\n",
+      "status": "passed",
+      "durationMs": 0.14834899999914342
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea null",
+      "status": "passed",
+      "durationMs": 0.15184600000065984
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 texto epoch inválido no se redondea 1",
+      "status": "passed",
+      "durationMs": 0.15230700000029174
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T009 lee límite congelado aunque el período actual de oferta cambie",
+      "status": "passed",
+      "durationMs": 1091.1294959999996
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T010 participante descubre padres/docente y snapshot explícito sin tomar locks",
+      "status": "passed",
+      "durationMs": 576.4895140000008
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-boundaries.spec.ts",
+      "name": "T010 snapshot distingue publicación, ocultamiento y generación docente recuperada",
+      "status": "passed",
+      "durationMs": 602.8337599999995
+    }
+  ],
+  "hooks": {
+    "before": "NO_EXTENSION_FILE",
+    "after": "NO_EXTENSION_FILE"
+  },
+  "next": "T011–T012: matriz de permisos y autorización; 84 tareas pendientes."
+}

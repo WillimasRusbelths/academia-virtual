@@ -3,7 +3,7 @@ import { civilDay, validateSchedule } from './schedule.js';
 import type { AcademicTimeZone, GroupState, Slot } from '../public/offer.js';
 
 export interface Group {
-  readonly id: string; readonly courseId: string; readonly name: string; readonly state: GroupState;
+  readonly id: string; readonly courseId: string; readonly name: string; readonly description: string | null; readonly state: GroupState;
   readonly capacity: number | null; readonly periodStart: string | null; readonly periodEnd: string | null;
   readonly timeZone: AcademicTimeZone; readonly teacherUserId: string | null;
   /** El llamante puede aportar las franjas persistidas para revalidar al editar. */
@@ -18,6 +18,11 @@ function attributes(input: unknown): Record<string, unknown> {
 function name(value: unknown): string {
   if (typeof value !== 'string' || value.trim() === '') throw new OfferingError({ code: 'VALIDATION_ERROR', fields: ['name'] });
   return value.trim();
+}
+function description(value: unknown): string | null {
+  if (value === null) return null;
+  if (typeof value !== 'string') throw new OfferingError({ code: 'VALIDATION_ERROR', fields: ['description'] });
+  return value.trim() || null;
 }
 function capacity(value: unknown): number {
   if (typeof value !== 'number' || !Number.isInteger(value) || value < 1 || value > 50) {
@@ -43,6 +48,7 @@ function teacher(value: unknown): string | null {
 function changes(values: Record<string, unknown>): Partial<Omit<Group, 'id' | 'courseId' | 'state' | 'schedule'>> {
   return {
     ...(Object.hasOwn(values, 'name') ? { name: name(values.name) } : {}),
+    ...(Object.hasOwn(values, 'description') ? { description: description(values.description) } : {}),
     ...(Object.hasOwn(values, 'capacity') ? { capacity: capacity(values.capacity) } : {}),
     ...(Object.hasOwn(values, 'periodStart') ? { periodStart: date(values.periodStart, 'periodStart') } : {}),
     ...(Object.hasOwn(values, 'periodEnd') ? { periodEnd: date(values.periodEnd, 'periodEnd') } : {}),
@@ -55,7 +61,7 @@ export function assertGroupEditable(state: GroupState): void {
 }
 export function createGroup(id: string, courseId: string, input: unknown): Group {
   const values = attributes(input);
-  const group: Group = { id, courseId, name: name(values.name), state: 'DRAFT', capacity: null,
+  const group: Group = { id, courseId, name: name(values.name), description: null, state: 'DRAFT', capacity: null,
     periodStart: null, periodEnd: null, timeZone: 'America/Lima', teacherUserId: null, ...changes(values) };
   validateSchedule({ ...group, schedule: [] });
   return group;

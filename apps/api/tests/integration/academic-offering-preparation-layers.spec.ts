@@ -14,12 +14,14 @@ import { academicOfferingDataset } from '../support/academic-offering.js';
 import type { AcademicOfferingDataset } from '../support/academic-offering.js';
 import { academicFingerprint, preparationSeed } from '../support/academic-preparation.js';
 import { waitForBlockedBy } from '../support/locks.js';
+import { createGroupCommitmentPolicy } from '../../src/modules/enrollment/infrastructure/commitments.js';
+import { resetAcademicFixture } from '../support/academic-maintenance-fixture.js';
 import { Test } from '@nestjs/testing';
 import { AppModule } from '../../dist/src/app.module.js';
 import { ACADEMIC_PREPARATION_COMMANDS, ACADEMIC_ADMINISTRATIVE_QUERIES } from '../../dist/src/modules/academic-offering/academic-offering.module.js';
 
 type Reads = Pick<OfferingStore, 'adminCourses' | 'adminCourse' | 'adminGroups' | 'adminGroup' | 'teacherCandidates'>;
-type Factory = (pool: Pool, authorization: AcademicTransactionDependencies) => PreparationStore;
+type Factory = (pool: Pool, authorization: AcademicTransactionDependencies, writer: persistence.AcademicCommandWriter) => PreparationStore;
 type QueryFactory = (pool: Pool, sessions: PostgresSessionStore) => Reads;
 const queryModules = import.meta.glob('../../src/modules/academic-offering/infrastructure/offering-queries.ts');
 let data: AcademicOfferingDataset; let sessions: PostgresSessionStore; let actor: SessionActor;
@@ -29,7 +31,8 @@ const authorization = () => ({ revalidateInTransaction: sessions.revalidateInTra
 function commands() {
   const factory = (persistence as unknown as { createPreparationStore?: Factory }).createPreparationStore;
   expect(factory, 'T024: adaptador real aún ausente').toBeTypeOf('function');
-  return new PreparationCommands(factory!(pool(), authorization()));
+  const auth = authorization();
+  return new PreparationCommands(factory!(pool(), auth, persistence.createAcademicCommandWriter(pool(), auth, { commitments: createGroupCommitmentPolicy })));
 }
 async function queries(connection = pool()) {
   const load = Object.values(queryModules)[0];
@@ -53,7 +56,7 @@ beforeAll(async () => {
   actor = (await sessions.lookup(data.account('ADMIN').sessions[0].secret))!;
 }, 120000);
 beforeEach(async () => {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await resetAcademicFixture(data);
   seed = await preparationSeed(pool());
 });
 afterAll(async () => { await data?.cleanup(); });
@@ -258,7 +261,7 @@ test('Q02/H04 búsqueda literal, estado, orden name/id y conteo', async () => {
 });
 test('Q03/H05 DTO cerrado, franjas y capacidad configurada sin disponibilidad', async () => {
   const reads = await queries(); const group = (await reads.adminGroup(actor, seed.groupId))!;
-  expect(Object.keys(group).sort()).toEqual(['id','courseId','name','state','revision','periodStart','periodEnd','timeZone','capacity',
+  expect(Object.keys(group).sort()).toEqual(['id','courseId','name','description','state','revision','periodStart','periodEnd','timeZone','capacity',
     'occupancy','availability','capacityStatus','schedule','teacher','teacherReviewRequired','studentVisible',
     'cancellationReason','cancelledAt','lastPublishedTeacherId','createdAt','updatedAt'].sort());
   expect(group).toMatchObject({ schedule: [monday], capacity: 1, availability: null, occupancy: null, capacityStatus: 'NOT_CALCULATED',

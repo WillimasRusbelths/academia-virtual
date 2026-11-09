@@ -1,0 +1,2397 @@
+{
+  "date": "2026-11-04",
+  "timezone": "America/Lima",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "status": "T037_T038_IMPLEMENTADOS_FEATURE_UI_Y_CONTROLADORES",
+  "aggregate": {
+    "unique": 321,
+    "passed": 321,
+    "failed": 0,
+    "skipped": 0,
+    "previouslyRedNowGreen": 25,
+    "newControllerAndRenderingTests": 23,
+    "existingRegressionPassed": 273,
+    "earlierRunsExcluded": true
+  },
+  "caseIdentity": "file + caseIndex: seis variantes distintas del test administrativo existente comparten título; no son repeticiones de ejecución.",
+  "checks": {
+    "lint": "PASS API/web",
+    "build": "PASS API/web",
+    "types": "PASS API/web enrollment",
+    "allWebUnit": "PASS",
+    "pgHttp": "NOT_RUN_BACKEND_UNCHANGED",
+    "ci": "NOT_RUN",
+    "e2e": "NOT_RUN_T041",
+    "keyboardAndMobileBrowser": "PENDING_T041",
+    "routeAndWorkerComposition": "PENDING_T039",
+    "us1Checkpoint": "PENDING_T040_T041"
+  },
+  "behavior": {
+    "oneGroupPerCourseAcrossPages": true,
+    "explicitPreviewAndConsent": true,
+    "uuidOnlyAfterConfirm": true,
+    "singleFlightSubmit": true,
+    "admittedIsWaiting": true,
+    "separateCapacityReservedOccupiedAvailable": true,
+    "undefinedPriceIsNotZero": true,
+    "previewNotBinding": true,
+    "manualReadAndIdenticalReplay": true,
+    "noAutomaticFinancialMutation": true,
+    "noLocalStorage": true,
+    "lateResultsDiscarded": true,
+    "privateStateClearedOnLogoutAndAuthLoss": true,
+    "ownOrdersRequestsAndCurrent": true,
+    "independentPaginationAndRetry": true,
+    "originalMoneyAndUtcSixFractions": true,
+    "noLocalClockExpiryDecision": true,
+    "newSelectionAfterServerExpiry": true,
+    "oldIntentionKeepsOriginalResult": true,
+    "noFunctionalPaymentButton": true,
+    "accessibleNativeControlsAndStatuses": true
+  },
+  "components": {
+    "ReservationPage": "Presentación",
+    "ReservationScreen": "Contenedor con API inyectada",
+    "createReservationController": "Selección/preview/consentimiento y recuperación",
+    "createReservationFlow": "Intención estable en memoria",
+    "OrderPage": "Presentación",
+    "OrdersScreen": "Contenedor con API inyectada",
+    "createOrdersController": "Listas/current/detalle y recuperación"
+  },
+  "initialFailureCorrection": "OC05 comprobaba propiedad presente con undefined; ahora exige ausencia del detalle mediante toBeUndefined, sin alterar producto por esa aserción.",
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true,
+    "containers": [
+      {
+        "service": "db",
+        "status": "exited",
+        "health": "unhealthy",
+        "image": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+        "mounts": [
+          {
+            "type": "bind",
+            "name": null,
+            "target": "/docker-entrypoint-initdb.d/01-academia.sql",
+            "readOnly": true
+          },
+          {
+            "type": "volume",
+            "name": "academic-offering-fa3d46bddbb8_postgres_data",
+            "target": "/var/lib/postgresql/data",
+            "readOnly": false
+          }
+        ]
+      },
+      {
+        "service": "mailpit",
+        "status": "exited",
+        "health": "unhealthy",
+        "image": "sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d",
+        "mounts": []
+      }
+    ],
+    "finalApiImage": "sha256:873ca979bb374417584c45c607c432291b9682060d5e11968e7797e601376619",
+    "postgresStarted": false,
+    "temporarySchemas": "NOT_QUERIED_POSTGRES_REMAINED_STOPPED",
+    "protectedUnchanged": 74,
+    "historicalMigrationsUnchanged": 6,
+    "newMigrations": 0
+  },
+  "sourceManifestSha256": "2c101839b6312c0cf73ca1278a74062c6a94c7526252255fbb5575b8ae23dc34",
+  "manifest": [
+    {
+      "path": "apps/web/src/features/enrollment/reservation-page.tsx",
+      "sha256": "d3c6f70a6e76e6454f81c3741108a0e8cfe8dd096d292652722a5a99e5fbff9b"
+    },
+    {
+      "path": "apps/web/src/features/enrollment/order-page.tsx",
+      "sha256": "b27b11184de7e935117ce3e5108ed6ea3ec8e286101a902a47dde3e97bceb620"
+    },
+    {
+      "path": "apps/web/src/features/enrollment/view.tsx",
+      "sha256": "2ef1cac7e85570c80dcc8cd293194a72d40f56539dd9dcd60101a0760fe5b346"
+    },
+    {
+      "path": "apps/web/src/features/enrollment/enrollment.css",
+      "sha256": "3708c90aeefa01bb0c0bb81fa5d933623a54e5fc39c8827df69c12c674c064e5"
+    },
+    {
+      "path": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "sha256": "ac47c8e30e7921c01e003f1ba5e23eb37bbe69e126f7bc32b6f64e0c1c419c85"
+    }
+  ],
+  "completedTasks": [
+    "T037",
+    "T038"
+  ],
+  "completed": 38,
+  "pending": 56,
+  "nextBlock": [
+    "T039",
+    "T040"
+  ],
+  "extensions": "NONE",
+  "cases": [
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 1,
+      "name": "catálogo pagina/busca por transporte común sin filtros administrativos",
+      "status": "passed",
+      "durationMs": 75.38604200000003
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 2,
+      "name": "detalle público conserva solo docente por nombre y capacidad sin disponibilidad",
+      "status": "passed",
+      "durationMs": 5.553952999999979
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 3,
+      "name": "rechaza proyección pública ampliada o inválida 0",
+      "status": "passed",
+      "durationMs": 3.5417510000000334
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 4,
+      "name": "rechaza proyección pública ampliada o inválida 1",
+      "status": "passed",
+      "durationMs": 8.22515100000004
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 5,
+      "name": "rechaza proyección pública ampliada o inválida 2",
+      "status": "passed",
+      "durationMs": 2.734273999999971
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 6,
+      "name": "rechaza proyección pública ampliada o inválida 3",
+      "status": "passed",
+      "durationMs": 2.3348809999999958
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 7,
+      "name": "rechaza proyección pública ampliada o inválida 4",
+      "status": "passed",
+      "durationMs": 2.163029999999992
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 8,
+      "name": "rechaza proyección pública ampliada o inválida 5",
+      "status": "passed",
+      "durationMs": 2.1918979999999806
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 9,
+      "name": "publicación course requiere envío explícito y repite exactamente la intención",
+      "status": "passed",
+      "durationMs": 19.189843999999994
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 10,
+      "name": "publicación group requiere envío explícito y repite exactamente la intención",
+      "status": "passed",
+      "durationMs": 6.169042999999988
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 11,
+      "name": "sesión perdida cancela la otra respuesta tardía del detalle sin mostrar datos ni repetir comandos",
+      "status": "passed",
+      "durationMs": 3.9025170000000458
+    },
+    {
+      "file": "apps/web/src/app/academic-catalog-api.test.ts",
+      "caseIndex": 12,
+      "name": "conflictos de publicación son administrativos; catálogo no expone referencias privadas",
+      "status": "passed",
+      "durationMs": 3.3756720000000087
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 1,
+      "name": "W12 grupo administrativo conserva descripción null y NOT_CALCULATED",
+      "status": "passed",
+      "durationMs": 64.18386200000003
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 2,
+      "name": "W12 grupo administrativo conserva descripción Descripción normalizada y NOT_CALCULATED",
+      "status": "passed",
+      "durationMs": 2.0534869999999614
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 3,
+      "name": "W13 lector cerrado rechaza descripción inválida undefined",
+      "status": "passed",
+      "durationMs": 1.8133869999999774
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 4,
+      "name": "W13 lector cerrado rechaza descripción inválida 42",
+      "status": "passed",
+      "durationMs": 1.7621320000000082
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 5,
+      "name": "W13 lector cerrado rechaza descripción inválida  sin normalizar ",
+      "status": "passed",
+      "durationMs": 1.7463899999999626
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 6,
+      "name": "W13 lector cerrado rechaza descripción inválida ",
+      "status": "passed",
+      "durationMs": 1.6720990000000029
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 7,
+      "name": "W14 descripción editable usa la ruta existente y conserva intención",
+      "status": "passed",
+      "durationMs": 2.6026469999999904
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 8,
+      "name": "W15 error de compromisos llega seguro a administración ",
+      "status": "passed",
+      "durationMs": 2.715857000000028
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 9,
+      "name": "W15 error de compromisos llega seguro a administración /cancel",
+      "status": "passed",
+      "durationMs": 3.7622910000000047
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 10,
+      "name": "W15 error de compromisos llega seguro a administración /schedule",
+      "status": "passed",
+      "durationMs": 3.321421999999984
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 11,
+      "name": "W01 courses codifica solo filtros de su ruta",
+      "status": "passed",
+      "durationMs": 3.861362999999983
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 12,
+      "name": "W01 groups codifica solo filtros de su ruta",
+      "status": "passed",
+      "durationMs": 1.7983970000000227
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 13,
+      "name": "W01 teachers codifica solo filtros de su ruta",
+      "status": "passed",
+      "durationMs": 1.5431669999999826
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 14,
+      "name": "W02 acepta curso/grupo incompletos y revisión decimal exacta, sin disponibilidad",
+      "status": "passed",
+      "durationMs": 2.6012020000000007
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 15,
+      "name": "W03 rechaza curso inesperado 0",
+      "status": "passed",
+      "durationMs": 1.5128750000000082
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 16,
+      "name": "W03 rechaza curso inesperado 1",
+      "status": "passed",
+      "durationMs": 1.8786400000000185
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 17,
+      "name": "W03 rechaza curso inesperado 2",
+      "status": "passed",
+      "durationMs": 1.2756409999999505
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 18,
+      "name": "W03 rechaza curso inesperado 3",
+      "status": "passed",
+      "durationMs": 1.0704130000000305
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 19,
+      "name": "W03 rechaza curso inesperado 4",
+      "status": "passed",
+      "durationMs": 0.8452530000000138
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 20,
+      "name": "W03 rechaza curso inesperado 5",
+      "status": "passed",
+      "durationMs": 0.7987090000000308
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 21,
+      "name": "W03 rechaza curso inesperado 6",
+      "status": "passed",
+      "durationMs": 0.766052000000002
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 22,
+      "name": "W04 rechaza grupo inesperado 0",
+      "status": "passed",
+      "durationMs": 1.1348039999999742
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 23,
+      "name": "W04 rechaza grupo inesperado 1",
+      "status": "passed",
+      "durationMs": 1.6910079999999539
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 24,
+      "name": "W04 rechaza grupo inesperado 2",
+      "status": "passed",
+      "durationMs": 5.866310999999996
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 25,
+      "name": "W04 rechaza grupo inesperado 3",
+      "status": "passed",
+      "durationMs": 1.0605229999999892
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 26,
+      "name": "W04 rechaza grupo inesperado 4",
+      "status": "passed",
+      "durationMs": 1.15930400000002
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 27,
+      "name": "W04 rechaza grupo inesperado 5",
+      "status": "passed",
+      "durationMs": 5.275118999999961
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 28,
+      "name": "W04 rechaza grupo inesperado 6",
+      "status": "passed",
+      "durationMs": 1.9606180000000109
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 29,
+      "name": "W04 rechaza grupo inesperado 7",
+      "status": "passed",
+      "durationMs": 0.9347260000000119
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 30,
+      "name": "W04 rechaza grupo inesperado 8",
+      "status": "passed",
+      "durationMs": 1.148290999999972
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 31,
+      "name": "W04 rechaza grupo inesperado 9",
+      "status": "passed",
+      "durationMs": 0.9932310000000371
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 32,
+      "name": "W05 página/selector cerrado 0",
+      "status": "passed",
+      "durationMs": 0.9369009999999776
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 33,
+      "name": "W05 página/selector cerrado 1",
+      "status": "passed",
+      "durationMs": 0.8444820000000277
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 34,
+      "name": "W05 página/selector cerrado 2",
+      "status": "passed",
+      "durationMs": 1.1404850000000124
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 35,
+      "name": "W05 página/selector cerrado 3",
+      "status": "passed",
+      "durationMs": 0.7251279999999838
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 36,
+      "name": "W05 página/selector cerrado 4",
+      "status": "passed",
+      "durationMs": 0.8103019999999788
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 37,
+      "name": "W06 una intención, dos envíos manuales idénticos y datos editados con ID nuevo",
+      "status": "passed",
+      "durationMs": 2.2720429999999965
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 38,
+      "name": "W07 cinco comandos usan método/ruta/revisión previstos; horario se copia",
+      "status": "passed",
+      "durationMs": 2.2243650000000343
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 39,
+      "name": "W08 AUTH_REQUIRED no encola ni reenvía al iniciar sesión; reintento explícito conserva ID",
+      "status": "passed",
+      "durationMs": 2.9455049999999687
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 40,
+      "name": "W10 nueva revisión exige nueva intención; PATCH vacío/atributos ajenos no salen al transporte",
+      "status": "passed",
+      "durationMs": 1.9738340000000107
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 41,
+      "name": "W11 respuesta perdida permite solo reintento manual con ID, revisión y payload idénticos",
+      "status": "passed",
+      "durationMs": 1.4977030000000013
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 42,
+      "name": "W09 rechaza resultado de comando incompatible: id",
+      "status": "passed",
+      "durationMs": 1.1967900000000213
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 43,
+      "name": "W09 rechaza resultado de comando incompatible: resource",
+      "status": "passed",
+      "durationMs": 0.7913130000000024
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 44,
+      "name": "W09 rechaza resultado de comando incompatible: revision",
+      "status": "passed",
+      "durationMs": 0.6035309999999754
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-api.test.ts",
+      "caseIndex": 45,
+      "name": "W09 rechaza resultado de comando incompatible: unknown",
+      "status": "passed",
+      "durationMs": 0.641256999999996
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 1,
+      "name": "hidrata sesión en acceso directo /admin/oferta",
+      "status": "passed",
+      "durationMs": 2.665205999999955
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 2,
+      "name": "hidrata sesión en acceso directo /admin/oferta/cursos/00000000-0000-4000-8000-000000000001",
+      "status": "passed",
+      "durationMs": 0.37443799999999783
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 3,
+      "name": "hidrata sesión en acceso directo /admin/oferta/grupos/00000000-0000-4000-8000-000000000001",
+      "status": "passed",
+      "durationMs": 0.8378159999999752
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 4,
+      "name": "hidrata sesión en acceso directo /oferta",
+      "status": "passed",
+      "durationMs": 0.3762919999999781
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 5,
+      "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001",
+      "status": "passed",
+      "durationMs": 0.21086699999995062
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 6,
+      "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001/grupos/00000000-0000-4000-8000-000000000001",
+      "status": "passed",
+      "durationMs": 0.1508049999999912
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 7,
+      "name": "hidrata sesión en acceso directo /mis-grupos",
+      "status": "passed",
+      "durationMs": 0.2860689999999977
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 8,
+      "name": "hidrata sesión en acceso directo /mis-grupos/00000000-0000-4000-8000-000000000001",
+      "status": "passed",
+      "durationMs": 0.2052349999999592
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 9,
+      "name": "políticas de audiencia STUDENT",
+      "status": "passed",
+      "durationMs": 1.51538800000003
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 10,
+      "name": "políticas de audiencia TEACHER",
+      "status": "passed",
+      "durationMs": 0.8180169999999976
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 11,
+      "name": "políticas de audiencia ADMIN",
+      "status": "passed",
+      "durationMs": 0.5459260000000086
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 12,
+      "name": "rutas no aceptan subrutas ni referencias externas",
+      "status": "passed",
+      "durationMs": 1.5978150000000255
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 13,
+      "name": "inicio conserva perfil/cierre y enlace administrativo solo para STUDENT",
+      "status": "passed",
+      "durationMs": 14.449897000000021
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 14,
+      "name": "inicio conserva perfil/cierre y enlace administrativo solo para TEACHER",
+      "status": "passed",
+      "durationMs": 1.6613139999999476
+    },
+    {
+      "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "caseIndex": 15,
+      "name": "inicio conserva perfil/cierre y enlace administrativo solo para ADMIN",
+      "status": "passed",
+      "durationMs": 0.8193590000000199
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 1,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"email\":\"privado@example.test\"}",
+      "status": "passed",
+      "durationMs": 63.88380599999999
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 2,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"revision\":\"1\"}",
+      "status": "passed",
+      "durationMs": 1.369421999999986
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 3,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"teacherReviewRequired\":true}",
+      "status": "passed",
+      "durationMs": 1.040187000000003
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 4,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"cancellationReason\":\"Privado\"}",
+      "status": "passed",
+      "durationMs": 0.984893999999997
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 5,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\",\"eligible\":true}}",
+      "status": "passed",
+      "durationMs": 1.458073000000013
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 6,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null,\"groups\":[]},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+      "status": "passed",
+      "durationMs": 1.1441169999999943
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 7,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":0,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+      "status": "passed",
+      "durationMs": 1.8088430000000244
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 8,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":51,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+      "status": "passed",
+      "durationMs": 2.179587999999967
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 9,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":0,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+      "status": "passed",
+      "durationMs": 4.593144999999993
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 10,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":50,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+      "status": "passed",
+      "durationMs": 1.8693349999999782
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 11,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"UTC\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+      "status": "passed",
+      "durationMs": 1.3628390000000081
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 12,
+      "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[{\"dayOfWeek\":1,\"startTime\":\"23:00\",\"endTime\":\"01:00\"}],\"teacher\":{\"name\":\"Docente\"}}",
+      "status": "passed",
+      "durationMs": 1.1292270000000144
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 13,
+      "name": "borrador incompleto y cancelado se decodifican sin inventar datos ni acceder a cursos generales",
+      "status": "passed",
+      "durationMs": 2.5530689999999936
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 14,
+      "name": "listado permite solo paginación y envía señal de cancelación",
+      "status": "passed",
+      "durationMs": 3.5998989999999935
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 15,
+      "name": "detalle no admite referencia distinta o parámetros privados",
+      "status": "passed",
+      "durationMs": 1.188397000000009
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 16,
+      "name": "cancelar pendientes invalida respuesta tardía aunque el transporte ignore AbortSignal, sin replay",
+      "status": "passed",
+      "durationMs": 2.593952999999999
+    },
+    {
+      "file": "apps/web/src/app/academic-teaching-api.test.ts",
+      "caseIndex": 17,
+      "name": "401 docente cancela operaciones hermanas y comunica pérdida de acceso una sola vez",
+      "status": "passed",
+      "durationMs": 2.7593270000000416
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 1,
+      "name": "WE01 GET /admin/enrollment/courses/00000000-0000-4000-8000-000000000001/price: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 50.97382799999997
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 2,
+      "name": "WE01 PUT /admin/enrollment/courses/00000000-0000-4000-8000-000000000001/price: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 2.1827499999999986
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 3,
+      "name": "WE01 GET /enrollment/offerings: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.333578999999986
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 4,
+      "name": "WE01 POST /enrollment/selection-preview: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.0562930000000392
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 5,
+      "name": "WE01 POST /enrollment/reservation-requests: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.526862000000051
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 6,
+      "name": "WE01 GET /enrollment/reservation-requests: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.6387720000000172
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 7,
+      "name": "WE01 GET /enrollment/reservation-requests/00000000-0000-4000-8000-000000000001: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.731380999999999
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 8,
+      "name": "WE01 GET /enrollment/orders: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.6877110000000357
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 9,
+      "name": "WE01 GET /enrollment/orders/current: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 5.724901999999986
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 10,
+      "name": "WE01 GET /enrollment/orders/00000000-0000-4000-8000-000000000001: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 2.040661
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 11,
+      "name": "WE01 POST /enrollment/orders/00000000-0000-4000-8000-000000000001/payment-attempts: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.3778789999999503
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 12,
+      "name": "WE01 GET /enrollment/enrollments: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.0378760000000398
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 13,
+      "name": "WE01 GET /enrollment/enrollments/00000000-0000-4000-8000-000000000001: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.515309000000002
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 14,
+      "name": "WE01 GET /admin/enrollment/orders: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 0.8926400000000285
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 15,
+      "name": "WE01 GET /admin/enrollment/orders/00000000-0000-4000-8000-000000000001: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.0871159999999804
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 16,
+      "name": "WE01 GET /admin/enrollment/incidents: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.046383999999989
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 17,
+      "name": "WE01 GET /admin/enrollment/incidents/00000000-0000-4000-8000-000000000001: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.4690249999999878
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 18,
+      "name": "WE01 POST /admin/enrollment/incidents/00000000-0000-4000-8000-000000000001/follow-ups: campos propios y error cerrado",
+      "status": "passed",
+      "durationMs": 1.4407679999999914
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 19,
+      "name": "WE02 /admin/enrollment/courses/00000000-0000-4000-8000-000000000001/price reconoce ENROLLMENT_VERSION_CONFLICT",
+      "status": "passed",
+      "durationMs": 1.4575619999999958
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 20,
+      "name": "WE02 /enrollment/reservation-requests reconoce ACTIVE_ORDER_EXISTS",
+      "status": "passed",
+      "durationMs": 1.2408590000000004
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 21,
+      "name": "WE02 /enrollment/reservation-requests reconoce COURSE_COMMITMENT_EXISTS",
+      "status": "passed",
+      "durationMs": 0.9380620000000022
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 22,
+      "name": "WE02 /enrollment/reservation-requests reconoce OFFERING_NOT_RESERVABLE",
+      "status": "passed",
+      "durationMs": 0.9955599999999549
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 23,
+      "name": "WE02 /enrollment/reservation-requests reconoce CAPACITY_UNAVAILABLE",
+      "status": "passed",
+      "durationMs": 1.0295690000000377
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 24,
+      "name": "WE02 /enrollment/reservation-requests reconoce STUDENT_SCHEDULE_CONFLICT",
+      "status": "passed",
+      "durationMs": 1.019297999999992
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 25,
+      "name": "WE02 /enrollment/orders/00000000-0000-4000-8000-000000000001/payment-attempts reconoce RESERVATION_EXPIRED",
+      "status": "passed",
+      "durationMs": 3.8444900000000075
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 26,
+      "name": "WE02 /enrollment/orders/00000000-0000-4000-8000-000000000001/payment-attempts reconoce PAYMENT_NOT_ALLOWED",
+      "status": "passed",
+      "durationMs": 0.8360450000000128
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 27,
+      "name": "WE02 /enrollment/orders/00000000-0000-4000-8000-000000000001/payment-attempts reconoce IDEMPOTENCY_CONFLICT",
+      "status": "passed",
+      "durationMs": 0.9890570000000025
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 28,
+      "name": "WE02 /admin/enrollment/incidents/00000000-0000-4000-8000-000000000001/follow-ups reconoce IDEMPOTENCY_CONFLICT",
+      "status": "passed",
+      "durationMs": 1.1656560000000127
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 29,
+      "name": "WE03 código ajeno /enrollment/orders/00000000-0000-4000-8000-000000000001 ACTIVE_ORDER_EXISTS",
+      "status": "passed",
+      "durationMs": 2.5376939999999877
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 30,
+      "name": "WE03 código ajeno /enrollment/reservation-requests/00000000-0000-4000-8000-000000000001 OFFERING_NOT_RESERVABLE",
+      "status": "passed",
+      "durationMs": 1.5969949999999926
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 31,
+      "name": "WE03 código ajeno /enrollment/orders/00000000-0000-4000-8000-000000000001/payment-attempts ENROLLMENT_VERSION_CONFLICT",
+      "status": "passed",
+      "durationMs": 2.01478800000001
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 32,
+      "name": "WE03 código ajeno /admin/enrollment/courses/00000000-0000-4000-8000-000000000001/price PAYMENT_NOT_ALLOWED",
+      "status": "passed",
+      "durationMs": 1.8512359999999717
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 33,
+      "name": "WE03 código ajeno /admin/enrollment/incidents/00000000-0000-4000-8000-000000000001/follow-ups RESERVATION_EXPIRED",
+      "status": "passed",
+      "durationMs": 0.9750880000000279
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 34,
+      "name": "WE04 query permitida /enrollment/offerings",
+      "status": "passed",
+      "durationMs": 0.7657710000000293
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 35,
+      "name": "WE04 query permitida /enrollment/orders",
+      "status": "passed",
+      "durationMs": 0.4477229999999963
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 36,
+      "name": "WE04 query permitida /admin/enrollment/orders",
+      "status": "passed",
+      "durationMs": 0.839492000000007
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 37,
+      "name": "WE05 query ajena no sale; body/UUID inválido de ruta no habilita campos",
+      "status": "passed",
+      "durationMs": 1.5026340000000005
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 38,
+      "name": "WE06 200 ADMITTED y REJECTED son datos; 503 nunca equivale a rechazo confirmado",
+      "status": "passed",
+      "durationMs": 2.5126530000000002
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 39,
+      "name": "WE07 respuesta financiera 202 no se descarta como éxito sin resultado",
+      "status": "passed",
+      "durationMs": 0.7069110000000478
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 40,
+      "name": "WE07 respuesta financiera 204 no se descarta como éxito sin resultado",
+      "status": "passed",
+      "durationMs": 0.40733000000000175
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 41,
+      "name": "WE08 envelope financiero de éxito cerrado",
+      "status": "passed",
+      "durationMs": 0.8061830000000327
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 42,
+      "name": "WE09 transporte conserva CSRF, no-store y no reenvía tras AUTH_REQUIRED",
+      "status": "passed",
+      "durationMs": 1.7741920000000277
+    },
+    {
+      "file": "apps/web/src/app/enrollment-api.test.ts",
+      "caseIndex": 43,
+      "name": "WE10 503 indica resultado no confirmado y consultar antes de repetir",
+      "status": "passed",
+      "durationMs": 1.0758730000000014
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 1,
+      "name": "WC01 adaptación app/shared conserva 200 ADMITTED, CSRF y no-store",
+      "status": "passed",
+      "durationMs": 69.02164300000004
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 2,
+      "name": "WC02 listas y current nulo usan GET con paginación recuperable",
+      "status": "passed",
+      "durationMs": 4.8245189999999525
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 3,
+      "name": "WC03 DTO inválido fracciones no se convierte en orden",
+      "status": "passed",
+      "durationMs": 6.92637400000001
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 4,
+      "name": "WC03 DTO inválido fecha imposible no se convierte en orden",
+      "status": "passed",
+      "durationMs": 2.446864000000005
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 5,
+      "name": "WC03 DTO inválido plazo alterado no se convierte en orden",
+      "status": "passed",
+      "durationMs": 2.89026199999995
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 6,
+      "name": "WC03 DTO inválido total número no se convierte en orden",
+      "status": "passed",
+      "durationMs": 2.6514680000000226
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 7,
+      "name": "WC03 DTO inválido total incoherente no se convierte en orden",
+      "status": "passed",
+      "durationMs": 2.0530970000000366
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 8,
+      "name": "WC03 DTO inválido campo privado no se convierte en orden",
+      "status": "passed",
+      "durationMs": 3.7507550000000265
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 9,
+      "name": "WC03 DTO inválido pago vencido no se convierte en orden",
+      "status": "passed",
+      "durationMs": 4.7030019999999695
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 10,
+      "name": "WC03 DTO inválido estado de pago no se convierte en orden",
+      "status": "passed",
+      "durationMs": 1.7018259999999827
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 11,
+      "name": "WC04 año ampliado conserva seis fracciones sin Date",
+      "status": "passed",
+      "durationMs": 1.8695450000000164
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 12,
+      "name": "WC05 202 no se interpreta ni reenvía y cancelación conserva generación",
+      "status": "passed",
+      "durationMs": 3.390314999999987
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 13,
+      "name": "WC06 oferta conserva precio null",
+      "status": "passed",
+      "durationMs": 2.6174399999999878
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 14,
+      "name": "WC06 oferta conserva precio 0",
+      "status": "passed",
+      "durationMs": 1.7376290000000836
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 15,
+      "name": "WC07 inventario inválido {\"available\":0}",
+      "status": "passed",
+      "durationMs": 1.9085039999999935
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 16,
+      "name": "WC07 inventario inválido {\"reserved\":2,\"available\":0}",
+      "status": "passed",
+      "durationMs": 2.2070680000000493
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 17,
+      "name": "WC07 inventario inválido {\"teacherEligibilityVersion\":\"private\"}",
+      "status": "passed",
+      "durationMs": 1.6970060000001013
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 18,
+      "name": "WC08 preview comprueba total y conserva selección sin admisión",
+      "status": "passed",
+      "durationMs": 9.397051999999917
+    },
+    {
+      "file": "apps/web/src/app/enrollment-client.test.ts",
+      "caseIndex": 19,
+      "name": "WC09 respuestas de otra intención u orden se rechazan",
+      "status": "passed",
+      "durationMs": 4.61421299999995
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 1,
+      "name": "JSON relativo, CSRF fijo y cookie gestionada por navegador sin leer secretos",
+      "status": "passed",
+      "durationMs": 49.516182000000015
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 2,
+      "name": "rechaza URL no permitida https://remote.invalid/auth/login sin contactar transporte",
+      "status": "passed",
+      "durationMs": 3.754885999999999
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 3,
+      "name": "rechaza URL no permitida //remote.invalid sin contactar transporte",
+      "status": "passed",
+      "durationMs": 0.7065509999999904
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 4,
+      "name": "rechaza URL no permitida /../me sin contactar transporte",
+      "status": "passed",
+      "durationMs": 1.071173999999985
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 5,
+      "name": "rechaza URL no permitida /me?token=secret sin contactar transporte",
+      "status": "passed",
+      "durationMs": 1.049284
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 6,
+      "name": "rechaza URL no permitida /me#secret sin contactar transporte",
+      "status": "passed",
+      "durationMs": 1.1081990000000133
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 7,
+      "name": "rechaza URL no permitida /me%2Fsecret sin contactar transporte",
+      "status": "passed",
+      "durationMs": 0.6784129999999777
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 8,
+      "name": "GET sin cuerpo, 204 sin JSON y 202 no se interpreta como correo entregado",
+      "status": "passed",
+      "durationMs": 5.9406139999999255
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 9,
+      "name": "429 muestra solo espera válida; Retry-After 60, sin replay",
+      "status": "passed",
+      "durationMs": 3.668710000000033
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 10,
+      "name": "429 muestra solo espera válida; Retry-After 0, sin replay",
+      "status": "passed",
+      "durationMs": 1.9850369999999202
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 11,
+      "name": "429 muestra solo espera válida; Retry-After invalid, sin replay",
+      "status": "passed",
+      "durationMs": 1.6365069999999378
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 12,
+      "name": "429 muestra solo espera válida; Retry-After 999999999999999999999999, sin replay",
+      "status": "passed",
+      "durationMs": 4.5838489999999865
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 13,
+      "name": "fallo network es seguro, exige reintento manual y no afirma éxito",
+      "status": "passed",
+      "durationMs": 1.341886000000045
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 14,
+      "name": "fallo 503 es seguro, exige reintento manual y no afirma éxito",
+      "status": "passed",
+      "durationMs": 1.4813050000000203
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 15,
+      "name": "fallo malformed es seguro, exige reintento manual y no afirma éxito",
+      "status": "passed",
+      "durationMs": 1.8036570000000438
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 16,
+      "name": "fallo unknown-code es seguro, exige reintento manual y no afirma éxito",
+      "status": "passed",
+      "durationMs": 2.3718450000000075
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 17,
+      "name": "401 de credenciales se distingue de expiración y no invalida otra sesión",
+      "status": "passed",
+      "durationMs": 3.282092000000034
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 18,
+      "name": "401 AUTH_REQUIRED limpia datos y cancela respuestas tardías, sin repetir mutación",
+      "status": "passed",
+      "durationMs": 3.1988620000000765
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 19,
+      "name": "cancelación explícita no se convierte en éxito ni provoca replay",
+      "status": "passed",
+      "durationMs": 0.893872999999985
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 20,
+      "name": "errores de campo descartan valores y mensajes remotos, conservan nombres aprobados",
+      "status": "passed",
+      "durationMs": 1.1762379999998984
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 21,
+      "name": "campos con etiqueta/error asociados y mensajes escapados; reintento solo manual",
+      "status": "passed",
+      "durationMs": 12.28890100000001
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 22,
+      "name": "router usa historial sin datos sensibles, reemplaza al expirar y rechaza destinos externos",
+      "status": "passed",
+      "durationMs": 2.1293609999999035
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 23,
+      "name": "filtros administrativos se codifican en GET; no se aceptan secretos ni consultas arbitrarias",
+      "status": "passed",
+      "durationMs": 2.3142879999999195
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 24,
+      "name": "T027 query permitida por ruta /admin/academic/courses",
+      "status": "passed",
+      "durationMs": 1.7950949999999466
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 25,
+      "name": "T027 query permitida por ruta /admin/academic/courses/00000000-0000-4000-8000-000000000001/groups",
+      "status": "passed",
+      "durationMs": 1.1393019999999296
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 26,
+      "name": "T027 query permitida por ruta /admin/academic/teachers",
+      "status": "passed",
+      "durationMs": 0.8327179999999998
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 27,
+      "name": "T027 no amplía queries arbitrarias /admin/academic/courses/{\"token\":\"secreto\"}",
+      "status": "passed",
+      "durationMs": 0.9996280000000297
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 28,
+      "name": "T027 no amplía queries arbitrarias /admin/academic/teachers/{\"state\":\"DRAFT\"}",
+      "status": "passed",
+      "durationMs": 0.8139899999999898
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 29,
+      "name": "T027 no amplía queries arbitrarias /admin/academic/groups/00000000-0000-4000-8000-000000000001/{\"q\":\"no\"}",
+      "status": "passed",
+      "durationMs": 1.4389340000000175
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 30,
+      "name": "T027 no amplía queries arbitrarias /academic/courses/{\"state\":\"DRAFT\"}",
+      "status": "passed",
+      "durationMs": 1.5864049999998997
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 31,
+      "name": "T027 reconoce conflicto académico OFFERING_VERSION_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+      "status": "passed",
+      "durationMs": 4.810869000000025
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 32,
+      "name": "T027 reconoce conflicto académico OFFERING_STATE_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+      "status": "passed",
+      "durationMs": 2.840712000000053
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 33,
+      "name": "T027 reconoce conflicto académico TEACHER_NOT_ELIGIBLE solo en ruta administrativa, sin texto remoto ni retry",
+      "status": "passed",
+      "durationMs": 1.2715819999999667
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 34,
+      "name": "T027 reconoce conflicto académico IDEMPOTENCY_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+      "status": "passed",
+      "durationMs": 1.4893160000000307
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 35,
+      "name": "T027 referencias de conflicto solo códigos y UUID administrativos permitidos",
+      "status": "passed",
+      "durationMs": 1.3523669999999584
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 36,
+      "name": "T027 rechaza código de identidad 400/INVALID_ACTION_LINK ajeno al contrato académico",
+      "status": "passed",
+      "durationMs": 1.0958950000000414
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 37,
+      "name": "T027 rechaza código de identidad 401/INVALID_CREDENTIALS ajeno al contrato académico",
+      "status": "passed",
+      "durationMs": 0.9834859999999708
+    },
+    {
+      "file": "apps/web/src/app/http.test.ts",
+      "caseIndex": 38,
+      "name": "router reconoce detalle sin aceptar subrutas ni valores externos",
+      "status": "passed",
+      "durationMs": 0.7475840000000744
+    },
+    {
+      "file": "apps/web/src/app/runtime.test.tsx",
+      "caseIndex": 1,
+      "name": "React renderiza el componente mínimo en español",
+      "status": "passed",
+      "durationMs": 15.038832999999954
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 1,
+      "name": "acepta únicamente una identidad habilitada y la proyección permitida",
+      "status": "passed",
+      "durationMs": 5.330872999999997
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 2,
+      "name": "rechaza respuesta inválida: multirol",
+      "status": "passed",
+      "durationMs": 1.6943810000000212
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 3,
+      "name": "rechaza respuesta inválida: coerción",
+      "status": "passed",
+      "durationMs": 0.751041000000015
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 4,
+      "name": "rechaza respuesta inválida: secreto",
+      "status": "passed",
+      "durationMs": 1.1643469999999922
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 5,
+      "name": "rechaza respuesta inválida: estado",
+      "status": "passed",
+      "durationMs": 0.8629769999999723
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 6,
+      "name": "rechaza respuesta inválida: verificación",
+      "status": "passed",
+      "durationMs": 0.8236479999999915
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 7,
+      "name": "rechaza respuesta inválida: provisional",
+      "status": "passed",
+      "durationMs": 1.1960719999999867
+    },
+    {
+      "file": "apps/web/src/shared/user-view.test.ts",
+      "caseIndex": 8,
+      "name": "rechaza respuesta inválida: fecha",
+      "status": "passed",
+      "durationMs": 0.9128790000000038
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 1,
+      "name": "feature usa exclusivamente la capacidad ApiClient y propaga cancelación",
+      "status": "passed",
+      "durationMs": 8.158604000000025
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 2,
+      "name": "crear intención no escribe; payload permitido se copia antes del envío",
+      "status": "passed",
+      "durationMs": 7.746775000000014
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 3,
+      "name": "rechaza revisión no contractual 0 antes de escribir",
+      "status": "passed",
+      "durationMs": 1.1085600000000113
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 4,
+      "name": "rechaza revisión no contractual 01 antes de escribir",
+      "status": "passed",
+      "durationMs": 1.1934679999999958
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 5,
+      "name": "rechaza revisión no contractual 9223372036854775808 antes de escribir",
+      "status": "passed",
+      "durationMs": 1.3184679999999958
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 6,
+      "name": "error de autorización se propaga sin recrear ni reenviar la intención",
+      "status": "passed",
+      "durationMs": 1.7963419999999815
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 7,
+      "name": "prepareCourseWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+      "status": "passed",
+      "durationMs": 2.7391549999999825
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 8,
+      "name": "prepareCourseWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+      "status": "passed",
+      "durationMs": 4.282301000000018
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 9,
+      "name": "prepareCourseWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+      "status": "passed",
+      "durationMs": 2.2410790000000134
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 10,
+      "name": "prepareGroupWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+      "status": "passed",
+      "durationMs": 2.7212389999999687
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 11,
+      "name": "prepareGroupWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+      "status": "passed",
+      "durationMs": 3.65378400000003
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 12,
+      "name": "prepareGroupWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+      "status": "passed",
+      "durationMs": 1.2421429999999987
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 13,
+      "name": "prepareGroupCancellation: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+      "status": "passed",
+      "durationMs": 1.8152220000000057
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 14,
+      "name": "prepareGroupCancellation: intención corregida usa otro ID y no sobrescribe el comando anterior",
+      "status": "passed",
+      "durationMs": 1.540329999999983
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 15,
+      "name": "prepareGroupCancellation: 401 no programa envíos y otra instancia no recupera una intención anterior",
+      "status": "passed",
+      "durationMs": 0.7858530000000314
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 16,
+      "name": "cancelación no prepara motivo inválido 0",
+      "status": "passed",
+      "durationMs": 0.8412759999999935
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 17,
+      "name": "cancelación no prepara motivo inválido 1",
+      "status": "passed",
+      "durationMs": 0.4322010000000205
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 18,
+      "name": "cancelación no prepara motivo inválido 2",
+      "status": "passed",
+      "durationMs": 0.4814320000000407
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/api.test.ts",
+      "caseIndex": 19,
+      "name": "cancelación no prepara motivo inválido 3",
+      "status": "passed",
+      "durationMs": 4.95248399999997
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 1,
+      "name": "nombre vacío \"\"",
+      "status": "passed",
+      "durationMs": 2.3694770000000176
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 2,
+      "name": "nombre vacío \" \"",
+      "status": "passed",
+      "durationMs": 0.30250200000000405
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 3,
+      "name": "nombre vacío \"\\t\\n\"",
+      "status": "passed",
+      "durationMs": 0.17165799999997944
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 4,
+      "name": "nombre sin límite de negocio inventado 0",
+      "status": "passed",
+      "durationMs": 0.44290699999999106
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 5,
+      "name": "nombre sin límite de negocio inventado 1",
+      "status": "passed",
+      "durationMs": 0.29765300000002526
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 6,
+      "name": "nombre sin límite de negocio inventado 2",
+      "status": "passed",
+      "durationMs": 0.1650539999999978
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 7,
+      "name": "capacidad válida 1",
+      "status": "passed",
+      "durationMs": 0.8106260000000134
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 8,
+      "name": "capacidad válida 50",
+      "status": "passed",
+      "durationMs": 0.28264200000000983
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 9,
+      "name": "capacidad válida 25",
+      "status": "passed",
+      "durationMs": 0.8526560000000245
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 10,
+      "name": "capacidad inválida \"\"",
+      "status": "passed",
+      "durationMs": 0.820370999999966
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 11,
+      "name": "capacidad inválida \" \"",
+      "status": "passed",
+      "durationMs": 0.6722619999999893
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 12,
+      "name": "capacidad inválida \"0\"",
+      "status": "passed",
+      "durationMs": 0.23878400000000966
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 13,
+      "name": "capacidad inválida \"-1\"",
+      "status": "passed",
+      "durationMs": 0.22141799999997147
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 14,
+      "name": "capacidad inválida \"1.5\"",
+      "status": "passed",
+      "durationMs": 0.16043500000000677
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 15,
+      "name": "capacidad inválida \"51\"",
+      "status": "passed",
+      "durationMs": 0.17679799999996249
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 16,
+      "name": "capacidad inválida \"NaN\"",
+      "status": "passed",
+      "durationMs": 0.29699099999999135
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 17,
+      "name": "capacidad inválida \"Infinity\"",
+      "status": "passed",
+      "durationMs": 0.1578190000000177
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 18,
+      "name": "preparación incompleta admite cero franjas y fechas omitidas",
+      "status": "passed",
+      "durationMs": 1.4565489999999954
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 19,
+      "name": "extremos incluidos y franjas contiguas",
+      "status": "passed",
+      "durationMs": 1.1608699999999885
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 20,
+      "name": "fecha civil inválida 2026-02-30",
+      "status": "passed",
+      "durationMs": 0.8523559999999861
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 21,
+      "name": "fecha civil inválida 2025-02-29",
+      "status": "passed",
+      "durationMs": 0.34057999999998856
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 22,
+      "name": "fecha civil inválida 0000-01-01",
+      "status": "passed",
+      "durationMs": 0.23325199999999313
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 23,
+      "name": "fecha civil inválida 19/10/2026",
+      "status": "passed",
+      "durationMs": 0.1290220000000204
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 24,
+      "name": "periodo invertido",
+      "status": "passed",
+      "durationMs": 0.3164310000000228
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 25,
+      "name": "día sin ocurrencia y periodo de un lunes con ocurrencia",
+      "status": "passed",
+      "durationMs": 0.32845499999996264
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 26,
+      "name": "horario inválido duplicado",
+      "status": "passed",
+      "durationMs": 0.4085869999999545
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 27,
+      "name": "horario inválido solapamiento",
+      "status": "passed",
+      "durationMs": 0.16769900000002735
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 28,
+      "name": "horario inválido medianoche",
+      "status": "passed",
+      "durationMs": 0.24109899999996287
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 29,
+      "name": "horario inválido horas iguales",
+      "status": "passed",
+      "durationMs": 0.1372580000000312
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 30,
+      "name": "horario inválido 24:00",
+      "status": "passed",
+      "durationMs": 0.12502399999999625
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/validation.test.ts",
+      "caseIndex": 31,
+      "name": "horario inválido día inválido",
+      "status": "passed",
+      "durationMs": 0.11018400000000383
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 1,
+      "name": "consulta filtros sin interpolar correo en paths y acepta cuentas sin sesión habilitada",
+      "status": "passed",
+      "durationMs": 5.783935999999983
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 2,
+      "name": "rechaza proyecciones y metadatos no contractuales",
+      "status": "passed",
+      "durationMs": 2.607890999999995
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 3,
+      "name": "rechaza proyecciones y metadatos no contractuales",
+      "status": "passed",
+      "durationMs": 0.7315810000000056
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 4,
+      "name": "rechaza proyecciones y metadatos no contractuales",
+      "status": "passed",
+      "durationMs": 0.7031729999999925
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 5,
+      "name": "rechaza proyecciones y metadatos no contractuales",
+      "status": "passed",
+      "durationMs": 0.8394100000000435
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 6,
+      "name": "rechaza proyecciones y metadatos no contractuales",
+      "status": "passed",
+      "durationMs": 0.6561289999999644
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 7,
+      "name": "rechaza proyecciones y metadatos no contractuales",
+      "status": "passed",
+      "durationMs": 0.5347929999999792
+    },
+    {
+      "file": "apps/web/src/features/admin-users/api.test.ts",
+      "caseIndex": 8,
+      "name": "comandos envían solo campos permitidos y nunca reintentan un fallo",
+      "status": "passed",
+      "durationMs": 2.9814969999999903
+    },
+    {
+      "file": "apps/web/src/features/auth/action-link.test.ts",
+      "caseIndex": 1,
+      "name": "captura un secreto conforme al contrato una sola vez y retira fragmento, query e historial",
+      "status": "passed",
+      "durationMs": 7.006595000000004
+    },
+    {
+      "file": "apps/web/src/features/auth/action-link.test.ts",
+      "caseIndex": 2,
+      "name": "fragmento inválido ausente se retira sin conservarlo",
+      "status": "passed",
+      "durationMs": 1.1034840000000088
+    },
+    {
+      "file": "apps/web/src/features/auth/action-link.test.ts",
+      "caseIndex": 3,
+      "name": "fragmento inválido con prefijo obsoleto se retira sin conservarlo",
+      "status": "passed",
+      "durationMs": 1.1547479999999837
+    },
+    {
+      "file": "apps/web/src/features/auth/action-link.test.ts",
+      "caseIndex": 4,
+      "name": "fragmento inválido mal formado se retira sin conservarlo",
+      "status": "passed",
+      "durationMs": 1.5120210000000043
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 1,
+      "name": "WA01 ADMITTED conserva intención y seis cifras; no crea orden por interpretar 200",
+      "status": "passed",
+      "durationMs": 18.970760999999982
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 2,
+      "name": "WA02 preview solo envía groupIds; no crea intención ni autoridad de precio",
+      "status": "passed",
+      "durationMs": 3.2200900000000274
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 3,
+      "name": "WA03 detalle mantiene importes exactos fuera de Number y timestamps sin Date",
+      "status": "passed",
+      "durationMs": 2.7422529999999483
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 4,
+      "name": "WA04 consulta de intención usa GET y no reenvía confirmación",
+      "status": "passed",
+      "durationMs": 1.5268820000000005
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 5,
+      "name": "WA05 CONFIRMED es dato de solicitud, no error HTTP",
+      "status": "passed",
+      "durationMs": 1.2923170000000255
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 6,
+      "name": "WA05 REJECTED es dato de solicitud, no error HTTP",
+      "status": "passed",
+      "durationMs": 0.9515560000000391
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 7,
+      "name": "WA06 DTO solicitud inválido null",
+      "status": "passed",
+      "durationMs": 4.417434000000014
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 8,
+      "name": "WA06 DTO solicitud inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"intentionId\":\"00000000-0000-4000-8000-000000000001\",\"state\":\"RESERVED\",\"admittedAt\":\"2026-11-04T00:00:00.000001Z\"}",
+      "status": "passed",
+      "durationMs": 1.5942580000000248
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 9,
+      "name": "WA06 DTO solicitud inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"intentionId\":\"00000000-0000-4000-8000-000000000001\",\"state\":\"ADMITTED\",\"admittedAt\":\"2026-11-04T00:00:00.001Z\"}",
+      "status": "passed",
+      "durationMs": 1.8671999999999684
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 10,
+      "name": "WA06 DTO solicitud inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"intentionId\":\"00000000-0000-4000-8000-000000000001\",\"state\":\"ADMITTED\",\"admittedAt\":\"2026-11-04T00:00:00.000001Z\",\"actorSessionReference\":\"00000000-0000-4000-8000-000000000003\"}",
+      "status": "passed",
+      "durationMs": 1.9914620000000127
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 11,
+      "name": "WA07 cliente sin datos tras respuesta incierta no equivale a confirmación",
+      "status": "passed",
+      "durationMs": 1.2258620000000064
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 12,
+      "name": "WA08 AUTH_REQUIRED no provoca replay automático",
+      "status": "passed",
+      "durationMs": 1.4579720000000407
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "caseIndex": 13,
+      "name": "WA08 TEMPORARILY_UNAVAILABLE no provoca replay automático",
+      "status": "passed",
+      "durationMs": 0.7910119999999665
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 1,
+      "name": "RC01 preview y consentimiento preceden UUID; doble confirmación admite una sola intención",
+      "status": "passed",
+      "durationMs": 13.017951999999923
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 2,
+      "name": "RC02 un grupo por curso también entre páginas de catálogo",
+      "status": "passed",
+      "durationMs": 1.8842409999999745
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 3,
+      "name": "RC03 ausencia, cero explícito y grupo lleno no se confunden",
+      "status": "passed",
+      "durationMs": 1.4489039999999704
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 4,
+      "name": "RC04 cambiar selección invalida resumen y consentimiento",
+      "status": "passed",
+      "durationMs": 1.598971000000006
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 5,
+      "name": "RC05 preview tardío tras logout no repuebla datos",
+      "status": "passed",
+      "durationMs": 2.0152180000000044
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 6,
+      "name": "RC06 resultado incierto conserva payload para replay manual idéntico",
+      "status": "passed",
+      "durationMs": 3.0163599999999633
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 7,
+      "name": "RC07 rechazo permite preparar otra selección sin generar UUID antes de confirmar",
+      "status": "passed",
+      "durationMs": 1.8622369999999364
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 8,
+      "name": "RC08 nueva selección consulta vencimiento del servidor y conserva replay antiguo",
+      "status": "passed",
+      "durationMs": 1.7797890000000507
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 9,
+      "name": "RC09 sesión perdida limpia catálogo, selección y preview",
+      "status": "passed",
+      "durationMs": 2.526561000000015
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 10,
+      "name": "RC10 catálogo tardío no reemplaza una búsqueda posterior",
+      "status": "passed",
+      "durationMs": 1.8432679999999664
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 11,
+      "name": "RC11 validación de servidor no deja bloqueada una intención no admitida",
+      "status": "passed",
+      "durationMs": 1.987653000000023
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 12,
+      "name": "RC12 consultar una intención histórica no crea otra admisión",
+      "status": "passed",
+      "durationMs": 2.6674170000000004
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 13,
+      "name": "OC01 recuperación consulta listas/current sin mutaciones",
+      "status": "passed",
+      "durationMs": 4.304451999999969
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 14,
+      "name": "OC02 logout descarta detalle tardío y su referencia para refresh",
+      "status": "passed",
+      "durationMs": 1.2743189999999913
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 15,
+      "name": "OC03 resultado más reciente prevalece sobre detalle anterior",
+      "status": "passed",
+      "durationMs": 0.7537570000000642
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 16,
+      "name": "OC04 ADMITTED se consulta sin inventar orden; CONFIRMED carga referencia propia",
+      "status": "passed",
+      "durationMs": 0.9710599999999658
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 17,
+      "name": "OC05 error de lectura no conserva detalle financiero como estado actual",
+      "status": "passed",
+      "durationMs": 0.6513879999999972
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 18,
+      "name": "OC06 listas de solicitudes y órdenes paginan de forma independiente",
+      "status": "passed",
+      "durationMs": 0.818177999999989
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 19,
+      "name": "OC07 retry conserva las páginas solicitadas tras un error de lectura",
+      "status": "passed",
+      "durationMs": 3.4369919999999183
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 20,
+      "name": "OC08 sesión perdida borra también la referencia privada de recuperación",
+      "status": "passed",
+      "durationMs": 0.7512719999999717
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 21,
+      "name": "VC01 formulario anuncia validación y mantiene confirmación explícita deshabilitada",
+      "status": "passed",
+      "durationMs": 15.587364999999977
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 22,
+      "name": "VC02 no hay acción de pago y dinero enorme se presenta exactamente",
+      "status": "passed",
+      "durationMs": 5.381973000000016
+    },
+    {
+      "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+      "caseIndex": 23,
+      "name": "VC03 contenedores iniciales renderizan carga sin datos privados ni POST durante SSR",
+      "status": "passed",
+      "durationMs": 6.400730999999951
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 1,
+      "name": "WO01 orden confirmada muestra desglose original, moneda y referencia",
+      "status": "passed",
+      "durationMs": 25.37831399999999
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 2,
+      "name": "WO02 ADMITTED carece de orden, plazo y acción de pago",
+      "status": "passed",
+      "durationMs": 2.3650289999999927
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 3,
+      "name": "WO03 reloj local posterior al vencimiento no inventa expiración del servidor",
+      "status": "passed",
+      "durationMs": 4.981446000000005
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 4,
+      "name": "WO04 expiración confirmada permite nueva selección; no convierte intención vieja en nueva",
+      "status": "passed",
+      "durationMs": 3.7546879999999874
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 5,
+      "name": "WO05 oferta oculta muestra aviso genérico y deshabilita pago sin detalles privados",
+      "status": "passed",
+      "durationMs": 4.964273999999989
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 6,
+      "name": "WO06 incidente no se anuncia como matrícula o pago rechazado",
+      "status": "passed",
+      "durationMs": 3.7466359999999668
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 7,
+      "name": "WO07 LOADING anuncia estado y consulta recuperable",
+      "status": "passed",
+      "durationMs": 2.2430820000000153
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 8,
+      "name": "WO07 EMPTY anuncia estado y consulta recuperable",
+      "status": "passed",
+      "durationMs": 1.425325999999984
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 9,
+      "name": "WO07 ERROR anuncia estado y consulta recuperable",
+      "status": "passed",
+      "durationMs": 2.6182289999999853
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 10,
+      "name": "WO07 UNCERTAIN anuncia estado y consulta recuperable",
+      "status": "passed",
+      "durationMs": 1.8169079999999553
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "caseIndex": 11,
+      "name": "WO08 detalle no habilita todavía un botón financiero funcional en US1",
+      "status": "passed",
+      "durationMs": 2.8178649999999834
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 1,
+      "name": "WR01 ADMITTED muestra espera y carece de pago o matrícula confirmada",
+      "status": "passed",
+      "durationMs": 26.645370999999955
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 2,
+      "name": "WR02 doble clic comparte intención y un solo POST en vuelo",
+      "status": "passed",
+      "durationMs": 6.4020530000000235
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 3,
+      "name": "WR03 resultado incierto conserva intención para consulta manual, no renueva POST",
+      "status": "passed",
+      "durationMs": 8.16386
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 4,
+      "name": "WR04 recarga recupera solicitudes propias sin recrear intención",
+      "status": "passed",
+      "durationMs": 3.7073090000000093
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 5,
+      "name": "WR05 logout borra intención en memoria y descarta respuesta tardía",
+      "status": "passed",
+      "durationMs": 3.1632700000000114
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 6,
+      "name": "WR06 flujo nunca persiste intención, grupo o token en localStorage",
+      "status": "passed",
+      "durationMs": 2.952639999999974
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 7,
+      "name": "WR07 AUTH_REQUIRED seguida de recuperación no reenvía operación financiera",
+      "status": "passed",
+      "durationMs": 2.424393000000009
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 8,
+      "name": "WR08 reloj local adelantado no convierte ADMITTED en confirmación",
+      "status": "passed",
+      "durationMs": 14.520099000000073
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 9,
+      "name": "WR09 CONFIRMED requiere referencia persistida; REJECTED no muestra pago",
+      "status": "passed",
+      "durationMs": 2.6453639999999723
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 10,
+      "name": "WR10 estado accesible LOADING",
+      "status": "passed",
+      "durationMs": 3.7389930000000504
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 11,
+      "name": "WR10 estado accesible EMPTY",
+      "status": "passed",
+      "durationMs": 2.407558999999992
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 12,
+      "name": "WR10 estado accesible ERROR",
+      "status": "passed",
+      "durationMs": 2.5306699999999864
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 13,
+      "name": "WR10 estado accesible VALIDATION_ERROR",
+      "status": "passed",
+      "durationMs": 2.3543899999999667
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "caseIndex": 14,
+      "name": "WR11 oferta separa capacidad, retenciones, ocupación y evaluación; ausencia no es cero",
+      "status": "passed",
+      "durationMs": 5.129107999999974
+    }
+  ]
+}

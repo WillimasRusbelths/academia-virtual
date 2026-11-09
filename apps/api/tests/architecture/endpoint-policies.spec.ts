@@ -7,6 +7,30 @@ import { METHOD_METADATA,PATH_METADATA } from '@nestjs/common/constants.js';
 import { expect,test } from 'vitest';
 import { ACCESS_POLICY } from '../../src/modules/authorization/public/session.js';
 
+/** Contrato futuro, solo fixtures de la puerta de políticas. No son rutas existentes. */
+const enrollmentRoutePolicies: Record<string,string> = {
+  'GET /api/v1/admin/enrollment/courses/:courseId/price':'enrollment:price-manage',
+  'PUT /api/v1/admin/enrollment/courses/:courseId/price':'enrollment:price-manage',
+  'GET /api/v1/enrollment/offerings':'enrollment:reserve-own',
+  'POST /api/v1/enrollment/selection-preview':'enrollment:reserve-own',
+  'POST /api/v1/enrollment/reservation-requests':'enrollment:reserve-own',
+  'GET /api/v1/enrollment/reservation-requests':'enrollment:read-own',
+  'GET /api/v1/enrollment/reservation-requests/:intentionId':'enrollment:read-own',
+  'GET /api/v1/enrollment/orders':'enrollment:read-own',
+  'GET /api/v1/enrollment/orders/current':'enrollment:read-own',
+  'GET /api/v1/enrollment/orders/:orderId':'enrollment:read-own',
+  'POST /api/v1/enrollment/orders/:orderId/payment-attempts':'enrollment:pay-own',
+  'GET /api/v1/enrollment/enrollments':'enrollment:read-own',
+  'GET /api/v1/enrollment/enrollments/:enrollmentId':'enrollment:read-own',
+  'GET /api/v1/admin/enrollment/orders':'enrollment:read-all',
+  'GET /api/v1/admin/enrollment/orders/:orderId':'enrollment:read-all',
+  'GET /api/v1/admin/enrollment/incidents':'enrollment:read-all',
+  'GET /api/v1/admin/enrollment/incidents/:incidentId':'enrollment:read-all',
+  'POST /api/v1/admin/enrollment/incidents/:incidentId/follow-ups':'enrollment:incident-follow-up',
+};
+const enrollmentPermissions = ['enrollment:price-manage','enrollment:reserve-own','enrollment:pay-own',
+  'enrollment:read-own','enrollment:read-all','enrollment:incident-follow-up'];
+
 function controllers(directory:string):string[] {
   return readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?controllers(path.join(directory,entry.name))
     :entry.name.endsWith('.controller.js')?[path.join(directory,entry.name)]:[]);
@@ -15,8 +39,11 @@ function controllers(directory:string):string[] {
  * Al añadir rutas se actualiza el inventario y se vuelve a ejecutar esta puerta.
  */
 function validPolicy(route: string, policy: unknown): boolean {
-  if (typeof policy !== 'string' || !['public','profile:read','users:manage','academic:manage','academic:read-published','academic:read-own'].includes(policy)) return false;
+  if (typeof policy !== 'string' || !['public','profile:read','users:manage','academic:manage','academic:read-published','academic:read-own',...enrollmentPermissions].includes(policy)) return false;
   const path = route.slice(route.indexOf(' ') + 1);
+  if (/^\/api\/v1\/(?:admin\/)?enrollment(?:\/|$)/.test(path)) {
+    return Object.hasOwn(enrollmentRoutePolicies,route) && enrollmentRoutePolicies[route] === policy;
+  }
   if (/^\/api\/v1\/admin\/academic(?:\/|$)/.test(path)) return policy === 'academic:manage';
   if (/^\/api\/v1\/academic(?:\/|$)/.test(path)) return policy === 'academic:read-published';
   if (/^\/api\/v1\/teaching(?:\/|$)/.test(path)) return policy === 'academic:read-own';
@@ -44,6 +71,19 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
   }
   expect(routes).toEqual({
     'GET /health/live':'public','GET /health/ready':'public',
+    'GET /api/v1/admin/enrollment/courses/:courseId/price':'enrollment:price-manage',
+    'PUT /api/v1/admin/enrollment/courses/:courseId/price':'enrollment:price-manage',
+    'GET /api/v1/enrollment/offerings':'enrollment:reserve-own',
+    'POST /api/v1/enrollment/selection-preview':'enrollment:reserve-own',
+    'POST /api/v1/enrollment/reservation-requests':'enrollment:reserve-own',
+    'GET /api/v1/enrollment/reservation-requests':'enrollment:read-own',
+    'GET /api/v1/enrollment/reservation-requests/:intentionId':'enrollment:read-own',
+    'GET /api/v1/enrollment/orders':'enrollment:read-own',
+    'GET /api/v1/enrollment/orders/current':'enrollment:read-own',
+    'GET /api/v1/enrollment/orders/:orderId':'enrollment:read-own',
+    'POST /api/v1/enrollment/orders/:orderId/payment-attempts':'enrollment:pay-own',
+    'GET /api/v1/enrollment/enrollments':'enrollment:read-own',
+    'GET /api/v1/enrollment/enrollments/:enrollmentId':'enrollment:read-own',
     'POST /api/v1/auth/login':'public','POST /api/v1/auth/logout':'public',
     'POST /api/v1/auth/register':'public','POST /api/v1/auth/verification/request':'public',
     'POST /api/v1/auth/verification/confirm':'public','POST /api/v1/auth/password/initial':'public',
@@ -74,6 +114,18 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
     'GET /api/v1/teaching/groups':'academic:read-own',
     'GET /api/v1/teaching/groups/:id':'academic:read-own',
   });
+});
+
+test.each(Object.entries(enrollmentRoutePolicies))('T011 política prevista %s exige %s sin declararla implementada', (route,required) => {
+  expect(validPolicy(route,required)).toBe(true);
+  for (const policy of [undefined,'public','profile:read','users:manage','academic:manage','academic:read-published','academic:read-own',
+    'enrollment:system','enrollment:confirm-manually',...enrollmentPermissions].filter(p=>p!==required)) expect(validPolicy(route,policy)).toBe(false);
+});
+test('T011 familia financiera desconocida no hereda un permiso genérico', () => {
+  for (const route of ['POST /api/v1/admin/enrollment/manual-enrollment','POST /api/v1/enrollment/confirm',
+    'DELETE /api/v1/enrollment/orders/:orderId']) for (const permission of ['public','academic:manage',...enrollmentPermissions]) {
+    expect(validPolicy(route,permission)).toBe(false);
+  }
 });
 
 test.each([

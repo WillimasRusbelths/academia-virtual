@@ -14,6 +14,8 @@ import { schedulesOverlap, validateSchedule } from '../domain/schedule.js';
 import { assertCoursePublication, groupVisibility, validateGroupPublication } from '../domain/visibility.js';
 import type { VisibilityInput, PublicationGroup } from '../domain/visibility.js';
 import type { TeacherEligibility } from '../../users/public/teaching-directory.js';
+import { requiresGroupCommitmentCheck } from '../../enrollment/public/commitments.js';
+import type { GroupCommitmentChange, GroupCommitmentPolicy } from '../../enrollment/public/commitments.js';
 import { projectCourse, projectGroup } from './offering-queries.js';
 
 type Resource = AdminCourse | AdminGroup;
@@ -84,7 +86,8 @@ function checkResource(resource: Resource, kind: 'COURSE' | 'GROUP', targetId: U
  * Las operaciones concretas y las consultas de audiencia se incorporan en sus historias.
  */
 export function createAcademicCommandWriter(pool: Pool, authorization: AcademicTransactionDependencies,
-  options: { readonly audit?: AcademicAuditWriter } = {}): AcademicCommandWriter {
+  options: { readonly audit?: AcademicAuditWriter;
+    readonly commitments?: (client: PoolClient, lockedGroupIds: readonly string[], assertActive: () => void) => GroupCommitmentPolicy } = {}): AcademicCommandWriter {
   const transact = createAcademicTransaction(pool, authorization);
   const audit = options.audit ?? offeringAudit;
   return <T extends Resource>(work: AcademicCommandWork<T>): Promise<CommandResult<T>> => {
@@ -121,6 +124,27 @@ export function createAcademicCommandWriter(pool: Pool, authorization: AcademicT
           if (before.revision !== work.expectedRevision) throw new OfferingError({ code: 'OFFERING_VERSION_CONFLICT' });
         }
         await work.validate?.(client, locked);
+        const group = work.targetKind === 'GROUP' ? before as AdminGroup | undefined : undefined;
+        // Formularios 002 pueden reenviar campos guardados. Proteger diferencias
+        // efectivas, sin impedir un cambio de texto por capacidad/fechas idénticas.
+        const changedFields = Object.keys(work.payload).filter(key => group &&
+          (key === 'teacherUserId' ? group.teacher?.id ?? null : group[key as keyof AdminGroup]) !== work.payload[key]);
+        const change: GroupCommitmentChange | undefined = work.operation === 'GROUP_EDIT'
+          ? { operation: 'GROUP_EDIT', fields: changedFields as Extract<GroupCommitmentChange, { operation: 'GROUP_EDIT' }>['fields'] }
+          : work.operation === 'GROUP_CANCEL' || work.operation === 'GROUP_SCHEDULE' && group && canonical(group.schedule) !== canonical(work.payload.schedule)
+            ? { operation: work.operation } : undefined;
+        if (change && requiresGroupCommitmentCheck(change)) {
+          // Ningún escritor protegido puede continuar sin la capacidad ensamblada.
+          if (!options.commitments || !locked.groupIds.includes(work.targetId)) throw new TypeError('Guard de compromisos no disponible.');
+          const row = (await client.query<{ at: string }>('SELECT (extract(epoch FROM clock_timestamp())*1000000)::numeric(30,0)::text AS at')).rows[0];
+          if (!/^-?\d+$/.test(row.at)) throw new TypeError('Instante no finito.');
+          let active = true;
+          const assertActive = () => { if (!active) throw new TypeError('Guard fuera de su unidad de trabajo.'); };
+          try {
+            const result = await options.commitments(client, locked.groupIds, assertActive).check({ groupId: work.targetId, change, evaluatedAt: BigInt(row.at) });
+            if (!result.allowed) throw new OfferingError({ code: 'GROUP_COMMITMENTS_BLOCK_OPERATION' });
+          } finally { active = false; }
+        }
       },
       async apply(client) {
         const changed = await work.apply(client);
@@ -160,7 +184,7 @@ function keys(value: unknown, allowed: readonly string[], required = false): Rec
   return values;
 }
 const courseKeys = ['name', 'description'];
-const groupKeys = ['name', 'periodStart', 'periodEnd', 'timeZone', 'capacity', 'teacherUserId'];
+const groupKeys = ['name', 'description', 'periodStart', 'periodEnd', 'timeZone', 'capacity', 'teacherUserId'];
 /** Normalizar intención, no estado persistido. Las reglas con estado se vuelven
  * a ejecutar bajo locks; no se incorpora una captura previa al digest del comando.
  */
@@ -238,9 +262,9 @@ export function createPreparationStore(pool: Pool, authorization: AcademicTransa
           if (command.operation === 'GROUP_CREATE') {
             const next = createGroup(targetId, reference(command.courseId), payload);
             await eligible(client, next.teacherUserId);
-            await client.query(`INSERT INTO "AcademicGroup" (id,"courseId",name,"periodStart","periodEnd","timeZone",capacity,"teacherUserId")
-              VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`, [targetId, next.courseId, next.name, next.periodStart, next.periodEnd,
-              next.timeZone, next.capacity, next.teacherUserId]);
+            await client.query(`INSERT INTO "AcademicGroup" (id,"courseId",name,"periodStart","periodEnd","timeZone",capacity,"teacherUserId",description)
+              VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`, [targetId, next.courseId, next.name, next.periodStart, next.periodEnd,
+              next.timeZone, next.capacity, next.teacherUserId, next.description]);
             return { resource: await projectGroup(client, targetId), result: 'APPLIED', beforeState: null, beforeRevision: null };
           }
           const before = await projectGroup(client, targetId);
@@ -252,8 +276,8 @@ export function createPreparationStore(pool: Pool, authorization: AcademicTransa
             if (Object.hasOwn(payload, 'teacherUserId')) await eligible(client, next.teacherUserId);
             changed = groupKeys.some(key => current[key as keyof typeof current] !== next[key as keyof typeof next]);
             if (changed) await client.query(`UPDATE "AcademicGroup" SET name=$2,"periodStart"=$3,"periodEnd"=$4,
-              "timeZone"=$5,capacity=$6,"teacherUserId"=$7,revision=revision+1 WHERE id=$1`,
-            [targetId, next.name, next.periodStart, next.periodEnd, next.timeZone, next.capacity, next.teacherUserId]);
+              "timeZone"=$5,capacity=$6,"teacherUserId"=$7,description=$8,revision=revision+1 WHERE id=$1`,
+            [targetId, next.name, next.periodStart, next.periodEnd, next.timeZone, next.capacity, next.teacherUserId, next.description]);
           } else {
             const slots = payload.schedule as readonly Slot[];
             validateSchedule({ ...current, schedule: slots });
@@ -281,7 +305,7 @@ interface PublicationRow extends Omit<PublicationGroup, 'publishedTeacherEligibi
 /** Solo oferta y la interfaz SQL pública de usuarios; nunca columnas privadas de User.
  * Fechas/horas civiles, generación decimal sin pasar por number. Una consulta por lote.
  */
-const publicationProjection = `SELECT g.id,g."courseId",g.name,g.state,g.capacity,g."timeZone",g."teacherUserId",
+const publicationProjection = `SELECT g.id,g."courseId",g.name,g.description,g.state,g.capacity,g."timeZone",g."teacherUserId",
   to_char(g."periodStart",'YYYY-MM-DD') AS "periodStart",to_char(g."periodEnd",'YYYY-MM-DD') AS "periodEnd",
   g."publishedTeacherUserId",g."publishedTeacherEligibilityVersion"::text,c.state AS "courseState",
   d."userId" AS "directoryUserId",d.name AS "directoryName",d.eligible,d."eligibilityVersion"::text,
@@ -296,7 +320,7 @@ function publicationInput(row: PublicationRow): VisibilityInput {
     userId: row.directoryUserId, name: row.directoryName!, eligible: row.eligible === true, eligibilityVersion: BigInt(row.eligibilityVersion!),
   };
   return { courseState: row.courseState, teacher, group: {
-    id: row.id, courseId: row.courseId, name: row.name, state: row.state, capacity: row.capacity, periodStart: row.periodStart,
+    id: row.id, courseId: row.courseId, name: row.name, description: row.description, state: row.state, capacity: row.capacity, periodStart: row.periodStart,
     periodEnd: row.periodEnd, timeZone: row.timeZone, teacherUserId: row.teacherUserId, schedule: row.schedule,
     publishedTeacherUserId: row.publishedTeacherUserId,
     publishedTeacherEligibilityVersion: row.publishedTeacherEligibilityVersion === null ? null : BigInt(row.publishedTeacherEligibilityVersion),

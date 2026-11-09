@@ -18,7 +18,7 @@ const text = (value: unknown) => typeof value === 'string';
 const optional = (valid: (value: unknown) => boolean) => (value: unknown) => value === undefined || valid(value);
 const revision = (value: unknown) => typeof value === 'string' && /^[1-9]\d{0,18}$/.test(value) && BigInt(value) <= 9223372036854775807n;
 const courseAttributes = { name: optional(text), description: optional(value => value === null || text(value)) };
-const groupAttributes = { name: optional(text), periodStart: optional(text), periodEnd: optional(text), timeZone: optional(text),
+const groupAttributes = { name: optional(text), description: optional(value => value === null || text(value)), periodStart: optional(text), periodEnd: optional(text), timeZone: optional(text),
   capacity: optional(value => typeof value === 'number'), teacherUserId: optional(value => value === null || uuid(value)) };
 function id(value: string) {
   if (!uuid(value)) throw new OfferingError({ code: 'VALIDATION_ERROR' });

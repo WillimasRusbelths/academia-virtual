@@ -28,7 +28,7 @@ function run(error: unknown, input: object = request()) {
 }
 const statuses = { VALIDATION_ERROR: 400, AUTH_REQUIRED: 401, FORBIDDEN: 403, REQUEST_NOT_ALLOWED: 403,
   NOT_FOUND: 404, OFFERING_VERSION_CONFLICT: 409, OFFERING_STATE_CONFLICT: 409, TEACHER_NOT_ELIGIBLE: 409,
-  TEACHER_SCHEDULE_CONFLICT: 409, COURSE_PUBLICATION_BLOCKED: 409, IDEMPOTENCY_CONFLICT: 409, TEMPORARILY_UNAVAILABLE: 503 } as const;
+  TEACHER_SCHEDULE_CONFLICT: 409, COURSE_PUBLICATION_BLOCKED: 409, GROUP_COMMITMENTS_BLOCK_OPERATION: 409, IDEMPOTENCY_CONFLICT: 409, TEMPORARILY_UNAVAILABLE: 503 } as const;
 test.each(Object.entries(statuses))('S01 catálogo académico cerrado: %s → %s, mensaje seguro y requestId', (code, status) => {
   const error = new OfferingError({ code } as OfferingFailure); error.message = marker;
   const input = request(); const result = run(error, input);

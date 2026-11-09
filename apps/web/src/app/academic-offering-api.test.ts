@@ -19,7 +19,7 @@ const id = '00000000-0000-4000-8000-000000000001';
 const other = '00000000-0000-4000-8000-000000000002';
 const course = { id, name: 'Curso ficticio', description: null, state: 'DRAFT', revision: '9007199254740993',
   studentVisible: false, createdAt: '2026-10-21T00:00:00.000Z', updatedAt: '2026-10-21T00:00:00.000Z' };
-const group = { id: other, courseId: id, name: 'Turno', state: 'DRAFT', revision: '1', periodStart: null, periodEnd: null,
+const group = { id: other, courseId: id, name: 'Turno', description: null, state: 'DRAFT', revision: '1', periodStart: null, periodEnd: null,
   timeZone: 'America/Lima', capacity: null, occupancy: null, availability: null, capacityStatus: 'NOT_CALCULATED', schedule: [],
   teacher: null, teacherReviewRequired: false, studentVisible: false, cancellationReason: null, cancelledAt: null,
   lastPublishedTeacherId: null, createdAt: course.createdAt, updatedAt: course.updatedAt };
@@ -30,6 +30,24 @@ function api(transport: typeof fetch, auth = vi.fn()) {
   return factory!(createApiClient(auth, transport));
 }
 afterEach(() => vi.unstubAllGlobals());
+
+test.each([null,'Descripción normalizada'])('W12 grupo administrativo conserva descripción %s y NOT_CALCULATED',async description=>{
+  const client=api(vi.fn<typeof fetch>().mockResolvedValue(response({...group,description})));
+  await expect(client.group(other)).resolves.toMatchObject({description,occupancy:null,availability:null,capacityStatus:'NOT_CALCULATED'});
+});
+test.each([undefined,42,' sin normalizar ',''])('W13 lector cerrado rechaza descripción inválida %s',async description=>{
+  const client=api(vi.fn<typeof fetch>().mockResolvedValue(response({...group,description})));
+  await expect(client.group(other)).rejects.toMatchObject({code:'TEMPORARILY_UNAVAILABLE'});
+});
+test('W14 descripción editable usa la ruta existente y conserva intención',async()=>{
+  const transport=vi.fn<typeof fetch>().mockImplementation(async(_url,options)=>response({resource:{...group,description:'Texto'},command:{id:JSON.parse(String(options?.body)).commandId,replayed:false,appliedRevision:'2',result:'APPLIED'}}));
+  const intent=api(transport).prepareGroupEdit(other,'1',{description:'Texto'});await intent.send();
+  expect(JSON.parse(String(transport.mock.calls[0][1]?.body))).toEqual({commandId:intent.commandId,expectedRevision:'1',description:'Texto'});
+});
+test.each(['', '/cancel','/schedule'])('W15 error de compromisos llega seguro a administración %s',async suffix=>{
+  const client=createApiClient(vi.fn(),vi.fn<typeof fetch>().mockResolvedValue(new Response(JSON.stringify({error:{code:'GROUP_COMMITMENTS_BLOCK_OPERATION',message:'privado',requestId:id,studentId:id,conflictingGroupIds:[id]}}),{status:409})));
+  await expect(client.request(`/admin/academic/groups/${other}${suffix}`,{method:'POST',body:{}})).rejects.toMatchObject({code:'GROUP_COMMITMENTS_BLOCK_OPERATION',status:409,conflictingGroupIds:[]});
+});
 
 test.each(['courses','groups','teachers'] as const)('W01 %s codifica solo filtros de su ruta', async kind => {
   const transport = vi.fn<typeof fetch>().mockImplementation(async () => response({ items: [], page: 2, pageSize: 10, total: 0 }));

@@ -8,7 +8,7 @@ export interface CourseQuery extends NameQuery { readonly state?: CourseState }
 export interface GroupQuery extends NameQuery { readonly state?: GroupState }
 interface CourseAttributes { readonly name: string; readonly description: string | null }
 interface GroupAttributes {
-  readonly name: string; readonly periodStart: CivilDate; readonly periodEnd: CivilDate;
+  readonly name: string; readonly description: string | null; readonly periodStart: CivilDate; readonly periodEnd: CivilDate;
   readonly timeZone: AcademicTimeZone; readonly capacity: number; readonly teacherUserId: UUID | null;
 }
 type AtLeastOne<T> = { [K in keyof T]: Pick<T, K> & Partial<Omit<T, K>> }[keyof T];

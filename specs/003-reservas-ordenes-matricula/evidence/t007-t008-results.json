@@ -1,0 +1,1244 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Lima",
+  "tasks": [
+    "T007",
+    "T008"
+  ],
+  "status": "MODELO_MIGRACION_Y_REGRESION_VERIFICADOS_EN_AISLAMIENTO",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "initialLocalFiles": 723,
+  "previousWork": "T001–T006 locales preservadas, sin commit nuevo.",
+  "checklist": "12/16 conservado; continuación autorizada por el responsable.",
+  "migration": {
+    "path": "apps/api/prisma/migrations/0006_enrollment/migration.sql",
+    "sha256": "edbfd6e606fc132443a5ee687623d1c99a2a94393de7d6fadb05efe3a2477a3f",
+    "generatedBase": {
+      "privatePath": ".cache/reservas-t007-t008/generated.sql",
+      "sha256": "01228e0d19e415607ae16e09fa6794baadab02ad26a41d00d127a9431b4b9c40",
+      "lines": 387
+    },
+    "tables": 15,
+    "enums": 7,
+    "checks": 15,
+    "triggers": 15,
+    "insertedTables": [
+      "AdmissionSequence",
+      "DispatchState"
+    ],
+    "financialBackfill": false,
+    "history0001To0005Unchanged": true,
+    "groupDescriptionNullable": true,
+    "exactEvidence": "DECIMAL sin precision/escala fija + amountScale; sin flotantes ni moneda PEN ficticia para INCIDENT.",
+    "generatedOffline": true,
+    "networkDuringDiff": "none; metadata datasource ficticia al puerto 1",
+    "appliedDestinations": "Solo schemas t_ nuevos y propios en academia_v00_test, nunca public/manual."
+  },
+  "validation": {
+    "schema": "Prisma validate PASS",
+    "clientGeneration": "PASS offline host y build de imagen",
+    "lint": "PASS ambos workspaces",
+    "build": "PASS ambos workspaces",
+    "selectiveTypes": "PASS",
+    "migrationSuite": {
+      "total": 122,
+      "passed": 122,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 142.1702939453125
+    },
+    "regression": {
+      "total": 39,
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 52.59771899414063
+    },
+    "originalT006CasesPassed": 102,
+    "addedMigrationCases": 20,
+    "finalUniqueCases": 161,
+    "finalExecutions": 161,
+    "finalFailed": 0,
+    "finalSkipped": 0,
+    "initialTrials": {
+      "smokeExecuted": 2,
+      "smokeNotSelected": 102,
+      "migrationPassed": 104,
+      "regressionPassed": 36,
+      "regressionFailed": 3,
+      "reason": "Expectativas heredadas de cinco migraciones, actualizadas a seis/28 tablas y al inventario propio de oferta."
+    },
+    "auxiliaryExecutions": 145,
+    "totalExecutionsIncludingAuxiliary": 306
+  },
+  "prismaUpgrade": {
+    "baseline": "0005 con datos ficticios previos y cinco SQL originales",
+    "adoption": "migrate resolve solo de esas cinco migraciones en schema recién creado",
+    "deploy": "apps/api/scripts/database.mjs deploy",
+    "sixChecksumsVerified": true,
+    "legacyFingerprintPreserved": true,
+    "runtimeCreateTableDenied": "42501"
+  },
+  "freshInstall": {
+    "migrations": 6,
+    "clientReadsCoordinators": true,
+    "coursePrices": 0,
+    "enrollments": 0
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "containers": [
+    {
+      "service": "db",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "mounts": [
+        {
+          "type": "bind",
+          "name": null,
+          "target": "/docker-entrypoint-initdb.d/01-academia.sql",
+          "readOnly": true
+        },
+        {
+          "type": "volume",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data",
+          "target": "/var/lib/postgresql/data",
+          "readOnly": false
+        }
+      ]
+    },
+    {
+      "service": "mailpit",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d",
+      "mounts": []
+    }
+  ],
+  "postgresql": "16.14",
+  "tzdata": "2026b-0+deb12u1",
+  "images": {
+    "initialApi": "sha256:4faa7264733fe1b121575da18a6e5adb49ccded6306d8e00875e882721be6262",
+    "finalApi": "sha256:7b583c736871275d9e7a2e40a6355e0f98556d9104ab86cd3c5351a1df056c8a"
+  },
+  "cleanup": {
+    "schemasBefore": 0,
+    "schemasAfter": 0,
+    "db": "stopped",
+    "mailpit": "stopped",
+    "volumePreserved": true,
+    "volumeCreatedAt": "2026-10-19T10:45:57Z"
+  },
+  "preservation": {
+    "protectedFiles": 74,
+    "historicalMigrations": 5,
+    "totalMigrations": 6,
+    "manualEnvironmentOperated": false,
+    "manualAccountsUsed": false,
+    "envUnchanged": true,
+    "lockfileUnchanged": true,
+    "clarifications": 15
+  },
+  "limitations": [
+    "T005 permanece en rojo hasta T009; no se declara CI general verde",
+    "Sin protocolo de reserva/pago/matricula ni puertos nuevos",
+    "CHECK no garantiza agregados entre filas ni D06",
+    "Sin sandbox real, cobros, capacidad o aceptacion humana"
+  ],
+  "commands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action config",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action up",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action sync",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action build",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action smoke",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action pg",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action regression",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action checks",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action inspect",
+      "finalExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t007-t008/run.ps1 -Action stop",
+      "finalExit": 0
+    }
+  ],
+  "rawReports": [
+    {
+      "path": ".cache/reservas-t007-t008/reports/migration.json",
+      "sha256": "8d34ae604abf9bec5a369c52104c9e6f836d8f3122f2a2ca309e2f034e6c61e7",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t007-t008/reports/regression.json",
+      "sha256": "21e4d1909a9ed6ff38e6db7526a8e949d3d08630659864fa66bb06f6a5a9b7aa",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t007-t008/reports/migration-initial.json",
+      "sha256": "73bb1492ba5b6fedcd3459a0f6dc84c68bfa3995d99eaa50d2bfb08500e77eb4",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t007-t008/reports/regression-initial.json",
+      "sha256": "5bb3ed4e1dce4e5c60688a0d24f46b3ace719fc58ff4463d8affaec7cb35045c",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t007-t008/reports/smoke-initial.json",
+      "sha256": "88340528a43ea3b9fdc148c16cd37f31577c62f362d44ab438dd1c03164ff8b9",
+      "private": true
+    }
+  ],
+  "sourceManifest": {
+    "path": ".cache/reservas-t007-t008/source-manifest.json",
+    "count": 717,
+    "sha256": "6906f104a7adbc46f1ba9e494a1623c4707f8c5a54af9c078e2e258d4652d38c",
+    "private": true
+  },
+  "sourceHashes": [
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "sha256": "459c61fd95d4633dbff355c176a9fd09f8ea5ab9470e1db639f1b457591f1ae3"
+    },
+    {
+      "path": "apps/api/prisma/migrations/0006_enrollment/migration.sql",
+      "sha256": "edbfd6e606fc132443a5ee687623d1c99a2a94393de7d6fadb05efe3a2477a3f"
+    },
+    {
+      "path": "apps/api/tests/support/enrollment-migration.ts",
+      "sha256": "21e4c72b57e91d71c19e6793926c1108ea18aa96d4f8fd286870c6df7b9d4fb3"
+    },
+    {
+      "path": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "sha256": "d749ae0c2012b19949005783449ea1184828f20437047d77324d580cbe0c55c0"
+    },
+    {
+      "path": "apps/api/tests/support/academic-migration.ts",
+      "sha256": "417148c0db6eb900cac8c3898a862544a802ee6bc22c168d4c27c8347b428dd8"
+    },
+    {
+      "path": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "sha256": "8623b6b30dc7d82b0871b6c0646494836536a59dc78eb62835e2ce4ec7a39a27"
+    },
+    {
+      "path": "apps/api/tests/integration/migrations.spec.ts",
+      "sha256": "476ac35d99b69efddd4e429e49453c736be852c70c5dbfe50804a235bd943c4e"
+    }
+  ],
+  "migrationCases": [
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM00 control snapshot 0005, datos anteriores y runtime sin DDL",
+      "status": "passed",
+      "durationMs": 1132.0042749999998
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM01 control motor: microsegundos, epoch negativo y límite civil año 10000",
+      "status": "passed",
+      "durationMs": 947.829131
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM02 upgrade conserva filas/cuentas/credenciales/oferta/auditoría y no crea finanzas ficticias",
+      "status": "passed",
+      "durationMs": 1962.247437
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid CoursePrice: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1676.2852679999996
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid AdmissionSequence: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1688.8505479999994
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid DispatchState: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 2407.6799680000004
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid ReservationRequest: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1245.1077269999987
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentOrder: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1452.0455469999997
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentOrderItem: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1293.7667029999993
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid SeatReservation: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1242.031832999999
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid PaymentAttempt: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1144.6531189999987
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid ProviderReceipt: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1089.6058359999988
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid VerifiedPayment: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1704.993574
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid Enrollment: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1608.2212839999993
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid PaymentIncident: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1506.1774899999982
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid IncidentFollowUp: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1336.1559360000028
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentCommand: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1172.038712999998
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentAuditEvent: fila válida, PK y DML real",
+      "status": "passed",
+      "durationMs": 1259.0916120000002
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK CoursePrice.courseId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1049.1164370000006
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK CoursePrice.changedBy: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1415.691232000001
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK ReservationRequest.studentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1733.887995000001
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrder.studentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1349.6601820000033
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrder.requestId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1371.4698470000003
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrderItem.orderId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1170.0836740000013
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrderItem.courseId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1077.1686679999984
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrderItem.groupId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1185.842036999995
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK SeatReservation.orderItemId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1198.5367709999991
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentAttempt.orderId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1877.4119560000036
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentAttempt.studentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1170.3412430000026
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK ProviderReceipt.terminalPaymentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1128.5725450000027
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK VerifiedPayment.orderId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1257.6695899999977
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.orderItemId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1155.4748869999967
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.studentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1268.0613630000007
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.courseId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1066.633031999998
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.groupId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1169.3924729999999
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.paymentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1853.2884450000056
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentIncident.verifiedPaymentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1119.7572819999987
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentIncident.orderId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1392.1671579999966
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK IncidentFollowUp.incidentId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 2028.3878229999973
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK IncidentFollowUp.adminUserId: referencia inexistente",
+      "status": "passed",
+      "durationMs": 1664.001403000002
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.amountMinor=\"-1\"",
+      "status": "passed",
+      "durationMs": 943.199830000005
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.amountMinor=null",
+      "status": "passed",
+      "durationMs": 1068.2329309999986
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.currency=\"USD\"",
+      "status": "passed",
+      "durationMs": 1685.6928310000003
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.revision=\"0\"",
+      "status": "passed",
+      "durationMs": 965.7110560000001
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.admissionSequence=\"0\"",
+      "status": "passed",
+      "durationMs": 1313.2341480000032
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.authVersion=\"-1\"",
+      "status": "passed",
+      "durationMs": 1241.9145549999957
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.groupIds=[]",
+      "status": "passed",
+      "durationMs": 1080.283537000003
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.state=\"UNKNOWN\"",
+      "status": "passed",
+      "durationMs": 905.0648169999913
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.currency=\"USD\"",
+      "status": "passed",
+      "durationMs": 1026.732210000002
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.totalMinor=\"-1\"",
+      "status": "passed",
+      "durationMs": 1040.3449469999905
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.revision=\"0\"",
+      "status": "passed",
+      "durationMs": 1269.1769169999898
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.state=\"CANCELLED\"",
+      "status": "passed",
+      "durationMs": 1423.039426999996
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.expiresAt=\"2026-11-02T00:00:00.123455Z\"",
+      "status": "passed",
+      "durationMs": 931.5619149999984
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.priceMinor=\"-1\"",
+      "status": "passed",
+      "durationMs": 1041.2980749999988
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.periodEnd=\"2030-01-01\"",
+      "status": "passed",
+      "durationMs": 977.08410800001
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.timeZone=\"UTC\"",
+      "status": "passed",
+      "durationMs": 791.2576059999992
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.scheduleSnapshot=[]",
+      "status": "passed",
+      "durationMs": 1089.4004870000063
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.enrollmentValidUntil=\"2030-01-01T05:00:00.000000Z\"",
+      "status": "passed",
+      "durationMs": 1121.8978070000012
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK SeatReservation.state=\"CANCELLED\"",
+      "status": "passed",
+      "durationMs": 724.5327649999963
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK PaymentAttempt.state=\"UNKNOWN\"",
+      "status": "passed",
+      "durationMs": 958.8779530000029
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ProviderReceipt.state=\"PENDING_RECONCILIATION\"",
+      "status": "passed",
+      "durationMs": 1024.7026640000113
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ProviderReceipt.state=\"RECEIVED\"",
+      "status": "passed",
+      "durationMs": 1031.6085840000014
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK VerifiedPayment.reconciliationState=\"PENDING_RECONCILIATION\"",
+      "status": "passed",
+      "durationMs": 621.6277620000037
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK VerifiedPayment.orderId=null",
+      "status": "passed",
+      "durationMs": 811.6748930000031
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK VerifiedPayment.currency=\"USD\"",
+      "status": "passed",
+      "durationMs": 766.3542940000043
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK Enrollment.originalPeriodEnd=\"2030-01-01\"",
+      "status": "passed",
+      "durationMs": 673.313725999993
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK Enrollment.timeZone=\"UTC\"",
+      "status": "passed",
+      "durationMs": 627.4981259999913
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK Enrollment.validUntil=\"2026-10-31T00:00:00.000000Z\"",
+      "status": "passed",
+      "durationMs": 672.2050569999992
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK IncidentFollowUp.content=null",
+      "status": "passed",
+      "durationMs": 623.6874569999927
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentCommand.resultingRevision=\"0\"",
+      "status": "passed",
+      "durationMs": 702.5257849999907
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentCommand.operation=null",
+      "status": "passed",
+      "durationMs": 724.8484659999958
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentCommand.actorKind=\"VISITOR\"",
+      "status": "passed",
+      "durationMs": 691.7030459999951
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentAuditEvent.afterRevision=\"0\"",
+      "status": "passed",
+      "durationMs": 627.6274019999983
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentAuditEvent.operation=null",
+      "status": "passed",
+      "durationMs": 628.92410199999
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE ReservationRequest: studentId/intentionId",
+      "status": "passed",
+      "durationMs": 1523.9238180000102
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE ReservationRequest: admissionSequence",
+      "status": "passed",
+      "durationMs": 772.1792409999907
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE EnrollmentOrder: requestId",
+      "status": "passed",
+      "durationMs": 696.0960270000069
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE EnrollmentOrderItem: orderId/courseId",
+      "status": "passed",
+      "durationMs": 752.1495659999928
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE SeatReservation: orderItemId",
+      "status": "passed",
+      "durationMs": 649.4284670000052
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE PaymentAttempt: studentId/initiationId",
+      "status": "passed",
+      "durationMs": 639.4011079999909
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE VerifiedPayment: providerScope/providerPaymentId",
+      "status": "passed",
+      "durationMs": 697.9262230000022
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE Enrollment: orderItemId",
+      "status": "passed",
+      "durationMs": 628.6740520000021
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE PaymentIncident: verifiedPaymentId/reason",
+      "status": "passed",
+      "durationMs": 618.7227080000011
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE EnrollmentCommand: actorKind/actorReference/commandId con otra operación",
+      "status": "passed",
+      "durationMs": 678.13115500001
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-money cero explícito y PEN exacto más allá de 2^53 sin backfill",
+      "status": "passed",
+      "durationMs": 655.5729859999992
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-economic scope distinto y dinero incompatible conservado como INCIDENT",
+      "status": "passed",
+      "durationMs": 634.644586999988
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-receipt no introduce FK provisional a orden ni recibo como pago",
+      "status": "passed",
+      "durationMs": 666.7815719999926
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append IncidentFollowUp: UPDATE rechazado",
+      "status": "passed",
+      "durationMs": 759.6911779999937
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append IncidentFollowUp: DELETE rechazado",
+      "status": "passed",
+      "durationMs": 1103.8463750000083
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append EnrollmentAuditEvent: UPDATE rechazado",
+      "status": "passed",
+      "durationMs": 652.5470599999971
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append EnrollmentAuditEvent: DELETE rechazado",
+      "status": "passed",
+      "durationMs": 730.1179779999948
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-active una sola orden RESERVED por alumno y estados históricos no bloquean",
+      "status": "passed",
+      "durationMs": 902.5248129999964
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-attempt FK compuesta no acepta otra cuenta existente de la orden",
+      "status": "passed",
+      "durationMs": 602.6647100000118
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-coordinator AdmissionSequence: id fijo",
+      "status": "passed",
+      "durationMs": 656.4900369999959
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-coordinator DispatchState: id fijo",
+      "status": "passed",
+      "durationMs": 753.068757999994
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-counter secuencia positiva",
+      "status": "passed",
+      "durationMs": 758.059150000001
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-effect ORDER_EXPIRED/orderId único y SYSTEM sin usuario financiero ficticio",
+      "status": "passed",
+      "durationMs": 756.6617209999968
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-unresolved una sola iniciación no resuelta por orden",
+      "status": "passed",
+      "durationMs": 731.4478169999929
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-immutable EnrollmentOrder: snapshot original conservado",
+      "status": "passed",
+      "durationMs": 641.4461259999953
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-immutable EnrollmentOrderItem: snapshot original conservado",
+      "status": "passed",
+      "durationMs": 655.2671439999976
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-immutable Enrollment: snapshot original conservado",
+      "status": "passed",
+      "durationMs": 653.5073330000014
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-RESTRICT referencias a identidad/oferta sin cascadas",
+      "status": "passed",
+      "durationMs": 1309.8942010000028
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-deploy upgrade 0005 con Prisma, checksums reales y datos anteriores preservados",
+      "status": "passed",
+      "durationMs": 15400.96445
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-deploy instalación nueva con seis migraciones y cliente generado utilizable",
+      "status": "passed",
+      "durationMs": 3075.916861000005
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-durable AdmissionSequence: no borrar coordinadora",
+      "status": "passed",
+      "durationMs": 976.4685880000034
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-durable DispatchState: no borrar coordinadora",
+      "status": "passed",
+      "durationMs": 1024.5137850000174
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-durable contador puede avanzar pero no retroceder",
+      "status": "passed",
+      "durationMs": 615.2818370000168
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: null",
+      "status": "passed",
+      "durationMs": 646.9145410000056
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: no array",
+      "status": "passed",
+      "durationMs": 746.2897729999968
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: vacío",
+      "status": "passed",
+      "durationMs": 594.5181659999944
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: día fuera de rango",
+      "status": "passed",
+      "durationMs": 614.2179449999821
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: campo nulo",
+      "status": "passed",
+      "durationMs": 622.9785359999805
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: horario invertido",
+      "status": "passed",
+      "durationMs": 593.6584490000096
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: campos sobrantes",
+      "status": "passed",
+      "durationMs": 642.5910009999934
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot forma inválida: solapamiento",
+      "status": "passed",
+      "durationMs": 657.7053629999864
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-snapshot franjas contiguas válidas sin solapamiento",
+      "status": "passed",
+      "durationMs": 640.5510530000029
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-evidence unidades incompatibles grandes no se redondean ni se fuerzan a PEN",
+      "status": "passed",
+      "durationMs": 659.1591080000217
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-groups conjunto inválido: duplicado",
+      "status": "passed",
+      "durationMs": 632.9312269999937
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-groups conjunto inválido: nulo",
+      "status": "passed",
+      "durationMs": 611.6525320000073
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-groups conjunto inválido: dos dimensiones",
+      "status": "passed",
+      "durationMs": 1177.9709529999818
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-groups conjunto inválido: desordenado",
+      "status": "passed",
+      "durationMs": 635.7325609999825
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-metadata descripción nullable conserva retiro previo y curso inmutable",
+      "status": "passed",
+      "durationMs": 640.2939309999929
+    }
+  ],
+  "regressionCases": [
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M01 control: propietario migra en esquema t_ y runtime conserva DML sin DDL",
+      "status": "passed",
+      "durationMs": 81.8520580000004
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M02 deploy vacío incorpora una migración posterior a las cuatro de identidad",
+      "status": "passed",
+      "durationMs": 9.523894999999357
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M03 deploy vacío crea cinco tablas académicas vacías y generación bigint default 0",
+      "status": "passed",
+      "durationMs": 59.38205400000061
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M04 directorio SQL mínimo funciona con runtime en esquema distinto de public",
+      "status": "passed",
+      "durationMs": 123.22487100000035
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M05 actualización incremental conserva cuentas, hashes, sesiones, tokens, auditoría, correo y bootstrap",
+      "status": "passed",
+      "durationMs": 914.1876620000003
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M06 restricción de grupo: capacidad cero",
+      "status": "passed",
+      "durationMs": 27.50543000000016
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M06 restricción de grupo: capacidad negativa",
+      "status": "passed",
+      "durationMs": 61.297050999999556
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M06 restricción de grupo: capacidad 51",
+      "status": "passed",
+      "durationMs": 56.14912900000036
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M06 restricción de grupo: zona ajena",
+      "status": "passed",
+      "durationMs": 57.175858999999946
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M06 restricción de grupo: revision cero",
+      "status": "passed",
+      "durationMs": 48.92297899999994
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M06 restricción de grupo: nombre vacío",
+      "status": "passed",
+      "durationMs": 54.53863999999976
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M07 capacidad admite 1 y 50, borrador incompleto y nombres iguales sin unicidad inventada",
+      "status": "passed",
+      "durationMs": 80.04350400000021
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M08 periodo invertido y snapshot incompleto son rechazados sin cambio parcial",
+      "status": "passed",
+      "durationMs": 75.52032599999984
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M09 FK RESTRICT y pertenencia inmutable no permiten trasladar o borrar padres",
+      "status": "passed",
+      "durationMs": 103.82578099999955
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M10 cancelar exige motivo/fecha y Cancelado es terminal incluso ante escritura SQL runtime",
+      "status": "passed",
+      "durationMs": 138.77706600000056
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M11 franja rechazada día=0 inicio=60 fin=120",
+      "status": "passed",
+      "durationMs": 45.53117800000018
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M11 franja rechazada día=8 inicio=60 fin=120",
+      "status": "passed",
+      "durationMs": 55.17004700000052
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M11 franja rechazada día=1 inicio=-1 fin=60",
+      "status": "passed",
+      "durationMs": 58.396945000000414
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M11 franja rechazada día=1 inicio=60 fin=1440",
+      "status": "passed",
+      "durationMs": 61.13065499999993
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M11 franja rechazada día=1 inicio=60 fin=60",
+      "status": "passed",
+      "durationMs": 55.77848300000005
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M11 franja rechazada día=1 inicio=120 fin=60",
+      "status": "passed",
+      "durationMs": 53.784450000000106
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M12 franjas contiguas válidas y duplicado exacto rechazado por unicidad",
+      "status": "passed",
+      "durationMs": 81.88680000000022
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M13 ledger exige unicidad actor/comando y huella SHA-256 de 32 bytes",
+      "status": "passed",
+      "durationMs": 75.97391200000129
+    },
+    {
+      "file": "apps/api/tests/integration/academic-offering-migration.spec.ts",
+      "name": "M14 generación no admite negativos en una nueva fila y Published exige datos completos",
+      "status": "passed",
+      "durationMs": 117.099909999999
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-harness.spec.ts",
+      "name": "el soporte de matrícula rechaza modo manual antes de abrir conexiones",
+      "status": "passed",
+      "durationMs": 4.5354300000003605
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-harness.spec.ts",
+      "name": "datasets separan actores/escenarios y limpieza sin consumir bootstrap",
+      "status": "passed",
+      "durationMs": 12753.770620000001
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-harness.spec.ts",
+      "name": "fixture sirve identidad y oferta visible/oculta mediante HTTP existente",
+      "status": "passed",
+      "durationMs": 6162.2808079999995
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-harness.spec.ts",
+      "name": "observador separado acredita bloqueo real sin importar Vitest al navegador",
+      "status": "passed",
+      "durationMs": 6211.719043000001
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "Prisma deploy crea veintiocho tablas, seis migraciones y singleton sin usuarios",
+      "status": "passed",
+      "durationMs": 391.48208499999964
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "aplicar SQL incremental sobre copia ficticia conserva usuarios y datos",
+      "status": "passed",
+      "durationMs": 2133.7493109999996
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "migraciones son idempotentes mediante el historial de Prisma y no reinicializan datos",
+      "status": "passed",
+      "durationMs": 3872.2388710000014
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "restricciones de cuenta: Unicode, trim, correo canónico, enum, versión y credenciales",
+      "status": "passed",
+      "durationMs": 263.3280139999988
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "unicidad canónica ante veinte escrituras concurrentes y desactivación sin liberar correo",
+      "status": "passed",
+      "durationMs": 216.91818899999998
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "sesiones: huella de 32 bytes, FK, vencimiento exacto y fechas UTC con reloj de BD",
+      "status": "passed",
+      "durationMs": 99.51542299999892
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "índice parcial de tokens no depende de now(): revoca vencido antes de reemitir",
+      "status": "passed",
+      "durationMs": 71.54551700000047
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "auditoría y singleton exigen actor/destino válidos y marca permanente de bootstrap",
+      "status": "passed",
+      "durationMs": 101.52757999999994
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "correo exige token/payload activo y conserva metadatos terminales al purgar el token",
+      "status": "passed",
+      "durationMs": 106.11955200000011
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "límites: claves HMAC, fases válidas, reservas de 30 s y FK sin cascada",
+      "status": "passed",
+      "durationMs": 48.27488199999971
+    },
+    {
+      "file": "apps/api/tests/integration/migrations.spec.ts",
+      "name": "Prisma usa el pool restringido y revierte escritura de cuenta/auditoría en el mismo commit",
+      "status": "passed",
+      "durationMs": 64.43075900000076
+    }
+  ],
+  "hooks": {
+    "before": "NO_EXTENSION_FILE",
+    "after": "NO_EXTENSION_FILE"
+  },
+  "next": "T009–T010: tiempo/dinero exactos y contratos públicos; 86 tareas pendientes."
+}

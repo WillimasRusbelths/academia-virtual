@@ -13,6 +13,25 @@ function messages(code: string, filename: string, rule: 'api-layers' | 'web-laye
 }
 
 describe('límites del monolito modular', () => {
+  test('T011 enrollment conserva barreras de IO y de dueño, sin excepciones nuevas', () => {
+    for (const layer of ['domain','application','public']) {
+      const file = `apps/api/src/modules/enrollment/${layer}/boundary.ts`;
+      expect(messages("import 'pg';",file,'api-layers')[0]?.messageId).toBe('external');
+      expect(messages("import '@nestjs/common';",file,'api-layers')[0]?.messageId).toBe('external');
+      expect(messages("export * from '../../../infrastructure/database/account-transaction.js';",file,'api-layers')[0]?.messageId).toBe('escape');
+      expect(messages("import '../../identity/infrastructure/session-store.js';",file,'api-layers').some(m=>m.messageId==='module')).toBe(true);
+      expect(messages("import '../../academic-offering/domain/schedule.js';",file,'api-layers').some(m=>m.messageId==='module')).toBe(true);
+      for (const dependency of ['authorization/public/session','users/public/account','academic-offering/public/reservation-boundary','academic-offering/public/schedule']) {
+        expect(messages(`import '../../${dependency}.js';`,file,'api-layers')).toHaveLength(0);
+      }
+    }
+    const adapter = 'apps/api/src/modules/enrollment/infrastructure/enrollment-store.ts';
+    expect(messages("import '../../academic-offering/infrastructure/offering-store.js';",adapter,'api-layers')[0]?.messageId).toBe('module');
+    expect(messages("import '../../identity/infrastructure/session-store.js';",adapter,'api-layers')[0]?.messageId).toBe('module');
+    const writer = 'apps/api/src/modules/academic-offering/infrastructure/offering-store.ts';
+    expect(messages("import '../../enrollment/infrastructure/enrollment-store.js';",writer,'api-layers')[0]?.messageId).toBe('module');
+    expect(messages("import '../../enrollment/public/commitments.js';",writer,'api-layers')).toHaveLength(0);
+  });
   test('dominio no importa Nest ni infraestructura', () => {
     const external = messages("import '@nestjs/common';", 'apps/api/src/modules/identity/domain/rule.ts', 'api-layers');
     const inward = messages("import '../infrastructure/store.js';", 'apps/api/src/modules/identity/domain/rule.ts', 'api-layers');

@@ -6,7 +6,7 @@ import type { OfferingCommand, OfferingStore } from '../application/offering-sto
 
 test('C01 DTO cerrados por audiencia, sin generación, credenciales ni datos de cuenta', () => {
   expectTypeOf<keyof AdminCourse>().toEqualTypeOf<'id' | 'name' | 'description' | 'state' | 'revision' | 'studentVisible' | 'createdAt' | 'updatedAt'>();
-  expectTypeOf<keyof AdminGroup>().toEqualTypeOf<'id' | 'courseId' | 'name' | 'state' | 'revision' | 'periodStart' | 'periodEnd' | 'timeZone'
+  expectTypeOf<keyof AdminGroup>().toEqualTypeOf<'id' | 'courseId' | 'name' | 'description' | 'state' | 'revision' | 'periodStart' | 'periodEnd' | 'timeZone'
     | 'capacity' | 'occupancy' | 'availability' | 'capacityStatus' | 'schedule' | 'teacher' | 'teacherReviewRequired' | 'studentVisible'
     | 'cancellationReason' | 'cancelledAt' | 'lastPublishedTeacherId' | 'createdAt' | 'updatedAt'>();
   expectTypeOf<keyof CatalogCourse>().toEqualTypeOf<'id' | 'name' | 'description'>();
@@ -46,7 +46,7 @@ test('C04 errores de negocio seguros; referencias solo en conflictos administrat
   const error = new OfferingError(failure);
   expect(error.code).toBe(failure.code); expect(error.message).toBe(OFFERING_ERROR_MESSAGES.TEMPORARILY_UNAVAILABLE);
   expect(error.message).not.toMatch(/no se aplicó/i);
-  expect(Object.keys(OFFERING_ERROR_MESSAGES)).toHaveLength(12);
+  expect(Object.keys(OFFERING_ERROR_MESSAGES)).toHaveLength(13);
   // Estas asignaciones deben fallar también al comprobar tipos, no solo en Vitest.
   // @ts-expect-error un error de autorización no lleva referencias administrativas
   const denied: OfferingFailure = { code: 'FORBIDDEN', conflictingGroupIds: ['privado'] };

@@ -10,6 +10,7 @@ export const OFFERING_ERROR_MESSAGES = {
   TEACHER_NOT_ELIGIBLE: 'Selecciona un docente habilitado.',
   TEACHER_SCHEDULE_CONFLICT: 'El horario coincide con otro grupo publicado del docente.',
   COURSE_PUBLICATION_BLOCKED: 'Revisa los grupos publicados antes de publicar el curso.',
+  GROUP_COMMITMENTS_BLOCK_OPERATION: 'El grupo tiene compromisos vigentes o incidencias pendientes que impiden esta operación.',
   IDEMPOTENCY_CONFLICT: 'El identificador ya corresponde a otro comando. Revisa la intención.',
   TEMPORARILY_UNAVAILABLE: 'Servicio temporalmente no disponible. Comprueba el estado antes de reintentar.',
 } as const;

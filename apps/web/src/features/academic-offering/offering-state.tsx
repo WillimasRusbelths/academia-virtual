@@ -9,12 +9,12 @@ export const stateLabels = { DRAFT: 'Borrador', PUBLISHED: 'Publicado', WITHDRAW
 export function safeFailure(value: unknown): ApiFailure {
   return value instanceof ApiFailure ? value : new ApiFailure(503, 'TEMPORARILY_UNAVAILABLE', 'Servicio temporalmente no disponible. Comprueba el estado antes de reintentar.');
 }
-export function OfferingLayout({ title, children, catalog = false, teaching = false }: { title: string; children: ReactNode; catalog?: boolean; teaching?: boolean }) {
+export function OfferingLayout({ title, children, catalog = false, teaching = false, reservationHref }: { title: string; children: ReactNode; catalog?: boolean; teaching?: boolean; reservationHref?: string }) {
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => heading.current?.focus(), []);
   return <main className="offering-page"><h1 ref={heading} tabIndex={-1}>{title}</h1>
     <nav aria-label="Navegación de oferta"><a href="/inicio">Inicio</a> · {teaching ? <a href="/mis-grupos">Mis grupos</a>
-      : catalog ? <a href="/oferta">Oferta</a> : <><a href="/admin/oferta">Cursos</a> · <a href="/admin/cuentas">Gestionar cuentas</a></>}</nav>{children}</main>;
+      : catalog ? <a href="/oferta">Oferta</a> : <><a href="/admin/oferta">Cursos</a> · <a href="/admin/cuentas">Gestionar cuentas</a></>}{reservationHref&&<> · <a href={reservationHref}>Reservar cursos</a></>}</nav>{children}</main>;
 }
 export function CatalogLoading({ loading, error, retry }: { loading: boolean; error?: ApiFailure; retry: () => void }) {
   return error?.status === 404 ? <p role="status">Oferta no disponible</p> : <LoadingState loading={loading} error={error} retry={retry}/>;

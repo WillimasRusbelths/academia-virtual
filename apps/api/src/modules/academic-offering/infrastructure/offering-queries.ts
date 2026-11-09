@@ -16,7 +16,7 @@ export const courseProjection = `SELECT c.id,c.name,c.description,c.state,c.revi
     WHERE g."courseId"=c.id AND ${visible})) AS "studentVisible",
   ${instant('c."createdAt"')} AS "createdAt",${instant('c."updatedAt"')} AS "updatedAt"
   FROM "AcademicCourse" c`;
-export const groupProjection = `SELECT g.id,g."courseId",g.name,g.state,g.revision::text,
+export const groupProjection = `SELECT g.id,g."courseId",g.name,g.description,g.state,g.revision::text,
   to_char(g."periodStart",'YYYY-MM-DD') AS "periodStart",to_char(g."periodEnd",'YYYY-MM-DD') AS "periodEnd",
   g."timeZone",g.capacity,NULL::integer AS occupancy,NULL::integer AS availability,'NOT_CALCULATED'::text AS "capacityStatus",
   COALESCE((SELECT jsonb_agg(jsonb_build_object('dayOfWeek',s."dayOfWeek",

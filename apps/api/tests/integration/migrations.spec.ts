@@ -10,7 +10,7 @@ import { createIsolatedTestEnvironment, type IsolatedTestEnvironment } from '../
 let isolated: IsolatedTestEnvironment;
 let database: ReturnType<typeof createDatabase>;
 const root = repositoryRoot();
-const migrationNames = ['0001_identity_users', '0002_identity_access', '0003_identity_mail_limits', '0004_identity_argon2_format', '0005_academic_offering'];
+const migrationNames = ['0001_identity_users', '0002_identity_access', '0003_identity_mail_limits', '0004_identity_argon2_format', '0005_academic_offering', '0006_enrollment'];
 // Datos ficticios: formato de hash, no una contraseña ni una credencial funcional.
 const hash = `$argon2id$v=19$m=19456,t=2,p=1$${randomBytes(16).toString('base64').replaceAll('=', '')}$${randomBytes(32).toString('base64').replaceAll('=', '')}`;
 
@@ -59,14 +59,14 @@ async function token(userId: string, purpose = 'VERIFY_EMAIL', created = new Dat
   return id;
 }
 
-test('Prisma deploy crea trece tablas, cinco migraciones y singleton sin usuarios', async () => {
+test('Prisma deploy crea veintiocho tablas, seis migraciones y singleton sin usuarios', async () => {
   expect(await database.prisma.user.count()).toBe(0);
   const result = await database.pool.query('SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name');
   expect(result.rows.map(row => row.migration_name)).toEqual(migrationNames);
   expect(await database.prisma.systemState.findMany()).toEqual([{ id: 1, bootstrapCompletedAt: null, firstAdminUserId: null }]);
   const tables = await database.pool.query(`SELECT count(*)::int AS count FROM information_schema.tables
     WHERE table_schema=$1 AND table_type='BASE TABLE' AND table_name <> '_prisma_migrations'`, [isolated.schema]);
-  expect(tables.rows[0].count).toBe(13);
+  expect(tables.rows[0].count).toBe(28);
   const views = await database.pool.query('SELECT table_name FROM information_schema.views WHERE table_schema=$1', [isolated.schema]);
   expect(views.rows).toEqual([{ table_name: 'AcademicTeacherDirectory' }]);
   const privilege = await database.pool.query('SELECT has_schema_privilege(current_user, $1, $2) AS allowed', [isolated.schema, 'CREATE']);

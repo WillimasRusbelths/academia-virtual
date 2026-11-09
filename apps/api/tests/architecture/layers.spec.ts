@@ -35,6 +35,33 @@ const local = (filename: string) => (imports.get(filename) ?? []).filter(value =
 const relative = (filename: string) => normalize(path.relative(root, filename));
 
 describe('VA: dependencias del código real', () => {
+  test('T011 enrollment usa superficies públicas de identidad/oferta y mantiene su núcleo puro', () => {
+    const expected = ['modules/enrollment/application/access.ts','modules/enrollment/application/ports.ts',
+      'modules/enrollment/public/enrollment.ts','modules/enrollment/public/commitments.ts','modules/enrollment/public/payments.ts',
+      'modules/academic-offering/public/reservation-boundary.ts','modules/academic-offering/public/schedule.ts',
+      'modules/academic-offering/infrastructure/reservation-participant.ts'];
+    for (const filename of expected) expect(imports.has(path.join(root,filename)), `Falta ${filename}`).toBe(true);
+    const consumers = sources.filter(filename => relative(filename).startsWith('modules/enrollment/'));
+    for (const filename of consumers) for (const target of local(filename)) {
+      const dependency = relative(target);
+      if (/^modules\/(identity|users|authorization|academic-offering)\//.test(dependency)) {
+        expect(dependency, `${relative(filename)} -> ${dependency}`).toMatch(/^modules\/[^/]+\/public\//);
+      }
+    }
+    for (const filename of sources.filter(filename => /^modules\/enrollment\/(domain|application|public)\//.test(relative(filename)))) {
+      const source = ts.createSourceFile(filename,readFileSync(filename,'utf8'),ts.ScriptTarget.Latest,true);
+      const connectionTypes: string[] = [];
+      function visit(node: ts.Node) {
+        if (ts.isIdentifier(node) && ['PoolClient','Pool','PrismaClient'].includes(node.text)) connectionTypes.push(node.text);
+        ts.forEachChild(node,visit);
+      }
+      visit(source); expect(connectionTypes).toEqual([]);
+    }
+    const access = local(path.join(root,'modules/enrollment/application/access.ts')).map(relative);
+    expect(access).toContain('modules/authorization/public/session.ts');
+    // La referencia pública del dueño ofrece el predicado; el consumidor no importa su dominio.
+    expect(local(path.join(root,'modules/academic-offering/public/schedule.ts')).map(relative)).toContain('modules/academic-offering/domain/schedule.ts');
+  });
   test('T017 oferta y directorio se incluyen en el grafo real, sin callbacks de identidad a oferta', () => {
     for (const filename of ['modules/academic-offering/academic-offering.module.ts',
       'modules/academic-offering/application/offering-store.ts','modules/academic-offering/domain/offering-error.ts',

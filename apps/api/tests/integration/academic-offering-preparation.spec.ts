@@ -6,6 +6,7 @@ import { us1Http } from '../support/us1-http.js';
 import type { Us1Http } from '../support/us1-http.js';
 import { academicFingerprint, preparationSeed } from '../support/academic-preparation.js';
 import type { AdminCourse, AdminGroup, CommandResult, DataResponse, Page } from '../../src/modules/academic-offering/public/offer.js';
+import { resetAcademicFixture } from '../support/academic-maintenance-fixture.js';
 
 let data: AcademicOfferingDataset; let http: Us1Http;
 let seed: Awaited<ReturnType<typeof preparationSeed>>;
@@ -43,7 +44,7 @@ async function unchangedFailure(route: Parameters<typeof request>[0], expected =
 beforeAll(async () => { data = await academicOfferingDataset('academic_preparation'); http = await us1Http(data); }, 120000);
 beforeEach(async () => {
   // Propietario SOLO del esquema t_ actual. No CASCADE, identidad ni base manual.
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await resetAcademicFixture(data);
   seed = await preparationSeed(data.context.database.pool);
 });
 afterAll(async () => { try { await http?.close(); } finally { await data?.cleanup(); } });
@@ -54,7 +55,7 @@ describe('T021 controles de infraestructura, NO aceptación académica', () => {
     const observer = await pool().query<{ schema: string; pid: number }>('SELECT current_schema() AS schema,pg_backend_pid() AS pid');
     expect(observer.rows[0].schema).toBe(data.context.isolated.schema);
     expect(observer.rows[0].schema).toBe(appDb.rows[0].schema); expect(observer.rows[0].pid).not.toBe(appDb.rows[0].pid);
-    expect((await pool().query('SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(5);
+    expect((await pool().query('SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(7);
     expect((await fetch(`${http.url}/health/ready`)).status).toBe(200);
     for (const role of ['ADMIN','STUDENT','TEACHER'] as const) {
       const account = data.account(role); const response = await http.get('/me', account.sessions[0].secret);
@@ -87,7 +88,7 @@ describe('T021 controles de infraestructura, NO aceptación académica', () => {
 
 describe('T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015', () => {
   test('H01 listado vacío es 200 y no error; página/conteo coherentes', async () => {
-    await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+    await resetAcademicFixture(data);
     const response = await request(routes()[0]); status(response, 200);
     expect((await response.json()).data).toEqual({ items: [], page: 1, pageSize: 20, total: 0 });
   });
@@ -130,7 +131,7 @@ describe('T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010
       periodStart: '2026-10-19', periodEnd: '2026-10-25', timeZone: 'America/Lima',
       schedule: [{ dayOfWeek: 1, startTime: '18:00', endTime: '19:00' }],
       occupancy: null, availability: null, capacityStatus: 'NOT_CALCULATED' });
-    expect(Object.keys(group).sort()).toEqual(['id','courseId','name','state','revision','periodStart','periodEnd','timeZone','capacity',
+    expect(Object.keys(group).sort()).toEqual(['id','courseId','name','description','state','revision','periodStart','periodEnd','timeZone','capacity',
       'occupancy','availability','capacityStatus','schedule','teacher','teacherReviewRequired','studentVisible',
       'cancellationReason','cancelledAt','lastPublishedTeacherId','createdAt','updatedAt'].sort());
   });

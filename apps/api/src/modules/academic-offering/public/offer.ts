@@ -39,7 +39,7 @@ export interface AdminCourse {
   readonly createdAt: ISOInstant; readonly updatedAt: ISOInstant;
 }
 export interface AdminGroup extends UncalculatedCapacity {
-  readonly id: UUID; readonly courseId: UUID; readonly name: string; readonly state: GroupState;
+  readonly id: UUID; readonly courseId: UUID; readonly name: string; readonly description: string | null; readonly state: GroupState;
   readonly revision: Revision; readonly periodStart: CivilDate | null; readonly periodEnd: CivilDate | null;
   readonly timeZone: AcademicTimeZone; readonly capacity: number | null; readonly schedule: readonly Slot[];
   readonly teacher: { readonly id: UUID; readonly name: string; readonly eligible: boolean } | null;

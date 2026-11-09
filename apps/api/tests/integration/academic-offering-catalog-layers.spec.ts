@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { resetAcademicFixture } from '../support/academic-maintenance-fixture.js';
 import { afterAll, beforeAll, beforeEach, expect, test, vi } from 'vitest';
 import * as persistence from '../../src/modules/academic-offering/infrastructure/offering-queries.js';
 import type { CatalogReads } from '../../src/modules/academic-offering/application/queries.js';
@@ -36,7 +37,7 @@ beforeAll(async () => {
   sessions = new PostgresSessionStore(data.observerPool);
 }, 120000);
 beforeEach(async () => {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await resetAcademicFixture(data);
   seed = await academicCatalogSeed(data);
 });
 afterAll(async () => { await data?.cleanup(); });
@@ -88,7 +89,7 @@ test.each([0, 1, 2, 3])('Q06 grupo oculto %i e inexistente indistinguibles', asy
   expect(await reads().catalogGroup(who, seed.hiddenCourseId, seed.hiddenParentGroupId)).toBeNull();
 });
 test('Q07 catálogo vacío verdadero devuelve página vacía', async () => {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse"');
+  await resetAcademicFixture(data);
   expect(await reads().catalogCourses(await actor(), page)).toEqual({ ...page, total: 0, items: [] });
 });
 for (const loss of ['role', 'status', 'verification'] as const) test(`Q08 pérdida ${loss} y recuperación sin lectura nunca rehabilita captura`, async () => {

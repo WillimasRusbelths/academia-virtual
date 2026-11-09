@@ -14,7 +14,7 @@ export const identityMigrations = ['0001_identity_users', '0002_identity_access'
 const migrationRoot = path.join(repositoryRoot(), 'apps/api/prisma/migrations');
 export function academicMigrations() {
   return readdirSync(migrationRoot, { withFileTypes: true }).filter(entry => entry.isDirectory()
-    && !identityMigrations.includes(entry.name)).map(entry => entry.name).sort();
+    && entry.name === '0005_academic_offering').map(entry => entry.name).sort();
 }
 
 /** Reproduce la actualización de 0001–0004; no genera SQL ni modifica migraciones. */

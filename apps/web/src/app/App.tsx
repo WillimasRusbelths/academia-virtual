@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AppRouter,navigate } from './router';
-import { createApiClient } from './http';
+import { createApiClient, enrollmentApi } from './http';
+import { enrollmentRoutes } from './enrollment-routes';
 import { SessionProvider, useSession } from './session';
 import { ProtectedRoute } from './protected-route';
 import { LoginPage } from '../features/auth/login-page';
@@ -26,6 +27,8 @@ export function App() {
 }
 function SessionRoutes() {
   const session=useSession();
+  const enrollment=useMemo(()=>enrollmentApi(session.api),[session.api]);
+  const reservationHref=session.user?.role==='STUDENT'?'/reservar':undefined;
   const [publicApi]=useState(()=>createApiClient(()=>navigate('/login',true)));
   return <AppRouter protect={(element,access)=><ProtectedRoute access={access}>{element}</ProtectedRoute>} routes={[
     {path:'/',element:<main><h1>Academia virtual</h1><p><a href="/login">Iniciar sesión</a></p></main>},
@@ -44,9 +47,10 @@ function SessionRoutes() {
     {path:'/admin/oferta',access:'admin',element:<AdminCoursesPage api={session.api} navigate={navigate}/>},
     {path:'/admin/oferta/cursos/:id',access:'admin',render:params=><AdminCoursePage api={session.api} id={params.id} navigate={navigate}/>},
     {path:'/admin/oferta/grupos/:id',access:'admin',render:params=><AdminGroupPage api={session.api} id={params.id} navigate={navigate}/>},
-    {path:'/oferta',access:'student',element:<CatalogPage api={session.api}/>},
-    {path:'/oferta/cursos/:id',access:'student',render:params=><CoursePage api={session.api} id={params.id}/>},
-    {path:'/oferta/cursos/:courseId/grupos/:id',access:'student',render:params=><GroupPage api={session.api} courseId={params.courseId} id={params.id}/>},
+    {path:'/oferta',access:'student',element:<CatalogPage api={session.api} reservationHref={reservationHref}/>},
+    {path:'/oferta/cursos/:id',access:'student',render:params=><CoursePage api={session.api} id={params.id} reservationHref={reservationHref}/>},
+    {path:'/oferta/cursos/:courseId/grupos/:id',access:'student',render:params=><GroupPage api={session.api} courseId={params.courseId} id={params.id} reservationHref={reservationHref}/>},
+    ...enrollmentRoutes(enrollment),
     {path:'/mis-grupos',access:'teacher',element:<TeachingGroupsPage api={session.api}/>},
     {path:'/mis-grupos/:id',access:'teacher',render:params=><TeachingGroupPage api={session.api} id={params.id}/>},
   ]}/>;

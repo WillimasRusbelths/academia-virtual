@@ -7,6 +7,7 @@ import { academicOfferingDataset } from '../../../api/tests/support/academic-off
 import type { AcademicOfferingDataset } from '../../../api/tests/support/academic-offering.js';
 import { us1Http } from '../../../api/tests/support/us1-http.js';
 import { repositoryRoot } from '../../../api/src/infrastructure/config/environment.js';
+import { enrollmentClock } from './enrollment-clock';
 
 async function assertLoopbackPortFree() {
   const probe = createServer();
@@ -16,16 +17,18 @@ async function assertLoopbackPortFree() {
   });
 }
 
-export const test = base.extend<{ offering: AcademicOfferingDataset & { backendUrl: string } }>({
+export const test = base.extend<{ offering: AcademicOfferingDataset & { backendUrl: string }; reservationWorker: boolean; reservationClock: boolean }>({
+  reservationWorker: [false, { option: true }],
+  reservationClock: [false, { option: true }],
   // Un esquema nuevo por caso; no TRUNCATE/reset de datos compartidos entre historias.
-  // eslint-disable-next-line no-empty-pattern
-  offering: [async ({}, use) => {
+  offering: [async ({reservationWorker,reservationClock}, use) => {
     await assertLoopbackPortFree();
     const data = await academicOfferingDataset('academic_browser');
     let server: Awaited<ReturnType<typeof us1Http>> | undefined;
     let vite: ReturnType<typeof spawn> | undefined;
     try {
-      server = await us1Http(data);
+      const clock=reservationClock?await enrollmentClock(data):undefined;
+      server = await us1Http({...data,reservationWorker,clock});
       const root = repositoryRoot();
       vite = spawn(process.execPath, [path.join(root, 'node_modules/vite/bin/vite.js'),
         '--host', '127.0.0.1', '--port', '5173', '--strictPort'], {

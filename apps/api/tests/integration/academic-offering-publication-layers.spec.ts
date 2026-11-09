@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { resetAcademicFixture } from '../support/academic-maintenance-fixture.js';
 import { afterAll, beforeAll, beforeEach, expect, test } from 'vitest';
 import { academicOfferingDataset } from '../support/academic-offering.js';
 import type { AcademicOfferingDataset } from '../support/academic-offering.js';
@@ -42,7 +43,7 @@ beforeAll(async () => {
   actor = (await sessions.lookup(data.account('ADMIN').sessions[0].secret))!;
 }, 120000);
 beforeEach(async () => {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await resetAcademicFixture(data);
   await db().query(`UPDATE "User" SET role='TEACHER',status='ACTIVE',"disabledAt"=NULL,"emailVerifiedAt"=clock_timestamp() WHERE id=ANY($1::uuid[])`,
     [[data.account('TEACHER').id, data.otherTeacher.userId]]);
   seed = await preparationSeed(db());

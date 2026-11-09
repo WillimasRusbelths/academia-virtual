@@ -7,7 +7,7 @@ import { OfferingReview, useOfferingCommand, weekDays } from './offering-state';
 
 /** Solo identifica datos guardados ausentes; el servidor revalida reglas y concurrencia. */
 export function publicationMissing(value: AdminCourse | AdminGroup): Readonly<Record<string, string>> {
-  if ('description' in value) return value.description ? {} : { description: 'Completa y guarda la descripción antes de publicar.' };
+  if (!('courseId' in value)) return value.description ? {} : { description: 'Completa y guarda la descripción antes de publicar.' };
   const errors: Record<string, string> = {};
   if (value.capacity === null) errors.capacity = 'Configura y guarda la capacidad máxima (1–50).';
   if (!value.periodStart) errors.periodStart = 'Configura y guarda la fecha de inicio.';

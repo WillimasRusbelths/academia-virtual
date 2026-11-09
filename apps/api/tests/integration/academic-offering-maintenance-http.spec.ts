@@ -36,7 +36,7 @@ for (const kind of kinds) for (const role of ['ADMIN', 'STUDENT', 'TEACHER', 'VI
   expect(result.command).toMatchObject({ id: input.commandId, replayed: false, result: 'APPLIED', appliedRevision: '2' });
   expect(result.resource).toMatchObject({ id: target(kind), state: kind === 'group-cancel' ? 'CANCELLED' : 'WITHDRAWN', revision: '2', studentVisible: false });
   const fields = kind === 'course-withdraw' ? ['id','name','description','state','revision','studentVisible','createdAt','updatedAt']
-    : ['id','courseId','name','state','revision','periodStart','periodEnd','timeZone','capacity','schedule','teacher','teacherReviewRequired','studentVisible',
+    : ['id','courseId','name','description','state','revision','periodStart','periodEnd','timeZone','capacity','schedule','teacher','teacherReviewRequired','studentVisible',
       'cancellationReason','cancelledAt','lastPublishedTeacherId','createdAt','updatedAt','occupancy','availability','capacityStatus'];
   expect(Object.keys(result.resource).sort()).toEqual(fields.sort());
   if (kind !== 'course-withdraw') expect(result.resource).toMatchObject({ occupancy: null, availability: null, capacityStatus: 'NOT_CALCULATED' });

@@ -23,7 +23,13 @@ export async function maintenanceSeed(data: AcademicOfferingDataset, options: { 
   return { ...seed, competitorId, teacherId };
 }
 export async function resetAcademicFixture(data: AcademicOfferingDataset) {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  const { isolated, environment } = data.context;
+  if (!/^t_[a-z0-9_]+$/.test(isolated.schema) || environment.databaseSchema !== isolated.schema) throw new Error('Limpieza fuera de schema de prueba.');
+  // 0006 añade referencias a oferta. Lista explícita dentro del schema propio,
+  // sin CASCADE ni identidad; conserva las coordinadoras técnicas singleton.
+  await isolated.ownerQuery(`TRUNCATE "CoursePrice","ReservationRequest","EnrollmentOrder","EnrollmentOrderItem",
+    "SeatReservation","PaymentAttempt","ProviderReceipt","VerifiedPayment","Enrollment","PaymentIncident","IncidentFollowUp",
+    "EnrollmentCommand","EnrollmentAuditEvent","AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"`);
 }
 export async function commandCounts(data: AcademicOfferingDataset, commandId: string) {
   return (await data.observerPool.query<{ ledger: number; audit: number }>(`SELECT

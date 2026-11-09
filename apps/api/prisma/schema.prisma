@@ -99,6 +99,12 @@ model User {
   academicPublishedGroups AcademicGroup[] @relation("AcademicPublishedTeacher")
   academicCommands        AcademicCommand[]
   academicAuditEvents     AcademicAuditEvent[]
+  coursePriceChanges      CoursePrice[]
+  reservationRequests     ReservationRequest[]
+  enrollmentOrders        EnrollmentOrder[]
+  paymentAttempts         PaymentAttempt[]
+  enrollments             Enrollment[]
+  incidentFollowUps       IncidentFollowUp[]
 }
 
 model Session {
@@ -240,6 +246,9 @@ model AcademicCourse {
   createdAt   DateTime            @default(now()) @db.Timestamptz(6)
   updatedAt   DateTime            @default(now()) @db.Timestamptz(6)
   groups      AcademicGroup[]
+  price       CoursePrice?
+  orderItems  EnrollmentOrderItem[]
+  enrollments Enrollment[]
 }
 
 model AcademicGroup {
@@ -247,6 +256,7 @@ model AcademicGroup {
   courseId                           String             @db.Uuid
   course                             AcademicCourse     @relation(fields: [courseId], references: [id], onDelete: Restrict)
   name                               String
+  description                        String?
   state                              AcademicGroupState @default(DRAFT)
   periodStart                        DateTime?          @db.Date
   periodEnd                          DateTime?          @db.Date
@@ -263,6 +273,8 @@ model AcademicGroup {
   createdAt                          DateTime           @default(now()) @db.Timestamptz(6)
   updatedAt                          DateTime           @default(now()) @db.Timestamptz(6)
   slots                              AcademicSlot[]
+  orderItems                         EnrollmentOrderItem[]
+  enrollments                        Enrollment[]
 
   @@index([courseId, state, id])
   @@index([teacherUserId, state, id])
@@ -317,3 +329,283 @@ model AcademicAuditEvent {
 }
 
 // AcademicTeacherDirectory y triggers/checks se versionan en SQL, sin vistas experimentales.
+
+enum ReservationRequestState {
+  ADMITTED
+  CONFIRMED
+  REJECTED
+}
+
+enum EnrollmentOrderState {
+  RESERVED
+  ENROLLED
+  EXPIRED
+}
+
+enum SeatReservationState {
+  CONFIRMED
+  CONVERTED
+  EXPIRED
+}
+
+enum PaymentAttemptState {
+  SUBMITTING
+  PENDING
+  INITIATION_UNKNOWN
+  FAILED_NO_CHARGE
+  APPLIED
+  INCIDENT
+}
+
+enum ProviderReceiptState {
+  RECEIVED
+  PROCESSED
+}
+
+enum PaymentReconciliationState {
+  APPLIED
+  INCIDENT
+}
+
+enum EnrollmentActorKind {
+  ACCOUNT
+  SYSTEM
+}
+
+model CoursePrice {
+  courseId    String         @id @db.Uuid
+  course      AcademicCourse @relation(fields: [courseId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  amountMinor BigInt
+  currency    String         @default("PEN")
+  revision    BigInt         @default(1)
+  changedBy   String         @db.Uuid
+  changedByUser User         @relation(fields: [changedBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  changedAt   DateTime       @default(now()) @db.Timestamptz(6)
+}
+
+model AdmissionSequence {
+  id           Int    @id @default(1)
+  nextSequence BigInt @default(1)
+}
+
+model DispatchState {
+  id Int @id @default(1)
+}
+
+model ReservationRequest {
+  id                    String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  studentId             String                  @db.Uuid
+  student               User                    @relation(fields: [studentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  intentionId           String                  @db.Uuid
+  selectionDigest       Bytes
+  groupIds              String[]                @db.Uuid
+  admittedAt            DateTime                @db.Timestamptz(6)
+  admissionSequence     BigInt                  @unique
+  actorSessionReference String                  @db.Uuid
+  authVersion           BigInt
+  state                 ReservationRequestState @default(ADMITTED)
+  decisionCode          String?
+  decidedAt             DateTime?               @db.Timestamptz(6)
+  order                 EnrollmentOrder?
+
+  @@unique([studentId, intentionId])
+  @@index([state, admissionSequence])
+}
+
+model EnrollmentOrder {
+  id                    String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  studentId             String               @db.Uuid
+  student               User                 @relation(fields: [studentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  requestId             String               @unique @db.Uuid
+  request               ReservationRequest   @relation(fields: [requestId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  currency              String               @default("PEN")
+  totalMinor            BigInt
+  state                 EnrollmentOrderState @default(RESERVED)
+  revision              BigInt               @default(1)
+  confirmedAt           DateTime             @db.Timestamptz(6)
+  expiresAt             DateTime             @db.Timestamptz(6)
+  expirationProcessedAt DateTime?            @db.Timestamptz(6)
+  items                 EnrollmentOrderItem[]
+  paymentAttempts       PaymentAttempt[]
+  verifiedPayments      VerifiedPayment[]
+  incidents             PaymentIncident[]
+
+  @@unique([id, studentId])
+  @@index([studentId, state, expiresAt])
+  @@index([state, expiresAt, id])
+  // UNIQUE parcial RESERVED por alumno en SQL; sin predicado dependiente de reloj.
+}
+
+model EnrollmentOrderItem {
+  id                   String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orderId              String          @db.Uuid
+  order                EnrollmentOrder @relation(fields: [orderId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  courseId             String          @db.Uuid
+  course               AcademicCourse  @relation(fields: [courseId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  groupId              String          @db.Uuid
+  group                AcademicGroup   @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  priceMinor           BigInt
+  courseName           String
+  groupName            String
+  periodStart          DateTime        @db.Date
+  periodEnd            DateTime        @db.Date
+  timeZone             String          @default("America/Lima")
+  groupStartAt         DateTime        @db.Timestamptz(6)
+  enrollmentValidUntil DateTime        @db.Timestamptz(6)
+  scheduleSnapshot     Json
+  reservation          SeatReservation?
+  enrollment           Enrollment?
+
+  @@unique([orderId, courseId])
+  @@index([groupId, courseId, orderId])
+}
+
+model SeatReservation {
+  id          String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orderItemId String               @unique @db.Uuid
+  orderItem   EnrollmentOrderItem  @relation(fields: [orderItemId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  state       SeatReservationState @default(CONFIRMED)
+  @@index([state, orderItemId])
+}
+
+model PaymentAttempt {
+  id                     String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orderId                String              @db.Uuid
+  studentId              String              @db.Uuid
+  order                  EnrollmentOrder     @relation(fields: [orderId, studentId], references: [id, studentId], onDelete: Restrict, onUpdate: Restrict)
+  student                User                @relation(fields: [studentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  initiationId           String              @db.Uuid
+  payloadDigest          Bytes
+  state                  PaymentAttemptState @default(SUBMITTING)
+  merchantReference      String
+  externalIdempotencyKey String
+  providerScope          String
+  providerReference      String?
+  createdAt              DateTime            @default(now()) @db.Timestamptz(6)
+
+  @@unique([studentId, initiationId])
+  @@index([state, createdAt, id])
+  @@index([orderId])
+  // Una iniciación no resuelta por orden: índice único parcial en SQL.
+}
+
+model ProviderReceipt {
+  integrityConflict           Boolean              @default(false)
+  id                          String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  providerScope               String
+  deliveryKey                 String?
+  merchantReferenceHint       String?
+  providerPaymentIdHint       String?
+  normalizedEvidenceReference String
+  receivedAt                  DateTime             @default(now()) @db.Timestamptz(6)
+  externalObservedAt          DateTime?            @db.Timestamptz(6)
+  state                       ProviderReceiptState @default(RECEIVED)
+  processedAt                 DateTime?            @db.Timestamptz(6)
+  terminalPaymentId           String?              @db.Uuid
+  terminalPayment             VerifiedPayment?     @relation(fields: [terminalPaymentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  @@index([state, receivedAt, id])
+  // Sin FK provisional a orden ni UNIQUE de entrega no acreditada por D02.
+}
+
+model VerifiedPayment {
+  id                          String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  providerScope               String
+  providerPaymentId           String
+  orderId                     String?                    @db.Uuid
+  order                       EnrollmentOrder?           @relation(fields: [orderId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  amountUnits                 Decimal                    @db.Decimal
+  amountScale                 Int
+  currency                    String
+  merchantReference           String
+  verificationFinishedAt      DateTime                   @db.Timestamptz(6)
+  reconciliationState         PaymentReconciliationState
+  normalizedEvidenceReference String
+  receipts                    ProviderReceipt[]
+  enrollments                 Enrollment[]
+  incidents                   PaymentIncident[]
+  @@unique([providerScope, providerPaymentId])
+  @@index([orderId])
+}
+
+model Enrollment {
+  id                  String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orderItemId         String              @unique @db.Uuid
+  orderItem           EnrollmentOrderItem @relation(fields: [orderItemId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  studentId           String              @db.Uuid
+  student             User                @relation(fields: [studentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  courseId            String              @db.Uuid
+  course              AcademicCourse      @relation(fields: [courseId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  groupId             String              @db.Uuid
+  group               AcademicGroup       @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  paymentId           String              @db.Uuid
+  payment             VerifiedPayment     @relation(fields: [paymentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  confirmedAt         DateTime            @db.Timestamptz(6)
+  originalPeriodStart DateTime            @db.Date
+  originalPeriodEnd   DateTime            @db.Date
+  timeZone            String              @default("America/Lima")
+  scheduleSnapshot    Json
+  validUntil          DateTime            @db.Timestamptz(6)
+  @@index([studentId, courseId, validUntil])
+  @@index([groupId, validUntil])
+}
+
+model PaymentIncident {
+  id                String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orderId           String?          @db.Uuid
+  order             EnrollmentOrder? @relation(fields: [orderId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  verifiedPaymentId String           @db.Uuid
+  verifiedPayment   VerifiedPayment  @relation(fields: [verifiedPaymentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  reason            String
+  affectedGroupIds  String[]         @db.Uuid
+  openedAt          DateTime         @default(now()) @db.Timestamptz(6)
+  followUps         IncidentFollowUp[]
+  @@unique([verifiedPaymentId, reason])
+  @@index([orderId, openedAt])
+  @@index([affectedGroupIds], type: Gin)
+}
+
+model IncidentFollowUp {
+  id          String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  incidentId  String          @db.Uuid
+  incident    PaymentIncident @relation(fields: [incidentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  adminUserId String          @db.Uuid
+  admin       User            @relation(fields: [adminUserId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  commandId   String          @db.Uuid
+  recordedAt  DateTime        @default(now()) @db.Timestamptz(6)
+  content     String
+  @@unique([adminUserId, commandId])
+  @@index([incidentId, recordedAt, id])
+}
+
+model EnrollmentCommand {
+  actorKind         EnrollmentActorKind
+  actorReference    String
+  commandId         String              @db.Uuid
+  operation         String
+  payloadDigest     Bytes
+  outcomeCode       String
+  resourceReferences Json
+  resultingRevision BigInt
+  appliedAt         DateTime            @default(now()) @db.Timestamptz(6)
+  @@id([actorKind, actorReference, commandId])
+}
+
+model EnrollmentAuditEvent {
+  id             String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorKind      EnrollmentActorKind
+  actorReference String
+  operation      String
+  targetKind     String
+  targetId       String              @db.Uuid
+  commandId      String?             @db.Uuid
+  providerEventId String?
+  effectKey      String?             @unique
+  requestId      String              @db.Uuid
+  occurredAt     DateTime            @default(now()) @db.Timestamptz(6)
+  beforeRevision BigInt?
+  afterRevision  BigInt?
+  result         String
+  @@index([targetKind, targetId, occurredAt])
+}
+
+// CHECK, coordinadoras iniciales, índices parciales e inmutabilidad: 0006_enrollment.

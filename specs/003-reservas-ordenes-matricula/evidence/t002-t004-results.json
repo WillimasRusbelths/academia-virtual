@@ -1,0 +1,230 @@
+{
+  "date": "2026-10-31",
+  "timezone": "America/Lima",
+  "tasks": [
+    "T002",
+    "T003",
+    "T004"
+  ],
+  "status": "PREPARACION_VERIFICADA_SIN_COMPORTAMIENTO_FINANCIERO",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "initialLocalChanges": "T001 completada sin commit; sus artefactos locales preservados.",
+  "checklist": {
+    "checked": 12,
+    "total": 16,
+    "unchanged": true,
+    "authorization": "Responsable solicitó continuar el siguiente bloque tras conocer el checklist pendiente y el cierre T001."
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "containersVerified": [
+    {
+      "service": "db",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "mounts": [
+        {
+          "type": "bind",
+          "name": null,
+          "target": "/docker-entrypoint-initdb.d/01-academia.sql",
+          "readOnly": true
+        },
+        {
+          "type": "volume",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data",
+          "target": "/var/lib/postgresql/data",
+          "readOnly": false
+        }
+      ]
+    },
+    {
+      "service": "mailpit",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d",
+      "mounts": []
+    }
+  ],
+  "images": [
+    {
+      "service": "api",
+      "id": "sha256:70f09a6da7ef9b59a5c43ffb85ff162e9775c68def1af97326d3201ee5bcd2d5"
+    },
+    {
+      "service": "web",
+      "id": "sha256:35c345924e6b9545190d7ee31dc9dae8e15fccabd45c25e1fd78f49841f01cd0"
+    },
+    {
+      "service": "browser-tests",
+      "id": "sha256:903778ec5ff418d130c91379fa2dd6715e9af74050dd5908fcaaab32dbf8645f"
+    }
+  ],
+  "sourceManifest": {
+    "path": ".cache/reservas-t002-t004/source-manifest.json",
+    "count": 708,
+    "sha256": "c86004dd34072003974701705de11c4b259ed6b234d9c1dc9cbd11e376bbdcbd",
+    "private": true
+  },
+  "commands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t002-t004/run.ps1 -Action up",
+      "exitCode": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t002-t004/run.ps1 -Action build",
+      "exitCode": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t002-t004/run.ps1 -Action checks",
+      "exitCode": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t002-t004/run.ps1 -Action api",
+      "exitCode": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t002-t004/run.ps1 -Action discovery",
+      "exitCode": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t002-t004/run.ps1 -Action browser",
+      "exitCode": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t002-t004/run.ps1 -Action stop",
+      "exitCode": 0
+    }
+  ],
+  "validation": {
+    "lint": "PASS ambos workspaces",
+    "build": "PASS ambos workspaces",
+    "selectiveTypes": "PASS host y contenedor; lista de cinco archivos TS y dependencias transitivas",
+    "api": {
+      "file": "apps/api/tests/integration/enrollment-harness.spec.ts",
+      "uniqueCases": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 43.41
+    },
+    "browser": {
+      "file": "apps/web/tests/e2e/enrollment-harness.spec.ts",
+      "uniqueCases": 1,
+      "executions": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "runnerSeconds": 16.5,
+      "projects": [
+        "desktop",
+        "mobile"
+      ],
+      "workers": 1,
+      "retries": 0
+    },
+    "totalUniqueInfrastructureCases": 5,
+    "totalInfrastructureExecutions": 6,
+    "enrollmentBusinessCases": 0,
+    "schemasBefore": 0,
+    "schemasAfter": 0
+  },
+  "fixture": {
+    "accountsPerDataset": 15,
+    "actors": [
+      "titular",
+      "otro alumno",
+      "administrador",
+      "docente"
+    ],
+    "offer": [
+      "visible",
+      "oculta"
+    ],
+    "financialScenarioLabels": [
+      "UNPRICED",
+      "AWAITING_PAYMENT",
+      "EXPIRED",
+      "APPLIED",
+      "INCIDENT"
+    ],
+    "financialStatesPersisted": false,
+    "financialLimit": "Solo etiquetas independientes por dataset/schema. Las tablas, filas y reglas financieras reales requieren tareas posteriores a T007/T008.",
+    "bootstrapUsed": false
+  },
+  "preservation": {
+    "protectedFiles": 74,
+    "migrations": 5,
+    "newMigrations": 0,
+    "manualEnvironmentOperated": false,
+    "manualAccountsUsed": false,
+    "volumePreserved": true,
+    "envPreserved": true,
+    "lockfileUnchanged": true
+  },
+  "finalEnvironment": {
+    "db": "stopped",
+    "mailpit": "stopped",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "volumeCreatedAt": "2026-10-19T10:45:57Z"
+  },
+  "limits": {
+    "newProductRoutes": 0,
+    "paymentProviderValidated": false,
+    "realCharges": false,
+    "capacityApproved": false,
+    "loadRun": false,
+    "humanAcceptance": false,
+    "remoteCI": false
+  },
+  "hooks": {
+    "before": "NO_EXTENSION_FILE",
+    "after": "NO_EXTENSION_FILE"
+  },
+  "next": "T005/T006: preparación de pruebas de tiempo/dinero y evolución aditiva; sin iniciar T007/T008 en este bloque.",
+  "sourceHashes": [
+    {
+      "path": "apps/api/tests/support/enrollment.ts",
+      "sha256": "032c525de465fc6a94a5892a4c69668a332707ec6c1a99415033ff9ea349155c"
+    },
+    {
+      "path": "apps/api/tests/integration/enrollment-harness.spec.ts",
+      "sha256": "525692493c222654ffa632bc3f664eb7bbf26d1b450b8262ee121568d81619d2"
+    },
+    {
+      "path": "apps/web/tests/support/enrollment-fixture.ts",
+      "sha256": "3513f22c9d3d20815463a1e8a024bee9aff4b0ce14186669a7a8f7de0f9f9b2d"
+    },
+    {
+      "path": "apps/web/tests/e2e/enrollment-harness.spec.ts",
+      "sha256": "48c86d7925cb003a1c88533d13912ced9b759d241779418bc11ac97470bc571b"
+    },
+    {
+      "path": "apps/web/playwright.enrollment.config.ts",
+      "sha256": "d92dedf673579b7f75ae87d231907b6adcde161ac40e2a6e6190b90b47080560"
+    },
+    {
+      "path": "apps/web/tsconfig.enrollment.json",
+      "sha256": "ed6d9994c605f0a602da3b4ceb39a2b82baa943751759fc1b72ef90c9887d0da"
+    },
+    {
+      "path": "apps/web/package.json",
+      "sha256": "4f815758921f88cee2eb49a4fa4a0206b0b345bb65cd6e8f0d7a6428158d87da"
+    }
+  ]
+}
