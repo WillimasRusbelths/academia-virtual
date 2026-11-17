@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync, symlinkSync, chmodSync } from 'node:fs';
@@ -20,8 +21,8 @@ const location = () => path.join(directory,randomUUID());
 beforeAll(async () => { context = await identityDatabase('fixture_safety'); },120000);
 afterEach(async () => {
   vi.restoreAllMocks();
-  await context.isolated.ownerQuery(`DROP FUNCTION IF EXISTS fixture_test_failure() CASCADE;
-    TRUNCATE "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+  await truncateFixtureTables(context, `DROP FUNCTION IF EXISTS fixture_test_failure() CASCADE;
+    TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
 });
 afterAll(async () => { await context?.cleanup();rmSync(directory,{recursive:true,force:true}); });

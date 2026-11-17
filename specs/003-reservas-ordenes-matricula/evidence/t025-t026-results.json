@@ -1,0 +1,1069 @@
+{
+  "date": "2026-11-04",
+  "timezone": "America/Lima",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "status": "PREPARACION_EJECUTADA_ROJO_ESPERADO_NO_ACEPTACION_US1",
+  "regression": {
+    "uniquePassed": 885,
+    "apiAndWebCases": 884,
+    "priorBrowserHarnessUnique": 1,
+    "priorBrowserHarnessExecutions": 2,
+    "suites": {
+      "core": {
+        "total": 524,
+        "passed": 524,
+        "failed": 0
+      },
+      "prices": {
+        "total": 52,
+        "passed": 52,
+        "failed": 0
+      },
+      "errors": {
+        "total": 67,
+        "passed": 67,
+        "failed": 0
+      },
+      "maintenance": {
+        "total": 36,
+        "passed": 36,
+        "failed": 0
+      },
+      "web": {
+        "total": 205,
+        "passed": 205,
+        "failed": 0
+      }
+    }
+  },
+  "checks": {
+    "lint": "PASS API/web",
+    "build": "PASS API/web",
+    "selectiveTypes": "PASS API/web",
+    "latestChangedTestsLint": "PASS",
+    "latestBrowserTypes": "PASS",
+    "ci": "NOT_RUN",
+    "fullApiSuiteGreen": false
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "cleanup": {
+    "schemasAfter": 0,
+    "db": "stopped",
+    "mailpit": "stopped",
+    "volumePreserved": true,
+    "manualEnvironmentOperated": false
+  },
+  "images": {
+    "api": "sha256:752be02e27d9b1b358cc52889c82b76e3cec269c1f214889996526f46689adb6",
+    "browserBase": "sha256:903778ec5ff418d130c91379fa2dd6715e9af74050dd5908fcaaab32dbf8645f",
+    "playwright": "1.63.0",
+    "node": "v22.23.1",
+    "packageLockVerified": true,
+    "browserBuild": "CANCELLED_SLOW_DOWNLOAD_REUSED_COMPATIBLE_CACHE",
+    "currentApiDistAndSourcesOverlay": true,
+    "overlayManifest": {
+      "path": ".cache/reservas-t027-t028/browser-overlay-manifest.json",
+      "sha256": "e67f55ad889501a1558c0d42fc85447a7542e1d969bbda51d86f75bb43b2f42c",
+      "private": true
+    },
+    "changedTestSourcesVsApiImage": [
+      "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "apps/web/tests/e2e/enrollment-reservation.spec.ts"
+    ],
+    "productionDelta": false
+  },
+  "limits": [
+    "Preparar pruebas no aprueba las funciones de reserva o consulta.",
+    "Las entradas tipadas son adaptadores de pruebas con globs literales; no hay imports rotos ni fábricas que devuelvan éxitos simulados.",
+    "T029–T039 y checkpoints T040–T042 siguen pendientes.",
+    "No cobros, proveedor/sandbox, aceptación humana o capacidad aprobados."
+  ],
+  "aggregateAcrossBothBlocks": {
+    "newUniqueCases": 101,
+    "newAuxiliaryUniquePassed": 9,
+    "newExpectedRedUnique": 92,
+    "newExecutions": 110,
+    "allFinalUniqueCases": 986,
+    "allFinalUniquePassed": 894,
+    "allFinalUniqueExpectedRed": 92,
+    "allFinalExecutions": 996,
+    "allFinalExecutionPassed": 896,
+    "allFinalExecutionExpectedRed": 100,
+    "skipped": 0,
+    "diagnosticsAndEarlierRunsExcluded": true
+  },
+  "privateReports": {
+    "processing": {
+      "path": ".cache/reservas-t027-t028/reports/processing.json",
+      "sha256": "1de262351e3890d8cf748cacd51d62d3316e58f7acb457a4af9d7adf257647b8",
+      "private": true
+    },
+    "web-preparation": {
+      "path": ".cache/reservas-t027-t028/reports/web-preparation.json",
+      "sha256": "cc4f3d3a6f1dbac81277b1c18187b395bfb5fcf4973b8085d7503ae59a2de06b",
+      "private": true
+    },
+    "core": {
+      "path": ".cache/reservas-t027-t028/reports/core.json",
+      "sha256": "411e8e51170b3bcad8d55ef377ee51bbc0f4ce17c8c61e2e9715fd016bfb3b61",
+      "private": true
+    },
+    "prices": {
+      "path": ".cache/reservas-t027-t028/reports/prices.json",
+      "sha256": "6ad7436e81c06af0fa9d59c81842674f3651d66b6bd203998c139a72f854c589",
+      "private": true
+    },
+    "errors": {
+      "path": ".cache/reservas-t027-t028/reports/errors.json",
+      "sha256": "00a06999d398c86bc1643e864ad53c6e854e140928cbdebb5740a73d6090c10a",
+      "private": true
+    },
+    "maintenance": {
+      "path": ".cache/reservas-t027-t028/reports/maintenance.json",
+      "sha256": "3946021bbe6066396b5154429455b00986ac45251c79651bc3098e5dda387b4a",
+      "private": true
+    },
+    "web": {
+      "path": ".cache/reservas-t027-t028/reports/web.json",
+      "sha256": "6068f87cda7d045d0491b3bfb91cf910a7863c8ec553d2c050fae5ed7a5255df",
+      "private": true
+    }
+  },
+  "tasks": [
+    "T025",
+    "T026"
+  ],
+  "validation": {
+    "uniqueCases": 54,
+    "auxiliaryOrLegacyPassed": 8,
+    "expectedRed": 46,
+    "dispatchCases": 22,
+    "queryCases": 32,
+    "dispatchEntryAbsent": 18,
+    "queryEntryAbsent": 17,
+    "http404": 11
+  },
+  "coverage": {
+    "RA02": "RD03",
+    "TV06": "RD11",
+    "TV10": "RD07",
+    "TV11": "RD08",
+    "TV12": "RD09/RD13",
+    "TV15": "RD06",
+    "TV17": "RD10/RD14",
+    "TV18": "RD10: mismo token y efecto; scheduler US3 no implementado",
+    "TV19": "RD07/RD12/RD15/RD16",
+    "P06_PV25": "RQ08",
+    "PV26": "RQ11: conjunto cubierto o aborto/redescubrimiento"
+  },
+  "changes": {
+    "newBusinessImplementations": 0,
+    "newRoutes": 0,
+    "newMigrations": 0,
+    "newDependencies": 0,
+    "fixtureSequenceParameter": "Opcional, valor anterior 1 conservado; permite segundo alumno sin colisión de fixture"
+  },
+  "cases": [
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ00a auxiliar: fixture de compromiso vencido mantiene hechos históricos",
+      "status": "passed",
+      "durationMs": 814.3733010000001,
+      "businessApproved": false,
+      "classification": "AUXILIARY_ONLY",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ00b auxiliar: hechos de conversión son válidos y lector SQL espera FOR SHARE",
+      "status": "passed",
+      "durationMs": 1247.3332560000001,
+      "businessApproved": false,
+      "classification": "AUXILIARY_ONLY",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ00c auxiliar: sobreocupación física posible entre dos alumnos",
+      "status": "passed",
+      "durationMs": 635.790418,
+      "businessApproved": false,
+      "classification": "AUXILIARY_ONLY",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ00d legado 002 conserva contador no calculado, null/null",
+      "status": "passed",
+      "durationMs": 1001.5986160000002,
+      "businessApproved": false,
+      "classification": "LEGACY_002_CONFIRMED",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ01 oferta sin compromisos calcula capacidad real y evaluatedAt sin escribir",
+      "status": "failed",
+      "durationMs": 903.2226570000003,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ02 inventario efectivo RESERVED: no cuenta dos veces ni exige worker",
+      "status": "failed",
+      "durationMs": 661.6048740000006,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ02 inventario efectivo ENROLLED: no cuenta dos veces ni exige worker",
+      "status": "failed",
+      "durationMs": 658.9624329999997,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ02 inventario efectivo EXPIRED: no cuenta dos veces ni exige worker",
+      "status": "failed",
+      "durationMs": 708.6504960000002,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ02 inventario efectivo DEADLINE_PASSED: no cuenta dos veces ni exige worker",
+      "status": "failed",
+      "durationMs": 654.296530999999,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ02 inventario efectivo FINISHED: no cuenta dos veces ni exige worker",
+      "status": "failed",
+      "durationMs": 728.0170240000007,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ03 precio sin definir se conserva como ausencia; cero explícito es diferente",
+      "status": "failed",
+      "durationMs": 656.9369360000001,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ04 preview multigrupo totaliza en servidor sin admisión, plazo o retención",
+      "status": "failed",
+      "durationMs": 643.1855720000003,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ05 histórico original oculto sigue propio, sin habilitar pago",
+      "status": "failed",
+      "durationMs": 648.5993820000003,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ06 orden ajena y UUID inexistente producen la misma ausencia",
+      "status": "failed",
+      "durationMs": 628.6068060000016,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ07 current no confunde histórico EXPIRED con reserva vigente",
+      "status": "failed",
+      "durationMs": 861.3084739999995,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ07 current no confunde histórico ENROLLED con reserva vigente",
+      "status": "failed",
+      "durationMs": 1079.7930030000007,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ07 current no confunde histórico DEADLINE_PASSED con reserva vigente",
+      "status": "failed",
+      "durationMs": 646.2543740000001,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ08 P06/PV25 lector espera conversión y evalúa en sentencia posterior al bloqueo",
+      "status": "failed",
+      "durationMs": 665.1634939999985,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ09 inventario anómalo produce temporal, sin ceros ni clamp",
+      "status": "failed",
+      "durationMs": 808.5221860000001,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ10 timeout de lock 55P03 se traduce a temporal sin DTO parcial",
+      "status": "failed",
+      "durationMs": 636.2093100000002,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ11 PV26 topología nueva obliga redescubrir antes de proyectar toda la página",
+      "status": "failed",
+      "durationMs": 669.9732750000021,
+      "businessApproved": false,
+      "classification": "T034_QUERY_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ12 HTTP oferta devuelve DTO financiero y no-store",
+      "status": "failed",
+      "durationMs": 952.5663019999993,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ13 HTTP /enrollment/offerings exige sesión",
+      "status": "failed",
+      "durationMs": 830.1077779999978,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ13 HTTP /enrollment/orders exige sesión",
+      "status": "failed",
+      "durationMs": 814.7863199999993,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ13 HTTP /enrollment/orders/current exige sesión",
+      "status": "failed",
+      "durationMs": 811.6803700000019,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ13 HTTP /enrollment/reservation-requests exige sesión",
+      "status": "failed",
+      "durationMs": 748.4260340000001,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ14 HTTP query cerrada ?page",
+      "status": "failed",
+      "durationMs": 745.6737199999989,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ14 HTTP query cerrada ?pageSize",
+      "status": "failed",
+      "durationMs": 1288.256765000002,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ14 HTTP query cerrada ?studentId",
+      "status": "failed",
+      "durationMs": 703.674536999999,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ15 HTTP preview no crea solicitud ni retención",
+      "status": "failed",
+      "durationMs": 740.6796020000002,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ16 recuperación HTTP enumera solicitud propia sin posición de terceros",
+      "status": "failed",
+      "durationMs": 908.9145480000007,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "name": "RQ17 HTTP timeout de grupo devuelve 503 sin cifras ficticias",
+      "status": "failed",
+      "durationMs": 725.0703490000014,
+      "businessApproved": false,
+      "classification": "HTTP_ROUTE_404",
+      "reached": "Composición HTTP real; ruta pendiente devuelve 404",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T034",
+        "T035",
+        "T039"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00a auxiliar: oferta, precios y secuencias ficticias válidas",
+      "status": "passed",
+      "durationMs": 1268.685872,
+      "businessApproved": false,
+      "classification": "AUXILIARY_ONLY",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00b auxiliar: bloqueo real de DispatchState entre conexiones distintas",
+      "status": "passed",
+      "durationMs": 668.5501569999997,
+      "businessApproved": false,
+      "classification": "AUXILIARY_ONLY",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00c auxiliar: proceso Node separado conecta a su schema PG real",
+      "status": "passed",
+      "durationMs": 1168.3125799999998,
+      "businessApproved": false,
+      "classification": "AUXILIARY_ONLY",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00d auxiliar: reloj SQL cruza corte Lima exactamente un microsegundo",
+      "status": "passed",
+      "durationMs": 703.7973320000001,
+      "businessApproved": false,
+      "classification": "AUXILIARY_ONLY",
+      "reached": "Control real de fixture/barrera/reloj/subproceso o contrato legado",
+      "notReached": [],
+      "requiredTasks": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD13 TV12 reinicio de proceso real beforeCommit: decisión durable única",
+      "status": "failed",
+      "durationMs": 730.6861490000001,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD13 TV12 reinicio de proceso real afterCommit: decisión durable única",
+      "status": "failed",
+      "durationMs": 762.1888349999999,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD01 sin cola no crea efectos ni consulta AdmissionSequence",
+      "status": "failed",
+      "durationMs": 1357.7850899999994,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD02 confirmación multigrupo: total original y exactamente 24h con un token",
+      "status": "failed",
+      "durationMs": 842.7937069999989,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD03 RA-02 dos despachadores disputan última plaza sin saltar cabeza bloqueada",
+      "status": "failed",
+      "durationMs": 651.2392509999991,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD04 multigrupo rechaza todo cuando uno no tiene precio",
+      "status": "failed",
+      "durationMs": 633.7028250000003,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD05 precio concurrente: espera curso y congela importe posterior al commit",
+      "status": "failed",
+      "durationMs": 611.2988029999997,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD06 TV15 fallo real del INSERT de auditoría revierte orden, ítems y plazas",
+      "status": "failed",
+      "durationMs": 1382.7605539999986,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD07 TV10/19 40001: aborto después de reloj exige rollback y token nuevo",
+      "status": "failed",
+      "durationMs": 664.3751460000003,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD07 TV10/19 40P01: aborto después de reloj exige rollback y token nuevo",
+      "status": "failed",
+      "durationMs": 622.4283910000013,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD08 TV11 COMMIT con acuse perdido se recupera sin duplicar orden ni timestamps",
+      "status": "failed",
+      "durationMs": 711.8717519999991,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD09 TV12 reinicio del despachador tras aborto libera mutex y conserva cabeza durable",
+      "status": "failed",
+      "durationMs": 680.3117660000007,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD10 TV17/18 normaliza orden vencida fuera de selección con el mismo token final",
+      "status": "failed",
+      "durationMs": 790.4516689999982,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD11 TV06 espera grupo y cruza exactamente corte Lima antes de confirmar",
+      "status": "failed",
+      "durationMs": 783.6206359999996,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD12 55P03 no bucle inmediato; error temporal conserva ADMITTED",
+      "status": "failed",
+      "durationMs": 610.7950670000027,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD14 TV17 bloquea también grupo de orden anterior fuera de la nueva selección",
+      "status": "failed",
+      "durationMs": 635.0666659999988,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD15 TV19 cambia docente en descubrimiento: rollback y nueva cobertura antes del token",
+      "status": "failed",
+      "durationMs": 652.0849469999994,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD16 TV19 tres abortos PG 40001 agotan presupuesto y conservan ADMITTED",
+      "status": "failed",
+      "durationMs": 648.1595759999982,
+      "businessApproved": false,
+      "classification": "T031_T033_DISPATCH_ENTRY_ABSENT",
+      "reached": "Fixture PG válida y adaptador tipado de conformidad: falta fábrica de producto",
+      "notReached": [
+        "SQL, locks y captura final del objetivo",
+        "Resultado de negocio y comprobaciones posteriores del caso"
+      ],
+      "requiredTasks": [
+        "T031",
+        "T032",
+        "T033"
+      ]
+    }
+  ],
+  "commands": [
+    "npm exec --workspace apps/api -- vitest run tests/integration/reservations-dispatch.spec.ts tests/integration/enrollment-queries.spec.ts --maxWorkers=1 --reporter=default --reporter=json --outputFile=/reports/processing.json"
+  ]
+}

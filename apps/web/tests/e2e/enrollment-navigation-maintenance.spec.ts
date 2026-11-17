@@ -1,0 +1,54 @@
+import { randomUUID } from 'node:crypto';
+import type { BrowserContext,Page } from '@playwright/test';
+import { test,expect } from '../support/enrollment-admin-fixture';
+import { economicFingerprint } from '../../../api/tests/support/enrollment-admin-facts';
+import { advanceBrowserClockWithSessions } from '../support/enrollment-clock';
+const headers={origin:'http://localhost:5173','x-csrf-protection':'1'};
+async function identity(context:BrowserContext,secret:string){await context.clearCookies();await context.addCookies([{name:'av_session_dev',value:secret,url:'http://localhost:5173',httpOnly:true,sameSite:'Lax'}]);}
+async function withdraw(page:Page){await page.getByRole('button',{name:'Retirar grupo',exact:true}).click();await page.getByRole('dialog').getByRole('button',{name:'Confirmar retiro',exact:true}).click();await expect(page.getByLabel('Nombre',{exact:true})).toBeEnabled();}
+async function fits(page:Page){expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}
+test('NM01 órdenes propias navegables, recarga e historial oculto conservan referencia y plazo',async({page,context,payment})=>{
+  const before=await economicFingerprint(payment.pool);await identity(context,payment.prepared.actors.owner.secret);await page.goto('/mis-ordenes');
+  await page.getByRole('link',{name:'Consultar detalle original',exact:true}).click();await expect(page).toHaveURL('http://localhost:5173/mis-ordenes/'+payment.orderId);await page.reload();await expect(page.locator('time',{hasText:payment.original.expiresAt})).toBeVisible();
+  await payment.pool.query('UPDATE "AcademicCourse" SET state=\'WITHDRAWN\' WHERE id=$1',[payment.prepared.offer.courseId]);
+  await page.reload();await expect(page.getByText('Curso ficticio de reservas',{exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'Iniciar pago',exact:true})).toBeDisabled();
+  await page.getByRole('navigation',{name:'Reservas y órdenes'}).getByRole('link',{name:'Mis órdenes',exact:true}).click();await page.getByRole('link',{name:'Consultar orden vigente',exact:true}).click();await page.goBack();await expect(page).toHaveURL('http://localhost:5173/mis-ordenes');
+  expect(await economicFingerprint(payment.pool)).toBe(before);expect(payment.calls).toHaveLength(0);await fits(page);
+});
+test('NM02 matrículas ocultas e históricas conservan detalle y enlazan orden original',async({page,context,payment})=>{
+  await identity(context,payment.prepared.actors.owner.secret);const started=await page.request.post('/api/v1/enrollment/orders/'+payment.orderId+'/payment-attempts',{headers,data:{initiationId:randomUUID()}});expect(started.status()).toBe(200);expect((await payment.economicFact()).state).toBe('APPLIED');
+  await payment.pool.query('UPDATE "AcademicCourse" SET state=\'WITHDRAWN\' WHERE id=$1',[payment.prepared.offer.courseId]);const before=await economicFingerprint(payment.pool);
+  await page.goto('/mis-matriculas');await page.getByRole('link',{name:'Consultar detalle de la matrícula',exact:true}).first().click();const detailUrl=page.url();await page.reload();await expect(page.getByText('Matrícula vigente.',{exact:true})).toBeVisible();
+  await page.getByRole('link',{name:'Consultar orden original',exact:true}).click();await expect(page).toHaveURL('http://localhost:5173/mis-ordenes/'+payment.orderId);await expect(page.getByText('Orden matriculada. Consulta las condiciones originales.',{exact:true})).toBeVisible();await page.goBack();await expect(page).toHaveURL(detailUrl);
+  await advanceBrowserClockWithSessions(payment.applicationPool,payment.original.items[0].enrollmentValidUntil);
+  await page.reload();await expect(page.getByText('Matrícula histórica; su vigencia original ha terminado.',{exact:true})).toBeVisible();await expect(page.getByText(payment.original.items[0].enrollmentValidUntil,{exact:true})).toBeVisible();await page.getByRole('link',{name:'Volver a mis matrículas',exact:true}).click();await expect(page).toHaveURL('http://localhost:5173/mis-matriculas');
+  expect(await economicFingerprint(payment.pool)).toBe(before);expect(payment.calls).toHaveLength(1);await fits(page);
+});
+test('NM03 referencias ajenas y desconocidas dan mismo404 y logout no conserva detalles',async({page,context,payment})=>{
+  await identity(context,payment.prepared.actors.other.secret);const before=await economicFingerprint(payment.pool);
+  for(const id of [payment.orderId,randomUUID()]){const response=await page.request.get('/api/v1/enrollment/orders/'+id);expect(response.status()).toBe(404);expect((await response.json()).error.code).toBe('NOT_FOUND');await page.goto('/mis-ordenes/'+id);await expect(page.getByRole('alert')).toHaveText('Orden o solicitud no encontrada.');await expect(page.getByText('Curso ficticio de reservas',{exact:true})).toHaveCount(0);}
+  await identity(context,payment.prepared.actors.owner.secret);await page.goto('/mis-ordenes/'+payment.orderId);await expect(page.getByText('Curso ficticio de reservas',{exact:true})).toBeVisible();await page.getByRole('link',{name:'Inicio',exact:true}).click();await page.getByRole('button',{name:'Cerrar sesión',exact:true}).click();await page.goto('/mis-ordenes/'+payment.orderId);await expect(page).toHaveURL('http://localhost:5173/login');await expect(page.getByText('Curso ficticio de reservas',{exact:true})).toHaveCount(0);
+  expect(await economicFingerprint(payment.pool)).toBe(before);expect(payment.calls).toHaveLength(0);
+});
+test('NM04 reserva bloquea capacidad; descripción y nombre se guardan sin republicar ni reprecificar',async({page,context,payment})=>{
+  const before=await economicFingerprint(payment.pool);await identity(context,payment.prepared.actors.admin.secret);await page.goto('/admin/oferta/grupos/'+payment.prepared.offer.groupId);await expect(page.getByLabel('Nombre',{exact:true})).toBeDisabled();await withdraw(page);
+  await page.getByLabel('Capacidad máxima',{exact:true}).fill('3');await page.getByRole('button',{name:'Guardar grupo',exact:true}).click();await expect(page.getByRole('alert').filter({hasText:'El servidor impide esta operación'})).toBeVisible();await expect(page.getByLabel('Capacidad máxima',{exact:true})).toHaveValue('3');
+  expect((await payment.pool.query('SELECT capacity FROM "AcademicGroup" WHERE id=$1',[payment.prepared.offer.groupId])).rows[0].capacity).toBe(2);
+  await page.getByLabel('Capacidad máxima',{exact:true}).fill('2');await page.getByLabel('Nombre',{exact:true}).fill('Nombre corregido');await page.getByLabel('Descripción del grupo (opcional)',{exact:true}).fill('Descripción opcional guardada');
+  const request=page.waitForRequest(r=>r.method()==='PATCH'&&r.url().endsWith('/admin/academic/groups/'+payment.prepared.offer.groupId));await page.getByRole('button',{name:'Guardar grupo',exact:true}).focus();await page.keyboard.press('Enter');const body=(await request).postDataJSON();expect(Object.keys(body).sort()).toEqual(['commandId','description','expectedRevision','name']);await expect(page.getByRole('status').filter({hasText:'Cambios guardados.'})).toBeVisible();
+  expect((await payment.pool.query('SELECT name,description,state,capacity FROM "AcademicGroup" WHERE id=$1',[payment.prepared.offer.groupId])).rows[0]).toEqual({name:'Nombre corregido',description:'Descripción opcional guardada',state:'WITHDRAWN',capacity:2});expect(await economicFingerprint(payment.pool)).toBe(before);expect(payment.calls).toHaveLength(0);await fits(page);
+});
+test('NM05 incidencia mantiene bloqueo de horario y cancelación con borradores conservados',async({page,context,payment,adminScenario})=>{
+  const before=await adminScenario.fingerprint();await identity(context,payment.prepared.actors.admin.secret);await page.goto('/admin/oferta/grupos/'+payment.prepared.offer.groupId);await withdraw(page);
+  await page.getByLabel('Hora de inicio 1',{exact:true}).fill('17:00');await page.getByRole('button',{name:'Guardar horario',exact:true}).click();await expect(page.getByRole('alert').filter({hasText:'El servidor impide esta operación'})).toBeVisible();await expect(page.getByLabel('Hora de inicio 1',{exact:true})).toHaveValue('17:00');
+  await page.getByLabel('Hora de inicio 1',{exact:true}).fill('18:00');await page.getByRole('button',{name:'Cancelar grupo',exact:true}).click();await page.getByLabel('Motivo de cancelación',{exact:true}).fill('Prueba ficticia de bloqueo');await page.getByRole('dialog').getByRole('button',{name:'Confirmar cancelación',exact:true}).click();await expect(page.getByRole('dialog').getByRole('alert').filter({hasText:'El servidor impide esta operación'})).toBeVisible();await expect(page.getByLabel('Motivo de cancelación',{exact:true})).toHaveValue('Prueba ficticia de bloqueo');
+  expect((await payment.pool.query('SELECT state FROM "AcademicGroup" WHERE id=$1',[payment.prepared.offer.groupId])).rows[0].state).toBe('WITHDRAWN');expect((await payment.pool.query('SELECT "startMinute" FROM "AcademicSlot" WHERE "groupId"=$1',[payment.prepared.offer.groupId])).rows[0].startMinute).toBe(1080);expect(await adminScenario.fingerprint()).toBe(before);expect(await adminScenario.notes()).toBe(0);await fits(page);
+});
+test('NM06 conflicto conserva descripción y revisión hasta comparar y descartar explícitamente',async({page,context,payment})=>{
+  const before=await economicFingerprint(payment.pool);await identity(context,payment.prepared.actors.admin.secret);await page.goto('/admin/oferta/grupos/'+payment.prepared.offer.groupId);await withdraw(page);
+  const saved=(await payment.pool.query('SELECT revision::text FROM "AcademicGroup" WHERE id=$1',[payment.prepared.offer.groupId])).rows[0];await page.getByLabel('Descripción del grupo (opcional)',{exact:true}).fill('Mi borrador conservado');
+  const response=await page.request.patch('/api/v1/admin/academic/groups/'+payment.prepared.offer.groupId,{headers,data:{commandId:randomUUID(),expectedRevision:saved.revision,description:'Cambio concurrente'}});expect(response.status()).toBe(200);
+  await page.getByRole('button',{name:'Guardar grupo',exact:true}).click();await expect(page.getByRole('alert')).toHaveText('La oferta cambió. Recarga y compara antes de guardar.');await expect(page.getByLabel('Descripción del grupo (opcional)',{exact:true})).toHaveValue('Mi borrador conservado');
+  await page.getByRole('button',{name:'Consultar datos guardados',exact:true}).click();await expect(page.getByText('Descripción guardada: Cambio concurrente',{exact:true})).toBeVisible();await expect(page.getByLabel('Descripción del grupo (opcional)',{exact:true})).toHaveValue('Mi borrador conservado');await page.getByRole('button',{name:'Descartar edición y cargar datos guardados',exact:true}).click();await expect(page.getByLabel('Descripción del grupo (opcional)',{exact:true})).toHaveValue('Cambio concurrente');
+  expect(await economicFingerprint(payment.pool)).toBe(before);expect(payment.calls).toHaveLength(0);
+});

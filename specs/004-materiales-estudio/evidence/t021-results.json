@@ -1,0 +1,811 @@
+{
+  "clientDate": "2026-11-16",
+  "clientTimezone": "America/Lima",
+  "scope": "T021 persistent upload intention registration and status; no complete or HTTP handlers",
+  "tasks": {
+    "completed": 21,
+    "pending": 47
+  },
+  "validation": {
+    "red": {
+      "exitCode": 1,
+      "success": false,
+      "total": 18,
+      "passed": 0,
+      "failed": 18,
+      "pending": 0,
+      "files": 1,
+      "reportSha256": "6b4fb0109fd32b0edf29a79464f5d1888d9a7fc735939df234e28cadca5cd6d5",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-upload-intents.spec.ts",
+          "status": "failed",
+          "passed": 0,
+          "failed": 18,
+          "failureKinds": [
+            "Error: T021: persistent upload intentions not implemented"
+          ]
+        }
+      ]
+    },
+    "first": {
+      "exitCode": 0,
+      "success": true,
+      "total": 18,
+      "passed": 18,
+      "failed": 0,
+      "pending": 0,
+      "files": 1,
+      "reportSha256": "1cdf199a3de9bc35f52627b7619d46de9cad151e6aa957aaec1ffe0f98e2b9de",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-upload-intents.spec.ts",
+          "status": "passed",
+          "passed": 18,
+          "failed": 0,
+          "failureKinds": []
+        }
+      ]
+    },
+    "interim": {
+      "exitCode": 1,
+      "success": false,
+      "total": 886,
+      "passed": 885,
+      "failed": 1,
+      "pending": 0,
+      "files": 46,
+      "reportSha256": "40adc0201d3477985f475fdd680ef034547c31b799b2f92642097bfa99c82eb5",
+      "suites": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "status": "passed",
+          "passed": 24,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "status": "failed",
+          "passed": 6,
+          "failed": 1,
+          "failureKinds": [
+            "Error: Test timed out in 15000ms."
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/materials-admission.spec.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-errors.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-files.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-fixture.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-format.spec.ts",
+          "status": "passed",
+          "passed": 30,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-schema.spec.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-upload-intents.spec.ts",
+          "status": "passed",
+          "passed": 21,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/expire-reservations.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/follow-up.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/commitments.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+          "status": "passed",
+          "passed": 23,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-invariants.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-verification.test.ts",
+          "status": "passed",
+          "passed": 38,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+          "status": "passed",
+          "passed": 86,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "status": "passed",
+          "passed": 115,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+          "status": "passed",
+          "passed": 27,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "status": "passed",
+          "passed": 91,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "status": "passed",
+          "passed": 42,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        }
+      ]
+    },
+    "final": {
+      "exitCode": 0,
+      "success": true,
+      "total": 886,
+      "passed": 886,
+      "failed": 0,
+      "pending": 0,
+      "files": 46,
+      "reportSha256": "14af8da146146aeee4ffcc61dd0baf1de4ac7ada07da58f82e047183bfba8e44",
+      "suites": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "status": "passed",
+          "passed": 24,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-admission.spec.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-errors.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-files.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-fixture.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-format.spec.ts",
+          "status": "passed",
+          "passed": 30,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-schema.spec.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-upload-intents.spec.ts",
+          "status": "passed",
+          "passed": 21,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+          "status": "passed",
+          "passed": 27,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "status": "passed",
+          "passed": 91,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "status": "passed",
+          "passed": 42,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "status": "passed",
+          "passed": 115,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/expire-reservations.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/follow-up.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/commitments.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+          "status": "passed",
+          "passed": 23,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-invariants.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-verification.test.ts",
+          "status": "passed",
+          "passed": 38,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+          "status": "passed",
+          "passed": 86,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        }
+      ]
+    },
+    "lintApiExitCode": 0,
+    "apiMaterialsTypecheckExitCode": 0,
+    "prismaGenerateExitCode": 0,
+    "apiBuildExitCode": 0,
+    "intentCasesPassed": 21,
+    "previousRegressionPassed": 865,
+    "finalMaxWorkers": 2,
+    "corrections": [
+      "Initial strict build failure from untyped Object.freeze adapter parameters; use explicit store interface",
+      "Full selection first had 1 ESLint architecture test timeout at 15000ms; repeated with maxWorkers=2 and same timeout/code"
+    ]
+  },
+  "preservation": {
+    "comparedFiles": 46,
+    "changedFiles": [
+      "apps/api/src/modules/materials/application/ports.ts",
+      "specs/004-materiales-estudio/tasks.md",
+      "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "apps/api/src/app.module.ts",
+      "specs/004-materiales-estudio/verification.md"
+    ],
+    "onlyExpectedFilesChanged": true,
+    "checkpoints": [
+      {
+        "path": "specs/004-materiales-estudio/evidence/t005-t008-results.json",
+        "sha256": "638bfc50b4e1b33393d0a9b780a97e3fcaccce3d2b1a0e80deb3ada95def1578"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+        "sha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t017-t019-results.json",
+        "sha256": "ae0866a5e9e86aaeeb1b2201156a48311b1cf27df9c2c46751adfa78dd17f87a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t020-results.json",
+        "sha256": "1b248cc05182b101e9d1acf889d2137ad6503a851558c4e9cc8e86b15f9e622d"
+      }
+    ],
+    "migrationsChanged": false,
+    "dependenciesChanged": false,
+    "materialsHttpAndUiTestsChanged": false,
+    "manualDataChanged": false
+  },
+  "files": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "fe80c5fa70ccab5318c30af6cf3c122e55d3638a05cc3aaa33f5d93f777f2d27"
+    },
+    {
+      "path": "apps/api/src/modules/materials/application/ports.ts",
+      "sha256": "f516dd7adf410da39c19d5bc741a2304f64d8cd9e29ee5d172b326bdb9b999bd"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "bd8b1feb0fd6677f2e8d805c23977cdcce97e5c08e16b56d600ee4677743a9b1"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "c66ac2aa555a2582780b515d7dd3cc3887d094c6599a4432c0b375aca03e2e8f"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "1254c9ab028fa7f1b1d7e5a8e09d593e93e4dabde6ca1679b66e8f4dfbf7cc7b"
+    },
+    {
+      "path": "apps/api/src/modules/materials/application/uploads.ts",
+      "sha256": "258f2ba85b9f5a2fc8a62edd39bddf334572c05db04fba47083d014803c5011b"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/uploads.ts",
+      "sha256": "f234f598f051cd7ba93be059341944e3d4f1161c7cb297cdf70e2ee22b5dfd69"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-upload-intents.spec.ts",
+      "sha256": "1a82c18f54756521df6fabf90a1b8c8d8488ad8bfeb3da374e1511fcacf475a7"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t021.md",
+      "sha256": "7d55796166c6ecb98b33b7cb821433dfd4e7339dec1b2b09b5abaada8876d3b5"
+    }
+  ],
+  "limitations": [
+    "No complete/content commit or publication implementation; T022-T023 pending",
+    "No materials HTTP routes or UI; T018/T019 not rerun because behavior is still absent",
+    "COMPLETED fixture status/replay is not proof of complete upload behavior",
+    "Concurrent registration tested in real PostgreSQL; no multi-process restart or uncertain COMMIT fault injection in this block",
+    "No intention quota or purge/TTL; quota policy remains T032",
+    "No US1 acceptance or closure of US2/US3, human acceptance, D10/D13"
+  ]
+}

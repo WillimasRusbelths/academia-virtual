@@ -4,6 +4,7 @@ import type { Environment } from '../infrastructure/config/environment.js';
 import { SafeErrorFilter, TransportFailure, type HttpRequest, type HttpResponse } from './error.filter.js';
 import { securityEvents } from '../infrastructure/logging/security-events.js';
 import type { SecurityEvents } from '../infrastructure/logging/security-events.js';
+import { binaryMaterialUploadId } from '../infrastructure/http/materials-contract.js';
 
 /** Valida forma y tipos, sin convertir valores ni contener reglas del negocio. */
 export function strictDto(body: unknown, schema: Record<string, (value: unknown) => boolean>): Record<string, unknown> {
@@ -30,7 +31,12 @@ export function configureTransport(app: NestExpressApplication,
     if (request.method === 'OPTIONS') return next(new TransportFailure(403, 'REQUEST_NOT_ALLOWED'));
     if (['POST', 'PATCH', 'PUT', 'DELETE'].includes(request.method)) {
       const type = request.headers['content-type'];
-      if (typeof type !== 'string' || !/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(type)) return next(new TransportFailure(415, 'UNSUPPORTED_MEDIA_TYPE'));
+      const binary = binaryMaterialUploadId(request.method, request.originalUrl ?? request.url ?? '') !== null;
+      if (binary) {
+        const encoding = request.headers['content-encoding'];
+        if (typeof type !== 'string' || !/^application\/octet-stream$/i.test(type)
+          || encoding !== undefined && (typeof encoding !== 'string' || !/^identity$/i.test(encoding))) return next(new TransportFailure(415, 'UNSUPPORTED_MEDIA_TYPE'));
+      } else if (typeof type !== 'string' || !/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(type)) return next(new TransportFailure(415, 'UNSUPPORTED_MEDIA_TYPE'));
       if (request.headers.origin !== environment.appOrigin || request.headers['x-csrf-protection'] !== '1'
         || request.headers['sec-fetch-site'] === 'cross-site') return next(new TransportFailure(403, 'REQUEST_NOT_ALLOWED'));
     }

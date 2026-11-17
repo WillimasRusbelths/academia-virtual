@@ -1,0 +1,50 @@
+{
+  "clientDate": "2026-11-17",
+  "request": "termina todo esos",
+  "status": "partial-decisions-recorded-external-equipment-unavailable",
+  "completed": 65,
+  "pending": [
+    "T065",
+    "T066",
+    "T068"
+  ],
+  "existingFilesCompared": 1117,
+  "historicalCheckpointsVerified": 30,
+  "changedFiles": [
+    "specs/004-materiales-estudio/operation.md",
+    "specs/004-materiales-estudio/capacity.md"
+  ],
+  "onlyExpectedDocumentationChanged": true,
+  "decisions": {
+    "externalBackupDestination": "another-computer-not-yet-identified-or-verified",
+    "copyCustodian": "person-in-charge-receiving-software",
+    "keyCustodian": null,
+    "loadGenerator": "another-computer-not-available",
+    "rubricProvided": false,
+    "proposedRpoRtoRetentionAccepted": false
+  },
+  "localLinksChecked": 21,
+  "localLinksValid": true,
+  "newFunctionalTestsRun": false,
+  "externalLoadRun": false,
+  "externalRecoveryRun": false,
+  "extensionsFilePresent": false,
+  "files": [
+    {
+      "path": "specs/004-materiales-estudio/operation.md",
+      "sha256": "c74c22dbd8e3514c21833f54c6335da9e735218bdd5abcca30c1e4fae8148130"
+    },
+    {
+      "path": "specs/004-materiales-estudio/capacity.md",
+      "sha256": "34b0caa50051bf2afb192c92688f813410ae230945fc0873c3557d2cb7f58fd7"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/closure-decisions-proposal.md",
+      "sha256": "e070d60d6ae719fe6963170144d5e9ee7f118431d042751c576fa5544e279480"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/closure-followup.md",
+      "sha256": "e7a7f3baf18d132756c22764189a494b0325ac8c53ec297e19c0027248ae9448"
+    }
+  ]
+}

@@ -1,0 +1,473 @@
+{
+  "clientDate": "2026-11-17",
+  "clientTimezone": "America/Lima",
+  "scope": "T061 material backup inventory and operational rehearsal; T062 real 0007 upgrade, restart, encrypted backup/restore and post-backup decision review",
+  "tasks": {
+    "completed": 62,
+    "pending": 6
+  },
+  "validation": {
+    "phases": [
+      {
+        "phase": "legacy",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "reportSha256": "89561e259fedfbefabb8c96b784d25613057ac2afbe41d2744ee51164607c2ad",
+        "cases": [
+          {
+            "title": "T062 recuperación de materiales: legacy",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "phase": "upgrade",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "reportSha256": "58af2858dd07a8c26b75973563c4af5146867ac88228bf8347e2574fe3f964ae",
+        "cases": [
+          {
+            "title": "T062 recuperación de materiales: upgrade",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "phase": "restart",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "reportSha256": "d1c57fe37367d87dba521a298fd5f7e2774df9ad6793a542d1cf37e8f79f4015",
+        "cases": [
+          {
+            "title": "T062 recuperación de materiales: restart",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "phase": "postbackup",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "reportSha256": "f67d01d1ca9bfbf7d06b2819f2596309a48111620619bfa387a25bab35b3b810",
+        "cases": [
+          {
+            "title": "T062 recuperación de materiales: postbackup",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "phase": "restore",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "reportSha256": "7f60f2d8e3563e861544489f18877a8b52197c9140783dee6a61bcebf8a1f864",
+        "cases": [
+          {
+            "title": "T062 recuperación de materiales: restore",
+            "status": "passed"
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "project": "materials-recovery-3e77cfc34ca8",
+      "apiImageId": "sha256:c13d8310193527418bb97f706420959e5ba9dc33815f6e99a46d179ed8fc68a8",
+      "configurationPreserved": true,
+      "sourceManifestVerified": true,
+      "oldRevision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+      "candidateRevision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+      "candidateMigrationSha256": "2a8d81ab2a22385583f91232df44f43a8819188ebf37560d381c74035aae57cf",
+      "failedMigrationVerified": true,
+      "materialsInventoryVerified": true,
+      "backup": {
+        "format": "ACADBKP1",
+        "postgresMajor": 16,
+        "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+        "startedAt": "2026-11-17T15:13:08.6470533Z",
+        "completedAt": "2026-11-17T15:13:09.9428673Z",
+        "plainSha256": "8762187854ad6295311e446f4c8e3f3defae23c1e3d9b1121fc80ba66256bf89",
+        "cipherSha256": "4c59a55f9ba3e747cd641e566ce5d2d1412b0c9ba74f318289be81e4dffa9463",
+        "cipherBytes": 198688,
+        "restored": false,
+        "materials": {
+          "items": [
+            {
+              "id": "1882800e-5ef3-4692-abbd-2d7a72235076",
+              "state": "WITHDRAWN",
+              "groupId": "1993cad5-ca39-4b7a-b4c7-fc57d5e2237b",
+              "byteSize": 67,
+              "revision": "2",
+              "createdBy": "eb8e0424-c1b2-452c-9c5a-d3e53c5bf20f",
+              "mediaType": "image/png",
+              "updatedBy": "a18defda-44fd-4903-8159-84fca21a23d3",
+              "bytesSha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108",
+              "storedSha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108",
+              "metadataSha256": "443c9355e19408698c5d302be88cd6ec6a37f7067358bce2b964c8d3f13deda6"
+            },
+            {
+              "id": "9c23b664-edb0-496c-b976-41c60c0c6661",
+              "state": "PUBLISHED",
+              "groupId": "1993cad5-ca39-4b7a-b4c7-fc57d5e2237b",
+              "byteSize": 137,
+              "revision": "2",
+              "createdBy": "eb8e0424-c1b2-452c-9c5a-d3e53c5bf20f",
+              "mediaType": "image/jpeg",
+              "updatedBy": "a18defda-44fd-4903-8159-84fca21a23d3",
+              "bytesSha256": "d7e98b662c74dcc8fd2a62381df06a4baf558919188bea95c09f06ee8da7a737",
+              "storedSha256": "d7e98b662c74dcc8fd2a62381df06a4baf558919188bea95c09f06ee8da7a737",
+              "metadataSha256": "e2a2c1238994454db8265f284e17c672116643ec66334496c0bbf609ce6eca1a"
+            },
+            {
+              "id": "9e279caa-4937-4800-ab3b-3a24cee99bf7",
+              "state": "PUBLISHED",
+              "groupId": "1993cad5-ca39-4b7a-b4c7-fc57d5e2237b",
+              "byteSize": 417,
+              "revision": "3",
+              "createdBy": "eb8e0424-c1b2-452c-9c5a-d3e53c5bf20f",
+              "mediaType": "application/pdf",
+              "updatedBy": "ae301e10-4d3f-416b-8c9f-ec90dd759986",
+              "bytesSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "storedSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "metadataSha256": "860edac52bf5cd4004d281046b5125a16e0e176c3b2b2fde877d02adc42eccc7"
+            },
+            {
+              "id": "a4993151-c014-44b0-8304-fa0f482822eb",
+              "state": "PREPARED",
+              "groupId": "1993cad5-ca39-4b7a-b4c7-fc57d5e2237b",
+              "byteSize": 417,
+              "revision": "1",
+              "createdBy": "eb8e0424-c1b2-452c-9c5a-d3e53c5bf20f",
+              "mediaType": "application/pdf",
+              "updatedBy": "eb8e0424-c1b2-452c-9c5a-d3e53c5bf20f",
+              "bytesSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "storedSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "metadataSha256": "43243295e7c32e08150426cc56a9a795ec98a99a819d344a5bde6b63170dfab9"
+            },
+            {
+              "id": "a94887b0-4f66-43ec-bb57-53621b308d76",
+              "state": "PUBLISHED",
+              "groupId": "1993cad5-ca39-4b7a-b4c7-fc57d5e2237b",
+              "byteSize": 67,
+              "revision": "2",
+              "createdBy": "eb8e0424-c1b2-452c-9c5a-d3e53c5bf20f",
+              "mediaType": "image/png",
+              "updatedBy": "a18defda-44fd-4903-8159-84fca21a23d3",
+              "bytesSha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108",
+              "storedSha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108",
+              "metadataSha256": "c08510a1d1b0433e199c0680ba0f43154968326a061f87a56b027f310714bb62"
+            },
+            {
+              "id": "dfe0ae0d-5fab-4241-9fd4-573c3e677b2a",
+              "state": "PUBLISHED",
+              "groupId": "f91196a5-20d5-4b20-8de2-30cab734dbc2",
+              "byteSize": 417,
+              "revision": "2",
+              "createdBy": "a18defda-44fd-4903-8159-84fca21a23d3",
+              "mediaType": "application/pdf",
+              "updatedBy": "a18defda-44fd-4903-8159-84fca21a23d3",
+              "bytesSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "storedSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "metadataSha256": "682fe3b4d0b0742315c7aedae13d775222f54494cef2c5ba380d2efc7fa9ca3d"
+            }
+          ],
+          "format": "materials-inventory-v1",
+          "schema": "t_materials_recovery_d811fad40784",
+          "durable": [
+            {
+              "name": "MaterialAuditEvent",
+              "rows": 12,
+              "sha256": "2ff58ef0bd5e9de6e57d906d124190c70fe0e198fd8eca73a6c018e85f21e857"
+            },
+            {
+              "name": "MaterialCommand",
+              "rows": 6,
+              "sha256": "a590c78a41ae202f05fd836687596feab334fa6de04620178c76b3b7fae6a57f"
+            },
+            {
+              "name": "MaterialUpload",
+              "rows": 7,
+              "sha256": "ecb459615852c3cd660cb7183f74d26b5e8f3624cad4a4f58157f28f876e2e31"
+            }
+          ],
+          "byteCount": 1522,
+          "contentCount": 6,
+          "materialCount": 6,
+          "allContentHashesVerified": true
+        },
+        "materialsInventorySha256": "1f153d5bdd37d544c93dc7d8fe715946d575de9e4946088bd8b75113a3253675"
+      },
+      "restore": {
+        "database": "recovery_3e77cfc34ca8_test",
+        "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+        "startedAt": "2026-11-17T15:13:59.0952683Z",
+        "completedAt": "2026-11-17T15:14:02.8861203Z",
+        "archiveSha256": "4c59a55f9ba3e747cd641e566ce5d2d1412b0c9ba74f318289be81e4dffa9463",
+        "restored": true,
+        "trafficReady": false,
+        "materialsVerified": true
+      },
+      "failureAt": "2026-11-17T15:13:57.4144740Z",
+      "finishedAt": "2026-11-17T15:15:04.3026176Z",
+      "rpoUpperSeconds": 48.767420699999995,
+      "rtoSeconds": 66.88814359999999,
+      "knownLostChanges": 2,
+      "legacyBackup": {
+        "format": "ACADBKP1",
+        "postgresMajor": 16,
+        "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+        "startedAt": "2026-11-17T15:12:09.6944902Z",
+        "completedAt": "2026-11-17T15:12:10.3149714Z",
+        "plainSha256": "fdb036bfd7409246cc08fcb8f9eed2530b58fa63a2b0dba2e2285133d5bdf790",
+        "cipherSha256": "7d4af9db8d30c02951607824ee6482c94a0bb1cb53d3b41c9513d217c8e96475",
+        "cipherBytes": 161144,
+        "restored": false
+      },
+      "automated": true,
+      "manualAcceptance": false
+    },
+    "restored": {
+      "snapshotEqualBeforeInvalidation": true,
+      "catalogAndAclEqual": true,
+      "fullBytesHashesEqual": true,
+      "allStatesAndFormats": true,
+      "authorAndGroupPreserved": true,
+      "oldSessionsDenied": true,
+      "freshLoginPermissionsChecked": true,
+      "expiredEnrollmentStillDenied": true,
+      "unauthorizedTeacherDenied": true,
+      "pendingNotCompleted": true,
+      "ledgerReplayPreserved": true,
+      "knownLostChanges": 2,
+      "reviewedWithdrawalReapplied": 1,
+      "publicationNotAutomaticallyReplayed": true,
+      "financesPreserved": true,
+      "trafficOpened": false,
+      "counts": {
+        "AcademicAuditEvent": "0",
+        "AcademicCommand": "0",
+        "AcademicCourse": "1",
+        "AcademicGroup": "2",
+        "AcademicSlot": "1",
+        "ActionToken": "0",
+        "AdmissionSequence": "1",
+        "AuditEvent": "0",
+        "CoursePrice": "1",
+        "DispatchState": "1",
+        "Enrollment": "2",
+        "EnrollmentAuditEvent": "1",
+        "EnrollmentCommand": "1",
+        "EnrollmentOrder": "2",
+        "EnrollmentOrderItem": "2",
+        "IncidentFollowUp": "1",
+        "MailDelivery": "0",
+        "Material": "6",
+        "MaterialAuditEvent": "12",
+        "MaterialCommand": "6",
+        "MaterialContent": "6",
+        "MaterialUpload": "7",
+        "PaymentAttempt": "1",
+        "PaymentIncident": "1",
+        "ProviderReceipt": "1",
+        "RateBucket": "0",
+        "RateEvent": "0",
+        "ReservationRequest": "2",
+        "SeatReservation": "2",
+        "Session": "9",
+        "SystemState": "1",
+        "User": "15",
+        "VerifiedPayment": "3",
+        "_prisma_migrations": "9"
+      }
+    },
+    "guards": {
+      "passed": 5,
+      "failed": 0,
+      "existingDatabasePreserved": true,
+      "invalidInputCreatedDatabase": false,
+      "partialPlaintextRemoved": true
+    },
+    "archiveTestsPassed": 7,
+    "timeTestsPassed": 2,
+    "lintApiExitCode": 0,
+    "recoveryTypecheckExitCode": 0,
+    "apiBuildExitCode": 0,
+    "summarySha256": "2497da28bc473dfd718b57f2797ccaca2837b507a6097803958936127aaa6738",
+    "restoreSummarySha256": "f2eddabecec24ff511c8bfb344c65edf5383ba789097868eeebe59293f2eba72",
+    "sourceManifestSha256": "621e4632584fdfef1ac973d2bae3c0701e76ed83208baf9c868ec64303a6e9eb"
+  },
+  "preservation": {
+    "comparedFiles": 1094,
+    "changedFiles": [
+      "ops/recovery/backup.ps1",
+      "ops/recovery/README.md",
+      "ops/recovery/restore-check.ps1",
+      "specs/004-materiales-estudio/quickstart.md",
+      "specs/004-materiales-estudio/tasks.md",
+      "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "specs/004-materiales-estudio/verification.md"
+    ],
+    "onlyExpectedFilesChanged": true,
+    "productUnchanged": true,
+    "previousTestsUnchanged": true,
+    "migrationsUnchanged": true,
+    "dependenciesUnchanged": true,
+    "branchUnchanged": true,
+    "manualEnvironmentUnchanged": true,
+    "labStoppedVolumePreserved": true,
+    "checkpoints": [
+      {
+        "path": "specs/004-materiales-estudio/evidence/t001-baseline.json",
+        "sha256": "f9d6286c065988a6308dde38cbf17cc60e02d26fcf10ba50af7eccfe4aa6d052"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t005-t008-results.json",
+        "sha256": "638bfc50b4e1b33393d0a9b780a97e3fcaccce3d2b1a0e80deb3ada95def1578"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+        "sha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t017-t019-results.json",
+        "sha256": "ae0866a5e9e86aaeeb1b2201156a48311b1cf27df9c2c46751adfa78dd17f87a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t020-results.json",
+        "sha256": "1b248cc05182b101e9d1acf889d2137ad6503a851558c4e9cc8e86b15f9e622d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t021-results.json",
+        "sha256": "77300d9032c75d57b4bf518886df927e11210d19a9b6c6e4892f123b9a91b660"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t022-results.json",
+        "sha256": "8592260ff8e79d094752f0c8c4000f269394029a38e1365af78c8aca196f7d8e"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t023-t024-results.json",
+        "sha256": "505a22028c03b04590998cfbbd68b25cef5f8f0bf73c2b6a95c936a2e0dc9c38"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t025-t026-results.json",
+        "sha256": "113f2bc93f41a92a8f7c9e9175c697d192e096cfc6606b9f6d3b4ba941e7156a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t027-t029-results.json",
+        "sha256": "63199b64369291a726e2b4e4653208192825e13a09c68f2f410df692695a304d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t030-t032-results.json",
+        "sha256": "a094a5b58c9c1db1d313cba2962c283d5cbbff1175a7cc60f4b65e32eee035ed"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t033-t034-results.json",
+        "sha256": "39efe9eab19e52880acbb85034a6d1c469f331e165519ae90589dd408d8cfde6"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t035-t036-results.json",
+        "sha256": "3cc1e88ef13edaaf661a51fed53caaf48c078cc8050cfec87d3e3deaf2409d30"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t037-t038-results.json",
+        "sha256": "599d0d445cb2fa48d12dadc0944875d8f024948428f7216c1c12718584f0c480"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t039-t040-results.json",
+        "sha256": "477e8bce6245361bd089caf663b2cc261379dc7bbcd1946907db3af2339b8eeb"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t041-t042-results.json",
+        "sha256": "39035658f20dfd567bf9d51c9c2a0917a468e34f390ef3c605e119233c67ff9a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t043-t044-results.json",
+        "sha256": "d6acea1dff1457bd95339b3b0a715185fd392ba011b34fb1cfb220f2d71342a7"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t045-t047-results.json",
+        "sha256": "d02632a7e11c29b84e00c1ede57247c97ea6f1043b9c3fd9403dbab26a16d63b"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t048-t050-results.json",
+        "sha256": "41069c87773eef76bce63c1b35e63881e17083eca15a30bcc02abaf2c236a11b"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t051-t053-results.json",
+        "sha256": "49a8c34a786f4a3818b2d4e22a7ba7548adc98e3e6e2dcb9066d267b84dee235"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t054-t056-results.json",
+        "sha256": "bd63a0c2f8fb6032d3cfe350194f2ffa12cfee7d4a05df6af83839ab4d7b3a4a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t057-t059-results.json",
+        "sha256": "61e5b6cfd2486d87a735a2e94a9c39975749d6ccb123affb21ab4f07aeb5a03c"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t060-results.json",
+        "sha256": "dd74568a1c5115bb928e41a2a3124b0052155fad74d1da6d1826702b686f2a3c"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "ops/recovery/backup.ps1",
+      "sha256": "7ee875592e499cbe2c5782e25b6f149beb51aa53e4a85d68120afc7462d23f5f"
+    },
+    {
+      "path": "ops/recovery/restore-check.ps1",
+      "sha256": "1ac1c42ec267c0e8dfa0515b536b7c4d6e6adf3acff478b7ea686dc72845f31b"
+    },
+    {
+      "path": "ops/recovery/README.md",
+      "sha256": "6c9d3a7b7aadb6b1b01072aea7c57dc4a5d57c49c3ae0d9b6f4cba4dab050043"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "aad2a50b0705af08dff12a77944e206201ec84242ba561fed4bbc60a45855d98"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "d5168663059ec2a422fd541039241619e5bfb9faa23e092d3bb5bcc8ce92a267"
+    },
+    {
+      "path": "specs/004-materiales-estudio/quickstart.md",
+      "sha256": "8e931843f9b3186992aabc0eb8beebecce8f757dc2e6a5118c2006accbe66b84"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "bbfca88b78f6284d448229ce654a1b6ed82cf4d61b5638334e7de91efcbdd28c"
+    },
+    {
+      "path": "ops/recovery/materials-inventory.ps1",
+      "sha256": "5d5e7b6d6cac172188966d0cd0653c39b91d2fc8b7aac062912f43b5ec75caa0"
+    },
+    {
+      "path": "ops/recovery/materials-inventory.sql",
+      "sha256": "529ff9faee921352d61cedb9d71482ddb6aba44867975658f12e3df8f88608ce"
+    },
+    {
+      "path": "ops/recovery/rehearse-materials.ps1",
+      "sha256": "456f7e9ca17eb4583f54907b09608d3db6182d511c0557cc01bb2ac4adb069ce"
+    },
+    {
+      "path": "apps/api/tests/recovery/materials-rehearsal.spec.ts",
+      "sha256": "944c79a15068b03620466576be73a40dd886b464818ca9479a789093a7a910c4"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/recovery.md",
+      "sha256": "074d01325a63b4875841c13fed92ef00a6996a0eb60d8f34f00a0372a002cc6a"
+    }
+  ],
+  "limitations": [
+    "Automatic local fixture rehearsal, no real human acceptance or public traffic",
+    "D13 custody/retention/RPO/RTO not accepted; key and archive on the same host in separate private directories",
+    "No physical capacity/resource acceptance D10 or T063 measurements",
+    "No CI remote run, sandbox payment, real 24-hour operation, deployment or closure of 001–003"
+  ]
+}

@@ -1,0 +1,409 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Lima",
+  "baseCommit": "48a8087",
+  "branch": "feat/002-oferta-academica",
+  "finding": {
+    "id": "H-CAP-01",
+    "severity": "MEDIA",
+    "requirements": [
+      "FR-006",
+      "FR-009",
+      "FR-014",
+      "SC-002"
+    ],
+    "status": "FIXED_AUTOMATED",
+    "humanAcceptance": false
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "appEnv": "test",
+    "publishedPorts": 0,
+    "manualMounts": 0,
+    "manualStateUnchanged": true,
+    "manualSqlExecuted": false,
+    "isolatedSqlExecuted": true,
+    "isolatedSchemasRemaining": 0,
+    "isolatedServicesStopped": true,
+    "volumesRetained": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "host": {
+      "ServerVersion": "29.8.1",
+      "OSType": "linux",
+      "Architecture": "x86_64",
+      "NCPU": 8,
+      "MemTotal": 7236878336
+    },
+    "images": [
+      "sha256:e62c102599d11930d040d9fe9cc468e40580a1522158d526f7e15cfa352e43b6 linux amd64",
+      "sha256:0fbf9b733a9a304c6b15600527a256f4cdd2fe0312482bc049a5c8ea99108128 linux amd64"
+    ],
+    "runtime": {
+      "node": "v22.23.1",
+      "npm": "10.9.8",
+      "timezone": "America/Lima",
+      "configs": [
+        {
+          "path": "apps/web/playwright.academic-offering.config.ts",
+          "sha256": "86869d54e41678c8b5a30f62d75faf0cf4fc7bd0bdf0944c05989748c13b3ddb"
+        },
+        {
+          "path": "apps/web/playwright.accessibility.config.ts",
+          "sha256": "63756ae84817243d3920f30a363a025981154d4e244782ef91046882728dd8a3"
+        },
+        {
+          "path": "apps/web/playwright.admin-users.config.ts",
+          "sha256": "bdfbf51c06facc533f5f7eeab39ca8fb1eb202f5fc18ddebf13251cc5f0d0d4e"
+        },
+        {
+          "path": "apps/web/playwright.config.ts",
+          "sha256": "9c9328778ebb052d4b721f6fa1e445b6cda6d5ca43d99cc25cb970447a2f5667"
+        },
+        {
+          "path": "apps/web/playwright.first-admin.config.ts",
+          "sha256": "a7660c23d106673125d3b38c882775f4d534e61ae662d68526a496f425d27be2"
+        },
+        {
+          "path": "apps/web/playwright.identity.config.ts",
+          "sha256": "1a2934126196abe26893833e665c1aacaf361ed00f7e2a5c37d295ec8731826a"
+        },
+        {
+          "path": "apps/web/playwright.login-timing.config.ts",
+          "sha256": "78a418d37d82dcb3f2148cdd8d1a29553ef277a8a9a3140da7f7d4e4bf7cf051"
+        },
+        {
+          "path": "apps/web/playwright.password-reset.config.ts",
+          "sha256": "cdbd6c41510533dd470bd1a136f47071b5c1180ceb2e231a90faa027b80b8f9e"
+        },
+        {
+          "path": "apps/web/playwright.profile.config.ts",
+          "sha256": "3f2c503ba5a127876db8b8d7bc05f2de788c92cdcd1b16047a7d5c90baa6b53c"
+        },
+        {
+          "path": "apps/web/playwright.registration.config.ts",
+          "sha256": "e5f13410c7108b7775f07e5bdf75e58ef9a7216817b4c12aafcfffcbb7487164"
+        },
+        {
+          "path": "apps/web/playwright.security.config.ts",
+          "sha256": "570883178862adab34be73655079e8e106777c724a8c45e232978b1b5af412df"
+        }
+      ]
+    }
+  },
+  "tests": {
+    "red": {
+      "uniqueCases": 1,
+      "executions": 1,
+      "expectedFailures": 1,
+      "exitCode": 1,
+      "stats": {
+        "startTime": "2026-10-30T01:11:36.024Z",
+        "duration": 19487.281,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cause": "B03 llega a /oferta y no encuentra el texto exacto Ocupación y disponibilidad no calculadas. No hay fallos de infraestructura/imports/fixtures.",
+      "subsequentAssertionsNotReachedUntilGreen": true
+    },
+    "e2e": {
+      "uniqueCases": 10,
+      "executions": 20,
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "timeoutMs": 15000,
+      "stats": {
+        "startTime": "2026-10-30T01:12:44.524Z",
+        "duration": 162827.29,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "name": "B01 US2.1 grupo incompleto informa campos y no publica parcialmente",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3609
+        },
+        {
+          "name": "B02 US2.2 confirmación/cancelación y publicación real de curso y dos grupos, sin publicación implícita",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 7512
+        },
+        {
+          "name": "B03 US2.3/4 compara dos grupos, datos completos, capacidad máxima y privacidad, solo teclado",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 5045
+        },
+        {
+          "name": "B04 US2.5 vacío publicado distinto de error y sin acciones de compra",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2705
+        },
+        {
+          "name": "B05 US2.5 fallo SQL real y reintento manual; nunca vacío ficticio",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2437
+        },
+        {
+          "name": "B06 US2.6 retirada de grupo: enlace previo no disponible, sin causa privada",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 4182
+        },
+        {
+          "name": "B06 US2.6 retirada de curso: enlace previo no disponible, sin causa privada",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3051
+        },
+        {
+          "name": "B07 VISITOR: catálogo directo exige audiencia autorizada",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1161
+        },
+        {
+          "name": "B07 TEACHER: catálogo directo exige audiencia autorizada",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1547
+        },
+        {
+          "name": "B08 administrador consulta misma oferta pública, sin incidencias privadas",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3386
+        },
+        {
+          "name": "B01 US2.1 grupo incompleto informa campos y no publica parcialmente",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4277
+        },
+        {
+          "name": "B02 US2.2 confirmación/cancelación y publicación real de curso y dos grupos, sin publicación implícita",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 8120
+        },
+        {
+          "name": "B03 US2.3/4 compara dos grupos, datos completos, capacidad máxima y privacidad, solo teclado",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 6437
+        },
+        {
+          "name": "B04 US2.5 vacío publicado distinto de error y sin acciones de compra",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3204
+        },
+        {
+          "name": "B05 US2.5 fallo SQL real y reintento manual; nunca vacío ficticio",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2159
+        },
+        {
+          "name": "B06 US2.6 retirada de grupo: enlace previo no disponible, sin causa privada",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3051
+        },
+        {
+          "name": "B06 US2.6 retirada de curso: enlace previo no disponible, sin causa privada",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3772
+        },
+        {
+          "name": "B07 VISITOR: catálogo directo exige audiencia autorizada",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1843
+        },
+        {
+          "name": "B07 TEACHER: catálogo directo exige audiencia autorizada",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1491
+        },
+        {
+          "name": "B08 administrador consulta misma oferta pública, sin incidencias privadas",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2510
+        }
+      ]
+    },
+    "unitWeb": {
+      "files": 11,
+      "total": 188,
+      "passed": 188,
+      "failed": 0,
+      "scope": "Regresión unitaria web; no sustituye PostgreSQL/HTTP/E2E reales."
+    },
+    "static": {
+      "lint": "PASS",
+      "architectureLint": "PASS",
+      "typecheckApi": "PASS",
+      "typecheckWeb": "PASS",
+      "buildApi": "PASS",
+      "buildWeb": "PASS"
+    },
+    "separatePostgresIntegrationSuiteRun": false,
+    "fullAcademicAndIdentityE2ERerun": false,
+    "smokesRerun": false,
+    "capacityRun": false
+  },
+  "audits": {
+    "documentation": {
+      "date": "2026-10-29",
+      "documents": 35,
+      "localLinksChecked": 899,
+      "introducedBrokenLinks": [],
+      "preexistingBrokenLinks": [],
+      "constitutionVersion": "1.2.0",
+      "constitutionTemporaryCommentRemoved": true,
+      "backlogTasks": 22,
+      "backlogCounts": {
+        "RP": 7,
+        "RV": 4,
+        "VP": 8,
+        "CT": 3
+      },
+      "confirmedRequirementIds": 7,
+      "pendingDecisionIds": 6,
+      "scenarioIds": 10,
+      "historicalT103T104T108TaskDescriptionsUnchanged": true
+    },
+    "conservation": {
+      "base": "48a8087",
+      "protectedUnchanged": 71,
+      "trackedBaseline": 673,
+      "allOtherTrackedFilesUnchanged": true,
+      "originalTaskDescriptionsAndMarksUnchanged": 74,
+      "pendingTasks": [
+        "T073",
+        "T074"
+      ],
+      "checklist": {
+        "total": 16,
+        "completed": 16
+      },
+      "isolatedProductSourceMatches": true,
+      "sensitiveValuesDetected": 0,
+      "extensionHooksPresent": false,
+      "changedPaths": [
+        "README.md",
+        "apps/web/src/features/academic-offering/catalog-page.tsx",
+        "apps/web/tests/e2e/academic-offering-catalog.spec.ts",
+        "docs/alcance-mvp.md",
+        "docs/decisiones-pendientes.md",
+        "docs/planificacion/reservas-capacidad.md",
+        "ops/local/architecture.md",
+        "specs/002-oferta-academica/evidence/human-acceptance.md",
+        "specs/002-oferta-academica/quickstart.md",
+        "specs/002-oferta-academica/tasks.md",
+        "specs/002-oferta-academica/evidence/h-cap-01-results.json",
+        "specs/002-oferta-academica/evidence/h-cap-01.md"
+      ]
+    }
+  },
+  "sourceHashes": [
+    {
+      "path": "apps/web/src/features/academic-offering/catalog-page.tsx",
+      "sha256": "18e5f0f85cdcd174853f00e9c30bdc2f5890bf903b045ce4e6c162271b686c31"
+    },
+    {
+      "path": "apps/web/tests/e2e/academic-offering-catalog.spec.ts",
+      "sha256": "c8021963c6100904089c0e90aa67dd21dbdf18a2df86eb96eff6bfbbd55691b9"
+    }
+  ],
+  "reports": [
+    {
+      "file": "e2e-browser-red.json",
+      "sha256": "3e3dd089686168a165a05e9f96a53ccaa46357e1a06d6e3017500034246ac7dd"
+    },
+    {
+      "file": "e2e-browser-catalog.json",
+      "sha256": "08e18f8bb52baa735e0b41fb2cf3d4b857697da88fd340bba0482773a08a5617"
+    },
+    {
+      "file": "unit-web.json",
+      "sha256": "b079b0342e31fdb397d5bec3d227130a071454f1154555eeaaa216aa31a441b6"
+    },
+    {
+      "file": "browser-red-command.json",
+      "sha256": "37f81a769eb91c22ae9e0e208084efcf566465c96bdef11609d83165871a42ff"
+    },
+    {
+      "file": "browser-catalog-command.json",
+      "sha256": "3d5293d9e78a74db80c7229c35b64785bd5494508b5c2ca6c9ff55bbf958012f"
+    },
+    {
+      "file": "unit-web-command.json",
+      "sha256": "f776c8713c68c072a2ef9850888cc2e0fe43879b09b81ad9970b2da7c1fd6c8f"
+    },
+    {
+      "file": "checks-command.json",
+      "sha256": "bbcadf28f8f9f4c34dea7e9954d5cf2688083f76429193fb6142276959d453c9"
+    },
+    {
+      "file": "environment-before.json",
+      "sha256": "c83f42f78b6dd5798eec7352790762bec560b6ecb570a238134b1c7ed0a7b9a3"
+    },
+    {
+      "file": "environment-after.json",
+      "sha256": "6c27a8e44c4fd54de647a0487ad00383b996390d85ea06004932fce4037329c1"
+    },
+    {
+      "file": "schema-check.json",
+      "sha256": "47d7181d8160d9541af149e55094aa22e6c91d352519787cf2d92cd88d24712d"
+    }
+  ],
+  "tasks": {
+    "completed": 72,
+    "total": 74,
+    "marksChanged": [],
+    "pending": [
+      "T073",
+      "T074"
+    ],
+    "humanObservation": "Aplazada por indicación del responsable el 2026-10-29; sin sesión ni resultados humanos."
+  },
+  "preserved": {
+    "clarifications": "PA-01–PA-05",
+    "correction": "E1",
+    "bootstrapFinding": "OPEN",
+    "historicalCapacityEvidence": "UNCHANGED",
+    "capacity2500": "NOT_APPROVED",
+    "reservation24h": "FUTURE_SPEC",
+    "remoteCi": "PENDING",
+    "D04": "PARTIAL_CONFIRMED_OPEN",
+    "D06Enrollment": "OPEN"
+  }
+}

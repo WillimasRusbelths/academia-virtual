@@ -1,0 +1,1081 @@
+{
+  "date": "2026-10-25",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "source": "f5ca5d6",
+  "constitution": "1.2.0",
+  "scope": [
+    "T052"
+  ],
+  "taskStatus": {
+    "T052": "Complete: 28 real PostgreSQL/HTTP cases passed with persistent audit and real private JSONL logs",
+    "T053": "Pending: next US3 matrix/checkpoint",
+    "T054": "Pending: editorial guide after T053 evidence",
+    "T055": "Pending: no US4 implementation"
+  },
+  "commands": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-26T02:24:05.262Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-26T02:24:43.837Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "audit",
+      "exitCode": 0,
+      "date": "2026-10-26T02:25:43.255Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "integration",
+      "exitCode": 0,
+      "date": "2026-10-26T02:27:09.991Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "initialCommands": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-26T02:21:52.174Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "audit",
+      "exitCode": 0,
+      "date": "2026-10-26T02:22:28.165Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 1,
+      "date": "2026-10-26T02:22:46.766Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "suites": {
+    "initialAuditBeforeAdditionalAssertions": {
+      "uniqueCases": 28,
+      "executions": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "academic-offering-audit.spec.ts",
+          "cases": [
+            {
+              "name": "A01 COURSE_CREATE: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 277.84378800000013
+            },
+            {
+              "name": "A01 COURSE_EDIT: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 195.42657599999984
+            },
+            {
+              "name": "A01 COURSE_PUBLISH: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 181.7943579999992
+            },
+            {
+              "name": "A01 COURSE_WITHDRAW: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 135.06793599999946
+            },
+            {
+              "name": "A01 GROUP_CREATE: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 137.63168699999915
+            },
+            {
+              "name": "A01 GROUP_EDIT: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 155.27263999999923
+            },
+            {
+              "name": "A01 GROUP_SCHEDULE: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 165.3800229999997
+            },
+            {
+              "name": "A01 GROUP_PUBLISH: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 173.92013199999928
+            },
+            {
+              "name": "A01 GROUP_WITHDRAW: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 138.11223099999916
+            },
+            {
+              "name": "A01 GROUP_CANCEL: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 127.03666900000098
+            },
+            {
+              "name": "A02 COURSE_EDIT: NO_CHANGE auditable una vez, agregado y revisión conservados",
+              "status": "passed",
+              "durationMs": 132.3893079999998
+            },
+            {
+              "name": "A02 GROUP_EDIT: NO_CHANGE auditable una vez, agregado y revisión conservados",
+              "status": "passed",
+              "durationMs": 150.73289300000033
+            },
+            {
+              "name": "A02 GROUP_SCHEDULE: NO_CHANGE auditable una vez, agregado y revisión conservados",
+              "status": "passed",
+              "durationMs": 131.61876600000141
+            },
+            {
+              "name": "A03 replay devuelve proyección actual y revisión aplicada original, sin modificar el hecho histórico",
+              "status": "passed",
+              "durationMs": 225.79846499999985
+            },
+            {
+              "name": "A04 retiro, sustitución y cancelación conservan snapshot docente previo e historial de transiciones",
+              "status": "passed",
+              "durationMs": 210.1678380000012
+            },
+            {
+              "name": "A05 COURSE_WITHDRAW/AcademicCommand: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 202.92556999999942
+            },
+            {
+              "name": "A05 COURSE_WITHDRAW/AcademicAuditEvent: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 179.8913249999987
+            },
+            {
+              "name": "A05 GROUP_WITHDRAW/AcademicCommand: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 169.61571999999978
+            },
+            {
+              "name": "A05 GROUP_WITHDRAW/AcademicAuditEvent: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 171.2650560000002
+            },
+            {
+              "name": "A05 GROUP_CANCEL/AcademicCommand: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 263.1620619999994
+            },
+            {
+              "name": "A05 GROUP_CANCEL/AcademicAuditEvent: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 375.67959299999893
+            },
+            {
+              "name": "A06 rechazo revision: canal privado correlacionado sin motivo/cuerpo/SQL ni hecho aceptado",
+              "status": "passed",
+              "durationMs": 254.3273339999996
+            },
+            {
+              "name": "A06 rechazo payload: canal privado correlacionado sin motivo/cuerpo/SQL ni hecho aceptado",
+              "status": "passed",
+              "durationMs": 298.0960560000003
+            },
+            {
+              "name": "A06 rechazo state: canal privado correlacionado sin motivo/cuerpo/SQL ni hecho aceptado",
+              "status": "passed",
+              "durationMs": 189.07251799999904
+            },
+            {
+              "name": "A07 STUDENT: rechazo HTTP no registra cuerpo/cookie ni fabrica commandId o hecho académico",
+              "status": "passed",
+              "durationMs": 137.55330099999992
+            },
+            {
+              "name": "A07 TEACHER: rechazo HTTP no registra cuerpo/cookie ni fabrica commandId o hecho académico",
+              "status": "passed",
+              "durationMs": 118.97107800000049
+            },
+            {
+              "name": "A07 VISITOR: rechazo HTTP no registra cuerpo/cookie ni fabrica commandId o hecho académico",
+              "status": "passed",
+              "durationMs": 273.50504100000035
+            },
+            {
+              "name": "A08 dos administradores con igual commandId/payload: hechos independientes con actor y requestId propios",
+              "status": "passed",
+              "durationMs": 205.1116409999995
+            }
+          ]
+        }
+      ]
+    },
+    "finalAudit": {
+      "uniqueCases": 28,
+      "executions": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "academic-offering-audit.spec.ts",
+          "cases": [
+            {
+              "name": "A01 COURSE_CREATE: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 386.4928850000015
+            },
+            {
+              "name": "A01 COURSE_EDIT: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 544.5696319999988
+            },
+            {
+              "name": "A01 COURSE_PUBLISH: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 530.6599839999999
+            },
+            {
+              "name": "A01 COURSE_WITHDRAW: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 672.5615350000007
+            },
+            {
+              "name": "A01 GROUP_CREATE: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 516.6886219999997
+            },
+            {
+              "name": "A01 GROUP_EDIT: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 332.1920090000003
+            },
+            {
+              "name": "A01 GROUP_SCHEDULE: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 256.825730999999
+            },
+            {
+              "name": "A01 GROUP_PUBLISH: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 543.5689949999996
+            },
+            {
+              "name": "A01 GROUP_WITHDRAW: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 349.0881500000014
+            },
+            {
+              "name": "A01 GROUP_CANCEL: hecho mínimo actor/recurso/acción/momento/resultado y replay HTTP sin segundo APPLIED",
+              "status": "passed",
+              "durationMs": 311.37509599999976
+            },
+            {
+              "name": "A02 COURSE_EDIT: NO_CHANGE auditable una vez, agregado y revisión conservados",
+              "status": "passed",
+              "durationMs": 308.6927629999991
+            },
+            {
+              "name": "A02 GROUP_EDIT: NO_CHANGE auditable una vez, agregado y revisión conservados",
+              "status": "passed",
+              "durationMs": 224.3188910000008
+            },
+            {
+              "name": "A02 GROUP_SCHEDULE: NO_CHANGE auditable una vez, agregado y revisión conservados",
+              "status": "passed",
+              "durationMs": 207.9225540000025
+            },
+            {
+              "name": "A03 replay devuelve proyección actual y revisión aplicada original, sin modificar el hecho histórico",
+              "status": "passed",
+              "durationMs": 411.73897999999826
+            },
+            {
+              "name": "A04 retiro, sustitución y cancelación conservan snapshot docente previo e historial de transiciones",
+              "status": "passed",
+              "durationMs": 416.27516099999775
+            },
+            {
+              "name": "A05 COURSE_WITHDRAW/AcademicCommand: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 239.5125369999987
+            },
+            {
+              "name": "A05 COURSE_WITHDRAW/AcademicAuditEvent: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 245.999448999999
+            },
+            {
+              "name": "A05 GROUP_WITHDRAW/AcademicCommand: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 245.42952800000057
+            },
+            {
+              "name": "A05 GROUP_WITHDRAW/AcademicAuditEvent: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 241.923952000001
+            },
+            {
+              "name": "A05 GROUP_CANCEL/AcademicCommand: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 318.90182399999685
+            },
+            {
+              "name": "A05 GROUP_CANCEL/AcademicAuditEvent: fallo SQL revierte negocio/ledger/auditoría; log real seguro y retry explícito único",
+              "status": "passed",
+              "durationMs": 280.9578330000004
+            },
+            {
+              "name": "A06 rechazo revision: canal privado correlacionado sin motivo/cuerpo/SQL ni hecho aceptado",
+              "status": "passed",
+              "durationMs": 140.02164599999742
+            },
+            {
+              "name": "A06 rechazo payload: canal privado correlacionado sin motivo/cuerpo/SQL ni hecho aceptado",
+              "status": "passed",
+              "durationMs": 168.91945699999997
+            },
+            {
+              "name": "A06 rechazo state: canal privado correlacionado sin motivo/cuerpo/SQL ni hecho aceptado",
+              "status": "passed",
+              "durationMs": 255.80499100000088
+            },
+            {
+              "name": "A07 STUDENT: rechazo HTTP no registra cuerpo/cookie ni fabrica commandId o hecho académico",
+              "status": "passed",
+              "durationMs": 141.02076099999977
+            },
+            {
+              "name": "A07 TEACHER: rechazo HTTP no registra cuerpo/cookie ni fabrica commandId o hecho académico",
+              "status": "passed",
+              "durationMs": 173.3178500000031
+            },
+            {
+              "name": "A07 VISITOR: rechazo HTTP no registra cuerpo/cookie ni fabrica commandId o hecho académico",
+              "status": "passed",
+              "durationMs": 146.2906010000006
+            },
+            {
+              "name": "A08 dos administradores con igual commandId/payload: hechos independientes con actor y requestId propios",
+              "status": "passed",
+              "durationMs": 223.52541800000108
+            }
+          ]
+        }
+      ]
+    },
+    "postgresHttpRegression": {
+      "uniqueCases": 116,
+      "executions": 116,
+      "passed": 116,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "academic-offering-commands.spec.ts",
+          "cases": [
+            {
+              "name": "K01 dos administradores/revisión 1: un cambio y un conflicto, cero sobrescrituras",
+              "status": "passed",
+              "durationMs": 130.9026240000003
+            },
+            {
+              "name": "K02 alta simultánea mismo actor/commandId recupera mismo UUID y único efecto",
+              "status": "passed",
+              "durationMs": 93.74869099999978
+            },
+            {
+              "name": "K03 igual payload/commandId con actor distinto corresponde a dos intenciones independientes",
+              "status": "passed",
+              "durationMs": 87.86176400000022
+            },
+            {
+              "name": "K04 dos envíos simultáneos de edición idéntica: un ledger/evento y revisión 2",
+              "status": "passed",
+              "durationMs": 95.43058399999973
+            },
+            {
+              "name": "K05 NO_CHANGE conserva agregado; comando aceptado tiene un ledger y un evento NO_CHANGE",
+              "status": "passed",
+              "durationMs": 87.27787500000068
+            },
+            {
+              "name": "K06 replay retorna proyección actual y revisión aplicada original sin segundo evento",
+              "status": "passed",
+              "durationMs": 137.70291699999962
+            },
+            {
+              "name": "K07 digest diferencia payload, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "durationMs": 117.81767200000013
+            },
+            {
+              "name": "K07 digest diferencia target, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "durationMs": 112.70259799999985
+            },
+            {
+              "name": "K07 digest diferencia operation, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "durationMs": 119.49630499999876
+            },
+            {
+              "name": "K07 digest diferencia revision, sin aplicar ni reemplazar ledger",
+              "status": "passed",
+              "durationMs": 138.49107299999923
+            },
+            {
+              "name": "K08 replay reautoriza antes del ledger tras pérdida de role",
+              "status": "passed",
+              "durationMs": 136.879468000001
+            },
+            {
+              "name": "K08 replay reautoriza antes del ledger tras pérdida de session",
+              "status": "passed",
+              "durationMs": 188.6778400000003
+            },
+            {
+              "name": "K09 fallo de auditoría real revierte datos y ledger; misma intención puede confirmarse después",
+              "status": "passed",
+              "durationMs": 248.75615900000048
+            },
+            {
+              "name": "K10 COMMIT ambiguo before: no replay automático, resolución manual por mismo ID",
+              "status": "passed",
+              "durationMs": 169.97440800000004
+            },
+            {
+              "name": "K10 COMMIT ambiguo after: no replay automático, resolución manual por mismo ID",
+              "status": "passed",
+              "durationMs": 121.84935399999995
+            },
+            {
+              "name": "K11 cliente descarta respuesta HTTP de alta aplicada y la recupera sin UUID ni evento nuevos",
+              "status": "passed",
+              "durationMs": 186.48990400000002
+            },
+            {
+              "name": "K12 COURSE_WITHDRAW: replay aceptado no es una segunda transición ni un segundo evento",
+              "status": "passed",
+              "durationMs": 222.1472049999993
+            },
+            {
+              "name": "K12 GROUP_CANCEL: replay aceptado no es una segunda transición ni un segundo evento",
+              "status": "passed",
+              "durationMs": 213.87447300000167
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-maintenance-http.spec.ts",
+          "cases": [
+            {
+              "name": "M01 course-withdraw/ADMIN: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 292.45683799999915
+            },
+            {
+              "name": "M01 course-withdraw/STUDENT: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 180.68800400000055
+            },
+            {
+              "name": "M01 course-withdraw/TEACHER: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 171.2608620000001
+            },
+            {
+              "name": "M01 course-withdraw/VISITOR: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 282.878882
+            },
+            {
+              "name": "M01 group-withdraw/ADMIN: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 318.55421600000045
+            },
+            {
+              "name": "M01 group-withdraw/STUDENT: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 138.03213400000095
+            },
+            {
+              "name": "M01 group-withdraw/TEACHER: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 106.25793499999963
+            },
+            {
+              "name": "M01 group-withdraw/VISITOR: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 95.2814529999996
+            },
+            {
+              "name": "M01 group-cancel/ADMIN: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 124.61057500000061
+            },
+            {
+              "name": "M01 group-cancel/STUDENT: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 91.3675519999997
+            },
+            {
+              "name": "M01 group-cancel/TEACHER: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 104.83722999999918
+            },
+            {
+              "name": "M01 group-cancel/VISITOR: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed",
+              "durationMs": 102.79394499999944
+            },
+            {
+              "name": "M02 course-withdraw: transporte csrf no permite mutación",
+              "status": "passed",
+              "durationMs": 215.4236149999997
+            },
+            {
+              "name": "M02 course-withdraw: transporte origin no permite mutación",
+              "status": "passed",
+              "durationMs": 312.37157900000057
+            },
+            {
+              "name": "M02 course-withdraw: transporte media no permite mutación",
+              "status": "passed",
+              "durationMs": 168.46996899999976
+            },
+            {
+              "name": "M02 course-withdraw: transporte size no permite mutación",
+              "status": "passed",
+              "durationMs": 225.0986920000014
+            },
+            {
+              "name": "M02 course-withdraw: transporte query no permite mutación",
+              "status": "passed",
+              "durationMs": 212.00460399999974
+            },
+            {
+              "name": "M02 group-withdraw: transporte csrf no permite mutación",
+              "status": "passed",
+              "durationMs": 193.22240300000158
+            },
+            {
+              "name": "M02 group-withdraw: transporte origin no permite mutación",
+              "status": "passed",
+              "durationMs": 222.88666999999987
+            },
+            {
+              "name": "M02 group-withdraw: transporte media no permite mutación",
+              "status": "passed",
+              "durationMs": 259.85444199999984
+            },
+            {
+              "name": "M02 group-withdraw: transporte size no permite mutación",
+              "status": "passed",
+              "durationMs": 186.07610599999862
+            },
+            {
+              "name": "M02 group-withdraw: transporte query no permite mutación",
+              "status": "passed",
+              "durationMs": 183.92266799999925
+            },
+            {
+              "name": "M02 group-cancel: transporte csrf no permite mutación",
+              "status": "passed",
+              "durationMs": 160.37203500000032
+            },
+            {
+              "name": "M02 group-cancel: transporte origin no permite mutación",
+              "status": "passed",
+              "durationMs": 162.90645199999926
+            },
+            {
+              "name": "M02 group-cancel: transporte media no permite mutación",
+              "status": "passed",
+              "durationMs": 170.0346329999993
+            },
+            {
+              "name": "M02 group-cancel: transporte size no permite mutación",
+              "status": "passed",
+              "durationMs": 150.2966749999996
+            },
+            {
+              "name": "M02 group-cancel: transporte query no permite mutación",
+              "status": "passed",
+              "durationMs": 187.4979940000012
+            },
+            {
+              "name": "M03 course-withdraw: target con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 272.8925240000008
+            },
+            {
+              "name": "M03 course-withdraw: commandId con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 235.6087690000004
+            },
+            {
+              "name": "M03 course-withdraw: expectedRevision con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 247.68528999999944
+            },
+            {
+              "name": "M03 group-withdraw: target con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 363.7922120000003
+            },
+            {
+              "name": "M03 group-withdraw: commandId con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 275.37228199999845
+            },
+            {
+              "name": "M03 group-withdraw: expectedRevision con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 132.86999099999957
+            },
+            {
+              "name": "M03 group-cancel: target con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 105.23404599999958
+            },
+            {
+              "name": "M03 group-cancel: commandId con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 113.71395600000142
+            },
+            {
+              "name": "M03 group-cancel: expectedRevision con salto final no se normaliza a una intención válida",
+              "status": "passed",
+              "durationMs": 112.98527600000125
+            },
+            {
+              "name": "M04 course-withdraw: pérdida de session deniega también una URL administrativa directa",
+              "status": "passed",
+              "durationMs": 126.00282499999958
+            },
+            {
+              "name": "M04 course-withdraw: pérdida de role deniega también una URL administrativa directa",
+              "status": "passed",
+              "durationMs": 134.40329999999994
+            },
+            {
+              "name": "M04 group-withdraw: pérdida de session deniega también una URL administrativa directa",
+              "status": "passed",
+              "durationMs": 158.3071549999986
+            },
+            {
+              "name": "M04 group-withdraw: pérdida de role deniega también una URL administrativa directa",
+              "status": "passed",
+              "durationMs": 149.24776099999872
+            },
+            {
+              "name": "M04 group-cancel: pérdida de session deniega también una URL administrativa directa",
+              "status": "passed",
+              "durationMs": 201.76235499999893
+            },
+            {
+              "name": "M04 group-cancel: pérdida de role deniega también una URL administrativa directa",
+              "status": "passed",
+              "durationMs": 439.6220400000002
+            },
+            {
+              "name": "M05 course-withdraw: replay HTTP conserva revisión aplicada y un solo hecho persistido",
+              "status": "passed",
+              "durationMs": 286.29985599999964
+            },
+            {
+              "name": "M05 group-withdraw: replay HTTP conserva revisión aplicada y un solo hecho persistido",
+              "status": "passed",
+              "durationMs": 244.55511900000056
+            },
+            {
+              "name": "M05 group-cancel: replay HTTP conserva revisión aplicada y un solo hecho persistido",
+              "status": "passed",
+              "durationMs": 272.50057000000015
+            },
+            {
+              "name": "M06 course-withdraw: fallo SQL de auditoría produce 503 seguro y rollback completo; reintento manual no duplica",
+              "status": "passed",
+              "durationMs": 243.36710200000016
+            },
+            {
+              "name": "M06 group-withdraw: fallo SQL de auditoría produce 503 seguro y rollback completo; reintento manual no duplica",
+              "status": "passed",
+              "durationMs": 180.61970499999916
+            },
+            {
+              "name": "M06 group-cancel: fallo SQL de auditoría produce 503 seguro y rollback completo; reintento manual no duplica",
+              "status": "passed",
+              "durationMs": 195.24780699999974
+            },
+            {
+              "name": "M07 course-withdraw: recurso inexistente devuelve 404 seguro sin mutaciones",
+              "status": "passed",
+              "durationMs": 138.3379759999989
+            },
+            {
+              "name": "M07 group-withdraw: recurso inexistente devuelve 404 seguro sin mutaciones",
+              "status": "passed",
+              "durationMs": 181.79106599999795
+            },
+            {
+              "name": "M07 group-cancel: recurso inexistente devuelve 404 seguro sin mutaciones",
+              "status": "passed",
+              "durationMs": 236.47128599999996
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-state.spec.ts",
+          "cases": [
+            {
+              "name": "I01 control auxiliar: composición HTTP real, dos grupos visibles y fixture sin ledger fabricado",
+              "status": "passed",
+              "durationMs": 213.25874499999918
+            },
+            {
+              "name": "S01 retirar curso oculta catálogo, conserva hijos/capturas y no libera su agenda PUBLISHED",
+              "status": "passed",
+              "durationMs": 294.83313799999996
+            },
+            {
+              "name": "S02 hijo publicado de padre retirado sigue no editable; guardar no retira implícitamente",
+              "status": "passed",
+              "durationMs": 181.15423200000077
+            },
+            {
+              "name": "S03 retirar/editar/guardar no republica; publicación explícita conserva captura hasta confirmación",
+              "status": "passed",
+              "durationMs": 535.0553060000002
+            },
+            {
+              "name": "S04 cancelar DRAFT: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "passed",
+              "durationMs": 632.601607999999
+            },
+            {
+              "name": "S04 cancelar PUBLISHED: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "passed",
+              "durationMs": 489.08828300000096
+            },
+            {
+              "name": "S04 cancelar WITHDRAWN: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "passed",
+              "durationMs": 698.3987969999998
+            },
+            {
+              "name": "S05 cancelado rechaza withdraw, sin NO_CHANGE o revisión nueva",
+              "status": "passed",
+              "durationMs": 178.47032900000158
+            },
+            {
+              "name": "S05 cancelado rechaza cancel, sin NO_CHANGE o revisión nueva",
+              "status": "passed",
+              "durationMs": 172.83156800000143
+            },
+            {
+              "name": "S05 cancelado rechaza publish, sin NO_CHANGE o revisión nueva",
+              "status": "passed",
+              "durationMs": 162.39792599999964
+            },
+            {
+              "name": "S06 retirar courses/DRAFT inválido no es éxito sin cambios",
+              "status": "passed",
+              "durationMs": 231.34678200000053
+            },
+            {
+              "name": "S06 retirar courses/WITHDRAWN inválido no es éxito sin cambios",
+              "status": "passed",
+              "durationMs": 128.0137450000002
+            },
+            {
+              "name": "S06 retirar groups/DRAFT inválido no es éxito sin cambios",
+              "status": "passed",
+              "durationMs": 241.21570699999938
+            },
+            {
+              "name": "S06 retirar groups/WITHDRAWN inválido no es éxito sin cambios",
+              "status": "passed",
+              "durationMs": 220.34968300000037
+            },
+            {
+              "name": "S07 recuperación del curso bloqueado exige retirar hijos afectados y republicarlos explícitamente",
+              "status": "passed",
+              "durationMs": 521.8274099999999
+            },
+            {
+              "name": "S08 motivo inválido \"\": 400 seguro y cero efectos",
+              "status": "passed",
+              "durationMs": 131.28071400000044
+            },
+            {
+              "name": "S08 motivo inválido \"  \": 400 seguro y cero efectos",
+              "status": "passed",
+              "durationMs": 123.70643799999925
+            },
+            {
+              "name": "S08 motivo inválido null: 400 seguro y cero efectos",
+              "status": "passed",
+              "durationMs": 142.46811400000297
+            },
+            {
+              "name": "S08 motivo inválido 1: 400 seguro y cero efectos",
+              "status": "passed",
+              "durationMs": 100.3193629999987
+            },
+            {
+              "name": "S09 withdraw denegado a STUDENT antes de entregar datos",
+              "status": "passed",
+              "durationMs": 108.49801300000036
+            },
+            {
+              "name": "S09 withdraw denegado a TEACHER antes de entregar datos",
+              "status": "passed",
+              "durationMs": 114.35960300000079
+            },
+            {
+              "name": "S09 withdraw denegado a VISITOR antes de entregar datos",
+              "status": "passed",
+              "durationMs": 114.62895900000149
+            },
+            {
+              "name": "S09 cancel denegado a STUDENT antes de entregar datos",
+              "status": "passed",
+              "durationMs": 116.14288600000145
+            },
+            {
+              "name": "S09 cancel denegado a TEACHER antes de entregar datos",
+              "status": "passed",
+              "durationMs": 109.4899089999999
+            },
+            {
+              "name": "S09 cancel denegado a VISITOR antes de entregar datos",
+              "status": "passed",
+              "durationMs": 95.27773299999899
+            },
+            {
+              "name": "S10 motivo de cancelación solo admin, alumno recibe 404 uniforme",
+              "status": "passed",
+              "durationMs": 166.7875529999983
+            },
+            {
+              "name": "S11 operación no ofrecida course-delete: 404 sin borrar datos",
+              "status": "passed",
+              "durationMs": 101.91854500000045
+            },
+            {
+              "name": "S11 operación no ofrecida group-delete: 404 sin borrar datos",
+              "status": "passed",
+              "durationMs": 103.90812699999879
+            },
+            {
+              "name": "S11 operación no ofrecida course-cancel: 404 sin borrar datos",
+              "status": "passed",
+              "durationMs": 111.97844699999769
+            },
+            {
+              "name": "S12 motivo administrativo denegado a STUDENT, incluso por URL directa",
+              "status": "passed",
+              "durationMs": 110.67560299999968
+            },
+            {
+              "name": "S12 motivo administrativo denegado a TEACHER, incluso por URL directa",
+              "status": "passed",
+              "durationMs": 131.9017989999993
+            },
+            {
+              "name": "S12 motivo administrativo denegado a VISITOR, incluso por URL directa",
+              "status": "passed",
+              "durationMs": 97.43216100000063
+            },
+            {
+              "name": "S13 cancelado rechaza PATCH de datos/franjas aunque sean iguales",
+              "status": "passed",
+              "durationMs": 115.57728199999838
+            },
+            {
+              "name": "S13 cancelado rechaza PUT de datos/franjas aunque sean iguales",
+              "status": "passed",
+              "durationMs": 119.31637400000182
+            },
+            {
+              "name": "S14 course-withdraw: body commandId no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 146.0739680000006
+            },
+            {
+              "name": "S14 course-withdraw: body expectedRevision no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 147.57719599999837
+            },
+            {
+              "name": "S14 course-withdraw: body state no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 176.40795100000105
+            },
+            {
+              "name": "S14 course-withdraw: body stale no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 183.56667799999923
+            },
+            {
+              "name": "S14 group-withdraw: body commandId no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 137.17524000000049
+            },
+            {
+              "name": "S14 group-withdraw: body expectedRevision no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 146.4317250000022
+            },
+            {
+              "name": "S14 group-withdraw: body state no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 125.40853700000298
+            },
+            {
+              "name": "S14 group-withdraw: body stale no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 128.67609599999923
+            },
+            {
+              "name": "S14 group-cancel: body commandId no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 120.68441899999743
+            },
+            {
+              "name": "S14 group-cancel: body expectedRevision no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 124.15412600000127
+            },
+            {
+              "name": "S14 group-cancel: body state no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 112.16986499999985
+            },
+            {
+              "name": "S14 group-cancel: body stale no permite bypass del contrato",
+              "status": "passed",
+              "durationMs": 157.1783239999968
+            },
+            {
+              "name": "S15 cancelación no acepta instante enviado por cliente",
+              "status": "passed",
+              "durationMs": 112.01408300000185
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "counting": {
+    "newUniqueCases": 28,
+    "newExecutionsFinal": 28,
+    "newExecutionsInitial": 28,
+    "regressionUniqueCases": 116,
+    "regressionAuxiliaryControls": 1,
+    "regressionAcademicCases": 115,
+    "finalUniqueCasesTotal": 144,
+    "meaning": "Initial and final audit batches are repetitions of the same 28 case identities, not 56 unique cases; no viewport/timezone multiplication"
+  },
+  "implementation": {
+    "productionChanges": false,
+    "onlyNewTest": "apps/api/tests/integration/academic-offering-audit.spec.ts",
+    "realPostgres": true,
+    "realHttp": true,
+    "realSecurityEventsFilesystem": true,
+    "simulatedBusinessWriters": false,
+    "temporaryFaults": "Real CHECK constraints on own schema only; removed in finally",
+    "independentObserver": true
+  },
+  "incident": {
+    "initialLintExit": 1,
+    "cause": "Redundant initial afterState assignment in new test preparer",
+    "correction": "Removed redundant assignment only; strengthened persisted state, actor/resource mapping and sensitive-value checks; final lint and all assertions passed",
+    "functionalRedClaimed": false
+  },
+  "preservation": {
+    "protectedFilesUnchanged": 72,
+    "trackedProductionAndHistoricalEvidenceUnchanged": true,
+    "originalTaskDescriptionsUnchanged": 74,
+    "taskCheckboxChanges": [
+      "T052"
+    ],
+    "E1Unchanged": true,
+    "approvedClarificationsUnchanged": 5,
+    "isolatedProject": "academic-offering-fa3d46bddbb8",
+    "volumesRetained": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "manualMetadataUnchanged": true,
+    "manualSqlExecuted": false,
+    "publishedPorts": 0,
+    "manualMounts": 0,
+    "isolatedSchemasRemaining": 0,
+    "isolatedServicesStopped": true
+  },
+  "documentation": {
+    "date": "2026-10-25",
+    "documents": 32,
+    "localLinksChecked": 792,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  },
+  "limitations": {
+    "T053CheckpointExecuted": false,
+    "E2EExecuted": false,
+    "fullIdentityRegressionExecuted": false,
+    "smokesOrCapacityLoadsExecuted": false,
+    "bootstrap": "Historical finding open",
+    "B02": "Historical timeout and explicit passing repeat retained; no stability or resolution claimed",
+    "humanAcceptance": "SC-002/T073 pending",
+    "T103": "Execution/report complete; capacity unapproved",
+    "T104": "Pending",
+    "T108": "Pending",
+    "SMTP": "Real validation pending",
+    "D04": "Open",
+    "D06Enrollment": "Open",
+    "capacity1000Approved": false,
+    "capacity2500Approved": false,
+    "registeredAccounts15000": "Requirement; not populated or measured here",
+    "reservations24Hours": "Confirmed; future own spec",
+    "openDecisions": [
+      "RA-01",
+      "RA-02",
+      "RA-03",
+      "RA-04",
+      "RA-05",
+      "RA-06"
+    ],
+    "AWSOrVPSChanges": false
+  }
+}

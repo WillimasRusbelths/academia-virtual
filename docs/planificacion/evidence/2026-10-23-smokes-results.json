@@ -1,0 +1,611 @@
+{
+  "date": "2026-10-23",
+  "timezone": "America/Lima",
+  "branch": "docs/planificacion-reservas-capacidad",
+  "baseCommit": "eafae88",
+  "filesChanged": [
+    ".specify/memory/constitution.md",
+    "README.md",
+    "docs/01-analisis-de-sistema/02-historias-del-usuario.md",
+    "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+    "docs/01-analisis-de-sistema/04-atributos-de-calidad.md",
+    "docs/01-analisis-de-sistema/05-restricciones.md",
+    "docs/01-analisis-de-sistema/06-driver-arquitectonicos.md",
+    "docs/01-analisis-de-sistema/07-decisiones-arquitectonicas.md",
+    "docs/01-analisis-de-sistema/08-escenarios-atributos-calidad.md",
+    "docs/02-arquitectura-software/arquitectura-inicial.md",
+    "docs/02-arquitectura-software/componentes-arquitectonicos.md",
+    "docs/02-arquitectura-software/diagrama-arquitectura.md",
+    "docs/02-arquitectura-software/enfoque-arquitectonico.md",
+    "docs/02-arquitectura-software/estilo-arquitectonico.md",
+    "docs/03-diseno-de-software/diseno-interno/diseno-interno-de-modulos.md",
+    "docs/03-diseno-de-software/diseno-interno/patrones-de-diseno.md",
+    "docs/03-diseno-de-software/diseno-interno/principios-de-diseno.md",
+    "docs/04-modelo-c4/01-contexto-del-sistema.md",
+    "docs/04-modelo-c4/02-contenedores.md",
+    "docs/04-modelo-c4/03-componentes.md",
+    "docs/alcance-mvp.md",
+    "docs/decisiones-pendientes.md",
+    "docs/planificacion/evidence/2026-10-23-smokes-results.json",
+    "docs/planificacion/evidence/2026-10-23-smokes.md",
+    "docs/planificacion/reservas-capacidad.md",
+    "docs/planificacion/tasks.md",
+    "load-tests/identity/README.md",
+    "load-tests/identity/followup-local.js",
+    "load-tests/identity/tooling.test.mjs",
+    "specs/001-identidad-acceso-roles/plan.md",
+    "specs/001-identidad-acceso-roles/spec.md",
+    "specs/001-identidad-acceso-roles/tasks.md",
+    "specs/001-identidad-acceso-roles/verification.md"
+  ],
+  "smokes": [
+    {
+      "kind": "smoke-sessions",
+      "name": "smoke-sessions-62534eb5",
+      "startedAtUTC": "2026-10-23T23:13:19.3188876Z",
+      "finishedAtUTC": "2026-10-23T23:13:37.7894711Z",
+      "exitCode": 0,
+      "smokeIterations": 4,
+      "configuredVUs": 2,
+      "localTimeZone": "America/Lima",
+      "report": {
+        "kind": "smoke-sessions",
+        "plateauTimeBasis": "session-statement",
+        "exitCode": 0,
+        "apiExitCode": 0,
+        "durationSeconds": 18.471,
+        "generatorDurationSeconds": 16.011545288,
+        "peakVUs": 2,
+        "requests": {
+          "count": 10,
+          "rate": 0.6245493373768609
+        },
+        "validTraffic": {
+          "count": 8,
+          "rate": 0.4996394699014887
+        },
+        "meMs": {
+          "med": 18.080485,
+          "p(50)": 18.080485,
+          "p(95)": 24.38047555,
+          "p(99)": 24.45894151,
+          "max": 24.478558,
+          "avg": 18.215822250000002,
+          "min": 12.223761
+        },
+        "loginMs": {
+          "med": 195.7723665,
+          "p(50)": 195.7723665,
+          "p(95)": 196.83889665,
+          "p(99)": 196.93369933,
+          "max": 196.9574,
+          "avg": 195.7723665,
+          "min": 194.587333
+        },
+        "bytesSent": {
+          "count": 2514,
+          "rate": 157.01170341654284
+        },
+        "bytesReceived": {
+          "count": 5052,
+          "rate": 315.52232524279015
+        },
+        "unexpectedErrors": {
+          "rate": 0,
+          "unexpected": 0,
+          "total": 8
+        },
+        "identityMismatch": {
+          "count": 0,
+          "rate": 0
+        },
+        "unavailable503": {
+          "count": 0,
+          "rate": 0
+        },
+        "completedLogouts": {
+          "count": 2,
+          "rate": 0.12490986747537218
+        },
+        "revocationFailures": {
+          "count": 0,
+          "rate": 0
+        },
+        "samples": 18,
+        "plateauSamples": 0,
+        "fullPlateauSamples": 0,
+        "maxSamplingGapMs": 1016,
+        "uniquePlateauSlots": 0,
+        "peakHttp": 2,
+        "peakSessions": 2,
+        "peakUsers": 2,
+        "peakRecent": 2,
+        "peakSessionsByGroup": {
+          "sessions": 2,
+          "warmup": 0,
+          "authentication": 0
+        },
+        "hashWaitMaxMs": 0.08401299999991352,
+        "hashWorkMaxMs": 77.21167600000081,
+        "peakHashQueue": 0,
+        "peakPoolWait": 0,
+        "hashAtLastSample": {
+          "active": 0,
+          "queued": 0,
+          "peakQueued": 0,
+          "completed": 3,
+          "rejected": 0,
+          "waitMaxMs": 0.08401299999991352,
+          "workMaxMs": 77.21167600000081,
+          "workTotalMs": 201.08150700000033
+        },
+        "peakConnections": 2,
+        "peakLockWaiters": 0,
+        "resources": {
+          "database": {
+            "peakCpuPercent": 22.63,
+            "peakMemoryPercent": 11.76,
+            "peakMemory": "60.21MiB / 512MiB",
+            "blockIo": "76.3MB / 877kB",
+            "networkIo": "1.18MB / 593kB"
+          },
+          "api": {
+            "peakCpuPercent": 54.01,
+            "peakMemoryPercent": 11.39,
+            "peakMemory": "116.6MiB / 1GiB",
+            "blockIo": "10.9MB / 1.92MB",
+            "networkIo": "76.9kB / 1.18MB"
+          },
+          "generator": {
+            "peakCpuPercent": 1.54,
+            "peakMemoryPercent": 2.81,
+            "peakMemory": "14.36MiB / 512MiB",
+            "blockIo": "4.1kB / 0B",
+            "networkIo": "6.85kB / 3.99kB"
+          }
+        },
+        "resourceSamples": 5,
+        "settings": {
+          "node": "v22.23.1",
+          "installedLockSha256": "6f2c05e1f0f7fa2e0f084ac7977f4360e9260814728e0590db82bced925a6292",
+          "postgres": "16.14 (Debian 16.14-1.pgdg12+1)",
+          "pool": 10,
+          "argon2": {
+            "type": 2,
+            "memoryCost": 19456,
+            "timeCost": 2,
+            "parallelism": 1,
+            "hashLength": 32
+          },
+          "hashConcurrency": 2,
+          "hashQueue": 50,
+          "hashWaitMs": 5000
+        },
+        "accountsBefore": 1120,
+        "accountsAfter": 1120,
+        "accountsUnchanged": true,
+        "singletonUnchanged": true,
+        "cleanup": {
+          "revoked": 0,
+          "removed": 0
+        },
+        "k6SummaryPresent": true,
+        "requiredDurationSeconds": null,
+        "executionComplete": false,
+        "thresholdsPassed": true,
+        "completeProfile": false,
+        "thousandSessionsObserved": false,
+        "plateauAllSamplesFull": false,
+        "plateauFirst": null,
+        "plateauLast": null,
+        "scenarioEpoch": 1792797200880,
+        "stop": null
+      },
+      "metadata": {
+        "revision": "eafae8896a8fb71126bf2db439f446ad28f32cdf",
+        "resourceExperiment": "baseline",
+        "requestedPostgresCpus": 1,
+        "requestedGeneratorCpus": 1,
+        "requestedGeneratorMemoryMiB": 512,
+        "postgresResources": "1000000000 536870912",
+        "generatorResources": "memory=536870912 nanoCpus=1000000000",
+        "hardware": {
+          "os": "Microsoft Windows 11 Pro",
+          "cpu": "AMD Ryzen 7 3750H with Radeon Vega Mobile Gfx  ",
+          "cores": 8,
+          "ramBytes": 14966218752,
+          "freeRamBytes": 2454429696,
+          "diskFreeBytes": 294685122560,
+          "diskBytes": 322122543104,
+          "fileSystem": "NTFS",
+          "driveType": 3,
+          "docker": "8 7236878336",
+          "sameHostContention": true
+        },
+        "k6Version": "k6 v1.6.0+dirty (commit/d97957fc61-dirty, go1.25.6, linux/amd64)",
+        "apiAndDbImageResources": [
+          "sha256:c1cb1ac44556058ef8f6e0726b0c1f74b69b20f8812676d8ef9fa1520ba52a2b memory=1073741824 nanoCpus=2000000000",
+          "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8 memory=536870912 nanoCpus=1000000000"
+        ],
+        "samePhysicalHost": true
+      },
+      "minHostFreeRamBytes": 2704666624,
+      "externalResourceSamples": 5,
+      "rawReportSha256": "1dd40cf0649c5b9df9e8d1bef5b168dbfd6ea6928c3c494df2e85ba92e8a3ec6",
+      "rawMetaSha256": "48efd09d16a8583dd79d952f7f511128dce25eeb5bdedb9d4baa6a195cedbbcd",
+      "k6SummarySha256": "c5f597b27de9187895fa4a99b6773a5a457eff9f98014333ef70a20f3c19369f",
+      "fullProfileAccepted": false,
+      "capacity2500Validated": false,
+      "note": "executionComplete/completeProfile=false because historical summary requires full-profile durations; smoke is 4 iterations with code0/thresholds true, not ID-LOAD-01/02 approval"
+    },
+    {
+      "kind": "smoke-authentication",
+      "name": "smoke-authentication-44fc1cbd",
+      "startedAtUTC": "2026-10-23T23:15:52.1599652Z",
+      "finishedAtUTC": "2026-10-23T23:16:05.8246320Z",
+      "exitCode": 0,
+      "smokeIterations": 4,
+      "configuredVUs": 2,
+      "localTimeZone": "America/Lima",
+      "report": {
+        "kind": "smoke-authentication",
+        "plateauTimeBasis": "session-statement",
+        "exitCode": 0,
+        "apiExitCode": 0,
+        "durationSeconds": 13.665,
+        "generatorDurationSeconds": 10.69227362,
+        "peakVUs": 2,
+        "requests": {
+          "count": 12,
+          "rate": 1.122305734633828
+        },
+        "validTraffic": {
+          "count": 12,
+          "rate": 1.122305734633828
+        },
+        "meMs": {
+          "p(99)": 47.095329219999996,
+          "max": 47.470069,
+          "avg": 35.941447,
+          "min": 30.477975,
+          "med": 32.908872,
+          "p(50)": 32.908872,
+          "p(95)": 45.5963701
+        },
+        "loginMs": {
+          "med": 242.7969785,
+          "p(50)": 242.7969785,
+          "p(95)": 294.00020674999996,
+          "p(99)": 301.04211814999996,
+          "max": 302.802596,
+          "avg": 255.6310985,
+          "min": 234.127841
+        },
+        "bytesSent": {
+          "count": 3244,
+          "rate": 303.3966502626782
+        },
+        "bytesReceived": {
+          "count": 6168,
+          "rate": 576.8651476017876
+        },
+        "unexpectedErrors": {
+          "rate": 0,
+          "unexpected": 0,
+          "total": 12
+        },
+        "identityMismatch": {
+          "count": 0,
+          "rate": 0
+        },
+        "unavailable503": {
+          "count": 0,
+          "rate": 0
+        },
+        "completedLogouts": {
+          "count": 4,
+          "rate": 0.37410191154460937
+        },
+        "revocationFailures": {
+          "count": 0,
+          "rate": 0
+        },
+        "samples": 13,
+        "plateauSamples": 0,
+        "fullPlateauSamples": 0,
+        "maxSamplingGapMs": 1019,
+        "uniquePlateauSlots": 0,
+        "peakHttp": 2,
+        "peakSessions": 0,
+        "peakUsers": 0,
+        "peakRecent": 0,
+        "peakSessionsByGroup": {
+          "sessions": 0,
+          "warmup": 0,
+          "authentication": 0
+        },
+        "hashWaitMaxMs": 0.0962449999999535,
+        "hashWorkMaxMs": 128.87551899999926,
+        "peakHashQueue": 0,
+        "peakPoolWait": 0,
+        "hashAtLastSample": {
+          "active": 0,
+          "queued": 0,
+          "peakQueued": 0,
+          "completed": 5,
+          "rejected": 0,
+          "waitMaxMs": 0.0962449999999535,
+          "workMaxMs": 128.87551899999926,
+          "workTotalMs": 512.4413029999998
+        },
+        "peakConnections": 2,
+        "peakLockWaiters": 0,
+        "resources": {
+          "database": {
+            "peakCpuPercent": 10.38,
+            "peakMemoryPercent": 12.75,
+            "peakMemory": "65.26MiB / 512MiB",
+            "blockIo": "81MB / 2.31MB",
+            "networkIo": "2.37MB / 1.85MB"
+          },
+          "api": {
+            "peakCpuPercent": 15.72,
+            "peakMemoryPercent": 15.18,
+            "peakMemory": "155.5MiB / 1GiB",
+            "blockIo": "0B / 1.89MB",
+            "networkIo": "77.9kB / 863kB"
+          },
+          "generator": {
+            "peakCpuPercent": 1.54,
+            "peakMemoryPercent": 2.76,
+            "peakMemory": "14.16MiB / 512MiB",
+            "blockIo": "0B / 0B",
+            "networkIo": "8.66kB / 5.01kB"
+          }
+        },
+        "resourceSamples": 3,
+        "settings": {
+          "node": "v22.23.1",
+          "installedLockSha256": "6f2c05e1f0f7fa2e0f084ac7977f4360e9260814728e0590db82bced925a6292",
+          "postgres": "16.14 (Debian 16.14-1.pgdg12+1)",
+          "pool": 10,
+          "argon2": {
+            "type": 2,
+            "memoryCost": 19456,
+            "timeCost": 2,
+            "parallelism": 1,
+            "hashLength": 32
+          },
+          "hashConcurrency": 2,
+          "hashQueue": 50,
+          "hashWaitMs": 5000
+        },
+        "accountsBefore": 1120,
+        "accountsAfter": 1120,
+        "accountsUnchanged": true,
+        "singletonUnchanged": true,
+        "cleanup": {
+          "revoked": 0,
+          "removed": 0
+        },
+        "k6SummaryPresent": true,
+        "requiredDurationSeconds": null,
+        "executionComplete": false,
+        "thresholdsPassed": true,
+        "completeProfile": false,
+        "thousandSessionsObserved": false,
+        "plateauAllSamplesFull": false,
+        "plateauFirst": null,
+        "plateauLast": null,
+        "scenarioEpoch": 1792797353574,
+        "stop": null
+      },
+      "metadata": {
+        "revision": "eafae8896a8fb71126bf2db439f446ad28f32cdf",
+        "resourceExperiment": "baseline",
+        "requestedPostgresCpus": 1,
+        "requestedGeneratorCpus": 1,
+        "requestedGeneratorMemoryMiB": 512,
+        "postgresResources": "1000000000 536870912",
+        "generatorResources": "memory=536870912 nanoCpus=1000000000",
+        "hardware": {
+          "os": "Microsoft Windows 11 Pro",
+          "cpu": "AMD Ryzen 7 3750H with Radeon Vega Mobile Gfx  ",
+          "cores": 8,
+          "ramBytes": 14966218752,
+          "freeRamBytes": 2957135872,
+          "diskFreeBytes": 294685011968,
+          "diskBytes": 322122543104,
+          "fileSystem": "NTFS",
+          "driveType": 3,
+          "docker": "8 7236878336",
+          "sameHostContention": true
+        },
+        "k6Version": "k6 v1.6.0+dirty (commit/d97957fc61-dirty, go1.25.6, linux/amd64)",
+        "apiAndDbImageResources": [
+          "sha256:c1cb1ac44556058ef8f6e0726b0c1f74b69b20f8812676d8ef9fa1520ba52a2b memory=1073741824 nanoCpus=2000000000",
+          "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8 memory=536870912 nanoCpus=1000000000"
+        ],
+        "samePhysicalHost": true
+      },
+      "minHostFreeRamBytes": 2881110016,
+      "externalResourceSamples": 3,
+      "rawReportSha256": "31d991010bc131841e5a6ee68294fa9891498468229fece59d77a113e72d8b58",
+      "rawMetaSha256": "2884c1b59d70848343f5f8f81b13d3898661148df2c26f593d8320c30abbf706",
+      "k6SummarySha256": "03263aa4a7f40f751d2c8311d225a6789e5b2ca4aec48bd4e40fa0a434bbb6a5",
+      "fullProfileAccepted": false,
+      "capacity2500Validated": false,
+      "note": "executionComplete/completeProfile=false because historical summary requires full-profile durations; smoke is 4 iterations with code0/thresholds true, not ID-LOAD-01/02 approval"
+    }
+  ],
+  "sequentialExecutionVerified": true,
+  "fullLoadsRun": false,
+  "followup10And25Executed": false,
+  "awsImplemented": false,
+  "preservation": {
+    "manualSqlExecuted": false,
+    "manualEnvironmentUnchanged": true,
+    "volumesRetained": 5,
+    "unchangedApplicationFiles": 330,
+    "unchangedHistoricalEvidenceFiles": 48,
+    "unchangedOfferingSpecFiles": 52,
+    "unchangedHistoricalHarnessFiles": [
+      "profiles.js",
+      "sessions.js",
+      "authentication.js",
+      "client.js",
+      "smoke.js",
+      "measure.ps1",
+      "compose.yml",
+      "observe.ts",
+      "fixtures.ts",
+      "cleanup.ts",
+      "summarize.mjs"
+    ],
+    "unchangedProtectedFiles": 68,
+    "identityDocumentsOnlyNoteAdded": [
+      "specs/001-identidad-acceso-roles/spec.md",
+      "specs/001-identidad-acceso-roles/plan.md",
+      "specs/001-identidad-acceso-roles/verification.md",
+      "specs/001-identidad-acceso-roles/tasks.md"
+    ],
+    "identityBodyAndTaskCriteriaUnchanged": true,
+    "loadConfigurationUnchanged": true,
+    "featureBranchUnchanged": true,
+    "before": {
+      "publishedPorts": 0,
+      "internalNetwork": true,
+      "manualDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "startedAt": "2026-10-18T19:19:45.837265111Z"
+      },
+      "manualSqlExecuted": false,
+      "volumes": [
+        {
+          "createdAt": "2026-10-16T11:47:49Z",
+          "name": "identity-load-80c2b6fa22ce_database"
+        },
+        {
+          "createdAt": "2026-10-16T11:47:53Z",
+          "name": "identity-load-80c2b6fa22ce_private"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        },
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        }
+      ],
+      "project": "identity-load-80c2b6fa22ce"
+    },
+    "after": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-16T11:47:49Z",
+          "name": "identity-load-80c2b6fa22ce_database"
+        },
+        {
+          "createdAt": "2026-10-16T11:47:53Z",
+          "name": "identity-load-80c2b6fa22ce_private"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        },
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        }
+      ],
+      "services": [
+        {
+          "oomKilled": false,
+          "status": "exited",
+          "service": "api"
+        },
+        {
+          "oomKilled": false,
+          "status": "exited",
+          "service": "db"
+        },
+        {
+          "oomKilled": false,
+          "status": "exited",
+          "service": "mailpit"
+        }
+      ],
+      "manualDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "startedAt": "2026-10-18T19:19:45.837265111Z"
+      },
+      "manualConfigurationChanged": false,
+      "manualSqlExecuted": false,
+      "project": "identity-load-80c2b6fa22ce"
+    }
+  },
+  "status": {
+    "T103": "COMPLETE execution/report; capacity UNAPPROVED",
+    "T104": "PENDING ten real participants",
+    "T108": "PENDING T104 and final acceptance",
+    "bootstrap": "OPEN",
+    "capacity2500": "PENDING",
+    "integralAcceptance": "PENDING"
+  },
+  "controls": {
+    "toolingTests": 14,
+    "toolingPassed": 14,
+    "toolingFailures": 0,
+    "toolingIsNotK6Load": true,
+    "lintExitCode": 0,
+    "syntaxCheckExitCode": 0,
+    "documentationChecks": {
+      "date": "2026-10-23",
+      "documents": 30,
+      "localLinksChecked": 727,
+      "introducedBrokenLinks": [],
+      "preexistingBrokenLinks": [],
+      "constitutionVersion": "1.2.0",
+      "constitutionTemporaryCommentRemoved": true,
+      "backlogTasks": 22,
+      "backlogCounts": {
+        "RP": 7,
+        "RV": 4,
+        "VP": 8,
+        "CT": 3
+      },
+      "confirmedRequirementIds": 7,
+      "pendingDecisionIds": 6,
+      "scenarioIds": 10,
+      "historicalT103T104T108TaskDescriptionsUnchanged": true
+    }
+  },
+  "incidents": {
+    "initialDockerUnavailable": true,
+    "DockerStartedHidden": true,
+    "initialGuardQuotingErrorCorrectedBeforeK6": true,
+    "initialNodeTestSpawnEPERM": true,
+    "nodeTestsRepeatedWithProcessPermission": true,
+    "orphansPreserved": true
+  },
+  "limits": [
+    "Two VUs/four iterations per smoke, not capacity",
+    "Few resource samples; peak values are observations not upper bounds",
+    "API/generator/database/observers share physical laptop and Docker VM",
+    "Authentication session samples may miss short login/logout cycles",
+    "No enrollment/payment/reservation implementation or 24-hour expiry test",
+    "No VPS or remote generator execution",
+    "Historical bootstrap not investigated or resolved here"
+  ]
+}

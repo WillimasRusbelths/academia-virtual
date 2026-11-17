@@ -1,0 +1,75 @@
+{
+  "feature": "004-materiales-estudio",
+  "date": "2026-11-16",
+  "timezone": "America/Lima",
+  "status": "planning-complete-ready-for-tasks",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "logicalFeature": "004-materiales-estudio",
+  "scope": "Technical design only; no tasks or product implementation",
+  "artifacts": [
+    {
+      "path": "specs/004-materiales-estudio/plan.md",
+      "sha256": "4b8165932085f87459a5167d66a9ec540585b31484471d35d7b22d9bda917991"
+    },
+    {
+      "path": "specs/004-materiales-estudio/research.md",
+      "sha256": "34df450020e39624a10e453f5e25dcfede31937d4a6b7024a1b81692f4498e1b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/data-model.md",
+      "sha256": "f28dfaa3d3996a0382c460b5f0172800c2446727151900055ca36024757ec412"
+    },
+    {
+      "path": "specs/004-materiales-estudio/contracts/api.md",
+      "sha256": "877d41fc18b4b8b675850d3fc835b2431f217897bb88343aa537d1476f12fe3a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/contracts/integration.md",
+      "sha256": "deee8cd07a3f97f177b3cd0c5e3babd6ea6819e7f0c24173c2c532c0b3a493c2"
+    },
+    {
+      "path": "specs/004-materiales-estudio/contracts/ui.md",
+      "sha256": "53efc645f1580c16e33050ed337e96d2d11e5bb93ae994a6e4c4d09e38007084"
+    },
+    {
+      "path": "specs/004-materiales-estudio/quickstart.md",
+      "sha256": "423132bdca84b13b608ec3051c01c0738300d68e00950659c74cb9a60b4f6d38"
+    }
+  ],
+  "quality": {
+    "localLinksChecked": 5,
+    "unresolvedTemplateMarkers": 0,
+    "verificationFamilies": 13,
+    "functionalRequirementsCovered": 20,
+    "successCriteriaCovered": 7,
+    "constitution": "1.2.1 reviewed before research and after design; no new exceptions"
+  },
+  "preservation": {
+    "baselineFilesUnchanged": 966,
+    "protectedFilesUnchanged": 74,
+    "specAndChecklistUnchanged": true,
+    "oldTasksComplete": 84,
+    "oldTasksPending": 10,
+    "gitBranchUnchanged": true
+  },
+  "execution": {
+    "hooks": "extensions.yml absent before and after; no hooks to dispatch",
+    "researchAgent": "Read-only investigation, no source edits",
+    "officialSources": [
+      "https://www.postgresql.org/docs/16/datatype-binary.html",
+      "https://node-postgres.com/features/queries"
+    ],
+    "productTestsRun": false,
+    "servicesStarted": false,
+    "migrationsApplied": false,
+    "dependenciesChanged": false,
+    "externalWrites": false
+  },
+  "limits": [
+    "Document review is not functional acceptance",
+    "bytea capacity and memory not measured",
+    "D02, D10 and D13 remain pending",
+    "Human observation and full binary restore must follow implementation"
+  ],
+  "nextStep": "speckit-tasks, then speckit-analyze before implementation"
+}

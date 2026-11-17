@@ -1,0 +1,1156 @@
+{
+  "clientDate": "2026-11-17",
+  "timezone": "America/Lima",
+  "scope": "T063 real isolated resource measurement; T064 prepared, human observation pending",
+  "tasks": {
+    "completed": 63,
+    "pending": 5,
+    "t063": "completed",
+    "t064": "prepared-observation-pending"
+  },
+  "validation": {
+    "summary": {
+      "project": "materials-resources-46d285396ecb",
+      "clientDate": "2026-11-17",
+      "timezone": "America/Lima",
+      "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+      "apiImageId": "sha256:c13d8310193527418bb97f706420959e5ba9dc33815f6e99a46d179ed8fc68a8",
+      "sourceManifestVerified": true,
+      "configurationPreserved": true,
+      "before": {
+        "at": "2026-11-17T16:58:05.3830459Z",
+        "postgres": {
+          "databaseBytes": 7666711,
+          "settings": {
+            "default_toast_compression": "pglz",
+            "full_page_writes": "on",
+            "max_connections": "100",
+            "server_version": "16.14 (Debian 16.14-1.pgdg12+1)",
+            "shared_buffers": "16384",
+            "wal_compression": "off",
+            "wal_level": "replica"
+          }
+        },
+        "clusterAllocatedKiB": 46688,
+        "walAllocatedKiB": 16392,
+        "disk": "Filesystem     1024-blocks     Used Available Capacity Mounted on\n/dev/sdd        1055762868 42925620 959133776       5% /var/lib/postgresql/data",
+        "container": {
+          "BlockIO": "4.1kB / 52.3MB",
+          "CPUPerc": "9.86%",
+          "Container": "ae11689e39cd3b459c4d59bd5d3875d63e11bb7d6e71e7072536b420379756d6",
+          "ID": "ae11689e39cd",
+          "MemPerc": "0.46%",
+          "MemUsage": "31.97MiB / 6.74GiB",
+          "Name": "materials-resources-46d285396ecb-db-1",
+          "NetIO": "1.57kB / 126B",
+          "PIDs": "6"
+        }
+      },
+      "after": {
+        "at": "2026-11-17T16:59:47.7508233Z",
+        "postgres": {
+          "databaseBytes": 11213847,
+          "settings": {
+            "default_toast_compression": "pglz",
+            "full_page_writes": "on",
+            "max_connections": "100",
+            "server_version": "16.14 (Debian 16.14-1.pgdg12+1)",
+            "shared_buffers": "16384",
+            "wal_compression": "off",
+            "wal_level": "replica"
+          }
+        },
+        "clusterAllocatedKiB": 50384,
+        "walAllocatedKiB": 16392,
+        "disk": "Filesystem     1024-blocks     Used Available Capacity Mounted on\n/dev/sdd        1055762868 42929372 959130024       5% /var/lib/postgresql/data",
+        "container": {
+          "BlockIO": "8.19kB / 61.4MB",
+          "CPUPerc": "2.15%",
+          "Container": "ae11689e39cd3b459c4d59bd5d3875d63e11bb7d6e71e7072536b420379756d6",
+          "ID": "ae11689e39cd",
+          "MemPerc": "0.58%",
+          "MemUsage": "40.37MiB / 6.74GiB",
+          "Name": "materials-resources-46d285396ecb-db-1",
+          "NetIO": "80.7MB / 201MB",
+          "PIDs": "6"
+        }
+      },
+      "afterBackup": {
+        "at": "2026-11-17T16:59:55.5872178Z",
+        "postgres": {
+          "databaseBytes": 11213847,
+          "settings": {
+            "default_toast_compression": "pglz",
+            "full_page_writes": "on",
+            "max_connections": "100",
+            "server_version": "16.14 (Debian 16.14-1.pgdg12+1)",
+            "shared_buffers": "16384",
+            "wal_compression": "off",
+            "wal_level": "replica"
+          }
+        },
+        "clusterAllocatedKiB": 50384,
+        "walAllocatedKiB": 16392,
+        "disk": "Filesystem     1024-blocks     Used Available Capacity Mounted on\n/dev/sdd        1055762868 42929380 959130016       5% /var/lib/postgresql/data",
+        "container": {
+          "BlockIO": "557kB / 61.7MB",
+          "CPUPerc": "9.79%",
+          "Container": "ae11689e39cd3b459c4d59bd5d3875d63e11bb7d6e71e7072536b420379756d6",
+          "ID": "ae11689e39cd",
+          "MemPerc": "0.63%",
+          "MemUsage": "43.15MiB / 6.74GiB",
+          "Name": "materials-resources-46d285396ecb-db-1",
+          "NetIO": "80.7MB / 201MB",
+          "PIDs": "6"
+        }
+      },
+      "backup": {
+        "format": "ACADBKP1",
+        "postgresMajor": 16,
+        "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+        "startedAt": "2026-11-17T16:59:48.0835619Z",
+        "completedAt": "2026-11-17T16:59:50.5302293Z",
+        "plainSha256": "a14396607821af68932f56a42c9944b3bfe8e4245be4221d0e393572b7d5010f",
+        "cipherSha256": "49eb18f489e59b932b27405d6b7ca53bc1355cfd8eca1b40870fef8de7e37774",
+        "cipherBytes": 278381,
+        "restored": false,
+        "materials": {
+          "items": [
+            {
+              "id": "01243bf5-3b34-40e3-a60e-14479d0d2ace",
+              "state": "PUBLISHED",
+              "groupId": "43217c35-008a-4728-80a5-d4c280f6f061",
+              "byteSize": 417,
+              "revision": "2",
+              "createdBy": "a6b20747-b6f0-4cfe-bf1a-f331e8aa20fd",
+              "mediaType": "application/pdf",
+              "updatedBy": "a6b20747-b6f0-4cfe-bf1a-f331e8aa20fd",
+              "bytesSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "storedSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "metadataSha256": "efc3b325f5981ea1aec1cb6b8032c587d1cd109cc31e5a0c6fea09d29c94be3f"
+            },
+            {
+              "id": "5c58a57e-7a43-4bf8-89f3-7f7b5b77e32e",
+              "state": "PUBLISHED",
+              "groupId": "ce878051-7df5-4272-ad8f-83d7ada0f9e2",
+              "byteSize": 20000000,
+              "revision": "2",
+              "createdBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "mediaType": "application/pdf",
+              "updatedBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "bytesSha256": "0d97becb3537c80e0ae700b9b503c6ea035f0f1b5c13e81fbb328ec7b8eae9d4",
+              "storedSha256": "0d97becb3537c80e0ae700b9b503c6ea035f0f1b5c13e81fbb328ec7b8eae9d4",
+              "metadataSha256": "cbbec7a15cf9376809c23fba4a4e47ab33ff10df60ff57d022e29bfa6e096320"
+            },
+            {
+              "id": "5e5d0f4a-eadd-44d1-8747-c78270698ec4",
+              "state": "PUBLISHED",
+              "groupId": "ce878051-7df5-4272-ad8f-83d7ada0f9e2",
+              "byteSize": 67,
+              "revision": "2",
+              "createdBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "mediaType": "image/png",
+              "updatedBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "bytesSha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108",
+              "storedSha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108",
+              "metadataSha256": "5c4aa5a7516489ca183337480dcbcf0d15292806d7fc10390889e15258827434"
+            },
+            {
+              "id": "625c0caa-e0d9-4eda-ae4f-858e76cdbb42",
+              "state": "PREPARED",
+              "groupId": "ce878051-7df5-4272-ad8f-83d7ada0f9e2",
+              "byteSize": 417,
+              "revision": "1",
+              "createdBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "mediaType": "application/pdf",
+              "updatedBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "bytesSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "storedSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "metadataSha256": "2e056d3f9bf6cfb967600534a11be4b48fc5b0e5b51a4518c450ecd48a2cd949"
+            },
+            {
+              "id": "a5acb2b8-8d82-47e4-9586-2aa4c06546db",
+              "state": "PREPARED",
+              "groupId": "ce878051-7df5-4272-ad8f-83d7ada0f9e2",
+              "byteSize": 20000000,
+              "revision": "1",
+              "createdBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "mediaType": "application/pdf",
+              "updatedBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "bytesSha256": "0d97becb3537c80e0ae700b9b503c6ea035f0f1b5c13e81fbb328ec7b8eae9d4",
+              "storedSha256": "0d97becb3537c80e0ae700b9b503c6ea035f0f1b5c13e81fbb328ec7b8eae9d4",
+              "metadataSha256": "0f701893e658a019894c02e9f74e6f6a4adfa056a2439da4586c04c53474bd0f"
+            },
+            {
+              "id": "c93c4824-4979-45ea-aa20-4baddb63031e",
+              "state": "PUBLISHED",
+              "groupId": "450d49fb-50a3-46c9-abb7-ccd66401f62d",
+              "byteSize": 417,
+              "revision": "2",
+              "createdBy": "9038736b-def9-4a65-9467-ccf505c16c5d",
+              "mediaType": "application/pdf",
+              "updatedBy": "9038736b-def9-4a65-9467-ccf505c16c5d",
+              "bytesSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "storedSha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5",
+              "metadataSha256": "3d6ea3ec1e6c4262115248a592d80540bd7e0168f364212471db5dd60aa16ed9"
+            },
+            {
+              "id": "f1d41b3d-51b3-46d9-b9d1-62ff109299d0",
+              "state": "WITHDRAWN",
+              "groupId": "ce878051-7df5-4272-ad8f-83d7ada0f9e2",
+              "byteSize": 137,
+              "revision": "2",
+              "createdBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "mediaType": "image/jpeg",
+              "updatedBy": "16c8bbdf-74a6-4fe8-b8e1-25c233b45b65",
+              "bytesSha256": "d7e98b662c74dcc8fd2a62381df06a4baf558919188bea95c09f06ee8da7a737",
+              "storedSha256": "d7e98b662c74dcc8fd2a62381df06a4baf558919188bea95c09f06ee8da7a737",
+              "metadataSha256": "9fde90c7c58b821cd10cda2a819bf572a6b9b5a7f3643ce30c39dee69a0ad7c0"
+            }
+          ],
+          "format": "materials-inventory-v1",
+          "schema": "t_materials_fixture_dc9fbe79245c",
+          "durable": [
+            {
+              "name": "MaterialAuditEvent",
+              "rows": 12,
+              "sha256": "2c7bc99ae31afb358ad6955e2488fd26d35f0a3bb0343a140331a2381266857c"
+            },
+            {
+              "name": "MaterialCommand",
+              "rows": 5,
+              "sha256": "455fa3b4bcdc05ea2ed023e3848c934e7e0a70357edc5387ef667a98532bc165"
+            },
+            {
+              "name": "MaterialUpload",
+              "rows": 12,
+              "sha256": "7f7277549867e97c76aac1d9d78967ab79b894de63d381c7917332a91c1229ed"
+            }
+          ],
+          "byteCount": 40001455,
+          "contentCount": 7,
+          "materialCount": 7,
+          "allContentHashesVerified": true
+        },
+        "materialsInventorySha256": "e9797d887d7bb4890bdabf33cfef04a9b59db22f9469c1c310992fd938cbb6ef"
+      },
+      "backupSeconds": 2.4466674,
+      "physicalDiskExhaustion": false,
+      "capacityAccepted": false,
+      "humanAcceptance": false,
+      "publicTraffic": false
+    },
+    "resources": {
+      "schema": "t_materials_fixture_dc9fbe79245c",
+      "apiProcessSeparated": true,
+      "generatorSeparated": true,
+      "samplingIntervalMs": 25,
+      "configured": {
+        "fileLimit": 20000000,
+        "globalTransfers": 2,
+        "actorTransfers": 1,
+        "poolMax": 10,
+        "uploadTimeoutMs": 60000
+      },
+      "corpus": {
+        "format": "PDF",
+        "bytes": 20000000,
+        "sha256": "0d97becb3537c80e0ae700b9b503c6ea035f0f1b5c13e81fbb328ec7b8eae9d4",
+        "compressibleSyntheticPadding": true
+      },
+      "baseline": {
+        "databaseBytes": "10222615",
+        "walLsn": "0/1B1DD68",
+        "contentRelationBytes": "32768",
+        "contentRows": "5",
+        "logicalContentBytes": "1455"
+      },
+      "final": {
+        "databaseBytes": "11213847",
+        "walLsn": "0/1C13338",
+        "contentRelationBytes": "1024000",
+        "contentRows": "7",
+        "logicalContentBytes": "40001455"
+      },
+      "windows": {
+        "uploadLimit": {
+          "durationMs": 929.8199939999995,
+          "api": {
+            "baseline": {
+              "rss": 153481216,
+              "heapUsed": 40380640,
+              "external": 4128006,
+              "arrayBuffers": 271238
+            },
+            "peak": {
+              "rss": 249163776,
+              "heapUsed": 41486328,
+              "external": 86902922,
+              "arrayBuffers": 83004324
+            },
+            "samples": 753,
+            "buffers": {
+              "alloc": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "allocUnsafe": {
+                "calls": 237,
+                "bytes": 60070182,
+                "atLeastFileSize": 3
+              },
+              "allocUnsafeSlow": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "from": {
+                "calls": 5,
+                "bytes": 40000539,
+                "atLeastFileSize": 2
+              },
+              "concat": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "copy": {
+                "calls": 391,
+                "bytes": 60007726,
+                "atLeastFileSize": 2
+              }
+            },
+            "sqlBufferParameterBytes": 20000032,
+            "sqlBufferResultBytes": 0,
+            "incomingBytes": 20000000,
+            "current": {
+              "rss": 209248256,
+              "heapUsed": 37872488,
+              "external": 46871380,
+              "arrayBuffers": 43014604
+            },
+            "pool": {
+              "total": 1,
+              "idle": 1,
+              "waiting": 0
+            }
+          },
+          "generator": {
+            "baseline": {
+              "rss": 159125504,
+              "heapUsed": 53440104,
+              "external": 23903661,
+              "arrayBuffers": 20102958
+            },
+            "peak": {
+              "rss": 159256576,
+              "heapUsed": 54258264,
+              "external": 23906465,
+              "arrayBuffers": 20105722
+            },
+            "samples": 33
+          },
+          "dbBefore": {
+            "databaseBytes": "10222615",
+            "walLsn": "0/1B1E328",
+            "contentRelationBytes": "32768",
+            "contentRows": "5",
+            "logicalContentBytes": "1455"
+          },
+          "dbAfter": {
+            "databaseBytes": "10492951",
+            "walLsn": "0/1B5ABC0",
+            "contentRelationBytes": "303104",
+            "contentRows": "6",
+            "logicalContentBytes": "20001455"
+          },
+          "walBytes": "247960"
+        },
+        "downloadLimit": {
+          "durationMs": 727.9072029999988,
+          "api": {
+            "baseline": {
+              "rss": 209248256,
+              "heapUsed": 38462736,
+              "external": 46920958,
+              "arrayBuffers": 43064182
+            },
+            "peak": {
+              "rss": 314048512,
+              "heapUsed": 77946312,
+              "external": 131041676,
+              "arrayBuffers": 127185229
+            },
+            "samples": 823,
+            "buffers": {
+              "alloc": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "allocUnsafe": {
+                "calls": 99,
+                "bytes": 134178599,
+                "atLeastFileSize": 2
+              },
+              "allocUnsafeSlow": {
+                "calls": 1,
+                "bytes": 20000000,
+                "atLeastFileSize": 1
+              },
+              "from": {
+                "calls": 3,
+                "bytes": 126,
+                "atLeastFileSize": 0
+              },
+              "concat": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "copy": {
+                "calls": 665,
+                "bytes": 106782852,
+                "atLeastFileSize": 1
+              }
+            },
+            "sqlBufferParameterBytes": 32,
+            "sqlBufferResultBytes": 20000000,
+            "incomingBytes": 0,
+            "current": {
+              "rss": 314048512,
+              "heapUsed": 77946720,
+              "external": 131041676,
+              "arrayBuffers": 127184900
+            },
+            "pool": {
+              "total": 1,
+              "idle": 1,
+              "waiting": 0
+            }
+          },
+          "generator": {
+            "baseline": {
+              "rss": 160305152,
+              "heapUsed": 54458664,
+              "external": 23916445,
+              "arrayBuffers": 20115702
+            },
+            "peak": {
+              "rss": 192548864,
+              "heapUsed": 56514304,
+              "external": 55076581,
+              "arrayBuffers": 44003674
+            },
+            "samples": 30
+          },
+          "dbBefore": {
+            "databaseBytes": "10492951",
+            "walLsn": "0/1B5B1C8",
+            "contentRelationBytes": "303104",
+            "contentRows": "6",
+            "logicalContentBytes": "20001455"
+          },
+          "dbAfter": {
+            "databaseBytes": "10492951",
+            "walLsn": "0/1B5B3F8",
+            "contentRelationBytes": "303104",
+            "contentRows": "6",
+            "logicalContentBytes": "20001455"
+          },
+          "walBytes": "560"
+        },
+        "twoHeldUploadsAdmissionAndAbort": {
+          "durationMs": 966.3845949999995,
+          "api": {
+            "baseline": {
+              "rss": 314048512,
+              "heapUsed": 79263168,
+              "external": 131144372,
+              "arrayBuffers": 127287596
+            },
+            "peak": {
+              "rss": 314179584,
+              "heapUsed": 80081792,
+              "external": 151187644,
+              "arrayBuffers": 147330676
+            },
+            "samples": 1334,
+            "buffers": {
+              "alloc": {
+                "calls": 1,
+                "bytes": 18,
+                "atLeastFileSize": 0
+              },
+              "allocUnsafe": {
+                "calls": 384,
+                "bytes": 158672911,
+                "atLeastFileSize": 4
+              },
+              "allocUnsafeSlow": {
+                "calls": 1,
+                "bytes": 20000000,
+                "atLeastFileSize": 1
+              },
+              "from": {
+                "calls": 19,
+                "bytes": 878,
+                "atLeastFileSize": 0
+              },
+              "concat": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "copy": {
+                "calls": 751,
+                "bytes": 98911403,
+                "atLeastFileSize": 1
+              }
+            },
+            "sqlBufferParameterBytes": 160,
+            "sqlBufferResultBytes": 20000000,
+            "incomingBytes": 2048,
+            "current": {
+              "rss": 230641664,
+              "heapUsed": 36021192,
+              "external": 83284909,
+              "arrayBuffers": 79435059
+            },
+            "pool": {
+              "total": 2,
+              "idle": 2,
+              "waiting": 0
+            }
+          },
+          "generator": {
+            "baseline": {
+              "rss": 180224000,
+              "heapUsed": 33792560,
+              "external": 23972225,
+              "arrayBuffers": 20105946
+            },
+            "peak": {
+              "rss": 180617216,
+              "heapUsed": 34700336,
+              "external": 24053627,
+              "arrayBuffers": 20187348
+            },
+            "samples": 39
+          },
+          "dbBefore": {
+            "databaseBytes": "10492951",
+            "walLsn": "0/1B5C210",
+            "contentRelationBytes": "303104",
+            "contentRows": "6",
+            "logicalContentBytes": "20001455"
+          },
+          "dbAfter": {
+            "databaseBytes": "10492951",
+            "walLsn": "0/1B5C998",
+            "contentRelationBytes": "303104",
+            "contentRows": "6",
+            "logicalContentBytes": "20001455"
+          },
+          "walBytes": "1928"
+        },
+        "slowUpload": {
+          "durationMs": 2431.901097,
+          "api": {
+            "baseline": {
+              "rss": 230641664,
+              "heapUsed": 36495112,
+              "external": 83324606,
+              "arrayBuffers": 79474756
+            },
+            "peak": {
+              "rss": 270434304,
+              "heapUsed": 36883816,
+              "external": 103879093,
+              "arrayBuffers": 100029243
+            },
+            "samples": 830,
+            "buffers": {
+              "alloc": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "allocUnsafe": {
+                "calls": 237,
+                "bytes": 60070182,
+                "atLeastFileSize": 3
+              },
+              "allocUnsafeSlow": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "from": {
+                "calls": 5,
+                "bytes": 40000539,
+                "atLeastFileSize": 2
+              },
+              "concat": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "copy": {
+                "calls": 399,
+                "bytes": 60007726,
+                "atLeastFileSize": 2
+              }
+            },
+            "sqlBufferParameterBytes": 20000032,
+            "sqlBufferResultBytes": 0,
+            "incomingBytes": 20000000,
+            "current": {
+              "rss": 270434304,
+              "heapUsed": 36161040,
+              "external": 63984382,
+              "arrayBuffers": 60134532
+            },
+            "pool": {
+              "total": 2,
+              "idle": 2,
+              "waiting": 0
+            }
+          },
+          "generator": {
+            "baseline": {
+              "rss": 180617216,
+              "heapUsed": 34854192,
+              "external": 24055279,
+              "arrayBuffers": 20189000
+            },
+            "peak": {
+              "rss": 180617216,
+              "heapUsed": 35649544,
+              "external": 24058118,
+              "arrayBuffers": 20191839
+            },
+            "samples": 95
+          },
+          "dbBefore": {
+            "databaseBytes": "10492951",
+            "walLsn": "0/1B5CE30",
+            "contentRelationBytes": "303104",
+            "contentRows": "6",
+            "logicalContentBytes": "20001455"
+          },
+          "dbAfter": {
+            "databaseBytes": "10730519",
+            "walLsn": "0/1B99668",
+            "contentRelationBytes": "540672",
+            "contentRows": "7",
+            "logicalContentBytes": "40001455"
+          },
+          "walBytes": "247864"
+        },
+        "slowDownload": {
+          "durationMs": 1805.487604,
+          "api": {
+            "baseline": {
+              "rss": 270434304,
+              "heapUsed": 36166152,
+              "external": 63984412,
+              "arrayBuffers": 60134562
+            },
+            "peak": {
+              "rss": 304091136,
+              "heapUsed": 76623184,
+              "external": 131042057,
+              "arrayBuffers": 127192081
+            },
+            "samples": 949,
+            "buffers": {
+              "alloc": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "allocUnsafe": {
+                "calls": 151,
+                "bytes": 134194068,
+                "atLeastFileSize": 2
+              },
+              "allocUnsafeSlow": {
+                "calls": 1,
+                "bytes": 20000000,
+                "atLeastFileSize": 1
+              },
+              "from": {
+                "calls": 6,
+                "bytes": 323,
+                "atLeastFileSize": 0
+              },
+              "concat": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "copy": {
+                "calls": 670,
+                "bytes": 106726935,
+                "atLeastFileSize": 1
+              }
+            },
+            "sqlBufferParameterBytes": 64,
+            "sqlBufferResultBytes": 20000000,
+            "incomingBytes": 0,
+            "current": {
+              "rss": 270659584,
+              "heapUsed": 76623592,
+              "external": 91104290,
+              "arrayBuffers": 87254440
+            },
+            "pool": {
+              "total": 2,
+              "idle": 2,
+              "waiting": 0
+            }
+          },
+          "generator": {
+            "baseline": {
+              "rss": 180617216,
+              "heapUsed": 35691816,
+              "external": 24058696,
+              "arrayBuffers": 20192417
+            },
+            "peak": {
+              "rss": 181141504,
+              "heapUsed": 36406552,
+              "external": 38852500,
+              "arrayBuffers": 34986221
+            },
+            "samples": 73
+          },
+          "dbBefore": {
+            "databaseBytes": "10730519",
+            "walLsn": "0/1B99668",
+            "contentRelationBytes": "540672",
+            "contentRows": "7",
+            "logicalContentBytes": "40001455"
+          },
+          "dbAfter": {
+            "databaseBytes": "10730519",
+            "walLsn": "0/1B999E0",
+            "contentRelationBytes": "540672",
+            "contentRows": "7",
+            "logicalContentBytes": "40001455"
+          },
+          "walBytes": "888"
+        },
+        "injected-53100": {
+          "durationMs": 980.2921129999995,
+          "api": {
+            "baseline": {
+              "rss": 270659584,
+              "heapUsed": 77034616,
+              "external": 91135795,
+              "arrayBuffers": 87285945
+            },
+            "peak": {
+              "rss": 277082112,
+              "heapUsed": 77559960,
+              "external": 117588220,
+              "arrayBuffers": 113738370
+            },
+            "samples": 1474,
+            "buffers": {
+              "alloc": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "allocUnsafe": {
+                "calls": 296,
+                "bytes": 174584894,
+                "atLeastFileSize": 5
+              },
+              "allocUnsafeSlow": {
+                "calls": 1,
+                "bytes": 20000000,
+                "atLeastFileSize": 1
+              },
+              "from": {
+                "calls": 8,
+                "bytes": 40000377,
+                "atLeastFileSize": 2
+              },
+              "concat": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "copy": {
+                "calls": 1025,
+                "bytes": 156925927,
+                "atLeastFileSize": 3
+              }
+            },
+            "sqlBufferParameterBytes": 20000064,
+            "sqlBufferResultBytes": 20000000,
+            "incomingBytes": 20000000,
+            "injectedFault": "53100",
+            "current": {
+              "rss": 270135296,
+              "heapUsed": 76186688,
+              "external": 81253292,
+              "arrayBuffers": 77403442
+            },
+            "pool": {
+              "total": 2,
+              "idle": 2,
+              "waiting": 0
+            }
+          },
+          "generator": {
+            "baseline": {
+              "rss": 181272576,
+              "heapUsed": 32696024,
+              "external": 30372917,
+              "arrayBuffers": 26513307
+            },
+            "peak": {
+              "rss": 181272576,
+              "heapUsed": 32986616,
+              "external": 30374407,
+              "arrayBuffers": 26514797
+            },
+            "samples": 39
+          },
+          "dbBefore": {
+            "databaseBytes": "10730519",
+            "walLsn": "0/1B99E78",
+            "contentRelationBytes": "540672",
+            "contentRows": "7",
+            "logicalContentBytes": "40001455"
+          },
+          "dbAfter": {
+            "databaseBytes": "10968087",
+            "walLsn": "0/1BD64E0",
+            "contentRelationBytes": "778240",
+            "contentRows": "7",
+            "logicalContentBytes": "40001455"
+          },
+          "walBytes": "247400"
+        },
+        "injected-53200": {
+          "durationMs": 1076.1984859999975,
+          "api": {
+            "baseline": {
+              "rss": 270135296,
+              "heapUsed": 76654984,
+              "external": 81284796,
+              "arrayBuffers": 77434946
+            },
+            "peak": {
+              "rss": 274722816,
+              "heapUsed": 77257136,
+              "external": 107335596,
+              "arrayBuffers": 102109490
+            },
+            "samples": 1480,
+            "buffers": {
+              "alloc": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "allocUnsafe": {
+                "calls": 295,
+                "bytes": 160648894,
+                "atLeastFileSize": 5
+              },
+              "allocUnsafeSlow": {
+                "calls": 1,
+                "bytes": 20000000,
+                "atLeastFileSize": 1
+              },
+              "from": {
+                "calls": 8,
+                "bytes": 40000377,
+                "atLeastFileSize": 2
+              },
+              "concat": {
+                "calls": 0,
+                "bytes": 0,
+                "atLeastFileSize": 0
+              },
+              "copy": {
+                "calls": 1033,
+                "bytes": 149864101,
+                "atLeastFileSize": 3
+              }
+            },
+            "sqlBufferParameterBytes": 20000064,
+            "sqlBufferResultBytes": 20000000,
+            "incomingBytes": 20000000,
+            "injectedFault": "53200",
+            "current": {
+              "rss": 191647744,
+              "heapUsed": 36141368,
+              "external": 23974808,
+              "arrayBuffers": 20124958
+            },
+            "pool": {
+              "total": 2,
+              "idle": 2,
+              "waiting": 0
+            }
+          },
+          "generator": {
+            "baseline": {
+              "rss": 181272576,
+              "heapUsed": 32986216,
+              "external": 24695021,
+              "arrayBuffers": 20835411
+            },
+            "peak": {
+              "rss": 181272576,
+              "heapUsed": 33265176,
+              "external": 24767450,
+              "arrayBuffers": 20907840
+            },
+            "samples": 44
+          },
+          "dbBefore": {
+            "databaseBytes": "10968087",
+            "walLsn": "0/1BD6978",
+            "contentRelationBytes": "778240",
+            "contentRows": "7",
+            "logicalContentBytes": "40001455"
+          },
+          "dbAfter": {
+            "databaseBytes": "11213847",
+            "walLsn": "0/1C13338",
+            "contentRelationBytes": "1024000",
+            "contentRows": "7",
+            "logicalContentBytes": "40001455"
+          },
+          "walBytes": "248256"
+        }
+      },
+      "faultResults": [
+        {
+          "code": "53100",
+          "httpStatus": 503,
+          "rolledBack": true,
+          "pendingIntentionPreserved": true,
+          "admissionReleased": true
+        },
+        {
+          "code": "53200",
+          "httpStatus": 503,
+          "rolledBack": true,
+          "pendingIntentionPreserved": true,
+          "admissionReleased": true
+        }
+      ],
+      "hashesVerified": true,
+      "financialFactsUnchanged": true,
+      "physicalDiskExhaustion": false,
+      "concurrentHeld": 2,
+      "actorExcessStatus": 429,
+      "globalExcessStatus": 503,
+      "queueUnbounded": false,
+      "slowClientConnectionsReleased": true,
+      "backupNotYetMeasured": true,
+      "capacityAccepted": false,
+      "humanAcceptance": false
+    },
+    "runtime": {
+      "runtime": {
+        "node": "v22.23.1",
+        "v8": "12.4.254.21-node.56",
+        "platform": "linux",
+        "arch": "x64"
+      },
+      "kernel": "Linux 6.18.33.2-microsoft-standard-WSL2 x86_64 GNU/Linux"
+    },
+    "tests": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "reportSha256": "9866014f6386a56574f4d99334be45c253cbbd8c9c8c024d4440454d7094b987"
+    },
+    "lintApiExitCode": 0,
+    "recoveryTypecheckExitCode": 0,
+    "apiBuildExitCode": 0,
+    "powerShellParsePassed": true,
+    "sourceManifestSha256": "5f39935635f849be25433104952520c9777523044c76a52aae75f73dd7f92ded"
+  },
+  "initialAttempts": [
+    {
+      "project": "materials-resources-b06e72c0972a",
+      "status": "stopped-before-transfer",
+      "reason": "Incorrect parsing of du tab-separated output; fixed numeric prefix parsing and reran in new project"
+    }
+  ],
+  "preservation": {
+    "comparedFiles": 1099,
+    "changedFiles": [
+      "specs/004-materiales-estudio/quickstart.md",
+      "specs/004-materiales-estudio/tasks.md",
+      "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "specs/004-materiales-estudio/verification.md"
+    ],
+    "productUnchanged": true,
+    "previousTestsUnchanged": true,
+    "migrationsUnchanged": true,
+    "dependenciesUnchanged": true,
+    "manualEnvironmentUnchanged": true,
+    "branchUnchanged": true,
+    "labStoppedVolumePreserved": true,
+    "checkpoints": [
+      {
+        "path": "specs/004-materiales-estudio/evidence/t001-baseline.json",
+        "sha256": "f9d6286c065988a6308dde38cbf17cc60e02d26fcf10ba50af7eccfe4aa6d052"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t005-t008-results.json",
+        "sha256": "638bfc50b4e1b33393d0a9b780a97e3fcaccce3d2b1a0e80deb3ada95def1578"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+        "sha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t017-t019-results.json",
+        "sha256": "ae0866a5e9e86aaeeb1b2201156a48311b1cf27df9c2c46751adfa78dd17f87a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t020-results.json",
+        "sha256": "1b248cc05182b101e9d1acf889d2137ad6503a851558c4e9cc8e86b15f9e622d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t021-results.json",
+        "sha256": "77300d9032c75d57b4bf518886df927e11210d19a9b6c6e4892f123b9a91b660"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t022-results.json",
+        "sha256": "8592260ff8e79d094752f0c8c4000f269394029a38e1365af78c8aca196f7d8e"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t023-t024-results.json",
+        "sha256": "505a22028c03b04590998cfbbd68b25cef5f8f0bf73c2b6a95c936a2e0dc9c38"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t025-t026-results.json",
+        "sha256": "113f2bc93f41a92a8f7c9e9175c697d192e096cfc6606b9f6d3b4ba941e7156a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t027-t029-results.json",
+        "sha256": "63199b64369291a726e2b4e4653208192825e13a09c68f2f410df692695a304d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t030-t032-results.json",
+        "sha256": "a094a5b58c9c1db1d313cba2962c283d5cbbff1175a7cc60f4b65e32eee035ed"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t033-t034-results.json",
+        "sha256": "39efe9eab19e52880acbb85034a6d1c469f331e165519ae90589dd408d8cfde6"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t035-t036-results.json",
+        "sha256": "3cc1e88ef13edaaf661a51fed53caaf48c078cc8050cfec87d3e3deaf2409d30"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t037-t038-results.json",
+        "sha256": "599d0d445cb2fa48d12dadc0944875d8f024948428f7216c1c12718584f0c480"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t039-t040-results.json",
+        "sha256": "477e8bce6245361bd089caf663b2cc261379dc7bbcd1946907db3af2339b8eeb"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t041-t042-results.json",
+        "sha256": "39035658f20dfd567bf9d51c9c2a0917a468e34f390ef3c605e119233c67ff9a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t043-t044-results.json",
+        "sha256": "d6acea1dff1457bd95339b3b0a715185fd392ba011b34fb1cfb220f2d71342a7"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t045-t047-results.json",
+        "sha256": "d02632a7e11c29b84e00c1ede57247c97ea6f1043b9c3fd9403dbab26a16d63b"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t048-t050-results.json",
+        "sha256": "41069c87773eef76bce63c1b35e63881e17083eca15a30bcc02abaf2c236a11b"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t051-t053-results.json",
+        "sha256": "49a8c34a786f4a3818b2d4e22a7ba7548adc98e3e6e2dcb9066d267b84dee235"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t054-t056-results.json",
+        "sha256": "bd63a0c2f8fb6032d3cfe350194f2ffa12cfee7d4a05df6af83839ab4d7b3a4a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t057-t059-results.json",
+        "sha256": "61e5b6cfd2486d87a735a2e94a9c39975749d6ccb123affb21ab4f07aeb5a03c"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t060-results.json",
+        "sha256": "dd74568a1c5115bb928e41a2a3124b0052155fad74d1da6d1826702b686f2a3c"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t061-t062-results.json",
+        "sha256": "4e09490f2451dfc544af36d6f65995826a1fcd9236ab2755829f48e231de7c99"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "06e273467203e32adfd236933ac5ce4a10752d01e022e341caa84cdee49425e5"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "fc4c3e16650ae870026c9dd080b1099ccb526c0187fdd048263565553b15384b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/quickstart.md",
+      "sha256": "97e74dd114df8be2ec81b8c1bc7f297a0f396ef3cc3e81cabcb91c0f43b0fec1"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "c65e4d34f6253ac5a473c4787cc095995da5224f73696f72dbe7c204bd25aa90"
+    },
+    {
+      "path": "ops/recovery/rehearse-materials-resources.ps1",
+      "sha256": "46cd0e697cd101c2165066ec5b9499a34139f8d782da46fa08ebb287f818e763"
+    },
+    {
+      "path": "apps/api/tests/recovery/materials-resources.spec.ts",
+      "sha256": "5ab5fcc906e1e4b4d1baed7e55b4938df0e77aa6bb23a8c048ee723d0bcba552"
+    },
+    {
+      "path": "apps/api/tests/support/materials-resource-process.mjs",
+      "sha256": "039c0546aca0f69172f76c91c0f82c29726c51be7ec8be0de997186483a1f357"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/local-resources.md",
+      "sha256": "383bfff53c59ec7f73bdc43157a29aa798e48fafd21d3ef761ecf1441ba32c15"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/human-acceptance.md",
+      "sha256": "de5eb66cddff29bfde4d54a9374146c6e29a56a3d9295ea1f1b4f7992c9c8752"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t063-t064-report.md",
+      "sha256": "fdcb099da0d059f0c288495c560820a97fe2da4fe32e038f7e70ee6c77943de3"
+    }
+  ],
+  "limitations": [
+    "No real human sessions, no consent or usability results invented",
+    "Synthetic compressible PDF corpus, local single API process only",
+    "Sampled metrics and overlapping Buffer-operation counters do not measure all native allocations or exact live copies",
+    "SQL faults injected after real insert; no physical full disk",
+    "No 2500 active user scenario, D10, D13, remote CI, deployment or closure of 001–003"
+  ]
+}

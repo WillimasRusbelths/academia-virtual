@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "task": "RP002",
+  "status": "DRAFT_SPECIFICATION_PREPARED_CLARIFICATION_REQUIRED",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "baseCommit": "d2676fd08c9fa6b3ae515426ea7b4634346a4e4f",
+  "featureDirectory": "specs/003-reservas-ordenes-matricula",
+  "specFile": "specs/003-reservas-ordenes-matricula/spec.md",
+  "checklistFile": "specs/003-reservas-ordenes-matricula/checklists/requirements.md",
+  "skill": "speckit-specify",
+  "clarifications": {
+    "source": "Respuestas explícitas del responsable durante specify, sesión 2026-10-30",
+    "confirmedPartial": [
+      {
+        "id": "RA-01",
+        "answer": "A. Confirmar todas juntas o ninguna; la composición y el pago de la orden se aclararán aparte.",
+        "approvedScope": "Reserva conjunta de varios cursos, todas o ninguna; no composición/pago de orden ni identidad de matrícula."
+      },
+      {
+        "id": "RA-03",
+        "answer": "A. El instante en que el servidor termina de verificar el pago.",
+        "approvedScope": "Autoridad temporal de verificación servidor; sin comparación exacta ni política tardía/reembolso aprobadas."
+      }
+    ],
+    "unansweredQuestion": "PD-01: fuente, unidad, moneda y vigencia del precio",
+    "openMarkers": [
+      "¿Cómo se compone la orden y su pago para ese conjunto de reservas?",
+      "¿Cómo se resuelve la verificación exactamente al vencimiento y una verificación tardía, coordinada con RA-04?",
+      "¿Quién define el precio y moneda, a qué unidad académica corresponden y qué vigencia mantiene el importe de una reserva u orden ya confirmada?"
+    ],
+    "RA01AndRA03FullyResolved": false,
+    "RP003Executed": false
+  },
+  "checks": {
+    "structure": {
+      "stories": 4,
+      "requirements": 24,
+      "successCriteria": 8,
+      "confirmedRequirementIds": 7,
+      "scenarioIds": 10,
+      "RAEntries": 6,
+      "additionalDecisionEntries": 3,
+      "clarificationMarkers": 3,
+      "mandatoryTemplateOrderPreserved": true,
+      "implementationDetailsExcluded": true
+    },
+    "quality": {
+      "total": 16,
+      "checked": 10,
+      "pending": 6,
+      "readyForClarify": true,
+      "readyForPlan": false,
+      "notProductAcceptance": true
+    },
+    "backlog": {
+      "total": 22,
+      "complete": 3,
+      "pending": 19,
+      "onlyMarkChanged": "RP002",
+      "RP002Scope": "Draft specification and checklist prepared; quality gate pending clarification",
+      "RP003": "PENDING"
+    },
+    "conservation": {
+      "trackedBaseline": 679,
+      "otherTrackedUnchanged": 675,
+      "protectedUnchanged": 72,
+      "researchRP001Unchanged": true,
+      "allSpec001And002FilesUnchanged": true,
+      "offeringBranchUnchanged": "adca8e6",
+      "inventoryBranchUnchanged": "d2676fd",
+      "migrationsAndCodeUnchanged": true
+    },
+    "workflow": {
+      "featureDirectory": "specs/003-reservas-ordenes-matricula",
+      "actualGitBranch": "feat/003-reservas-ordenes-matricula",
+      "helperFeatureName": "003-reservas-ordenes-matricula",
+      "template": ".specify/templates/spec-template.md",
+      "templateSha256": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e",
+      "localIgnoredPointerUpdated": true,
+      "extensionHooksPresent": false,
+      "planCreated": false,
+      "implementationTasksCreated": false
+    },
+    "documentation": {
+      "documents": 87,
+      "localLinksChecked": 1297,
+      "introducedBrokenLinks": [],
+      "preexistingBrokenLinks": []
+    },
+    "productTestsExecuted": 0,
+    "servicesOperated": false,
+    "sqlExecuted": false,
+    "smokesExecuted": false,
+    "capacityRunsExecuted": false,
+    "sensitiveValuesDetected": 0
+  },
+  "limits": {
+    "businessDefaultsInvented": false,
+    "implementationStarted": false,
+    "capacity2500Approved": false,
+    "humanAcceptance": false,
+    "T103": "COMPLETE_REPORT_WITHOUT_APPROVED_CAPACITY",
+    "T104": "PENDING",
+    "T108": "PENDING",
+    "T073": "PENDING",
+    "T074": "PENDING",
+    "bootstrap": "OPEN",
+    "AWSAdopted": false
+  },
+  "nextTask": "RP003",
+  "sourceHashes": [
+    {
+      "path": "README.md",
+      "sha256": "49f0ff59ee4e1a38eb654ac6d9f42c5155565f86e7a5e83003370db4253a0edc"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "3480f7f1728651d8ba1a997d52b7b1500e53b6d7a8a11361f865f7f8d173e023"
+    },
+    {
+      "path": "docs/planificacion/reservas-capacidad.md",
+      "sha256": "90e7ac24c5eeca05cbb23f47312322ee3c5695a7c99a92ff78568ae40519c2e8"
+    },
+    {
+      "path": "docs/decisiones-pendientes.md",
+      "sha256": "034d8d469b63f325d8cb1955c2b2a2435b71a8edca585331e59671e6dc15d291"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/spec.md",
+      "sha256": "d756eed849dc8518fbd725520103ea8182c9a8fdd0ceec09c31520e769c239fd"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/checklists/requirements.md",
+      "sha256": "bd325539532c1d5383c376ec06ba6c7e1216a92bca9887630b7ef2729f85a59b"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/research.md",
+      "sha256": "61be3c8809806042607511f0ad3be5ce4399f19cfb9143af39781c1b1425ca21"
+    },
+    {
+      "path": "docs/alcance-mvp.md",
+      "sha256": "2742d5021e67ce427e43bca59e1505da1eaaf19e26b8d0601e3e9b774c63050f"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/02-historias-del-usuario.md",
+      "sha256": "da6d66e1ef996c0b7a580c48dc08555b1b49eabb0d364f8b3015815b0641f6d3"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+      "sha256": "a3d0478b778135688242f4a2bf30b97e081d6f4348b6047025dbe13d69026188"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "sha256": "23a1903ff98ebe71c858d6123c1286f18ea184a6bbd5f111fcca69c67d82b7f3"
+    },
+    {
+      "path": ".agents/skills/speckit-specify/SKILL.md",
+      "sha256": "a505028de7f6489878696d6656c7d057f3a66119ebb8c0cc82d69fabb7b344ff"
+    },
+    {
+      "path": ".specify/templates/spec-template.md",
+      "sha256": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e"
+    },
+    {
+      "path": ".specify/scripts/powershell/create-new-feature.ps1",
+      "sha256": "305bbc2cf67f92caed6940c11df73d75891e5678a1c0321c963d045e1ae4a218"
+    },
+    {
+      "path": "specs/002-oferta-academica/spec.md",
+      "sha256": "38ac3e76389e4701d7216e611c8e3bd09780fd99ea719546b02c74342f985742"
+    },
+    {
+      "path": "specs/002-oferta-academica/tasks.md",
+      "sha256": "4d346f4eac72ee4576f722c560c5e02c9bee60b34bba0e003b235f9135a53f26"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/acceptance.md",
+      "sha256": "4bd3409ba372a84a08c2bb4e86a2a1446bc0111c6ab913c224ef3b2fbfa2d514"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/tasks.md",
+      "sha256": "ea40918842c5a6ba379cb3320723b6c35847459d9f8b8d42f0018b9a4059485c"
+    }
+  ]
+}

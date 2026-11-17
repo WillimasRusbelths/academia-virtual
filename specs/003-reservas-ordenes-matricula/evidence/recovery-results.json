@@ -1,0 +1,251 @@
+{
+  "task": "T086",
+  "date": "2026-11-15",
+  "timezone": "America/Lima",
+  "status": "local-rehearsal-complete",
+  "commit": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+  "project": "enrollment-recovery-52959423bd9d",
+  "apiImageId": "sha256:c13d8310193527418bb97f706420959e5ba9dc33815f6e99a46d179ed8fc68a8",
+  "versions": {
+    "postgres": "16.14",
+    "node": "22.23.1"
+  },
+  "command": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/recovery/rehearse-enrollment.ps1 -ApiImage academic-offering-fa3d46bddbb8-api:latest",
+  "phases": [
+    {
+      "phase": "legacy",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "resultSha256": "7c0054a82a7cd8d082b602cea2e25d9f9e9f2487bcd55d3db114118e820f1839",
+      "summary": {
+        "migrations": 5,
+        "accounts": 12,
+        "legacyRowsRecorded": true
+      }
+    },
+    {
+      "phase": "upgrade",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "resultSha256": "e55255ec15e0d5f70cdb535c034c539e3ad6a4db80b8f5aa8aa58801baa64cd5",
+      "summary": {
+        "migrations": 7,
+        "legacyRowsPreserved": true,
+        "newDescriptionDefaultNull": true,
+        "accounts": 12,
+        "counts": {
+          "AcademicAuditEvent": "0",
+          "AcademicCommand": "0",
+          "AcademicCourse": "1",
+          "AcademicGroup": "1",
+          "AcademicSlot": "1",
+          "ActionToken": "2",
+          "AdmissionSequence": "1",
+          "AuditEvent": "1",
+          "CoursePrice": "1",
+          "DispatchState": "1",
+          "Enrollment": "1",
+          "EnrollmentAuditEvent": "1",
+          "EnrollmentCommand": "1",
+          "EnrollmentOrder": "1",
+          "EnrollmentOrderItem": "1",
+          "IncidentFollowUp": "1",
+          "MailDelivery": "2",
+          "PaymentAttempt": "1",
+          "PaymentIncident": "1",
+          "ProviderReceipt": "1",
+          "RateBucket": "0",
+          "RateEvent": "0",
+          "ReservationRequest": "1",
+          "SeatReservation": "1",
+          "Session": "6",
+          "SystemState": "1",
+          "User": "12",
+          "VerifiedPayment": "2",
+          "_prisma_migrations": "7"
+        },
+        "orderReadable": true,
+        "financialRows": "synthetic physical fixtures"
+      }
+    },
+    {
+      "phase": "postbackup",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "resultSha256": "37550b8433c258d160cab760ce671064bd8a0d7c3a8e74f7521ce3ea4cc1d537",
+      "summary": {
+        "knownLostChanges": 1,
+        "additionalFollowUp": true,
+        "at": "2026-11-16T01:29:42.173Z"
+      }
+    },
+    {
+      "phase": "restore",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "resultSha256": "3e6c0eabb6bf1e29e1e137b573e1d0d5a3b0621e5343fb6b744f73948ecfc73d",
+      "summary": {
+        "matchingRows": true,
+        "matchingSchemaConstraintsFunctionsViewsAndGrants": true,
+        "migrationsAfterRestore": 7,
+        "allNonAccessRowsPreservedByInvalidation": true,
+        "financialRowsUnchanged": true,
+        "oldCredentialsRejected": true,
+        "newRoleLogins": true,
+        "roleDenials": true,
+        "ledgerReplay": true,
+        "differentIntentRejected": true,
+        "restartMode": "separate-node-process",
+        "staleMailSent": 0,
+        "knownLostChanges": 1,
+        "reviewedAndReappliedFictitiousDecisions": 1,
+        "invalidated": {
+          "sessions": 6,
+          "tokens": 2,
+          "mail": 2
+        },
+        "trafficReady": false,
+        "at": "2026-11-16T01:30:29.713Z"
+      }
+    }
+  ],
+  "auxiliary": {
+    "cipher": {
+      "passed": 7,
+      "failed": 0,
+      "command": "node --test ops/recovery/archive.test.mjs"
+    },
+    "guards": {
+      "passed": 5,
+      "failed": 0,
+      "existingDatabasePreserved": true,
+      "invalidInputCreatedDatabase": false,
+      "partialPlaintextRemoved": true
+    },
+    "timeZoneChecks": 2
+  },
+  "checks": {
+    "apiLint": "PASS",
+    "apiBuild": "PASS",
+    "prismaGeneration": "PASS",
+    "rehearsalStrictTypes": "PASS",
+    "apiEnrollmentTypes": "PASS",
+    "powershellSyntax": "PASS",
+    "sourceManifest": "PASS",
+    "privateConfigurationPreserved": true
+  },
+  "backup": {
+    "format": "ACADBKP1",
+    "postgresMajor": 16,
+    "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+    "startedAt": "2026-11-16T01:29:06.0719045Z",
+    "completedAt": "2026-11-16T01:29:07.0786404Z",
+    "plainSha256": "6075c69f121d1e2740896b03f72cfe84a1725243c8a76bf92f0112e65de92a00",
+    "cipherSha256": "14a6633bea796076ee9e3ec1355e221c77d927afd44cfb40c25c9855c6d3d562",
+    "cipherBytes": 162309,
+    "restored": false
+  },
+  "restore": {
+    "database": "recovery_52959423bd9d_test",
+    "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+    "startedAt": "2026-11-16T01:29:51.1020581Z",
+    "completedAt": "2026-11-16T01:29:53.2821869Z",
+    "archiveSha256": "14a6633bea796076ee9e3ec1355e221c77d927afd44cfb40c25c9855c6d3d562",
+    "restored": true,
+    "trafficReady": false
+  },
+  "preEnrollmentBackup": {
+    "format": "ACADBKP1",
+    "postgresMajor": 16,
+    "revision": "cfc001eac89292c1b135dbba79be9a9ca8cc0b8b",
+    "startedAt": "2026-11-16T01:28:32.2518239Z",
+    "completedAt": "2026-11-16T01:28:33.2411928Z",
+    "plainSha256": "153fdf662e16e5d14b95968237a3907a091a8497f7024e3fe5fe2bd70949fb0c",
+    "cipherSha256": "75c6334bea079b4eedf2bc1fb08333f656a194d0d0427067a80de078dac5c90b",
+    "cipherBytes": 78527,
+    "restored": false
+  },
+  "recovery": {
+    "expectedFailedMigration": "0008_recovery_failed",
+    "failedMigrationVerified": true,
+    "partialTableAbsent": true,
+    "rtoSeconds": 42.286358199999995,
+    "rpoUpperSeconds": 43.284774899999995,
+    "knownLostChanges": 1,
+    "reappliedKnownChanges": 1,
+    "trafficReady": false
+  },
+  "preservation": {
+    "baselineFiles": 955,
+    "protectedFilesUnchanged": 74,
+    "productAndMigrationsUnchanged": true,
+    "previousEvidenceUnchanged": true,
+    "existingManualProjectsUntouched": true
+  },
+  "attempts": [
+    {
+      "project": "enrollment-recovery-fdd513a382c8",
+      "status": "failed-restore-check",
+      "cause": "Test queried /enrollment/my-enrollments instead of existing /enrollment/enrollments; corrected test only; previous resources retained"
+    },
+    {
+      "project": "enrollment-recovery-52959423bd9d",
+      "status": "all-four-phases-pass"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "ops/recovery/rehearse-enrollment.ps1",
+      "sha256": "feccd09282af4e6e399dd2908b600b531944e0920ea6134cddd84af10d131ef7"
+    },
+    {
+      "path": "apps/api/tests/recovery/enrollment-rehearsal.spec.ts",
+      "sha256": "7fef91e1c819059931cb2746c88f4fb743c049e4fffbbf12dbc123dbeed606ce"
+    },
+    {
+      "path": "apps/api/tests/recovery/academic-snapshot.ts",
+      "sha256": "a3cbf794c14dd0721deb803ecb959fe1bf4998db073be10a70f175348472cdbb"
+    },
+    {
+      "path": "apps/api/tests/support/enrollment-migration.ts",
+      "sha256": "3ca6a788bf6ff648f61f6f641b75e570058628d8111a1562903b9a31986c18fd"
+    },
+    {
+      "path": "ops/recovery/backup.ps1",
+      "sha256": "cbd248365e9865016ddc4cabb57fc8099112496aa73c43b953e8db799b519c6a"
+    },
+    {
+      "path": "ops/recovery/restore-check.ps1",
+      "sha256": "084dcebc9231c241f9d3e9a1bcefcf6d2b2b8b68787bc84ecacadb2c09e5909a"
+    },
+    {
+      "path": "ops/recovery/archive.mjs",
+      "sha256": "fcb3c721405d3913688ff8a098db4ac19d8a679b53190d05284994edca6dc63c"
+    },
+    {
+      "path": "ops/recovery/common.ps1",
+      "sha256": "0466f47c059dffcd6bf3ebce981d1d8f242e540b1ddf4aef753e08d3b42c5085"
+    }
+  ],
+  "limits": [
+    "Synthetic financial rows do not verify provider payments or D02",
+    "Only new-version backup restored; pre-enrollment archive retained but not restored",
+    "No automatic rollback or recovery of changes after backup",
+    "Observed timing is not an approved RPO/RTO; D13 and physical 24h pending",
+    "T083, D10 and T094 remain pending"
+  ],
+  "tasks": {
+    "complete": 81,
+    "pending": 13
+  },
+  "closure": {
+    "containersStopped": 4,
+    "internalNetworks": 2,
+    "publishedPorts": 0,
+    "volumesRetained": true
+  }
+}

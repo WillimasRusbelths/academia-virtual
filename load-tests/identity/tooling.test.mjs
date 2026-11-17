@@ -66,3 +66,21 @@ test('watchdog conserva límite 5 s exactos y detiene por espera mayor o poca RA
   assert.equal(stopReason(5000,0,1024**3),null);assert.equal(stopReason(5000.001,0,1024**3),'HASH_WAIT_OVER_5S');assert.equal(stopReason(0,950*1024**2,1024**3),'MEMORY_HEADROOM_UNDER_128M');
 });
 test('resumen no incluye manifiesto, cuerpos ni cookies',async()=>{const {module}=await script('sessions.js');const output=module.handleSummary({metrics:{count:2}});assert.ok(!JSON.stringify(output).includes('canary'));});
+
+test('seguimiento local independiente: 10/25 constantes dos minutos cada uno, sin cambiar perfiles históricos',async()=>{
+  const {module}=await script('followup-local.js',{SMOKE_KIND:'authentication'});
+  const scenario=module.options.scenarios.local_followup;
+  assert.equal(Object.keys(module.options.scenarios).length,1);assert.equal(scenario.executor,'ramping-vus');
+  assert.equal(scenario.startVUs,10);
+  assert.equal(JSON.stringify(scenario.stages),JSON.stringify([{duration:'2m',target:10},{duration:'0s',target:25},{duration:'2m',target:25}]));
+  assert.equal(scenario.gracefulStop,'15s');assert.equal(module.options.noCookiesReset,true);
+  const historical=await script('authentication.js',{SMOKE_KIND:'authentication'});
+  assert.equal(JSON.stringify(module.options.thresholds),JSON.stringify(historical.module.options.thresholds));
+  assert.deepEqual(authenticationStages.filter(s=>s.duration==='2m').map(s=>s.target),[10,25,50,100]);
+});
+test('seguimiento local reutiliza autenticación y CSRF, cuenta exclusiva 25, sin otro cliente o reintento',async()=>{
+  const {module,state}=await script('followup-local.js',{SMOKE_KIND:'authentication'},25);module.default();
+  assert.equal(state.requests.length,3);assert.equal(JSON.parse(state.requests[0].body).email,'authentication-24@example.test');
+  assert.equal(state.requests[0].params.headers['X-CSRF-Protection'],'1');
+  assert.equal(state.requests[0].params.headers.Origin,'http://localhost:5173');assert.deepEqual(state.sleeps,[5]);
+});

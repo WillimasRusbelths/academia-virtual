@@ -1,0 +1,472 @@
+{
+  "clientDate": "2026-11-16",
+  "clientTimezone": "America/Lima",
+  "scope": "T009?T016 shared backend foundations; no materials HTTP handlers",
+  "tasks": {
+    "completed": 16,
+    "pending": 52
+  },
+  "validation": {
+    "materials": {
+      "success": true,
+      "passed": 45,
+      "failed": 0,
+      "pending": 0,
+      "files": 7,
+      "reportSha256": "aa3a72088d82b0b749d5322e5f6476a9a8bdadc8782898ad8c4b343f37b4daec",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-admission.spec.ts",
+          "status": "passed",
+          "passed": 10
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "status": "passed",
+          "passed": 9
+        },
+        {
+          "file": "apps/api/tests/integration/materials-errors.spec.ts",
+          "status": "passed",
+          "passed": 3
+        },
+        {
+          "file": "apps/api/tests/integration/materials-files.spec.ts",
+          "status": "passed",
+          "passed": 6
+        },
+        {
+          "file": "apps/api/tests/integration/materials-fixture.spec.ts",
+          "status": "passed",
+          "passed": 3
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "status": "passed",
+          "passed": 3
+        },
+        {
+          "file": "apps/api/tests/integration/materials-schema.spec.ts",
+          "status": "passed",
+          "passed": 11
+        }
+      ]
+    },
+    "unitAndArchitecture": {
+      "success": true,
+      "passed": 770,
+      "failed": 0,
+      "pending": 0,
+      "files": 36,
+      "reportSha256": "cc7c43564eab54050eb2eb3fae519a7c6ccb7051b57aca4310169cb835cb9f87",
+      "suites": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "status": "passed",
+          "passed": 24
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "status": "passed",
+          "passed": 6
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "status": "passed",
+          "passed": 7
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "status": "passed",
+          "passed": 20
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "status": "passed",
+          "passed": 39
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+          "status": "passed",
+          "passed": 27
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "status": "passed",
+          "passed": 10
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "status": "passed",
+          "passed": 91
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "status": "passed",
+          "passed": 42
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "status": "passed",
+          "passed": 4
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "status": "passed",
+          "passed": 115
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/expire-reservations.test.ts",
+          "status": "passed",
+          "passed": 15
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/follow-up.test.ts",
+          "status": "passed",
+          "passed": 10
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+          "status": "passed",
+          "passed": 22
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/commitments.test.ts",
+          "status": "passed",
+          "passed": 13
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+          "status": "passed",
+          "passed": 22
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+          "status": "passed",
+          "passed": 8
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+          "status": "passed",
+          "passed": 39
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+          "status": "passed",
+          "passed": 23
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+          "status": "passed",
+          "passed": 13
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-invariants.test.ts",
+          "status": "passed",
+          "passed": 10
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-verification.test.ts",
+          "status": "passed",
+          "passed": 38
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+          "status": "passed",
+          "passed": 86
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts",
+          "status": "passed",
+          "passed": 2
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+          "status": "passed",
+          "passed": 20
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "status": "passed",
+          "passed": 4
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "status": "passed",
+          "passed": 4
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "status": "passed",
+          "passed": 7
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "status": "passed",
+          "passed": 6
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "status": "passed",
+          "passed": 12
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "status": "passed",
+          "passed": 4
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "status": "passed",
+          "passed": 7
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "status": "passed",
+          "passed": 9
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "status": "passed",
+          "passed": 4
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "status": "passed",
+          "passed": 4
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "status": "passed",
+          "passed": 3
+        }
+      ]
+    },
+    "apiBuild": {
+      "exitCode": 0
+    },
+    "apiLint": {
+      "exitCode": 0
+    },
+    "prismaGenerate": {
+      "exitCode": 0
+    },
+    "materialsTypecheck": {
+      "exitCode": 0
+    },
+    "regression": {
+      "initial": {
+        "files": 8,
+        "filesPassed": 6,
+        "passed": 174,
+        "failed": 72,
+        "exitCode": 1,
+        "failures": [
+          "environment test invoked from wrong cwd",
+          "offering fixture TRUNCATE missing new FK dependencies"
+        ]
+      },
+      "corrected": {
+        "files": 3,
+        "passed": 97,
+        "exitCode": 0,
+        "suites": [
+          "environment",
+          "academic-offering-privacy",
+          "fixture-truncate"
+        ]
+      },
+      "remainingSuitesPassed": [
+        "http-security",
+        "session-store",
+        "session-lifecycle",
+        "academic-http-errors",
+        "enrollment-errors",
+        "enrollment-authorization"
+      ]
+    },
+    "beforeImplementation": {
+      "foundationAndPermissions": {
+        "failed": 16,
+        "passed": 103,
+        "exitCode": 1
+      },
+      "materialErrors": {
+        "failed": 3,
+        "exitCode": 1
+      },
+      "abortDuringAuthorization": {
+        "failed": 1,
+        "passed": 9,
+        "exitCode": 1
+      }
+    }
+  },
+  "preservation": {
+    "baselineFiles": 982,
+    "expectedChanges": [
+      "apps/api/prisma/schema.prisma",
+      "apps/api/src/app.module.ts",
+      "apps/api/src/http/error.filter.ts",
+      "apps/api/src/infrastructure/config/environment.ts",
+      "apps/api/src/infrastructure/logging/security-events.ts",
+      "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "apps/api/src/modules/authorization/domain/permissions.ts",
+      "apps/api/tests/architecture/endpoint-policies.spec.ts",
+      "apps/api/tests/architecture/import-boundaries.spec.ts",
+      "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "apps/api/tests/integration/migrations.spec.ts",
+      "apps/api/tests/support/academic-maintenance-fixture.ts",
+      "specs/004-materiales-estudio/tasks.md"
+    ],
+    "unexpectedChanges": [],
+    "previousCheckpointChanges": [
+      "specs/004-materiales-estudio/tasks.md",
+      "specs/004-materiales-estudio/evidence/implementation-environment.md"
+    ],
+    "unexpectedPreviousCheckpointChanges": [],
+    "unexpectedPreparationChanges": [],
+    "previousSpecs": [
+      {
+        "spec": "001-identidad-acceso-roles",
+        "completed": 106,
+        "pending": 2
+      },
+      {
+        "spec": "002-oferta-academica",
+        "completed": 72,
+        "pending": 2
+      },
+      {
+        "spec": "003-reservas-ordenes-matricula",
+        "completed": 84,
+        "pending": 10
+      }
+    ],
+    "historicalMigrations0001To0008Unchanged": true,
+    "privateConfigurationUnchanged": true
+  },
+  "environment": {
+    "project": "materials-trial-92aba908-04a",
+    "database": "academia_v00_test",
+    "publishedPorts": [],
+    "runnerImageId": "sha256:c13d8310193527418bb97f706420959e5ba9dc33815f6e99a46d179ed8fc68a8",
+    "finalState": "Test project stopped with compose down; volume and private configuration preserved"
+  },
+  "files": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "425e6c85d7d5d9a2e1349975773b5afd0ef5b28e56e3a046af81c234b7739be1"
+    },
+    {
+      "path": "apps/api/src/http/error.filter.ts",
+      "sha256": "931d25316f91b05b32424d8b795ae9e71851655978e2abfd5a07de3c30658d47"
+    },
+    {
+      "path": "apps/api/src/infrastructure/config/environment.ts",
+      "sha256": "336492a57089aaa338c59df8e481b75f92914e0d7780ba03514b531857b5a5ac"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/materials-transaction.ts",
+      "sha256": "6d53e60c5afdce8ef826baac2b16bd2a1ecabd21cb46fdd706f1c26efe6ff04c"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/materials-contract.ts",
+      "sha256": "afb2ca00c5292b30dc8e19427a6bc77e660a8491295d944c44e3d0b45b762ace"
+    },
+    {
+      "path": "apps/api/src/infrastructure/logging/security-events.ts",
+      "sha256": "db51642ce8b6bcfcdb59ae63da00a28135908fef74ed2ea96ef3e4afffbf1aa8"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/infrastructure/materials-participant.ts",
+      "sha256": "61bbbcfe8b5cc2ad0ec091d95aa3b147a4efab77b45eaa42f55871a565aaebfd"
+    },
+    {
+      "path": "apps/api/src/modules/academic-offering/public/materials-access.ts",
+      "sha256": "8b59d017b4c4b0fc489ef2dc4f9db9832f1d479229f294bebe34497726a9b337"
+    },
+    {
+      "path": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+      "sha256": "28f233d87abc4173806d50c79e9fea0b7f2e3e354362b29f8b29782c0986a999"
+    },
+    {
+      "path": "apps/api/src/modules/authorization/domain/permissions.ts",
+      "sha256": "d284fc12b57947d003e7e76b26b1f9b34159acee6c19a12e3de1c0f09e7e2150"
+    },
+    {
+      "path": "apps/api/src/modules/materials/domain/material-error.ts",
+      "sha256": "77060867149d77c381e8994905cd99c5098886d3a18e850fc243564755c74b28"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/material-queries.ts",
+      "sha256": "8634621307fd617bfc681c28733c15f241a7c44aadd998841b4276357e87839c"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/transfer-admission.ts",
+      "sha256": "9b08d7dfa945371c73807ab08f9027f705ba5bacfd28e326d0d6e56e31f39cd9"
+    },
+    {
+      "path": "apps/api/src/modules/materials/public/errors.ts",
+      "sha256": "ebac6acc3510e475ce75d50a91bbf5c6034b13cebefda609b8ec30f5b76d0f46"
+    },
+    {
+      "path": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+      "sha256": "bb0ce7f42dacdb1b74ec57119772ef74e461d78d8bcf090c08af52be7718a516"
+    },
+    {
+      "path": "apps/api/tests/architecture/import-boundaries.spec.ts",
+      "sha256": "cbeed78e195f57f587624e3da2319f55b53691fce0e42c3b15291c0870bf7acc"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-admission.spec.ts",
+      "sha256": "8039972f0dd562be714c5a3adc0bdba14cc181da2b07bf7f24291820165710bd"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-authority.spec.ts",
+      "sha256": "9e303392578f8d474468b99432ff8ae1688a9dcc33c7f14f888ad330480f2632"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-errors.spec.ts",
+      "sha256": "ca3333c54a80e5655fb7a3ef7bf6aa1d2cb6b37a25679adf2a97ca213f61f9ec"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-queries.spec.ts",
+      "sha256": "37365e49b375fe900af76c4756308337d445cbe248069eb69f25a467fc0c4710"
+    },
+    {
+      "path": "apps/api/tests/support/academic-maintenance-fixture.ts",
+      "sha256": "5f7fee5a1b500a66c124ade7eb6baad6c6cc8cf62e16e7fac75118bc30d277ab"
+    },
+    {
+      "path": "apps/api/tests/support/materials-foundation.ts",
+      "sha256": "aa162680d3aa94270fcb43a0f56ae09e48bca92f2c70e92f23b4263fa9ac5c10"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "868a00b11cf9c0a7044ed0fcb9e84139ff00cee833e2ffe0936a5ced61e394bd"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t009-t016.md",
+      "sha256": "56c3d3fd0af92adeadb3fcf724af4bd7a4b98e6c6994005458150c828b88136b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "76c67e1e7abfd45be0741c6d8dab71dcd9d90042da6d5bedbf6f744e77bf321d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "bcb7a61159b6316afebc8b2a3f3cea85356e30ba8659dd47ca5f4a272f5d179a"
+    }
+  ],
+  "notImplemented": [
+    "materials HTTP handlers",
+    "US1 upload/publication",
+    "US2 enrollment-authorized listing/download",
+    "UI/E2E",
+    "remote CI",
+    "restore/resources",
+    "human acceptance",
+    "D10/D13"
+  ]
+}

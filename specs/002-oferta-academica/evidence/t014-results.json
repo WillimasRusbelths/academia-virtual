@@ -1,0 +1,1828 @@
+{
+    "feature":  "002-oferta-academica",
+    "scope":  "T014 only; closure of T012/T013 after complete verification",
+    "date":  "2026-10-20",
+    "timezone":  "America/Lima",
+    "branch":  "feat/002-oferta-academica",
+    "previousBlockCommit":  "189280511ac971366359d7514c465d748449a81d",
+    "sourceMountedReadOnly":  true,
+    "source":  [
+                   {
+                       "path":  "apps/api/src/modules/academic-offering/infrastructure/offering-store.ts",
+                       "sha256":  "7170aa43313021b5c20080192876912fb63425e920bac31810b0d9241ef34d66"
+                   },
+                   {
+                       "path":  "apps/api/src/modules/academic-offering/infrastructure/offering-audit.ts",
+                       "sha256":  "6d6c2eb5c0c0d3ec13656bb825167aa29569171fca672669f3fa4dc0a2b83a33"
+                   },
+                   {
+                       "path":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                       "sha256":  "1754f900a8f700ddfe9ccc28ba99a4bfd6457143c8b923f2800932c3331b3ee4"
+                   },
+                   {
+                       "path":  "apps/api/src/infrastructure/database/account-locks.ts",
+                       "sha256":  "a8ae108bda9e013ac5b60be1644e60ba4efe27de20abec3926e9996bda96ffe0"
+                   },
+                   {
+                       "path":  "apps/api/src/infrastructure/database/academic-transaction.ts",
+                       "sha256":  "9328bea2f04972283127b85292d7b6c3fd99a155611e4797fbd6e1025d29a028"
+                   },
+                   {
+                       "path":  "apps/api/src/infrastructure/database/account-transaction.ts",
+                       "sha256":  "d26d51003ac0b755ed75f1536d496b3e935604769b344103726337de24b4202e"
+                   },
+                   {
+                       "path":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                       "sha256":  "6d5d900a67e38f1bdb534a82b89825274831f089c9c185b5eed3cbe205745800"
+                   },
+                   {
+                       "path":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                       "sha256":  "d9261584dd1fdebd2c01d3f80fe0b16d23441f765cb92a2cc1a06b863099b11a"
+                   },
+                   {
+                       "path":  "apps/api/tests/support/academic-foundation-contract.ts",
+                       "sha256":  "bf87f69e7a7df1cb6ff9c37f8e4142fa0df5747a6777737eaf164762d9f60da8"
+                   }
+               ],
+    "initialSelectedLedgerRun":  {
+                                     "report":  "ledger.json",
+                                     "sha256":  "6e0a687f4dde61469779d0ff946a755cc76c8b8e770aff508e5a3141ad0c66a9",
+                                     "passed":  15,
+                                     "failed":  0,
+                                     "notSelected":  18,
+                                     "files":  1
+                                 },
+    "finalReports":  [
+                         {
+                             "report":  "transaction.json",
+                             "sha256":  "d62be424974b0f5fcd13083273a5d74a409a7fdc6518d25f085232800bf89803",
+                             "passed":  33,
+                             "failed":  0,
+                             "notSelected":  0,
+                             "files":  1
+                         },
+                         {
+                             "report":  "protocol-extra.json",
+                             "sha256":  "2af7ebf446a2f1f509f7b813242190ffc22dd6d85ab4f906be3fc351052e28fe",
+                             "passed":  8,
+                             "failed":  0,
+                             "notSelected":  0,
+                             "files":  1
+                         },
+                         {
+                             "report":  "writer-extra.json",
+                             "sha256":  "e29d69ea7f19e8ef42f79bb0cd01cb48287f269d80e506c787bca936327f2947",
+                             "passed":  7,
+                             "failed":  0,
+                             "notSelected":  0,
+                             "files":  1
+                         },
+                         {
+                             "report":  "regression.json",
+                             "sha256":  "125e77bd438b85cdf50dc4a94e175a2cc5200b48d3a253aeaff3381e10f0151f",
+                             "passed":  56,
+                             "failed":  0,
+                             "notSelected":  0,
+                             "files":  5
+                         },
+                         {
+                             "report":  "unit.json",
+                             "sha256":  "65eed5dd33144a8c4a5c79ab9faed78c7be156917c062802c75a325ac24a87ef",
+                             "passed":  101,
+                             "failed":  0,
+                             "notSelected":  0,
+                             "files":  16
+                         }
+                     ],
+    "finalUniqueCases":  {
+                             "total":  205,
+                             "passed":  205,
+                             "failed":  0,
+                             "skipped":  0,
+                             "helperControls":  6,
+                             "protocolHookControl":  1,
+                             "initialSelectedRunExcludedFromTotals":  true
+                         },
+    "checks":  {
+                   "prerequisites":  0,
+                   "requirementsChecklist":  "16/16 read-only",
+                   "strictTypesThreePgSuites":  0,
+                   "lintApi":  0,
+                   "buildApiLinux":  0,
+                   "buildApiWindows":  0,
+                   "targetedLintNewFiles":  0,
+                   "gitDiffCheck":  0,
+                   "hooks":  "extensions.yml absent"
+               },
+    "architectureIncident":  {
+                                 "previousEvidence":  "t013.md",
+                                 "previousTimeoutMs":  16545,
+                                 "unchangedLimitMs":  15000,
+                                 "previousApprovedSerialRerunMs":  9543,
+                                 "currentFullUnitRun":  "unit.json",
+                                 "currentEslintDurationMs":  4143.944144,
+                                 "reappeared":  false,
+                                 "timeoutsAssertionsAndConfigUnchanged":  true,
+                                 "definitivePreviousRootCauseEstablished":  false
+                             },
+    "taskState":  {
+                      "T012":  "complete: 33/33 with barriers and persisted assertions",
+                      "T013":  "complete: T012 green, 8/8 protocol and affected identity regression",
+                      "T014":  "complete: real writer, 15 ledger cases and 7 extra PG checks",
+                      "T015":  "not started"
+                  },
+    "isolation":  {
+                      "project":  "academic-offering-fa3d46bddbb8",
+                      "volume":  "academic-offering-fa3d46bddbb8_postgres_data",
+                      "volumeCreatedAt":  "2026-10-19T10:45:57Z",
+                      "isolatedDbMailpitStopped":  true,
+                      "protectedFilesUnchanged":  72,
+                      "priorSourceFilesUnchanged":  5,
+                      "manualDbIdPrefix":  "e804ca17a1d5",
+                      "manualState":  "exited",
+                      "manualLastStart":  "2026-10-18T19:19:45.837265111Z",
+                      "manualLastStop":  "2026-10-18T21:58:41.760194769Z",
+                      "manualSqlOrStartPerformed":  false,
+                      "volumesPreserved":  true,
+                      "newMigrations":  false
+                  },
+    "catalog":  {
+                    "views":  [
+                                  "AcademicTeacherDirectory"
+                              ],
+                    "checks":  21,
+                    "tables":  [
+                                   "AcademicAuditEvent",
+                                   "AcademicCommand",
+                                   "AcademicCourse",
+                                   "AcademicGroup",
+                                   "AcademicSlot"
+                               ],
+                    "triggers":  [
+                                     "AcademicCourse_editorial_guard",
+                                     "AcademicGroup_editorial_guard",
+                                     "AcademicSlot_membership_guard",
+                                     "User_teacher_eligibility"
+                                 ],
+                    "migrations":  [
+                                       "0001_identity_users",
+                                       "0002_identity_access",
+                                       "0003_identity_mail_limits",
+                                       "0004_identity_argon2_format",
+                                       "0005_academic_offering"
+                                   ],
+                    "newChecksum":  "deef3e283d56e40a1fa30343b05b70137df35471763275fdf31126a4c5e36e21",
+                    "publicUsers":  0,
+                    "runtimeCanCreate":  false,
+                    "academicSchemasRemaining":  0
+                },
+    "limitations":  [
+                        "Foundation infrastructure, not HTTP academic commands or functional acceptance",
+                        "No new route, T015 logging, AppModule wiring or later feature implementation",
+                        "No E2E, remote CI, restore or load run",
+                        "No claim of 1000 concurrent users",
+                        "D04, enrollment part of D06 and inherited first-spec items remain open"
+                    ],
+    "cases":  [
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B01 control PG: PK actor/commandId serializa inserts concurrentes; barrera desde tercera conexión",
+                      "status":  "passed",
+                      "classification":  "helper-control",
+                      "durationMs":  136.46216300000015
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B02 control PG: agregado/ledger/auditoría confirman en una transacción existente",
+                      "status":  "passed",
+                      "classification":  "helper-control",
+                      "durationMs":  63.49331799999891
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B03 control PG: fallo real de restricción de auditoría revierte agregado y ledger",
+                      "status":  "passed",
+                      "classification":  "helper-control",
+                      "durationMs":  72.87336400000095
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B04 control PG: presupuesto compartido de señal de aborto y SQL 40001 no supera tres intentos",
+                      "status":  "passed",
+                      "classification":  "helper-control",
+                      "durationMs":  79.90657000000101
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B05 control PG: COMMIT aplicado sin acuse devuelve 503 y no repite el efecto",
+                      "status":  "passed",
+                      "classification":  "helper-control",
+                      "durationMs":  66.597389999999
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B06 control PG: rollback sin acuse confirmado descarta cliente y no reintenta",
+                      "status":  "passed",
+                      "classification":  "helper-control",
+                      "durationMs":  57.42106500000045
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P01 T013: User ordenados antes de sesión, Course y Group; sin SystemState ni grupos ajenos",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  120.95473599999968
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en account observada fuera de la transacción retenida",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  156.37303900000006
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en session observada fuera de la transacción retenida",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  144.69687400000112
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en course observada fuera de la transacción retenida",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  137.99443800000154
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en group observada fuera de la transacción retenida",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  143.2199529999998
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P03 T013: consulta posterior al lock ve el commit que hizo esperar, no la instantánea anterior",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  208.47921499999939
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P04 T013: redescubre conjunto cambiado dentro del siguiente intento y no toma User nuevos tras Course",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  181.33048299999973
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P05 T013: cambios persistentes de conjunto y 40P01 comparten tres intentos completos, sin bucle exterior",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  188.1597469999997
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P06 T013: commit incierto no reejecuta el callback académico",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  123.63142399999924
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P06 T013: rollback incierto no reejecuta el callback académico",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  113.14896000000044
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P07 T013: espera agotada devuelve indisponibilidad, nunca falso conflicto de horario",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  3143.6313609999997
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P08 T013: efecto y comprobaciones usan READ COMMITTED en la misma conexión",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  83.0280019999991
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L01 T014: comando aceptado confirma agregado, ledger y auditoría con IDs distintos",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  99.21417999999903
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L02 T014: replay idéntico retorna proyección actual y appliedRevision original, sin efecto/auditoría duplicados",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  138.12129099999947
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con payload distinto rechaza sin consumir cambios",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  104.40443699999923
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con target distinto rechaza sin consumir cambios",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  106.4871149999999
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con revision distinto rechaza sin consumir cambios",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  101.44823999999971
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con operation distinto rechaza sin consumir cambios",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  73.31576999999925
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L04 T014: claves JSON en distinto orden producen el mismo comando canónico",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  77.88358399999925
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L05 T014: reautoriza session antes de consultar ledger y no entrega proyección en replay denegado",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  81.61479299999883
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L05 T014: reautoriza role antes de consultar ledger y no entrega proyección en replay denegado",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  104.42188499999975
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L06 T014: fallo de auditoría revierte negocio y ledger; corregir permite reutilizar commandId",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  79.09452400000009
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L07 T014: dos conexiones del mismo actor/commandId esperan su lock y confirman un solo efecto",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  131.72191400000156
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L08 T014: commandId pertenece al actor; mismo UUID de otro administrador no es replay",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  96.2233699999997
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L09 T014: NO_CHANGE conserva revisión, persiste intención y replay no agrega auditoría",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  77.50979000000007
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L10 T014: fallo de negocio no consume commandId y error se conserva sin traducirlo a horario/503",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  91.34507000000303
+                  },
+                  {
+                      "report":  "transaction.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L11 T014: COMMIT sin acuse conserva ledger; solo reintento manual idéntico recupera resultado sin otro efecto",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer",
+                      "durationMs":  96.5859019999989
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G01 pérdida de session confirmada durante espera impide efecto y fase posterior a autorización",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  173.73230499999954
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G01 pérdida de role confirmada durante espera impide efecto y fase posterior a autorización",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  82.89206100000047
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G01 pérdida de status confirmada durante espera impide efecto y fase posterior a autorización",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  127.6525819999988
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G02 fase tras autorización puede devolver sin locks de recursos ni efecto; no implementa ledger",
+                      "status":  "passed",
+                      "classification":  "protocol-hook-control",
+                      "durationMs":  104.4264949999997
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G03 validación posterior a recheck conserva error de negocio y revierte escrituras de la transacción",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  73.07672900000034
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G04 cambio del conjunto de hijos redescubre también grupos, no solo cuentas",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  144.40725100000054
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G05 nunca ejecuta efecto de grupo sin su padre bloqueado, aunque discover lo omita",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  117.84410000000025
+                  },
+                  {
+                      "report":  "protocol-extra.json",
+                      "file":  "apps/api/tests/integration/academic-transaction-protocol.spec.ts",
+                      "test":  "G06 añade actor omitido, normaliza UUID duplicados y entrega snapshot inmutable",
+                      "status":  "passed",
+                      "classification":  "academic-protocol",
+                      "durationMs":  52.357405000000654
+                  },
+                  {
+                      "report":  "writer-extra.json",
+                      "file":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                      "test":  "W01 escritor real: CHECK de auditoría falla después del ledger y revierte ambos con el agregado",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer-extra",
+                      "durationMs":  248.607978
+                  },
+                  {
+                      "report":  "writer-extra.json",
+                      "file":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                      "test":  "W02 revisión obsoleta se rechaza bajo locks antes del callback; la clave sigue libre",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer-extra",
+                      "durationMs":  75.22710000000006
+                  },
+                  {
+                      "report":  "writer-extra.json",
+                      "file":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                      "test":  "W03 escritor comparte tres intentos entre redescubrimiento y aborto PG después de auditoría",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer-extra",
+                      "durationMs":  166.44450399999914
+                  },
+                  {
+                      "report":  "writer-extra.json",
+                      "file":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                      "test":  "W04 JSON anidado canónico conserva arrays; cambiar su orden es una intención distinta",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer-extra",
+                      "durationMs":  98.99769000000015
+                  },
+                  {
+                      "report":  "writer-extra.json",
+                      "file":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                      "test":  "W05 el escritor exige academic:manage aunque el llamante pase profile:read",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer-extra",
+                      "durationMs":  61.07134099999894
+                  },
+                  {
+                      "report":  "writer-extra.json",
+                      "file":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                      "test":  "W06 alta ficticia: UUID original se recupera del ledger y no se crea otro recurso",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer-extra",
+                      "durationMs":  103.23385700000108
+                  },
+                  {
+                      "report":  "writer-extra.json",
+                      "file":  "apps/api/tests/integration/academic-command-writer.spec.ts",
+                      "test":  "W07 escritor genérico: grupo con revisión bigint mayor que precisión JS y auditoría propia",
+                      "status":  "passed",
+                      "classification":  "academic-command-writer-extra",
+                      "durationMs":  109.20171000000119
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional ADMIN/academic:manage=true",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  17.171973000000435
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional ADMIN/academic:read-published=true",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  9.501917000000503
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional ADMIN/academic:read-own=false",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  11.988940999999613
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional STUDENT/academic:manage=false",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  9.23758700000053
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional STUDENT/academic:read-published=true",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  7.018665999999939
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional STUDENT/academic:read-own=false",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  6.909141000000091
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional TEACHER/academic:manage=false",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  6.468835000000581
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional TEACHER/academic:read-published=false",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  8.423573000000033
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorización primaria y revalidación transaccional TEACHER/academic:read-own=true",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  8.197730999999294
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:manage",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  0.8080800000007002
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:read-published",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  0.4477790000000823
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:read-own",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  0.31899199999952543
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A03 sesión revocada no aprovecha un actor validado anteriormente",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  7.540433000000121
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "role: UUID inválido, campos ausentes y filtros extra son 400; inexistente autorizado 404",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  738.6993550000007
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "status: UUID inválido, campos ausentes y filtros extra son 400; inexistente autorizado 404",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  310.00896399999874
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "rol revoca sesiones pero conserva tokens y entregas; auditoría contiene solo roles",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  235.90055700000084
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "desactivación conserva tokens consumidos/marca revocada previa y cancela entrega SENDING con payload borrado",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  237.2181670000009
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "reactivar conserva versión, verificación pendiente y provisional; no habilita acceso por sí sola",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  613.6041829999995
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "cambiar rol de cuenta desactivada conserva disabledAt",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  416.1645210000006
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "no-op role: no altera cuenta, tokens o correo; audita NO_CHANGE sin metadatos de transición",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  382.48671699999977
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "no-op status: no altera cuenta, tokens o correo; audita NO_CHANGE sin metadatos de transición",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  364.04024799999934
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "fallo AuditEvent por HTTP: 503 seguro y rollback de cuenta/sesiones/tokens/entregas",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  476.132384999999
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "aborto de auditoría: dos reintentos y un cambio de versión/evento",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  810.3377990000008
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "aborto de auditoría: dos reintentos y rollback total",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  1923.6291930000007
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/access-change.spec.ts",
+                      "test":  "aborto en revalidación real conserva señal segura y permite dos reintentos",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  686.1267349999998
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/credential-races.spec.ts",
+                      "test":  "login pausado tras verificar hash: reset confirma versión nueva y no nace ninguna sesión antigua",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  1792.2521899999992
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/credential-races.spec.ts",
+                      "test":  "reset frente a desactivación (before-lock): orden serial y ningún rescate al reactivar",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  936.504234
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/credential-races.spec.ts",
+                      "test":  "reset frente a desactivación (before-commit): orden serial y ningún rescate al reactivar",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  848.4039499999999
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/credential-races.spec.ts",
+                      "test":  "emisión de reset frente a desactivación (before-lock): no queda enlace ni entrega utilizables",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  447.0568999999996
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/credential-races.spec.ts",
+                      "test":  "emisión de reset frente a desactivación (before-commit): no queda enlace ni entrega utilizables",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  538.0978780000005
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/credential-races.spec.ts",
+                      "test":  "SMTP indisponible: solicitudes repetidas conservan cuenta/sesiones, cuotas y reemplazo sin ampliar caducidad",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  1220.62198
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/credential-races.spec.ts",
+                      "test":  "SMTP indisponible: veinte admisiones por origen suman propósitos, incluso sin destinatario; reiniciar adaptadores no libera cuota",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  1150.614877
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/password-reset-store.spec.ts",
+                      "test":  "provisional vencida verificada: reset limpia provisional, conserva identidad y habilita solo contraseña nueva",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  987.3115740000003
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/password-reset-store.spec.ts",
+                      "test":  "fallo después de cambiar hash y consumir token: rollback total y posterior reintento con el mismo enlace",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  497.9056789999995
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/password-reset-store.spec.ts",
+                      "test":  "hash fuera de locks y caducidad revalidada después de calcularlo",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  373.3163999999997
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/password-reset-store.spec.ts",
+                      "test":  "cookie configurada HTTPS: solo se elimina tras éxito, sin emitir sesión",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  419.5615429999998
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "consulta primaria en cada solicitud y conserva sesión tras recrear el adaptador",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  190.1353450000006
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "rechaza cuenta no elegible: disabled",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  24.30573800000002
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "rechaza cuenta no elegible: unverified",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  24.22802700000011
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "rechaza cuenta no elegible: provisional",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  19.44253800000024
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "rechaza cuenta no elegible: no-password",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  16.99112299999979
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "rechaza expiración idle sin renovar",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  38.297882999999274
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "rechaza expiración absolute sin renovar",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  37.94901200000004
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "revalidación exige una transacción explícita que conserve bloqueos hasta la escritura",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  19.30468700000074
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "solo accept aumenta actividad; GREATEST conserva orden y no amplía las ocho horas",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  80.11715800000002
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "revocación idempotente persistida; una solicitud iniciada antes no reactiva la sesión",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  58.715737000000445
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "credenciales alteradas, no canónicas, UUID o desconocidas no autentican",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  25.296454999999696
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "fallo de persistencia falla cerrado sin detalles de SQL",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  22.44434199999978
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "conflictos transitorios: 2 fallos, máximo dos reintentos y rollback",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  175.70543699999962
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "conflictos transitorios: 3 fallos, máximo dos reintentos y rollback",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  153.9342259999994
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "accept conserva User bloqueado mientras espera Session",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  78.09443499999998
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "accept revalida después de esperar bloqueo: revoke",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  52.632832000000235
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "accept revalida después de esperar bloqueo: version",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  44.086505000000216
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "accept revalida después de esperar bloqueo: role",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  62.24066800000037
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "accept revalida después de esperar bloqueo: expiry",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  55.826929999999265
+                  },
+                  {
+                      "report":  "regression.json",
+                      "file":  "apps/api/tests/integration/session-store.spec.ts",
+                      "test":  "base no disponible deniega lookup, renovación y revocación con error seguro",
+                      "status":  "passed",
+                      "classification":  "affected-regression",
+                      "durationMs":  25.306266999999934
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/endpoint-policies.spec.ts",
+                      "test":  "T088: todos los endpoints compilados tienen la política explícita de su contrato",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  770.2184610000002
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/import-boundaries.spec.ts",
+                      "test":  "límites del monolito modular dominio no importa Nest ni infraestructura",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  86.47331300000002
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/import-boundaries.spec.ts",
+                      "test":  "límites del monolito modular aplicación usa dominio y otro módulo solo por public",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  9.570392000000027
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/import-boundaries.spec.ts",
+                      "test":  "límites del monolito modular frontend mantiene shared y features sin ciclos laterales",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  6.289305000000013
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del código real todas las capas cumplen ESLint, incluido guard y superficies públicas",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  4143.944144
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del código real el cierre transitivo del núcleo no alcanza IO, composición ni DTO HTTP",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  7.607955999999831
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del código real el grafo de archivos y las raíces de composición no tienen ciclos",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.9697739999992336
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del código real HTTP y CLI consumen aplicación; no comparten reglas a través de entradas",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  4.490085999999792
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del código real las barreras rechazan escapes reales que el patrón de carpetas no cubría",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  16.962062000000515
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C01 DTO cerrados por audiencia, sin generación, credenciales ni datos de cuenta",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.335700999999972
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C02 revisiones JSON decimales, sin capacidad de inscripción ficticia",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.35222100000004275
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C03 comandos explícitos, revisión en recursos existentes y sin actualización de snapshot desde cliente",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.19822300000004134
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C04 errores de negocio seguros; referencias solo en conflictos administrativos",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.3103270000000293
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica ADMIN / academic:manage = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.5344460000000026
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica ADMIN / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.2813759999999661
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica ADMIN / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.18551300000001447
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica STUDENT / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.4047759999999698
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica STUDENT / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.22827399999999898
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica STUDENT / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.17542099999997163
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica TEACHER / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.27199600000000146
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica TEACHER / academic:read-published = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.1845299999999952
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz académica TEACHER / academic:read-own = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.7385339999999587
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión ADMIN / academic:manage = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.6825450000000046
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión ADMIN / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.49224200000003293
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión ADMIN / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.585893999999996
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión STUDENT / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.3649929999999699
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión STUDENT / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.12597600000003695
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión STUDENT / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.3209889999999973
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión TEACHER / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.25698399999998855
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión TEACHER / academic:read-published = false",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.2669050000000084
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorización backend por interfaz de sesión TEACHER / academic:read-own = true",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.17273599999998623
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "visitante sin sesión recibe AUTH_REQUIRED en academic:manage, sin consultar repositorio",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.4465150000000335
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "visitante sin sesión recibe AUTH_REQUIRED en academic:read-published, sin consultar repositorio",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.2905649999999582
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "visitante sin sesión recibe AUTH_REQUIRED en academic:read-own, sin consultar repositorio",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.21795099999997092
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "roles desconocidos/visitante y permisos desconocidos siempre se deniegan",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.8643000000000143
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz de identidad: perfil propio para tres roles; administración solo ADMIN",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.8764219999999909
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "operaciones y roles ajenos a la matriz se deniegan",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.3489789999999857
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "elegibilidad exige cuenta activa, correo verificado y contraseña propia",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  6.884180000000015
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "sesión vence exactamente a 30 minutos; no cambia ni renueva sus fechas",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.6317350000000488
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "sesión vence a ocho horas aunque haya actividad reciente",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.9463540000000421
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "acción VERIFY_EMAIL: propósito, destinatario, vigencia y uso único",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  3.0433929999999236
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "acción RESET_PASSWORD: propósito, destinatario, vigencia y uso único",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.5807160000000522
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "credencial provisional vence a 24 h; no exige correo para establecer clave, ni concede sesión",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.639821999999981
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide cambio propio role/STUDENT",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  3.0452769999999987
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide retirar último ADMIN ACTIVE mediante role/STUDENT",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.46158700000000863
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide cambio propio role/TEACHER",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.19289900000001126
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide retirar último ADMIN ACTIVE mediante role/TEACHER",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.3165300000000002
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide cambio propio status/DISABLED",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.21921400000002222
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide retirar último ADMIN ACTIVE mediante status/DISABLED",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.15946700000000646
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "otro ADMIN puede retirarse cuando queda otro activo; no exige correo verificado para contar",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.9329549999999927
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "no-op propio role no revoca ni restaura",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.4779010000000312
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "no-op propio status no revoca ni restaura",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.8281939999999963
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "desactivar revoca sesiones y acciones; cambiar rol solo sesiones",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.4885039999999776
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "reactivar y no-op desactivado no reconstruyen sesiones, tokens ni provisional",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.5239889999999718
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "ADMIN desactivado no cuenta como último activo para un cambio de rol",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.2238439999999855
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "quinto fallo bloquea 15 minutos; solicitudes rechazadas no prolongan bloqueo",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  3.54752000000002
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "ventana móvil: frontera inferior excluida y ninguna actividad futura",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.674788000000035
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "cinco reservas en vuelo consumen capacidad; al vencer se convierten en fallos conservadores",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.6169770000000199
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "éxito elimina fallos sin eliminar reservas de solicitudes concurrentes",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.38143700000000536
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidación de una credencial comprobada misma credencial y versión habilitadas",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.2662480000000187
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidación de una credencial comprobada rechaza cambio de estado",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.386667999999986
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidación de una credencial comprobada rechaza cambio de correo",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.19239799999996876
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidación de una credencial comprobada rechaza cambio de verificación",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.28304900000000544
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidación de una credencial comprobada rechaza cambio de contraseña",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.3321430000000305
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidación de una credencial comprobada rechaza cambio de versión",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.4025320000000079
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidación de una credencial comprobada rechaza cambio de provisional",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.22209000000003698
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "alias operativo ASCII de 1 a 64, sin derivacion ni valor predeterminado",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  3.0495769999999993
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (0)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.5172450000000026
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (1)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.20785000000000764
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (2)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.2405300000000068
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (3)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.22175899999996318
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (4)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.16257400000000644
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (5)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.5524389999999926
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (6)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.2405790000000252
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (7)",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.7737679999999614
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "prepara hash/enlace antes del store y solo transmite material persistible, sin provisional",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  4.794089000000042
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "fallo de credenciales no inicia la transaccion ni emite un enlace",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.474669000000006
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "fallo de preparacion de enlace no toca store ni revela errores del adaptador",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.1076449999999909
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "conserva rechazo irreversible de T028 sin inventar otro camino de inicializacion",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.9445200000000114
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "cuota antes de store; factory cifra enlace de origen fijo y no devuelve secreto",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  5.186922000000038
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "sin cuota no toca store, generador de payload ni cuenta",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.017403999999999
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "factory VERIFY_EMAIL conserva caducidad y elegibilidad de dominio",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.0980940000000032
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "factory RESET_PASSWORD conserva caducidad y elegibilidad de dominio",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.7041409999999928
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "contraseña inválida no invoca hash, repositorio ni consumo",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  5.128327000000013
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "token mal formado no invoca hash ni repositorio",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.0766590000000633
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "fallo de hash deja sin invocar el repositorio",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.5394699999999375
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "repositorio que rechaza consumo produce únicamente InvalidActionLink",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.2058829999999716
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "hash finaliza antes del repositorio; la regla pura exige verificación, propósito y caducidad vigentes",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.2563290000000507
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "solicitar reutiliza emisión con propósito reset y responde igual con o sin entrega",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.48275200000000495
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "cuota denegada conserva la espera definida por emisión",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  3.182557999999972
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "acuse de commit incierto devuelve error seguro sin repetir la operación",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  4.814192999999989
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "dos conflictos abortados con rollback confirmado permiten un tercer intento",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  32.11949000000004
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "conflicto persistente no supera tres intentos",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  27.44198799999998
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "sin rollback confirmado no reintenta y descarta el cliente fallido",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  1.8032979999999839
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+                      "test":  "mínimo de 60 s exactos por destinatario y propósito",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  4.639502999999991
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+                      "test":  "cinco por hora con ventana móvil, frontera exacta y Retry-After según ambos límites",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.8338550000000282
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+                      "test":  "veinte por origen sumando propósitos; la cuota limita aun con destinatario nuevo",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.8406889999999976
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "nombre Unicode: trim exterior y límites por caracteres, no bytes ni unidades UTF-16",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  3.7649410000000216
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "correo: trim y minúscula simple, sin transformar alias ni puntos",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  2.2262929999999983
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "contraseñas preservan espacios, composición Unicode y contenido completo",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.6963440000000105
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "rol único y estado admiten exclusivamente los enums",
+                      "status":  "passed",
+                      "classification":  "unit-or-architecture",
+                      "durationMs":  0.8553499999999872
+                  }
+              ]
+}

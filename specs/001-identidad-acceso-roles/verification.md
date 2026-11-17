@@ -1,5 +1,9 @@
 # Estrategia de verificación de identidad
 
+> Contexto de planificación 2026-10-23: [15 000 cuentas y objetivo 2500 activos](../../docs/planificacion/reservas-capacidad.md).
+> El protocolo y criterios históricos de identidad (1000) se conservan; esta nota no amplía
+> sus resultados ni cambia T103 [x] ejecución/informe, T104/T108 [ ] o bootstrap abierto.
+
 **Estado vigente — 2026-10-18:** las siete historias tienen checkpoints comprobados;
 [T106](evidence/regression.md) repite instalación/V00, lint/build, 120 unitarias,
 744 integraciones y 203 E2E sobre configuración/BD nuevas. Incluye V16 nuevo,

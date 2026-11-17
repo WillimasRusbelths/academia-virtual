@@ -1,0 +1,2563 @@
+{
+  "date": "2026-10-25",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "source": "aafd2a0",
+  "constitution": "1.2.0",
+  "scope": [
+    "T050",
+    "T051"
+  ],
+  "taskStatus": {
+    "T047": "Complete; ten original cases passed in both viewports with real HTTP/PostgreSQL",
+    "T050": "Complete; editorial cycle, terminal cancellation, parent/child behavior and keyboard checks passed",
+    "T051": "Complete; T045 and T047 green, explicit comparison/retry/correction and no replay after login",
+    "T052": "Pending: next block; no expanded audit/log implementation",
+    "T053": "Pending: full US3 checkpoint"
+  },
+  "commands": [
+    {
+      "action": "web",
+      "exitCode": 0,
+      "date": "2026-10-26T01:56:14.495Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-26T01:56:59.155Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-26T01:57:22.124Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "build",
+      "exitCode": 0,
+      "date": "2026-10-26T01:58:24.813Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "integration",
+      "exitCode": 0,
+      "date": "2026-10-26T01:59:45.331Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser-b02",
+      "exitCode": 0,
+      "date": "2026-10-26T02:01:23.693Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser-final",
+      "exitCode": 0,
+      "date": "2026-10-26T02:07:35.760Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "priorCommands": [
+    {
+      "action": "web-red",
+      "exitCode": 1,
+      "date": "2026-10-26T01:28:44.487Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser",
+      "exitCode": 1,
+      "date": "2026-10-26T01:34:41.846Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser",
+      "exitCode": 0,
+      "date": "2026-10-26T01:39:56.048Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser-regression",
+      "exitCode": 1,
+      "date": "2026-10-26T01:54:27.149Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "suites": {
+    "clientRed": {
+      "passed": 6,
+      "failed": 13,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "api.test.ts",
+          "cases": [
+            {
+              "name": "feature usa exclusivamente la capacidad ApiClient y propaga cancelación",
+              "status": "passed"
+            },
+            {
+              "name": "crear intención no escribe; payload permitido se copia antes del envío",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza revisión no contractual 0 antes de escribir",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza revisión no contractual 01 antes de escribir",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza revisión no contractual 9223372036854775808 antes de escribir",
+              "status": "passed"
+            },
+            {
+              "name": "error de autorización se propaga sin recrear ni reenviar la intención",
+              "status": "passed"
+            },
+            {
+              "name": "prepareCourseWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+              "status": "failed"
+            },
+            {
+              "name": "prepareCourseWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+              "status": "failed"
+            },
+            {
+              "name": "prepareCourseWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+              "status": "failed"
+            },
+            {
+              "name": "prepareGroupWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+              "status": "failed"
+            },
+            {
+              "name": "prepareGroupWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+              "status": "failed"
+            },
+            {
+              "name": "prepareGroupWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+              "status": "failed"
+            },
+            {
+              "name": "prepareGroupCancellation: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+              "status": "failed"
+            },
+            {
+              "name": "prepareGroupCancellation: intención corregida usa otro ID y no sobrescribe el comando anterior",
+              "status": "failed"
+            },
+            {
+              "name": "prepareGroupCancellation: 401 no programa envíos y otra instancia no recupera una intención anterior",
+              "status": "failed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 0",
+              "status": "failed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 1",
+              "status": "failed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 2",
+              "status": "failed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 3",
+              "status": "failed"
+            }
+          ]
+        }
+      ]
+    },
+    "webUnitFinal": {
+      "passed": 169,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "academic-catalog-api.test.ts",
+          "cases": [
+            {
+              "name": "catálogo pagina/busca por transporte común sin filtros administrativos",
+              "status": "passed"
+            },
+            {
+              "name": "detalle público conserva solo docente por nombre y capacidad sin disponibilidad",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyección pública ampliada o inválida 0",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyección pública ampliada o inválida 1",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyección pública ampliada o inválida 2",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyección pública ampliada o inválida 3",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyección pública ampliada o inválida 4",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyección pública ampliada o inválida 5",
+              "status": "passed"
+            },
+            {
+              "name": "publicación course requiere envío explícito y repite exactamente la intención",
+              "status": "passed"
+            },
+            {
+              "name": "publicación group requiere envío explícito y repite exactamente la intención",
+              "status": "passed"
+            },
+            {
+              "name": "sesión perdida cancela la otra respuesta tardía del detalle sin mostrar datos ni repetir comandos",
+              "status": "passed"
+            },
+            {
+              "name": "conflictos de publicación son administrativos; catálogo no expone referencias privadas",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-api.test.ts",
+          "cases": [
+            {
+              "name": "W01 courses codifica solo filtros de su ruta",
+              "status": "passed"
+            },
+            {
+              "name": "W01 groups codifica solo filtros de su ruta",
+              "status": "passed"
+            },
+            {
+              "name": "W01 teachers codifica solo filtros de su ruta",
+              "status": "passed"
+            },
+            {
+              "name": "W02 acepta curso/grupo incompletos y revisión decimal exacta, sin disponibilidad",
+              "status": "passed"
+            },
+            {
+              "name": "W03 rechaza curso inesperado 0",
+              "status": "passed"
+            },
+            {
+              "name": "W03 rechaza curso inesperado 1",
+              "status": "passed"
+            },
+            {
+              "name": "W03 rechaza curso inesperado 2",
+              "status": "passed"
+            },
+            {
+              "name": "W03 rechaza curso inesperado 3",
+              "status": "passed"
+            },
+            {
+              "name": "W03 rechaza curso inesperado 4",
+              "status": "passed"
+            },
+            {
+              "name": "W03 rechaza curso inesperado 5",
+              "status": "passed"
+            },
+            {
+              "name": "W03 rechaza curso inesperado 6",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 0",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 1",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 2",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 3",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 4",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 5",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 6",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 7",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 8",
+              "status": "passed"
+            },
+            {
+              "name": "W04 rechaza grupo inesperado 9",
+              "status": "passed"
+            },
+            {
+              "name": "W05 página/selector cerrado 0",
+              "status": "passed"
+            },
+            {
+              "name": "W05 página/selector cerrado 1",
+              "status": "passed"
+            },
+            {
+              "name": "W05 página/selector cerrado 2",
+              "status": "passed"
+            },
+            {
+              "name": "W05 página/selector cerrado 3",
+              "status": "passed"
+            },
+            {
+              "name": "W05 página/selector cerrado 4",
+              "status": "passed"
+            },
+            {
+              "name": "W06 una intención, dos envíos manuales idénticos y datos editados con ID nuevo",
+              "status": "passed"
+            },
+            {
+              "name": "W07 cinco comandos usan método/ruta/revisión previstos; horario se copia",
+              "status": "passed"
+            },
+            {
+              "name": "W08 AUTH_REQUIRED no encola ni reenvía al iniciar sesión; reintento explícito conserva ID",
+              "status": "passed"
+            },
+            {
+              "name": "W10 nueva revisión exige nueva intención; PATCH vacío/atributos ajenos no salen al transporte",
+              "status": "passed"
+            },
+            {
+              "name": "W11 respuesta perdida permite solo reintento manual con ID, revisión y payload idénticos",
+              "status": "passed"
+            },
+            {
+              "name": "W09 rechaza resultado de comando incompatible: id",
+              "status": "passed"
+            },
+            {
+              "name": "W09 rechaza resultado de comando incompatible: resource",
+              "status": "passed"
+            },
+            {
+              "name": "W09 rechaza resultado de comando incompatible: revision",
+              "status": "passed"
+            },
+            {
+              "name": "W09 rechaza resultado de comando incompatible: unknown",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-routes.test.tsx",
+          "cases": [
+            {
+              "name": "hidrata sesión en acceso directo /admin/oferta",
+              "status": "passed"
+            },
+            {
+              "name": "hidrata sesión en acceso directo /admin/oferta/cursos/00000000-0000-4000-8000-000000000001",
+              "status": "passed"
+            },
+            {
+              "name": "hidrata sesión en acceso directo /admin/oferta/grupos/00000000-0000-4000-8000-000000000001",
+              "status": "passed"
+            },
+            {
+              "name": "hidrata sesión en acceso directo /oferta",
+              "status": "passed"
+            },
+            {
+              "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001",
+              "status": "passed"
+            },
+            {
+              "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001/grupos/00000000-0000-4000-8000-000000000001",
+              "status": "passed"
+            },
+            {
+              "name": "políticas de audiencia STUDENT",
+              "status": "passed"
+            },
+            {
+              "name": "políticas de audiencia TEACHER",
+              "status": "passed"
+            },
+            {
+              "name": "políticas de audiencia ADMIN",
+              "status": "passed"
+            },
+            {
+              "name": "rutas no aceptan subrutas ni referencias externas",
+              "status": "passed"
+            },
+            {
+              "name": "inicio conserva perfil/cierre y enlace administrativo solo para STUDENT",
+              "status": "passed"
+            },
+            {
+              "name": "inicio conserva perfil/cierre y enlace administrativo solo para TEACHER",
+              "status": "passed"
+            },
+            {
+              "name": "inicio conserva perfil/cierre y enlace administrativo solo para ADMIN",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "http.test.ts",
+          "cases": [
+            {
+              "name": "JSON relativo, CSRF fijo y cookie gestionada por navegador sin leer secretos",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza URL no permitida https://remote.invalid/auth/login sin contactar transporte",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza URL no permitida //remote.invalid sin contactar transporte",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza URL no permitida /../me sin contactar transporte",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza URL no permitida /me?token=secret sin contactar transporte",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza URL no permitida /me#secret sin contactar transporte",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza URL no permitida /me%2Fsecret sin contactar transporte",
+              "status": "passed"
+            },
+            {
+              "name": "GET sin cuerpo, 204 sin JSON y 202 no se interpreta como correo entregado",
+              "status": "passed"
+            },
+            {
+              "name": "429 muestra solo espera válida; Retry-After 60, sin replay",
+              "status": "passed"
+            },
+            {
+              "name": "429 muestra solo espera válida; Retry-After 0, sin replay",
+              "status": "passed"
+            },
+            {
+              "name": "429 muestra solo espera válida; Retry-After invalid, sin replay",
+              "status": "passed"
+            },
+            {
+              "name": "429 muestra solo espera válida; Retry-After 999999999999999999999999, sin replay",
+              "status": "passed"
+            },
+            {
+              "name": "fallo network es seguro, exige reintento manual y no afirma éxito",
+              "status": "passed"
+            },
+            {
+              "name": "fallo 503 es seguro, exige reintento manual y no afirma éxito",
+              "status": "passed"
+            },
+            {
+              "name": "fallo malformed es seguro, exige reintento manual y no afirma éxito",
+              "status": "passed"
+            },
+            {
+              "name": "fallo unknown-code es seguro, exige reintento manual y no afirma éxito",
+              "status": "passed"
+            },
+            {
+              "name": "401 de credenciales se distingue de expiración y no invalida otra sesión",
+              "status": "passed"
+            },
+            {
+              "name": "401 AUTH_REQUIRED limpia datos y cancela respuestas tardías, sin repetir mutación",
+              "status": "passed"
+            },
+            {
+              "name": "cancelación explícita no se convierte en éxito ni provoca replay",
+              "status": "passed"
+            },
+            {
+              "name": "errores de campo descartan valores y mensajes remotos, conservan nombres aprobados",
+              "status": "passed"
+            },
+            {
+              "name": "campos con etiqueta/error asociados y mensajes escapados; reintento solo manual",
+              "status": "passed"
+            },
+            {
+              "name": "router usa historial sin datos sensibles, reemplaza al expirar y rechaza destinos externos",
+              "status": "passed"
+            },
+            {
+              "name": "filtros administrativos se codifican en GET; no se aceptan secretos ni consultas arbitrarias",
+              "status": "passed"
+            },
+            {
+              "name": "T027 query permitida por ruta /admin/academic/courses",
+              "status": "passed"
+            },
+            {
+              "name": "T027 query permitida por ruta /admin/academic/courses/00000000-0000-4000-8000-000000000001/groups",
+              "status": "passed"
+            },
+            {
+              "name": "T027 query permitida por ruta /admin/academic/teachers",
+              "status": "passed"
+            },
+            {
+              "name": "T027 no amplía queries arbitrarias /admin/academic/courses/{\"token\":\"secreto\"}",
+              "status": "passed"
+            },
+            {
+              "name": "T027 no amplía queries arbitrarias /admin/academic/teachers/{\"state\":\"DRAFT\"}",
+              "status": "passed"
+            },
+            {
+              "name": "T027 no amplía queries arbitrarias /admin/academic/groups/00000000-0000-4000-8000-000000000001/{\"q\":\"no\"}",
+              "status": "passed"
+            },
+            {
+              "name": "T027 no amplía queries arbitrarias /academic/courses/{\"state\":\"DRAFT\"}",
+              "status": "passed"
+            },
+            {
+              "name": "T027 reconoce conflicto académico OFFERING_VERSION_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+              "status": "passed"
+            },
+            {
+              "name": "T027 reconoce conflicto académico OFFERING_STATE_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+              "status": "passed"
+            },
+            {
+              "name": "T027 reconoce conflicto académico TEACHER_NOT_ELIGIBLE solo en ruta administrativa, sin texto remoto ni retry",
+              "status": "passed"
+            },
+            {
+              "name": "T027 reconoce conflicto académico IDEMPOTENCY_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+              "status": "passed"
+            },
+            {
+              "name": "T027 referencias de conflicto solo códigos y UUID administrativos permitidos",
+              "status": "passed"
+            },
+            {
+              "name": "T027 rechaza código de identidad 400/INVALID_ACTION_LINK ajeno al contrato académico",
+              "status": "passed"
+            },
+            {
+              "name": "T027 rechaza código de identidad 401/INVALID_CREDENTIALS ajeno al contrato académico",
+              "status": "passed"
+            },
+            {
+              "name": "router reconoce detalle sin aceptar subrutas ni valores externos",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "runtime.test.tsx",
+          "cases": [
+            {
+              "name": "React renderiza el componente mínimo en español",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "user-view.test.ts",
+          "cases": [
+            {
+              "name": "acepta únicamente una identidad habilitada y la proyección permitida",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza respuesta inválida: multirol",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza respuesta inválida: coerción",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza respuesta inválida: secreto",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza respuesta inválida: estado",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza respuesta inválida: verificación",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza respuesta inválida: provisional",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza respuesta inválida: fecha",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "api.test.ts",
+          "cases": [
+            {
+              "name": "feature usa exclusivamente la capacidad ApiClient y propaga cancelación",
+              "status": "passed"
+            },
+            {
+              "name": "crear intención no escribe; payload permitido se copia antes del envío",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza revisión no contractual 0 antes de escribir",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza revisión no contractual 01 antes de escribir",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza revisión no contractual 9223372036854775808 antes de escribir",
+              "status": "passed"
+            },
+            {
+              "name": "error de autorización se propaga sin recrear ni reenviar la intención",
+              "status": "passed"
+            },
+            {
+              "name": "prepareCourseWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+              "status": "passed"
+            },
+            {
+              "name": "prepareCourseWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+              "status": "passed"
+            },
+            {
+              "name": "prepareCourseWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+              "status": "passed"
+            },
+            {
+              "name": "prepareGroupWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+              "status": "passed"
+            },
+            {
+              "name": "prepareGroupWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+              "status": "passed"
+            },
+            {
+              "name": "prepareGroupWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+              "status": "passed"
+            },
+            {
+              "name": "prepareGroupCancellation: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+              "status": "passed"
+            },
+            {
+              "name": "prepareGroupCancellation: intención corregida usa otro ID y no sobrescribe el comando anterior",
+              "status": "passed"
+            },
+            {
+              "name": "prepareGroupCancellation: 401 no programa envíos y otra instancia no recupera una intención anterior",
+              "status": "passed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 0",
+              "status": "passed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 1",
+              "status": "passed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 2",
+              "status": "passed"
+            },
+            {
+              "name": "cancelación no prepara motivo inválido 3",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "validation.test.ts",
+          "cases": [
+            {
+              "name": "nombre vacío \"\"",
+              "status": "passed"
+            },
+            {
+              "name": "nombre vacío \" \"",
+              "status": "passed"
+            },
+            {
+              "name": "nombre vacío \"\\t\\n\"",
+              "status": "passed"
+            },
+            {
+              "name": "nombre sin límite de negocio inventado 0",
+              "status": "passed"
+            },
+            {
+              "name": "nombre sin límite de negocio inventado 1",
+              "status": "passed"
+            },
+            {
+              "name": "nombre sin límite de negocio inventado 2",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad válida 1",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad válida 50",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad válida 25",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \"\"",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \" \"",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \"0\"",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \"-1\"",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \"1.5\"",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \"51\"",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \"NaN\"",
+              "status": "passed"
+            },
+            {
+              "name": "capacidad inválida \"Infinity\"",
+              "status": "passed"
+            },
+            {
+              "name": "preparación incompleta admite cero franjas y fechas omitidas",
+              "status": "passed"
+            },
+            {
+              "name": "extremos incluidos y franjas contiguas",
+              "status": "passed"
+            },
+            {
+              "name": "fecha civil inválida 2026-02-30",
+              "status": "passed"
+            },
+            {
+              "name": "fecha civil inválida 2025-02-29",
+              "status": "passed"
+            },
+            {
+              "name": "fecha civil inválida 0000-01-01",
+              "status": "passed"
+            },
+            {
+              "name": "fecha civil inválida 19/10/2026",
+              "status": "passed"
+            },
+            {
+              "name": "periodo invertido",
+              "status": "passed"
+            },
+            {
+              "name": "día sin ocurrencia y periodo de un lunes con ocurrencia",
+              "status": "passed"
+            },
+            {
+              "name": "horario inválido duplicado",
+              "status": "passed"
+            },
+            {
+              "name": "horario inválido solapamiento",
+              "status": "passed"
+            },
+            {
+              "name": "horario inválido medianoche",
+              "status": "passed"
+            },
+            {
+              "name": "horario inválido horas iguales",
+              "status": "passed"
+            },
+            {
+              "name": "horario inválido 24:00",
+              "status": "passed"
+            },
+            {
+              "name": "horario inválido día inválido",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "api.test.ts",
+          "cases": [
+            {
+              "name": "consulta filtros sin interpolar correo en paths y acepta cuentas sin sesión habilitada",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyecciones y metadatos no contractuales",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyecciones y metadatos no contractuales",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyecciones y metadatos no contractuales",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyecciones y metadatos no contractuales",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyecciones y metadatos no contractuales",
+              "status": "passed"
+            },
+            {
+              "name": "rechaza proyecciones y metadatos no contractuales",
+              "status": "passed"
+            },
+            {
+              "name": "comandos envían solo campos permitidos y nunca reintentan un fallo",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "action-link.test.ts",
+          "cases": [
+            {
+              "name": "captura un secreto conforme al contrato una sola vez y retira fragmento, query e historial",
+              "status": "passed"
+            },
+            {
+              "name": "fragmento inválido ausente se retira sin conservarlo",
+              "status": "passed"
+            },
+            {
+              "name": "fragmento inválido con prefijo obsoleto se retira sin conservarlo",
+              "status": "passed"
+            },
+            {
+              "name": "fragmento inválido mal formado se retira sin conservarlo",
+              "status": "passed"
+            }
+          ]
+        }
+      ]
+    },
+    "postgresHttp": {
+      "passed": 116,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "file": "academic-offering-commands.spec.ts",
+          "cases": [
+            {
+              "name": "K01 dos administradores/revisión 1: un cambio y un conflicto, cero sobrescrituras",
+              "status": "passed"
+            },
+            {
+              "name": "K02 alta simultánea mismo actor/commandId recupera mismo UUID y único efecto",
+              "status": "passed"
+            },
+            {
+              "name": "K03 igual payload/commandId con actor distinto corresponde a dos intenciones independientes",
+              "status": "passed"
+            },
+            {
+              "name": "K04 dos envíos simultáneos de edición idéntica: un ledger/evento y revisión 2",
+              "status": "passed"
+            },
+            {
+              "name": "K05 NO_CHANGE conserva agregado; comando aceptado tiene un ledger y un evento NO_CHANGE",
+              "status": "passed"
+            },
+            {
+              "name": "K06 replay retorna proyección actual y revisión aplicada original sin segundo evento",
+              "status": "passed"
+            },
+            {
+              "name": "K07 digest diferencia payload, sin aplicar ni reemplazar ledger",
+              "status": "passed"
+            },
+            {
+              "name": "K07 digest diferencia target, sin aplicar ni reemplazar ledger",
+              "status": "passed"
+            },
+            {
+              "name": "K07 digest diferencia operation, sin aplicar ni reemplazar ledger",
+              "status": "passed"
+            },
+            {
+              "name": "K07 digest diferencia revision, sin aplicar ni reemplazar ledger",
+              "status": "passed"
+            },
+            {
+              "name": "K08 replay reautoriza antes del ledger tras pérdida de role",
+              "status": "passed"
+            },
+            {
+              "name": "K08 replay reautoriza antes del ledger tras pérdida de session",
+              "status": "passed"
+            },
+            {
+              "name": "K09 fallo de auditoría real revierte datos y ledger; misma intención puede confirmarse después",
+              "status": "passed"
+            },
+            {
+              "name": "K10 COMMIT ambiguo before: no replay automático, resolución manual por mismo ID",
+              "status": "passed"
+            },
+            {
+              "name": "K10 COMMIT ambiguo after: no replay automático, resolución manual por mismo ID",
+              "status": "passed"
+            },
+            {
+              "name": "K11 cliente descarta respuesta HTTP de alta aplicada y la recupera sin UUID ni evento nuevos",
+              "status": "passed"
+            },
+            {
+              "name": "K12 COURSE_WITHDRAW: replay aceptado no es una segunda transición ni un segundo evento",
+              "status": "passed"
+            },
+            {
+              "name": "K12 GROUP_CANCEL: replay aceptado no es una segunda transición ni un segundo evento",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-maintenance-http.spec.ts",
+          "cases": [
+            {
+              "name": "M01 course-withdraw/ADMIN: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 course-withdraw/STUDENT: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 course-withdraw/TEACHER: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 course-withdraw/VISITOR: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-withdraw/ADMIN: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-withdraw/STUDENT: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-withdraw/TEACHER: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-withdraw/VISITOR: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-cancel/ADMIN: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-cancel/STUDENT: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-cancel/TEACHER: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M01 group-cancel/VISITOR: matriz HTTP real, datos mínimos y cero efectos denegados",
+              "status": "passed"
+            },
+            {
+              "name": "M02 course-withdraw: transporte csrf no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 course-withdraw: transporte origin no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 course-withdraw: transporte media no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 course-withdraw: transporte size no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 course-withdraw: transporte query no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-withdraw: transporte csrf no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-withdraw: transporte origin no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-withdraw: transporte media no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-withdraw: transporte size no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-withdraw: transporte query no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-cancel: transporte csrf no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-cancel: transporte origin no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-cancel: transporte media no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-cancel: transporte size no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M02 group-cancel: transporte query no permite mutación",
+              "status": "passed"
+            },
+            {
+              "name": "M03 course-withdraw: target con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 course-withdraw: commandId con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 course-withdraw: expectedRevision con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 group-withdraw: target con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 group-withdraw: commandId con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 group-withdraw: expectedRevision con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 group-cancel: target con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 group-cancel: commandId con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M03 group-cancel: expectedRevision con salto final no se normaliza a una intención válida",
+              "status": "passed"
+            },
+            {
+              "name": "M04 course-withdraw: pérdida de session deniega también una URL administrativa directa",
+              "status": "passed"
+            },
+            {
+              "name": "M04 course-withdraw: pérdida de role deniega también una URL administrativa directa",
+              "status": "passed"
+            },
+            {
+              "name": "M04 group-withdraw: pérdida de session deniega también una URL administrativa directa",
+              "status": "passed"
+            },
+            {
+              "name": "M04 group-withdraw: pérdida de role deniega también una URL administrativa directa",
+              "status": "passed"
+            },
+            {
+              "name": "M04 group-cancel: pérdida de session deniega también una URL administrativa directa",
+              "status": "passed"
+            },
+            {
+              "name": "M04 group-cancel: pérdida de role deniega también una URL administrativa directa",
+              "status": "passed"
+            },
+            {
+              "name": "M05 course-withdraw: replay HTTP conserva revisión aplicada y un solo hecho persistido",
+              "status": "passed"
+            },
+            {
+              "name": "M05 group-withdraw: replay HTTP conserva revisión aplicada y un solo hecho persistido",
+              "status": "passed"
+            },
+            {
+              "name": "M05 group-cancel: replay HTTP conserva revisión aplicada y un solo hecho persistido",
+              "status": "passed"
+            },
+            {
+              "name": "M06 course-withdraw: fallo SQL de auditoría produce 503 seguro y rollback completo; reintento manual no duplica",
+              "status": "passed"
+            },
+            {
+              "name": "M06 group-withdraw: fallo SQL de auditoría produce 503 seguro y rollback completo; reintento manual no duplica",
+              "status": "passed"
+            },
+            {
+              "name": "M06 group-cancel: fallo SQL de auditoría produce 503 seguro y rollback completo; reintento manual no duplica",
+              "status": "passed"
+            },
+            {
+              "name": "M07 course-withdraw: recurso inexistente devuelve 404 seguro sin mutaciones",
+              "status": "passed"
+            },
+            {
+              "name": "M07 group-withdraw: recurso inexistente devuelve 404 seguro sin mutaciones",
+              "status": "passed"
+            },
+            {
+              "name": "M07 group-cancel: recurso inexistente devuelve 404 seguro sin mutaciones",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "file": "academic-offering-state.spec.ts",
+          "cases": [
+            {
+              "name": "I01 control auxiliar: composición HTTP real, dos grupos visibles y fixture sin ledger fabricado",
+              "status": "passed"
+            },
+            {
+              "name": "S01 retirar curso oculta catálogo, conserva hijos/capturas y no libera su agenda PUBLISHED",
+              "status": "passed"
+            },
+            {
+              "name": "S02 hijo publicado de padre retirado sigue no editable; guardar no retira implícitamente",
+              "status": "passed"
+            },
+            {
+              "name": "S03 retirar/editar/guardar no republica; publicación explícita conserva captura hasta confirmación",
+              "status": "passed"
+            },
+            {
+              "name": "S04 cancelar DRAFT: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "passed"
+            },
+            {
+              "name": "S04 cancelar PUBLISHED: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "passed"
+            },
+            {
+              "name": "S04 cancelar WITHDRAWN: motivo/instante servidor, snapshot/franjas y hermano conservados",
+              "status": "passed"
+            },
+            {
+              "name": "S05 cancelado rechaza withdraw, sin NO_CHANGE o revisión nueva",
+              "status": "passed"
+            },
+            {
+              "name": "S05 cancelado rechaza cancel, sin NO_CHANGE o revisión nueva",
+              "status": "passed"
+            },
+            {
+              "name": "S05 cancelado rechaza publish, sin NO_CHANGE o revisión nueva",
+              "status": "passed"
+            },
+            {
+              "name": "S06 retirar courses/DRAFT inválido no es éxito sin cambios",
+              "status": "passed"
+            },
+            {
+              "name": "S06 retirar courses/WITHDRAWN inválido no es éxito sin cambios",
+              "status": "passed"
+            },
+            {
+              "name": "S06 retirar groups/DRAFT inválido no es éxito sin cambios",
+              "status": "passed"
+            },
+            {
+              "name": "S06 retirar groups/WITHDRAWN inválido no es éxito sin cambios",
+              "status": "passed"
+            },
+            {
+              "name": "S07 recuperación del curso bloqueado exige retirar hijos afectados y republicarlos explícitamente",
+              "status": "passed"
+            },
+            {
+              "name": "S08 motivo inválido \"\": 400 seguro y cero efectos",
+              "status": "passed"
+            },
+            {
+              "name": "S08 motivo inválido \"  \": 400 seguro y cero efectos",
+              "status": "passed"
+            },
+            {
+              "name": "S08 motivo inválido null: 400 seguro y cero efectos",
+              "status": "passed"
+            },
+            {
+              "name": "S08 motivo inválido 1: 400 seguro y cero efectos",
+              "status": "passed"
+            },
+            {
+              "name": "S09 withdraw denegado a STUDENT antes de entregar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S09 withdraw denegado a TEACHER antes de entregar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S09 withdraw denegado a VISITOR antes de entregar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S09 cancel denegado a STUDENT antes de entregar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S09 cancel denegado a TEACHER antes de entregar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S09 cancel denegado a VISITOR antes de entregar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S10 motivo de cancelación solo admin, alumno recibe 404 uniforme",
+              "status": "passed"
+            },
+            {
+              "name": "S11 operación no ofrecida course-delete: 404 sin borrar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S11 operación no ofrecida group-delete: 404 sin borrar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S11 operación no ofrecida course-cancel: 404 sin borrar datos",
+              "status": "passed"
+            },
+            {
+              "name": "S12 motivo administrativo denegado a STUDENT, incluso por URL directa",
+              "status": "passed"
+            },
+            {
+              "name": "S12 motivo administrativo denegado a TEACHER, incluso por URL directa",
+              "status": "passed"
+            },
+            {
+              "name": "S12 motivo administrativo denegado a VISITOR, incluso por URL directa",
+              "status": "passed"
+            },
+            {
+              "name": "S13 cancelado rechaza PATCH de datos/franjas aunque sean iguales",
+              "status": "passed"
+            },
+            {
+              "name": "S13 cancelado rechaza PUT de datos/franjas aunque sean iguales",
+              "status": "passed"
+            },
+            {
+              "name": "S14 course-withdraw: body commandId no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 course-withdraw: body expectedRevision no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 course-withdraw: body state no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 course-withdraw: body stale no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-withdraw: body commandId no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-withdraw: body expectedRevision no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-withdraw: body state no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-withdraw: body stale no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-cancel: body commandId no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-cancel: body expectedRevision no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-cancel: body state no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S14 group-cancel: body stale no permite bypass del contrato",
+              "status": "passed"
+            },
+            {
+              "name": "S15 cancelación no acepta instante enviado por cliente",
+              "status": "passed"
+            }
+          ]
+        }
+      ]
+    },
+    "initialMaintenance": {
+      "uniqueCases": 10,
+      "executions": 20,
+      "passed": 18,
+      "failed": 2,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "timeoutMs": 15000,
+      "cases": [
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "desktop",
+          "status": "failed",
+          "durationMs": 3733
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3908
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1196
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 5339
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2597
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1896
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3471
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2801
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3014
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1689
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "mobile",
+          "status": "failed",
+          "durationMs": 3156
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2607
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1623
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 5544
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3032
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2140
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4696
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2146
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2906
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1989
+        }
+      ]
+    },
+    "maintenanceAfterReadinessFix": {
+      "uniqueCases": 10,
+      "executions": 20,
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "timeoutMs": 15000,
+      "cases": [
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 7351
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3217
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1183
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3901
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2427
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1552
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2993
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2236
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1961
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2134
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 7922
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3436
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1974
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 5350
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2211
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2137
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3342
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2195
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2482
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2977
+        }
+      ]
+    },
+    "regressionBeforeFinal503Warning": {
+      "uniqueCases": 38,
+      "executions": 76,
+      "passed": 75,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "timeoutMs": 15000,
+      "cases": [
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C01 cancelación obsoleta conserva motivo; comparar no adopta revisión hasta descarte explícito y nuevo ID",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 5275
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: cerrar/reabrir conserva intención incierta sin reenvío automático",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3477
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: motivo corregido usa ID nuevo",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3228
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C01 cancelación obsoleta conserva motivo; comparar no adopta revisión hasta descarte explícito y nuevo ID",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4690
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: cerrar/reabrir conserva intención incierta sin reenvío automático",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4355
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: motivo corregido usa ID nuevo",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3890
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B01 US1.1 listado vacío con acción para crear, navegación y teclado",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2883
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B02 US1.2 crea curso y dos grupos independientes, horarios/capacidad distintos y recarga",
+          "project": "desktop",
+          "status": "timedOut",
+          "durationMs": 15102
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B03 US1.3 nombre inválido conserva entradas, error asociado y cero guardado parcial",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2708
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B04 US1.4 cancelar alta vuelve al listado sin petición de escritura",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2155
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B05 US1.4 cancelar edición conserva datos y puede recorrerse solo con teclado",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 6857
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"\" conserva entrada y datos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 4186
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"0\" conserva entrada y datos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3537
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"-1\" conserva entrada y datos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2341
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"1.5\" conserva entrada y datos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3257
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"51\" conserva entrada y datos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2748
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B07 US1.6 franjas contiguas, fechas inclusivas y America/Lima persisten tras recarga",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 6668
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B08 US1.6 horas inválidas 18:00–18:00, sin persistencia parcial",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3028
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B08 US1.6 horas inválidas 19:00–18:00, sin persistencia parcial",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2573
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B08 US1.6 horas inválidas 23:00–01:00, sin persistencia parcial",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3234
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B09 listado fallido por permiso SQL real muestra error/reintento, nunca vacío ficticio",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2244
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 duplicado: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3231
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 solapamiento: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3587
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 periodo invertido: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2721
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 sin ocurrencia: rechazo por campo y datos intactos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2226
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B01 US1.1 listado vacío con acción para crear, navegación y teclado",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4217
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B02 US1.2 crea curso y dos grupos independientes, horarios/capacidad distintos y recarga",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 13517
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B03 US1.3 nombre inválido conserva entradas, error asociado y cero guardado parcial",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3459
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B04 US1.4 cancelar alta vuelve al listado sin petición de escritura",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3041
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B05 US1.4 cancelar edición conserva datos y puede recorrerse solo con teclado",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 7262
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"\" conserva entrada y datos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 6828
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"0\" conserva entrada y datos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2996
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"-1\" conserva entrada y datos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2212
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"1.5\" conserva entrada y datos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2961
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B06 US1.5 capacidad inválida \"51\" conserva entrada y datos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 5203
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B07 US1.6 franjas contiguas, fechas inclusivas y America/Lima persisten tras recarga",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 13941
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B08 US1.6 horas inválidas 18:00–18:00, sin persistencia parcial",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2881
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B08 US1.6 horas inválidas 19:00–18:00, sin persistencia parcial",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 8269
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B08 US1.6 horas inválidas 23:00–01:00, sin persistencia parcial",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 5224
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B09 listado fallido por permiso SQL real muestra error/reintento, nunca vacío ficticio",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3138
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 duplicado: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3254
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 solapamiento: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4422
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 periodo invertido: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2327
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B10 US1.6 sin ocurrencia: rechazo por campo y datos intactos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3179
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P01 edición sin guardar bloquea publicación; Escape cancela y devuelve foco sin escribir",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2271
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P02 revisión concurrente rechaza publicación; comparar no reemplaza hasta decisión explícita",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2162
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P03 respuesta perdida después de commit: confirmación manual repite commandId y no duplica auditoría",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2065
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P04 curso bloqueado por revisión docente muestra referencias académicas administrativas seguras",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 9736
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P05 comparación paginada consulta segunda página real sin enumerar grupos ocultos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 9869
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P01 edición sin guardar bloquea publicación; Escape cancela y devuelve foco sin escribir",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2533
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P02 revisión concurrente rechaza publicación; comparar no reemplaza hasta decisión explícita",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3431
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P03 respuesta perdida después de commit: confirmación manual repite commandId y no duplica auditoría",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2975
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P04 curso bloqueado por revisión docente muestra referencias académicas administrativas seguras",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1978
+        },
+        {
+          "file": "academic-offering-publication-ui.spec.ts",
+          "name": "P05 comparación paginada consulta segunda página real sin enumerar grupos ocultos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4270
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U01 acceso directo denegado a VISITOR, sin consultar datos académicos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3064
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U01 acceso directo denegado a STUDENT, sin consultar datos académicos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3894
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U01 acceso directo denegado a TEACHER, sin consultar datos académicos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 4617
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U02 inicio conserva perfil, cuentas y cierre al navegar por teclado hacia oferta",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 6800
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U03 sesión revocada elimina borrador privado; login real no reenvía el guardado",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 11508
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U04 fallo real de auditoría, rollback y reintento manual idéntico sin duplicar",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 5902
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U05 conflicto conserva entradas y permite comparar sin adoptar otra revisión automáticamente",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 4457
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U06 selector mínimo permite asignar un docente real y conservarlo tras recarga",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3964
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U07 docente pierde habilitación antes de guardar: rechazo real por campo y cero efectos académicos",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 4109
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U08 Enter al buscar docente consulta candidatos sin guardar ni consumir comando",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2580
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U09 publicado bajo curso retirado y cancelado permanecen de solo lectura",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2038
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U01 acceso directo denegado a VISITOR, sin consultar datos académicos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 6806
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U01 acceso directo denegado a STUDENT, sin consultar datos académicos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 5787
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U01 acceso directo denegado a TEACHER, sin consultar datos académicos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3173
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U02 inicio conserva perfil, cuentas y cierre al navegar por teclado hacia oferta",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3883
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U03 sesión revocada elimina borrador privado; login real no reenvía el guardado",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3188
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U04 fallo real de auditoría, rollback y reintento manual idéntico sin duplicar",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3844
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U05 conflicto conserva entradas y permite comparar sin adoptar otra revisión automáticamente",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3216
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U06 selector mínimo permite asignar un docente real y conservarlo tras recarga",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4278
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U07 docente pierde habilitación antes de guardar: rechazo real por campo y cero efectos académicos",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2555
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U08 Enter al buscar docente consulta candidatos sin guardar ni consumir comando",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4674
+        },
+        {
+          "file": "academic-offering-ui.spec.ts",
+          "name": "U09 publicado bajo curso retirado y cancelado permanecen de solo lectura",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2090
+        }
+      ]
+    },
+    "b02ManualRepeat": {
+      "uniqueCases": 1,
+      "executions": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "timeoutMs": 15000,
+      "cases": [
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B02 US1.2 crea curso y dos grupos independientes, horarios/capacidad distintos y recarga",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 10878
+        },
+        {
+          "file": "academic-offering-preparation.spec.ts",
+          "name": "B02 US1.2 crea curso y dos grupos independientes, horarios/capacidad distintos y recarga",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 10759
+        }
+      ]
+    },
+    "maintenanceAndConflictsFinal": {
+      "uniqueCases": 14,
+      "executions": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "timeoutMs": 15000,
+      "cases": [
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C01 cancelación obsoleta conserva motivo; comparar no adopta revisión hasta descarte explícito y nuevo ID",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 12428
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: cerrar/reabrir conserva intención incierta sin reenvío automático",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3850
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: motivo corregido usa ID nuevo",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 4005
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C03 edición con 503 conserva aviso incierto incluso al corregir; salir no envía otro comando",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 5425
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C01 cancelación obsoleta conserva motivo; comparar no adopta revisión hasta descarte explícito y nuevo ID",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 5695
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: cerrar/reabrir conserva intención incierta sin reenvío automático",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4746
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C02 cancelación 503 real: motivo corregido usa ID nuevo",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3961
+        },
+        {
+          "file": "academic-offering-maintenance-conflicts.spec.ts",
+          "name": "C03 edición con 503 conserva aviso incierto incluso al corregir; salir no envía otro comando",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3865
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 12555
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3688
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 1750
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 6437
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 7779
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2948
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 6019
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 7628
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 3864
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "desktop",
+          "status": "passed",
+          "durationMs": 2791
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M01 SC-001 curso y dos grupos: retirar/corregir/republicar explícitamente, sin modificar hermano",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 8601
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M02 cancelación exige motivo asociado, confirmación explícita e instante exclusivamente servidor",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2409
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M03 cancelado consultable con motivo administrativo y todos los controles de edición bloqueados",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1329
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M04 dos administradores conservan borrador obsoleto y exigen revisión e intención nueva",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 5245
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M05 guardar grupo retirado conserva ocultamiento; no envía publicación implícita",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3134
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M06 padre retirado no habilita edición del hijo publicado; retiro propio requiere confirmación",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1833
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M07 503 real revierte guardado, conserva formulario y repite misma intención solo manualmente",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 4197
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M08 respuesta perdida tras retiro aplicado: retry manual conserva cuerpo/ID y una sola auditoría",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 2600
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M09 sesión revocada cancela intención de retiro y login nuevo no la reenvía",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 3036
+        },
+        {
+          "file": "academic-offering-maintenance.spec.ts",
+          "name": "M10 cancelar confirmación de retiro devuelve foco, no escribe y mantiene oferta consultable",
+          "project": "mobile",
+          "status": "passed",
+          "durationMs": 1956
+        }
+      ]
+    }
+  },
+  "e2eCoverage": {
+    "uniqueCases": 49,
+    "projectCaseKeys": 98,
+    "meaning": "Union of case coverage across labeled batches and explicit B02 rerun; not a single 98/98 suite"
+  },
+  "incidents": [
+    {
+      "case": "M01 desktop/mobile initial",
+      "cause": "Immediate count before asynchronous group rendering",
+      "correction": "Wait for existing Nombre field visibility after navigation; all business assertions and limits unchanged"
+    },
+    {
+      "case": "B02 desktop regression",
+      "cause": "15000 ms total test timeout during final reload; teardown connection refusal is secondary; latency variance root cause unproven",
+      "correction": "Unchanged case repeated separately in both viewports under unchanged limits; historical failure retained; not proof of stability or bootstrap resolution"
+    },
+    {
+      "case": "Host runner invocation",
+      "cause": "PowerShell script execution policy on first final invocation",
+      "correction": "Existing documented process-scoped -ExecutionPolicy Bypass used; no test counted from rejected invocation"
+    }
+  ],
+  "preservation": {
+    "trackedChangesWithinAllowlist": true,
+    "protectedFilesUnchanged": 72,
+    "taskDefinitionsUnchanged": 74,
+    "taskCheckboxChanges": [
+      "T047",
+      "T050",
+      "T051"
+    ],
+    "originalApiCasesPreserved": 6,
+    "originalMaintenanceBusinessAssertionsPreserved": 10,
+    "isolatedProject": "academic-offering-fa3d46bddbb8",
+    "volumesRetained": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "manualMetadataUnchanged": true,
+    "manualSqlExecuted": false,
+    "publishedPorts": 0,
+    "manualMounts": 0,
+    "isolatedSchemasRemaining": 0,
+    "isolatedServicesStopped": true
+  },
+  "documentation": {
+    "date": "2026-10-25",
+    "documents": 32,
+    "localLinksChecked": 789,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  },
+  "limitations": [
+    "ApiClient simulations are unit boundary controls, not PostgreSQL evidence",
+    "Historical B02 timeout retained; focused rerun does not establish root cause or eliminate timing variance",
+    "No T052/T053 checkpoint or human acceptance claimed",
+    "Bootstrap, T104/T108, SMTP real, D04 and enrollment part of D06 remain open",
+    "T103 execution/report remains complete with capacity unapproved",
+    "No load or smoke runs; no 1000/2500 concurrency acceptance",
+    "24-hour reservations and RA-01..RA-06 remain in their future spec"
+  ]
+}

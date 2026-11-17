@@ -45,7 +45,7 @@ function matchesExternal(source, patterns) {
 
 export const apiLayersRule = {
   meta: {
-    type: 'problem',
+    type: /** @type {const} */ ('problem'),
     schema: [],
     messages: {
       external: 'La capa {{layer}} no puede importar {{source}}; usa un contrato o la raíz de composición.',
@@ -90,7 +90,7 @@ export const apiLayersRule = {
 
 export const webLayersRule = {
   meta: {
-    type: 'problem',
+    type: /** @type {const} */ ('problem'),
     schema: [],
     messages: {
       app: 'shared no puede depender de app ni features.',

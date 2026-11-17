@@ -1,0 +1,79 @@
+{
+  "task": "T083",
+  "recordedDate": "2026-11-15",
+  "timezone": "America/Lima",
+  "status": "complete-from-responsible-report",
+  "actualTrialDate": null,
+  "reportingSource": "User messages in this conversation",
+  "reportedSteps": [
+    "price",
+    "query",
+    "follow-up",
+    "student view"
+  ],
+  "device": "computer",
+  "reportedOutcome": {
+    "notePersisted": true,
+    "incidentStillPending": true,
+    "noEnrollmentGenerated": true,
+    "noRefundGenerated": true
+  },
+  "confirmation": {
+    "steps": "probe los pasos que me mencionaste que hiciera",
+    "result": "si",
+    "resultQuestion": "Al guardar el seguimiento, ¿la anotación se conservó y la incidencia siguió pendiente, sin generar matrícula ni devolución? Indica también si encontraste alguna dificultad."
+  },
+  "limits": {
+    "directAgentObservation": false,
+    "otherRealStudentParticipationConfirmed": false,
+    "mobileObserved": false,
+    "keyboardOnlyObserved": false,
+    "difficultiesDetailsProvided": false,
+    "timingMeasured": false,
+    "activeSessionClaimed": false
+  },
+  "provider": {
+    "sandboxAccess": false,
+    "source": "User answered no",
+    "D02": "pending",
+    "T056throughT059": "pending"
+  },
+  "checks": {
+    "previousHumanAndAcceptanceEvidence": "byte-for-byte prefix preserved",
+    "productTestsConfigurationAndMigrationsUnchanged": true,
+    "protectedFilesUnchanged": 74,
+    "taskCompletionChanged": [
+      "T083"
+    ],
+    "newProductTestsRun": false,
+    "servicesStarted": false
+  },
+  "updatedFiles": [
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/acceptance.md",
+      "sha256": "eb41c4bdab4148f5a35c620e3cae86ff35391b2c8c593577cdc0fbb2cdd2c643"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/human-acceptance.md",
+      "sha256": "7631bf268a18270271f868ab0bcf1ed356ac700ecc68481e7438dd9093d5e411"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/human-integrated-guide.md",
+      "sha256": "0223345c4a866148331fdf7b9d89751a3d709f66beacbfaf7ac953ebaa5682a3"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/tasks.md",
+      "sha256": "d59a92980033928131701699f519104c1f787b8df47213a8e0810bd2d888eba4"
+    }
+  ],
+  "taskCounts": {
+    "complete": 84,
+    "pending": 10
+  },
+  "remainingGates": [
+    "T089 integrated human acceptance requires T059",
+    "T090 physical 24h requires T059 and concrete D13 authorization/agreements",
+    "D10 and T094 remain pending",
+    "001 T104/T108 and 002 T073/T074 unchanged"
+  ]
+}

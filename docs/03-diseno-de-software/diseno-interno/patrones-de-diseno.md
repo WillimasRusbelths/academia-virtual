@@ -1,5 +1,10 @@
 # Patrones de diseño
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 Los patrones descritos se identifican por las colaboraciones del código y por el diseño explícito del [plan de identidad](../../../specs/001-identidad-acceso-roles/plan.md). Complementan el [diseño interno de módulos](diseno-interno-de-modulos.md) sin introducir nuevas decisiones. El backend conserva el estilo monolito por capas y Clean Architecture como enfoque para sus dependencias internas.
 
 Se distingue Adaptador, patrón estructural, de la entrega diferida transaccional, patrón de integración. Estados contrastados hasta T058: **implementado** en el alcance delimitado, **parcial** si quedan funciones pendientes y **previsto** sin implementación funcional. Los checkpoints US1/US2/US6 no equivalen a identidad completa.
@@ -106,4 +111,4 @@ El nombre **SessionRepository** no basta para afirmar Repository como colección
 | Guards, interceptor y filtros HTTP | Adaptación y controles del framework; no se deducen Decorator o Chain of Responsibility solo de sus nombres o del uso de decoradores de TypeScript |
 | Clean Architecture, monolito por capas y SOLID | Enfoque de dependencias, estilo arquitectónico y principios, respectivamente; no se presentan como patrones internos. Docker Compose organiza la ejecución local |
 
-Esta clasificación conserva funciones y contratos específicos donde son suficientes. No incorpora patrones a módulos académicos aún no detallados ni atribuye funcionalidades completas a los fundamentos existentes. Los 1000 usuarios concurrentes permanecen pendientes de pruebas de carga; la evidencia local no acredita disponibilidad de producción.
+Esta clasificación conserva funciones y contratos específicos donde son suficientes. No incorpora patrones a módulos académicos aún no detallados ni atribuye funcionalidades completas a los fundamentos existentes. Los 2500 usuarios concurrentes activos permanecen pendientes de pruebas de carga; la evidencia local no acredita disponibilidad de producción.

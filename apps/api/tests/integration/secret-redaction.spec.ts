@@ -26,6 +26,20 @@ const rootLogs=path.join(repositoryRoot(),'apps/api/logs/security');
 const uuid=/^[a-f0-9-]{36}$/;
 const auditFields=['id','actorKind','actorUserId','targetUserId','action','result','occurredAt','requestId','oldRole','newRole','oldStatus','newStatus'];
 const logFields=['eventId','correlationId','occurredAt','category','action','result','reasonCode','actorKind','actorUserId','operatorRef','targetKind','requestedTargetId','routeTemplate','counts'];
+// Contrato 002: extensiones cerradas, sin ampliar la proyección de identidad.
+const academicLogFields=[...logFields,'commandId'];
+const academicReasons=['OFFERING_VERSION_CONFLICT','OFFERING_STATE_CONFLICT','TEACHER_NOT_ELIGIBLE',
+  'TEACHER_SCHEDULE_CONFLICT','COURSE_PUBLICATION_BLOCKED','IDEMPOTENCY_CONFLICT'];
+const academicTargets:Readonly<Record<string,string>>={
+  '/admin/academic/courses':'NONE','/admin/academic/courses/:id':'COURSE',
+  '/admin/academic/courses/:id/publish':'COURSE','/admin/academic/courses/:id/withdraw':'COURSE',
+  '/admin/academic/courses/:courseId/groups':'COURSE','/admin/academic/groups/:id':'GROUP',
+  '/admin/academic/groups/:id/schedule':'GROUP','/admin/academic/groups/:id/publish':'GROUP',
+  '/admin/academic/groups/:id/withdraw':'GROUP','/admin/academic/groups/:id/cancel':'GROUP',
+  '/admin/academic/teachers':'NONE','/academic/courses':'NONE','/academic/courses/:id':'COURSE',
+  '/academic/courses/:courseId/groups':'COURSE','/academic/courses/:courseId/groups/:id':'GROUP',
+  '/teaching/groups':'NONE','/teaching/groups/:id':'GROUP',
+};
 function records(location:string):Record<string,unknown>[] {
   if(!existsSync(location))return [];
   return readdirSync(location).filter(file=>file.endsWith('.jsonl')).flatMap(file=>readFileSync(path.join(location,file),'utf8')
@@ -64,23 +78,39 @@ afterEach(async()=>{
     audit((await data.context.database.pool.query('SELECT * FROM "AuditEvent"')).rows);
     const entries=[...records(directory),...records(rootLogs)];
     for(const entry of entries){
-      expect(Object.keys(entry).every(key=>logFields.includes(key))).toBe(true);
+      const academic=['COURSE','GROUP'].includes(String(entry.targetKind))||Object.hasOwn(academicTargets,String(entry.routeTemplate));
+      expect(Object.keys(entry).every(key=>(academic?academicLogFields:logFields).includes(key))).toBe(true);
       expect(['eventId','correlationId','occurredAt','category','action','result','reasonCode','actorKind','targetKind'].every(key=>Object.hasOwn(entry,key))).toBe(true);
       expect(uuid.test(String(entry.eventId))&&uuid.test(String(entry.correlationId))&&Number.isFinite(Date.parse(String(entry.occurredAt)))).toBe(true);
       expect(['ACCESS_DENIED','AUTHENTICATION_FAILED','ADMIN_COMMAND_REJECTED','BOOTSTRAP_ATTEMPT','RESTORED_STATE_INVALIDATION','MAIL_DELIVERY_FAILED','RUNTIME_FAILURE'].includes(String(entry.action))).toBe(true);
       expect(['SECURITY','OPERATION'].includes(String(entry.category))&&['STARTED','SUCCEEDED','DENIED','FAILED'].includes(String(entry.result))).toBe(true);
-      expect(['ACCOUNT','ANONYMOUS','SYSTEM','LOCAL_OPERATOR'].includes(String(entry.actorKind))&&['USER_REFERENCE','IDENTITY_SCOPE','NONE'].includes(String(entry.targetKind))).toBe(true);
-      expect(['AUTH_REQUIRED','INVALID_CREDENTIALS','FORBIDDEN','REQUEST_NOT_ALLOWED','VALIDATION_ERROR','NOT_FOUND','ACCOUNT_CONFLICT','ADMIN_INVARIANT','RATE_LIMITED','ALREADY_INITIALIZED','TEMPORARILY_UNAVAILABLE','SMTP_FAILURE','NONE'].includes(String(entry.reasonCode))).toBe(true);
+      expect(['ACCOUNT','ANONYMOUS','SYSTEM','LOCAL_OPERATOR'].includes(String(entry.actorKind))&&(academic?['COURSE','GROUP','NONE']:['USER_REFERENCE','IDENTITY_SCOPE','NONE']).includes(String(entry.targetKind))).toBe(true);
+      const reasons=['AUTH_REQUIRED','INVALID_CREDENTIALS','FORBIDDEN','REQUEST_NOT_ALLOWED','VALIDATION_ERROR','NOT_FOUND','ACCOUNT_CONFLICT','ADMIN_INVARIANT','RATE_LIMITED','ALREADY_INITIALIZED','TEMPORARILY_UNAVAILABLE','SMTP_FAILURE','NONE'];
+      expect((academic?[...reasons,...academicReasons]:reasons).includes(String(entry.reasonCode))).toBe(true);
       expect(entry.actorKind==='ACCOUNT'?uuid.test(String(entry.actorUserId))&&!('operatorRef'in entry):!('actorUserId'in entry)).toBe(true);
-      if(entry.requestedTargetId!==undefined)expect(entry.targetKind==='USER_REFERENCE'&&uuid.test(String(entry.requestedTargetId))).toBe(true);
+      if(entry.requestedTargetId!==undefined)expect((academic?['COURSE','GROUP']:['USER_REFERENCE']).includes(String(entry.targetKind))&&uuid.test(String(entry.requestedTargetId))).toBe(true);
+      if(entry.commandId!==undefined)expect(academic&&entry.actorKind==='ACCOUNT'&&uuid.test(String(entry.commandId))).toBe(true);
       if(entry.actorKind==='LOCAL_OPERATOR')expect(typeof entry.operatorRef==='string'&&/^[A-Za-z0-9_-]{1,64}$/.test(entry.operatorRef)&&entry.targetKind==='IDENTITY_SCOPE').toBe(true);
       if(entry.routeTemplate!==undefined)expect(!String(entry.routeTemplate).includes('?')&&!String(entry.routeTemplate).includes('#')).toBe(true);
+      if(academic&&entry.routeTemplate!==undefined)expect(academicTargets[String(entry.routeTemplate)]).toBe(entry.targetKind);
     }
     const captured=JSON.stringify([entries,consoleSpies.flatMap(spy=>spy.mock.calls)]);
     expect([...secrets,...personal].every(value=>!captured.includes(value))).toBe(true);
   }finally{for(const spy of consoleSpies)spy.mockRestore();logs?.onApplicationShutdown();if(directory)rmSync(directory,{recursive:true,force:true});}
 });
 afterAll(async()=>{await data?.cleanup();});
+test('control: registro académico real admite solo referencias/commandId aprobados y rechaza datos personales',()=>{
+  const marker=secret(accessSecrets.issue().secret);
+  for(const kind of ['COURSE','GROUP'] as const){
+    const event={category:'SECURITY',action:'ADMIN_COMMAND_REJECTED',result:'DENIED',reasonCode:'OFFERING_STATE_CONFLICT',
+      actorKind:'ACCOUNT',actorUserId:data.account('ADMIN').id,targetKind:kind,requestedTargetId:randomUUID(),commandId:randomUUID(),
+      routeTemplate:kind==='COURSE'?'/admin/academic/courses/:id/publish':'/admin/academic/groups/:id/publish'};
+    expect(logs.record(event,randomUUID())).toBe(true);
+    for(const field of ['email','body','cancellationReason','expectedRevision'])expect(logs.record({...event,[field]:marker},randomUUID())).toBe(false);
+    expect(logs.record({...event,commandId:marker},randomUUID())).toBe(false);
+  }
+  expect(records(directory)).toHaveLength(2);
+});
 async function response(result:Response,status:number,cookie:'none'|'login'|'clear'='none'){
   expect(result.status).toBe(status);const raw=await result.text();
   expect(result.headers.get('cache-control')).toBe('no-store');expect(result.headers.get('referrer-policy')).toBe('no-referrer');

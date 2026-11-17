@@ -1,0 +1,695 @@
+{
+  "clientDate": "2026-11-16",
+  "clientTimezone": "America/Lima",
+  "scope": "T020 metadata and bounded binary structure validation",
+  "tasks": {
+    "completed": 20,
+    "pending": 48
+  },
+  "validation": {
+    "first": {
+      "exitCode": 0,
+      "success": true,
+      "total": 42,
+      "passed": 42,
+      "failed": 0,
+      "pending": 0,
+      "files": 2,
+      "reportSha256": "617d76f6371972ac81709d82c2290583268c492bde3edf8314b193c3ed4e9729",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-format.spec.ts",
+          "status": "passed",
+          "passed": 23,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "status": "passed",
+          "passed": 19,
+          "failed": 0
+        }
+      ]
+    },
+    "interim": {
+      "exitCode": 1,
+      "success": false,
+      "total": 863,
+      "passed": 862,
+      "failed": 1,
+      "pending": 0,
+      "files": 45,
+      "reportSha256": "bad25810b33c3d4c09ae07951de202ca56cc4a16551daa802c0de8ed31a69bde",
+      "suites": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "status": "passed",
+          "passed": 24,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "status": "failed",
+          "passed": 6,
+          "failed": 1
+        },
+        {
+          "file": "apps/api/tests/integration/materials-admission.spec.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-errors.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-files.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-fixture.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-format.spec.ts",
+          "status": "passed",
+          "passed": 28,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-schema.spec.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+          "status": "passed",
+          "passed": 27,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "status": "passed",
+          "passed": 91,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "status": "passed",
+          "passed": 42,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "status": "passed",
+          "passed": 115,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/expire-reservations.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/follow-up.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/commitments.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+          "status": "passed",
+          "passed": 23,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-invariants.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-verification.test.ts",
+          "status": "passed",
+          "passed": 38,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+          "status": "passed",
+          "passed": 86,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        }
+      ]
+    },
+    "final": {
+      "exitCode": 0,
+      "success": true,
+      "total": 865,
+      "passed": 865,
+      "failed": 0,
+      "pending": 0,
+      "files": 45,
+      "reportSha256": "1eb35a4fc8576419127df1eec97223d2eb38ef4cd76e9c91be8a9e539873e360",
+      "suites": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "status": "passed",
+          "passed": 24,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-admission.spec.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-errors.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-files.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-fixture.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-format.spec.ts",
+          "status": "passed",
+          "passed": 30,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-schema.spec.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+          "status": "passed",
+          "passed": 27,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "status": "passed",
+          "passed": 91,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "status": "passed",
+          "passed": 42,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "status": "passed",
+          "passed": 115,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/expire-reservations.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/follow-up.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/commitments.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+          "status": "passed",
+          "passed": 23,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-invariants.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-verification.test.ts",
+          "status": "passed",
+          "passed": 38,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+          "status": "passed",
+          "passed": 86,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0
+        }
+      ]
+    },
+    "lintApiExitCode": 0,
+    "apiMaterialsTypecheckExitCode": 0,
+    "prismaGenerateExitCode": 0,
+    "apiBuildExitCode": 0,
+    "metadataAndFormatPassed": 50,
+    "previousRegressionPassed": 815,
+    "initialCorrections": [
+      "ES2023 type library has no String.isWellFormed; use Unicode surrogate validation",
+      "PDF NUL whitespace regex has a documented local lint exception",
+      "Move metadata types into domain to remove public/domain import cycle"
+    ]
+  },
+  "preservation": {
+    "comparedFiles": 42,
+    "changedFiles": [
+      "apps/api/src/modules/materials/public/materials.ts",
+      "specs/004-materiales-estudio/tasks.md",
+      "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "apps/api/src/app.module.ts",
+      "specs/004-materiales-estudio/verification.md",
+      "apps/api/src/modules/materials/domain/material.test.ts",
+      "apps/api/tests/integration/materials-format.spec.ts"
+    ],
+    "checkpoints": [
+      {
+        "path": "specs/004-materiales-estudio/evidence/t005-t008-results.json",
+        "sha256": "638bfc50b4e1b33393d0a9b780a97e3fcaccce3d2b1a0e80deb3ada95def1578"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+        "sha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t017-t019-results.json",
+        "sha256": "ae0866a5e9e86aaeeb1b2201156a48311b1cf27df9c2c46751adfa78dd17f87a"
+      }
+    ],
+    "onlyExpectedFilesChanged": true,
+    "migrationsChanged": false,
+    "dependenciesChanged": false,
+    "materialsHttpAndUiTestsChanged": false
+  },
+  "files": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "f116a7db127464a3684029a7b21d6d2daddcc5bbb7eacc655a4f996e8f86bd1a"
+    },
+    {
+      "path": "apps/api/src/modules/materials/public/materials.ts",
+      "sha256": "d4786ba755087db9bddc8deaa5b17921401335cc297d61b9472bf3e280dcad8a"
+    },
+    {
+      "path": "apps/api/src/modules/materials/domain/material.test.ts",
+      "sha256": "fba9ab8d7bf2467483bfde28098bbd8b4aebbb40d766a5ee5e28f4eb3a9b117c"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-format.spec.ts",
+      "sha256": "7768fc94e915a1ff954d6d7014edc0492b74388879f9acff849b464b609dc5d7"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "7d52303c82b3d8b314a21b689ccfb190c76c689a70c0c65bcd543db74af8a45e"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "712fa74d9fe3025867568c55c14638924c297ea8e30f7427b3560c5f0836c242"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "d7cf30611df5032a16fbdb14990dcf96752fa8007984152327499bf378fa831f"
+    },
+    {
+      "path": "apps/api/src/modules/materials/domain/material.ts",
+      "sha256": "61a38e5eee333f901ace9cb7f8f2578e948b293b6132ba2a88ddd0cc39198bfd"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/file-validation.ts",
+      "sha256": "7df51dbaa7b4932a867e94dbc9ebf26b883d523ffef93306c3afbe2f564ddf2c"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/pdf-structure.ts",
+      "sha256": "6057261d00ef8a6d6afcc1fb40fc975c5a07215a124360fb5debc3813017cdaa"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t020.md",
+      "sha256": "da20e0dc082f125b7ad8aa2119ea9d02e49260497d57ed5978fa91a0b09ea055"
+    }
+  ],
+  "limitations": [
+    "No HTTP upload/publication implementation or materials UI",
+    "T018/T019 not rerun; behavior remains absent",
+    "Structural validation does not decode image pixels/PDF streams, render or scan malware",
+    "PDF xref-stream framing validated but compressed reference entries/objects not decoded",
+    "JPEG deferred-height DNL variant unsupported",
+    "PDF dictionary nesting <=64; structural names/keywords <=1024 bytes",
+    "No US1 functional/human acceptance, resource certification or D10/D13 closure"
+  ]
+}

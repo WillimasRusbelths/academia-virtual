@@ -1,0 +1,4 @@
+{
+  "extends":"./tsconfig.enrollment.json",
+  "include":["playwright.materials.config.ts","tests/support/materials-fixture.ts","tests/e2e/materials-management.spec.ts","tests/e2e/materials-student.spec.ts","tests/e2e/materials-actions.spec.ts"]
+}

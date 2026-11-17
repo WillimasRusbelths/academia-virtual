@@ -1,5 +1,10 @@
 # Decisiones arquitectónicas
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 Las decisiones responden a los [drivers arquitectónicos](06-driver-arquitectonicos.md) y establecen cómo organizar el sistema, proteger sus operaciones y verificar su comportamiento. Una decisión aceptada orienta el diseño; no demuestra por sí misma que la funcionalidad esté implementada.
 
 Se conservan los identificadores R01–R12 de la [investigación de identidad](../../specs/001-identidad-acceso-roles/research.md) y D02 y D13 del [registro de decisiones pendientes](../decisiones-pendientes.md). R11 y R12 se presentan conjuntamente por tratar el mismo entorno local. DEC01 identifica la elección de video vigente en DA03. Los estados se contrastan con la [verificación de identidad](../../specs/001-identidad-acceso-roles/verification.md) y la [validación de Docker](../../ops/docker/verification.md).
@@ -15,7 +20,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 | R07 | Interfaces y adaptadores para integraciones; Mailpit local y futura salida SMTP. | DA06, DA07 | Sustituir proveedores sin trasladar sus detalles al dominio. | Decisión aceptada; servicio Mailpit comprobado, envío funcional y proveedor externo pendientes. |
 | R08 | Entrega de correo persistida en PostgreSQL y ejecutada fuera de la solicitud HTTP. | DA06, DA08 | Permitir reintentos y recuperación sin bloquear las operaciones del usuario. | Decisión aceptada; ejecutor y garantías funcionales pendientes. |
 | R09 | Límites persistentes de solicitudes y respuestas que reduzcan enumeración de cuentas. | DA01, DA05 | Contener abuso y mantener controles coherentes entre solicitudes. | Decisión aceptada; implementación y pruebas pendientes. |
-| R10 | Pruebas de carga y optimización basada en mediciones. | DA05 | Dimensionar consultas, conexiones y recursos con evidencia. | Estrategia aceptada; 1000 usuarios concurrentes pendientes de demostrar. |
+| R10 | Pruebas de carga y optimización basada en mediciones. | DA05 | Dimensionar consultas, conexiones y recursos con evidencia. | Estrategia aceptada; 2500 usuarios concurrentes activos pendientes de demostrar. |
 | R11, R12 | Docker Compose para una operación local reproducible. | DA04, DA10 | Ejecutar dependencias y aplicaciones con configuración y procedimiento comunes. | Entorno local comprobado en el commit 47c8338. |
 | D02 | Izipay mediante un adaptador; PostgreSQL, transacciones e idempotencia para pagos y matrículas. | DA02, DA06 | Verificar el pago y evitar duplicados o inconsistencias entre cobro y acceso. | Pasarela elegida; integración y reglas pendientes. |
 | DEC01 | Video mediante YouTube Live con OBS. | DA03 | Externalizar emisión y distribución dentro de las restricciones del proyecto. | Elección aceptada; integración y control de acceso pendientes de validación. |
@@ -95,11 +100,11 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 
 ## R10 — Capacidad y rendimiento verificables
 
-- **Contexto:** AC01, AC03 y RT11 establecen el objetivo de 1000 usuarios concurrentes; D10 mantiene criterios de evaluación por acordar.
+- **Contexto:** RC-01/RC-02, AC03 y RT11 fijan población ≥15 000 y objetivo de 2500 activos; AC01 conserva el protocolo histórico de identidad de 1000. D10 mantiene criterios de evaluación por acordar.
 - **Decisión:** realizar pruebas de carga reproducibles, medir latencias, errores y recursos, y optimizar consultas, índices, conexiones y recursos según resultados.
 - **Justificación:** elegir ajustes a partir de cuellos de botella observados y separar carga interna de pruebas de proveedores externos.
 - **Consecuencias y limitaciones:** caché o escalamiento horizontal son posibilidades por validar si las mediciones las justifican. Un escenario de identidad no demuestra capacidad de chat, video o de toda la academia.
-- **Estado:** estrategia aceptada; protocolo definitivo y prueba de 1000 concurrentes pendientes. Las comprobaciones técnicas existentes no acreditan esa capacidad.
+- **Estado:** estrategia aceptada; protocolo definitivo y prueba de 2500 activos concurrentes pendientes. Las comprobaciones técnicas existentes no acreditan esa capacidad.
 
 ## R11 y R12 — Operación local reproducible
 

@@ -1,8 +1,12 @@
-# Carga de identidad: preparación T099–T102
+# Carga de identidad: perfiles históricos y seguimiento
 
 Herramientas locales para [ID-LOAD-01/02](../../specs/001-identidad-acceso-roles/verification.md#escenario-de-carga-id-load-01-1000-sesiones-activas).
-No acreditan capacidad hasta ejecutar y evaluar T103. No miden matrícula, clases,
-video o chat ni predicen producción. D10/rúbrica siguen pendientes.
+T103 está completada como ejecución/informe, con capacidad **sin aprobar**. No miden
+matrícula, clases, video o chat ni predicen producción. D10/rúbrica siguen pendientes.
+Desde 2026-10-23 se requieren al menos 15 000 cuentas y se plantea 2500 activos
+concurrentes, sin demostrar; no se modifican los perfiles/umbrales históricos de 1000.
+Véanse [planificación vigente](../../docs/planificacion/reservas-capacidad.md) y
+[smokes de este bloque](../../docs/planificacion/evidence/2026-10-23-smokes.md).
 
 ## Entorno aislado y fixtures
 
@@ -148,6 +152,23 @@ no convierte una muestra de 1000 en diez minutos demostrados. Son umbrales provi
 hasta D10, sin afirmar aprobación de la rúbrica.
 
 ## Verificación técnica y métricas
+
+### Seguimiento local preparado, sin ejecutar
+
+[followup-local.js](followup-local.js) es independiente de ID-LOAD-01/02 y de smoke.js:
+10 VU constantes durante 2 min, salto de 0 s y 25 VU constantes durante 2 min; hasta
+15 s de gracia al finalizar iteraciones. Reutiliza autenticación login/me/logout/pausa,
+las cuentas exclusivas de la cohorte authentication, clientes, CSRF, cookies y umbrales
+históricos. No cambia hash, cuotas, watchdog ni perfiles de 1000/10–25–50–100.
+VU configurados no prueban actividad real, reservas o capacidad de 2500.
+
+**No se ejecuta este perfil en este bloque**, ni se añade a measure.ps1. Para ejecutarlo
+después se deberá integrar un escenario independiente con snapshots, recursos,
+watchdog, resumen de duración propia y limpieza dirigida, o un wrapper equivalente
+revisado, sin desactivar guardas ni reutilizar nombres de reportes. Requiere autorización
+posterior. Sus pruebas de estructura/cliente con mocks de k6 no son una ejecución de carga.
+
+### Smokes existentes
 
 [smoke.js](smoke.js) es un programa independiente de 2 VU × 2 iteraciones, con los
 mismos clientes; no cambia los perfiles completos. `measure.ps1` admite

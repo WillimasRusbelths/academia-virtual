@@ -1,0 +1,89 @@
+{
+  "task": "T085",
+  "date": "2026-11-15",
+  "timezone": "America/Lima",
+  "status": "configuration-complete-locally-validated",
+  "workflow": {
+    "yaml": "PASS",
+    "budgetMinutes": 20,
+    "permissions": {
+      "contents": "read"
+    },
+    "steps": 32,
+    "enrollmentStep": "PASS",
+    "explicitTypes": "PASS",
+    "cleanup": "always",
+    "remoteRun": false
+  },
+  "checks": {
+    "hostApiTypes": "PASS",
+    "hostWebTypes": "PASS",
+    "containerApiAndWebTypes": "PASS",
+    "containerLint": "PASS",
+    "webBuild": "PASS",
+    "playwrightDiscovery": {
+      "status": "PASS",
+      "tests": 160,
+      "files": 10,
+      "executed": 0
+    }
+  },
+  "images": [
+    {
+      "name": "api",
+      "id": "sha256:c13d8310193527418bb97f706420959e5ba9dc33815f6e99a46d179ed8fc68a8",
+      "source": {
+        "imageSource": "MATCH",
+        "files": 533
+      }
+    },
+    {
+      "name": "browser",
+      "id": "sha256:8db1fd767edda05e36b9403af64ef09c36f8a30deb18e0ab1bfcec725448aca5",
+      "source": {
+        "imageSource": "MATCH",
+        "files": 533
+      }
+    }
+  ],
+  "configurationMounts": "workspace tsconfig.enrollment.json files, read-only",
+  "preservation": {
+    "baselineFiles": 953,
+    "protectedFilesUnchanged": 74,
+    "previousAppSourcesUnchangedExceptTwoTypeConfigs": true,
+    "databaseServicesStarted": false,
+    "databaseTestsExecuted": false,
+    "previousEvidenceUnchanged": true
+  },
+  "modifiedFiles": [
+    {
+      "path": ".github/workflows/v00-linux.yml",
+      "sha256": "945e406c90d8d4598727ea6f78797e6875cc6883bd6553a706551edfb29eb28b"
+    },
+    {
+      "path": "apps/api/tsconfig.enrollment.json",
+      "sha256": "2c9ffb29bdf2b93ff86672846d75773ab0164c8f553ce79a520311ec4a60076d"
+    },
+    {
+      "path": "apps/web/tsconfig.enrollment.json",
+      "sha256": "7831bd9f185c1f911a85b990e405fe7c3056003eccc28e0112b52932ddcc2100"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/quickstart.md",
+      "sha256": "3fc07d36ffebe65f0c255889abace81846d0bcaf9cb3b2e2976074028181b6b8"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/tasks.md",
+      "sha256": "22ff7cb63b2166577447af18641ed86254af88a19427ee4bc91f788055c29141"
+    }
+  ],
+  "taskCounts": {
+    "complete": 80,
+    "pending": 14
+  },
+  "limits": [
+    "GitHub Actions not executed; remote success and duration unverified",
+    "Discovery is not a functional test execution; see T084 for previous results",
+    "T083, D02, D10, D13 and T094 remain pending"
+  ]
+}

@@ -3,6 +3,7 @@ import path from 'node:path';
 import { setTimeout as pause } from 'node:timers/promises';
 import { test as base,expect } from '@playwright/test';
 import { identityDatabase } from '../../../api/tests/support/identity-database.js';
+import { truncateFixtureTables } from '../../../api/tests/support/fixture-truncate.js';
 import { us1Http } from '../../../api/tests/support/us1-http.js';
 import { repositoryRoot } from '../../../api/src/infrastructure/config/environment.js';
 import { assertMailpitAvailable } from '../../../api/tests/support/mailpit.js';
@@ -29,7 +30,10 @@ async function bootstrapEnvironment(){
     return {context,async reset(){
       if(!/^t_[a-z0-9_]+$/.test(context.environment.databaseSchema))throw new Error('Restablecimiento de ensayo no permitido.');
       await scheduler.beforeApplicationShutdown();
-      await context.isolated.ownerQuery(`TRUNCATE "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+      // Incluir solo dependientes vacías del mismo esquema; rechazar filas de negocio
+      // y conservar coordinadoras, sin CASCADE ni limpieza de datos compartidos.
+      await truncateFixtureTables(context, `TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent",
+        "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
         INSERT INTO "SystemState" (id) VALUES (1);`);
       scheduler.onApplicationBootstrap();
     },cleanup};

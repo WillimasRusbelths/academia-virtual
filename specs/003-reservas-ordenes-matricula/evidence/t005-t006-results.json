@@ -1,0 +1,1767 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Lima",
+  "tasks": [
+    "T005",
+    "T006"
+  ],
+  "status": "PREPARACION_COMPLETA_ROJO_ESPERADO_SIN_IMPLEMENTACION",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "initialLocalFiles": 713,
+  "previousWorkPreserved": "T001–T004 y sus cambios locales; sin nuevo commit.",
+  "authorization": "Continuación del siguiente bloque solicitada tras informe T002–T004; checklist 12/16 conservado.",
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "containers": [
+    {
+      "service": "db",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+      "mounts": [
+        {
+          "type": "bind",
+          "name": null,
+          "target": "/docker-entrypoint-initdb.d/01-academia.sql",
+          "readOnly": true
+        },
+        {
+          "type": "volume",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data",
+          "target": "/var/lib/postgresql/data",
+          "readOnly": false
+        }
+      ]
+    },
+    {
+      "service": "mailpit",
+      "status": "running",
+      "health": "healthy",
+      "image": "sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d",
+      "mounts": []
+    }
+  ],
+  "postgresql": "16.14",
+  "tzdata": "2026b-0+deb12u1",
+  "images": {
+    "finalApiFromInspect": "sha256:d65e3893df899469fc2c4e9de89e91d26ef829909a5687b4e756eda0f4040cc0",
+    "migrationBuildManifestFromToolOutput": "sha256:bdfffbc63491b7d61ae657c822f6a8593a4683376fdd66ce638240a1584d4692",
+    "earlierImageAvailableForDirectComparison": false,
+    "changeBetweenBuilds": "Solo mensajes/aserciones de los tres UNIT; fuentes PG y entradas de dominio no editadas entre ambas."
+  },
+  "finalRuns": {
+    "unitUTC": {
+      "total": 84,
+      "passed": 0,
+      "failed": 84,
+      "skipped": 0,
+      "todo": 0,
+      "runnerSeconds": 1.69385791015625
+    },
+    "unitLima": {
+      "total": 84,
+      "passed": 0,
+      "failed": 84,
+      "skipped": 0,
+      "todo": 0,
+      "runnerSeconds": 2.226599853515625
+    },
+    "migration": {
+      "total": 102,
+      "passed": 2,
+      "failed": 100,
+      "skipped": 0,
+      "todo": 0,
+      "runnerSeconds": 112.25545434570313
+    }
+  },
+  "counts": {
+    "uniqueCases": 186,
+    "finalExecutions": 270,
+    "finalPassed": 2,
+    "finalExpectedRed": 268,
+    "auxiliaryInitialUnitRepetitions": 168,
+    "totalExecutionsIncludingAuxiliary": 438
+  },
+  "zoneComparison": {
+    "sameCases": true,
+    "sameStatuses": true,
+    "unexpectedFailures": 0
+  },
+  "domain": {
+    "entrypoints": "instant.ts/calendar.ts/money.ts: contrato tipado, todas las operaciones arrojan ENROLLMENT_NOT_IMPLEMENTED.",
+    "rulesImplemented": false,
+    "units": {
+      "instant": 39,
+      "calendar": 22,
+      "money": 23
+    },
+    "fullTemporalProtocolVerified": false,
+    "TV06LockProtocol": "Pendiente T025, no acreditado con UNIT."
+  },
+  "migration": {
+    "baseline": "0001–0005 reales en cada schema t_ propio",
+    "newMigrationCreated": false,
+    "newMigrationApplied": false,
+    "controlsVerified": 2,
+    "independentMigrationMissingCases": 100,
+    "newEntityDMLReached": false,
+    "newConstraintsVerified": false,
+    "futureAssertions": "Intentos y aserciones escritos; T007/T008 deben ejecutar/verificar las nuevas filas y constraints.",
+    "physicalFixtureContract": "amountUnits/amountScale exactos; providerScope opaco ficticio; arrays UUID y snapshots JSON; sin contratos Izipay inventados."
+  },
+  "technicalChecks": {
+    "fullLint": "PASS imagen anterior",
+    "fullBuild": "PASS imagen anterior; build API final PASS",
+    "finalSelectiveTypes": "PASS host",
+    "finalSelectiveLint": "PASS host",
+    "selectiveConfig": "apps/web/tsconfig.enrollment.json"
+  },
+  "cleanup": {
+    "schemasBefore": 0,
+    "schemasAfter": 0,
+    "db": "stopped",
+    "mailpit": "stopped",
+    "volumePreserved": true,
+    "volumeCreatedAt": "2026-10-19T10:45:57Z"
+  },
+  "preservation": {
+    "protectedFiles": 74,
+    "historicalMigrations": 5,
+    "lockfileUnchanged": true,
+    "manualEnvironmentOperated": false,
+    "bootstrapUsed": false,
+    "checklist": "12/16 intacto",
+    "clarifications": 15
+  },
+  "limitations": [
+    "Rojo no equivale a comportamiento aprobado",
+    "Cien casos PG no alcanzaron DML posterior a la migración ausente",
+    "Sin prueba de sandbox/cobros/capacidad/24h/humana/CI remoto"
+  ],
+  "hooks": {
+    "before": "NO_EXTENSION_FILE",
+    "after": "NO_EXTENSION_FILE"
+  },
+  "commands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action config",
+      "expectedExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action up",
+      "expectedExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action sync",
+      "expectedExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action build",
+      "expectedExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action checks",
+      "expectedExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action unit-utc",
+      "expectedExit": 1
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action unit-lima",
+      "expectedExit": 1
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action pg",
+      "expectedExit": 1
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action inspect",
+      "expectedExit": 0
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cache/reservas-t005-t006/run.ps1 -Action stop",
+      "expectedExit": 0
+    }
+  ],
+  "rawReports": [
+    {
+      "path": ".cache/reservas-t005-t006/reports/unit-utc.json",
+      "sha256": "f4b10ece0c5e8e7fde32ccf085e32b2e665d02d17e6d82f9e86926e06207977b",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t005-t006/reports/unit-lima.json",
+      "sha256": "401fa5cd4f88e7b4274cab416e907a6d704fe73766e38dc0beaaa1e062a01a52",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t005-t006/reports/migration.json",
+      "sha256": "9317727e6df034becddbdf7525f56f773850ecf77d8b8be2ac65caf7bfce4d9e",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t005-t006/reports/unit-utc-initial.json",
+      "sha256": "f9fbb939db4b9ca579abc1735f0eddcf74d8c1b85ca60f72091fc6876a077916",
+      "private": true
+    },
+    {
+      "path": ".cache/reservas-t005-t006/reports/unit-lima-initial.json",
+      "sha256": "2d4ad47a089c3b8d9fbd9b09257fcf3c8fb3779e84d99d69bb77bccb86359360",
+      "private": true
+    }
+  ],
+  "sourceManifest": {
+    "path": ".cache/reservas-t005-t006/source-manifest.json",
+    "count": 716,
+    "sha256": "4b112958da34472db4c55ea32b9b946d12f1eb1ad0bab021ee90f560123ef956",
+    "private": true
+  },
+  "sourceHashes": [
+    {
+      "path": "apps/api/src/modules/enrollment/domain/instant.ts",
+      "sha256": "7d5f46b09ea689248a05370e03df8f0577fb3f33fad2ec0a22901226ec902969"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/calendar.ts",
+      "sha256": "df3d867027ba707eac0e1f6474854d2c7d53901e30aa93db8413f58574d63d9f"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/money.ts",
+      "sha256": "9fc8fdfb254289ec125b6701dad3e6f5b30ed9eecd04233fa8761f07f3c24ca8"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "sha256": "c6a586a5562905eff3978840e5eed5c6f79d96b49e43765e63bda394d7099969"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "sha256": "0d95034782911dc6236ae4803433bc13005552185c3c79875ffebf5ee5b07d29"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "sha256": "bead54df0f754c04cda41d11dcb704ce78a5eaa729f52ac2573da0c73ee22d1b"
+    },
+    {
+      "path": "apps/api/tests/support/enrollment-migration.ts",
+      "sha256": "691d50b1feb675fa903450dffc79d10769f9c658184469fd169d0f5404f343d4"
+    },
+    {
+      "path": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "sha256": "a80f856d170742ece9f8488aab9d83378f26985881ffd49c02d46858762201bd"
+    },
+    {
+      "path": "apps/web/tsconfig.enrollment.json",
+      "sha256": "ce177e8dd3f6015ed30c7f1d5991c598c2baa2bc5763d68532d6cb03fea2f833"
+    }
+  ],
+  "unitCases": [
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 0001-01-01",
+      "status": "failed",
+      "durationMs": 6.23411200000001,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 1900-02-28",
+      "status": "failed",
+      "durationMs": 1.8614619999999888,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2000-02-29",
+      "status": "failed",
+      "durationMs": 2.1572220000000186,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 2024-02-29",
+      "status": "failed",
+      "durationMs": 1.337186000000031,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 acepta fecha civil 9999-12-31",
+      "status": "failed",
+      "durationMs": 0.7507049999999822,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-01-31",
+      "status": "failed",
+      "durationMs": 0.7957640000000197,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-28",
+      "status": "failed",
+      "durationMs": 0.6978510000000142,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2024-02-29",
+      "status": "failed",
+      "durationMs": 0.7583319999999958,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 1900-02-28",
+      "status": "failed",
+      "durationMs": 1.3099480000000199,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2000-02-28",
+      "status": "failed",
+      "durationMs": 0.7697169999999574,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 2026-12-31",
+      "status": "failed",
+      "durationMs": 0.6713239999999701,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 0001-01-01",
+      "status": "failed",
+      "durationMs": 0.45936499999999114,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 día civil posterior a 9999-12-31",
+      "status": "failed",
+      "durationMs": 0.5681599999999776,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: bisiesto imposible",
+      "status": "failed",
+      "durationMs": 5.119216999999992,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: fecha imposible",
+      "status": "failed",
+      "durationMs": 1.4816690000000108,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año cero",
+      "status": "failed",
+      "durationMs": 6.15612299999998,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: año civil fuera de rango",
+      "status": "failed",
+      "durationMs": 1.0595050000000015,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: sin ceros",
+      "status": "failed",
+      "durationMs": 1.6372559999999794,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: timestamp",
+      "status": "failed",
+      "durationMs": 0.9942530000000147,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: null",
+      "status": "failed",
+      "durationMs": 0.8258089999999925,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 fecha inválida: número",
+      "status": "failed",
+      "durationMs": 0.8783220000000256,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: civilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+      "name": "TV08 no normaliza una fecha final inválida al calcular su límite",
+      "status": "failed",
+      "durationMs": 1.8579340000000002,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: nextCivilDate",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000000Z",
+      "status": "failed",
+      "durationMs": 14.266899000000024,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1970-01-01T00:00:00.000001Z",
+      "status": "failed",
+      "durationMs": 1.9260209999999915,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:59.999999Z",
+      "status": "failed",
+      "durationMs": 1.7593009999999936,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 1969-12-31T23:59:58.999999Z",
+      "status": "failed",
+      "durationMs": 1.6706980000000158,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 0001-01-01T00:00:00.000000Z",
+      "status": "failed",
+      "durationMs": 3.7485529999999585,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto 2000-01-01T00:00:00.000000Z",
+      "status": "failed",
+      "durationMs": 1.4173889999999574,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 parser exacto +010000-01-01T05:00:00.000000Z",
+      "status": "failed",
+      "durationMs": 1.6864250000000425,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 0n",
+      "status": "failed",
+      "durationMs": 1.5309439999999768,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: formatInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1n",
+      "status": "failed",
+      "durationMs": 2.08414300000004,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: formatInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto -1000001n",
+      "status": "failed",
+      "durationMs": 1.1274720000000116,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: formatInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 999999n",
+      "status": "failed",
+      "durationMs": 1.117921000000024,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: formatInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 1000000n",
+      "status": "failed",
+      "durationMs": 0.7544940000000224,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: formatInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07/08 formatter exacto 253402318800000000n",
+      "status": "failed",
+      "durationMs": 0.7205300000000534,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: formatInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 0n",
+      "status": "failed",
+      "durationMs": 5.223663999999985,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: reservationExpiresAt",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1n",
+      "status": "failed",
+      "durationMs": 1.2705320000000029,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: reservationExpiresAt",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde 999999n",
+      "status": "failed",
+      "durationMs": 0.9342230000000882,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: reservationExpiresAt",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV01 duración de 86400 segundos desde -1000001n",
+      "status": "failed",
+      "durationMs": 1.1847709999999552,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: reservationExpiresAt",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: antes del inicio",
+      "status": "failed",
+      "durationMs": 2.4656380000000127,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: containsInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: inicio inclusivo",
+      "status": "failed",
+      "durationMs": 0.9252539999999954,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: containsInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: un microsegundo antes del fin",
+      "status": "failed",
+      "durationMs": 0.39744099999995797,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: containsInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: fin exclusivo",
+      "status": "failed",
+      "durationMs": 1.0856489999999894,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: containsInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV02/05 intervalo: después del fin",
+      "status": "failed",
+      "durationMs": 1.8132579999999052,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: containsInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: antes",
+      "status": "failed",
+      "durationMs": 3.208359000000087,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: beforeDeadline",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: igual",
+      "status": "failed",
+      "durationMs": 2.7017809999999827,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: beforeDeadline",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV03/04 comparación estricta de pago/corte: después",
+      "status": "failed",
+      "durationMs": 0.9419300000000703,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: beforeDeadline",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 10.254418999999984,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza infinito negativo sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 2.3686250000000655,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza NaN sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.7112059999999474,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número infinito sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.6792169999999942,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza null sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 2.9311380000000327,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza número sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.810241000000019,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza precisión sobrante sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 2.2213110000000142,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fecha imposible sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.5717140000000427,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza mes imposible sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.7862589999999727,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza hora imposible sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.7824500000000398,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza año cero sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.5713230000000067,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza offset no canónico sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 1.7031489999999394,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 rechaza fracción no canónica sin normalizar/redondear",
+      "status": "failed",
+      "durationMs": 2.1681760000000168,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+      "name": "TV07 conserva acarreo al siguiente segundo, sin pasar por Date",
+      "status": "failed",
+      "durationMs": 0.8767380000000458,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parseInstant",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 0",
+      "status": "failed",
+      "durationMs": 6.063857999999982,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 1",
+      "status": "failed",
+      "durationMs": 1.0306520000000035,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 12500",
+      "status": "failed",
+      "durationMs": 0.7207209999999975,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN unidades menores exactas: 9007199254740993",
+      "status": "failed",
+      "durationMs": 0.8628789999999924,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: negativo",
+      "status": "failed",
+      "durationMs": 6.127580999999992,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: decimal",
+      "status": "failed",
+      "durationMs": 1.2229079999999897,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: exponente",
+      "status": "failed",
+      "durationMs": 1.1700739999999996,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: ceros iniciales",
+      "status": "failed",
+      "durationMs": 0.8789840000000027,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: signo positivo",
+      "status": "failed",
+      "durationMs": 1.85154,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: vacío",
+      "status": "failed",
+      "durationMs": 1.1445589999999868,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: espacio",
+      "status": "failed",
+      "durationMs": 0.811286999999993,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: número",
+      "status": "failed",
+      "durationMs": 0.8132009999999923,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: null",
+      "status": "failed",
+      "durationMs": 0.904057999999992,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: NaN",
+      "status": "failed",
+      "durationMs": 0.8035600000000045,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN representación inválida: infinito",
+      "status": "failed",
+      "durationMs": 3.4165820000000053,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: parsePenMinor",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN suma por servidor más allá de Number.MAX_SAFE_INTEGER",
+      "status": "failed",
+      "durationMs": 1.644001000000003,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: sumPenMinor",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "ausencia de precio es explícita y no se sustituye por cero",
+      "status": "failed",
+      "durationMs": 1.4656750000000045,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: penPrice",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN cero explícito conserva representación sin inferir matrícula gratuita",
+      "status": "failed",
+      "durationMs": 1.0366349999999898,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: penPrice",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "PEN precio exacto conserva moneda",
+      "status": "failed",
+      "durationMs": 0.665471000000025,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: penPrice",
+      "downstreamAssertions": "Aserción de valor posterior NO alcanzada"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena USD",
+      "status": "failed",
+      "durationMs": 0.8402200000000164,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: penPrice",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena pen",
+      "status": "failed",
+      "durationMs": 0.4409249999999929,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: penPrice",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena ",
+      "status": "failed",
+      "durationMs": 0.5430560000000071,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: penPrice",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+      "name": "precio no acepta moneda ajena null",
+      "status": "failed",
+      "durationMs": 0.48516100000000506,
+      "boundary": "ENROLLMENT_NOT_IMPLEMENTED: penPrice",
+      "downstreamAssertions": "Aserción de clase de error alcanzada y fallida"
+    }
+  ],
+  "migrationCases": [
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM00 control snapshot 0005, datos anteriores y runtime sin DDL",
+      "status": "passed",
+      "durationMs": 1054.2454710000002,
+      "boundary": "snapshot/motor PostgreSQL verificado",
+      "downstreamAssertions": "Controles completados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM01 control motor: microsegundos, epoch negativo y límite civil año 10000",
+      "status": "passed",
+      "durationMs": 1960.9488009999995,
+      "boundary": "snapshot/motor PostgreSQL verificado",
+      "downstreamAssertions": "Controles completados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM02 upgrade conserva filas/cuentas/credenciales/oferta/auditoría y no crea finanzas ficticias",
+      "status": "failed",
+      "durationMs": 1757.3218230000002,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid CoursePrice: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 846.7067349999998,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid AdmissionSequence: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 1385.6608530000003,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid DispatchState: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 758.1334829999996,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid ReservationRequest: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 882.3976979999989,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentOrder: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 1263.6898419999998,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentOrderItem: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 856.7582230000007,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid SeatReservation: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 918.9200199999996,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid PaymentAttempt: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 971.7551179999991,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid ProviderReceipt: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 981.1823260000001,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid VerifiedPayment: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 918.7186579999998,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid Enrollment: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 951.9945939999998,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid PaymentIncident: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 1520.0482370000027,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid IncidentFollowUp: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 1354.7580219999982,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentCommand: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 1065.9977180000024,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-valid EnrollmentAuditEvent: fila válida, PK y DML real",
+      "status": "failed",
+      "durationMs": 917.0510269999977,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK CoursePrice.courseId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 868.9606700000004,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK CoursePrice.changedBy: referencia inexistente",
+      "status": "failed",
+      "durationMs": 964.028538999999,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK ReservationRequest.studentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 867.1201959999999,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrder.studentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 768.5746760000002,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrder.requestId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 773.093581000001,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrderItem.orderId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 734.9641880000017,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrderItem.courseId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 1399.450799000002,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK EnrollmentOrderItem.groupId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 1400.2367830000003,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK SeatReservation.orderItemId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 974.5839990000022,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentAttempt.orderId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 907.0550170000024,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentAttempt.studentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 927.6090139999978,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK ProviderReceipt.terminalPaymentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 815.8516410000011,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK VerifiedPayment.orderId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 962.983017999999,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.orderItemId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 926.981590000003,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.studentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 911.1414349999977,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.courseId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 896.8003360000002,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.groupId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 1493.723957000002,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK Enrollment.paymentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 1410.8190820000018,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentIncident.verifiedPaymentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 874.2925899999973,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK PaymentIncident.orderId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 837.0203130000009,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK IncidentFollowUp.incidentId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 910.984540999998,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-FK IncidentFollowUp.adminUserId: referencia inexistente",
+      "status": "failed",
+      "durationMs": 772.1745720000035,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.amountMinor=\"-1\"",
+      "status": "failed",
+      "durationMs": 862.6894420000026,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.amountMinor=null",
+      "status": "failed",
+      "durationMs": 917.8663059999963,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.currency=\"USD\"",
+      "status": "failed",
+      "durationMs": 783.6979490000012,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK CoursePrice.revision=\"0\"",
+      "status": "failed",
+      "durationMs": 921.6109419999993,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.admissionSequence=\"0\"",
+      "status": "failed",
+      "durationMs": 2043.9782580000028,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.authVersion=\"-1\"",
+      "status": "failed",
+      "durationMs": 1460.0636270000032,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.groupIds=[]",
+      "status": "failed",
+      "durationMs": 732.9815739999976,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ReservationRequest.state=\"UNKNOWN\"",
+      "status": "failed",
+      "durationMs": 897.4722889999975,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.currency=\"USD\"",
+      "status": "failed",
+      "durationMs": 1023.5800769999987,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.totalMinor=\"-1\"",
+      "status": "failed",
+      "durationMs": 994.4689690000014,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.revision=\"0\"",
+      "status": "failed",
+      "durationMs": 811.4610840000023,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.state=\"CANCELLED\"",
+      "status": "failed",
+      "durationMs": 850.5178400000004,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrder.expiresAt=\"2026-11-02T00:00:00.123455Z\"",
+      "status": "failed",
+      "durationMs": 746.1440309999962,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.priceMinor=\"-1\"",
+      "status": "failed",
+      "durationMs": 741.590830000001,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.periodEnd=\"2030-01-01\"",
+      "status": "failed",
+      "durationMs": 1532.3632500000022,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.timeZone=\"UTC\"",
+      "status": "failed",
+      "durationMs": 1192.4132020000034,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.scheduleSnapshot=[]",
+      "status": "failed",
+      "durationMs": 848.8738980000053,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentOrderItem.enrollmentValidUntil=\"2030-01-01T05:00:00.000000Z\"",
+      "status": "failed",
+      "durationMs": 1017.4155880000035,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK SeatReservation.state=\"CANCELLED\"",
+      "status": "failed",
+      "durationMs": 907.834981,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK PaymentAttempt.state=\"UNKNOWN\"",
+      "status": "failed",
+      "durationMs": 938.0020619999996,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ProviderReceipt.state=\"PENDING_RECONCILIATION\"",
+      "status": "failed",
+      "durationMs": 847.458934000002,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK ProviderReceipt.state=\"RECEIVED\"",
+      "status": "failed",
+      "durationMs": 1676.1846259999948,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK VerifiedPayment.reconciliationState=\"PENDING_RECONCILIATION\"",
+      "status": "failed",
+      "durationMs": 1167.0150429999921,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK VerifiedPayment.orderId=null",
+      "status": "failed",
+      "durationMs": 2040.2828719999961,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK VerifiedPayment.currency=\"USD\"",
+      "status": "failed",
+      "durationMs": 1728.4603409999982,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK Enrollment.originalPeriodEnd=\"2030-01-01\"",
+      "status": "failed",
+      "durationMs": 1367.696953999999,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK Enrollment.timeZone=\"UTC\"",
+      "status": "failed",
+      "durationMs": 1735.8104380000004,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK Enrollment.validUntil=\"2026-10-31T00:00:00.000000Z\"",
+      "status": "failed",
+      "durationMs": 1115.9640809999983,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK IncidentFollowUp.content=null",
+      "status": "failed",
+      "durationMs": 910.5427259999997,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentCommand.resultingRevision=\"0\"",
+      "status": "failed",
+      "durationMs": 934.5486850000016,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentCommand.operation=null",
+      "status": "failed",
+      "durationMs": 1596.285778999998,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentCommand.actorKind=\"VISITOR\"",
+      "status": "failed",
+      "durationMs": 1198.2111100000038,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentAuditEvent.afterRevision=\"0\"",
+      "status": "failed",
+      "durationMs": 1199.3946489999944,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-CHECK EnrollmentAuditEvent.operation=null",
+      "status": "failed",
+      "durationMs": 1930.7544239999988,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE ReservationRequest: studentId/intentionId",
+      "status": "failed",
+      "durationMs": 1559.5144189999992,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE ReservationRequest: admissionSequence",
+      "status": "failed",
+      "durationMs": 1169.6017699999938,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE EnrollmentOrder: requestId",
+      "status": "failed",
+      "durationMs": 898.4269150000036,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE EnrollmentOrderItem: orderId/courseId",
+      "status": "failed",
+      "durationMs": 1111.7297189999954,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE SeatReservation: orderItemId",
+      "status": "failed",
+      "durationMs": 1689.666425000003,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE PaymentAttempt: studentId/initiationId",
+      "status": "failed",
+      "durationMs": 893.124867999999,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE VerifiedPayment: providerScope/providerPaymentId",
+      "status": "failed",
+      "durationMs": 1107.5749589999905,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE Enrollment: orderItemId",
+      "status": "failed",
+      "durationMs": 959.1689679999981,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE PaymentIncident: verifiedPaymentId/reason",
+      "status": "failed",
+      "durationMs": 833.3140289999865,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-UNIQUE EnrollmentCommand: actorKind/actorReference/commandId con otra operación",
+      "status": "failed",
+      "durationMs": 766.0844020000077,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-money cero explícito y PEN exacto más allá de 2^53 sin backfill",
+      "status": "failed",
+      "durationMs": 780.3676469999918,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-economic scope distinto y dinero incompatible conservado como INCIDENT",
+      "status": "failed",
+      "durationMs": 962.031971000004,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-receipt no introduce FK provisional a orden ni recibo como pago",
+      "status": "failed",
+      "durationMs": 1023.5440679999883,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append IncidentFollowUp: UPDATE rechazado",
+      "status": "failed",
+      "durationMs": 1006.2689819999941,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append IncidentFollowUp: DELETE rechazado",
+      "status": "failed",
+      "durationMs": 1495.3217300000106,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append EnrollmentAuditEvent: UPDATE rechazado",
+      "status": "failed",
+      "durationMs": 888.7755100000068,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-append EnrollmentAuditEvent: DELETE rechazado",
+      "status": "failed",
+      "durationMs": 922.7363580000092,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-active una sola orden RESERVED por alumno y estados históricos no bloquean",
+      "status": "failed",
+      "durationMs": 1021.2238299999881,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-attempt FK compuesta no acepta otra cuenta existente de la orden",
+      "status": "failed",
+      "durationMs": 948.5256249999948,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-coordinator AdmissionSequence: id fijo",
+      "status": "failed",
+      "durationMs": 721.7614140000078,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-coordinator DispatchState: id fijo",
+      "status": "failed",
+      "durationMs": 997.1391169999988,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-counter secuencia positiva",
+      "status": "failed",
+      "durationMs": 759.1688109999959,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-effect ORDER_EXPIRED/orderId único y SYSTEM sin usuario financiero ficticio",
+      "status": "failed",
+      "durationMs": 955.104462999996,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-unresolved una sola iniciación no resuelta por orden",
+      "status": "failed",
+      "durationMs": 962.1132590000052,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-immutable EnrollmentOrder: snapshot original conservado",
+      "status": "failed",
+      "durationMs": 1440.7602119999938,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-immutable EnrollmentOrderItem: snapshot original conservado",
+      "status": "failed",
+      "durationMs": 853.2938910000084,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-immutable Enrollment: snapshot original conservado",
+      "status": "failed",
+      "durationMs": 872.4024389999977,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    },
+    {
+      "file": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "name": "EM-RESTRICT referencias a identidad/oferta sin cascadas",
+      "status": "failed",
+      "durationMs": 1100.4542389999988,
+      "boundary": "applyEnrollment: ENROLLMENT_MIGRATION_NOT_IMPLEMENTED",
+      "downstreamAssertions": "DML/constraints posteriores NO alcanzados"
+    }
+  ],
+  "next": "T007–T008: modelo/migración y ejecución aislada de constraints. T009 implementará las reglas de T005."
+}

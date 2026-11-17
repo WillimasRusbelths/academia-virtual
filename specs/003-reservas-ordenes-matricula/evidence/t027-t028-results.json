@@ -1,0 +1,1062 @@
+{
+  "date": "2026-11-04",
+  "timezone": "America/Lima",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "status": "PREPARACION_EJECUTADA_ROJO_ESPERADO_NO_ACEPTACION_US1",
+  "regression": {
+    "uniquePassed": 885,
+    "apiAndWebCases": 884,
+    "priorBrowserHarnessUnique": 1,
+    "priorBrowserHarnessExecutions": 2,
+    "suites": {
+      "core": {
+        "total": 524,
+        "passed": 524,
+        "failed": 0
+      },
+      "prices": {
+        "total": 52,
+        "passed": 52,
+        "failed": 0
+      },
+      "errors": {
+        "total": 67,
+        "passed": 67,
+        "failed": 0
+      },
+      "maintenance": {
+        "total": 36,
+        "passed": 36,
+        "failed": 0
+      },
+      "web": {
+        "total": 205,
+        "passed": 205,
+        "failed": 0
+      }
+    }
+  },
+  "checks": {
+    "lint": "PASS API/web",
+    "build": "PASS API/web",
+    "selectiveTypes": "PASS API/web",
+    "latestChangedTestsLint": "PASS",
+    "latestBrowserTypes": "PASS",
+    "ci": "NOT_RUN",
+    "fullApiSuiteGreen": false
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "cleanup": {
+    "schemasAfter": 0,
+    "db": "stopped",
+    "mailpit": "stopped",
+    "volumePreserved": true,
+    "manualEnvironmentOperated": false
+  },
+  "images": {
+    "api": "sha256:752be02e27d9b1b358cc52889c82b76e3cec269c1f214889996526f46689adb6",
+    "browserBase": "sha256:903778ec5ff418d130c91379fa2dd6715e9af74050dd5908fcaaab32dbf8645f",
+    "playwright": "1.63.0",
+    "node": "v22.23.1",
+    "packageLockVerified": true,
+    "browserBuild": "CANCELLED_SLOW_DOWNLOAD_REUSED_COMPATIBLE_CACHE",
+    "currentApiDistAndSourcesOverlay": true,
+    "overlayManifest": {
+      "path": ".cache/reservas-t027-t028/browser-overlay-manifest.json",
+      "sha256": "e67f55ad889501a1558c0d42fc85447a7542e1d969bbda51d86f75bb43b2f42c",
+      "private": true
+    },
+    "changedTestSourcesVsApiImage": [
+      "apps/api/tests/integration/enrollment-queries.spec.ts",
+      "apps/web/tests/e2e/enrollment-reservation.spec.ts"
+    ],
+    "productionDelta": false
+  },
+  "limits": [
+    "Preparar pruebas no aprueba las funciones de reserva o consulta.",
+    "Las entradas tipadas son adaptadores de pruebas con globs literales; no hay imports rotos ni fábricas que devuelvan éxitos simulados.",
+    "T029–T039 y checkpoints T040–T042 siguen pendientes.",
+    "No cobros, proveedor/sandbox, aceptación humana o capacidad aprobados."
+  ],
+  "aggregateAcrossBothBlocks": {
+    "newUniqueCases": 101,
+    "newAuxiliaryUniquePassed": 9,
+    "newExpectedRedUnique": 92,
+    "newExecutions": 110,
+    "allFinalUniqueCases": 986,
+    "allFinalUniquePassed": 894,
+    "allFinalUniqueExpectedRed": 92,
+    "allFinalExecutions": 996,
+    "allFinalExecutionPassed": 896,
+    "allFinalExecutionExpectedRed": 100,
+    "skipped": 0,
+    "diagnosticsAndEarlierRunsExcluded": true
+  },
+  "privateReports": {
+    "processing": {
+      "path": ".cache/reservas-t027-t028/reports/processing.json",
+      "sha256": "1de262351e3890d8cf748cacd51d62d3316e58f7acb457a4af9d7adf257647b8",
+      "private": true
+    },
+    "web-preparation": {
+      "path": ".cache/reservas-t027-t028/reports/web-preparation.json",
+      "sha256": "cc4f3d3a6f1dbac81277b1c18187b395bfb5fcf4973b8085d7503ae59a2de06b",
+      "private": true
+    },
+    "core": {
+      "path": ".cache/reservas-t027-t028/reports/core.json",
+      "sha256": "411e8e51170b3bcad8d55ef377ee51bbc0f4ce17c8c61e2e9715fd016bfb3b61",
+      "private": true
+    },
+    "prices": {
+      "path": ".cache/reservas-t027-t028/reports/prices.json",
+      "sha256": "6ad7436e81c06af0fa9d59c81842674f3651d66b6bd203998c139a72f854c589",
+      "private": true
+    },
+    "errors": {
+      "path": ".cache/reservas-t027-t028/reports/errors.json",
+      "sha256": "00a06999d398c86bc1643e864ad53c6e854e140928cbdebb5740a73d6090c10a",
+      "private": true
+    },
+    "maintenance": {
+      "path": ".cache/reservas-t027-t028/reports/maintenance.json",
+      "sha256": "3946021bbe6066396b5154429455b00986ac45251c79651bc3098e5dda387b4a",
+      "private": true
+    },
+    "web": {
+      "path": ".cache/reservas-t027-t028/reports/web.json",
+      "sha256": "6068f87cda7d045d0491b3bfb91cf910a7863c8ec553d2c050fae5ed7a5255df",
+      "private": true
+    }
+  },
+  "tasks": [
+    "T027",
+    "T028"
+  ],
+  "validation": {
+    "unitUniqueCases": 38,
+    "unitPassed": 0,
+    "unitExpectedRed": 38,
+    "apiUnit": 13,
+    "reservationUnit": 14,
+    "orderUnit": 11,
+    "e2eNewUniqueScenarios": 9,
+    "e2eNewUniqueAuxiliaryPassed": 1,
+    "e2eNewUniqueExpectedRed": 8,
+    "e2eNewExecutions": 18,
+    "e2eNewAuxiliaryExecutionsPassed": 2,
+    "e2eNewExpectedRedExecutions": 16,
+    "totalBrowserExecutions": 20,
+    "totalBrowserPassed": 4,
+    "totalBrowserExpectedRed": 16,
+    "projects": [
+      "desktop",
+      "mobile"
+    ],
+    "http404Executions": 14,
+    "uiRouteAbsentExecutions": 2
+  },
+  "unitLimits": "Dobles de ApiClient y SSR solo UNIT; eventos/DOM se preparan para E2E. Ninguno acredita HTTP ni persistencia.",
+  "browserMocks": false,
+  "browserCases": [
+    {
+      "file": "apps/web/tests/e2e/enrollment-harness.spec.ts",
+      "name": "harness de matrícula conecta alumno ficticio, oferta y teclado sin simular reservas",
+      "project": "desktop",
+      "status": "passed",
+      "durationMs": 2360,
+      "classification": "LEGACY_HARNESS",
+      "businessApproved": false,
+      "reached": "Fixture PG y composición HTTP/navegador reales",
+      "notReached": []
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-harness.spec.ts",
+      "name": "harness de matrícula conecta alumno ficticio, oferta y teclado sin simular reservas",
+      "project": "mobile",
+      "status": "passed",
+      "durationMs": 1906,
+      "classification": "LEGACY_HARNESS",
+      "businessApproved": false,
+      "reached": "Fixture PG y composición HTTP/navegador reales",
+      "notReached": []
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER00 auxiliar: precio, solicitud histórica y dueño son hechos PG reales",
+      "project": "desktop",
+      "status": "passed",
+      "durationMs": 287,
+      "classification": "AUXILIARY_FIXTURE_ONLY",
+      "businessApproved": false,
+      "reached": "Fixture PG y composición HTTP/navegador reales",
+      "notReached": []
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER01 selección por teclado, espera durable y orden original sin simular HTTP",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 221,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER02 oferta sin precio no promete gratuidad ni permite confirmar",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 6199,
+      "classification": "UI_ROUTE_ABSENT",
+      "businessApproved": false,
+      "reached": "Router real; página de reservas ausente",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER03 recarga y segunda sesión del titular recuperan ADMITTED sin nuevo POST",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 268,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER04 titular ajeno no obtiene detalle histórico ni cambia el dueño",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 407,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER05 desconexión muestra estado incierto y consulta manual al reconectar",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 301,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER06 logout elimina estado privado y nuevo login solo consulta sin reenviar",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 238,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER07 estado vacío ofrece navegación y no inventa una orden actual",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 293,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER08 bloqueo real de grupo muestra error recuperable sin disponibilidad ficticia",
+      "project": "desktop",
+      "status": "failed",
+      "durationMs": 265,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER00 auxiliar: precio, solicitud histórica y dueño son hechos PG reales",
+      "project": "mobile",
+      "status": "passed",
+      "durationMs": 460,
+      "classification": "AUXILIARY_FIXTURE_ONLY",
+      "businessApproved": false,
+      "reached": "Fixture PG y composición HTTP/navegador reales",
+      "notReached": []
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER01 selección por teclado, espera durable y orden original sin simular HTTP",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 210,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER02 oferta sin precio no promete gratuidad ni permite confirmar",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 6539,
+      "classification": "UI_ROUTE_ABSENT",
+      "businessApproved": false,
+      "reached": "Router real; página de reservas ausente",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER03 recarga y segunda sesión del titular recuperan ADMITTED sin nuevo POST",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 253,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER04 titular ajeno no obtiene detalle histórico ni cambia el dueño",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 395,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER05 desconexión muestra estado incierto y consulta manual al reconectar",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 299,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER06 logout elimina estado privado y nuevo login solo consulta sin reenviar",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 317,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER07 estado vacío ofrece navegación y no inventa una orden actual",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 290,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    },
+    {
+      "file": "apps/web/tests/e2e/enrollment-reservation.spec.ts",
+      "name": "ER08 bloqueo real de grupo muestra error recuperable sin disponibilidad ficticia",
+      "project": "mobile",
+      "status": "failed",
+      "durationMs": 241,
+      "classification": "HTTP_ROUTE_404",
+      "businessApproved": false,
+      "reached": "Preparación PG real y comprobación positiva HTTP que devuelve 404",
+      "notReached": [
+        "Flujo funcional preparado después de la frontera ausente",
+        "Aserciones de persistencia, reconsulta, logout y teclado del escenario cuando proceden"
+      ]
+    }
+  ],
+  "unitCases": [
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA01 ADMITTED conserva intención y seis cifras; no crea orden por interpretar 200",
+      "status": "failed",
+      "durationMs": 14.516924000000017,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA02 preview solo envía groupIds; no crea intención ni autoridad de precio",
+      "status": "failed",
+      "durationMs": 2.7252189999999814,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA03 detalle mantiene importes exactos fuera de Number y timestamps sin Date",
+      "status": "failed",
+      "durationMs": 1.7138209999999958,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA04 consulta de intención usa GET y no reenvía confirmación",
+      "status": "failed",
+      "durationMs": 1.674069999999972,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA05 CONFIRMED es dato de solicitud, no error HTTP",
+      "status": "failed",
+      "durationMs": 2.062588000000005,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA05 REJECTED es dato de solicitud, no error HTTP",
+      "status": "failed",
+      "durationMs": 1.3972709999999893,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA06 DTO solicitud inválido null",
+      "status": "failed",
+      "durationMs": 1.3939340000000016,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA06 DTO solicitud inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"intentionId\":\"00000000-0000-4000-8000-000000000001\",\"state\":\"RESERVED\",\"admittedAt\":\"2026-11-04T00:00:00.000001Z\"}",
+      "status": "failed",
+      "durationMs": 1.018843000000004,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA06 DTO solicitud inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"intentionId\":\"00000000-0000-4000-8000-000000000001\",\"state\":\"ADMITTED\",\"admittedAt\":\"2026-11-04T00:00:00.001Z\"}",
+      "status": "failed",
+      "durationMs": 2.3133230000000253,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA06 DTO solicitud inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"intentionId\":\"00000000-0000-4000-8000-000000000001\",\"state\":\"ADMITTED\",\"admittedAt\":\"2026-11-04T00:00:00.000001Z\",\"actorSessionReference\":\"00000000-0000-4000-8000-000000000003\"}",
+      "status": "failed",
+      "durationMs": 2.2529690000000073,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA07 cliente sin datos tras respuesta incierta no equivale a confirmación",
+      "status": "failed",
+      "durationMs": 1.4054669999999874,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA08 AUTH_REQUIRED no provoca replay automático",
+      "status": "failed",
+      "durationMs": 1.2532339999999635,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/api.test.tsx",
+      "name": "WA08 TEMPORARILY_UNAVAILABLE no provoca replay automático",
+      "status": "failed",
+      "durationMs": 3.695024999999987,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T036"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO01 orden confirmada muestra desglose original, moneda y referencia",
+      "status": "failed",
+      "durationMs": 13.465317000000027,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO02 ADMITTED carece de orden, plazo y acción de pago",
+      "status": "failed",
+      "durationMs": 1.802363000000014,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO03 reloj local posterior al vencimiento no inventa expiración del servidor",
+      "status": "failed",
+      "durationMs": 4.263036999999997,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO04 expiración confirmada permite nueva selección; no convierte intención vieja en nueva",
+      "status": "failed",
+      "durationMs": 1.5285209999999552,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO05 oferta oculta muestra aviso genérico y deshabilita pago sin detalles privados",
+      "status": "failed",
+      "durationMs": 1.8999230000000011,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO06 incidente no se anuncia como matrícula o pago rechazado",
+      "status": "failed",
+      "durationMs": 1.391147999999987,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO07 LOADING anuncia estado y consulta recuperable",
+      "status": "failed",
+      "durationMs": 4.426900999999987,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO07 EMPTY anuncia estado y consulta recuperable",
+      "status": "failed",
+      "durationMs": 1.0705990000000156,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO07 ERROR anuncia estado y consulta recuperable",
+      "status": "failed",
+      "durationMs": 2.2491110000000276,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO07 UNCERTAIN anuncia estado y consulta recuperable",
+      "status": "failed",
+      "durationMs": 1.351015000000018,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+      "name": "WO08 detalle no habilita todavía un botón financiero funcional en US1",
+      "status": "failed",
+      "durationMs": 1.3555449999999496,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T038"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR01 ADMITTED muestra espera y carece de pago o matrícula confirmada",
+      "status": "failed",
+      "durationMs": 15.259973000000002,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR02 doble clic comparte intención y un solo POST en vuelo",
+      "status": "failed",
+      "durationMs": 3.5277470000000335,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR03 resultado incierto conserva intención para consulta manual, no renueva POST",
+      "status": "failed",
+      "durationMs": 2.776933999999983,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR04 recarga recupera solicitudes propias sin recrear intención",
+      "status": "failed",
+      "durationMs": 5.70159000000001,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR05 logout borra intención en memoria y descarta respuesta tardía",
+      "status": "failed",
+      "durationMs": 3.214486000000022,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR06 flujo nunca persiste intención, grupo o token en localStorage",
+      "status": "failed",
+      "durationMs": 2.108542,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR07 AUTH_REQUIRED seguida de recuperación no reenvía operación financiera",
+      "status": "failed",
+      "durationMs": 1.4368420000000128,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR08 reloj local adelantado no convierte ADMITTED en confirmación",
+      "status": "failed",
+      "durationMs": 5.025114999999971,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR09 CONFIRMED requiere referencia persistida; REJECTED no muestra pago",
+      "status": "failed",
+      "durationMs": 2.547473000000025,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR10 estado accesible LOADING",
+      "status": "failed",
+      "durationMs": 1.5675509999999804,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR10 estado accesible EMPTY",
+      "status": "failed",
+      "durationMs": 1.115982000000031,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR10 estado accesible ERROR",
+      "status": "failed",
+      "durationMs": 0.9371050000000309,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR10 estado accesible VALIDATION_ERROR",
+      "status": "failed",
+      "durationMs": 0.9641399999999862,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    },
+    {
+      "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+      "name": "WR11 oferta separa capacidad, retenciones, ocupación y evaluación; ausencia no es cero",
+      "status": "failed",
+      "durationMs": 1.0524229999999761,
+      "businessApproved": false,
+      "classification": "FEATURE_ENTRY_ABSENT",
+      "reached": "Adaptador UNIT tipado; falta exportación T036/T037/T038",
+      "notReached": [
+        "Llamadas y respuestas del adaptador de feature",
+        "Transiciones de estado o render y aserciones posteriores"
+      ],
+      "requiredTasks": [
+        "T037"
+      ]
+    }
+  ],
+  "commands": [
+    "npm exec --workspace apps/web -- vitest run src/features/enrollment --maxWorkers=1 --reporter=default --reporter=json --outputFile=/reports/web-preparation.json",
+    "npm exec --workspace apps/web -- playwright test --config playwright.enrollment.config.ts --list",
+    "npm exec --workspace apps/web -- playwright test --config playwright.enrollment.config.ts --reporter=list,json"
+  ]
+}

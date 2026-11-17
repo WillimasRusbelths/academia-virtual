@@ -1,0 +1,1596 @@
+{
+    "feature":  "002-oferta-academica",
+    "scope":  [
+                  "T011",
+                  "T012"
+              ],
+    "date":  "2026-10-19",
+    "branch":  "feat/002-oferta-academica",
+    "previousCommit":  "cbfb224a46e2b08833809a3a0cd4069b7608d2c6",
+    "source":  [
+                   {
+                       "path":  "apps/api/src/modules/authorization/domain/permissions.ts",
+                       "sha256":  "39126550c24027764973b91ef3d8d02076e8687ae582dd2cb10196f553e81401"
+                   },
+                   {
+                       "path":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                       "sha256":  "50aa813c525aa884fb569710c577adcdb49d8df40eb270bb7979b13db57b9025"
+                   },
+                   {
+                       "path":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                       "sha256":  "d3d9111f9eee5b5144b72f01bb1a807d8ad5520f1086d1fc84624b6465d5b6c9"
+                   },
+                   {
+                       "path":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                       "sha256":  "6d5d900a67e38f1bdb534a82b89825274831f089c9c185b5eed3cbe205745800"
+                   },
+                   {
+                       "path":  "apps/api/tests/support/academic-foundation-contract.ts",
+                       "sha256":  "bf87f69e7a7df1cb6ff9c37f8e4142fa0df5747a6777737eaf164762d9f60da8"
+                   }
+               ],
+    "reports":  [
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/permission-red.json",
+                        "sha256":  "ae709d458214fd6edc454784bff63df8823adca4b3447912be496e7769a8a51d"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/unit.json",
+                        "sha256":  "8002b6d217a00398f0f143d46e012a81eddc7d7fccfabff7d8c2bded4c7fa759"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/permissions-pg.json",
+                        "sha256":  "b7b8e3bf53ded1e94ce09a7b7ce756efd0ce2ca0b25ba5626fbcc676e39e5bcb"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/permissions-final.json",
+                        "sha256":  "6b2b811488d956b47a53801262d2b29dd86772151c52a9f757866ac5ee7f7249"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/transaction.json",
+                        "sha256":  "bddc8a65c66e58fa0b98c7bb2c52cdd092b45c874835949d63a88b60efd37336"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/transaction-final.json",
+                        "sha256":  "765399b0bb12c938b4d3664f811c547e44e091a1eff5680e7c118ca350707c54"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/list.log",
+                        "sha256":  "8ad057fb58f988be452497d186a1339c84d35882a02a3390a9cc9148d88d89e8"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/lint.log",
+                        "sha256":  "ce27bebbbf892af476d0fc3fbe849d41bf6d823e3940a3519f04a69ebb186db7"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/build.log",
+                        "sha256":  "befb8eb7a20f74fc1a3c02120532c26d79214db7cd76b4ec6a94245fc81a2298"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/types.log",
+                        "sha256":  "414eeef5bb4a54772cb5c799114bdf1e6edb49ae2468c65bff6e1ed96d827332"
+                    },
+                    {
+                        "path":  ".cache/academic-offering-validation/t011-t012-reports/catalog.json",
+                        "sha256":  "32c81e9f1b1a5c6a6db064ec9269cf494c741fc46be1fa451463a874225f105d"
+                    }
+                ],
+    "targetBinding":  "Test-only structural conformance ports; factories proposed, absent until T013/T014 wiring; no fallback implementation",
+    "checks":  {
+                   "unitAndArchitecturePassed":  101,
+                   "permissionUnitCases":  24,
+                   "permissionPostgresPassed":  13,
+                   "identityRegressionPostgresPassed":  33,
+                   "transactionCases":  33,
+                   "transactionBaselinePassed":  6,
+                   "transactionCapabilityAssertionsFailed":  27,
+                   "T013Missing":  12,
+                   "T014Missing":  15,
+                   "behaviorAssertionsInThose27CasesReached":  false,
+                   "skipped":  0,
+                   "unexpectedFailures":  0,
+                   "apiBuildExit":  0,
+                   "lintExit":  0,
+                   "strictTypesExit":  0,
+                   "protectedFilesUnchanged":  72
+               },
+    "initialT011Red":  {
+                           "passed":  16,
+                           "failed":  8,
+                           "cause":  "Academic permissions not implemented yet; no environment/import failure",
+                           "report":  "permission-red.json"
+                       },
+    "taskState":  {
+                      "T011":  "complete",
+                      "T012":  "pending-full-criteria-tests-written-and-run",
+                      "T013":  "not-started",
+                      "T014":  "not-started"
+                  },
+    "isolation":  {
+                      "project":  "academic-offering-fa3d46bddbb8",
+                      "volume":  "academic-offering-fa3d46bddbb8_postgres_data",
+                      "stopped":  true,
+                      "volumeRetained":  true,
+                      "manualDatabaseUnchanged":  true,
+                      "configurationUnchanged":  true
+                  },
+    "catalog":  {
+                    "views":  [
+                                  "AcademicTeacherDirectory"
+                              ],
+                    "checks":  21,
+                    "tables":  [
+                                   "AcademicAuditEvent",
+                                   "AcademicCommand",
+                                   "AcademicCourse",
+                                   "AcademicGroup",
+                                   "AcademicSlot"
+                               ],
+                    "triggers":  [
+                                     "AcademicCourse_editorial_guard",
+                                     "AcademicGroup_editorial_guard",
+                                     "AcademicSlot_membership_guard",
+                                     "User_teacher_eligibility"
+                                 ],
+                    "migrations":  [
+                                       "0001_identity_users",
+                                       "0002_identity_access",
+                                       "0003_identity_mail_limits",
+                                       "0004_identity_argon2_format",
+                                       "0005_academic_offering"
+                                   ],
+                    "newChecksum":  "deef3e283d56e40a1fa30343b05b70137df35471763275fdf31126a4c5e36e21",
+                    "publicUsers":  0,
+                    "runtimeCanCreate":  false,
+                    "academicSchemasRemaining":  0
+                },
+    "limitations":  [
+                        "27 failures stop at missing capability preconditions; later assertions and academic barriers not yet exercised",
+                        "Six green controls validate DB/existing accountTransaction only, not academic implementation",
+                        "Final 46 permission/regression cases deduplicated from per-file reports, initial joint run 46 passed",
+                        "No E2E, remote CI, full identity regression, restore, load or human/functional acceptance",
+                        "No validated capacity for 1000 concurrent users"
+                    ],
+    "cases":  [
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/endpoint-policies.spec.ts",
+                      "test":  "T088: todos los endpoints compilados tienen la polÃ­tica explÃ­cita de su contrato",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  684.817729
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/import-boundaries.spec.ts",
+                      "test":  "lÃ­mites del monolito modular dominio no importa Nest ni infraestructura",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  79.94681700000001
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/import-boundaries.spec.ts",
+                      "test":  "lÃ­mites del monolito modular aplicaciÃ³n usa dominio y otro mÃ³dulo solo por public",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  14.683528999999965
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/import-boundaries.spec.ts",
+                      "test":  "lÃ­mites del monolito modular frontend mantiene shared y features sin ciclos laterales",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  12.08545700000002
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del cÃ³digo real todas las capas cumplen ESLint, incluido guard y superficies pÃºblicas",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  4700.700046
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del cÃ³digo real el cierre transitivo del nÃºcleo no alcanza IO, composiciÃ³n ni DTO HTTP",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  18.247103999999126
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del cÃ³digo real el grafo de archivos y las raÃ­ces de composiciÃ³n no tienen ciclos",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  4.33779499999946
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del cÃ³digo real HTTP y CLI consumen aplicaciÃ³n; no comparten reglas a travÃ©s de entradas",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  6.917627000000721
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/tests/architecture/layers.spec.ts",
+                      "test":  "VA: dependencias del cÃ³digo real las barreras rechazan escapes reales que el patrÃ³n de carpetas no cubrÃ­a",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  35.25911899999937
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica ADMIN / academic:manage = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  4.951608999999962
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica ADMIN / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.5747659999999541
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica ADMIN / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.4828730000000405
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica STUDENT / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.2668049999999766
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica STUDENT / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.6804959999999483
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica STUDENT / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.47371399999997266
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica TEACHER / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.096461999999974
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica TEACHER / academic:read-published = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.6223099999999704
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz acadÃ©mica TEACHER / academic:read-own = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.5884660000000395
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n ADMIN / academic:manage = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  2.0533260000000837
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n ADMIN / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.586638999999991
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n ADMIN / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  3.954029999999989
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n STUDENT / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.7006870000000163
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n STUDENT / academic:read-published = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.48461599999995997
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n STUDENT / academic:read-own = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.9115570000000162
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n TEACHER / academic:manage = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.8595330000000558
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n TEACHER / academic:read-published = false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.5357380000000376
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "autorizaciÃ³n backend por interfaz de sesiÃ³n TEACHER / academic:read-own = true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.48929499999997006
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "visitante sin sesiÃ³n recibe AUTH_REQUIRED en academic:manage, sin consultar repositorio",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.07210699999996
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "visitante sin sesiÃ³n recibe AUTH_REQUIRED en academic:read-published, sin consultar repositorio",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.630627000000004
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "visitante sin sesiÃ³n recibe AUTH_REQUIRED en academic:read-own, sin consultar repositorio",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.6997350000000324
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "roles desconocidos/visitante y permisos desconocidos siempre se deniegan",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.3995390000000043
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "matriz de identidad: perfil propio para tres roles; administraciÃ³n solo ADMIN",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.7362870000000612
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/authorization/domain/permissions.test.ts",
+                      "test":  "operaciones y roles ajenos a la matriz se deniegan",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.6422890000000052
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "acuse de commit incierto devuelve error seguro sin repetir la operaciÃ³n",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  7.763662999999951
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "dos conflictos abortados con rollback confirmado permiten un tercer intento",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  24.475531000000046
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "conflicto persistente no supera tres intentos",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  29.74461800000006
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+                      "test":  "sin rollback confirmado no reintenta y descarta el cliente fallido",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  2.9127549999999474
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "elegibilidad exige cuenta activa, correo verificado y contraseÃ±a propia",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  4.335991999999976
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "sesiÃ³n vence exactamente a 30 minutos; no cambia ni renueva sus fechas",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.84769
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "sesiÃ³n vence a ocho horas aunque haya actividad reciente",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.3850980000000277
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "acciÃ³n VERIFY_EMAIL: propÃ³sito, destinatario, vigencia y uso Ãºnico",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.13525199999998
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "acciÃ³n RESET_PASSWORD: propÃ³sito, destinatario, vigencia y uso Ãºnico",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.7916480000000092
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/access.test.ts",
+                      "test":  "credencial provisional vence a 24 h; no exige correo para establecer clave, ni concede sesiÃ³n",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.7295639999999821
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide cambio propio role/STUDENT",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  3.514253999999994
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide retirar Ãºltimo ADMIN ACTIVE mediante role/STUDENT",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.7205260000000067
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide cambio propio role/TEACHER",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.27419600000001765
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide retirar Ãºltimo ADMIN ACTIVE mediante role/TEACHER",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.3643559999999866
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide cambio propio status/DISABLED",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.40571799999997893
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "impide retirar Ãºltimo ADMIN ACTIVE mediante status/DISABLED",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.1911709999999971
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "otro ADMIN puede retirarse cuando queda otro activo; no exige correo verificado para contar",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.9979289999999992
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "no-op propio role no revoca ni restaura",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.5652870000000121
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "no-op propio status no revoca ni restaura",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.2330180000000155
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "desactivar revoca sesiones y acciones; cambiar rol solo sesiones",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.096004999999991
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "reactivar y no-op desactivado no reconstruyen sesiones, tokens ni provisional",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.8687309999999684
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/account-administration.test.ts",
+                      "test":  "ADMIN desactivado no cuenta como Ãºltimo activo para un cambio de rol",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.3614200000000096
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "quinto fallo bloquea 15 minutos; solicitudes rechazadas no prolongan bloqueo",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  3.682839999999999
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "ventana mÃ³vil: frontera inferior excluida y ninguna actividad futura",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.8200539999999705
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "cinco reservas en vuelo consumen capacidad; al vencer se convierten en fallos conservadores",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.012548000000038
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/limits.test.ts",
+                      "test":  "Ã©xito elimina fallos sin eliminar reservas de solicitudes concurrentes",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.5215789999999743
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidaciÃ³n de una credencial comprobada misma credencial y versiÃ³n habilitadas",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  3.1670799999999986
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidaciÃ³n de una credencial comprobada rechaza cambio de estado",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.5530030000000465
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidaciÃ³n de una credencial comprobada rechaza cambio de correo",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.30200200000001587
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidaciÃ³n de una credencial comprobada rechaza cambio de verificaciÃ³n",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.30602000000004637
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidaciÃ³n de una credencial comprobada rechaza cambio de contraseÃ±a",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.246550999999954
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidaciÃ³n de una credencial comprobada rechaza cambio de versiÃ³n",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.5852770000000191
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/login.test.ts",
+                      "test":  "revalidaciÃ³n de una credencial comprobada rechaza cambio de provisional",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.5105580000000032
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "alias operativo ASCII de 1 a 64, sin derivacion ni valor predeterminado",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  4.461933999999985
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (0)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.3263339999999744
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (1)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.31183199999998124
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (2)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.3405379999999809
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (3)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.4880929999999921
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (4)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.3622920000000249
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (5)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.6822599999999852
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (6)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.8188620000000242
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/domain/operator.test.ts",
+                      "test":  "rechaza alias invalido sin normalizarlo (7)",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.9206179999999904
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "prepara hash/enlace antes del store y solo transmite material persistible, sin provisional",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  5.292667999999992
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "fallo de credenciales no inicia la transaccion ni emite un enlace",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.9867900000000418
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "fallo de preparacion de enlace no toca store ni revela errores del adaptador",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.0990300000000275
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+                      "test":  "conserva rechazo irreversible de T028 sin inventar otro camino de inicializacion",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.300753000000043
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "cuota antes de store; factory cifra enlace de origen fijo y no devuelve secreto",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  7.017957000000024
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "sin cuota no toca store, generador de payload ni cuenta",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.7992659999999887
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "factory VERIFY_EMAIL conserva caducidad y elegibilidad de dominio",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  2.1040040000000317
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+                      "test":  "factory RESET_PASSWORD conserva caducidad y elegibilidad de dominio",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.5154809999999657
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "contraseÃ±a invÃ¡lida no invoca hash, repositorio ni consumo",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  7.023172000000045
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "token mal formado no invoca hash ni repositorio",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.6541179999999258
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "fallo de hash deja sin invocar el repositorio",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.7360800000000154
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "repositorio que rechaza consumo produce Ãºnicamente InvalidActionLink",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  7.878074999999967
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "hash finaliza antes del repositorio; la regla pura exige verificaciÃ³n, propÃ³sito y caducidad vigentes",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  3.059426999999914
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "solicitar reutiliza emisiÃ³n con propÃ³sito reset y responde igual con o sin entrega",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  2.0606169999999793
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/identity/application/reset-password.test.ts",
+                      "test":  "cuota denegada conserva la espera definida por emisiÃ³n",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.755818999999974
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C01 DTO cerrados por audiencia, sin generaciÃ³n, credenciales ni datos de cuenta",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  2.1968080000000327
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C02 revisiones JSON decimales, sin capacidad de inscripciÃ³n ficticia",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.33467800000005354
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C03 comandos explÃ­citos, revisiÃ³n en recursos existentes y sin actualizaciÃ³n de snapshot desde cliente",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.20480799999995725
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/academic-offering/public/offer.test.ts",
+                      "test":  "C04 errores de negocio seguros; referencias solo en conflictos administrativos",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  2.6556730000000925
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+                      "test":  "mÃ­nimo de 60 s exactos por destinatario y propÃ³sito",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  4.375651000000005
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+                      "test":  "cinco por hora con ventana mÃ³vil, frontera exacta y Retry-After segÃºn ambos lÃ­mites",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.7961070000000063
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+                      "test":  "veinte por origen sumando propÃ³sitos; la cuota limita aun con destinatario nuevo",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.2182180000000358
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "nombre Unicode: trim exterior y lÃ­mites por caracteres, no bytes ni unidades UTF-16",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  4.242594999999994
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "correo: trim y minÃºscula simple, sin transformar alias ni puntos",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  2.59143499999999
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "contraseÃ±as preservan espacios, composiciÃ³n Unicode y contenido completo",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.956436999999994
+                  },
+                  {
+                      "report":  "unit.json",
+                      "file":  "apps/api/src/modules/users/domain/account.test.ts",
+                      "test":  "rol Ãºnico y estado admiten exclusivamente los enums",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.1136589999999842
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "visitante: todos los endpoints administrativos y consulta propia requieren sesiÃ³n, sin efectos",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  816.7459030000009
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT: matriz administrativa conocida/desconocida idÃ©ntica y sin datos de B",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  372.2227210000001
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER: matriz administrativa conocida/desconocida idÃ©ntica y sin datos de B",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  383.17471300000034
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT con sesiÃ³n revoked: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  368.17533100000037
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT con sesiÃ³n idle: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  414.56759000000056
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT con sesiÃ³n absolute: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  560.1764000000003
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT con sesiÃ³n version: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  595.088855
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT con sesiÃ³n disabled: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  369.43218799999886
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT con sesiÃ³n unverified: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  321.39114599999994
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT con sesiÃ³n provisional: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  284.16341099999954
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER con sesiÃ³n revoked: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  391.5663000000004
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER con sesiÃ³n idle: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  326.5142599999999
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER con sesiÃ³n absolute: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  471.5133110000006
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER con sesiÃ³n version: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  347.7707929999997
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER con sesiÃ³n disabled: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  361.1091570000008
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER con sesiÃ³n unverified: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  276.03327699999863
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER con sesiÃ³n provisional: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  278.57690100000036
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN con sesiÃ³n revoked: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  271.11282100000244
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN con sesiÃ³n idle: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  277.96246299999984
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN con sesiÃ³n absolute: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  294.53883300000234
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN con sesiÃ³n version: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  262.2215000000033
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN con sesiÃ³n disabled: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  279.36021299999993
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN con sesiÃ³n unverified: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  276.1435079999974
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN con sesiÃ³n provisional: matriz completa 401, sin actividad ni cambios",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  406.58610300000146
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "credencial de sesiÃ³n malformed: no sustituye identidad en ningÃºn endpoint",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  221.37477999999828
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "credencial de sesiÃ³n unknown: no sustituye identidad en ningÃºn endpoint",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  264.5797300000013
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "credencial de sesiÃ³n bearer: no sustituye identidad en ningÃºn endpoint",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  219.03980599999704
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "credencial de sesiÃ³n duplicate: no sustituye identidad en ningÃºn endpoint",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  264.0586110000004
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "STUDENT: /me devuelve exclusivamente identidad propia, sin selector ni perfiles ajenos editables",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  278.8216539999994
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "TEACHER: /me devuelve exclusivamente identidad propia, sin selector ni perfiles ajenos editables",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  274.28208299999824
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN: /me devuelve exclusivamente identidad propia, sin selector ni perfiles ajenos editables",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  336.8385070000004
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "ADMIN: controles positivos de las seis operaciones y 404 Ãºnicamente despuÃ©s de autorizar",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  473.0144
+                  },
+                  {
+                      "report":  "permissions-pg.json",
+                      "file":  "apps/api/tests/integration/permission-matrix.spec.ts",
+                      "test":  "inyecciÃ³n de identidad, permisos y campos ajenos a cada comando: 400 sin elevaciÃ³n ni efectos",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  313.3069620000024
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional ADMIN/academic:manage=true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  30.514224999999897
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional ADMIN/academic:read-published=true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  32.53369600000042
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional ADMIN/academic:read-own=false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  40.1457190000001
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional STUDENT/academic:manage=false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  36.932192000000214
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional STUDENT/academic:read-published=true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  30.23205499999949
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional STUDENT/academic:read-own=false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  31.93859799999973
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional TEACHER/academic:manage=false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  35.13024799999948
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional TEACHER/academic:read-published=false",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  19.62487300000066
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A01 autorizaciÃ³n primaria y revalidaciÃ³n transaccional TEACHER/academic:read-own=true",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  23.250146000000314
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:manage",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  3.0948239999997895
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:read-published",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  1.7608490000002348
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A02 visitante y credencial desconocida: AUTH_REQUIRED en academic:read-own",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  0.9849080000003596
+                  },
+                  {
+                      "report":  "permissions-final.json",
+                      "file":  "apps/api/tests/integration/academic-permissions.spec.ts",
+                      "test":  "A03 sesiÃ³n revocada no aprovecha un actor validado anteriormente",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  13.680452000000514
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B01 control PG: PK actor/commandId serializa inserts concurrentes; barrera desde tercera conexiÃ³n",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  154.71316099999967
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B02 control PG: agregado/ledger/auditorÃ­a confirman en una transacciÃ³n existente",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  60.04127199999948
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B03 control PG: fallo real de restricciÃ³n de auditorÃ­a revierte agregado y ledger",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  76.25755800000024
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B04 control PG: presupuesto compartido de seÃ±al de aborto y SQL 40001 no supera tres intentos",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  101.3997789999994
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B05 control PG: COMMIT aplicado sin acuse devuelve 503 y no repite el efecto",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  82.16759600000023
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "B06 control PG: rollback sin acuse confirmado descarta cliente y no reintenta",
+                      "status":  "passed",
+                      "classification":  "passed",
+                      "durationMs":  78.4593589999995
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P01 T013: User ordenados antes de sesiÃ³n, Course y Group; sin SystemState ni grupos ajenos",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  169.304169
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en account observada fuera de la transacciÃ³n retenida",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  37.72121900000002
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en session observada fuera de la transacciÃ³n retenida",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  49.091113999999834
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en course observada fuera de la transacciÃ³n retenida",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  37.952597000000424
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P02 T013: espera real en group observada fuera de la transacciÃ³n retenida",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  54.543799000000035
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P03 T013: consulta posterior al lock ve el commit que hizo esperar, no la instantÃ¡nea anterior",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  62.26380699999936
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P04 T013: redescubre conjunto cambiado dentro del siguiente intento y no toma User nuevos tras Course",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  60.912655000000086
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P05 T013: cambios persistentes de conjunto y 40P01 comparten tres intentos completos, sin bucle exterior",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  89.07302699999946
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P06 T013: commit incierto no reejecuta el callback acadÃ©mico",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  29.273583999999573
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P06 T013: rollback incierto no reejecuta el callback acadÃ©mico",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  92.43805000000066
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P07 T013: espera agotada devuelve indisponibilidad, nunca falso conflicto de horario",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  44.5497720000003
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "P08 T013: efecto y comprobaciones usan READ COMMITTED en la misma conexiÃ³n",
+                      "status":  "failed",
+                      "classification":  "T013-capability-absent-behavior-not-reached",
+                      "durationMs":  33.10239499999989
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L01 T014: comando aceptado confirma agregado, ledger y auditorÃ­a con IDs distintos",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  37.05497699999978
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L02 T014: replay idÃ©ntico retorna proyecciÃ³n actual y appliedRevision original, sin efecto/auditorÃ­a duplicados",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  32.54969799999981
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con payload distinto rechaza sin consumir cambios",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  27.048666000000594
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con target distinto rechaza sin consumir cambios",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  34.2908580000003
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con revision distinto rechaza sin consumir cambios",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  25.969410000000607
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L03 T014: mismo actor/commandId con operation distinto rechaza sin consumir cambios",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  23.807831999999507
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L04 T014: claves JSON en distinto orden producen el mismo comando canÃ³nico",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  30.310096999999587
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L05 T014: reautoriza session antes de consultar ledger y no entrega proyecciÃ³n en replay denegado",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  24.465243000000555
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L05 T014: reautoriza role antes de consultar ledger y no entrega proyecciÃ³n en replay denegado",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  28.460735999999997
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L06 T014: fallo de auditorÃ­a revierte negocio y ledger; corregir permite reutilizar commandId",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  23.564016999999694
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L07 T014: dos conexiones del mismo actor/commandId esperan su lock y confirman un solo efecto",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  29.408761000000595
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L08 T014: commandId pertenece al actor; mismo UUID de otro administrador no es replay",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  24.558649999999943
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L09 T014: NO_CHANGE conserva revisiÃ³n, persiste intenciÃ³n y replay no agrega auditorÃ­a",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  20.974214999999276
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L10 T014: fallo de negocio no consume commandId y error se conserva sin traducirlo a horario/503",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  28.934596000000056
+                  },
+                  {
+                      "report":  "transaction-final.json",
+                      "file":  "apps/api/tests/integration/academic-offering-transaction.spec.ts",
+                      "test":  "L11 T014: COMMIT sin acuse conserva ledger; solo reintento manual idÃ©ntico recupera resultado sin otro efecto",
+                      "status":  "failed",
+                      "classification":  "T014-capability-absent-behavior-not-reached",
+                      "durationMs":  37.719938000000184
+                  }
+              ]
+}

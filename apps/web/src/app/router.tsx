@@ -1,10 +1,20 @@
 import { Fragment,useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 
-export type RouteAccess='authenticated'|'admin';
+export type RouteAccess='authenticated'|'admin'|'student'|'teacher'|'enrollment'|'materials-manager';
+export function permitsRoute(role:'STUDENT'|'TEACHER'|'ADMIN',access:RouteAccess):boolean {
+  return access==='authenticated'||(access==='admin'&&role==='ADMIN')||(access==='student'&&(role==='STUDENT'||role==='ADMIN'))||(access==='teacher'&&role==='TEACHER')||(access==='enrollment'&&role==='STUDENT')||(access==='materials-manager'&&(role==='ADMIN'||role==='TEACHER'));
+}
 export interface AppRoute { readonly path:string; readonly access?:RouteAccess;readonly element?:ReactNode;readonly render?:(params:Readonly<Record<string,string>>)=>ReactNode }
 export function isProtectedPath(path:string):boolean {
-  return path==='/inicio'||path==='/perfil'||path==='/admin/cuentas'||matchRoute('/admin/cuentas/:id',path)!==null;
+  return path==='/inicio'||path==='/perfil'||path==='/admin/cuentas'||matchRoute('/admin/cuentas/:id',path)!==null
+    ||path==='/admin/oferta'||matchRoute('/admin/oferta/cursos/:id',path)!==null||matchRoute('/admin/oferta/grupos/:id',path)!==null
+    ||path==='/oferta'||matchRoute('/oferta/cursos/:id',path)!==null||matchRoute('/oferta/cursos/:courseId/grupos/:id',path)!==null
+    ||path==='/mis-grupos'||matchRoute('/mis-grupos/:id',path)!==null
+    ||path==='/materiales'||matchRoute('/materiales/grupos/:groupId',path)!==null
+    ||path==='/reservar'||path==='/mis-ordenes'||matchRoute('/mis-ordenes/:id',path)!==null
+    ||path==='/mis-matriculas'||matchRoute('/mis-matriculas/:id',path)!==null
+    ||path==='/admin/precios'||path==='/admin/compromisos'||matchRoute('/admin/incidencias/:id',path)!==null;
 }
 export function matchRoute(pattern:string,path:string):Readonly<Record<string,string>>|null {
   const parts=pattern.split('/');const actual=path.split('/');const parameters:Record<string,string>={};

@@ -1,0 +1,566 @@
+{
+  "date": "2026-11-04",
+  "timezone": "America/Lima",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "status": "IMPLEMENTADO_Y_VERIFICADO_PUERTOS_INTERNOS_NO_ACEPTACION_US1",
+  "aggregate": {
+    "targetedUnique": 191,
+    "targetedPassed": 178,
+    "targetedKnownHttpPending": 13,
+    "previouslyRedNowGreen": 159,
+    "newExecutionTests": 10,
+    "regressionUniquePassed": 1371,
+    "allUnique": 1562,
+    "allUniquePassed": 1549,
+    "allUniqueKnownPending": 13,
+    "finalExecutionsIncludingTimezoneRepeat": 1683,
+    "finalExecutionPassed": 1670,
+    "finalExecutionKnownPending": 13,
+    "skipped": 0,
+    "earlierLocalAndDispatchRunsExcludedFromFinalCounts": true
+  },
+  "checks": {
+    "lint": "PASS API/web",
+    "build": "PASS API/web",
+    "types": "PASS API/web enrollment",
+    "latestExecutionTestLintAndTypes": "PASS",
+    "ci": "NOT_RUN",
+    "e2e": "NOT_RUN",
+    "fullSuiteGreen": false
+  },
+  "regression": {
+    "uniquePassed": 1371,
+    "suites": {
+      "regression": {
+        "total": 104,
+        "passed": 104,
+        "failed": 0
+      },
+      "audit": {
+        "total": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "core": {
+        "total": 524,
+        "passed": 524,
+        "failed": 0
+      },
+      "prices": {
+        "total": 52,
+        "passed": 52,
+        "failed": 0
+      },
+      "errors": {
+        "total": 67,
+        "passed": 67,
+        "failed": 0
+      },
+      "maintenance": {
+        "total": 36,
+        "passed": 36,
+        "failed": 0
+      },
+      "offering": {
+        "total": 365,
+        "passed": 365,
+        "failed": 0
+      },
+      "web": {
+        "total": 205,
+        "passed": 205,
+        "failed": 0
+      }
+    }
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "images": {
+    "api": "sha256:646005fbf96de481401df66bdac45f29e9e1cb15f430a0c1c19b3708c58fb564",
+    "sourceManifest": {
+      "path": ".cache/reservas-t029-t032/source-manifest.json",
+      "sha256": "124f6eee0e4b7726fe084dbfde7979eb14430a65a14961143ce0029122f6af22",
+      "private": true
+    },
+    "imageManifest": {
+      "path": ".cache/reservas-t029-t032/source-manifest-image.json",
+      "sha256": "a696d604578c4f263dda7cfc853083ccf3e93e282c15e7c74f99d6c1f868f50e",
+      "private": true
+    },
+    "sourceDelta": [
+      "apps/api/tests/integration/reservations-execution.spec.ts"
+    ],
+    "productionDelta": false,
+    "testOverride": "Solo reservations-execution.spec.ts montado read-only para añadir RX08 al mismo código compilado"
+  },
+  "cleanup": {
+    "schemasAfter": 0,
+    "db": "stopped",
+    "mailpit": "stopped",
+    "originalVolumePreserved": true,
+    "manualEnvironmentOperated": false
+  },
+  "limits": [
+    "Las rutas de reserva/consulta T035 y composición T039 no se implementan en este bloque.",
+    "El lifecycle se verifica directamente; todavía no se registra un background dispatcher en AppModule.",
+    "Persistencia mínima de orden/detalles/plazas necesaria para T032 incorporada en enrollment-store; T033 mantiene su tarea de cierre independiente.",
+    "T034, interfaz y checkpoints T040/T041 siguen pendientes; los informes anteriores son históricos y se conservan.",
+    "Sin nuevos paquetes, migraciones, parsers globales, proveedor, cobros, carga o aceptación humana."
+  ],
+  "productionSources": [
+    {
+      "path": "apps/api/src/modules/enrollment/application/expire-reservations.ts",
+      "sha256": "df51fac3bcf2bd4a9a54a823ec832f980a124cbc553f3592816503702e3cb174"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/expiration-store.ts",
+      "sha256": "35106ad9986e831c1ff8c928e4cfa00c561dd0394b8578fcc5fd0ae907849524"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/reservation-facts.ts",
+      "sha256": "9a1f66ef54ee3871b42bd671e2c07558d8b21d34d2ec98fdc56860e143557e17"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/dispatch.ts",
+      "sha256": "58c5cfb934d592dabe7b40966b9839284df2887ce7ba3b0bbb511c7fd7a50f28"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/enrollment-transaction.ts",
+      "sha256": "b8f9b6759c6e74631b83047f67a7e8ab21f643b10b537657fb75c2b0494a9ebd"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/enrollment-store.ts",
+      "sha256": "930f9c2d902e16eca71160b254f002e9dab03cd78ebc719772de5835a38508f2"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/audit.ts",
+      "sha256": "a3b1ad8c6583e1d0a9e95601b3f20e722f073ac46987a1fb03440b68469eb85e"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/enrollment-error.ts",
+      "sha256": "7af21742e8d21d0a7cfefd58f2493fe315e8518a1ecd28c6c717b772464f4c7f"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/reservation.ts",
+      "sha256": "40d6cf7b4224c50a65ef33a59f96f9ee94b6f085da0dbce783d650fb2b4ed202"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/order.ts",
+      "sha256": "adcb0c8e63a82f1edf739dbeb906192000c22baf7be1f95f7ec031258b942df6"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/compatibility.ts",
+      "sha256": "c52bfc3331d0b39a5a75171313be97f96530090ef0b211c2514da56330c819f7"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/application/reserve.ts",
+      "sha256": "957a2e33557d53a17bbb71379c4d7b91d2faccf1c2ce0aa1b332392546a2d9a1"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/admission.ts",
+      "sha256": "fcada8c4434335f5854029940bc307e476fe0415fee72d2032c6d0ea1d3363cb"
+    }
+  ],
+  "privateReports": {
+    "unit-preparation-utc": {
+      "path": ".cache/reservas-t029-t032/reports/unit-preparation-utc.json",
+      "sha256": "b210d1d47068fef2ff41fac4370bbe1e8c0122b1d6cc779f0f433958a2e40679",
+      "private": true
+    },
+    "unit-preparation-lima": {
+      "path": ".cache/reservas-t029-t032/reports/unit-preparation-lima.json",
+      "sha256": "9bbae1850efe146f656e26b003b696dc5b99ed6207572b7dac6261432eb3886f",
+      "private": true
+    },
+    "admission": {
+      "path": ".cache/reservas-t029-t032/reports/admission.json",
+      "sha256": "623c3df32c6deb88e8f37698537eabb2b8c3682baaa0c8ba7aaf7efc3852871e",
+      "private": true
+    },
+    "dispatch": {
+      "path": ".cache/reservas-t029-t032/reports/dispatch.json",
+      "sha256": "2e5e72c059f43b6347c8813251d7a74822006f347651b6d08982559654ca61f9",
+      "private": true
+    },
+    "regression": {
+      "path": ".cache/reservas-t029-t032/reports/regression.json",
+      "sha256": "4a8b0410fbd00a4eddb428d2b9c05b0592ac537df5b22dfa6d1a73ad08a02559",
+      "private": true
+    },
+    "audit": {
+      "path": ".cache/reservas-t029-t032/reports/audit.json",
+      "sha256": "1ac31f2796675483439dacb56f236e463c29718cf27dab2b06cd068f17c25a06",
+      "private": true
+    },
+    "core": {
+      "path": ".cache/reservas-t029-t032/reports/core.json",
+      "sha256": "40224219174c2a8224605cc04ea61a2693ce151012e41642f7952baaa9f6e2d5",
+      "private": true
+    },
+    "prices": {
+      "path": ".cache/reservas-t029-t032/reports/prices.json",
+      "sha256": "5c54676c154ba73e99e22ec613d1879473d6b4ec30c1c1cf8126f9f97e1d4e3f",
+      "private": true
+    },
+    "errors": {
+      "path": ".cache/reservas-t029-t032/reports/errors.json",
+      "sha256": "7baf94e72ff6d3c5739f19a77115fd1e04cc6f19e9d04026c8556e53c44490a1",
+      "private": true
+    },
+    "maintenance": {
+      "path": ".cache/reservas-t029-t032/reports/maintenance.json",
+      "sha256": "0a1879cfaf99af878e4824438fde93a77963ce57fcd663fa8abc24890d77ad3c",
+      "private": true
+    },
+    "offering": {
+      "path": ".cache/reservas-t029-t032/reports/offering.json",
+      "sha256": "8500fd311174055dfa9ebd892d9adaeaf0cd7e03456cb1dffda03ddc4fd19a63",
+      "private": true
+    },
+    "web": {
+      "path": ".cache/reservas-t029-t032/reports/web.json",
+      "sha256": "2b16113ca48ed9161100858093c45dc0b6293dbc9678e7ca4d66cf2be344fd5c",
+      "private": true
+    }
+  },
+  "tasks": [
+    "T031",
+    "T032"
+  ],
+  "validation": {
+    "dispatchPreparedCases": 22,
+    "executionAddedCases": 10,
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0
+  },
+  "implementation": {
+    "dispatch": "Mutex DispatchState hasta COMMIT, cabeza durable, cuentas/sesión -> cursos/grupos -> filas financieras -> resultado/auditoría",
+    "lifetime": "start/onModuleInit: un trabajo local en vuelo, sondeo técnico 250ms; stop/onApplicationShutdown cancela timer y espera operaciones; sin pool nuevo",
+    "expiration": "createExpirationNormalizer + expirationDecision compartidos: mismo TemporalDecision; efecto ORDER_EXPIRED/orderId único",
+    "confirmation": "86400000000 microsegundos, precio y condiciones originales, una transacción; validación completa antes de escribir",
+    "partiality": "Fallo desde la primera escritura revierte normalización, nueva orden, ítems, plazas, solicitud y auditoría; error temporal conserva ADMITTED"
+  },
+  "coverage": {
+    "RA02": "RD03",
+    "TV06": "RD11",
+    "TV10": "RD07",
+    "TV11": "RD08",
+    "TV12": "RD09/RD13",
+    "TV15": "RD06/RX04",
+    "TV17": "RD10/RD14",
+    "TV18": "RD10/RX03/RX05",
+    "TV19": "RD07/RD12/RD15/RD16",
+    "authorization": "RX01/RX02",
+    "lifecycle": "RX06",
+    "realAdmissionDispatchReplay": "RX08"
+  },
+  "cases": [
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00a auxiliar: oferta, precios y secuencias ficticias válidas",
+      "status": "passed",
+      "durationMs": 1022.6670599999998,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00b auxiliar: bloqueo real de DispatchState entre conexiones distintas",
+      "status": "passed",
+      "durationMs": 913.6930350000002,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00c auxiliar: proceso Node separado conecta a su schema PG real",
+      "status": "passed",
+      "durationMs": 913.7186739999997,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD00d auxiliar: reloj SQL cruza corte Lima exactamente un microsegundo",
+      "status": "passed",
+      "durationMs": 899.0849200000002,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD13 TV12 reinicio de proceso real beforeCommit: decisión durable única",
+      "status": "passed",
+      "durationMs": 1252.143567,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD13 TV12 reinicio de proceso real afterCommit: decisión durable única",
+      "status": "passed",
+      "durationMs": 1314.0525340000004,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD01 sin cola no crea efectos ni consulta AdmissionSequence",
+      "status": "passed",
+      "durationMs": 687.1079140000002,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD02 confirmación multigrupo: total original y exactamente 24h con un token",
+      "status": "passed",
+      "durationMs": 769.5741209999996,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD03 RA-02 dos despachadores disputan última plaza sin saltar cabeza bloqueada",
+      "status": "passed",
+      "durationMs": 984.5253130000001,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD04 multigrupo rechaza todo cuando uno no tiene precio",
+      "status": "passed",
+      "durationMs": 890.3300080000008,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD05 precio concurrente: espera curso y congela importe posterior al commit",
+      "status": "passed",
+      "durationMs": 739.6975199999997,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD06 TV15 fallo real del INSERT de auditoría revierte orden, ítems y plazas",
+      "status": "passed",
+      "durationMs": 807.5234709999986,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD07 TV10/19 40001: aborto después de reloj exige rollback y token nuevo",
+      "status": "passed",
+      "durationMs": 737.675322000001,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD07 TV10/19 40P01: aborto después de reloj exige rollback y token nuevo",
+      "status": "passed",
+      "durationMs": 721.8229609999999,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD08 TV11 COMMIT con acuse perdido se recupera sin duplicar orden ni timestamps",
+      "status": "passed",
+      "durationMs": 922.862003000002,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD09 TV12 reinicio del despachador tras aborto libera mutex y conserva cabeza durable",
+      "status": "passed",
+      "durationMs": 1006.6402449999987,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD10 TV17/18 normaliza orden vencida fuera de selección con el mismo token final",
+      "status": "passed",
+      "durationMs": 874.0407159999995,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD11 TV06 espera grupo y cruza exactamente corte Lima antes de confirmar",
+      "status": "passed",
+      "durationMs": 846.2740770000019,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD12 55P03 no bucle inmediato; error temporal conserva ADMITTED",
+      "status": "passed",
+      "durationMs": 737.170181999998,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD14 TV17 bloquea también grupo de orden anterior fuera de la nueva selección",
+      "status": "passed",
+      "durationMs": 740.8974640000015,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD15 TV19 cambia docente en descubrimiento: rollback y nueva cobertura antes del token",
+      "status": "passed",
+      "durationMs": 804.6492059999982,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-dispatch.spec.ts",
+      "name": "RD16 TV19 tres abortos PG 40001 agotan presupuesto y conservan ADMITTED",
+      "status": "passed",
+      "durationMs": 1028.6463440000007,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX01 revocación comprobada deja REJECTED y auditoría, sin plazas",
+      "status": "passed",
+      "durationMs": 898.254207,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX02 autorización indisponible conserva ADMITTED y cero efectos",
+      "status": "passed",
+      "durationMs": 688.877185,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX03 normalizador compartido materializa una vez sin scheduler ni otra captura",
+      "status": "passed",
+      "durationMs": 827.1210329999999,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX04 fallo al crear nueva orden revierte también normalización anterior",
+      "status": "passed",
+      "durationMs": 1122.8374669999998,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX05 normalización SYSTEM concurrente y despacho producen un solo efecto",
+      "status": "passed",
+      "durationMs": 857.0601019999995,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX06 lifecycle inicia single-flight y shutdown impide nuevos trabajos",
+      "status": "passed",
+      "durationMs": 777.9644799999996,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX07 forma inválida directa []",
+      "status": "passed",
+      "durationMs": 923.344419,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX07 forma inválida directa [\"bad\"]",
+      "status": "passed",
+      "durationMs": 810.9441340000003,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX07 forma inválida directa [\"00000000-0000-4000-8000-000000000001\",\"00000000-0000-4000-8000-000000000001\"]",
+      "status": "passed",
+      "durationMs": 753.6067800000001,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-execution.spec.ts",
+      "name": "RX08 admisión real → despacho → replay recupera orden original sin nueva secuencia",
+      "status": "passed",
+      "durationMs": 1293.2199469999996,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    }
+  ],
+  "commands": [
+    "npm exec --workspace apps/api -- vitest run tests/integration/reservations-dispatch.spec.ts tests/integration/reservations-execution.spec.ts --maxWorkers=1"
+  ]
+}

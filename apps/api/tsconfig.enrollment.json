@@ -1,0 +1,63 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "../..",
+    "allowJs": true,
+    "checkJs": false
+  },
+  "files": [
+    "src/modules/authorization/domain/permissions.test.ts",
+    "src/modules/enrollment/domain/reservation.test.ts",
+    "src/modules/enrollment/domain/order.test.ts",
+    "src/modules/enrollment/domain/compatibility.test.ts",
+    "src/modules/enrollment/domain/payment-verification.test.ts",
+    "src/modules/enrollment/domain/payment-invariants.test.ts",
+    "src/modules/enrollment/application/expire-reservations.test.ts",
+    "src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+    "src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts"
+  ],
+  "include": [
+    "tests/support/enrollment*.ts",
+    "tests/support/fixture-truncate.ts",
+    "tests/integration/fixture-truncate.spec.ts",
+    "tests/integration/enrollment-us4-checkpoint.spec.ts",
+    "tests/integration/enrollment-temporal-reads.spec.ts",
+    "tests/integration/enrollment-expiration-lifecycle.spec.ts",
+    "src/**/*.ts",
+    "tests/contracts/enrollment.spec.ts",
+    "tests/integration/enrollment-boundaries.spec.ts",
+    "tests/integration/enrollment-authorization.spec.ts",
+    "tests/integration/enrollment-foundation.spec.ts",
+    "tests/integration/enrollment-audit.spec.ts",
+    "tests/integration/enrollment-maintenance.spec.ts",
+    "tests/integration/enrollment-errors.spec.ts",
+    "tests/integration/enrollment-prices.spec.ts",
+    "tests/integration/reservations-admission.spec.ts",
+    "tests/integration/reservations-dispatch.spec.ts",
+    "tests/integration/enrollment-queries.spec.ts",
+    "tests/integration/reservations-execution.spec.ts",
+    "tests/integration/enrollment-read-persistence.spec.ts",
+    "tests/integration/enrollment-http.spec.ts",
+    "tests/integration/enrollment-composition.spec.ts",
+    "tests/integration/enrollment-payments.spec.ts",
+    "tests/integration/enrollment-payment-attempts.spec.ts",
+    "tests/integration/enrollment-payment-http.spec.ts",
+    "tests/integration/enrollment-payment-initiation.spec.ts",
+    "tests/integration/enrollment-payment-recovery.spec.ts",
+    "tests/integration/enrollment-payment-upgrade.spec.ts",
+    "tests/integration/enrollment-student-payments.spec.ts",
+    "tests/integration/reservations-expiration.spec.ts",
+    "tests/integration/enrollment-expiration-http.spec.ts",
+    "tests/integration/enrollment-temporal-checkpoint.spec.ts",
+    "src/modules/enrollment/domain/commitments.test.ts",
+    "src/modules/enrollment/application/follow-up.test.ts",
+    "tests/integration/enrollment-admin.spec.ts",
+    "tests/integration/reservation-authorization.spec.ts",
+    "tests/integration/enrollment-admin-persistence.spec.ts",
+    "tests/integration/enrollment-admin-http.spec.ts"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ]
+}

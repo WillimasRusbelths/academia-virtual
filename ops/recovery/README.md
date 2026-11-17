@@ -1,5 +1,9 @@
 # Recuperación local de identidad (T096–T098)
 
+El procedimiento también incluye oferta, matrícula y materiales en el dump completo.
+El [ensayo de materiales](#materiales-004-t061t062) añade inventario de contenido y
+verificación de restauración; no sustituye los acuerdos operativos D13.
+
 Procedimiento de mantenimiento con PostgreSQL 16, Docker y Node 22; scripts compatibles
 con Windows PowerShell 5.1. No es un servicio de backups ni una programación activada.
 El ensayo se documenta en [evidencia](../../specs/001-identidad-acceso-roles/evidence/recovery.md).
@@ -131,3 +135,180 @@ de fases directamente contra desarrollo/manual ni reutilizar sus cuentas.
 Referencias oficiales: [pg_dump 16](https://www.postgresql.org/docs/16/app-pgdump.html),
 [pg_restore 16](https://www.postgresql.org/docs/16/app-pgrestore.html),
 [crypto de Node](https://nodejs.org/docs/latest-v22.x/api/crypto.html).
+
+## Ensayo de oferta académica (T069)
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ops/recovery/rehearse-academic.ps1
+```
+
+Usa los mismos scripts de cifrado, respaldo, guardas y restauración. Crea un proyecto
+`academic-recovery-*` exclusivo, red interna sin puertos y volumen nuevo retenido;
+no reutiliza cuentas, claves, bases ni volúmenes manuales. Requiere la imagen local
+de API indicada por `-ApiImage` (por defecto `academia-local-api:latest`). Monta las
+fuentes, Prisma y tsconfig actuales; no instala servicios ni ejecuta cargas.
+
+Las fases explícitas de `academic-rehearsal.spec.ts` comprueban:
+
+1. Migraciones 0001–0004 mediante Prisma y doce cuentas ficticias; respaldo cifrado
+   previo a la incorporación académica.
+2. Aplicación aditiva de 0005 con las mismas huellas de identidad; publicación real,
+   pérdida/recuperación docente, revisión explícita y cancelación terminal.
+3. Backup consistente con escritores/worker detenidos, incluidos generación,
+   snapshots, ledger y auditoría. Dos entregas sintéticas permanecen retenidas para
+   comprobar su cancelación al invalidar el estado restaurado, sin enviarlas.
+4. Tres decisiones ficticias posteriores al backup y una migración inválida 0006
+   solo en una copia temporal de Prisma. Se exige fallo real y ausencia de tabla
+   parcial; no se modifica ninguna migración aplicada ni se usa migrate resolve.
+5. Restauración transaccional a una base nueva; comparación de filas, esquema,
+   restricciones, funciones, vistas y permisos; deploy compatible sin cambios.
+6. Invalidación real de sesiones/enlaces/correo antes de abrir tráfico; conservación
+   del ledger y auditoría académicos, replay y rechazo de intención diferente.
+   Revisión y reaplicación controlada de las tres decisiones ficticias perdidas,
+   accesos por rol y reinicio mediante otro proceso Node.
+
+Los archivos de `.cache/academic-recovery-*`, dumps, claves y `handoff.json` son
+privados. Las fases generan reportes saneados `*-summary.json`; el resumen final
+solo existe si todas completaron sus aserciones. Los fallos se conservan y los
+servicios se detienen en `finally`, sin borrar volúmenes. Ninguna fase abre tráfico
+público. Registrar revisión y hashes del código no versionado que se haya ensayado.
+
+Este ensayo no recupera automáticamente cambios posteriores al backup: los tres
+cambios se conocen por el registro privado del ensayo. Sus tiempos observados no
+establecen un SLA ni cierran D13. La evidencia efectiva y sus limitaciones se
+registran en [T069](../../specs/002-oferta-academica/evidence/recovery.md).
+
+## Ensayo de reservas, órdenes y matrícula (T086)
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ops/recovery/rehearse-enrollment.ps1 -ApiImage academic-offering-fa3d46bddbb8-api:latest
+```
+
+Indicar una imagen API local revisada que contenga las dependencias del lockfile
+vigente. El lanzador registra su ID y monta fuentes, pruebas, Prisma y configuración
+de compilación actuales. Verifica el manifiesto de fuentes y la configuración
+privada al terminar; no editar estos archivos mientras se ejecuta.
+
+El ensayo crea un proyecto `enrollment-recovery-*`, volumen nuevo retenido, red
+interna y cero puertos publicados. Genera claves y credenciales propias en un
+directorio con ACL del usuario actual. No requiere las cuentas ni el volumen del
+ensayo manual. Reutiliza `backup.ps1`, `restore-check.ps1`, cifrado AES-256-GCM y
+guardas existentes. Nunca ejecutar sus fases directamente contra datos manuales.
+
+Las cuatro fases de `apps/api/tests/recovery/enrollment-rehearsal.spec.ts` verifican:
+
+1. Deploy Prisma real de 0001–0005, doce cuentas ficticias y filas académicas previas;
+   respaldo cifrado anterior a matrícula.
+2. Deploy aditivo de 0006–0007, preservación de las filas previas y comprobación del
+   default nullable de descripción. Preparación de un grafo financiero ficticio y
+   lectura real de la orden. Estas filas físicas no acreditan pagos del proveedor.
+3. Backup con escritores detenidos: cada runner terminó y no hay API ni worker
+   persistentes. Registro de una anotación ficticia posterior al punto consistente.
+   Migración 0008 deliberadamente inválida únicamente en una copia temporal de
+   Prisma; fallo real y ausencia de tabla parcial, sin `migrate resolve`.
+4. Restore transaccional de la versión nueva a otra BD `recovery_*_test`, comparando
+   todas las filas y catálogo, owners/ACL y deploy compatible. Runtime sin DDL y
+   pagos terminales inmutables. Invalidación real de sesiones/enlaces/correo antes
+   del acceso de prueba; las filas ajenas a esos accesos permanecen intactas.
+   Nuevos logins por rol, lecturas de matrícula, denegaciones, reaplicación revisada
+   de la anotación perdida, replay sin duplicación y rechazo de intención distinta.
+   Otro proceso Node comprueba persistencia y rechazo de la sesión anterior.
+
+Solo la copia posterior al upgrade se restaura en este ensayo; la copia 0005 se
+conserva sin atribuirle una restauración. Un fallo deja sus bases, archivos y volumen
+en cuarentena; repetir el lanzador crea un proyecto diferente. `finally` detiene solo
+los servicios nuevos y conserva sus recursos. No borrar volúmenes ni reutilizar una
+BD de restore existente para intentar corregir un fallo.
+
+Los resúmenes y manifiestos son privados en `.cache/enrollment-recovery-*`.
+La [evidencia T086](../../specs/003-reservas-ordenes-matricula/evidence/recovery.md)
+publica resultados saneados y límites. La restauración no recupera automáticamente
+cambios posteriores al backup: se revisa y reaplica únicamente la anotación conocida.
+Los tiempos observados no aprueban RPO/RTO, custodia, retención ni operación física
+de 24 horas. D13, D02, aceptación humana y capacidad siguen siendo puertas separadas.
+
+
+## Preparación del ensayo operacional 003 (T090, pendiente)
+
+El [plan de 24 horas](../../specs/003-reservas-ordenes-matricula/evidence/operation.md)
+coordina T090 con VP004 y este procedimiento. Es una preparación documental, sin
+servicios iniciados, destino autorizado ni reloj físico observado. T059/D02 y los
+acuerdos D13 siguen pendientes. La recuperación T086 no fija objetivos de RPO/RTO
+ni aprueba custodia, retención o una demo persistente.
+
+Antes de ejecutar: identificar responsables, destino exclusivo, ventana/costo,
+fuente horaria y observación, custodia/retención, RPO/RTO y límites de interrupción;
+registrar autorización explícita y evidencia sandbox T059. Verificar fuentes, roles,
+backups/restauración y ausencia de relojes/timers de fixture. No promover el reloj
+controlado de ensayos humanos o automatizados como observación de 24 horas físicas.
+
+Durante backup/restore mantener detenidos todos los writers del destino acordado,
+incluidos despacho de reservas, vencimiento, conciliación de pagos, API y correo.
+Si el futuro callback del proveedor no puede pausarse, aplicar únicamente el
+procedimiento validado con T059 para su entrega/recuperación; no asumir que detener
+la API detiene los hechos externos ni que un backup contiene eventos posteriores.
+Restaurar siempre a otra BD, invalidar accesos y reconciliar solo hechos conocidos
+y autorizados antes de abrir. No cambiar plazos, prometer downgrade o reejecutar
+cobros para resolver incertidumbre. Conservar fuente fallida, copias y evidencia.
+
+## Materiales 004 (T061–T062)
+
+Con todos los escritores detenidos, `backup.ps1` sigue haciendo pg_dump de la BD
+completa: metadatos, bytea, intenciones pendientes/completadas, ledger y auditoría
+permanecen juntos en el archivo cifrado. El parámetro opcional `-MaterialsSchema`
+añade al manifiesto un inventario del schema explícito que ya tiene 0008/0009:
+
+```powershell
+./ops/recovery/backup.ps1 -Container recovery-db -Database academia_v00_test -ArchiveFile C:/privado/backups/materials.enc -KeyFile C:/privado/keys/archive.key -Revision <commit> -MaintenanceConfirmed -MaterialsSchema t_materials_trial
+```
+
+El dump sigue incluyendo toda la BD; el inventario corresponde al schema indicado.
+Se calculan hashes completos desde cada bytea, se comparan con SHA-256 y tamaño
+persistidos, y se registran grupo, autor original, último actor, estado y revisión.
+Los textos y nombres solo participan en el hash de metadata, nunca se imprimen.
+Intenciones, comandos y eventos llevan conteos y hashes de todas sus filas. Una
+inconsistencia impide generar la copia. Se conserva compatibilidad con respaldos
+sin materiales y con el formato cifrado ACADBKP1; no se modifican copias previas.
+
+El mantenimiento declarado debe impedir escrituras durante inventario y dump.
+Los hashes no sustituyen esa exclusión ni autentican por sí solos un manifiesto.
+Cuando el manifiesto incluye materiales, `restore-check.ps1` compara automáticamente
+`Get-RecoveryMaterialsInventory` con el inventario original antes de devolver
+`materialsVerified=true`; mantiene `trafficReady=false`. Después se invalidan
+accesos y se ejecutan los controles funcionales. Revisar primero
+los roles/ACL: el dump de una BD no incluye sus roles globales.
+
+Para el laboratorio ficticio, con Docker Desktop activo y una imagen API local:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ops/recovery/rehearse-materials.ps1 -ApiImage <imagen-local-api>
+```
+
+El script crea otro proyecto `materials-recovery-*`, red interna sin puertos,
+volumen nuevo y credenciales/clave exclusivas en `.cache/materials-recovery-*`
+con ACL privada y clave separada de las copias. No usa la BD/volumen manual.
+Comprueba 0007 real, conserva identidad/oferta/finanzas, aplica 0008/0009 y prepara
+PDF/JPEG/PNG mediante API real, en tres estados, más una intención pendiente.
+Comprueba dos procesos API distintos antes de respaldar. Una migración 0010
+deliberadamente inválida existe solo en una copia temporal de Prisma; debe fallar
+y no dejar su tabla parcial. No se reescriben migraciones ni se ejecuta downgrade.
+
+La restauración se hace en una BD nueva `recovery_*_test`, preservando la fuente
+fallida. Antes de abrir tráfico se comparan inventario, bytes completos, catálogo,
+ACL, datos, hashes, grupo, autor y estados; se invalidan todas las sesiones
+restauradas y se prueban login nuevo, permisos de gestor/alumno y matrícula histórica.
+Replay conserva el ledger anterior; reiniciar no completa una intención pendiente.
+
+El ensayo registra un retiro y una publicación posteriores al backup. La copia no
+los contiene: restaurar puede volver a mostrar el estado anterior al retiro. Por
+eso se mantiene cuarentena hasta revisar decisiones conocidas. El operador ficticio
+reaplica únicamente el retiro revisado y comprueba replay idempotente; no publica
+automáticamente el preparado ni pretende recuperar todos los cambios posteriores.
+Las comprobaciones HTTP son internas al laboratorio, sin abrir tráfico público.
+
+`handoff.json`, archivos de entorno, dumps, claves y logs completos quedan privados.
+Los `*-summary.json`, `summary.json` y `guards-summary.json` contienen resultados
+saneados. El script detiene solo sus servicios, sin eliminar volumen o archivos.
+Ver [evidencia de materiales](../../specs/004-materiales-estudio/evidence/recovery.md).
+Este ensayo local no acepta custodia/retención D13, RPO/RTO, recursos/capacidad D10,
+operación física de 24 horas, aceptación humana o cierre integral de 001–003.

@@ -1,0 +1,241 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "task": "RP005",
+  "status": "DISENO_TEMPORAL_COMPLETO_SIN_IMPLEMENTACION",
+  "baseCommit": "0c778032fdf16f6797287925fcbac79aa8b701cd",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "skill": "speckit-plan",
+  "setup": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File D:/Proyectos/academia-virtual/.specify/scripts/powershell/setup-plan.ps1 -Json",
+    "exitCode": 0,
+    "existingPlanPreserved": true,
+    "helperBranchAlias": "003-reservas-ordenes-matricula",
+    "actualGitBranch": "feat/003-reservas-ordenes-matricula"
+  },
+  "artifacts": [
+    "specs/003-reservas-ordenes-matricula/plan.md",
+    "specs/003-reservas-ordenes-matricula/research.md",
+    "specs/003-reservas-ordenes-matricula/data-model.md",
+    "specs/003-reservas-ordenes-matricula/quickstart.md",
+    "specs/003-reservas-ordenes-matricula/contracts/api.md",
+    "specs/003-reservas-ordenes-matricula/contracts/integration.md",
+    "specs/003-reservas-ordenes-matricula/contracts/ui.md",
+    "specs/003-reservas-ordenes-matricula/contracts/time.md",
+    "specs/003-reservas-ordenes-matricula/temporal-verification.md"
+  ],
+  "agents": {
+    "researchers": 3,
+    "readOnly": true,
+    "reviewRounds": 2,
+    "newCriticalOrHighDesignBlockers": 0
+  },
+  "decisions": [
+    "Precisión timestamptz(6), bigint microsegundos y transporte UTC textual exacto sin Date/parser global.",
+    "Token temporal definitivo único tras todos los locks/recheck; normalización oportuna y reserva nueva lo comparten.",
+    "86.400 segundos fijos e intervalos semicerrados; calendario Lima, epoch negativo y año derivado10000 conservados.",
+    "Expiración efectiva separada de materialización; expirationProcessedAt y evento único ORDER_EXPIRED/orderId sin ledger del timer.",
+    "Worker mismo proceso/pool, single-flight, horizonte finito/cursor orientativo y único presupuesto de reintentos existente.",
+    "Anomalía de reloj detectada implica fallo seguro; no garantiza detección universal ni24h físicas con autoridad UTC perdida.",
+    "RP006 mantiene pagos verificados pendientes y conciliación/reasignación; sin retención de seguridad inventada."
+  ],
+  "spec": {
+    "fileBytesUnchanged": true,
+    "answersPreservedVerbatim": 15,
+    "stories": 4,
+    "functionalRequirements": 24,
+    "successCriteria": 8,
+    "qualityChecklistUnchanged": "12/16"
+  },
+  "constitution": {
+    "version": "1.2.1",
+    "fileBytesUnchanged": true,
+    "allElevenPrinciplesReviewedBeforeAndAfterDesign": true,
+    "newExceptionsRequired": false,
+    "assessment": "Conforme por diseño dentro de RP005; operación temporal exige saludD13, sin aprobación de pagos/capacidad/producción."
+  },
+  "backlog": {
+    "total": 22,
+    "complete": 6,
+    "pending": 16,
+    "onlyMarkerChanged": "RP005",
+    "descriptionsPreserved": true,
+    "RP006": "PENDIENTE",
+    "RV001": "PENDIENTE",
+    "RP007": "PENDIENTE"
+  },
+  "temporalVerification": {
+    "plannedCaseIds": 25,
+    "range": "TV01-TV25",
+    "implementedTests": 0,
+    "executedTests": 0,
+    "variantsNotCountedAsExecutedCases": true,
+    "paymentCaseTV25AndCompleteTV03DependOn": "RP006",
+    "humanAcceptance": false
+  },
+  "designReview": {
+    "notSpeckitAnalyze": true,
+    "corrections": [
+      {
+        "id": "P005-01",
+        "severity": "MEDIA",
+        "detail": "Una sola captura también en normalización oportuna: token compartido tras locks de unión de referencias."
+      },
+      {
+        "id": "P005-02",
+        "severity": "MEDIA",
+        "detail": "Horizonte fijo de cada barrido y cursor por candidata examinada evitan postergar fallidas por entrada continua."
+      },
+      {
+        "id": "P005-03",
+        "severity": "BAJA",
+        "detail": "TV16 distingue estados de orden, reserva y resultado NOT_DUE; no fixtures con estados inexistentes."
+      },
+      {
+        "id": "P005-04",
+        "severity": "BAJA",
+        "detail": "Modelo sincronizado con microsegundos, expirationProcessedAt, límites originales y efecto único."
+      },
+      {
+        "id": "P005-05",
+        "severity": "BAJA",
+        "detail": "Epoch negativo fraccionario, carry y rechazo de infinitos/no finitos o precisión>6 sin redondeo."
+      },
+      {
+        "id": "P005-06",
+        "severity": "BAJA",
+        "detail": "Clock/config inválidos detienen el ciclo; continuar otras candidatas solo ante fallo aislado."
+      }
+    ],
+    "remainingDesignBlockersInRP005": 0
+  },
+  "preservation": {
+    "trackedBaseline": 693,
+    "otherTrackedUnchanged": 684,
+    "protectedFilesUnchanged": 72,
+    "previousResearchPrefixByteForBytePreserved": true,
+    "priorRP001ThroughRP004ReportsUnchanged": true,
+    "spec001And002Unchanged": true,
+    "constitutionAndClarificationsUnchanged": true,
+    "codeSchemaMigrationsConfigurationAccountsFixturesUntouched": true,
+    "servicesAndVolumesNotOperated": true,
+    "existingMigrations": 5
+  },
+  "documentation": {
+    "documents": 82,
+    "localLinksChecked": 1341,
+    "brokenLocalLinks": [],
+    "markdownTablesChecked": 13,
+    "quickstartPowerShellSyntax": {
+      "blocks": 4,
+      "parseErrors": 0,
+      "executed": false
+    },
+    "unfilledScaffolding": 0,
+    "sensitiveValuesDetected": 0,
+    "all24FRTraceabilityPreserved": true
+  },
+  "commands": [
+    {
+      "command": "setup-plan.ps1 -Json",
+      "result": "0; plan existente conservado y directorio003 resuelto."
+    },
+    {
+      "command": "node .cache/reservas-rp005/review.mjs",
+      "result": "0; artefactos, límites documentados, TV01-TV25, enlaces, tablas, preservación, backlog y secretos verificados."
+    },
+    {
+      "command": "PowerShell Parser::ParseInput sobre cuatro bloques de quickstart",
+      "result": "0 errores; ningún comando de los bloques ejecutado."
+    },
+    {
+      "command": "git diff --check",
+      "result": "0; sin errores de whitespace, avisos LF/CRLF no son fallos."
+    }
+  ],
+  "auxiliaryCorrections": [
+    {
+      "kind": "CONTEXTO_DE_PATCH",
+      "detail": "Cuatro intentos de patch documental con contexto ajeno/incompleto rechazados antes de escrituras; corregidos. No fueron pruebas de producto."
+    }
+  ],
+  "hooks": {
+    "beforePlan": "NO_EXTENSION_FILE",
+    "afterPlan": "NO_EXTENSION_FILE"
+  },
+  "deferred": [
+    "RP006: recibo durable, pagos PENDING_RECONCILIATION y protocolo completo pago/vencimiento/reasignación.",
+    "RV001 y RP007: matriz integral, tareas y análisis posteriores.",
+    "D02/sandbox y D05/RA04: proveedor y política/procedimiento económicos antes de cobros reales.",
+    "D10: rúbrica/escenario y2500 activos aún no aprobados; S/300 total y≥15000cuentas no demuestran concurrencia.",
+    "D13: salud temporal operativa, recuperación/custodia/retención/RPO/RTO antes de demo persistente/publicación.",
+    "Bootstrap, T104/T108, T073/T074, CI remoto, SMTP externo, timeouts históricos e INV-DOC-01 conservados."
+  ],
+  "limits": {
+    "productTestsExecuted": 0,
+    "sqlExecuted": false,
+    "npmCommandsExecuted": 0,
+    "servicesOperated": false,
+    "smokesExecuted": false,
+    "loadRunsExecuted": false,
+    "migrationsGenerated": false,
+    "implementationStarted": false,
+    "implementationTasksCreated": false,
+    "capacity2500Approved": false,
+    "realChargesEnabled": false,
+    "AWSAdopted": false,
+    "T103": "INFORME_EJECUTADO_CAPACIDAD_SIN_APROBAR",
+    "T104": "PENDIENTE",
+    "T108": "PENDIENTE",
+    "T073": "PENDIENTE",
+    "T074": "PENDIENTE",
+    "bootstrap": "ABIERTO"
+  },
+  "next": "RP006: diseño de conciliación de pago/vencimiento/reasignación y recibo durable, sin implementar todavía.",
+  "sourceHashes": [
+    {
+      "path": "specs/003-reservas-ordenes-matricula/plan.md",
+      "sha256": "d41849c3b81b6f73c74d9f844da02871590b84b58ee3846aec3887866aff297f"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/research.md",
+      "sha256": "33bf7d364378f867ab0b348ae00c71ffe42a88191c2a33e3bdb0ed83e568d25e"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/data-model.md",
+      "sha256": "69a3b3aed25ed2480784fb7c2be34552cd76a6e1ea68b3788e448463c062b60a"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/quickstart.md",
+      "sha256": "d52757945780924f20273c75ca6e88b586f05f783f59271a45a3abfa11840aae"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/api.md",
+      "sha256": "9e86028047db34a20567f0b06d28fccf895abdcacd44abb15816c41681e49b51"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/integration.md",
+      "sha256": "238c73e2c4f59a37f5a43b7835216977277ecccd3c28ef36192b0fa5d656c047"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/ui.md",
+      "sha256": "4b94fb8f2312dee024d34b9733838df18656a6565ed21fc2305c574621bfc520"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/time.md",
+      "sha256": "9661178a1d33ec0e92a4f167f47dc40355c86356c40894c559c16e01148d3652"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/temporal-verification.md",
+      "sha256": "8068c033eb3dd9fe270d7e5e552acfc65fe66d740ac4d0227e206d76bfdf1e89"
+    },
+    {
+      "path": "README.md",
+      "sha256": "d1941df5b85bf5af74e42a0ef24b0a900dcfcbd27811d9dcbe61dc0ee18ffaa8"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "ac4bf5f9b29395a270cd31cb0d666e2f6199cf712e1dee96765e653340b6a458"
+    }
+  ]
+}

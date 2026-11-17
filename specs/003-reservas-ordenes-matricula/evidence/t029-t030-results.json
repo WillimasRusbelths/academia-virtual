@@ -1,0 +1,1742 @@
+{
+  "date": "2026-11-04",
+  "timezone": "America/Lima",
+  "baseCommit": "533b4b618b7d1ad972741e855d67d3fbb14e5a0f",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "status": "IMPLEMENTADO_Y_VERIFICADO_PUERTOS_INTERNOS_NO_ACEPTACION_US1",
+  "aggregate": {
+    "targetedUnique": 191,
+    "targetedPassed": 178,
+    "targetedKnownHttpPending": 13,
+    "previouslyRedNowGreen": 159,
+    "newExecutionTests": 10,
+    "regressionUniquePassed": 1371,
+    "allUnique": 1562,
+    "allUniquePassed": 1549,
+    "allUniqueKnownPending": 13,
+    "finalExecutionsIncludingTimezoneRepeat": 1683,
+    "finalExecutionPassed": 1670,
+    "finalExecutionKnownPending": 13,
+    "skipped": 0,
+    "earlierLocalAndDispatchRunsExcludedFromFinalCounts": true
+  },
+  "checks": {
+    "lint": "PASS API/web",
+    "build": "PASS API/web",
+    "types": "PASS API/web enrollment",
+    "latestExecutionTestLintAndTypes": "PASS",
+    "ci": "NOT_RUN",
+    "e2e": "NOT_RUN",
+    "fullSuiteGreen": false
+  },
+  "regression": {
+    "uniquePassed": 1371,
+    "suites": {
+      "regression": {
+        "total": 104,
+        "passed": 104,
+        "failed": 0
+      },
+      "audit": {
+        "total": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "core": {
+        "total": 524,
+        "passed": 524,
+        "failed": 0
+      },
+      "prices": {
+        "total": 52,
+        "passed": 52,
+        "failed": 0
+      },
+      "errors": {
+        "total": 67,
+        "passed": 67,
+        "failed": 0
+      },
+      "maintenance": {
+        "total": 36,
+        "passed": 36,
+        "failed": 0
+      },
+      "offering": {
+        "total": 365,
+        "passed": 365,
+        "failed": 0
+      },
+      "web": {
+        "total": 205,
+        "passed": 205,
+        "failed": 0
+      }
+    }
+  },
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "volume": "academic-offering-fa3d46bddbb8_postgres_data",
+    "createdAt": "2026-10-19T10:45:57Z",
+    "services": [
+      "api",
+      "browser-tests",
+      "db",
+      "mailpit",
+      "web"
+    ],
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "testDatabase": "academia_v00_test",
+    "separateRoles": true
+  },
+  "images": {
+    "api": "sha256:646005fbf96de481401df66bdac45f29e9e1cb15f430a0c1c19b3708c58fb564",
+    "sourceManifest": {
+      "path": ".cache/reservas-t029-t032/source-manifest.json",
+      "sha256": "124f6eee0e4b7726fe084dbfde7979eb14430a65a14961143ce0029122f6af22",
+      "private": true
+    },
+    "imageManifest": {
+      "path": ".cache/reservas-t029-t032/source-manifest-image.json",
+      "sha256": "a696d604578c4f263dda7cfc853083ccf3e93e282c15e7c74f99d6c1f868f50e",
+      "private": true
+    },
+    "sourceDelta": [
+      "apps/api/tests/integration/reservations-execution.spec.ts"
+    ],
+    "productionDelta": false,
+    "testOverride": "Solo reservations-execution.spec.ts montado read-only para añadir RX08 al mismo código compilado"
+  },
+  "cleanup": {
+    "schemasAfter": 0,
+    "db": "stopped",
+    "mailpit": "stopped",
+    "originalVolumePreserved": true,
+    "manualEnvironmentOperated": false
+  },
+  "limits": [
+    "Las rutas de reserva/consulta T035 y composición T039 no se implementan en este bloque.",
+    "El lifecycle se verifica directamente; todavía no se registra un background dispatcher en AppModule.",
+    "Persistencia mínima de orden/detalles/plazas necesaria para T032 incorporada en enrollment-store; T033 mantiene su tarea de cierre independiente.",
+    "T034, interfaz y checkpoints T040/T041 siguen pendientes; los informes anteriores son históricos y se conservan.",
+    "Sin nuevos paquetes, migraciones, parsers globales, proveedor, cobros, carga o aceptación humana."
+  ],
+  "productionSources": [
+    {
+      "path": "apps/api/src/modules/enrollment/application/expire-reservations.ts",
+      "sha256": "df51fac3bcf2bd4a9a54a823ec832f980a124cbc553f3592816503702e3cb174"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/expiration-store.ts",
+      "sha256": "35106ad9986e831c1ff8c928e4cfa00c561dd0394b8578fcc5fd0ae907849524"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/reservation-facts.ts",
+      "sha256": "9a1f66ef54ee3871b42bd671e2c07558d8b21d34d2ec98fdc56860e143557e17"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/dispatch.ts",
+      "sha256": "58c5cfb934d592dabe7b40966b9839284df2887ce7ba3b0bbb511c7fd7a50f28"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/enrollment-transaction.ts",
+      "sha256": "b8f9b6759c6e74631b83047f67a7e8ab21f643b10b537657fb75c2b0494a9ebd"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/enrollment-store.ts",
+      "sha256": "930f9c2d902e16eca71160b254f002e9dab03cd78ebc719772de5835a38508f2"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/audit.ts",
+      "sha256": "a3b1ad8c6583e1d0a9e95601b3f20e722f073ac46987a1fb03440b68469eb85e"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/enrollment-error.ts",
+      "sha256": "7af21742e8d21d0a7cfefd58f2493fe315e8518a1ecd28c6c717b772464f4c7f"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/reservation.ts",
+      "sha256": "40d6cf7b4224c50a65ef33a59f96f9ee94b6f085da0dbce783d650fb2b4ed202"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/order.ts",
+      "sha256": "adcb0c8e63a82f1edf739dbeb906192000c22baf7be1f95f7ec031258b942df6"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/domain/compatibility.ts",
+      "sha256": "c52bfc3331d0b39a5a75171313be97f96530090ef0b211c2514da56330c819f7"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/application/reserve.ts",
+      "sha256": "957a2e33557d53a17bbb71379c4d7b91d2faccf1c2ce0aa1b332392546a2d9a1"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/admission.ts",
+      "sha256": "fcada8c4434335f5854029940bc307e476fe0415fee72d2032c6d0ea1d3363cb"
+    }
+  ],
+  "privateReports": {
+    "unit-preparation-utc": {
+      "path": ".cache/reservas-t029-t032/reports/unit-preparation-utc.json",
+      "sha256": "b210d1d47068fef2ff41fac4370bbe1e8c0122b1d6cc779f0f433958a2e40679",
+      "private": true
+    },
+    "unit-preparation-lima": {
+      "path": ".cache/reservas-t029-t032/reports/unit-preparation-lima.json",
+      "sha256": "9bbae1850efe146f656e26b003b696dc5b99ed6207572b7dac6261432eb3886f",
+      "private": true
+    },
+    "admission": {
+      "path": ".cache/reservas-t029-t032/reports/admission.json",
+      "sha256": "623c3df32c6deb88e8f37698537eabb2b8c3682baaa0c8ba7aaf7efc3852871e",
+      "private": true
+    },
+    "dispatch": {
+      "path": ".cache/reservas-t029-t032/reports/dispatch.json",
+      "sha256": "2e5e72c059f43b6347c8813251d7a74822006f347651b6d08982559654ca61f9",
+      "private": true
+    },
+    "regression": {
+      "path": ".cache/reservas-t029-t032/reports/regression.json",
+      "sha256": "4a8b0410fbd00a4eddb428d2b9c05b0592ac537df5b22dfa6d1a73ad08a02559",
+      "private": true
+    },
+    "audit": {
+      "path": ".cache/reservas-t029-t032/reports/audit.json",
+      "sha256": "1ac31f2796675483439dacb56f236e463c29718cf27dab2b06cd068f17c25a06",
+      "private": true
+    },
+    "core": {
+      "path": ".cache/reservas-t029-t032/reports/core.json",
+      "sha256": "40224219174c2a8224605cc04ea61a2693ce151012e41642f7952baaa9f6e2d5",
+      "private": true
+    },
+    "prices": {
+      "path": ".cache/reservas-t029-t032/reports/prices.json",
+      "sha256": "5c54676c154ba73e99e22ec613d1879473d6b4ec30c1c1cf8126f9f97e1d4e3f",
+      "private": true
+    },
+    "errors": {
+      "path": ".cache/reservas-t029-t032/reports/errors.json",
+      "sha256": "7baf94e72ff6d3c5739f19a77115fd1e04cc6f19e9d04026c8556e53c44490a1",
+      "private": true
+    },
+    "maintenance": {
+      "path": ".cache/reservas-t029-t032/reports/maintenance.json",
+      "sha256": "0a1879cfaf99af878e4824438fde93a77963ce57fcd663fa8abc24890d77ad3c",
+      "private": true
+    },
+    "offering": {
+      "path": ".cache/reservas-t029-t032/reports/offering.json",
+      "sha256": "8500fd311174055dfa9ebd892d9adaeaf0cd7e03456cb1dffda03ddc4fd19a63",
+      "private": true
+    },
+    "web": {
+      "path": ".cache/reservas-t029-t032/reports/web.json",
+      "sha256": "2b16113ca48ed9161100858093c45dc0b6293dbc9678e7ca4d66cf2be344fd5c",
+      "private": true
+    }
+  },
+  "tasks": [
+    "T029",
+    "T030"
+  ],
+  "validation": {
+    "domainUnique": 121,
+    "domainUtcPassed": 121,
+    "domainLimaPassed": 121,
+    "admissionCases": 38,
+    "admissionPassed": 25,
+    "admissionFunctionalPassed": 20,
+    "admissionAuxiliaryAndTransport": 5,
+    "httpPendingT035": 13
+  },
+  "implementation": {
+    "domain": [
+      "prepareReservation",
+      "createReservedOrder",
+      "assertReservationCompatibility"
+    ],
+    "admission": "createReservationAdmission(...).admit",
+    "priority": "AdmissionSequence -> User -> Session -> ReservationRequest; COMMIT conjunto",
+    "replay": "Digest canónico de selección, propietario/intención únicos, resultado terminal original, sin secuencia o plazo nuevos"
+  },
+  "cases": [
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP01 selección sin compromiso ajeno devuelve compatibilidad",
+      "status": "passed",
+      "durationMs": 4.753288999999995,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP02 selección se compara contra sí misma por fecha efectiva",
+      "status": "passed",
+      "durationMs": 8.640909999999963,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP03 períodos comunes sin un lunes común no generan conflicto",
+      "status": "passed",
+      "durationMs": 1.2309609999999793,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP04 franjas después son compatibles",
+      "status": "passed",
+      "durationMs": 1.364231000000018,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP04 franjas antes son compatibles",
+      "status": "passed",
+      "durationMs": 0.6572500000000332,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP04 franjas otro día son compatibles",
+      "status": "passed",
+      "durationMs": 0.6745749999999475,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP05 RESERVATION visible=true vigente cuenta para D06",
+      "status": "passed",
+      "durationMs": 1.2127909999999815,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP05 RESERVATION visible=false vigente cuenta para D06",
+      "status": "passed",
+      "durationMs": 0.8491290000000049,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP05 ENROLLMENT visible=true vigente cuenta para D06",
+      "status": "passed",
+      "durationMs": 3.613065000000006,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP05 ENROLLMENT visible=false vigente cuenta para D06",
+      "status": "passed",
+      "durationMs": 1.916343999999981,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP06 RESERVATION límite original -1",
+      "status": "passed",
+      "durationMs": 0.9081380000000081,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP06 RESERVATION límite original 0",
+      "status": "passed",
+      "durationMs": 0.4637290000000007,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP06 RESERVATION límite original 1",
+      "status": "passed",
+      "durationMs": 0.6853569999999536,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP06 ENROLLMENT límite original -1",
+      "status": "passed",
+      "durationMs": 0.2968700000000126,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP06 ENROLLMENT límite original 0",
+      "status": "passed",
+      "durationMs": 0.18204800000000887,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP06 ENROLLMENT límite original 1",
+      "status": "passed",
+      "durationMs": 0.4837489999999889,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP07 reserva EXPIRED no bloquea",
+      "status": "passed",
+      "durationMs": 0.6342329999999947,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP07 reserva CONVERTED no bloquea",
+      "status": "passed",
+      "durationMs": 0.32645100000002003,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP08 curso único incluso en grupo 00000000-0000-4000-8000-00000000000a",
+      "status": "passed",
+      "durationMs": 0.6480419999999754,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP08 curso único incluso en grupo 00000000-0000-4000-8000-000000000063",
+      "status": "passed",
+      "durationMs": 0.6748360000000275,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP09 una segunda franja compartida basta para rechazar conjunto",
+      "status": "passed",
+      "durationMs": 1.0150140000000079,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+      "name": "CP10 historial con fechas originales finalizadas no revive por oferta posterior",
+      "status": "passed",
+      "durationMs": 0.5811560000000213,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR01 orden inicial reservada conserva detalle, total, titular y revisión",
+      "status": "passed",
+      "durationMs": 4.718758999999977,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR02 duración exacta desde -86400000001",
+      "status": "passed",
+      "durationMs": 1.9030799999999886,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR02 duración exacta desde -1",
+      "status": "passed",
+      "durationMs": 1.2431160000000432,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR02 duración exacta desde 0",
+      "status": "passed",
+      "durationMs": 2.3054349999999886,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR02 duración exacta desde 1893456000123456",
+      "status": "passed",
+      "durationMs": 1.2611220000000003,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR02 duración exacta desde 253402232399999999",
+      "status": "passed",
+      "durationMs": 1.62273399999998,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR03 total mayor al entero seguro de JS no pierde unidades menores",
+      "status": "passed",
+      "durationMs": 1.1399670000000128,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR04 cero explícito conserva RESERVED y nunca ENROLLED",
+      "status": "passed",
+      "durationMs": 2.0023219999999924,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR05 conjunto vacío no crea orden parcial",
+      "status": "passed",
+      "durationMs": 2.5510100000000193,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR05 conjunto mismo curso no crea orden parcial",
+      "status": "passed",
+      "durationMs": 2.819990999999959,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR05 conjunto precio negativo no crea orden parcial",
+      "status": "passed",
+      "durationMs": 0.6976010000000201,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR05 conjunto total fuera de BIGINT no crea orden parcial",
+      "status": "passed",
+      "durationMs": 0.6901070000000118,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+      "name": "OR06 copia nombres, período, límites y franjas originales sin alias",
+      "status": "passed",
+      "durationMs": 1.2609199999999987,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS01 un grupo válido conserva detalle y PEN exacto sin input financiero cliente",
+      "status": "passed",
+      "durationMs": 7.354692,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS02 varios cursos: total exacto sin flotantes ni cambio del conjunto",
+      "status": "passed",
+      "durationMs": 13.340805000000046,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS03 cero es precio explícito, no precio ausente ni matrícula automática",
+      "status": "passed",
+      "durationMs": 4.384045000000015,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS04 selección vacía rechaza todo el conjunto",
+      "status": "passed",
+      "durationMs": 3.085342999999966,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS04 selección UUID inválido rechaza todo el conjunto",
+      "status": "passed",
+      "durationMs": 1.9146949999999379,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS04 selección duplicada rechaza todo el conjunto",
+      "status": "passed",
+      "durationMs": 1.1492660000000114,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS04 selección UUID con salto rechaza todo el conjunto",
+      "status": "passed",
+      "durationMs": 1.4412770000000137,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS05 normaliza UUID canónico sin mutar selección recibida",
+      "status": "passed",
+      "durationMs": 1.4332999999999174,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS06 dos grupos del mismo curso se rechazan, no se elige uno silenciosamente",
+      "status": "passed",
+      "durationMs": 2.8046150000000125,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS07 referencia sin snapshot no produce reserva parcial",
+      "status": "passed",
+      "durationMs": 2.0277079999999614,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS08 oculto no permite reservar",
+      "status": "passed",
+      "durationMs": 1.6364720000000261,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS08 docente no habilitado no permite reservar",
+      "status": "passed",
+      "durationMs": 0.6718799999999874,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS08 revisión docente pendiente no permite reservar",
+      "status": "passed",
+      "durationMs": 0.7260489999999891,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS08 precio ausente no permite reservar",
+      "status": "passed",
+      "durationMs": 2.2526730000000725,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 1: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 5.10584700000004,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 2: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.4760969999999816,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 3: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.6723040000001674,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 4: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.5302059999999074,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 5: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 5.008710999999948,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 6: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.7544969999999012,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 7: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.558149000000185,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 8: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.6217790000000605,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 9: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.9976289999999608,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 10: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.7542260000000169,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 11: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.7708870000001298,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 12: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.9000750000000153,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 13: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.531844000000092,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 14: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.6955579999998918,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 15: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.8505820000000313,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 16: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.717431999999917,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 17: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.3102229999999508,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 18: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.8709519999999884,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 19: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.0838929999999891,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 20: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.4610730000001695,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 21: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.26291199999991477,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 22: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.26585799999998017,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 23: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.49247700000000805,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 24: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.38574000000016895,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 25: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.32847400000014204,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 26: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.6246340000000146,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 27: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.6202149999999165,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 28: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.1097760000000108,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 29: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.974332000000004,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 30: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 2.088907000000063,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 31: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.125253000000157,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 32: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.1955900000000383,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 33: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.7411329999999907,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 34: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.2090270000001055,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 35: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.9789909999999509,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 36: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 1.1249250000000757,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 37: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.5091399999998885,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 38: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.6500550000000658,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 39: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.5980600000000322,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 40: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.34514899999999216,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 41: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.5162649999999758,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 42: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.31053799999995135,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 43: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.4445189999999002,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 44: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.6822809999998753,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 45: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.34827500000005784,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 46: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.27953600000000733,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 47: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.32972799999993185,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 48: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.658822999999984,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 49: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.36045000000012806,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS09 inventario configurado 50: queda exactamente una plaza",
+      "status": "passed",
+      "durationMs": 0.46104300000001786,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS10 capacidad inválida null no se normaliza",
+      "status": "passed",
+      "durationMs": 0.8546690000000581,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS10 capacidad inválida -1 no se normaliza",
+      "status": "passed",
+      "durationMs": 1.7099299999999857,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS10 capacidad inválida 0 no se normaliza",
+      "status": "passed",
+      "durationMs": 0.8785370000000512,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS10 capacidad inválida 51 no se normaliza",
+      "status": "passed",
+      "durationMs": 0.8200589999999011,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS11 lleno 2 reservas/0 matrículas",
+      "status": "passed",
+      "durationMs": 0.8675250000001142,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS11 lleno 1 reservas/1 matrículas",
+      "status": "passed",
+      "durationMs": 0.534020000000055,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS11 lleno 0 reservas/2 matrículas",
+      "status": "passed",
+      "durationMs": 0.48501099999998587,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS12 inventario anómalo -1/0 falla seguro",
+      "status": "passed",
+      "durationMs": 0.5959359999999378,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS12 inventario anómalo 0/-1 falla seguro",
+      "status": "passed",
+      "durationMs": 0.47126300000013543,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS12 inventario anómalo 2/1 falla seguro",
+      "status": "passed",
+      "durationMs": 0.4470249999999396,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS12 inventario anómalo 0.5/0 falla seguro",
+      "status": "passed",
+      "durationMs": 1.0767779999998766,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS13 multigrupo sin plaza en uno: ningún detalle parcial, input intacto",
+      "status": "passed",
+      "durationMs": 1.4185609999999542,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS14 corte Lima: instante inicial -1 microsegundos",
+      "status": "passed",
+      "durationMs": 0.6540239999999358,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS14 corte Lima: instante inicial 0 microsegundos",
+      "status": "passed",
+      "durationMs": 0.38387699999998404,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS14 corte Lima: instante inicial 1 microsegundos",
+      "status": "passed",
+      "durationMs": 0.2825620000000981,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS15 orden RESERVED vigente impide otra reserva sin penalidad inventada",
+      "status": "passed",
+      "durationMs": 0.8676629999999932,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS16 orden RESERVED/1893456000123456 no es otra reserva vigente",
+      "status": "passed",
+      "durationMs": 0.6004749999999603,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS16 orden EXPIRED/1893456000123455 no es otra reserva vigente",
+      "status": "passed",
+      "durationMs": 0.6325600000000122,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS16 orden ENROLLED/1893456000123457 no es otra reserva vigente",
+      "status": "passed",
+      "durationMs": 0.3747479999999541,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS17 mismo curso comprometido RESERVATION aunque oculto",
+      "status": "passed",
+      "durationMs": 0.9118050000001858,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS17 mismo curso comprometido ENROLLMENT aunque oculto",
+      "status": "passed",
+      "durationMs": 0.36806499999988773,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+      "name": "RS18 copia snapshots y no conserva alias de catálogo/precio/franjas",
+      "status": "passed",
+      "durationMs": 0.9832890000000134,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA00a auxiliar: PG real, autoridad y migración; no aceptación de admisión",
+      "status": "passed",
+      "durationMs": 937.7684669999999,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA00b auxiliar: fixture histórica válida sin llamar al objetivo",
+      "status": "passed",
+      "durationMs": 915.5695770000002,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA00c auxiliar: barrera de AdmissionSequence observada por segunda conexión",
+      "status": "passed",
+      "durationMs": 807.3375260000003,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA00d auxiliar: inyección SQL 40001 real antes de ejecutar admisión",
+      "status": "passed",
+      "durationMs": 924.7690240000002,
+      "scope": "AUXILIARY",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA01 ADMITTED y contador confirman juntos; no orden, plaza ni plazo",
+      "status": "passed",
+      "durationMs": 816.5988590000006,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA02 prioridad durable pese a respuesta de segundo alumno primero",
+      "status": "passed",
+      "durationMs": 777.1868329999998,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA03 mismo contenido canónico recupera identidad y no consume secuencia",
+      "status": "passed",
+      "durationMs": 795.5174320000006,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA04 misma intención con otra selección es conflicto, no nuevo ticket",
+      "status": "passed",
+      "durationMs": 908.6156730000002,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA05 duplicado concurrente aplica una sola admisión",
+      "status": "passed",
+      "durationMs": 986.9566879999984,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA06 COMMIT before: acuse adverso consulta ledger antes de repetir",
+      "status": "passed",
+      "durationMs": 1740.6685639999996,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA06 COMMIT after: acuse adverso consulta ledger antes de repetir",
+      "status": "passed",
+      "durationMs": 753.5764519999993,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA07 aborto SQL real revierte contador e intención, no REJECTED",
+      "status": "passed",
+      "durationMs": 912.7652749999997,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA08 40001 real reintenta dentro del presupuesto, sin hueco de secuencia",
+      "status": "passed",
+      "durationMs": 945.7318810000015,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA09 revalida session en nueva admisión",
+      "status": "passed",
+      "durationMs": 761.0608119999997,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA09 revalida disabled en nueva admisión",
+      "status": "passed",
+      "durationMs": 751.9777900000008,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA09 revalida role en nueva admisión",
+      "status": "passed",
+      "durationMs": 799.5241720000013,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA09 revalida authVersion en nueva admisión",
+      "status": "passed",
+      "durationMs": 771.9157239999986,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA10 replay exige sesión vigente de nuevo login, antigua revocada no recupera",
+      "status": "passed",
+      "durationMs": 786.8673560000025,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA11 replay CONFIRMED recupera orden histórica vencida sin renovar",
+      "status": "passed",
+      "durationMs": 804.3899410000013,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA12 REJECTED previo conserva decisión y no obtiene nueva secuencia",
+      "status": "passed",
+      "durationMs": 761.2293060000011,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA13 una orden activa permanece intacta: admisión no crea segunda orden",
+      "status": "passed",
+      "durationMs": 2905.3590350000013,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA14 ADMIN no admite como alumno",
+      "status": "passed",
+      "durationMs": 869.2880049999985,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA14 TEACHER no admite como alumno",
+      "status": "passed",
+      "durationMs": 1076.3517109999993,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA15 HTTP 200 ADMITTED mínimo y persistido, no 202 ni ticket privado",
+      "status": "failed",
+      "durationMs": 1558.2954620000019,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA16 HTTP deniega ADMIN",
+      "status": "failed",
+      "durationMs": 990.3018369999991,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA16 HTTP deniega TEACHER",
+      "status": "failed",
+      "durationMs": 950.6251740000007,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA16 HTTP deniega VISITOR",
+      "status": "failed",
+      "durationMs": 856.6482959999994,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO vacío no se admite",
+      "status": "failed",
+      "durationMs": 842.3443990000014,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO duplicado no se admite",
+      "status": "failed",
+      "durationMs": 1586.554122999998,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO UUID no se admite",
+      "status": "failed",
+      "durationMs": 818.2930400000041,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO sesión cliente no se admite",
+      "status": "failed",
+      "durationMs": 1048.467125999996,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO titular cliente no se admite",
+      "status": "failed",
+      "durationMs": 1010.1762679999956,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO total cliente no se admite",
+      "status": "failed",
+      "durationMs": 858.0447989999957,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO plazo cliente no se admite",
+      "status": "failed",
+      "durationMs": 829.6228049999991,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO secuencia cliente no se admite",
+      "status": "failed",
+      "durationMs": 797.7971619999953,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA17 HTTP selección/DTO reloj cliente no se admite",
+      "status": "failed",
+      "durationMs": 1031.1711910000013,
+      "scope": "HTTP_PENDING_T035",
+      "reached": "Composición HTTP real: ruta todavía ausente, status 404",
+      "notReached": [
+        "Guarda y DTO de ruta específica",
+        "Resultado/persistencia por HTTP"
+      ]
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA18 HTTP conserva Origin/CSRF/16KiB sin intención durable",
+      "status": "passed",
+      "durationMs": 919.6760559999966,
+      "scope": "EXISTING_TRANSPORT",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    },
+    {
+      "file": "apps/api/tests/integration/reservations-admission.spec.ts",
+      "name": "RA19 la identidad de intención está acotada al alumno, no es global",
+      "status": "passed",
+      "durationMs": 786.143075999993,
+      "scope": "IMPLEMENTED_BEHAVIOR",
+      "reached": "Aserciones completas del caso",
+      "notReached": []
+    }
+  ],
+  "commands": [
+    "TZ=UTC npm exec --workspace apps/api -- vitest run src/modules/enrollment/domain/reservation.test.ts src/modules/enrollment/domain/order.test.ts src/modules/enrollment/domain/compatibility.test.ts --maxWorkers=1",
+    "TZ=America/Lima npm exec --workspace apps/api -- vitest run src/modules/enrollment/domain/reservation.test.ts src/modules/enrollment/domain/order.test.ts src/modules/enrollment/domain/compatibility.test.ts --maxWorkers=1",
+    "npm exec --workspace apps/api -- vitest run tests/integration/reservations-admission.spec.ts --maxWorkers=1"
+  ]
+}

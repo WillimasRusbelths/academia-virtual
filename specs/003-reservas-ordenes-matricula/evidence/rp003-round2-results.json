@@ -1,0 +1,328 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Lima",
+  "task": "RP003",
+  "round": 2,
+  "status": "FIVE_ADDITIONAL_CLARIFICATIONS_RECORDED_BUSINESS_GATES_OPEN",
+  "baseCommit": "5dc380eddaa4683714559715fcf23f9195dea9e3",
+  "branch": "feat/003-reservas-ordenes-matricula",
+  "skills": [
+    "speckit-clarify",
+    "speckit-constitution"
+  ],
+  "specFile": "specs/003-reservas-ordenes-matricula/spec.md",
+  "questions": {
+    "maximumThisRound": 5,
+    "asked": 5,
+    "answered": 5,
+    "pending": null,
+    "approved": [
+      {
+        "number": 1,
+        "id": "RA-02",
+        "question": "¿Qué prioridad debe aplicarse cuando varios alumnos solicitan el último cupo disponible?",
+        "selected": "A",
+        "approved": "Prioridad por admisión servidor de solicitudes autenticadas y válidas; empate por secuencia única del servidor. Clic, login y reloj cliente no dan prioridad ni reservan."
+      },
+      {
+        "number": 2,
+        "id": "PD-02",
+        "question": "¿Puede un alumno reservar o matricularse en más de un grupo del mismo curso al mismo tiempo?",
+        "selected": "A",
+        "approved": "Un solo grupo por curso; rechazar nueva reserva si existe reserva o matrícula vigente del curso, incluso otro grupo. Misma intención recupera resultado; vigencia/finalización siguen D03."
+      },
+      {
+        "number": 3,
+        "id": "PD-03",
+        "question": "¿Qué permisos tendrán el administrador, el alumno y el docente sobre reservas, órdenes, pagos y matrículas?",
+        "selected": "A",
+        "approved": "Alumno reserva/inicia pago/consulta lo propio; administrador fija precios, consulta todos y registra seguimiento. Docente y visitante sin acceso financiero; sin confirmaciones, devoluciones o cancelaciones manuales fuera de políticas aprobadas."
+      },
+      {
+        "number": 4,
+        "id": "RA-04",
+        "question": "¿Qué debe hacer este incremento con un pago verificado al vencer o después, o que no tenga una plaza válida para confirmar matrícula?",
+        "selected": "A",
+        "approved": "Incidencia y pago en conciliación sin matrícula, con seguimiento administrativo. Fuera del incremento devoluciones/traslados/asignaciones manuales; política y procedimiento económicos antes de cobros reales; seguimiento no resuelve incidencia."
+      },
+      {
+        "number": 5,
+        "id": "D03",
+        "question": "¿Hasta cuándo debe considerarse vigente una matrícula confirmada por pago?",
+        "selected": "A",
+        "approved": "Desde confirmación por pago verificado hasta terminar fecha final del grupo en America/Lima; después no vigente, historial conservado; no reabrir oferta ni aprobar cancelaciones/reembolsos."
+      }
+    ],
+    "previousRound": {
+      "asked": 5,
+      "answered": 5,
+      "commit": "5dc380e",
+      "verbatimAnswersPreserved": true,
+      "reportUnchanged": true
+    },
+    "totalRecordedToday": 10
+  },
+  "quality": {
+    "before": "11/16",
+    "after": "11/16",
+    "newlyPassing": [],
+    "regressions": [],
+    "stillUnchecked": [
+      "Los requisitos son verificables y no ambiguos en todo su alcance.",
+      "Todos los criterios de éxito son medibles con condiciones de evaluación definidas.",
+      "Todos los escenarios de aceptación tienen reglas de resultado definidas.",
+      "Todos los requisitos funcionales tienen criterios de aceptación completos.",
+      "La funcionalidad especificada permite evaluar todos los resultados de éxito sin reglas pendientes."
+    ],
+    "checklistBytesUnchanged": true,
+    "notes": "Historical RP002 notes preserved; current state is eleven checked items.",
+    "readyForPlan": false
+  },
+  "structure": {
+    "stories": 4,
+    "functionalRequirements": 24,
+    "successCriteria": 8,
+    "scenarioIds": 10,
+    "RAEntries": 6,
+    "PDEntries": 3,
+    "clarificationMarkers": 0,
+    "sessionDateHeadings": 1,
+    "roundsToday": 2,
+    "eachRoundRespectsFiveQuestionQuota": true
+  },
+  "coverage": {
+    "functional": {
+      "status": "Deferred",
+      "reason": "Matriz resuelta; elegibilidad, cambios/cancelaciones y reiteraciones aún abiertos."
+    },
+    "domain": {
+      "status": "Deferred",
+      "reason": "Unicidad y vigencia resueltas; elegibilidad y efectos de cambios aún abiertos."
+    },
+    "interaction": {
+      "status": "Clear",
+      "reason": "Recorridos y estados, pago en conciliación y límites de seguimiento explícitos."
+    },
+    "nonfunctional": {
+      "status": "Deferred",
+      "reason": "D10 evaluación y D13 operación conservan sus etapas, sin capacidad aprobada."
+    },
+    "integration": {
+      "status": "Deferred",
+      "reason": "Contratos técnicos RP004 y condiciones/sandbox Izipay en sus etapas; puerta económica antes de cobros reales."
+    },
+    "edgeCases": {
+      "status": "Deferred",
+      "reason": "Prioridad y duplicados resueltos; cambios, reiteraciones/excepciones y D06 exceden la cuota de esta ronda."
+    },
+    "constraints": {
+      "status": "Clear",
+      "reason": "24 h, presupuesto y alcance conservados; resolución económica fuera del incremento."
+    },
+    "terminology": {
+      "status": "Clear",
+      "reason": "Admisión/reserva, vigencia, pago en conciliación y seguimiento diferenciados."
+    },
+    "completion": {
+      "status": "Deferred",
+      "reason": "Cinco criterios del checklist siguen condicionados por reglas abiertas/D10; sin plan."
+    },
+    "placeholders": {
+      "status": "Deferred",
+      "reason": "Sin marcas NEEDS CLARIFICATION; pendientes RA-05/06, PD-02/D06 explícitos."
+    }
+  },
+  "deferred": [
+    "PD-02 condiciones de oferta reservable y efectos de retiro/cambio/habilitación docente",
+    "RA-05 cancelación voluntaria, cambios y resolución de compromisos",
+    "RA-06 reiteraciones, varias cuentas, excepciones y sanciones",
+    "D06 conflictos de horarios del alumno",
+    "RA-04 resolución económica fuera del incremento; obligatoria antes de cobros reales",
+    "D10 evaluación/capacidad y D13 operación en sus etapas"
+  ],
+  "sectionsTouched": [
+    "Status and sources",
+    "Clarifications and decision register",
+    "User Scenarios and Testing",
+    "Edge Cases",
+    "Functional Requirements",
+    "Permission matrix",
+    "Key Entities",
+    "Measurable Outcomes",
+    "Assumptions and scope",
+    "Traceability"
+  ],
+  "backlog": {
+    "total": 22,
+    "complete": 3,
+    "pending": 19,
+    "RP003": "PENDING",
+    "taskDescriptionsAndMarkersUnchanged": true
+  },
+  "constitution": {
+    "previous": "1.2.0",
+    "current": "1.2.1",
+    "bump": "PATCH_DOCUMENTARY_SYNCHRONIZATION",
+    "approvalSource": "Explicit answer 2 in first RP003 round, committed at 5dc380e",
+    "motivation": "C-SYNC-01: proposal status contradicted approved order/payment/enrollment rule",
+    "principlesAllElevenVerbatimUnchanged": true,
+    "otherConstraintsUnchanged": true,
+    "ratification": "2026-09-22",
+    "lastAmended": "2026-10-30",
+    "temporarySyncReportReviewedAndRemoved": true,
+    "templatesUnchanged": true,
+    "otherBusinessDecisionsNotInvented": true
+  },
+  "preservation": {
+    "trackedBaseline": 683,
+    "otherTrackedUnchanged": 673,
+    "protectedFilesUnchanged": 72,
+    "spec001And002Unchanged": true,
+    "researchAndReportsRP001RP002AndFirstRP003Unchanged": true,
+    "offeringBranch": "adca8e6",
+    "inventoryBranch": "d2676fd",
+    "codeSchemaMigrationsConfigAccountsAndFixturesUnchanged": true
+  },
+  "documentation": {
+    "documents": 88,
+    "localLinksChecked": 1359,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": []
+  },
+  "findings": [
+    {
+      "id": "RP003-R2-B01",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "detail": "PD-02 eligibility and effects of withdrawal, date/teacher changes remain unapproved."
+    },
+    {
+      "id": "RP003-R2-B02",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "detail": "Voluntary cancellations, reiteration/exception policy and student schedule conflicts D06 require another clarification round."
+    },
+    {
+      "id": "RA-04-LIVE",
+      "severity": "HIGH",
+      "status": "DEFERRED_OPERATIONAL_GATE",
+      "detail": "Economic resolution is excluded from this increment but policy/procedure mandatory before real charges; tracking cannot resolve cases."
+    },
+    {
+      "id": "C-SYNC-01",
+      "severity": "MEDIUM",
+      "status": "CORRECTED",
+      "detail": "Constitution 1.2.1 mirrors prior explicit approval without changing principles."
+    },
+    {
+      "id": "C-SYNC-02",
+      "severity": "MEDIUM",
+      "status": "CORRECTED",
+      "detail": "README MVP summary now mirrors approved total payment and joint selection."
+    },
+    {
+      "id": "INV-DOC-01",
+      "severity": "MEDIUM",
+      "status": "PRESERVED",
+      "detail": "Older offering-state summaries in actor/HU/RF source documents remain historical inconsistencies; spec002 and evidence authoritative. New HU10/HU11 and RF11-RF13 synchronized."
+    }
+  ],
+  "reviewCommands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .specify/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly",
+      "result": "Resolved 003 once at this round startup"
+    },
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .specify/scripts/powershell/resolve-template.ps1 constitution-template -Json",
+      "result": "Success; active scaffold resolved, existing hierarchy retained"
+    },
+    {
+      "command": "node .cache/reservas-rp003-ronda2/review.mjs",
+      "result": "Passed assertions for artifacts, links, business approvals and conservation"
+    },
+    {
+      "command": "git diff --check",
+      "result": "Exit 0; only LF/CRLF normalization notices where applicable"
+    }
+  ],
+  "auxiliaryCorrections": [
+    {
+      "kind": "PATCH_CONTEXT_ORDER",
+      "result": "Two document patch attempts rejected before writes; corrected context ordering. Not a business test."
+    },
+    {
+      "kind": "SYNC_SCRIPT_SYNTAX",
+      "result": "One private synchronization helper had an unescaped Markdown backtick; corrected before any writes and rerun successfully. Not a product test."
+    }
+  ],
+  "hooks": {
+    "beforeClarify": "NO_EXTENSION_FILE",
+    "afterClarify": "NO_EXTENSION_FILE",
+    "beforeConstitution": "NO_EXTENSION_FILE",
+    "afterConstitution": "NO_EXTENSION_FILE"
+  },
+  "limits": {
+    "productTestsExecuted": 0,
+    "servicesOperated": false,
+    "sqlExecuted": false,
+    "smokesExecuted": false,
+    "capacityRunsExecuted": false,
+    "implementationStarted": false,
+    "planCreated": false,
+    "implementationTasksCreated": false,
+    "realChargesEnabled": false,
+    "AWSAdopted": false,
+    "capacity2500Approved": false,
+    "humanAcceptance": false,
+    "T103": "COMPLETE_REPORT_WITHOUT_APPROVED_CAPACITY",
+    "T104": "PENDING",
+    "T108": "PENDING",
+    "T073": "PENDING",
+    "T074": "PENDING",
+    "bootstrap": "OPEN"
+  },
+  "next": "Continue speckit-clarify on eligibility, changes/cancellations, reiterations and student schedule conflicts; no plan until resolved or explicitly delimited",
+  "sourceHashes": [
+    {
+      "path": "README.md",
+      "sha256": "8b1ab4e94a7655e6df6e6aafccab78d931075be6ec649dd579e6f75614173736"
+    },
+    {
+      "path": "docs/decisiones-pendientes.md",
+      "sha256": "99c31b29c6ecc29910380efdc421b335c9d9155f0ed8303666a521330634c8ba"
+    },
+    {
+      "path": "docs/planificacion/reservas-capacidad.md",
+      "sha256": "b57967bcb167458a057c5d898ce1ba1df87c9f9c2ad696b3810063cdd0de8492"
+    },
+    {
+      "path": "docs/planificacion/tasks.md",
+      "sha256": "5fef378e3a47d69dce2e39736b1395ae51a3d6f21d2163ac3bd9aa42f5cac371"
+    },
+    {
+      "path": "docs/alcance-mvp.md",
+      "sha256": "bcb2bc5bc2dfb172943b5f7599740c22b4dbbaf428cdda7066436ab6b5e7ba3a"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/02-historias-del-usuario.md",
+      "sha256": "dd87b1a90781c252b16f9bf521673142c675a3685666fbaf1abbf569399c94a4"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+      "sha256": "12288cc271412148e4b7a3a3ccec554716bc788e854e1945f10e6428cdd3d922"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/spec.md",
+      "sha256": "df6f08f22b5facebc8b7de7770700eb9a5861b8c26f1c6a19cd41de55f1652d7"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/checklists/requirements.md",
+      "sha256": "67b05dfe11322701fc055536b8d74c2956d6400990661bae5e7cad87b95cbd48"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "sha256": "09f1e8a1ce63f354575860a85cd12ae20ab5c537f5ef4662d901f997fba1081a"
+    }
+  ],
+  "sensitiveValuesDetected": 0
+}

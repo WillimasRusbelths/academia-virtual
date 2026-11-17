@@ -1,0 +1,46 @@
+{
+  "feature": "004-materiales-estudio",
+  "date": "2026-11-16",
+  "status": "tasks-generated-awaiting-read-only-analysis",
+  "tasks": 68,
+  "complete": 0,
+  "pending": 68,
+  "storyCounts": {
+    "US1": 18,
+    "US2": 13,
+    "US3": 11,
+    "shared": 26
+  },
+  "parallelMarkers": 11,
+  "phases": 6,
+  "format": "All tasks have unchecked checkbox, sequential ID, appropriate story label and concrete file paths",
+  "coverage": {
+    "functionalRequirements": 20,
+    "successCriteria": 7,
+    "mappedTasks": 68,
+    "verificationFamilies": 13,
+    "scope": "Documentary coverage only; not implemented or verified behavior"
+  },
+  "localLinksChecked": 8,
+  "preservation": {
+    "previousBaselineFiles": 966,
+    "protectedFiles": 74,
+    "priorDesignArtifactHashesUnchanged": true,
+    "oldTasksComplete": 84,
+    "oldTasksPending": 10,
+    "gitBranch": "feat/003-reservas-ordenes-matricula"
+  },
+  "execution": {
+    "hooks": "extensions.yml absent before and after tasks generation",
+    "productTestsRun": false,
+    "servicesStarted": false,
+    "migrationsApplied": false,
+    "dependenciesChanged": false,
+    "productCodeChanged": false
+  },
+  "artifact": {
+    "path": "specs/004-materiales-estudio/tasks.md",
+    "sha256": "6215d63064804ec04ce93bcadcf48bd02bf7b147a7afc11a097cf7bf76a27b00"
+  },
+  "nextStep": "Read-only speckit-analyze; after addressing blockers implement T001–T004"
+}

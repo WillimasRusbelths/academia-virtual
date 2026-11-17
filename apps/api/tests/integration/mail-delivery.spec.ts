@@ -18,6 +18,7 @@ import { identityDatabase } from '../support/identity-database.js';
 import { sessionFixture } from '../support/session-fixture.js';
 import type { IdentityTestDatabase } from '../support/session-fixture.js';
 import { mailpitOrigin } from '../support/mailpit.js';
+import { us1Http } from '../support/us1-http.js';
 
 let context: IdentityTestDatabase;
 let rates: PostgresRateStore;
@@ -107,7 +108,10 @@ test('caída real de Mailpit: el intento queda recuperable y ready no depende de
   const row = await state(f.id);
   expect(row.status).toBe(unavailable?'PENDING':'SENT'); expect(row.attempts).toBe(1);
   if (unavailable) { expect(row.lastErrorClass).toBe('TIMEOUT'); expect(row.payloadCleared).toBe(false); }
-  const readiness = await fetch('http://127.0.0.1:3000/health/ready'); expect(readiness.status).toBe(200);
+  const http = await us1Http({ context });
+  try {
+    const readiness = await fetch(`${http.url}/health/ready`); expect(readiness.status).toBe(200);
+  } finally { await http.close(); }
 }, 35000);
 
 test('Nest ensambla y ejecuta el scheduler interno, sin proceso separado', async () => {

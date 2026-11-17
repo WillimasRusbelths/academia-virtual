@@ -1,0 +1,2419 @@
+{
+  "date": "2026-10-26",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "base": "e41374a",
+  "scope": [
+    "T062",
+    "T063",
+    "T064"
+  ],
+  "constitution": "1.2.0",
+  "checklist": {
+    "total": 16,
+    "passed": 16,
+    "modified": false
+  },
+  "taskStates": {
+    "T058": "complete; 18 unique cases, 36 executions passed",
+    "T059": "complete; reexecuted 6 unique cases, 12 executions passed",
+    "T062": "complete",
+    "T063": "complete",
+    "T064": "complete",
+    "T065": "pending full identity regression",
+    "T066": "pending US4 checkpoint"
+  },
+  "commands": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-26T14:12:29.268Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-26T14:12:46.594Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "web",
+      "exitCode": 0,
+      "date": "2026-10-26T14:04:37.354Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser",
+      "exitCode": 0,
+      "date": "2026-10-26T14:18:43.811Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser-login",
+      "exitCode": 0,
+      "date": "2026-10-26T14:20:04.452Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser-profile",
+      "exitCode": 0,
+      "date": "2026-10-26T14:21:20.125Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "browser": {
+    "uniqueCases": 24,
+    "executions": 48,
+    "passed": 48,
+    "failed": 0,
+    "stats": {
+      "startTime": "2026-10-26T14:13:20.073Z",
+      "duration": 323714.322,
+      "expected": 48,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 6363,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 7800,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 7655,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3546,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2789,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 4102,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 4953,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 6235,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 6065,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3897,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3497,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3412,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2981,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1613,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2158,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1856,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2003,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2730,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1912,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1544,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1887,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1553,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1073,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2003,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2553,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2310,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3186,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3870,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3563,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 4708,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2453,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1683,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1895,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1637,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1618,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1741,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1392,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1563,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1867,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1254,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1048,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1551,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1632,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2154,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3252,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3436,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3819,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3645,
+        "retry": 0
+      }
+    ]
+  },
+  "login": {
+    "uniqueScenariosExcludingViewportRepetition": 15,
+    "registeredCases": 21,
+    "executions": 21,
+    "passed": 21,
+    "auxiliaryControlExecutions": 1,
+    "stats": {
+      "startTime": "2026-10-26T14:19:23.860Z",
+      "duration": 40500.638000000006,
+      "expected": 21,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "login.spec.ts",
+        "name": "cuenta DISABLED no concede sesión ni muestra identidad",
+        "project": "",
+        "status": "passed",
+        "durationMs": 2199,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "cuenta UNVERIFIED no concede sesión ni muestra identidad",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1587,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "cuenta PROVISIONAL no concede sesión ni muestra identidad",
+        "project": "",
+        "status": "passed",
+        "durationMs": 908,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "correo inexistente mantiene error genérico y no crea cookie",
+        "project": "",
+        "status": "passed",
+        "durationMs": 961,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "cuota 429 en UI, sin replay; acceso manual después de los quince minutos",
+        "project": "",
+        "status": "passed",
+        "durationMs": 3336,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "fallo SQL de login produce 503 seguro; no afirma éxito ni reintenta; recuperación manual",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1488,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "logout fallido conserva el aviso y solo cierra al reintentar explícitamente",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1039,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "hidratación 503 oculta identidad y recupera /me solo por acción manual",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1787,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "control: aplicación real, proxy y sesión válida en PostgreSQL",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1214,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "login/inicio/logout/atrás STUDENT en 360",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1455,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "login/inicio/logout/atrás TEACHER en 360",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1310,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "login/inicio/logout/atrás ADMIN en 360",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1334,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "credenciales incorrectas y recarga sin contraseña en 360",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1035,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "V04-A: inactividad, /me limpia UI y vuelve a login sin replay en 360",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1091,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "V04-A: absoluta, /me limpia UI y vuelve a login sin replay en 360",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1349,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "login/inicio/logout/atrás STUDENT en 1366",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1748,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "login/inicio/logout/atrás TEACHER en 1366",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1353,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "login/inicio/logout/atrás ADMIN en 1366",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1453,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "credenciales incorrectas y recarga sin contraseña en 1366",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1229,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "V04-A: inactividad, /me limpia UI y vuelve a login sin replay en 1366",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1431,
+        "retry": 0
+      },
+      {
+        "file": "login.spec.ts",
+        "name": "V04-A: absoluta, /me limpia UI y vuelve a login sin replay en 1366",
+        "project": "",
+        "status": "passed",
+        "durationMs": 1319,
+        "retry": 0
+      }
+    ]
+  },
+  "profile": {
+    "uniqueCases": 4,
+    "executions": 8,
+    "passed": 8,
+    "stats": {
+      "startTime": "2026-10-26T14:20:40.766Z",
+      "duration": 39290.166,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil con sesión vencida: recarga vuelve a acceso sin datos privados",
+        "project": "movil",
+        "status": "passed",
+        "durationMs": 3346,
+        "retry": 0
+      },
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil con sesión revocada: recarga vuelve a acceso sin datos privados",
+        "project": "movil",
+        "status": "passed",
+        "durationMs": 3066,
+        "retry": 0
+      },
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil con fallo SQL: sin datos ni reintentos automáticos; recuperación explícita",
+        "project": "movil",
+        "status": "passed",
+        "durationMs": 2097,
+        "retry": 0
+      },
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil: nombre de 100 caracteres, lectura semántica y cierre por teclado",
+        "project": "movil",
+        "status": "passed",
+        "durationMs": 2210,
+        "retry": 0
+      },
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil con sesión vencida: recarga vuelve a acceso sin datos privados",
+        "project": "escritorio",
+        "status": "passed",
+        "durationMs": 3763,
+        "retry": 0
+      },
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil con sesión revocada: recarga vuelve a acceso sin datos privados",
+        "project": "escritorio",
+        "status": "passed",
+        "durationMs": 2280,
+        "retry": 0
+      },
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil con fallo SQL: sin datos ni reintentos automáticos; recuperación explícita",
+        "project": "escritorio",
+        "status": "passed",
+        "durationMs": 3376,
+        "retry": 0
+      },
+      {
+        "file": "profile.spec.ts",
+        "name": "perfil: nombre de 100 caracteres, lectura semántica y cierre por teclado",
+        "project": "escritorio",
+        "status": "passed",
+        "durationMs": 2297,
+        "retry": 0
+      }
+    ]
+  },
+  "web": {
+    "total": 188,
+    "passed": 188,
+    "failed": 0,
+    "files": [
+      {
+        "file": "academic-catalog-api.test.ts",
+        "cases": [
+          {
+            "name": "catálogo pagina/busca por transporte común sin filtros administrativos",
+            "status": "passed"
+          },
+          {
+            "name": "detalle público conserva solo docente por nombre y capacidad sin disponibilidad",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyección pública ampliada o inválida 0",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyección pública ampliada o inválida 1",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyección pública ampliada o inválida 2",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyección pública ampliada o inválida 3",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyección pública ampliada o inválida 4",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyección pública ampliada o inválida 5",
+            "status": "passed"
+          },
+          {
+            "name": "publicación course requiere envío explícito y repite exactamente la intención",
+            "status": "passed"
+          },
+          {
+            "name": "publicación group requiere envío explícito y repite exactamente la intención",
+            "status": "passed"
+          },
+          {
+            "name": "sesión perdida cancela la otra respuesta tardía del detalle sin mostrar datos ni repetir comandos",
+            "status": "passed"
+          },
+          {
+            "name": "conflictos de publicación son administrativos; catálogo no expone referencias privadas",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-api.test.ts",
+        "cases": [
+          {
+            "name": "W01 courses codifica solo filtros de su ruta",
+            "status": "passed"
+          },
+          {
+            "name": "W01 groups codifica solo filtros de su ruta",
+            "status": "passed"
+          },
+          {
+            "name": "W01 teachers codifica solo filtros de su ruta",
+            "status": "passed"
+          },
+          {
+            "name": "W02 acepta curso/grupo incompletos y revisión decimal exacta, sin disponibilidad",
+            "status": "passed"
+          },
+          {
+            "name": "W03 rechaza curso inesperado 0",
+            "status": "passed"
+          },
+          {
+            "name": "W03 rechaza curso inesperado 1",
+            "status": "passed"
+          },
+          {
+            "name": "W03 rechaza curso inesperado 2",
+            "status": "passed"
+          },
+          {
+            "name": "W03 rechaza curso inesperado 3",
+            "status": "passed"
+          },
+          {
+            "name": "W03 rechaza curso inesperado 4",
+            "status": "passed"
+          },
+          {
+            "name": "W03 rechaza curso inesperado 5",
+            "status": "passed"
+          },
+          {
+            "name": "W03 rechaza curso inesperado 6",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 0",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 1",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 2",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 3",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 4",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 5",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 6",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 7",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 8",
+            "status": "passed"
+          },
+          {
+            "name": "W04 rechaza grupo inesperado 9",
+            "status": "passed"
+          },
+          {
+            "name": "W05 página/selector cerrado 0",
+            "status": "passed"
+          },
+          {
+            "name": "W05 página/selector cerrado 1",
+            "status": "passed"
+          },
+          {
+            "name": "W05 página/selector cerrado 2",
+            "status": "passed"
+          },
+          {
+            "name": "W05 página/selector cerrado 3",
+            "status": "passed"
+          },
+          {
+            "name": "W05 página/selector cerrado 4",
+            "status": "passed"
+          },
+          {
+            "name": "W06 una intención, dos envíos manuales idénticos y datos editados con ID nuevo",
+            "status": "passed"
+          },
+          {
+            "name": "W07 cinco comandos usan método/ruta/revisión previstos; horario se copia",
+            "status": "passed"
+          },
+          {
+            "name": "W08 AUTH_REQUIRED no encola ni reenvía al iniciar sesión; reintento explícito conserva ID",
+            "status": "passed"
+          },
+          {
+            "name": "W10 nueva revisión exige nueva intención; PATCH vacío/atributos ajenos no salen al transporte",
+            "status": "passed"
+          },
+          {
+            "name": "W11 respuesta perdida permite solo reintento manual con ID, revisión y payload idénticos",
+            "status": "passed"
+          },
+          {
+            "name": "W09 rechaza resultado de comando incompatible: id",
+            "status": "passed"
+          },
+          {
+            "name": "W09 rechaza resultado de comando incompatible: resource",
+            "status": "passed"
+          },
+          {
+            "name": "W09 rechaza resultado de comando incompatible: revision",
+            "status": "passed"
+          },
+          {
+            "name": "W09 rechaza resultado de comando incompatible: unknown",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "academic-offering-routes.test.tsx",
+        "cases": [
+          {
+            "name": "hidrata sesión en acceso directo /admin/oferta",
+            "status": "passed"
+          },
+          {
+            "name": "hidrata sesión en acceso directo /admin/oferta/cursos/00000000-0000-4000-8000-000000000001",
+            "status": "passed"
+          },
+          {
+            "name": "hidrata sesión en acceso directo /admin/oferta/grupos/00000000-0000-4000-8000-000000000001",
+            "status": "passed"
+          },
+          {
+            "name": "hidrata sesión en acceso directo /oferta",
+            "status": "passed"
+          },
+          {
+            "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001",
+            "status": "passed"
+          },
+          {
+            "name": "hidrata sesión en acceso directo /oferta/cursos/00000000-0000-4000-8000-000000000001/grupos/00000000-0000-4000-8000-000000000001",
+            "status": "passed"
+          },
+          {
+            "name": "hidrata sesión en acceso directo /mis-grupos",
+            "status": "passed"
+          },
+          {
+            "name": "hidrata sesión en acceso directo /mis-grupos/00000000-0000-4000-8000-000000000001",
+            "status": "passed"
+          },
+          {
+            "name": "políticas de audiencia STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "políticas de audiencia TEACHER",
+            "status": "passed"
+          },
+          {
+            "name": "políticas de audiencia ADMIN",
+            "status": "passed"
+          },
+          {
+            "name": "rutas no aceptan subrutas ni referencias externas",
+            "status": "passed"
+          },
+          {
+            "name": "inicio conserva perfil/cierre y enlace administrativo solo para STUDENT",
+            "status": "passed"
+          },
+          {
+            "name": "inicio conserva perfil/cierre y enlace administrativo solo para TEACHER",
+            "status": "passed"
+          },
+          {
+            "name": "inicio conserva perfil/cierre y enlace administrativo solo para ADMIN",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "academic-teaching-api.test.ts",
+        "cases": [
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"email\":\"privado@example.test\"}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"revision\":\"1\"}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"teacherReviewRequired\":true}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"},\"cancellationReason\":\"Privado\"}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\",\"eligible\":true}}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null,\"groups\":[]},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":0,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":51,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":0,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":50,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"UTC\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[],\"teacher\":{\"name\":\"Docente\"}}",
+            "status": "passed"
+          },
+          {
+            "name": "DTO docente rechaza ampliación/valor inválido {\"id\":\"00000000-0000-4000-8000-000000000001\",\"course\":{\"id\":\"00000000-0000-4000-8000-000000000001\",\"name\":\"Curso\",\"description\":null},\"name\":\"Grupo\",\"state\":\"DRAFT\",\"periodStart\":null,\"periodEnd\":null,\"timeZone\":\"America/Lima\",\"capacity\":null,\"occupancy\":null,\"availability\":null,\"capacityStatus\":\"NOT_CALCULATED\",\"schedule\":[{\"dayOfWeek\":1,\"startTime\":\"23:00\",\"endTime\":\"01:00\"}],\"teacher\":{\"name\":\"Docente\"}}",
+            "status": "passed"
+          },
+          {
+            "name": "borrador incompleto y cancelado se decodifican sin inventar datos ni acceder a cursos generales",
+            "status": "passed"
+          },
+          {
+            "name": "listado permite solo paginación y envía señal de cancelación",
+            "status": "passed"
+          },
+          {
+            "name": "detalle no admite referencia distinta o parámetros privados",
+            "status": "passed"
+          },
+          {
+            "name": "cancelar pendientes invalida respuesta tardía aunque el transporte ignore AbortSignal, sin replay",
+            "status": "passed"
+          },
+          {
+            "name": "401 docente cancela operaciones hermanas y comunica pérdida de acceso una sola vez",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "http.test.ts",
+        "cases": [
+          {
+            "name": "JSON relativo, CSRF fijo y cookie gestionada por navegador sin leer secretos",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza URL no permitida https://remote.invalid/auth/login sin contactar transporte",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza URL no permitida //remote.invalid sin contactar transporte",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza URL no permitida /../me sin contactar transporte",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza URL no permitida /me?token=secret sin contactar transporte",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza URL no permitida /me#secret sin contactar transporte",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza URL no permitida /me%2Fsecret sin contactar transporte",
+            "status": "passed"
+          },
+          {
+            "name": "GET sin cuerpo, 204 sin JSON y 202 no se interpreta como correo entregado",
+            "status": "passed"
+          },
+          {
+            "name": "429 muestra solo espera válida; Retry-After 60, sin replay",
+            "status": "passed"
+          },
+          {
+            "name": "429 muestra solo espera válida; Retry-After 0, sin replay",
+            "status": "passed"
+          },
+          {
+            "name": "429 muestra solo espera válida; Retry-After invalid, sin replay",
+            "status": "passed"
+          },
+          {
+            "name": "429 muestra solo espera válida; Retry-After 999999999999999999999999, sin replay",
+            "status": "passed"
+          },
+          {
+            "name": "fallo network es seguro, exige reintento manual y no afirma éxito",
+            "status": "passed"
+          },
+          {
+            "name": "fallo 503 es seguro, exige reintento manual y no afirma éxito",
+            "status": "passed"
+          },
+          {
+            "name": "fallo malformed es seguro, exige reintento manual y no afirma éxito",
+            "status": "passed"
+          },
+          {
+            "name": "fallo unknown-code es seguro, exige reintento manual y no afirma éxito",
+            "status": "passed"
+          },
+          {
+            "name": "401 de credenciales se distingue de expiración y no invalida otra sesión",
+            "status": "passed"
+          },
+          {
+            "name": "401 AUTH_REQUIRED limpia datos y cancela respuestas tardías, sin repetir mutación",
+            "status": "passed"
+          },
+          {
+            "name": "cancelación explícita no se convierte en éxito ni provoca replay",
+            "status": "passed"
+          },
+          {
+            "name": "errores de campo descartan valores y mensajes remotos, conservan nombres aprobados",
+            "status": "passed"
+          },
+          {
+            "name": "campos con etiqueta/error asociados y mensajes escapados; reintento solo manual",
+            "status": "passed"
+          },
+          {
+            "name": "router usa historial sin datos sensibles, reemplaza al expirar y rechaza destinos externos",
+            "status": "passed"
+          },
+          {
+            "name": "filtros administrativos se codifican en GET; no se aceptan secretos ni consultas arbitrarias",
+            "status": "passed"
+          },
+          {
+            "name": "T027 query permitida por ruta /admin/academic/courses",
+            "status": "passed"
+          },
+          {
+            "name": "T027 query permitida por ruta /admin/academic/courses/00000000-0000-4000-8000-000000000001/groups",
+            "status": "passed"
+          },
+          {
+            "name": "T027 query permitida por ruta /admin/academic/teachers",
+            "status": "passed"
+          },
+          {
+            "name": "T027 no amplía queries arbitrarias /admin/academic/courses/{\"token\":\"secreto\"}",
+            "status": "passed"
+          },
+          {
+            "name": "T027 no amplía queries arbitrarias /admin/academic/teachers/{\"state\":\"DRAFT\"}",
+            "status": "passed"
+          },
+          {
+            "name": "T027 no amplía queries arbitrarias /admin/academic/groups/00000000-0000-4000-8000-000000000001/{\"q\":\"no\"}",
+            "status": "passed"
+          },
+          {
+            "name": "T027 no amplía queries arbitrarias /academic/courses/{\"state\":\"DRAFT\"}",
+            "status": "passed"
+          },
+          {
+            "name": "T027 reconoce conflicto académico OFFERING_VERSION_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+            "status": "passed"
+          },
+          {
+            "name": "T027 reconoce conflicto académico OFFERING_STATE_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+            "status": "passed"
+          },
+          {
+            "name": "T027 reconoce conflicto académico TEACHER_NOT_ELIGIBLE solo en ruta administrativa, sin texto remoto ni retry",
+            "status": "passed"
+          },
+          {
+            "name": "T027 reconoce conflicto académico IDEMPOTENCY_CONFLICT solo en ruta administrativa, sin texto remoto ni retry",
+            "status": "passed"
+          },
+          {
+            "name": "T027 referencias de conflicto solo códigos y UUID administrativos permitidos",
+            "status": "passed"
+          },
+          {
+            "name": "T027 rechaza código de identidad 400/INVALID_ACTION_LINK ajeno al contrato académico",
+            "status": "passed"
+          },
+          {
+            "name": "T027 rechaza código de identidad 401/INVALID_CREDENTIALS ajeno al contrato académico",
+            "status": "passed"
+          },
+          {
+            "name": "router reconoce detalle sin aceptar subrutas ni valores externos",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "runtime.test.tsx",
+        "cases": [
+          {
+            "name": "React renderiza el componente mínimo en español",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "user-view.test.ts",
+        "cases": [
+          {
+            "name": "acepta únicamente una identidad habilitada y la proyección permitida",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza respuesta inválida: multirol",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza respuesta inválida: coerción",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza respuesta inválida: secreto",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza respuesta inválida: estado",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza respuesta inválida: verificación",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza respuesta inválida: provisional",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza respuesta inválida: fecha",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "api.test.ts",
+        "cases": [
+          {
+            "name": "feature usa exclusivamente la capacidad ApiClient y propaga cancelación",
+            "status": "passed"
+          },
+          {
+            "name": "crear intención no escribe; payload permitido se copia antes del envío",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza revisión no contractual 0 antes de escribir",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza revisión no contractual 01 antes de escribir",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza revisión no contractual 9223372036854775808 antes de escribir",
+            "status": "passed"
+          },
+          {
+            "name": "error de autorización se propaga sin recrear ni reenviar la intención",
+            "status": "passed"
+          },
+          {
+            "name": "prepareCourseWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+            "status": "passed"
+          },
+          {
+            "name": "prepareCourseWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+            "status": "passed"
+          },
+          {
+            "name": "prepareCourseWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+            "status": "passed"
+          },
+          {
+            "name": "prepareGroupWithdrawal: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+            "status": "passed"
+          },
+          {
+            "name": "prepareGroupWithdrawal: intención corregida usa otro ID y no sobrescribe el comando anterior",
+            "status": "passed"
+          },
+          {
+            "name": "prepareGroupWithdrawal: 401 no programa envíos y otra instancia no recupera una intención anterior",
+            "status": "passed"
+          },
+          {
+            "name": "prepareGroupCancellation: preparar no escribe y reintento manual conserva exactamente ID/revisión/payload",
+            "status": "passed"
+          },
+          {
+            "name": "prepareGroupCancellation: intención corregida usa otro ID y no sobrescribe el comando anterior",
+            "status": "passed"
+          },
+          {
+            "name": "prepareGroupCancellation: 401 no programa envíos y otra instancia no recupera una intención anterior",
+            "status": "passed"
+          },
+          {
+            "name": "cancelación no prepara motivo inválido 0",
+            "status": "passed"
+          },
+          {
+            "name": "cancelación no prepara motivo inválido 1",
+            "status": "passed"
+          },
+          {
+            "name": "cancelación no prepara motivo inválido 2",
+            "status": "passed"
+          },
+          {
+            "name": "cancelación no prepara motivo inválido 3",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "validation.test.ts",
+        "cases": [
+          {
+            "name": "nombre vacío \"\"",
+            "status": "passed"
+          },
+          {
+            "name": "nombre vacío \" \"",
+            "status": "passed"
+          },
+          {
+            "name": "nombre vacío \"\\t\\n\"",
+            "status": "passed"
+          },
+          {
+            "name": "nombre sin límite de negocio inventado 0",
+            "status": "passed"
+          },
+          {
+            "name": "nombre sin límite de negocio inventado 1",
+            "status": "passed"
+          },
+          {
+            "name": "nombre sin límite de negocio inventado 2",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad válida 1",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad válida 50",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad válida 25",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \"\"",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \" \"",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \"0\"",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \"-1\"",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \"1.5\"",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \"51\"",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \"NaN\"",
+            "status": "passed"
+          },
+          {
+            "name": "capacidad inválida \"Infinity\"",
+            "status": "passed"
+          },
+          {
+            "name": "preparación incompleta admite cero franjas y fechas omitidas",
+            "status": "passed"
+          },
+          {
+            "name": "extremos incluidos y franjas contiguas",
+            "status": "passed"
+          },
+          {
+            "name": "fecha civil inválida 2026-02-30",
+            "status": "passed"
+          },
+          {
+            "name": "fecha civil inválida 2025-02-29",
+            "status": "passed"
+          },
+          {
+            "name": "fecha civil inválida 0000-01-01",
+            "status": "passed"
+          },
+          {
+            "name": "fecha civil inválida 19/10/2026",
+            "status": "passed"
+          },
+          {
+            "name": "periodo invertido",
+            "status": "passed"
+          },
+          {
+            "name": "día sin ocurrencia y periodo de un lunes con ocurrencia",
+            "status": "passed"
+          },
+          {
+            "name": "horario inválido duplicado",
+            "status": "passed"
+          },
+          {
+            "name": "horario inválido solapamiento",
+            "status": "passed"
+          },
+          {
+            "name": "horario inválido medianoche",
+            "status": "passed"
+          },
+          {
+            "name": "horario inválido horas iguales",
+            "status": "passed"
+          },
+          {
+            "name": "horario inválido 24:00",
+            "status": "passed"
+          },
+          {
+            "name": "horario inválido día inválido",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "action-link.test.ts",
+        "cases": [
+          {
+            "name": "captura un secreto conforme al contrato una sola vez y retira fragmento, query e historial",
+            "status": "passed"
+          },
+          {
+            "name": "fragmento inválido ausente se retira sin conservarlo",
+            "status": "passed"
+          },
+          {
+            "name": "fragmento inválido con prefijo obsoleto se retira sin conservarlo",
+            "status": "passed"
+          },
+          {
+            "name": "fragmento inválido mal formado se retira sin conservarlo",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "api.test.ts",
+        "cases": [
+          {
+            "name": "consulta filtros sin interpolar correo en paths y acepta cuentas sin sesión habilitada",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyecciones y metadatos no contractuales",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyecciones y metadatos no contractuales",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyecciones y metadatos no contractuales",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyecciones y metadatos no contractuales",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyecciones y metadatos no contractuales",
+            "status": "passed"
+          },
+          {
+            "name": "rechaza proyecciones y metadatos no contractuales",
+            "status": "passed"
+          },
+          {
+            "name": "comandos envían solo campos permitidos y nunca reintentan un fallo",
+            "status": "passed"
+          }
+        ]
+      }
+    ],
+    "mockedUnitTransportIsNotIntegrationEvidence": true
+  },
+  "initial": {
+    "executions": 48,
+    "passed": 44,
+    "failed": 4,
+    "stats": {
+      "startTime": "2026-10-26T14:05:12.296Z",
+      "duration": 362630.653,
+      "expected": 44,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 6619,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 8748,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 8182,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3227,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3025,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 4512,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 6237,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 8456,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 8069,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3146,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3855,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "name": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3716,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2197,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1860,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1886,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1883,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2694,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1741,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1779,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1443,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2094,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1175,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1271,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1804,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2301,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 2175,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 4446,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 6196,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 4811,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 5137,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2360,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2335,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1862,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1844,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1729,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2192,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2087,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1675,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2544,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1463,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1113,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1841,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2777,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 2223,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3838,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 4491,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 4315,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 4397,
+        "retry": 0
+      }
+    ],
+    "sourceD07": {
+      "privatePath": ".cache/academic-offering-validation/t062-t064/initial-teaching.spec.ts",
+      "sha256": "20bf403022e39d59a7ff389c46d48ec7cb709c6982794b89bb8d43173f569e2b"
+    },
+    "cause": "D07 checked URL before async session hydration /me completed; changed to await exact original login destination; same no-data/no-query assertions and timeouts"
+  },
+  "previousRed": {
+    "privatePath": ".cache/academic-offering-validation/t058-t059-reports/e2e-browser.json",
+    "sha256": "7492efef76f63b3e390c3278a44f51d34347a72174ec2b3e7a2cde010d1c3713",
+    "previousFailureExecutions": 36,
+    "allNowPassed": true,
+    "cases": [
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "desktop",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "name": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "mobile",
+        "currentStatus": "passed",
+        "downstreamAssertionsReached": true
+      }
+    ]
+  },
+  "safety": {
+    "protectedFilesCompared": 72,
+    "protectedFilesUnchanged": true,
+    "trackedExistingChanges": [
+      "apps/web/src/app/App.tsx",
+      "apps/web/src/app/academic-offering-routes.test.tsx",
+      "apps/web/src/app/http.ts",
+      "apps/web/src/app/router.tsx",
+      "apps/web/src/app/session.tsx",
+      "apps/web/src/features/academic-offering/admin-group-page.tsx",
+      "apps/web/src/features/academic-offering/api.ts",
+      "apps/web/src/features/academic-offering/group-form.tsx",
+      "apps/web/src/features/academic-offering/offering-state.tsx",
+      "apps/web/src/features/profile/home-page.tsx",
+      "apps/web/tests/e2e/academic-offering-teaching.spec.ts",
+      "docs/planificacion/reservas-capacidad.md",
+      "specs/002-oferta-academica/tasks.md"
+    ],
+    "taskDescriptionsUnchanged": 74,
+    "checkboxChanges": [
+      "T058",
+      "T062",
+      "T063",
+      "T064"
+    ],
+    "manualMetadataUnchanged": true,
+    "volumesUnchanged": true,
+    "environmentBefore": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-26T13:49:16.793462626Z",
+        "startedAt": "2026-10-26T13:38:49.821466862Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "environmentAfter": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-26T14:22:04.024137771Z",
+        "startedAt": "2026-10-26T14:00:48.180145348Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "source": [
+    {
+      "path": "apps/web/src/app/App.tsx",
+      "sha256": "c42bba6140819a9aa0f6a51ea115f8784a27e9b8e03ec5bbd391bcddc58d3f1b"
+    },
+    {
+      "path": "apps/web/src/app/academic-offering-routes.test.tsx",
+      "sha256": "523e5c89fb7d4ab8d8ab53560d2378e5bbca38a34e2f1a87c2228024f2c6db33"
+    },
+    {
+      "path": "apps/web/src/app/http.ts",
+      "sha256": "fb447d2d2389f93b79f95c5095e0e7c1e06fdb8c6c176d54525c3a606da21496"
+    },
+    {
+      "path": "apps/web/src/app/router.tsx",
+      "sha256": "33cd515c2692533383ff72fa3fd928c53a755a9a248c04bf40be34cc2306cccb"
+    },
+    {
+      "path": "apps/web/src/app/session.tsx",
+      "sha256": "2ec8139054100595c012b5823036145b127bb9c1eac5362bbda996125bd6d0e3"
+    },
+    {
+      "path": "apps/web/src/features/academic-offering/admin-group-page.tsx",
+      "sha256": "bc67667e09c78e141f34f78cce8585142d5eefec2921a6fdf5420411a4822cc1"
+    },
+    {
+      "path": "apps/web/src/features/academic-offering/api.ts",
+      "sha256": "cdb35cf388ebdb216e32871fe32299366bb1bb536124f44d3ebac11490171884"
+    },
+    {
+      "path": "apps/web/src/features/academic-offering/group-form.tsx",
+      "sha256": "937089c23e74d1d87f00f81689dddaa2c90b5502719ac6d7130ab550e93b6cd4"
+    },
+    {
+      "path": "apps/web/src/features/academic-offering/offering-state.tsx",
+      "sha256": "62944825c29d03bfa3ed8dad1c225c68df4847ca4a535292cce9e98ef780b79b"
+    },
+    {
+      "path": "apps/web/src/features/profile/home-page.tsx",
+      "sha256": "cd2755c4a4b045955a4644d95a8126e83e1c6086ea7cb3fc4596e374c15659ee"
+    },
+    {
+      "path": "apps/web/tests/e2e/academic-offering-teaching.spec.ts",
+      "sha256": "24beb1fb9f580507adacd690c889dfcc68cbffcdc6a41d38f27ae1909fc76e8f"
+    },
+    {
+      "path": "apps/web/src/app/academic-teaching-api.test.ts",
+      "sha256": "cbe097539d7fc5e04053178b2d63027fad6e311b72bc4429503b050c21368d86"
+    },
+    {
+      "path": "apps/web/src/features/academic-offering/teaching-group-page.tsx",
+      "sha256": "839cf6add04a6bfebb53a8624bc1dac24de162e106a024305a8d63fe1bd716eb"
+    },
+    {
+      "path": "apps/web/src/features/academic-offering/teaching-groups-page.tsx",
+      "sha256": "8e096b0ffdaa10eb47c3f0453d99b2cb4bf75db74619ec09d78863327ee8be16"
+    }
+  ],
+  "rawReports": [
+    {
+      "privatePath": ".cache/academic-offering-validation/t062-t064-reports/initial-e2e-browser.json",
+      "sha256": "8a47c0afca852f2c5299a31340301a771846ef4cfc02f9f99608bd43e3fedf5a"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t062-t064-reports/e2e-browser.json",
+      "sha256": "9dd9e431c76e027b1daae9f21a93b080ff7e1cf11d26435eca703a9199709101"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t062-t064-reports/e2e-browser-login.json",
+      "sha256": "dae8444f447a283b29079c0d640d304cba82ded82f64a42bae67e5f7c69879d2"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t062-t064-reports/e2e-browser-profile.json",
+      "sha256": "badebda2b2f6aed17bdd58f4d4945674a888de1caf18d5795c821f9e8f31be84"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t062-t064-reports/web.json",
+      "sha256": "2a559886fab8ea37d79b74f454d1881428054ac6475054d6339150db20be892a"
+    }
+  ],
+  "totals": {
+    "finalUniqueE2EScenariosAcrossSuites": 43,
+    "finalE2EExecutions": 77,
+    "auxiliaryControlExecutionsIncluded": 1,
+    "initialAcademicExecutionsSeparate": 48,
+    "unitWebCasesSeparate": 188
+  },
+  "limitations": [
+    "T065/T066 and T067-T074 pending; no whole-US4/integral/human acceptance",
+    "Backend PG and HTTP smokes not reexecuted; backend unchanged",
+    "Bootstrap, T104/T108, SMTP real, D04 and enrollment D06 remain open",
+    "T103 execution/report complete, capacity unapproved; 15000 accounts requirement / 2500 concurrency target / S300 total retained",
+    "24-hour reservations belong to future spec with six open decisions"
+  ],
+  "nextBlock": [
+    "T065",
+    "T066"
+  ],
+  "documentation": {
+    "date": "2026-10-26",
+    "documents": 32,
+    "localLinksChecked": 807,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  }
+}

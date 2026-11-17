@@ -1,14 +1,16 @@
-import { Inject, Injectable, SetMetadata } from '@nestjs/common';
+import { Inject, Injectable, SetMetadata, StreamableFile } from '@nestjs/common';
 import type { CanActivate, ExecutionContext, NestInterceptor, CallHandler } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { concatMap } from 'rxjs';
 import { SESSION_LOOKUP, type SessionLookup } from '../../application/session-lookup.js';
-import { ACCESS_POLICY, AuthorizationFailure, type Permission, type SessionActor } from '../../public/session.js';
+import { ACCESS_POLICY, AuthorizationFailure, type SessionPermission, type SessionActor } from '../../public/session.js';
 import { SessionCookie } from '../../../../http/session-cookie.js';
 import type { HttpRequest, HttpResponse } from '../../../../http/error.filter.js';
+import { TransportFailure } from '../../../../http/error.filter.js';
+import { discardBinaryResponse, isBinaryResponse, prepareBinaryResponse } from '../../../../http/binary-response.js';
 
 const POLICY = ACCESS_POLICY;
-type Policy = Permission | 'public';
+type Policy = SessionPermission | 'public';
 export const Access = (policy: Policy) => SetMetadata(POLICY, policy);
 interface AuthorizedRequest extends HttpRequest { actor?: SessionActor }
 
@@ -37,6 +39,14 @@ export class AcceptedSessionInterceptor implements NestInterceptor {
     const request = http.getRequest<AuthorizedRequest>();
     const response = http.getResponse<HttpResponse>();
     return next.handle().pipe(concatMap(async (body: unknown) => {
+      if (isBinaryResponse(body)) {
+        try {
+          if (!request.actor || response.statusCode !== 200 || response.headersSent || response.destroyed) throw new TransportFailure(503, 'TEMPORARILY_UNAVAILABLE');
+          await this.sessions.accepted(request.actor);
+          return prepareBinaryResponse(body, request, response);
+        } catch (error) { discardBinaryResponse(body); throw error; }
+      }
+      if (Buffer.isBuffer(body) || body instanceof StreamableFile) throw new TransportFailure(503, 'TEMPORARILY_UNAVAILABLE');
       // Un resultado no serializable también es un fallo HTTP, no actividad aceptada.
       if (body !== undefined && response.statusCode !== 204) JSON.stringify(body);
       if (request.actor && response.statusCode >= 200 && response.statusCode < 300) {

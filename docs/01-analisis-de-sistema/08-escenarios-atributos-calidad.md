@@ -1,21 +1,26 @@
 # Escenarios de atributos de calidad
 
+> Requisitos vigentes al 2026-10-23: ≥15 000 cuentas; objetivo 2500 activos sin demostrar;
+> reserva confirmada de 24 h. Véase [planificación vigente](../planificacion/reservas-capacidad.md).
+> Estados/figuras de implementaciones anteriores y el protocolo T103 de 1000 se conservan
+> como antecedentes; no acreditan los nuevos objetivos ni matrícula implementada.
+
 Los escenarios EQ-01–EQ-11 desarrollan los atributos [AC01–AC07](04-atributos-de-calidad.md), sin sustituir sus identificadores ni modificar los requisitos. Cada escenario delimita el estímulo, la respuesta y la evidencia necesaria para evaluar el diseño de Academia Virtual.
 
 Se mantienen el [monolito por capas organizado en módulos](../02-arquitectura-software/estilo-arquitectonico.md), [Clean Architecture](../02-arquitectura-software/enfoque-arquitectonico.md), PostgreSQL y Docker Compose como entorno local. Las integraciones externas corresponden a los módulos consumidores; PostgreSQL no invoca Izipay, correo ni video.
 
 Una **medida definida** procede de requisitos o contratos existentes. Una **meta provisional** requiere validación antes de emplearse como aceptación definitiva. **Evidencia parcial** acredita únicamente el comportamiento y entorno ensayados; **pendiente** indica que el escenario completo no tiene resultados. Ningún escenario de este documento se considera aprobado integralmente.
 
-El requisito de **1000 usuarios concurrentes** permanece pendiente de pruebas. Las sesiones de identidad, las operaciones de matrícula y los espectadores con chat son cargas diferentes. Un ensayo local o una población prevista de 1000 alumnos no demuestra disponibilidad de producción ni capacidad del MVP completo.
+El requisito de **2500 usuarios concurrentes activos** permanece pendiente de pruebas. Las sesiones de identidad, las operaciones de matrícula y los espectadores con chat son cargas diferentes. Un ensayo local o una población de al menos 15 000 cuentas no demuestra disponibilidad de producción ni capacidad del MVP completo.
 
 ## Resumen y trazabilidad
 
-Los RF, DA y decisiones se conservan del [catálogo funcional](03-requisitos-funcionales.md), los [drivers](06-driver-arquitectonicos.md) y el [registro arquitectónico](07-decisiones-arquitectonicas.md). Los pendientes D01–D13 se consultan en [decisiones pendientes](../decisiones-pendientes.md). Los FR, SC, V e ID-LOAD pertenecen al detalle de identidad.
+Los RF, DA y decisiones se conservan del [catálogo funcional](03-requisitos-funcionales.md), los [drivers](06-driver-arquitectonicos.md) y el [registro arquitectónico](07-decisiones-arquitectonicas.md). Los pendientes D01–D15 se consultan en [decisiones pendientes](../decisiones-pendientes.md). Los FR, SC, V e ID-LOAD pertenecen al detalle de identidad.
 
 | Escenario | Atributo original | Situación evaluada | Requisitos y restricciones | Drivers | Decisiones | Verificación y estado |
 | --- | --- | --- | --- | --- | --- | --- |
 | EQ-01 | AC01 · Rendimiento | Acceso secuencial e inicio visible | RF03, RF05; SC-008 | DA05, DA09 | R03, R10 | V03; pendiente del flujo completo |
-| EQ-02 | AC01 · Rendimiento | 1000 sesiones activas de identidad | RF03, RF05, RF08; RT11 | DA01, DA05 | R02, R04, R10 | ID-LOAD-01; sin carga ejecutada |
+| EQ-02 | AC01 · Rendimiento | 1000 sesiones activas de identidad | RF03, RF05, RF08; RT11 | DA01, DA05 | R02, R04, R10 | ID-LOAD-01 histórico ejecutado T103; capacidad sin aprobar |
 | EQ-03 | AC01 · Rendimiento | Saturación del cómputo de autenticación | RF03; FR-006, FR-022; RT11 | DA01, DA05 | R04, R09, R10 | ID-LOAD-02; evidencia parcial de límites |
 | EQ-04 | AC02 · Disponibilidad y recuperación | Restauración y reapertura segura | RF19; RT09 | DA08, DA10 | D13, R02, R08, R11, R12 | V16; recuperación pendiente |
 | EQ-05 | AC03 · Escalabilidad | Carga de matrícula y competencia por cupos | RF10–RF13; RT02, RT10, RT11 | DA02, DA04, DA05 | D02, R10 | Ensayo académico por definir; pendiente |
@@ -36,7 +41,7 @@ Los RF, DA y decisiones se conservan del [catálogo funcional](03-requisitos-fun
 | Artefacto afectado | Web React/Vite, API de identidad y persistencia de sesiones. |
 | Entorno | Entorno de evaluación documentado, con el flujo de acceso completo; sin mezclar esta medición con la carga concurrente. |
 | Respuesta esperada | Autenticar, establecer la sesión y mostrar el inicio correspondiente al único rol de la cuenta. |
-| Medida de la respuesta | SC-008: al menos 19 de 20 accesos muestran el inicio autorizado dentro de 3 segundos desde el envío. Es una medida definida de experiencia de acceso, no un percentil de API ni una prueba de 1000 concurrentes. |
+| Medida de la respuesta | SC-008: al menos 19 de 20 accesos muestran el inicio autorizado dentro de 3 segundos desde el envío. Es una medida definida de experiencia de acceso, no un percentil de API ni una prueba de 2500 activos concurrentes. |
 | Requisitos, drivers o decisiones relacionados | RF03, RF05; SC-008; DA05, DA09; R03, R10. |
 | Método de verificación | Medir de envío a inicio visible, registrar cada duración y resultado según [spec.md](../../specs/001-identidad-acceso-roles/spec.md) y V03 de [verification.md](../../specs/001-identidad-acceso-roles/verification.md). La automatización de navegador puede apoyar el registro; no reemplaza las pruebas con participantes de otros SC. |
 | Estado y evidencia disponible | Pendiente: no hay registro/login ni inicio por rol completos. La [evidencia de sesiones](../../specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md) verifica fundamentos y controles, no SC-008. |
@@ -49,7 +54,7 @@ Los RF, DA y decisiones se conservan del [catálogo funcional](03-requisitos-fun
 | Fuente del estímulo | 1000 cuentas de alumno distintas, activas y verificadas, mediante un generador de carga. |
 | Estímulo | Acceso gradual y consultas de perfil cada 5–10 segundos, manteniendo una sesión independiente por usuario. |
 | Artefacto afectado | API de identidad, consultas de sesión/perfil, pool y PostgreSQL. |
-| Entorno | Ensayo aislado ID-LOAD-01: calentamiento de 20 cuentas durante 1 minuto; rampas 0→100 en 1 minuto, 100→500 en 2 y 500→1000 en 2; meseta de 10 minutos y descenso de 2. Total medido: 17 minutos. |
+| Entorno | Protocolo histórico aislado ID-LOAD-01, conservado sin ampliar a 2500: calentamiento de 20 cuentas durante 1 minuto; rampas 0→100 en 1 minuto, 100→500 en 2 y 500→1000 en 2; meseta de 10 minutos y descenso de 2. Total medido: 17 minutos. |
 | Respuesta esperada | Sostener actividad con sesiones válidas, preservar aislamiento y controles de seguridad, sin ocultar accesos fallidos ni compartir cookies. |
 | Medida de la respuesta | Alcanzar realmente 1000 usuarios virtuales y 1000 sesiones distintas válidas durante la meseta. Metas provisionales: p95 de `GET /me` <500 ms, p99 <1000 ms, p95 de login <3 s y errores inesperados <1 % en tráfico válido. Cero cruces de identidad o duplicados; la revocación se ensaya aparte y no se mezcla con la tasa de error de tráfico válido. Umbrales sujetos a D10. |
 | Requisitos, drivers o decisiones relacionados | RF03, RF05, RF08; AC01, RT11; DA01, DA05; R02, R04, R10. |
@@ -92,11 +97,11 @@ Los RF, DA y decisiones se conservan del [catálogo funcional](03-requisitos-fun
 | --- | --- |
 | Atributo de calidad | AC03 · Escalabilidad. |
 | Fuente del estímulo | Alumnos distintos que consultan oferta, seleccionan cursos y tramitan órdenes. |
-| Estímulo | La carga crece hacia el objetivo de 1000 usuarios concurrentes e incluye competencia por cupos limitados y pagos simulados. |
+| Estímulo | La carga crece hacia el objetivo de 2500 usuarios concurrentes activos e incluye competencia por cupos limitados y pagos simulados. |
 | Artefacto afectado | Módulos previstos de oferta, órdenes, pagos y matrículas; transacciones, índices, pool y PostgreSQL. |
 | Entorno | Ensayo académico aislado con datos ficticios. Distribución de operaciones, rampas, duración y condiciones finales pendientes de D01–D06 y D10. Izipay no interviene en la carga simulada. |
 | Respuesta esperada | Preservar totales y consistencia de cupos/matrículas, observar el recurso limitante y ajustar consultas, configuración o recursos según mediciones. |
-| Medida de la respuesta | Objetivo de 1000 concurrentes no demostrado; medir concurrencia alcanzada, RPS, latencias, errores, CPU, memoria, conexiones y bloqueos. Cero sobreventa y matrículas duplicadas. Los límites aceptables de latencia/error y la distribución de carga son metas por acordar en D10, no los percentiles de identidad. |
+| Medida de la respuesta | Objetivo de 2500 activos concurrentes no demostrado; medir concurrencia alcanzada, RPS, latencias, errores, CPU, memoria, conexiones y bloqueos. Cero sobreventa y matrículas duplicadas. Los límites aceptables de latencia/error y la distribución de carga son metas por acordar en D10, no los percentiles de identidad. |
 | Requisitos, drivers o decisiones relacionados | RF10–RF13; RT02, RT10, RT11; DA02, DA04, DA05; D02, R10; políticas pendientes D01–D06. |
 | Método de verificación | Ensayo k6 de matrícula según el [alcance y evidencia de capacidad](../alcance-mvp.md#evidencia-requerida-para-la-capacidad), con cuentas distintas y comprobación de cupos, órdenes, importes y matrículas antes/después. |
 | Estado y evidencia disponible | Pendiente: no existen flujos académicos ni resultados de esta carga. La persistencia concurrente de identidad es evidencia de otro dominio y no demuestra ausencia de sobreventa. El presupuesto permanece en S/300 totales; cualquier dimensionamiento requiere estimación D09, sin nuevos objetivos de gasto. |
@@ -107,11 +112,11 @@ Los RF, DA y decisiones se conservan del [catálogo funcional](03-requisitos-fun
 | --- | --- |
 | Atributo de calidad | AC03 · Escalabilidad. |
 | Fuente del estímulo | Docentes que emiten y alumnos autorizados distribuidos entre clases y grupos. |
-| Estímulo | Crece la reproducción real de video y la participación por chat hacia el objetivo académico de 1000 usuarios concurrentes. |
+| Estímulo | Crece la reproducción real de video y participación por chat según el reparto del objetivo agregado de 2500 activos, pendiente de D10; no se fijan 2500 reproducciones o conexiones de chat por defecto. |
 | Artefacto afectado | Web/reproductor, autorización de clases, gateway de chat previsto y servicio externo YouTube Live con OBS. |
 | Entorno | Ensayo de medios y chat independiente de matrícula; emisiones, grupos, calidad y protocolo de reproducción por acordar en D07/D10. El chat usa clientes compatibles con Socket.IO, todavía propuesto. |
 | Respuesta esperada | Permitir reproducción y chat autorizados, aislar clases y observar límites de conexiones, recursos, transferencia y dependencia del proveedor. |
-| Medida de la respuesta | Registrar espectadores reales, emisiones simultáneas, conexiones de chat, mensajes, reconexiones, latencia, errores, recursos y transferencia observada. Cero accesos indebidos o cruces de mensajes entre clases. Objetivo 1000 concurrentes pendiente; metas de calidad/latencia del video y chat, duración y reparto por clase requieren validación D07/D10. Abrir 1000 páginas no demuestra 1000 reproducciones. |
+| Medida de la respuesta | Registrar espectadores reales, emisiones simultáneas, conexiones de chat, mensajes, reconexiones, latencia, errores, recursos y transferencia observada. Cero accesos indebidos o cruces de mensajes entre clases. Objetivo 2500 activos concurrentes pendiente; metas de calidad/latencia del video y chat, duración y reparto por clase requieren validación D07/D10. Abrir 1000 páginas no demuestra 1000 reproducciones. |
 | Requisitos, drivers o decisiones relacionados | RF16, RF17; RT02, RT08, RT11; DA03, DA04, DA05; DEC01, R10; D07–D10. |
 | Método de verificación | Emisión OBS → YouTube Live y reproducción real, más ensayo específico de chat, conforme al [alcance](../alcance-mvp.md#evidencia-requerida-para-la-capacidad). Validar cómo comprobar los controles de manifiestos/segmentos exigidos por RF16 con este proveedor. Medir un escenario combinado si se pretende afirmar capacidad conjunta. |
 | Estado y evidencia disponible | Pendiente: no hay integración ni ensayos reproducibles de video/chat. DEC01 acredita selección, no capacidad ni control de acceso. ID-LOAD-01 no aporta evidencia de espectadores; no se extrapolan cargas separadas. |

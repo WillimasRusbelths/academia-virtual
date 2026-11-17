@@ -16,7 +16,7 @@ jobs:
   validate:
     name: Entorno local Linux
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 60
     env:
       COMPOSE_PROJECT_NAME: academia-ci-${{ github.run_id }}-${{ github.run_attempt }}
       COMPOSE_FILE: compose.yml:ops/docker/compose.regression.yml:ops/docker/compose.identity-tests.yml
@@ -34,8 +34,16 @@ jobs:
           docker compose config --quiet
       - name: Construir
         run: docker compose build
-      - name: Iniciar los cuatro servicios
-        run: docker compose up -d --wait
+      - name: Iniciar PostgreSQL y Mailpit
+        run: docker compose up -d --wait db mailpit
+      - name: Migraciones y permisos de compatibilidad
+        run: |
+          docker compose run --rm --no-deps api npm run probe:migrate
+          docker compose run --rm --no-deps api npm run probe:check
+      - name: Migrar la BD de prueba antes de iniciar la API
+        run: docker compose run --rm --no-deps api npm run db:migrate:deploy
+      - name: Iniciar API y web
+        run: docker compose up -d --wait api web
       - name: Estado y logs
         run: |
           docker compose ps
@@ -44,14 +52,16 @@ jobs:
         run: docker compose exec -T api npm run lint
       - name: Compilación - API y web
         run: docker compose exec -T api npm run build
+      - name: Tipos - matrícula, soportes y configuración
+        run: |
+          docker compose exec -T api npm exec --workspace apps/api -- tsc -p tsconfig.enrollment.json
+          docker compose exec -T api npm run typecheck:enrollment --workspace @academia/web
       - name: Unitarias y arquitectura
         run: docker compose exec -T api npm run test:unit
-      - name: Migraciones y permisos de compatibilidad
+      - name: Tipos - materiales, soportes y configuración
         run: |
-          docker compose exec -T api npm run probe:migrate
-          docker compose exec -T api npm run probe:check
-      - name: Migraciones de identidad - BD de prueba
-        run: docker compose exec -T api npm run db:migrate:deploy
+          docker compose exec -T api npm exec --workspace apps/api -- tsc -p tsconfig.materials.json
+          docker compose exec -T api npm run typecheck:materials --workspace @academia/web
       - name: Integración - API y PostgreSQL
         run: docker compose exec -T api npm run test:integration
       - name: Compatibilidad - Argon2 y SMTP
@@ -62,7 +72,7 @@ jobs:
         run: >-
           docker compose --profile tests run --rm --no-deps browser-tests
           npm run test:e2e --workspace @academia/web --
-          --config playwright.config.ts harness.spec.ts foundations.spec.ts
+          --config playwright.config.ts '(^|/)harness\.spec\.ts$' '(^|/)foundations\.spec\.ts$'
       - name: E2E - acceso y sesiones
         run: >-
           docker compose --profile tests run --rm --no-deps browser-tests
@@ -99,6 +109,18 @@ jobs:
         run: >-
           docker compose --profile tests run --rm --no-deps browser-tests
           npm run test:e2e --workspace @academia/web -- --config playwright.login-timing.config.ts
+      - name: E2E - oferta académica
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.academic-offering.config.ts
+      - name: E2E - reservas, órdenes y matrícula
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e --workspace @academia/web -- --config playwright.enrollment.config.ts
+      - name: E2E - materiales de estudio
+        run: >-
+          docker compose --profile tests run --rm --no-deps browser-tests
+          npm run test:e2e:materials --workspace @academia/web
       - name: Auditar dependencias - informativo
         continue-on-error: true
         run: docker compose exec -T api npm audit --json

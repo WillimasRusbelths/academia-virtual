@@ -1,0 +1,1266 @@
+{
+  "date": "2026-10-26",
+  "timezone": "America/Lima",
+  "branch": "feat/002-oferta-academica",
+  "base": "22a8b93",
+  "scope": [
+    "T058",
+    "T059"
+  ],
+  "constitution": "1.2.0",
+  "checklist": {
+    "total": 16,
+    "passed": 16,
+    "modified": false
+  },
+  "taskStates": {
+    "T055": "pending T060/T061; unchanged",
+    "T056": "complete; unchanged",
+    "T057": "pending T060/T061; unchanged",
+    "T058": "pending T060/T061/T063/T064; tests prepared and executed",
+    "T059": "complete; six unique cases passed desktop/mobile"
+  },
+  "commands": [
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-26T13:21:24.094Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-26T13:21:46.323Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "discovery",
+      "exitCode": 0,
+      "date": "2026-10-26T13:21:56.424Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser-harness",
+      "exitCode": 0,
+      "date": "2026-10-26T13:12:10.304Z",
+      "timezone": "America/Lima"
+    },
+    {
+      "action": "browser",
+      "exitCode": 1,
+      "date": "2026-10-26T13:29:55.804Z",
+      "timezone": "America/Lima"
+    }
+  ],
+  "final": {
+    "uniqueCases": 24,
+    "executions": 48,
+    "passedExecutions": 12,
+    "expectedFailureExecutions": 36,
+    "uniqueByTask": {
+      "T058": {
+        "total": 18,
+        "passed": 0,
+        "failed": 18
+      },
+      "T059": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      }
+    },
+    "stats": {
+      "startTime": "2026-10-26T13:22:30.715Z",
+      "duration": 444995.784,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 36,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 6536,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 8816,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 7700,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3888,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3090,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3771,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 5297,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 7984,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 7705,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3075,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3812,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 4141,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1510,
+        "retry": 0,
+        "cause": "T064: missing home teaching link",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2578,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2057,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1810,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1361,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1570,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1354,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1593,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1661,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1399,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1299,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1489,
+        "retry": 0,
+        "cause": "T064: missing teaching route for role denial",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1759,
+        "retry": 0,
+        "cause": "T064: missing teaching route for role denial",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1682,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1918,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1790,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2021,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 5542,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1717,
+        "retry": 0,
+        "cause": "T064: missing home teaching link",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1617,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1584,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1665,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1634,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1676,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1768,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1581,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 3922,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1640,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1369,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1732,
+        "retry": 0,
+        "cause": "T064: missing teaching route for role denial",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1819,
+        "retry": 0,
+        "cause": "T064: missing teaching route for role denial",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1315,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1394,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1442,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1530,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D12 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 4543,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      }
+    ]
+  },
+  "initial": {
+    "executions": 48,
+    "passed": 12,
+    "failed": 36,
+    "invalidFixtureFailures": 2,
+    "expectedBehaviorFailures": 34,
+    "stats": {
+      "startTime": "2026-10-26T13:12:48.367Z",
+      "duration": 468285.121,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 36,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 7419,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 8015,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 10046,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3181,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 3356,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 5894,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R06 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 5811,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R01 selector homónimos: solo habilitados, referencia UUID distinta, asignar no crea ni cambia cuentas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 6279,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 status: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 9115,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R02 role: pérdida y recuperación vía identidad exige retirar/revisar/republicar explícitamente",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 7044,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R03 cuenta desactivada mantiene referencia previa, selector no la ofrece como habilitada ni cambia identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 3009,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R04 grupo cancelado sigue terminal después de desactivar y reactivar desde identidad",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 4434,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R05 recuperación no basta para publicar padre; referencias de revisión solo administrativas",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 5598,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-teacher-review.spec.ts",
+        "title": "R06 diagnóstico de revisión solo admin; docente propio conserva consulta sin incidentes privados",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 5594,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1260,
+        "retry": 0,
+        "cause": "T064: missing home teaching link",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1905,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1712,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2128,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2271,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1716,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1630,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 307,
+        "retry": 0,
+        "cause": "invalid fixture: assignment changed while group published",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1456,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1361,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2178,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1684,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1553,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 1463,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2014,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2338,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "desktop",
+        "status": "failed",
+        "durationMs": 2168,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D01 inicio enlaza Mis grupos; navegación solo por teclado sin enlaces de gestión",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1895,
+        "retry": 0,
+        "cause": "T064: missing home teaching link",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D02 lista todos los estados propios y ningún hermano ajeno, sin escrituras",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1832,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 DRAFT: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1896,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 PUBLISHED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1781,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 WITHDRAWN: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1679,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D03 CANCELLED: detalle propio, contexto de curso y datos sin gestión ni motivo",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1830,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D04 borrador incompleto dice Sin configurar sin inventar capacidad o disponibilidad",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1636,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D05 sin asignaciones muestra vacío después de consultar, no grupos ajenos",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 333,
+        "retry": 0,
+        "cause": "invalid fixture: assignment changed while group published",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D06 enlace ajeno exige control propio positivo y ofrece no disponible sin causa privada",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1639,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante list: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1419,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D07 visitante detail: acceso exige login sin consulta docente",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1344,
+        "retry": 0,
+        "cause": "T064: missing protected teaching route and redirect",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 ADMIN: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1444,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D08 STUDENT: denegación segura de ruta docente y retorno a inicio",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1535,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 revoked: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1537,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D09 role: vista abierta limpia datos al rechazo y nuevo login no reenvía",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1575,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D10 respuesta real retrasada tras logout se descarta y no restaura datos privados",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 2191,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      },
+      {
+        "file": "academic-offering-teaching.spec.ts",
+        "title": "D11 quitar asignación en otra sesión retira acceso en la siguiente consulta",
+        "project": "mobile",
+        "status": "failed",
+        "durationMs": 1707,
+        "retry": 0,
+        "cause": "T063/T064: missing teaching page/route",
+        "downstreamAssertionsReached": false
+      }
+    ],
+    "sourceFiles": [
+      {
+        "sha256": "246ADE335CC657AF35D1BAC5402D605D5EFFBA5F14BC46D2FB153CACA963550B",
+        "path": "apps/web/tests/support/academic-us4-browser.ts"
+      },
+      {
+        "sha256": "7E14C7ECC20746951363471713264ACBE72FAED5F7178415F95EA82359D6747F",
+        "path": "apps/web/tests/e2e/academic-offering-teaching.spec.ts"
+      },
+      {
+        "sha256": "FC627CCD3759C8F69483AA18A203EC140AE4710DD3054CBCA779FB728C4ADD0A",
+        "path": "apps/web/tests/e2e/academic-offering-teacher-review.spec.ts"
+      }
+    ],
+    "caseMove": "R06 docente privacy moved intact from review to teaching D12; T059 does not gain dependency on teaching UI"
+  },
+  "harness": {
+    "uniqueCases": 1,
+    "executions": 2,
+    "passed": 2,
+    "auxiliaryOnly": true,
+    "stats": {
+      "startTime": "2026-10-26T13:11:47.362Z",
+      "duration": 22853.782,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "academic-offering-harness.spec.ts",
+        "title": "harness inicia API real, web loopback y sesión ficticia con teclado",
+        "project": "desktop",
+        "status": "passed",
+        "durationMs": 1585,
+        "retry": 0
+      },
+      {
+        "file": "academic-offering-harness.spec.ts",
+        "title": "harness inicia API real, web loopback y sesión ficticia con teclado",
+        "project": "mobile",
+        "status": "passed",
+        "durationMs": 1401,
+        "retry": 0
+      }
+    ]
+  },
+  "totals": {
+    "initialAndFinalAcademicExecutions": 96,
+    "harnessExecutionsSeparate": 2,
+    "finalUniqueCases": 24,
+    "note": "Do not sum unique scenarios across draft/final versions; two viewports are repetitions, not new cases"
+  },
+  "testSource": [
+    {
+      "path": "apps/web/tests/support/academic-us4-browser.ts",
+      "sha256": "938fefaa92945d3d126315bccde4ea6db6bbe4db5d3deac0848ff8663e5a1ac6",
+      "executedSha256": "938fefaa92945d3d126315bccde4ea6db6bbe4db5d3deac0848ff8663e5a1ac6",
+      "trailingWhitespaceOnlyAfterExecution": false
+    },
+    {
+      "path": "apps/web/tests/e2e/academic-offering-teaching.spec.ts",
+      "sha256": "20bf403022e39d59a7ff389c46d48ec7cb709c6982794b89bb8d43173f569e2b",
+      "executedSha256": "20bf403022e39d59a7ff389c46d48ec7cb709c6982794b89bb8d43173f569e2b",
+      "trailingWhitespaceOnlyAfterExecution": false
+    },
+    {
+      "path": "apps/web/tests/e2e/academic-offering-teacher-review.spec.ts",
+      "sha256": "929d55801eb946b442aea293c071c9a996852f35602e452104818c020d68c99c",
+      "executedSha256": "ab0715b8d3e4e9fd93a542696c16fa0d04e6e21f4c380b5f318301ae33bfbb55",
+      "trailingWhitespaceOnlyAfterExecution": true
+    }
+  ],
+  "resources": {
+    "date": "2026-10-26T13:15:42.1154655Z",
+    "purpose": "single observation during E2E, not capacity evidence",
+    "project": "academic-offering-fa3d46bddbb8",
+    "stats": [
+      {
+        "BlockIO": "127kB / 13.5MB",
+        "CPUPerc": "238.20%",
+        "Container": "61168430355a",
+        "ID": "61168430355a",
+        "MemPerc": "6.15%",
+        "MemUsage": "424.4MiB / 6.74GiB",
+        "Name": "academic-offering-fa3d46bddbb8-browser-tests-run-a50bc784abea",
+        "NetIO": "1.4MB / 2.07MB",
+        "PIDs": "69"
+      },
+      {
+        "BlockIO": "80MB / 36.5MB",
+        "CPUPerc": "0.03%",
+        "Container": "08ae034e61c3",
+        "ID": "08ae034e61c3",
+        "MemPerc": "0.98%",
+        "MemUsage": "67.76MiB / 6.74GiB",
+        "Name": "academic-offering-fa3d46bddbb8-db-1",
+        "NetIO": "2.22MB / 1.48MB",
+        "PIDs": "6"
+      },
+      {
+        "BlockIO": "25.6MB / 500kB",
+        "CPUPerc": "0.00%",
+        "Container": "25f60ac9514f",
+        "ID": "25f60ac9514f",
+        "MemPerc": "0.31%",
+        "MemUsage": "21.71MiB / 6.74GiB",
+        "Name": "academic-offering-fa3d46bddbb8-mailpit-1",
+        "NetIO": "4.1kB / 252B",
+        "PIDs": "13"
+      }
+    ],
+    "images": [
+      {
+        "container": "61168430355a",
+        "image": "academic-offering-fa3d46bddbb8-browser-tests"
+      },
+      {
+        "container": "08ae034e61c3",
+        "image": "postgres:16.14-bookworm"
+      },
+      {
+        "container": "25f60ac9514f",
+        "image": "axllent/mailpit:v1.31.3"
+      }
+    ],
+    "phase": "initial E2E run; single observation, not capacity"
+  },
+  "safety": {
+    "protectedFilesCompared": 72,
+    "protectedFilesUnchanged": true,
+    "trackedExistingChanges": [
+      "docs/planificacion/reservas-capacidad.md",
+      "specs/002-oferta-academica/tasks.md"
+    ],
+    "taskDescriptionsUnchanged": 74,
+    "checkboxChanges": [
+      "T059"
+    ],
+    "manualMetadataUnchanged": true,
+    "volumesUnchanged": true,
+    "environmentBefore": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "sqlExecuted": false,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-26T12:29:49.829154286Z",
+        "startedAt": "2026-10-26T12:12:47.818009306Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test"
+    },
+    "environmentAfter": {
+      "volumes": [
+        {
+          "createdAt": "2026-10-19T10:45:57Z",
+          "name": "academic-offering-fa3d46bddbb8_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-06T20:22:59Z",
+          "name": "academia-local_postgres_data"
+        },
+        {
+          "createdAt": "2026-10-14T14:38:18Z",
+          "name": "academia-local_manual_us1_secrets"
+        }
+      ],
+      "manualMounts": 0,
+      "isolatedDb": {
+        "status": "exited",
+        "finishedAt": "2026-10-26T13:30:39.324266083Z",
+        "startedAt": "2026-10-26T13:06:38.290142328Z"
+      },
+      "project": "academic-offering-fa3d46bddbb8",
+      "publishedPorts": 0,
+      "manualDb": {
+        "status": "exited",
+        "startedAt": "2026-10-18T19:19:45.837265111Z",
+        "finishedAt": "2026-10-18T21:58:41.760194769Z",
+        "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+      },
+      "appEnv": "test",
+      "isolatedSchemasRemaining": 0,
+      "isolatedSqlExecutedDuringBlock": true,
+      "manualSqlExecuted": false
+    }
+  },
+  "rawReports": [
+    {
+      "privatePath": ".cache/academic-offering-validation/t058-t059-reports/initial-e2e-browser.json",
+      "sha256": "5137073a5dd7ea806a541f37090bea8b04fa0f362618fa5d108d0fe433cf7b5b"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t058-t059-reports/e2e-browser.json",
+      "sha256": "7492efef76f63b3e390c3278a44f51d34347a72174ec2b3e7a2cde010d1c3713"
+    },
+    {
+      "privatePath": ".cache/academic-offering-validation/t058-t059-reports/e2e-browser-harness.json",
+      "sha256": "74c747e5e3d3473ebddc64d1a8a39a68335ad217146ee8522b604d1ce13c5adc"
+    }
+  ],
+  "limitations": [
+    "Teaching-route positive controls fail before downstream privacy/session/late-response assertions",
+    "No PG/UNIT reexecution, full identity regression, smokes or load in this tests-only block",
+    "T055/T057 retained; T060/T061 unblock academic teaching API",
+    "Bootstrap, T104/T108 and human/integral acceptance pending",
+    "T103 execution/report complete; 1000/2500 capacity unapproved",
+    "24-hour reservations belong to future spec; six open planning decisions unchanged"
+  ],
+  "nextBlock": [
+    "T060",
+    "T061"
+  ],
+  "documentation": {
+    "date": "2026-10-26",
+    "documents": 32,
+    "localLinksChecked": 801,
+    "introducedBrokenLinks": [],
+    "preexistingBrokenLinks": [],
+    "constitutionVersion": "1.2.0",
+    "constitutionTemporaryCommentRemoved": true,
+    "backlogTasks": 22,
+    "backlogCounts": {
+      "RP": 7,
+      "RV": 4,
+      "VP": 8,
+      "CT": 3
+    },
+    "confirmedRequirementIds": 7,
+    "pendingDecisionIds": 6,
+    "scenarioIds": 10,
+    "historicalT103T104T108TaskDescriptionsUnchanged": true
+  }
+}

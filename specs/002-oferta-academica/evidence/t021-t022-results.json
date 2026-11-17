@@ -1,0 +1,1373 @@
+{
+  "feature": "002-oferta-academica",
+  "scope": "T021/T022 only; stop before T023",
+  "date": "2026-10-20",
+  "branch": "feat/002-oferta-academica",
+  "baseCommit": "70342ff49022780c9f9ac2060d0c88575e38b151",
+  "checkpoint": "70342ff",
+  "initialGitClean": true,
+  "source": [
+    {
+      "path": "apps/api/tests/support/academic-preparation.ts",
+      "sha256": "5a0349ca04abac1640fa8b185d29778e046926dddd8de2755cc860bc666f96fe"
+    },
+    {
+      "path": "apps/api/tests/integration/academic-offering-preparation.spec.ts",
+      "sha256": "48f420175420b06fee42ba65502a8547bc26dd309aaa34d3583650aef466f2da"
+    },
+    {
+      "path": "apps/web/tests/e2e/academic-offering-preparation.spec.ts",
+      "sha256": "0fef6272fd404325febb2a78d2426d5e7e734377cfcc2d120cd2a5e88814d8e7"
+    }
+  ],
+  "counts": {
+    "newUniqueCases": 93,
+    "apiNewUnique": 74,
+    "apiNewInfrastructureApproved": 6,
+    "apiBusinessApproved": 0,
+    "apiExpectedFailures": 68,
+    "apiExistingPassed": 16,
+    "e2eNewUnique": 19,
+    "e2eProfiles": [
+      "desktop",
+      "mobile"
+    ],
+    "e2eNewExecutions": 38,
+    "e2eExpectedFailures": 38,
+    "e2eBusinessApproved": 0,
+    "e2eExistingControlUnique": 1,
+    "e2eExistingControlExecutionsPassed": 2,
+    "architectureExistingPassed": 14,
+    "unexpectedFailureCauses": 0,
+    "loadErrors": 0,
+    "skipped": 0,
+    "configuredProcessTimezone": "America/Lima",
+    "timezoneRepetitionsInThisBlock": 0
+  },
+  "tasks": {
+    "T019": {
+      "state": "pending",
+      "unchanged": true,
+      "dependency": "T023"
+    },
+    "T020": {
+      "state": "pending",
+      "unchanged": true,
+      "dependency": "T023"
+    },
+    "T021": {
+      "state": "pending",
+      "prepared": true,
+      "executed": true,
+      "dependency": "T023/T024/T025/T026: estado HTTP y aserciones posteriores de negocio"
+    },
+    "T022": {
+      "state": "pending",
+      "prepared": true,
+      "executed": true,
+      "dependency": "T024/T025/T026/T027/T028/T029: navegación, API y pantallas reales"
+    }
+  },
+  "apiCases": [
+    {
+      "name": "T021 controles de infraestructura, NO aceptación académica I01 PostgreSQL real, migraciones y observador separado; identidad HTTP de los tres roles",
+      "status": "passed",
+      "classification": "infrastructure-control",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": null,
+      "expectationReached": "control real completo"
+    },
+    {
+      "name": "T021 controles de infraestructura, NO aceptación académica I02 cuerpo superior a 16 KiB: middleware real conserva las cinco tablas académicas",
+      "status": "passed",
+      "classification": "infrastructure-control",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": null,
+      "expectationReached": "control real completo"
+    },
+    {
+      "name": "T021 controles de infraestructura, NO aceptación académica I03 tipo de contenido: middleware real conserva las cinco tablas académicas",
+      "status": "passed",
+      "classification": "infrastructure-control",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": null,
+      "expectationReached": "control real completo"
+    },
+    {
+      "name": "T021 controles de infraestructura, NO aceptación académica I04 Origin externo: middleware real conserva las cinco tablas académicas",
+      "status": "passed",
+      "classification": "infrastructure-control",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": null,
+      "expectationReached": "control real completo"
+    },
+    {
+      "name": "T021 controles de infraestructura, NO aceptación académica I05 CSRF ausente: middleware real conserva las cinco tablas académicas",
+      "status": "passed",
+      "classification": "infrastructure-control",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": null,
+      "expectationReached": "control real completo"
+    },
+    {
+      "name": "T021 controles de infraestructura, NO aceptación académica I06 fallo SQL dirigido al esquema propio y recuperación del permiso, sin afectar identidad",
+      "status": "passed",
+      "classification": "infrastructure-control",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": null,
+      "expectationReached": "control real completo"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H01 listado vacío es 200 y no error; página/conteo coherentes",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H02 POST curso incompleto, UUID servidor, recorte y commit visibles desde observador",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H03 POST dos grupos del mismo curso, capacidad 1/50 y omisión inicial diferenciada",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H04 GET curso y grupos conservan pertenencia y DTO cerrado sin datos privados",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H05 GET grupo usa fechas civiles, horario y capacidad sin disponibilidad ficticia",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H06 selector docente entrega solo candidatos habilitados y claves id/name",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H07 PATCH curso conserva grupos; PATCH grupo conserva hermano y curso",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H08 PUT reemplaza franjas atómicamente y admite adyacencia; solo aumenta revisión propia",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H09 datos creados por HTTP persisten tras cerrar/reabrir AppModule con la misma base aislada",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H10 16 KiB exactos en UTF-8 no se rechazan ni se inventa límite de texto",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H11 revisión bigint no pierde precisión al editar y serializar",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H12 pertenencia inmutable: PATCH courseId es campo desconocido, cero efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H13 ruta 6 rechaza revisión obsoleta sin efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H13 ruta 8 rechaza revisión obsoleta sin efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H13 ruta 9 rechaza revisión obsoleta sin efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 5 rechaza campo desconocido sin escribir ni consumir commandId",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 6 rechaza campo desconocido sin escribir ni consumir commandId",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 7 rechaza campo desconocido sin escribir ni consumir commandId",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 8 rechaza campo desconocido sin escribir ni consumir commandId",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H14 ruta 9 rechaza campo desconocido sin escribir ni consumir commandId",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 0 rechaza query desconocida",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 1 rechaza query desconocida",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 2 rechaza query desconocida",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 3 rechaza query desconocida",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H15 GET 4 rechaza query desconocida",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida null no produce cambios parciales",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida \"\" no produce cambios parciales",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida 0 no produce cambios parciales",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida -1 no produce cambios parciales",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida 1.5 no produce cambios parciales",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H16 capacidad inválida 51 no produce cambios parciales",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza duplicado y conserva franjas/revisión/ledger/auditoría",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza solapamiento y conserva franjas/revisión/ledger/auditoría",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza medianoche y conserva franjas/revisión/ledger/auditoría",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H17 PUT rechaza día inválido y conserva franjas/revisión/ledger/auditoría",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H18 cambiar periodo revalida las franjas existentes sin ocurrencias, cero efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H19 replay idéntico del alta no crea segundo curso, comando o auditoría",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 comportamiento académico HTTP/PG real — FR-001/002/003/005/010/015 H20 un 404 de recurso requiere primero ruta funcional, no confundir ausencia de controlador",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-0 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-1 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-2 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-3 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-4 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-5 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-6 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-7 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-8 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-VISITOR-9 devuelve 401, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-0 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-1 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-2 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-3 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-4 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-5 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-6 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-7 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-8 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-STUDENT-9 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-0 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-1 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-2 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-3 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-4 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-5 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-6 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-7 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-8 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    },
+    {
+      "name": "T021 autorización backend de CADA ruta de preparación A-TEACHER-9 devuelve 403, sin datos ni efectos",
+      "status": "failed",
+      "classification": "missing-academic-http-route",
+      "businessApproved": false,
+      "businessAssertionsReached": false,
+      "dependency": "T023/T024/T025/T026",
+      "expectationReached": "HTTP real devolvió 404; aserción de estado requerido fallida; resto pendiente"
+    }
+  ],
+  "browserCases": [
+    {
+      "name": "B01 US1.1 listado vacío con acción para crear, navegación y teclado",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B02 US1.2 crea curso y dos grupos independientes, horarios/capacidad distintos y recarga",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B03 US1.3 nombre inválido conserva entradas, error asociado y cero guardado parcial",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B04 US1.4 cancelar alta vuelve al listado sin petición de escritura",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B05 US1.4 cancelar edición conserva datos y puede recorrerse solo con teclado",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B06 US1.5 capacidad inválida \"\" conserva entrada y datos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B06 US1.5 capacidad inválida \"0\" conserva entrada y datos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B06 US1.5 capacidad inválida \"-1\" conserva entrada y datos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B06 US1.5 capacidad inválida \"1.5\" conserva entrada y datos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B06 US1.5 capacidad inválida \"51\" conserva entrada y datos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B07 US1.6 franjas contiguas, fechas inclusivas y America/Lima persisten tras recarga",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B08 US1.6 horas inválidas 18:00–18:00, sin persistencia parcial",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B08 US1.6 horas inválidas 19:00–18:00, sin persistencia parcial",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B08 US1.6 horas inválidas 23:00–01:00, sin persistencia parcial",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B09 listado fallido por permiso SQL real muestra error/reintento, nunca vacío ficticio",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-offering-navigation",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B10 US1.6 duplicado: rechazo por campo y datos intactos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B10 US1.6 solapamiento: rechazo por campo y datos intactos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B10 US1.6 periodo invertido: rechazo por campo y datos intactos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    },
+    {
+      "name": "B10 US1.6 sin ocurrencia: rechazo por campo y datos intactos",
+      "uniqueCase": true,
+      "businessApproved": false,
+      "dependency": "T024/T025/T026/T027/T028/T029",
+      "executions": [
+        {
+          "project": "desktop",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        },
+        {
+          "project": "mobile",
+          "status": "failed",
+          "attempts": 1,
+          "cause": "missing-group-page",
+          "businessAssertionsReached": false
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "action": "api",
+      "exitCode": 1,
+      "date": "2026-10-20T21:18:00.312Z",
+      "timezone": "America/Lima",
+      "path": ".cache/academic-offering-validation/t021-t022-reports/api-command.json",
+      "sha256": "577c51f34535114425788a38b6ee6926e83cf0755f5e676e212ae0cabaf51d4e"
+    },
+    {
+      "action": "e2e",
+      "exitCode": 1,
+      "date": "2026-10-20T21:23:12.216Z",
+      "timezone": "America/Lima",
+      "path": ".cache/academic-offering-validation/t021-t022-reports/e2e-command.json",
+      "sha256": "4acf9e22568e6a2b1b8e30cf222b94ab26e2f83fc3a4615175174c62083507ef"
+    },
+    {
+      "action": "types",
+      "exitCode": 0,
+      "date": "2026-10-20T21:19:07.633Z",
+      "timezone": "America/Lima",
+      "path": ".cache/academic-offering-validation/t021-t022-reports/types-command.json",
+      "sha256": "fee044296cad177c12a0a188b1184a6b96279495c355c7561a35054ffc28edc3"
+    },
+    {
+      "action": "lint",
+      "exitCode": 0,
+      "date": "2026-10-20T21:19:28.229Z",
+      "timezone": "America/Lima",
+      "path": ".cache/academic-offering-validation/t021-t022-reports/lint-command.json",
+      "sha256": "0ef3c4d39c2d59ccf8777f5224e2e5cce08d97757bc25205507f5ab56f3f8773"
+    },
+    {
+      "action": "architecture",
+      "exitCode": 0,
+      "date": "2026-10-20T21:24:04.686Z",
+      "timezone": "America/Lima",
+      "path": ".cache/academic-offering-validation/t021-t022-reports/architecture-command.json",
+      "sha256": "d2bc0464d4ad204d3a1af93b49c89aa8fc3f9b13b0a6aebe97dd0b38c810b2cb"
+    }
+  ],
+  "architecture": {
+    "files": 3,
+    "passed": 14,
+    "layerLintMilliseconds": 3241.4904069999993,
+    "timeoutMillisecondsUnchanged": 15000
+  },
+  "builds": {
+    "api": "passed before api/e2e/architecture",
+    "web": "passed before e2e"
+  },
+  "environmentBefore": {
+    "volumes": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "manualMounts": 0,
+    "sqlExecuted": false,
+    "isolatedDb": {
+      "status": "exited",
+      "finishedAt": "2026-10-20T11:29:07.312431639Z",
+      "startedAt": "2026-10-20T11:11:09.067203221Z"
+    },
+    "project": "academic-offering-fa3d46bddbb8",
+    "publishedPorts": 0,
+    "manualDb": {
+      "status": "exited",
+      "startedAt": "2026-10-18T19:19:45.837265111Z",
+      "finishedAt": "2026-10-18T21:58:41.760194769Z",
+      "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+    },
+    "appEnv": "test"
+  },
+  "environmentAfter": {
+    "volumes": [
+      {
+        "createdAt": "2026-10-19T10:45:57Z",
+        "name": "academic-offering-fa3d46bddbb8_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-06T20:22:59Z",
+        "name": "academia-local_postgres_data"
+      },
+      {
+        "createdAt": "2026-10-14T14:38:18Z",
+        "name": "academia-local_manual_us1_secrets"
+      }
+    ],
+    "manualMounts": 0,
+    "isolatedDb": {
+      "status": "exited",
+      "finishedAt": "2026-10-20T21:24:41.543367856Z",
+      "startedAt": "2026-10-20T21:16:45.345325131Z"
+    },
+    "project": "academic-offering-fa3d46bddbb8",
+    "publishedPorts": 0,
+    "manualDb": {
+      "status": "exited",
+      "startedAt": "2026-10-18T19:19:45.837265111Z",
+      "finishedAt": "2026-10-18T21:58:41.760194769Z",
+      "id": "e804ca17a1d57fee1be63fab4e530cccf56e5827ea3e5fe6a02ebe7607e0582c"
+    },
+    "appEnv": "test",
+    "isolatedSchemasRemaining": 0,
+    "isolatedSqlExecutedDuringBlock": true,
+    "manualSqlExecuted": false
+  },
+  "preserved": {
+    "files": 72,
+    "priorSources": 28,
+    "fiveClarifications": true,
+    "E1": true,
+    "firstSpecEvidence": true,
+    "productUnchanged": true,
+    "configurationAndCredentials": true,
+    "volumesRetained": true,
+    "manualAccountsNotQueried": true
+  },
+  "limitations": {
+    "academicBehaviorApproved": false,
+    "functionalAcceptance": false,
+    "humanAcceptance": false,
+    "concurrent1000Validated": false,
+    "T019T020Rerun": false,
+    "bootstrapRerun": false,
+    "historicalBootstrapState": "open",
+    "ciRemoteRun": false
+  },
+  "corrections": [
+    {
+      "type": "host-script-policy",
+      "detail": "Prerrequisitos repetidos con ExecutionPolicy Bypass de proceso"
+    },
+    {
+      "type": "fixture-type",
+      "detail": "TS2345 corregido con tipo explícito de headers; tipos estrictos host/contenedor verdes"
+    }
+  ],
+  "reportHashes": [
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/api.json",
+      "sha256": "16ed3db3e648bd220acb1c88325427fa7ddc1e91fcffee7607063c8684028f19"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/e2e.json",
+      "sha256": "eb1b4de98b6dcdc00112b4a70a050668826cdd2b616b96dbfbc3f2b5a08d7bb1"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/architecture.json",
+      "sha256": "5e2adeb8441b8f3f490a92f8e43f3d64f3d3894a008d982c1b3c678ef2feeb95"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/api.log",
+      "sha256": "99def39a400d2bd454253e532e5c0ad146fa1909065e3e494c7c3aba459835bc"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/e2e.log",
+      "sha256": "0189340f8afdb0a1193229b8d94f71887af2fb63c49f5ca36939a31705e1afd1"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/types.log",
+      "sha256": "94fdb4d1481efd0eb434c070e869375e76e56ca4b196a0ae845d91999d810063"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/lint.log",
+      "sha256": "6baadfa78f353d0263127441d69390dbb0a20d2cc2ba1834487f76c7ec958abc"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/architecture.log",
+      "sha256": "cfd656ca7647aee1678d2e722618af0365a15a833d1886103068029332d8c664"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/environment-before.json",
+      "sha256": "21746116701195237b605a66327e29fa097361ae3e39f501c5fbe7a4086390e3"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/environment-after.json",
+      "sha256": "b6c1d216ab5204609d6a3e02eadf08c5447de13dcc6cd3fdc0063380d5ebfe84"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/up.log",
+      "sha256": "4f9768ad320e89ac5ca5fe113d8c41aff837b05cecccfcffc8956d85a46c6492"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022-reports/stop.log",
+      "sha256": "c3e6c44c9948666eda8cfb3340a4efb93f0510b8c8ceede51107ab4e5bf2507c"
+    }
+  ],
+  "helpers": [
+    {
+      "path": ".cache/academic-offering-validation/t021-t022/run.ps1",
+      "sha256": "a0b9560e3aafc2f9b1a21447d111fde766c05cf92558724752f740e299476531"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022/verify.mjs",
+      "sha256": "21001a024bfa881be66545430098499d77462a72a5d90553a1b884e018bb4521"
+    },
+    {
+      "path": ".cache/academic-offering-validation/t021-t022/summarize.mjs",
+      "sha256": "891228f0793b213061515464f5571a0b7f3f8c2b551ada2013da089db58a1e2e"
+    }
+  ],
+  "next": "T023: implementar reglas reales; ejecutar y comprobar las aserciones de 150 UNIT conservadas"
+}

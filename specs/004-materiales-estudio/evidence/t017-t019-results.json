@@ -1,0 +1,240 @@
+{
+  "clientDate": "2026-11-16",
+  "clientTimezone": "America/Lima",
+  "scope": "T017-T019 tests before US1 implementation",
+  "tasks": {
+    "completed": 19,
+    "pending": 49
+  },
+  "validation": {
+    "apiExpectedRed": {
+      "exitCode": 1,
+      "success": false,
+      "total": 53,
+      "passed": 1,
+      "failed": 52,
+      "pending": 0,
+      "reportSha256": "7ee4b171ec0d4e9c2e23a518c50fe44c3290e8e575625c1e9ecf1a64ba760aac",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-format.spec.ts",
+          "status": "failed",
+          "total": 23,
+          "passed": 0,
+          "failed": 23,
+          "failureKinds": [
+            "Error: T020: materials binary validator not implemented."
+          ]
+        },
+        {
+          "file": "apps/api/tests/integration/materials-upload.spec.ts",
+          "status": "failed",
+          "total": 11,
+          "passed": 1,
+          "failed": 10,
+          "failureKinds": [
+            "AssertionError: expected 404 to be 201 // Object.is equality",
+            "AssertionError: expected 404 to be 400 // Object.is equality"
+          ]
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "status": "failed",
+          "total": 19,
+          "passed": 0,
+          "failed": 19,
+          "failureKinds": [
+            "Error: T020: normalizeMaterialTexts not implemented.",
+            "AssertionError: expected error to match asymmetric matcher",
+            "Error: T020: normalizeMaterialFileMetadata not implemented."
+          ]
+        }
+      ]
+    },
+    "webExpectedRed": {
+      "exitCode": 1,
+      "success": false,
+      "total": 7,
+      "passed": 0,
+      "failed": 7,
+      "pending": 0,
+      "reportSha256": "b557c18d048ee68914be5f224c693eefb3ce1bfac88bfff94d4ab6d16015f286",
+      "suites": [
+        {
+          "file": "apps/web/src/features/materials/management-page.test.tsx",
+          "status": "failed",
+          "total": 7,
+          "passed": 0,
+          "failed": 7,
+          "failureKinds": [
+            "Error: T028 pending: materials management form is not implemented"
+          ]
+        }
+      ]
+    },
+    "previousRegression": {
+      "exitCode": 0,
+      "success": true,
+      "total": 197,
+      "passed": 197,
+      "failed": 0,
+      "pending": 0,
+      "reportSha256": "94666f14ceda14820bf5d93560957cb5ceaefdf90521972847b757fb3f17b865",
+      "suites": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "status": "passed",
+          "total": 24,
+          "passed": 24,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "status": "passed",
+          "total": 6,
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "status": "passed",
+          "total": 7,
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-admission.spec.ts",
+          "status": "passed",
+          "total": 10,
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "status": "passed",
+          "total": 9,
+          "passed": 9,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-errors.spec.ts",
+          "status": "passed",
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-files.spec.ts",
+          "status": "passed",
+          "total": 6,
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-fixture.spec.ts",
+          "status": "passed",
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "status": "passed",
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-schema.spec.ts",
+          "status": "passed",
+          "total": 11,
+          "passed": 11,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "status": "passed",
+          "total": 115,
+          "passed": 115,
+          "failed": 0,
+          "failureKinds": []
+        }
+      ]
+    },
+    "lint": {
+      "exitCode": 0,
+      "workspaces": [
+        "api",
+        "web"
+      ]
+    },
+    "types": {
+      "apiMaterialsExitCode": 0,
+      "webExitCode": 0
+    },
+    "prismaGenerateExitCode": 0,
+    "apiBuildExitCode": 0
+  },
+  "preservation": {
+    "checkpoint": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+    "checkpointSha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f",
+    "comparedFiles": 26,
+    "changedFiles": [
+      "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "specs/004-materiales-estudio/tasks.md",
+      "specs/004-materiales-estudio/verification.md"
+    ],
+    "onlyProgressDocumentationChanged": true,
+    "productionFilesChanged": 0
+  },
+  "files": [
+    {
+      "path": "apps/api/src/modules/materials/domain/material.test.ts",
+      "sha256": "f8f0e8eaae5a118f50a7a897567494931ade3ac791cab78af4e030c36ade17f1"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-format.spec.ts",
+      "sha256": "49b592ac1daf5229751520a15d9335165825afd7bb91e4b3e903287ad6225066"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-upload.spec.ts",
+      "sha256": "c7e48a32e5a30acce211b835ce1c12b99f5226ef64671975c91fbf7d62c94507"
+    },
+    {
+      "path": "apps/web/src/features/materials/management-page.test.tsx",
+      "sha256": "b651af5fbe0ea941e5068df4259c6918858eea7af5caf0c6f337f2cb70775196"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "de17c41870b2e75133ec5bc70636a079ecdad4c7fea27dcf6c90fc04e62e494e"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "3132b7affe03582cec7ec657e7d165361b82ddbea33d1e9deff4b16f31932b68"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "487602f5d885e83436650e18668b75f830d6aded1bc4b2ab8b2395770aa09b17"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t017-t019.md",
+      "sha256": "0d725022564f4193c6c783c9e4a4b5e666915e0c1d89b6c79c39a91394b4d017"
+    }
+  ],
+  "limitations": [
+    "General test commands intentionally remain red pending T020-T028",
+    "No upload/publication implementation or materials UI",
+    "No US1 acceptance, browser E2E or human acceptance",
+    "US2/US3 and D10/D13 remain pending"
+  ]
+}
