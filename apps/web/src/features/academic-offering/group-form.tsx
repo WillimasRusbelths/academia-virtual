@@ -56,6 +56,7 @@ export function GroupForm({ client, courseId, initial, busy = false, onBusy = ()
     <FormField id="group-name" label="Nombre" autoFocus={!initial} value={draft.name} error={error('name')} disabled={disabled} onChange={event => change('name', event.target.value)}/>
     <div className="form-field"><label htmlFor="group-description">Descripción del grupo (opcional)</label>
       <textarea id="group-description" rows={4} value={draft.description} disabled={disabled} aria-invalid={error('description')?true:undefined}
+        onFocus={event=>event.currentTarget.scrollIntoView({block:'nearest',inline:'nearest'})}
         aria-describedby={error('description')?'group-description-error':undefined} onChange={event=>change('description',event.target.value)}/>
       {error('description')&&<p id="group-description-error" className="field-error">{error('description')}</p>}</div>
     <FormField id="group-capacity" label="Capacidad máxima" inputMode="decimal" value={draft.capacity} error={error('capacity')} disabled={disabled}

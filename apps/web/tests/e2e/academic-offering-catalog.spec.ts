@@ -81,7 +81,11 @@ test('B03 US2.3/4 compara dos grupos, datos completos, capacidad máxima y priva
   await expect(page.locator('main')).not.toContainText(offering.account('TEACHER').email);
   await expect(page.locator('main')).not.toContainText(/45 cupos disponibles|0 inscritos|agotado|Motivo ficticio privado/i);
   await expect(page.getByRole('button', { name: /comprar|reservar|matricular|pagar/i })).toHaveCount(0);
-  await expect(page.getByRole('link', { name: /comprar|reservar|matricular|pagar/i })).toHaveCount(0);
+  // 003 incorpora navegación a reservas; consultar oferta sigue sin reservar o cobrar.
+  const reservationLinks = page.getByRole('link', { name: /comprar|reservar|matricular|pagar/i });
+  await expect(reservationLinks).toHaveCount(1);
+  await expect(reservationLinks).toHaveAccessibleName('Reservar cursos');
+  await expect(reservationLinks).toHaveAttribute('href', '/reservar');
   await page.reload(); await expect(page.locator('main')).toContainText('Capacidad máxima: 45 alumnos');
   await page.goto(`/oferta/cursos/${ids.visibleCourseId}`); await activate(page, page.getByRole('link', { name: 'Grupo visible B', exact: true }));
   await expect(page.locator('main')).toContainText('Capacidad máxima: 50 alumnos'); await controlsAccessible(page); await pageFits(page);
