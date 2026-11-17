@@ -34,8 +34,16 @@ jobs:
           docker compose config --quiet
       - name: Construir
         run: docker compose build
-      - name: Iniciar los cuatro servicios
-        run: docker compose up -d --wait
+      - name: Iniciar PostgreSQL y Mailpit
+        run: docker compose up -d --wait db mailpit
+      - name: Migraciones y permisos de compatibilidad
+        run: |
+          docker compose run --rm --no-deps api npm run probe:migrate
+          docker compose run --rm --no-deps api npm run probe:check
+      - name: Migrar la BD de prueba antes de iniciar la API
+        run: docker compose run --rm --no-deps api npm run db:migrate:deploy
+      - name: Iniciar API y web
+        run: docker compose up -d --wait api web
       - name: Estado y logs
         run: |
           docker compose ps
@@ -54,12 +62,6 @@ jobs:
         run: |
           docker compose exec -T api npm exec --workspace apps/api -- tsc -p tsconfig.materials.json
           docker compose exec -T api npm run typecheck:materials --workspace @academia/web
-      - name: Migraciones y permisos de compatibilidad
-        run: |
-          docker compose exec -T api npm run probe:migrate
-          docker compose exec -T api npm run probe:check
-      - name: Migraciones de identidad - BD de prueba
-        run: docker compose exec -T api npm run db:migrate:deploy
       - name: Integración - API y PostgreSQL
         run: docker compose exec -T api npm run test:integration
       - name: Compatibilidad - Argon2 y SMTP
