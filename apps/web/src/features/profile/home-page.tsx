@@ -16,6 +16,7 @@ export function HomePage({user,loading,error,onLogout,onRefresh}:{readonly user:
         {user.role!=='TEACHER'&&<p><a href="/oferta">Consultar oferta</a></p>}
         {user.role==='ADMIN'&&<p><a href="/admin/cuentas">Gestionar cuentas</a></p>}
         {user.role==='ADMIN'&&<p><a href="/admin/oferta">Gestionar oferta</a></p>}
+        {user.role==='ADMIN'&&<><p><a href="/admin/precios">Gestionar precios</a></p><p><a href="/admin/compromisos">Consultar compromisos e incidencias</a></p></>}
       </nav>
       <button type="button" disabled={loading} onClick={()=>void onLogout()}>Cerrar sesión</button>
     </>}

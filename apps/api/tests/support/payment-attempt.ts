@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { RESERVATION_EXPIRATION_LIFECYCLE } from '../../dist/src/modules/enrollment/enrollment.module.js';
 import { randomUUID } from 'node:crypto';
 import { Test } from '@nestjs/testing';
 import type { NestExpressApplication } from '@nestjs/platform-express';
@@ -62,6 +63,7 @@ export async function paymentHttp(f:AttemptFixture){
   try{
     const builder=Test.createTestingModule({imports:[AppModule.forRoot(environment,database)]});
     builder.overrideProvider(RESERVATION_DISPATCH_LIFECYCLE).useValue({});
+    builder.overrideProvider(RESERVATION_EXPIRATION_LIFECYCLE).useValue({});
     // Solo se sustituye el puerto externo del proveedor cuando exista. Sin controlador ficticio.
     if(gatewayBinding!==undefined){builder.overrideProvider(gatewayBinding).useValue(f.gateway.gateway);builder.overrideProvider(PAYMENT_CONFIGURATION).useValue({providerScope:'fixture/provider/merchant/sandbox'});}
     const module=await builder.compile();app=module.createNestApplication<NestExpressApplication>({logger:false,bodyParser:false});

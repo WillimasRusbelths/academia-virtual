@@ -3,12 +3,12 @@ import type { ApiFailure } from '../../shared/api-client';
 import { FormField } from '../../shared/ui/form-field';
 import { Feedback } from '../../shared/ui/feedback';
 import type { AdminGroup, GroupAttributes, academicOfferingApi } from './api';
-import { focusInvalid, LoadingState, OfferingReview, useOfferingCommand, useOfferingResource } from './offering-state';
-import { capacityError, nameError, scheduleErrors } from './validation';
+import { CommitmentNotice,focusInvalid, LoadingState, OfferingReview, useOfferingCommand, useOfferingResource } from './offering-state';
+import { capacityError,groupChanges, nameError, scheduleErrors } from './validation';
 import type { FieldErrors } from './validation';
 
 function values(group?: AdminGroup) {
-  return { name: group?.name ?? '', capacity: group?.capacity?.toString() ?? '', periodStart: group?.periodStart ?? '',
+  return { name: group?.name ?? '',description:group?.description??'', capacity: group?.capacity?.toString() ?? '', periodStart: group?.periodStart ?? '',
     periodEnd: group?.periodEnd ?? '', teacherUserId: group?.teacher?.id ?? '' };
 }
 export function GroupForm({ client, courseId, initial, busy = false, onBusy = () => undefined, onSaved, onCancel, onDenied, onReplace, onDirty, externalErrors = {} }: {
@@ -19,14 +19,14 @@ export function GroupForm({ client, courseId, initial, busy = false, onBusy = ()
   const [draft, setDraft] = useState(() => values(initial)); const [touched, setTouched] = useState<ReadonlySet<string>>(new Set());
   const dirty = JSON.stringify(draft) !== JSON.stringify(values(initial));
   useEffect(() => { onDirty?.(dirty); }, [dirty, onDirty]);
-  const [errors, setErrors] = useState<FieldErrors>({}); const form = useRef<HTMLFormElement>(null); const command = useOfferingCommand<AdminGroup>();
+  const [errors, setErrors] = useState<FieldErrors>({}); const [unchanged,setUnchanged]=useState(false);const form = useRef<HTMLFormElement>(null); const command = useOfferingCommand<AdminGroup>();
   const [search, setSearch] = useState(''); const [filter, setFilter] = useState({ q: '', page: 1, pageSize: 20 });
   const [selectedTeacher, setSelectedTeacher] = useState(initial?.teacher ? { id: initial.teacher.id, name: initial.teacher.name } : undefined);
   const load = useCallback((signal: AbortSignal) => client.teachers(filter, signal), [client, filter]); const teachers = useOfferingResource(load);
   useEffect(() => { if (teachers.error && [401, 403].includes(teachers.error.status)) onDenied(teachers.error); }, [teachers.error, onDenied]);
   const editable = !initial || initial.state === 'DRAFT' || initial.state === 'WITHDRAWN'; const disabled = busy || command.pending || !editable;
   function change(key: keyof typeof draft, value: string) {
-    command.changed(); setDraft(current => ({ ...current, [key]: value })); setTouched(current => new Set([...current, key])); setErrors({});
+    command.changed();setUnchanged(false); setDraft(current => ({ ...current, [key]: value })); setTouched(current => new Set([...current, key])); setErrors({});
     if (key === 'teacherUserId') setSelectedTeacher(teachers.data?.items.find(teacher => teacher.id === value));
   }
   function searchTeachers() { setFilter({ ...filter, q: search.trim(), page: 1 }); }
@@ -42,12 +42,11 @@ export function GroupForm({ client, courseId, initial, busy = false, onBusy = ()
     Object.assign(invalid, schedule);
     if (schedule.schedule) { invalid.periodStart = schedule.schedule; delete invalid.schedule; }
     setErrors(invalid); if (Object.keys(invalid).length) { focusInvalid(form); return; }
-    const attributes: GroupAttributes = { name: draft.name, timeZone: 'America/Lima',
-      ...(configured ? { capacity: Number(draft.capacity) } : {}), ...(draft.periodStart ? { periodStart: draft.periodStart } : {}),
-      ...(draft.periodEnd ? { periodEnd: draft.periodEnd } : {}),
-      ...(draft.teacherUserId !== (initial?.teacher?.id ?? '') ? { teacherUserId: draft.teacherUserId || null } : {}) };
+    const attributes=groupChanges(draft,initial);
+    if(initial&&!Object.keys(attributes).length){setUnchanged(true);return;}
+    const creation:GroupAttributes={...attributes,name:draft.name,timeZone:'America/Lima'};
     await command.run(JSON.stringify([initial?.id, initial?.revision, courseId, attributes]),
-      () => initial ? client.prepareGroupEdit(initial.id, initial.revision, attributes) : client.prepareGroup(courseId, attributes),
+      () => initial ? client.prepareGroupEdit(initial.id, initial.revision, attributes) : client.prepareGroup(courseId, creation),
       value => { setDraft(values(value)); setTouched(new Set()); onSaved(value); }, onDenied, onBusy);
     focusInvalid(form);
   }
@@ -55,6 +54,10 @@ export function GroupForm({ client, courseId, initial, busy = false, onBusy = ()
     onSubmit={event => { event.preventDefault(); if (!disabled) void save(); }}>
     {!editable && <p>{initial?.state === 'CANCELLED' ? 'El grupo está cancelado. No permite cambios ni republicación.' : 'Retira la oferta antes de editar.'}</p>}
     <FormField id="group-name" label="Nombre" autoFocus={!initial} value={draft.name} error={error('name')} disabled={disabled} onChange={event => change('name', event.target.value)}/>
+    <div className="form-field"><label htmlFor="group-description">Descripción del grupo (opcional)</label>
+      <textarea id="group-description" rows={4} value={draft.description} disabled={disabled} aria-invalid={error('description')?true:undefined}
+        aria-describedby={error('description')?'group-description-error':undefined} onChange={event=>change('description',event.target.value)}/>
+      {error('description')&&<p id="group-description-error" className="field-error">{error('description')}</p>}</div>
     <FormField id="group-capacity" label="Capacidad máxima" inputMode="decimal" value={draft.capacity} error={error('capacity')} disabled={disabled}
       placeholder="Sin configurar" onChange={event => change('capacity', event.target.value)}/>
     <p>Ocupación y disponibilidad no calculadas.</p>
@@ -80,6 +83,7 @@ export function GroupForm({ client, courseId, initial, busy = false, onBusy = ()
         <button type="button" disabled={filter.page * filter.pageSize >= teachers.data.total || teachers.loading} onClick={() => setFilter({ ...filter, page: filter.page + 1 })}>Más docentes</button></>}
     </fieldset>
     <Feedback error={command.error} message={command.message} onRetry={() => void save()}/>
+    <CommitmentNotice error={command.error}/>{unchanged&&<p role="status">No hay cambios para guardar.</p>}
     <button type="submit" disabled={disabled}>{command.pending ? 'Guardando…' : 'Guardar grupo'}</button><button type="button" disabled={busy || command.pending} onClick={onCancel}>Cancelar</button>
     {initial && command.error && [409, 503].includes(command.error.status) && onReplace && <OfferingReview load={() => client.group(initial.id)} replace={onReplace} denied={onDenied} disabled={disabled}/>}
   </form>;

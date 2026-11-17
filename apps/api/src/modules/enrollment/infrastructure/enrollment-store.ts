@@ -19,6 +19,43 @@ import type { PaymentGateway } from '../public/payments.js';
 import { createPaymentAttemptStore } from './payment-attempts.js';
 import { readEnrollmentOrder } from './financial-reads.js';
 import { createPaymentVerificationStore } from './payment-verification.js';
+import { administrativeTopology } from './admin-topology.js';
+import type { EnrollmentFollowUpStore,FollowUpView } from '../application/follow-up.js';
+import { followUpInput } from '../application/follow-up.js';
+import { enrollmentUuid } from '../domain/enrollment-error.js';
+import { formatInstant } from '../domain/instant.js';
+
+/** Seguimiento append-only; el writer existente comparte autoridad/locks/ledger y
+ * auditoría. No modifica la incidencia ni ninguna fila de compromiso económico. */
+export function createIncidentFollowUpStore(pool:Pool,authorization:EnrollmentTransactionDependencies,
+  offering:(client:PoolClient)=>ReservationOfferingAccess):EnrollmentFollowUpStore {
+  const write=createEnrollmentCommandWriter(pool,{...authorization,preserve:error=>error instanceof EnrollmentError||Boolean(authorization.preserve?.(error))});
+  return {async append(actor,incidentInput,input,requestInput){
+    const incidentId=enrollmentUuid(incidentInput),requestId=enrollmentUuid(requestInput),command=followUpInput(input);
+    const discover=(client:PoolClient)=>administrativeTopology(client,offering(client),{orderIds:[],incidentIds:[incidentId]},true);
+    const result=await write<FollowUpView>({actor,operation:'INCIDENT_FOLLOW_UP',targetId:incidentId,commandId:command.commandId,requestId,
+      expectedRevision:null,payload:{content:command.content},discover,recheck:discover,
+      async validateTarget(_client,locked){if(!locked.incidentIds.includes(incidentId))throw new EnrollmentError({code:'NOT_FOUND'});},
+      async apply(context){
+        const id=randomUUID();await context.use(async()=>{
+          const inserted=await context.client.query(`INSERT INTO "IncidentFollowUp" (id,"incidentId","adminUserId","commandId","recordedAt",content)
+            VALUES ($1,$2,$3,$4,$5,$6)`,[id,incidentId,context.authority.reference,command.commandId,postgresInstantParameter(context.decision.at),command.content]);
+          if(inserted.rowCount!==1)throw new EnrollmentTransactionUnavailable();
+        });
+        return {outcomeCode:'APPLIED',resultingRevision:'1',resourceReferences:{incidentId,followUpId:id}};
+      },async project(context,refs){
+        if(!('followUpId' in refs)||!context.locked.incidentIds.includes(refs.incidentId))throw new EnrollmentTransactionUnavailable();
+        const row=(await context.client.query<FollowUpView&{at:string}>(`SELECT id,"incidentId","adminUserId","commandId",content,
+          (extract(epoch FROM "recordedAt")*1000000)::numeric(30,0)::text AS at FROM "IncidentFollowUp" WHERE id=$1 AND "incidentId"=$2 AND "adminUserId"=$3 AND "commandId"=$4`,
+        [refs.followUpId,incidentId,actor.userId,command.commandId])).rows[0];
+        if(!row)throw new EnrollmentTransactionUnavailable();
+        return {id:row.id,incidentId:row.incidentId,adminUserId:row.adminUserId,commandId:row.commandId,content:row.content,recordedAt:formatInstant(BigInt(row.at))};
+      }});
+    if(result.command.outcomeCode!=='APPLIED')throw new EnrollmentTransactionUnavailable();
+    return {resource:result.resource,command:{id:result.command.id,replayed:result.command.replayed,outcomeCode:result.command.outcomeCode,
+      resultingRevision:result.command.resultingRevision,appliedAt:formatInstant(result.command.appliedAt)}};
+  }};
+}
 
 export function createPaymentVerification(pool:Pool,offering:(client:PoolClient)=>ReservationOfferingAccess){
   return createPaymentVerificationStore(pool,offering,{discover:discoverEnrollmentTopology,order:readEnrollmentOrder});

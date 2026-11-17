@@ -31,6 +31,18 @@ export interface Enrollment {
   readonly state:'ENROLLED'|'HISTORICAL';readonly periodStart:string;readonly periodEnd:string;readonly timeZone:'America/Lima';
   readonly schedule:readonly Slot[];readonly confirmedAt:string;readonly validUntil:string;
 }
+export type CoursePrice={readonly courseId:string;readonly defined:false;readonly amountMinor:null;readonly currency:null;readonly revision:null}
+  | {readonly courseId:string;readonly defined:true;readonly amountMinor:string;readonly currency:'PEN';readonly revision:string};
+export interface SetPrice {readonly commandId:string;readonly expectedRevision:string|null;readonly amountMinor:string;readonly currency:'PEN'}
+export interface FollowUpInput {readonly commandId:string;readonly content:string}
+export interface FollowUp {readonly id:string;readonly incidentId:string;readonly adminUserId:string;readonly commandId:string;readonly recordedAt:string;readonly content:string}
+export interface Incident {
+  readonly id:string;readonly orderId:string|null;readonly reason:string;readonly openedAt:string;readonly affectedGroupIds:readonly string[];readonly followUps:readonly FollowUp[];
+  readonly payment:{readonly amountUnits:string;readonly amountScale:number;readonly currency:string;readonly verifiedAt:string};
+}
+export interface AdministrativeOrder extends Order {readonly studentId:string}
+export interface CommandReceipt {readonly id:string;readonly replayed:boolean;readonly outcomeCode:'APPLIED'|'NO_CHANGE';readonly resultingRevision:string;readonly appliedAt:string}
+export interface CommandResult<T> {readonly resource:T;readonly command:CommandReceipt}
 const unavailable=():never=>{throw new ApiFailure(503,'TEMPORARILY_UNAVAILABLE','No se pudo confirmar el resultado. Consúltalo antes de reintentar manualmente.');};
 function object(value:unknown,required:readonly string[],optional:readonly string[]=[]):Record<string,unknown>{
   if(!value||typeof value!=='object'||Array.isArray(value))return unavailable();
@@ -91,8 +103,9 @@ function orderItem(value:unknown):OrderItem {
     ||!instant(r.groupStartAt)||!instant(r.enrollmentValidUntil)||point(r.groupStartAt)!>=point(r.enrollmentValidUntil)!)return unavailable();
   return Object.freeze({...r,schedule:slots(r.schedule)}) as unknown as OrderItem;
 }
+const orderFields=['id','state','revision','totalMinor','currency','confirmedAt','expiresAt','serverNow','items','paymentAllowed','paymentMessage','paymentState','incidentSummary'] as const;
 export function orderView(value:unknown):Order {
-  const r=object(value,['id','state','revision','totalMinor','currency','confirmedAt','expiresAt','serverNow','items','paymentAllowed','paymentMessage','paymentState','incidentSummary']);
+  const r=object(value,orderFields);
   if(!uuid(r.id)||typeof r.state!=='string'||!['RESERVED','EXPIRED','ENROLLED'].includes(r.state)||!money(r.revision)||BigInt(r.revision)<1n||BigInt(r.revision)>9223372036854775807n
     ||!money(r.totalMinor)||r.currency!=='PEN'||!instant(r.confirmedAt)||!instant(r.expiresAt)||!instant(r.serverNow)||!Array.isArray(r.items)||!r.items.length
     ||point(r.expiresAt)!-point(r.confirmedAt)!!==86400000000n||point(r.serverNow)!<point(r.confirmedAt)!
@@ -145,3 +158,67 @@ export function createEnrollmentApi(client:ApiClient){
   };
 }
 export type EnrollmentApi=ReturnType<typeof createEnrollmentApi>;
+
+const revision=(value:unknown):value is string=>money(value)&&BigInt(value)>0n&&BigInt(value)<=9223372036854775807n;
+const priceAmount=(value:unknown):value is string=>money(value)&&BigInt(value)<=9223372036854775807n;
+function coursePrice(value:unknown):CoursePrice {
+  const r=object(value,['courseId','defined','amountMinor','currency','revision']);if(!uuid(r.courseId))return unavailable();
+  if(r.defined===false&&r.amountMinor===null&&r.currency===null&&r.revision===null)return Object.freeze({courseId:r.courseId,defined:false,amountMinor:null,currency:null,revision:null});
+  if(r.defined!==true||!priceAmount(r.amountMinor)||r.currency!=='PEN'||!revision(r.revision))return unavailable();
+  return Object.freeze({courseId:r.courseId,defined:true,amountMinor:r.amountMinor,currency:'PEN',revision:r.revision});
+}
+function administrativeOrder(value:unknown):AdministrativeOrder {
+  const r=object(value,[...orderFields,'studentId']);if(!uuid(r.studentId))return unavailable();
+  const own=orderView(Object.fromEntries(orderFields.map(key=>[key,r[key]])));
+  return Object.freeze({id:own.id,studentId:r.studentId,state:own.state,revision:own.revision,totalMinor:own.totalMinor,currency:own.currency,
+    confirmedAt:own.confirmedAt,expiresAt:own.expiresAt,serverNow:own.serverNow,items:own.items,paymentAllowed:own.paymentAllowed,
+    paymentMessage:own.paymentMessage,paymentState:own.paymentState,incidentSummary:own.incidentSummary});
+}
+function followUp(value:unknown):FollowUp {
+  const r=object(value,['id','incidentId','adminUserId','commandId','recordedAt','content']);
+  if(!uuid(r.id)||!uuid(r.incidentId)||!uuid(r.adminUserId)||!uuid(r.commandId)||!instant(r.recordedAt)||!text(r.content))return unavailable();
+  return Object.freeze({id:r.id,incidentId:r.incidentId,adminUserId:r.adminUserId,commandId:r.commandId,recordedAt:r.recordedAt,content:r.content});
+}
+function incident(value:unknown):Incident {
+  const r=object(value,['id','orderId','reason','openedAt','affectedGroupIds','followUps','payment']);
+  if(!uuid(r.id)||!(r.orderId===null||uuid(r.orderId))||!text(r.reason)||!instant(r.openedAt)||!Array.isArray(r.affectedGroupIds)||!r.affectedGroupIds.every(uuid)
+    ||new Set(r.affectedGroupIds.map(id=>id.toLowerCase())).size!==r.affectedGroupIds.length||r.orderId===null&&r.affectedGroupIds.length!==0||!Array.isArray(r.followUps))return unavailable();
+  const p=object(r.payment,['amountUnits','amountScale','currency','verifiedAt']);
+  // Una incidencia puede conservar importe negativo o moneda incompatible: son
+  // hechos normalizados de investigación, no una autorización de cobro/matrícula.
+  if(typeof p.amountUnits!=='string'||! /^(?:0|-?[1-9]\d*)$/.test(p.amountUnits)||!integer(p.amountScale)||!text(p.currency)||!instant(p.verifiedAt))return unavailable();
+  const notes=r.followUps.map(followUp);if(notes.some(note=>note.incidentId.toLowerCase()!==reference(r.id as string))||new Set(notes.map(note=>note.id.toLowerCase())).size!==notes.length)return unavailable();
+  return Object.freeze({id:r.id,orderId:r.orderId,reason:r.reason,openedAt:r.openedAt,affectedGroupIds:Object.freeze([...r.affectedGroupIds]),followUps:Object.freeze(notes),
+    payment:Object.freeze({amountUnits:p.amountUnits,amountScale:p.amountScale,currency:p.currency,verifiedAt:p.verifiedAt})});
+}
+function commandResult<T>(value:unknown,parse:(value:unknown)=>T,commandId:string):CommandResult<T>{
+  const r=object(value,['resource','command']),c=object(r.command,['id','replayed','outcomeCode','resultingRevision','appliedAt']);
+  if(!uuid(c.id)||reference(c.id)!==reference(commandId)||typeof c.replayed!=='boolean'||!(c.outcomeCode==='APPLIED'||c.outcomeCode==='NO_CHANGE')||!revision(c.resultingRevision)||!instant(c.appliedAt))return unavailable();
+  return Object.freeze({resource:parse(r.resource),command:Object.freeze({id:c.id,replayed:c.replayed,outcomeCode:c.outcomeCode,resultingRevision:c.resultingRevision,appliedAt:c.appliedAt})});
+}
+/** Capacidad administrativa separada. Cada envío copia solo campos aprobados;
+ * no crea UI, polling, caché, otra identidad o replay automático. */
+export function createEnrollmentAdminApi(client:ApiClient){
+  return {
+    async price(id:string,signal?:AbortSignal){const courseId=reference(id),r=coursePrice(await client.request('/admin/enrollment/courses/'+courseId+'/price',{signal}));if(reference(r.courseId)!==courseId)return unavailable();return r;},
+    async setPrice(id:string,input:SetPrice,signal?:AbortSignal){
+      const courseId=reference(id),commandId=reference(input.commandId);
+      if(!(input.expectedRevision===null||revision(input.expectedRevision))||!priceAmount(input.amountMinor)||input.currency!=='PEN')return unavailable();
+      const result=commandResult(await client.request('/admin/enrollment/courses/'+courseId+'/price',{method:'PUT',body:{commandId,expectedRevision:input.expectedRevision,amountMinor:input.amountMinor,currency:'PEN'},signal}),coursePrice,commandId);
+      if(reference(result.resource.courseId)!==courseId||!result.resource.defined||result.resource.revision!==result.command.resultingRevision&& !result.command.replayed)return unavailable();return result;
+    },
+    async orders(input:{readonly page?:number;readonly pageSize?:number;readonly studentId?:string}={},signal?:AbortSignal){
+      const studentId=input.studentId===undefined?undefined:reference(input.studentId),result=paginated(await client.request('/admin/enrollment/orders',{query:{page:input.page??1,pageSize:input.pageSize??20,studentId},signal}),administrativeOrder);
+      if(studentId&&result.items.some(item=>reference(item.studentId)!==studentId))return unavailable();return result;
+    },
+    async order(id:string,signal?:AbortSignal){const orderId=reference(id),result=administrativeOrder(await client.request('/admin/enrollment/orders/'+orderId,{signal}));if(reference(result.id)!==orderId)return unavailable();return result;},
+    async incidents(input:Omit<Filters,'q'>={},signal?:AbortSignal){return paginated(await client.request('/admin/enrollment/incidents',{query:{page:input.page??1,pageSize:input.pageSize??20},signal}),incident);},
+    async incident(id:string,signal?:AbortSignal){const incidentId=reference(id),result=incident(await client.request('/admin/enrollment/incidents/'+incidentId,{signal}));if(reference(result.id)!==incidentId)return unavailable();return result;},
+    async followUp(id:string,input:FollowUpInput,signal?:AbortSignal){
+      const incidentId=reference(id),commandId=reference(input.commandId);if(!text(input.content))return unavailable();
+      const result=commandResult(await client.request('/admin/enrollment/incidents/'+incidentId+'/follow-ups',{method:'POST',body:{commandId,content:input.content},signal}),followUp,commandId);
+      if(reference(result.resource.incidentId)!==incidentId||reference(result.resource.commandId)!==commandId||result.resource.content!==input.content||result.command.outcomeCode!=='APPLIED'||result.command.resultingRevision!=='1'||result.resource.recordedAt!==result.command.appliedAt)return unavailable();return result;
+    },
+  };
+}
+export type EnrollmentAdminApi=ReturnType<typeof createEnrollmentAdminApi>;

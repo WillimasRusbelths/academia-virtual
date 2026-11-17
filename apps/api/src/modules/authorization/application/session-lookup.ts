@@ -1,4 +1,4 @@
-import { AuthorizationFailure, permits, type Permission, type SessionActor,
+import { AuthorizationFailure, permits, type SessionPermission, type SessionActor,
   type SessionRepository } from '../public/session.js';
 
 export const SESSION_LOOKUP = Symbol('SessionLookup');
@@ -7,10 +7,15 @@ export const SESSION_LOOKUP = Symbol('SessionLookup');
 export class SessionLookup {
   constructor(private readonly sessions: SessionRepository) {}
 
-  async authorize(secret: string | null, permission: Permission): Promise<SessionActor> {
+  async authorize(secret: string | null, permission: SessionPermission): Promise<SessionActor> {
     const actor = secret === null ? null : await this.sessions.lookup(secret);
     if (!actor) throw new AuthorizationFailure('AUTH_REQUIRED');
-    if (!permits(actor.role, permission)) throw new AuthorizationFailure('FORBIDDEN');
+    const allowed = typeof permission === 'string' ? permits(actor.role, permission)
+      : Array.isArray(permission) && (permission.length === 2 || (permission.length === 3 && permission[2] === 'materials:read-enrolled')) && permission[0] === 'materials:manage-all'
+        && permission[1] === 'materials:manage-own'
+        && (permits(actor.role, 'materials:manage-all') || permits(actor.role, 'materials:manage-own')
+          || (permission.length === 3 && permits(actor.role, 'materials:read-enrolled')));
+    if (!allowed) throw new AuthorizationFailure('FORBIDDEN');
     return actor;
   }
 

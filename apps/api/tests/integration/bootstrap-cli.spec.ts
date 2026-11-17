@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import { afterAll,afterEach,beforeAll,expect,test } from 'vitest';
 import { identityDatabase } from '../support/identity-database.js';
@@ -14,7 +15,7 @@ let context:IdentityTestDatabase;
 beforeAll(async()=>{context=await identityDatabase('us6_cli');},120000);
 afterEach(async()=>{
   // Solo el esquema t_* creado por esta suite; nunca se restablece una marca real.
-  await context.isolated.ownerQuery(`TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+  await truncateFixtureTables(context, `TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
 });
 afterAll(async()=>{await context?.cleanup();});

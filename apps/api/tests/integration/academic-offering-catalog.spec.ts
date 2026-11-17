@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'vitest';
 import { academicOfferingDataset } from '../support/academic-offering.js';
@@ -27,7 +28,7 @@ async function unavailable(path: string) {
 }
 beforeAll(async () => { data = await academicOfferingDataset('academic_catalog'); http = await us1Http(data); }, 120000);
 beforeEach(async () => {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await truncateFixtureTables(data.context, 'TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
   seed = await academicCatalogSeed(data);
 });
 afterAll(async () => { try { await http?.close(); } finally { await data?.cleanup(); } });
@@ -51,7 +52,7 @@ describe('T033 controles del contexto; NO catálogo implementado', () => {
 });
 describe('T033 catálogo HTTP/PG real — FR-006/009/010/011', () => {
   test('C01 vacío es 200 con página vacía; no falso error o disponibilidad', async () => {
-    await data.context.isolated.ownerQuery('TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse"');
+    await truncateFixtureTables(data.context, 'TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse"');
     expect((await (await get(routes()[0])).json()).data).toEqual({ items: [], total: 0, page: 1, pageSize: 20 });
   });
   test.each([1,2,3])('C02 filtra ocultos antes de contar/paginar cursos: página %i', async page => {

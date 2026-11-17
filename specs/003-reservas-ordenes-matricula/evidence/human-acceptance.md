@@ -30,3 +30,68 @@ El guion entregado incluía consultar oferta y entrar en Reservar; comparar hora
 - Las pruebas automatizadas de móvil, escritorio y teclado se mantienen como evidencia técnica separada en [US1](us1.md), sin sustituir observaciones humanas.
 - No se comunicaron correcciones pendientes de esta sesión. Las observaciones humanas adicionales de móvil, teclado y detalle de escenarios podrán ampliar esta evidencia.
 - El cierre corresponde a T042, observación humana de US1. No aprueba pagos, sandbox, las otras historias ni la aceptación humana integrada T089; tampoco cierra tareas humanas de otras especificaciones.
+
+
+## T083 — preparación administrativa, pendiente de observación
+
+2026-11-13, America/Lima. El responsable confirmó que puede probarlo en computador.
+Se preparó una sesión local temporal con cuentas ficticias y una incidencia de
+pago simulada explícitamente, usando el receptor/finalizador y la persistencia
+reales. La web respondió HTTP 200 desde el anfitrión. No hay resultados humanos
+comunicados para este recorrido: **T083 permanece pendiente**.
+
+El [guion de T083](t083-guide.md) describe precio, consulta, seguimiento, conservación
+de importe/plazo y separación de la vista del alumno. Se solicitó informar pasos
+realmente probados, comprensión de la resolución económica pendiente, dificultades
+y consentimiento si participa un alumno real, sin datos personales. La disponibilidad
+del responsable y la preparación técnica no sustituyen el ensayo. El resultado
+T042 anterior se conserva íntegro; no se cierran T089 ni tareas humanas de 001/002.
+
+
+### Continuidad del 2026-11-15
+
+La sesión temporal preparada el13 terminó durante la interrupción del entorno.
+No se recibieron resultados humanos del recorrido administrativo; la confirmación
+de disponibilidad en computador no permite cerrar T083. El enlace de aquella sesión
+no se presenta como activo. El ensayo debe retomarse cuando se comuniquen acciones
+y observaciones reales. T042 mantiene íntegro su registro anterior.
+
+
+## Preparación de T089 — sesión integrada pendiente
+
+2026-11-15, America/Lima. Se preparó el [guion integrado](human-integrated-guide.md)
+con casos HI01–HI09 para las cuatro historias y registro por participante, dispositivo,
+entrada y estado observado. No se ha realizado una sesión nueva en este bloque.
+La evidencia T042 original permanece íntegra; T083 sigue sin acciones/resultados
+humanos comunicados. Se solicitaron las observaciones reales y el estado de acceso
+al sandbox, sin pedir credenciales públicas. No se interpreta disponibilidad como
+resultado ni se atribuyen móvil o teclado a la prueba histórica en computador.
+
+T089 depende de T083 y T059/proveedor real. Se admite registrar observación parcial
+con su procedencia, pero no cerrar el recorrido integrado con simulación. El ensayo
+operacional [T090](operation.md) se preparó por separado y no ha comenzado.
+
+
+## T083 — resultado comunicado y cierre
+
+Registro: 2026-11-15, America/Lima. **T083 COMPLETADA** según confirmación
+del responsable en esta conversación. La fecha exacta del ensayo no fue indicada.
+Los apartados anteriores conservan el estado que tenían antes de esta confirmación.
+
+El responsable afirmó: «probe los pasos que me mencionaste que hiciera», en
+respuesta al recorrido de precio, consulta, seguimiento y vista del alumno en
+computador. Después respondió «si» a la pregunta de si la anotación se conservó
+y la incidencia siguió pendiente, sin generar matrícula ni devolución. Se registra
+ese resultado favorable del seguimiento; el agente no observó directamente el ensayo.
+
+La confirmación respalda uso real del recorrido indicado y la distinción entre
+seguimiento y resolución económica pendiente. No se comunicó un detalle separado
+de dificultades, tiempos o ayudas; no se inventa ausencia de dificultades ni
+resultados individuales adicionales. El uso de la vista STUDENT no acredita que
+haya participado otro alumno real. No se atribuye ensayo en móvil o solo con teclado.
+No se publica información personal ni se presenta la sesión histórica como activa.
+
+El responsable confirmó también que no dispone de acceso al sandbox de Izipay.
+T056–T059/D02 siguen pendientes; T089 integrada y T090 operacional no se cierran
+con este resultado. T042 conserva íntegro su resultado previo.
+[Registro saneado del cierre T083](t083-human-results.json).

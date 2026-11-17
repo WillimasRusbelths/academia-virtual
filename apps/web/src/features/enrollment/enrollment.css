@@ -15,4 +15,9 @@
 .enrollment-confirm { display: flex; gap: .65rem; align-items: flex-start; margin: 1rem 0; }
 .enrollment-confirm input { min-width: 1.25rem; min-height: 1.25rem; }
 .enrollment-page fieldset { min-width: 0; }
+.enrollment-admin input, .enrollment-admin select, .enrollment-admin textarea { display: block; box-sizing: border-box; width: 100%; max-width: 32rem; padding: .6rem; font: inherit; margin: .4rem 0 .75rem; }
+.enrollment-admin select { min-height: 2.75rem; }
+.enrollment-admin textarea { resize: vertical; }
+.enrollment-note { white-space: pre-wrap; overflow-wrap: anywhere; }
+.enrollment-admin form { margin: 1rem 0; }
 @media (max-width: 35rem) { .enrollment-page { padding: .75rem; } .enrollment-actions > button { width: 100%; } }

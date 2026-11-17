@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import type { Pool } from 'pg';
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'vitest';
@@ -32,7 +33,7 @@ beforeAll(async () => {
   adminB = (await sessions.lookup(data.secondAdmin.secret))!;
 }, 120000);
 beforeEach(async () => {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await truncateFixtureTables(data.context, 'TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
   await db().query(`UPDATE "User" SET role='TEACHER',status='ACTIVE',"disabledAt"=NULL WHERE id=$1`, [data.account('TEACHER').id]);
   courses = [randomUUID(), randomUUID()]; groups = [randomUUID(), randomUUID()];
   for (let i = 0; i < 2; i++) {

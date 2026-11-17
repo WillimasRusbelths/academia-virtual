@@ -1,0 +1,77 @@
+{
+  "clientDate": "2026-11-16",
+  "clientTimezone": "America/Lima",
+  "scope": "T001?T004 preparation only",
+  "tasks": {
+    "completed": 4,
+    "pending": 64
+  },
+  "coverage": {
+    "mv": 13,
+    "fr": 20,
+    "sc": 7,
+    "scenarios": 19
+  },
+  "validation": {
+    "vitest": {
+      "files": 1,
+      "passed": 6,
+      "exitCode": 0,
+      "durationSeconds": 7.95
+    },
+    "eslint": {
+      "exitCode": 0
+    },
+    "typecheck": {
+      "exitCode": 0
+    },
+    "independentImageDecoder": "System.Drawing: PNG/JPEG 1x1",
+    "gitDiffCheck": {
+      "exitCode": 0
+    }
+  },
+  "preservation": {
+    "baselineFiles": 982,
+    "expectedChanges": [
+      "specs/004-materiales-estudio/tasks.md"
+    ],
+    "unexpectedChanges": [],
+    "previousSpecsUnchanged": true,
+    "privateConfigurationUnchanged": true
+  },
+  "files": [
+    {
+      "path": "apps/api/tests/support/materials-files.ts",
+      "sha256": "4ca288a53cb248ba99afa72af6c431967ce1656ee0875d08fb3a892198a39ef1"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-files.spec.ts",
+      "sha256": "8962c9ec74a5c8fc5aad714d5d29606cbf4364a1792be150d2d973c706da5b41"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "07ae05fdd48a227ae7fe14d82aa60b4e9ddc70bf34168f08adffa5ea440cdecb"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "e5709602cc42398789785115b61d56e59b036d8ff719b05024dd718bcf565ffd"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t004-corpus.json",
+      "sha256": "a821579822bf035cd918497ff803578ccb746e27fcff0ce8f80d830e39e766e4"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "826caed416ee5e06ad8c91810d10b750b748a72ebf2b0577ab81a5d29dfd23f3"
+    }
+  ],
+  "notExecuted": [
+    "PostgreSQL/migrations",
+    "HTTP/UI/E2E",
+    "general build/regression",
+    "remote CI",
+    "restore",
+    "human acceptance",
+    "D10/D13"
+  ]
+}

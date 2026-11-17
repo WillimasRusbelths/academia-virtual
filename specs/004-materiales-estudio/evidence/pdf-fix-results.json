@@ -1,0 +1,212 @@
+{
+  "clientDate": "2026-11-17",
+  "timezone": "America/Lima",
+  "issue": "H-PDF-01",
+  "scope": "PDF trailer-only incremental updates with empty xref subsections",
+  "status": "technical-fix-verified-human-retest-pending",
+  "tasks": {
+    "completed": 63,
+    "pending": 5,
+    "t064": "human-retest-pending"
+  },
+  "validation": {
+    "initialRegression": {
+      "passed": 2,
+      "failed": 3,
+      "total": 5
+    },
+    "final": {
+      "passed": 107,
+      "failed": 0,
+      "skipped": 0,
+      "files": 6,
+      "reportSha256": "85f0631889719d678b246f08bc47e32b61e71ff542e7e84b2b2d8c52808616f5"
+    },
+    "lintApiExitCode": 0,
+    "regressionTypecheckExitCode": 0,
+    "apiBuildExitCode": 0,
+    "providedPdf": {
+      "checkedAt": "2026-11-17T18:04:17.602Z",
+      "bytes": 1342144,
+      "sha256": "e161d9708a99dc6581eb235e581787f636dc58c8d23ad455b7a42c73aa9bb1e8",
+      "uploadStatus": 201,
+      "state": "PREPARED",
+      "downloadStatus": 200,
+      "downloadFullBytesEqual": true,
+      "downloadSha256": "e161d9708a99dc6581eb235e581787f636dc58c8d23ad455b7a42c73aa9bb1e8",
+      "published": false,
+      "sameSchema": true,
+      "previousDataPreserved": true,
+      "humanAcceptance": false
+    },
+    "sessionPreserved": {
+      "sameSchema": true,
+      "countsPreserved": true,
+      "noMigrations": true,
+      "noFixtures": true
+    },
+    "originalProvidedPdfNotCommitted": true,
+    "syntheticRegressionsOnly": true,
+    "reference": "https://github.com/pdf-association/pdf-issues/issues/147"
+  },
+  "preservation": {
+    "comparedFiles": 1113,
+    "changedFiles": [
+      "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "apps/api/src/modules/materials/infrastructure/pdf-structure.ts",
+      "specs/004-materiales-estudio/evidence/human-acceptance.md"
+    ],
+    "onlyExpectedFilesChanged": true,
+    "previousTestsUnchanged": true,
+    "migrationsUnchanged": true,
+    "dependenciesUnchanged": true,
+    "manualEnvironmentUnchanged": true,
+    "branch": "feat/003-reservas-ordenes-matricula",
+    "humanSessionAccountsAndDataPreserved": true,
+    "checkpoints": [
+      {
+        "path": "specs/004-materiales-estudio/evidence/t001-baseline.json",
+        "sha256": "f9d6286c065988a6308dde38cbf17cc60e02d26fcf10ba50af7eccfe4aa6d052"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t005-t008-results.json",
+        "sha256": "638bfc50b4e1b33393d0a9b780a97e3fcaccce3d2b1a0e80deb3ada95def1578"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+        "sha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t017-t019-results.json",
+        "sha256": "ae0866a5e9e86aaeeb1b2201156a48311b1cf27df9c2c46751adfa78dd17f87a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t020-results.json",
+        "sha256": "1b248cc05182b101e9d1acf889d2137ad6503a851558c4e9cc8e86b15f9e622d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t021-results.json",
+        "sha256": "77300d9032c75d57b4bf518886df927e11210d19a9b6c6e4892f123b9a91b660"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t022-results.json",
+        "sha256": "8592260ff8e79d094752f0c8c4000f269394029a38e1365af78c8aca196f7d8e"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t023-t024-results.json",
+        "sha256": "505a22028c03b04590998cfbbd68b25cef5f8f0bf73c2b6a95c936a2e0dc9c38"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t025-t026-results.json",
+        "sha256": "113f2bc93f41a92a8f7c9e9175c697d192e096cfc6606b9f6d3b4ba941e7156a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t027-t029-results.json",
+        "sha256": "63199b64369291a726e2b4e4653208192825e13a09c68f2f410df692695a304d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t030-t032-results.json",
+        "sha256": "a094a5b58c9c1db1d313cba2962c283d5cbbff1175a7cc60f4b65e32eee035ed"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t033-t034-results.json",
+        "sha256": "39efe9eab19e52880acbb85034a6d1c469f331e165519ae90589dd408d8cfde6"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t035-t036-results.json",
+        "sha256": "3cc1e88ef13edaaf661a51fed53caaf48c078cc8050cfec87d3e3deaf2409d30"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t037-t038-results.json",
+        "sha256": "599d0d445cb2fa48d12dadc0944875d8f024948428f7216c1c12718584f0c480"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t039-t040-results.json",
+        "sha256": "477e8bce6245361bd089caf663b2cc261379dc7bbcd1946907db3af2339b8eeb"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t041-t042-results.json",
+        "sha256": "39035658f20dfd567bf9d51c9c2a0917a468e34f390ef3c605e119233c67ff9a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t043-t044-results.json",
+        "sha256": "d6acea1dff1457bd95339b3b0a715185fd392ba011b34fb1cfb220f2d71342a7"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t045-t047-results.json",
+        "sha256": "d02632a7e11c29b84e00c1ede57247c97ea6f1043b9c3fd9403dbab26a16d63b"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t048-t050-results.json",
+        "sha256": "41069c87773eef76bce63c1b35e63881e17083eca15a30bcc02abaf2c236a11b"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t051-t053-results.json",
+        "sha256": "49a8c34a786f4a3818b2d4e22a7ba7548adc98e3e6e2dcb9066d267b84dee235"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t054-t056-results.json",
+        "sha256": "bd63a0c2f8fb6032d3cfe350194f2ffa12cfee7d4a05df6af83839ab4d7b3a4a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t057-t059-results.json",
+        "sha256": "61e5b6cfd2486d87a735a2e94a9c39975749d6ccb123affb21ab4f07aeb5a03c"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t060-results.json",
+        "sha256": "dd74568a1c5115bb928e41a2a3124b0052155fad74d1da6d1826702b686f2a3c"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t061-t062-results.json",
+        "sha256": "4e09490f2451dfc544af36d6f65995826a1fcd9236ab2755829f48e231de7c99"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t063-t064-results.json",
+        "sha256": "d66a9df95f1aca4fe995e2cd218f70b084197eca81d1c329608e69de31ad0c24"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t065-t066-results.json",
+        "sha256": "17feb496939372d884d9ac8f6847f0d8a83f1e4d8079936bba69ed8726428b2d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t067-t068-results.json",
+        "sha256": "0b0fabdd43c52d15fb6d277073992666d3d032fe47b5385f73f5f848b16f8711"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t064-session-ready-results.json",
+        "sha256": "0fd998a825fa322fe08da0d6b88295059aeb1192699b33510194f757624665a3"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/pdf-structure.ts",
+      "sha256": "bef61a23a7a8f2ae1b9de225e031cccf21e2da1f5282649d7020a147b96580da"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/human-acceptance.md",
+      "sha256": "a4c5445527d89c3b11059e8350e0f70a704630850e8a78deb6321bbf3539e9bb"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "e93b632f7dc4b9688595c63c45b4fab0a1bfe0c60c360c731c10331b25d73582"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-pdf-structure.spec.ts",
+      "sha256": "e7589b0a18811bd717da096fe7e4cdf796bfe742fa745ce992a7a179df2fb0bc"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/pdf-diagnostic.md",
+      "sha256": "20d05944047e70a936db80430c9709878f9fdf249e9f1849580b38f38e8944ba"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/pdf-fix.md",
+      "sha256": "f7d7b1b3f8e146df4e6727be4b53100321fa81113e002bcf3cdf8ef1751d7f0c"
+    }
+  ],
+  "limitations": [
+    "Only supplied PDF confirmed; other user PDFs need retest",
+    "No human acceptance inferred from technical checks",
+    "D10/D13, remote CI, physical 24-hour operation, provider and 001–003 remain pending"
+  ]
+}

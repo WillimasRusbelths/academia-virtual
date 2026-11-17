@@ -7,15 +7,17 @@ import { PublicationAction } from './publication-action';
 import { MaintenanceAction } from './maintenance-action';
 import { LoadingState, OfferingLayout, stateLabels, useOfferingResource } from './offering-state';
 
-export function AdminGroupPage({ api, id, navigate }: { api: ApiClient; id: string; navigate: (path: string) => void }) {
+export function AdminGroupPage({ api, id, navigate, materialsHref }: { api: ApiClient; id: string; navigate: (path: string) => void;materialsHref?:string }) {
   const client = useMemo(() => academicOfferingApi(api), [api]); const load = useCallback((signal: AbortSignal) => client.group(id, signal), [client, id]);
   const resource = useOfferingResource(load); const [busy, setBusy] = useState(false); const [formVersion, setFormVersion] = useState(0);
   const [dirtyGroup, setDirtyGroup] = useState(false); const [dirtySchedule, setDirtySchedule] = useState(false);
   const [errors, setErrors] = useState<Readonly<Record<string, string>>>({});
   return <OfferingLayout title="Preparar grupo"><LoadingState loading={resource.loading} error={resource.error} retry={resource.reload}/>
     {resource.data && <><p><a href={`/admin/oferta/cursos/${resource.data.courseId}`}>Volver al curso</a></p>
+      {materialsHref&&<p><a href={materialsHref}>Gestionar materiales del grupo</a></p>}
       <p>{stateLabels[resource.data.state]} · {resource.data.studentVisible ? 'Visible para alumnos' : 'No visible para alumnos'}</p>
       <p>Capacidad máxima: {resource.data.capacity === null ? 'Sin configurar' : `${resource.data.capacity} alumnos`}. Ocupación y disponibilidad no calculadas.</p>
+      <p>Si existen compromisos vigentes o incidencias pendientes, solo se admite cambiar nombre, descripción o docente tras retirar el grupo. El servidor protege período, horarios, capacidad y cancelación. Guardar no republica; revisa los datos y confirma la publicación por separado. El curso del grupo no se puede cambiar.</p>
       {resource.data.state === 'CANCELLED' && <section aria-label="Cancelación del grupo"><h2>Grupo cancelado</h2>
         <p>{resource.data.cancellationReason}</p><p>Cancelación confirmada: {resource.data.cancelledAt}</p></section>}
       {resource.data.teacher && !resource.data.teacher.eligible && <p>Docente no habilitado: {resource.data.teacher.name}</p>}

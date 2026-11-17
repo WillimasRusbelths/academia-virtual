@@ -3,11 +3,12 @@
 Proyecto de academia virtual para un trabajo final de curso, con desarrollo local
 mediante Spec-Driven Development con GitHub Spec Kit.
 
-**Estado al 2026-10-30:** React/NestJS y PostgreSQL, monolito modular y Docker Compose local.
+**Estado al 2026-11-15:** React/NestJS y PostgreSQL, monolito modular y Docker Compose local.
 Requisitos confirmados: **al menos 15 000 cuentas registradas**, objetivo de **2500
 usuarios concurrentes activos todavía sin demostrar**, y reserva de cupo previa al pago
 por **24 horas exactas desde confirmación del servidor**. Pago verificado confirma
-matrícula; vencimiento sin pago libera cupo según conciliación consistente aún por diseñar.
+matrícula; vencimiento sin pago libera cupo mediante conciliación implementada y
+verificada localmente en 003. La integración real del proveedor sigue pendiente.
 Presupuesto **S/300 total**. [Planificación y decisiones abiertas](docs/planificacion/reservas-capacidad.md),
 [backlog futuro](docs/planificacion/tasks.md) y [smokes recientes](docs/planificacion/evidence/2026-10-23-smokes.md).
 Se propone preparar VPS y acceso controlado en apertura; AWS se evaluará después de
@@ -21,8 +22,8 @@ T104 sigue aplazada hasta diez personas reales en la versión integrada y establ
 [T108 es preliminar](specs/001-identidad-acceso-roles/evidence/acceptance.md). Son **106/108 tareas**
 completas, sin aceptación integral. El bootstrap intermitente sigue abierto, sin causa confirmada.
 Capacidad sin aprobar: [T103 conserva ejecución/informe e incumplimientos](specs/001-identidad-acceso-roles/evidence/load-resources.md).
-Las nuevas cargas completas esperan a matrícula; se prepara la evaluación VPS, sin
-ejecutarla ni contratar. D10/D13 y SMTP real siguen pendientes.
+Las nuevas cargas completas requieren las puertas D02/D10/D13 y autorización del
+entorno VPS; se prepara su evaluación, sin ejecutarla ni contratar. SMTP real sigue pendiente.
 La purga es CLI explícita, sin programación. Operación actual y SMTP futuro:
 [quickstart](specs/001-identidad-acceso-roles/quickstart.md).
 
@@ -52,8 +53,23 @@ El [cierre parcial T074](specs/002-oferta-academica/evidence/acceptance.md) reú
 la matriz FR/SC y las limitaciones; T073 sigue aplazada y ambas tareas sin marcar.
 H-CAP-01 se [corrigió y verificó automáticamente](specs/002-oferta-academica/evidence/h-cap-01.md):
 el catálogo inicial indica ocupación/disponibilidad no calculadas. Esto no sustituye T073/SC-002 humano.
-Reservas, órdenes y matrícula requieren su propio spec y no amplían 002;
-no hay integración de pagos/video ni despliegue acreditado.
+Reservas, órdenes y matrícula pertenecen al [spec 003](specs/003-reservas-ordenes-matricula/spec.md).
+Sus cuatro historias tienen núcleo local implementado y verificado en
+[T084](specs/003-reservas-ordenes-matricula/evidence/acceptance.md): 4135 casos únicos y
+4336 ejecuciones finales seleccionadas, con procedencia y correcciones detalladas.
+Son resultados registrados, no pruebas ejecutadas de nuevo por esta actualización.
+[T085](specs/003-reservas-ordenes-matricula/evidence/t085.md) incorpora E2E003 y tipos
+a CI; Actions remoto y su presupuesto de 20 minutos siguen sin acreditar.
+[T086](specs/003-reservas-ordenes-matricula/evidence/recovery.md) comprueba upgrade
+0005→0007 y restauración aislada. D13 operativo y 24 horas físicas siguen pendientes.
+La aceptación humana US1/T042 fue favorable en computador; T083 solo cuenta con
+disponibilidad del responsable, y T089/T094 siguen abiertos. Izipay/D02 y resolución
+económica requieren aprobación propia antes de cobros reales; no hay pagos reales,
+integración de video ni despliegue acreditados.
+
+<details>
+<summary>Historia de preparación 003 hasta RV001/RP007 (2026-10-30; estados de diseño)</summary>
+
 RP001 conserva el [inventario](specs/003-reservas-ordenes-matricula/research.md) desde adca8e6;
 RP002 prepara el [borrador 003](specs/003-reservas-ordenes-matricula/spec.md) y su
 [checklist](specs/003-reservas-ordenes-matricula/checklists/requirements.md), 10/16 y sin aprobación para plan.
@@ -106,6 +122,9 @@ no detectó contradicciones nuevas críticas/altas/medias; no acredita comportam
 [Revisión RV001/RP007](specs/003-reservas-ordenes-matricula/evidence/rv001-rp007-results.json).
 Primer bloque recomendado de implementación: **T001–T004**.
 [Revisión documental RP004](specs/003-reservas-ordenes-matricula/evidence/rp004-results.json).
+
+</details>
+
 La configuración por entorno y el esquema de identidad con cuatro migraciones cuentan con
 [pruebas de persistencia](specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md).
 Las [reglas, credenciales y cuotas persistidas](specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md)
@@ -119,7 +138,37 @@ Las pruebas históricas de 1000 se conservan completas, con sus fallos y límite
 El presupuesto de infraestructura y servicios es **S/300 en total**, destinado a despliegue
 y pruebas necesarias, no a financiar una operación permanente. Al menos 15 000 cuentas
 no equivalen a usuarios activos, peticiones en vuelo ni reservas. La capacidad configurada
-por grupo es de 1–50 según PA-04 de 002; ocupación/disponibilidad no se calculan todavía.
+por grupo es de 1–50 según PA-04 de 002. El catálogo 002 mantiene su proyección sin
+disponibilidad calculada; 003 calcula plazas disponibles en su recorrido `/reservar`.
+
+## Reservas, órdenes y matrícula implementadas
+
+El alumno usa `/reservar`, `/mis-ordenes` y `/mis-matriculas`. La selección conjunta
+se confirma completa o se rechaza, con precio PEN del servidor y snapshots originales.
+La admisión persistida define prioridad; una orden con reservas vigentes por alumno,
+un grupo por curso y control de conflictos propios, incluso ocultos. Se permiten
+franjas contiguas. La confirmación exige oferta visible, docente/revisión vigente,
+precio y cupo antes de las 00:00 de la fecha inicial en America/Lima.
+
+El plazo es de 86 400 segundos desde confirmación; consulta y reintentos recuperan
+la misma intención sin renovarlo. El vencimiento efectivo y su materialización
+idempotente liberan cupo. Retiro u ocultamiento conservan compromisos y plazo, y
+bloquean inicio de pago y confirmación total mientras falte elegibilidad. Los tests
+locales usan pagos verificados simulados para comprobar conversión atómica o incidencia;
+el adaptador real no está conectado y la iniciación devuelve indisponibilidad segura.
+Una pantalla de éxito no acredita pago. No se habilitan cobros reales.
+
+El administrador fija precios en `/admin/precios`, consulta órdenes e incidencias en
+`/admin/compromisos` y anota seguimiento en `/admin/incidencias/:id`. El seguimiento
+no resuelve incidencias ni ejecuta devoluciones, traslados o matrículas manuales.
+Los bloqueantes vigentes impiden editar curso, período, horarios, capacidad o cancelar;
+textos y sustitución docente siguen las reglas aprobadas. Historial finalizado no
+revive por editar o republicar. Sin modificación/cancelación voluntaria de compromisos;
+tras vencer, una nueva intención no impone sanción ni espera por abandono.
+
+[Guía local 003](specs/003-reservas-ordenes-matricula/quickstart.md),
+[tareas y puertas](specs/003-reservas-ordenes-matricula/tasks.md) y
+[aceptación humana](specs/003-reservas-ordenes-matricula/evidence/human-acceptance.md).
 
 ## Oferta académica implementada
 
@@ -134,13 +183,15 @@ estado y sin gestión; el visitante no accede. Perfil, cuentas y cierre se conse
 Backend comprueba permisos/pertenencia; la navegación no sustituye autorización.
 Horarios en America/Lima, sin cruce de medianoche, con franjas contiguas permitidas.
 Perder habilitación docente oculta la oferta afectada; recuperarla exige revisión y
-republicación. Capacidad máxima no equivale a plazas libres: ocupación/disponibilidad
-no calculadas, sin acciones de reservar, pagar o matricularse.
+republicación. En `/oferta`, capacidad máxima no equivale a plazas libres: el contrato
+002 conserva ocupación/disponibilidad no calculadas y no incorpora acciones financieras.
+La disponibilidad real y las operaciones de matrícula pertenecen a las rutas 003.
 
 [Guía local](specs/002-oferta-academica/quickstart.md),
 [arquitectura vigente](ops/local/architecture.md) y
 [alcance y límites](docs/alcance-mvp.md). La migración 0005 es aditiva; conservar las
-cuatro migraciones de identidad y seguir recuperación antes de datos persistentes.
+cuatro migraciones de identidad y las aditivas 0006–0007 de matrícula. Seguir el
+procedimiento de recuperación antes de actualizar datos persistentes.
 
 ## Ejecución local
 
@@ -177,6 +228,7 @@ persistencia y solución de problemas. Detener con `docker compose down`, sin `-
 - [Planificación vigente de reservas/capacidad](docs/planificacion/reservas-capacidad.md):
   24 horas confirmadas, escenarios, pendientes, VPS propuesto y continuidad de los specs.
 - [Oferta académica](specs/002-oferta-academica/tasks.md): cuatro historias con evidencia automática; aceptación humana/integral pendiente.
+- [Reservas, órdenes y matrícula](specs/003-reservas-ordenes-matricula/tasks.md): núcleo local verificado; proveedor, humanos integrados, operación y capacidad pendientes.
 - [Identidad, autenticación y acceso por roles](specs/001-identidad-acceso-roles/spec.md):
   primera especificación revisada, con correo verificado, recuperación por correo, un rol
   por cuenta y [checklist de calidad](specs/001-identidad-acceso-roles/checklists/requirements.md).
@@ -220,7 +272,7 @@ elegido; reserva de varios cursos toda junta o ninguna y 24 horas exactas.
 La prioridad registrada por servidor, unicidad vigente por curso, matriz financiera
 y vigencia de matrícula también están confirmadas. El alcance funcional está aclarado o delimitado; integración,
 resolución económica antes de cobros reales, capacidad y operación siguen sus puertas.
-No se atribuye implementación. **Izipay es la pasarela elegida para el MVP** desde el
+La implementación y su verificación local se describen arriba. **Izipay es la pasarela elegida para el MVP** desde el
 2026-09-23 y sustituye a Culqi, que figuraba como candidata inicial. La integración no está
 implementada; siguen pendientes tarifas finales, límites, acceso al entorno de pruebas y
 habilitación de Yape para la modalidad contratada. No se asume capacidad ilimitada.
@@ -233,7 +285,8 @@ React, TypeScript y Vite para el frontend; NestJS como monolito modular con Type
 PostgreSQL 16.14 y Prisma, con Mailpit 1.31.3 para correo local. Compose construye las
 imágenes Linux de API/web con `npm ci` y conserva los datos de PostgreSQL en un volumen.
 La API y la web incorporan los flujos de acceso/cierre y registro/verificación de identidad;
-la oferta académica tiene sus cuatro historias verificadas automáticamente en 002, sin reservas/matrícula.
+la oferta académica tiene sus cuatro historias verificadas automáticamente en 002,
+y reservas/matrícula se incorporan en 003 sin ampliar la proyección del catálogo 002.
 
 Socket.IO autorizado por clase sigue propuesto. YouTube Live con OBS es la elección
 de video del MVP según DA03 y DEC01; integración y control de acceso pendientes.

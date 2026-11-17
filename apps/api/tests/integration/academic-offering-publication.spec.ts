@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'vitest';
 import { academicOfferingDataset } from '../support/academic-offering.js';
@@ -64,7 +65,7 @@ async function loseAndRecover(kind: 'role' | 'status' | 'verification') {
 beforeAll(async () => { data = await academicOfferingDataset('academic_publication'); http = await us1Http(data); }, 120000);
 beforeEach(async () => {
   // Solo las cinco tablas académicas del esquema de esta suite. No identidad ni base manual.
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await truncateFixtureTables(data.context, 'TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
   await pool().query(`UPDATE "User" SET role='TEACHER',status='ACTIVE',"disabledAt"=NULL,"emailVerifiedAt"=clock_timestamp() WHERE id=$1`, [data.account('TEACHER').id]);
   seed = await preparationSeed(pool());
   await pool().query('UPDATE "AcademicGroup" SET "teacherUserId"=$2 WHERE id=$1', [seed.groupId, data.account('TEACHER').id]);
@@ -74,11 +75,11 @@ beforeEach(async () => {
 afterAll(async () => { try { await http?.close(); } finally { await data?.cleanup(); } });
 
 describe('T032 controles reales y proyecciones existentes; NO publicación aprobada', () => {
-  test('I01 AppModule real, conexión observadora distinta, cinco migraciones y sesión administrativa', async () => {
+  test('I01 AppModule real, conexión observadora distinta, migraciones vigentes y sesión administrativa', async () => {
     const a = (await http.database.pool.query('SELECT current_schema() AS schema,pg_backend_pid() AS pid')).rows[0];
     const b = (await pool().query('SELECT current_schema() AS schema,pg_backend_pid() AS pid')).rows[0];
     expect(a.schema).toBe(data.context.isolated.schema); expect(b.schema).toBe(a.schema); expect(b.pid).not.toBe(a.pid);
-    expect((await pool().query('SELECT 1 FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(5);
+    expect((await pool().query('SELECT 1 FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(9);
     expect((await http.get('/me', admin())).status).toBe(200);
   });
   test('I02 SQL de fixture preparado no fabrica comandos ni auditoría; directorio mínimo', async () => {

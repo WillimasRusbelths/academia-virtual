@@ -4,7 +4,8 @@ import type { Role } from '../../users/public/account.js';
 import { SessionLookup } from '../application/session-lookup.js';
 import type { SessionActor, SessionRepository } from '../public/session.js';
 import { EnrollmentAccess } from '../../enrollment/application/access.js';
-import { AuthorizationFailure, SessionStoreUnavailable } from '../public/session.js';
+import { AuthorizationFailure, SessionStoreUnavailable, MATERIALS_MANAGEMENT_POLICY, MATERIALS_READ_POLICY } from '../public/session.js';
+import type { SessionPermission } from '../public/session.js';
 import type { EnrollmentPermission, OwnEnrollmentPermission } from '../../enrollment/application/ports.js';
 
 const academicMatrix = [
@@ -12,6 +13,54 @@ const academicMatrix = [
   ['STUDENT', 'academic:manage', false], ['STUDENT', 'academic:read-published', true], ['STUDENT', 'academic:read-own', false],
   ['TEACHER', 'academic:manage', false], ['TEACHER', 'academic:read-published', false], ['TEACHER', 'academic:read-own', true],
 ] as const;
+
+test.each(['ADMIN', 'TEACHER', 'STUDENT'] as const)('closed materials read policy for %s preserves manager separation', async role => {
+  const actor: SessionActor = { userId: 'synthetic-actor', sessionId: 'synthetic-session', role, authVersion: 0n };
+  const lookup = new SessionLookup({ lookup: async () => actor, accept: async () => true, revoke: async () => {} });
+  expect(await lookup.authorize('synthetic-secret', MATERIALS_READ_POLICY)).toBe(actor);
+  await expect(lookup.authorize(null, MATERIALS_READ_POLICY)).rejects.toMatchObject({ code: 'AUTH_REQUIRED' });
+  for (const policy of [[...MATERIALS_READ_POLICY].reverse(), [...MATERIALS_READ_POLICY, 'profile:read'],
+    ['materials:manage-all', 'materials:read-enrolled'], ['materials:manage-all', 'materials:manage-own', 'unknown']]) {
+    await expect(lookup.authorize('synthetic-secret', policy as unknown as SessionPermission)).rejects.toMatchObject({ code: 'FORBIDDEN' });
+  }
+});
+
+test.each(['ADMIN', 'TEACHER', 'STUDENT'] as const)('shared materials manager policy for %s', async role => {
+  const actor: SessionActor = { userId: 'synthetic-actor', sessionId: 'synthetic-session', role, authVersion: 0n };
+  const sessions: SessionRepository = { lookup: async () => actor, accept: async () => true, revoke: async () => {} };
+  const lookup = new SessionLookup(sessions);
+  if (role === 'STUDENT') await expect(lookup.authorize('synthetic-secret', MATERIALS_MANAGEMENT_POLICY)).rejects.toMatchObject({ code: 'FORBIDDEN' });
+  else expect(await lookup.authorize('synthetic-secret', MATERIALS_MANAGEMENT_POLICY)).toBe(actor);
+  await expect(lookup.authorize(null, MATERIALS_MANAGEMENT_POLICY)).rejects.toMatchObject({ code: 'AUTH_REQUIRED' });
+  for (const policy of [[], ['profile:read'], ['materials:manage-all'], ['materials:manage-own', 'materials:manage-all'],
+    ['materials:manage-all', 'materials:read-enrolled'], ['materials:manage-all', 'materials:manage-own', 'profile:read']]) {
+    await expect(lookup.authorize('synthetic-secret', policy as unknown as SessionPermission)).rejects.toMatchObject({ code: 'FORBIDDEN' });
+  }
+});
+
+const materialsMatrix = (['ADMIN', 'TEACHER', 'STUDENT'] as const).flatMap(role =>
+  (['materials:manage-all', 'materials:manage-own', 'materials:read-enrolled'] as const).map(permission => ({
+    role, permission, allowed: permission === 'materials:manage-all' ? role === 'ADMIN'
+      : permission === 'materials:manage-own' ? role === 'TEACHER' : role === 'STUDENT',
+  })));
+test.each(materialsMatrix)('materials closed permission $role / $permission = $allowed', ({ role, permission, allowed }) => {
+  expect(permits(role, permission as Permission)).toBe(allowed);
+});
+test.each(materialsMatrix)('materials session authorization $role / $permission = $allowed', async ({ role, permission, allowed }) => {
+  const actor: SessionActor = { userId: 'material-actor', sessionId: 'material-session', authVersion: 0n, role };
+  const repository: SessionRepository = { lookup: async () => actor, accept: async () => true, revoke: async () => {} };
+  const result = new SessionLookup(repository).authorize('synthetic-secret', permission as Permission);
+  if (allowed) expect(await result).toBe(actor);
+  else await expect(result).rejects.toMatchObject({ code: 'FORBIDDEN' });
+});
+test('materials unknown roles/permissions and visitors default to deny', () => {
+  for (const role of ['SYSTEM', 'UNKNOWN', 'VISITOR', '', null, undefined]) {
+    for (const permission of ['materials:manage-all', 'materials:manage-own', 'materials:read-enrolled']) {
+      expect(permits(role as Role, permission as Permission)).toBe(false);
+    }
+  }
+  for (const role of ['ADMIN', 'TEACHER', 'STUDENT'] as const) expect(permits(role, 'materials:unknown' as Permission)).toBe(false);
+});
 
 test.each(academicMatrix)('matriz académica %s / %s = %s', (role, permission, allowed) => {
   expect(permits(role, permission)).toBe(allowed);

@@ -13,6 +13,7 @@ import { academicOfferingDataset } from '../../../api/tests/support/academic-off
 import { prepareEnrollmentFixture } from '../../../api/tests/support/enrollment.js';
 import { enrollmentClock } from './enrollment-clock';
 import { AppModule } from '../../../api/dist/src/app.module.js';
+import { RESERVATION_EXPIRATION_LIFECYCLE } from '../../../api/dist/src/modules/enrollment/enrollment.module.js';
 import * as paymentBindings from '../../../api/dist/src/modules/enrollment/application/payments.js';
 import * as paymentStores from '../../../api/dist/src/modules/enrollment/infrastructure/enrollment-store.js';
 import { createDatabase } from '../../../api/dist/src/infrastructure/database/database.js';
@@ -39,10 +40,15 @@ async function createPaymentBrowser(){
     const calls:GatewayAttempt[]=[],control={result:{state:'PENDING',providerReference:'fixture-operation'} as GatewayInitiation};
     const gateway:PaymentGateway={async initiate(input){calls.push({...input});return control.result;},async recover(){return {state:'UNRESOLVED'};},async verify(){return {state:'UNRESOLVED'};}};
     const environment={...data.context.environment,appOrigin:'http://localhost:5173'};
-    database=createDatabase(environment);clock.configure(database.pool);
-    const builder=Test.createTestingModule({imports:[AppModule.forRoot(environment,database)]});
-    const binding=Reflect.get(paymentBindings,'PAYMENT_GATEWAY');if(binding!==undefined){builder.overrideProvider(binding).useValue(gateway);builder.overrideProvider(Reflect.get(paymentBindings,'PAYMENT_CONFIGURATION')).useValue({providerScope:'fixture/provider/merchant/sandbox'});}
-    app=(await builder.compile()).createNestApplication<NestExpressApplication>({logger:false,bodyParser:false});configureTransport(app,environment);await app.listen(0,'127.0.0.1');const backend=await app.getUrl();
+    async function boot(port=0){
+      database=createDatabase(environment);clock.configure(database.pool);
+      const builder=Test.createTestingModule({imports:[AppModule.forRoot(environment,database)]});
+      // Estos casos controlan el worker explícitamente o prueban pago/lectura sin él.
+      builder.overrideProvider(RESERVATION_EXPIRATION_LIFECYCLE).useValue({});
+      const binding=Reflect.get(paymentBindings,'PAYMENT_GATEWAY');if(binding!==undefined){builder.overrideProvider(binding).useValue(gateway);builder.overrideProvider(Reflect.get(paymentBindings,'PAYMENT_CONFIGURATION')).useValue({providerScope:'fixture/provider/merchant/sandbox'});}
+      app=(await builder.compile()).createNestApplication<NestExpressApplication>({logger:false,bodyParser:false});configureTransport(app,environment);await app.listen(port,'127.0.0.1');return app.getUrl();
+    }
+    const backend=await boot();
     web=spawn(process.execPath,[path.join(repositoryRoot(),'node_modules/vite/bin/vite.js'),'--host','127.0.0.1','--port','5173','--strictPort'],{cwd:path.join(repositoryRoot(),'apps/web'),env:{...process.env,API_PROXY_TARGET:backend},stdio:'ignore'});
     let ready=false;for(let i=0;i<100;i++){if(web.exitCode!==null)break;try{ready=(await fetch('http://localhost:5173/',{signal:AbortSignal.timeout(1000)})).ok;}catch{/* Espera acotada de readiness. */}if(ready)break;await pause(100);}
     if(!ready)throw new Error('Web de pago no disponible; valores omitidos.');expect((await fetch(backend+'/health/ready')).status).toBe(200);
@@ -54,6 +60,8 @@ async function createPaymentBrowser(){
     async function counts(){return (await pool.query(`SELECT (SELECT count(*)::int FROM "PaymentAttempt") AS attempts,(SELECT count(*)::int FROM "VerifiedPayment") AS payments,(SELECT count(*)::int FROM "Enrollment") AS enrollments,(SELECT count(*)::int FROM "PaymentIncident") AS incidents`)).rows[0];}
     async function close(){if(web?.pid&&web.exitCode===null){const closed=new Promise<void>(resolve=>web!.once('exit',()=>resolve()));web.kill('SIGTERM');await closed;}try{await app?.close();}finally{try{await database?.close();}finally{await data.cleanup();}}}
     return {data,prepared,pool,orderId,original:order.data,calls,control,counts,close,
+      get applicationPool(){return database!.pool;},
+      async restartBackend(){const port=Number(new URL(backend).port);await app!.close();await database!.close();await boot(port);expect((await fetch(backend+'/health/ready')).status).toBe(200);},
       async expire(){
         // El salto de reloj y las sesiones ficticias se publican juntos. Una
         // petición concurrente no debe observar reloj nuevo con sesión antigua.

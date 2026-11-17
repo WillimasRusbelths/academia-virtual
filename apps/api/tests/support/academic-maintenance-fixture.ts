@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { OfferingCommand } from '../../src/modules/academic-offering/application/offering-store.js';
 import type { AcademicOfferingDataset } from './academic-offering.js';
 import { preparationSeed } from './academic-preparation.js';
+import { truncateFixtureTables } from './fixture-truncate.js';
 
 /** Exclusivamente datos ficticios dentro del esquema t_ del harness. Dos hijos
  * publicados con franjas distintas y un competidor del mismo docente en otro curso. */
@@ -25,9 +26,9 @@ export async function maintenanceSeed(data: AcademicOfferingDataset, options: { 
 export async function resetAcademicFixture(data: AcademicOfferingDataset) {
   const { isolated, environment } = data.context;
   if (!/^t_[a-z0-9_]+$/.test(isolated.schema) || environment.databaseSchema !== isolated.schema) throw new Error('Limpieza fuera de schema de prueba.');
-  // 0006 añade referencias a oferta. Lista explícita dentro del schema propio,
-  // sin CASCADE ni identidad; conserva las coordinadoras técnicas singleton.
-  await isolated.ownerQuery(`TRUNCATE "CoursePrice","ReservationRequest","EnrollmentOrder","EnrollmentOrderItem",
+  // Future owner modules may reference offering. Expand only empty dependent
+  // tables in this schema; reject fixtures with material/other dependent facts.
+  await truncateFixtureTables(data.context, `TRUNCATE "CoursePrice","ReservationRequest","EnrollmentOrder","EnrollmentOrderItem",
     "SeatReservation","PaymentAttempt","ProviderReceipt","VerifiedPayment","Enrollment","PaymentIncident","IncidentFollowUp",
     "EnrollmentCommand","EnrollmentAuditEvent","AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"`);
 }

@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { Test } from '@nestjs/testing';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule, RESERVATION_DISPATCH_LIFECYCLE } from '../../dist/src/app.module.js';
+import { RESERVATION_EXPIRATION_LIFECYCLE } from '../../dist/src/modules/enrollment/enrollment.module.js';
 import { configureTransport } from '../../dist/src/http/transport.js';
 import { SessionCookie } from '../../dist/src/http/session-cookie.js';
 import { createDatabase } from '../../dist/src/infrastructure/database/database.js';
@@ -75,7 +76,7 @@ async function installClock(context:Awaited<ReturnType<typeof identityDatabase>>
 }
 
 /** Composición real: el ensayo no añade controladores login/logout/me ni accesos privilegiados. */
-export async function us1Http(dataset:{context:Pick<Us1Dataset['context'],'environment'>;clock?:Pick<NonNullable<Us1Dataset['clock']>,'configure'>;reservationWorker?:boolean},origin = dataset.context.environment.appOrigin,
+export async function us1Http(dataset:{context:Pick<Us1Dataset['context'],'environment'>;clock?:Pick<NonNullable<Us1Dataset['clock']>,'configure'>;reservationWorker?:boolean;expirationWorker?:boolean},origin = dataset.context.environment.appOrigin,
   logs?:Pick<SecurityEvents,'record'>) {
   const environment = {...dataset.context.environment,appOrigin:origin};
   const database = createDatabase(environment);
@@ -86,6 +87,7 @@ export async function us1Http(dataset:{context:Pick<Us1Dataset['context'],'envir
     // Solo se pausa el temporizador para observar ADMITTED y coordinar barreras.
     // enrollment-composition lo habilita; controladores y transacciones son reales.
     if(!dataset.reservationWorker)builder.overrideProvider(RESERVATION_DISPATCH_LIFECYCLE).useValue({});
+    if(!dataset.expirationWorker)builder.overrideProvider(RESERVATION_EXPIRATION_LIFECYCLE).useValue({});
     const module = await builder.compile();
     app = module.createNestApplication<NestExpressApplication>({logger:false,bodyParser:false});
     configureTransport(app,environment,logs);

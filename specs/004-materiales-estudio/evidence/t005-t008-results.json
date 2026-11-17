@@ -1,0 +1,162 @@
+{
+  "clientDate": "2026-11-16",
+  "clientTimezone": "America/Lima",
+  "scope": "T005?T008, contracts and persistence only",
+  "tasks": {
+    "completed": 8,
+    "pending": 60
+  },
+  "environment": {
+    "project": "materials-trial-92aba908-04a",
+    "dockerEngine": "29.8.1",
+    "compose": "5.5.1",
+    "postgresImage": "postgres:16.14-bookworm",
+    "runnerImageId": "sha256:c13d8310193527418bb97f706420959e5ba9dc33815f6e99a46d179ed8fc68a8",
+    "publishedPorts": [],
+    "database": "academia_v00_test",
+    "schemas": "random t_<suite>_<hex>, removed by suite cleanup",
+    "privateConfig": "new, ignored; no values included",
+    "manualDatabaseTouched": false,
+    "finalState": "Test project stopped with compose down; volume and private configuration preserved"
+  },
+  "validation": {
+    "schemaBefore0008": {
+      "tests": 11,
+      "failed": 11,
+      "exitCode": 1,
+      "reason": "Material tables absent: null to_regclass and SQLSTATE 42P01"
+    },
+    "schemaAfter0008": {
+      "tests": 11,
+      "passed": 11,
+      "exitCode": 0,
+      "durationSeconds": 6.07
+    },
+    "regression": {
+      "files": 4,
+      "passed": 139,
+      "exitCode": 0,
+      "durationSeconds": 169.72,
+      "suites": [
+        "materials-fixture",
+        "migrations",
+        "enrollment-migration",
+        "fixture-truncate"
+      ]
+    },
+    "unitAndArchitecture": {
+      "files": 36,
+      "passed": 749,
+      "exitCode": 0,
+      "durationSeconds": 16.78
+    },
+    "prismaValidate": {
+      "exitCode": 0
+    },
+    "prismaGenerate": {
+      "exitCode": 0
+    },
+    "apiBuild": {
+      "exitCode": 0
+    },
+    "apiLint": {
+      "exitCode": 0
+    },
+    "materialsTypecheck": {
+      "exitCode": 0,
+      "config": "apps/api/tsconfig.materials.json"
+    }
+  },
+  "preservation": {
+    "baselineFiles": 982,
+    "expectedChanges": [
+      "apps/api/prisma/schema.prisma",
+      "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "apps/api/tests/integration/migrations.spec.ts",
+      "specs/004-materiales-estudio/tasks.md"
+    ],
+    "unexpectedChanges": [],
+    "unexpectedPreparationChanges": [],
+    "historicalMigrationsUnchanged": true,
+    "previousSpecs": [
+      {
+        "spec": "001-identidad-acceso-roles",
+        "completed": 106,
+        "pending": 2
+      },
+      {
+        "spec": "002-oferta-academica",
+        "completed": 72,
+        "pending": 2
+      },
+      {
+        "spec": "003-reservas-ordenes-matricula",
+        "completed": 84,
+        "pending": 10
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "apps/api/src/modules/materials/public/materials.ts",
+      "sha256": "2dfdcfbb4905a8f6cd590ad1b6f14a3410945d31be733676affbfad82ad84f21"
+    },
+    {
+      "path": "apps/api/src/modules/materials/application/ports.ts",
+      "sha256": "8c489d85ae48b58ae56c597d4085f547ad2e50475e2c550b96a25a52ad7667e8"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "sha256": "3b8b0bb5e3b383db97e2560013a58e112244f65ca7c3cbde74157afdf4ac6e3b"
+    },
+    {
+      "path": "apps/api/prisma/migrations/0008_materials/migration.sql",
+      "sha256": "b32db328c3974d9adfa4f530afb3cc084f750d07701d0250faea0ec5bac49e92"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-schema.spec.ts",
+      "sha256": "bd324919272dd994a4137e700a5484545f3d5a82ce883e849beaca90d791b16d"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-fixture.spec.ts",
+      "sha256": "7f718fd6c01073b6498e023c8b24f202f7df14991ae654e6acff4471d5e60b33"
+    },
+    {
+      "path": "apps/api/tests/support/materials.ts",
+      "sha256": "1c14dbc5af607941d4da82a9c6ba2c64022785efd552f6b8430cb43a3e061baa"
+    },
+    {
+      "path": "apps/api/tsconfig.materials.json",
+      "sha256": "19cd08710536502269e97cf9760cb59f30e9dce69075ee15af5632ce3fa2f0f7"
+    },
+    {
+      "path": "apps/api/tests/integration/migrations.spec.ts",
+      "sha256": "ce13e250e26e4ffa34590936ded7888510996e65891564374c55292bb022d92c"
+    },
+    {
+      "path": "apps/api/tests/integration/enrollment-migration.spec.ts",
+      "sha256": "f3dda49542cee8d6b1dee46ec3f557987f741909653144b8061f6b765297f45b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "6d648a8db6789fd235f5294fc3ca5058a33887df69807e1a3b807b36a5398c3a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t005-t008.md",
+      "sha256": "268f1e7ba11b4a846b337b2c45baafa7012f9b48b71a32b16f0624b98f58975d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "11fdab959485f317933fbcb0cdf24608ceaca53cef81d5f52504db50779eb661"
+    }
+  ],
+  "pending": [
+    "T009?T016 shared foundations",
+    "materials HTTP/upload/download/UI",
+    "E2E",
+    "remote CI",
+    "restore/resources",
+    "human acceptance",
+    "D10/D13"
+  ]
+}

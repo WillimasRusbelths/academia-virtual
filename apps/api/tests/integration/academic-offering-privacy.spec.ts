@@ -16,7 +16,7 @@ const db=()=>data.context.database.pool,own=()=>data.account('TEACHER').id;
 const actor=(who:'ADMIN'|'STUDENT'|'OWN'|'OTHER')=>who==='OTHER'?data.otherTeacher.secret:data.account(who==='OWN'?'TEACHER':who).sessions[0].secret;
 const keys=(value:object,fields:readonly string[])=>expect(Object.keys(value).sort()).toEqual([...fields].sort());
 const adminCourse=['id','name','description','state','revision','studentVisible','createdAt','updatedAt'];
-const adminGroup=['id','courseId','name','state','revision','periodStart','periodEnd','timeZone','capacity','occupancy','availability','capacityStatus','schedule','teacher','teacherReviewRequired','studentVisible','cancellationReason','cancelledAt','lastPublishedTeacherId','createdAt','updatedAt'];
+const adminGroup=['id','courseId','name','description','state','revision','periodStart','periodEnd','timeZone','capacity','occupancy','availability','capacityStatus','schedule','teacher','teacherReviewRequired','studentVisible','cancellationReason','cancelledAt','lastPublishedTeacherId','createdAt','updatedAt'];
 const publicGroup=['id','courseId','name','periodStart','periodEnd','timeZone','capacity','occupancy','availability','capacityStatus','schedule','teacher'];
 const teachingGroup=['id','course','name','state','periodStart','periodEnd','timeZone','capacity','occupancy','availability','capacityStatus','schedule','teacher'];
 beforeAll(async()=>{data=await academicOfferingDataset('us4_privacy');http=await us1Http(data);},120000);
@@ -62,7 +62,7 @@ for(const state of courseStates)test(`D curso ${state}: DTO admin cerrado sin cr
 });
 for(const state of groupStates)test(`D grupo ${state}: diagnóstico solo admin y ninguna generación/cuenta completa`,async()=>{
  const group=groups.find(g=>g.state===state)!,value=await get(`/admin/academic/groups/${group.id}`,'ADMIN');keys(value,adminGroup);keys(value.teacher,['id','name','eligible']);common(value);
- expect(value.id).toBe(group.id);expect(JSON.stringify(value)).not.toMatch(/"email"|authVersion|eligibilityVersion|teacherEligibilityVersion|passwordHash/);
+ expect(value.id).toBe(group.id);expect(value.description).toBeNull();expect(JSON.stringify(value)).not.toMatch(/"email"|authVersion|eligibilityVersion|teacherEligibilityVersion|passwordHash/);
  expect(value.cancellationReason).toBe(state==='CANCELLED'?'PRIVATE_US4_REASON':null);
 });
 for(const who of ['ADMIN','STUDENT'] as const)for(const page of [1,2,3])test(`C cursos ${who}/página ${page}: filtro visible antes de conteo y paginación`,async()=>{

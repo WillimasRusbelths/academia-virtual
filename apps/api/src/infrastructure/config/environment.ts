@@ -27,6 +27,7 @@ export interface Environment {
   readonly rateHmacKey: Buffer;
   readonly mailKeyId: string;
   readonly trustedProxy: string | false;
+  readonly materials?: Readonly<{ transferLimit: number; actorTransferLimit: number; uploadTimeoutMs: number }>;
 }
 
 export function repositoryRoot(start = process.cwd()): string {
@@ -155,5 +156,10 @@ export function loadEnvironment(input: NodeJS.ProcessEnv = process.env, root = r
     poolMax: integer(values.DB_POOL_MAX ?? '10', 'DB_POOL_MAX', 1, 100), mailMode: mailMode as 'capture' | 'smtp',
     smtp: Object.freeze({ host, port, secure, requireTls, user: values.SMTP_USER || undefined,
       password: values.SMTP_PASSWORD || undefined, from }), mailPayloadKey, rateHmacKey, mailKeyId,
-    trustedProxy: proxy || false });
+    trustedProxy: proxy || false,
+    materials: Object.freeze({
+      transferLimit: integer(values.MATERIALS_TRANSFER_LIMIT ?? '2', 'MATERIALS_TRANSFER_LIMIT', 1, 2),
+      actorTransferLimit: integer(values.MATERIALS_ACTOR_TRANSFER_LIMIT ?? '1', 'MATERIALS_ACTOR_TRANSFER_LIMIT', 1, 1),
+      uploadTimeoutMs: integer(values.MATERIALS_UPLOAD_TIMEOUT_MS ?? '60000', 'MATERIALS_UPLOAD_TIMEOUT_MS', 1000, 300000),
+    }) });
 }

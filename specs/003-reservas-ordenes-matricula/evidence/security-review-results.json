@@ -1,0 +1,2779 @@
+{
+  "task": "T088",
+  "date": "2026-11-15",
+  "timezone": "America/Lima",
+  "status": "scoped-local-review-complete",
+  "trace": [
+    "FR-015",
+    "FR-016",
+    "FR-019",
+    "FR-022",
+    "FR-024"
+  ],
+  "findings": {
+    "requiresProductChanges": 0,
+    "scope": "Application DTOs, errors, operational logs, financial audit, receipt boundary and web clients; not a general security certification"
+  },
+  "executions": {
+    "total": 409,
+    "apiPgHttp": 224,
+    "webVitest": 185,
+    "files": 18,
+    "failed": 0,
+    "skipped": 0,
+    "newBrowserE2E": false
+  },
+  "suites": [
+    {
+      "name": "security-pg",
+      "command": "npm exec --workspace apps/api -- vitest run tests/integration/enrollment-http.spec.ts tests/integration/enrollment-payment-http.spec.ts tests/integration/enrollment-admin-http.spec.ts tests/integration/enrollment-expiration-http.spec.ts tests/integration/enrollment-errors.spec.ts tests/integration/enrollment-authorization.spec.ts tests/integration/reservation-authorization.spec.ts tests/integration/enrollment-audit.spec.ts tests/integration/rate-limits.spec.ts tests/integration/secret-redaction.spec.ts --maxWorkers=1 --reporter=default --reporter=json --outputFile=/reports/security-pg.json",
+      "reportSha256": "07911791c0c98befc58b87d390aa3c8db06794a5b1bf11f2463c1f4e2fdb0b21",
+      "passed": 224,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "source": "apps/api/tests/integration/enrollment-admin-http.spec.ts",
+          "sha256": "99dcbce80dd4cd767ac479ffb2936c5b82e3991d44901d09d22af1f0df8a7627",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "AH01",
+              "titleSha256": "c1c6ebd8168f4594ef19077a19fba458b33733a749a1e196753fc3e3f8606e52",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "AH01",
+              "titleSha256": "f7b8dbecf0d3e63b77685330e810c6f31adab2628357973321a0fc016e3e5627",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "AH02",
+              "titleSha256": "c1108fbfaca398592ecc62636de1eed125d80b1c3f086042d6e57535f2a3eaae",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "AH02",
+              "titleSha256": "6b8fd2e4d2227f39f9c2fce15a0c4d57d795440d89ce3a0beb54492f0b463c82",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "AH02",
+              "titleSha256": "73631c70f94146be9790e714f7e62cf1e683aebbc9e51a88908a63a74f76e061",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "AH02",
+              "titleSha256": "4abcab65941f149d09c440fc17b037e3ed6c8c2732da070bd6a189a067237b6f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "AH03",
+              "titleSha256": "a6cc4808ec60454d5633421dcdd49b82f43f63c1f8603292bce6038a87e1d990",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "AH03",
+              "titleSha256": "eb0bce3ba830fcaaa28e07c69cd811b1853718161ae39fb014573d1fa269212e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "AH03",
+              "titleSha256": "b3a168f731d6f5ed710545346d1a6c1926f9897496c8ab961bd574efb738d803",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "AH03",
+              "titleSha256": "14c41c18eacf9bc5779c1114796d7d5b30952fb189a3587ad38b2ba3807978b9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "AH04",
+              "titleSha256": "54578c9917e4a39047d7dfcb018dd224dc158b2e5518b99fe39345d87e281eda",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "AH04",
+              "titleSha256": "0742766fd6c6a6ac7f631dfae2e2a4660b009df0aa7435ba1902b126d1a85053",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "AH05",
+              "titleSha256": "0040225bc3af1a2f11569a8057e437c014f94a331adfc64333f24ad672604b1c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "AH06",
+              "titleSha256": "6ad0600adc924b1449cc7e7656f34032152ae3b525fa4986ef3a74a8f496a01f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "AH07",
+              "titleSha256": "a36025710290d2af6d14f6179b7a19baae8bc50ce3af1d8e90ed269d69a5ffac",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "AH08",
+              "titleSha256": "b6e90682a7d23216ad592b1604ea457575c4a61b708d2c9da9df56d343eef322",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "AH09",
+              "titleSha256": "15f48996401f0b8951990dc9fca704fab52b23d68b379bb3feb5ca36db435582",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "AH09",
+              "titleSha256": "c77989e5841eb1ea744ec05db32e45e3e42b380c99f0099e570f3ed38d8d053b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": "AH09",
+              "titleSha256": "63f00be0bec7838ee611b9eef6d3775e8b8b16b7f85cb6809a5611faf02ebb5a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": "AH09",
+              "titleSha256": "0c9fd9ebfa1fae1cfa0b29ffd775d5791b6e9c1c2932cd415839f77ddbc13232",
+              "status": "passed"
+            },
+            {
+              "ordinal": 21,
+              "id": "AH09",
+              "titleSha256": "c96808fb7bc9c68d04bfe7a498c149bb3e570f35636f737e4a01b59d924c667e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 22,
+              "id": "AH09",
+              "titleSha256": "96711b74cc6afb16c58a6e2adffff81eee1a0c38e847374cfc5d9e401f47c453",
+              "status": "passed"
+            },
+            {
+              "ordinal": 23,
+              "id": "AH10",
+              "titleSha256": "95c77f87d0f5f6012bf2584d4415bd130a3a32aec993cddd54a561353ebd09ef",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/enrollment-audit.spec.ts",
+          "sha256": "a666caf27b9bb32a38908b51c3188fbe878249b14875119d60aa9333512f0a7c",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "EA01",
+              "titleSha256": "46d2e580642319988fd383969f034cf99bc1b2f1122b7006a8dbcd415a650d3b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "EA02",
+              "titleSha256": "f2aa0bdc2db3e37103602351ac5d27103a12a6e62c4af45357e9517c9612a572",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "EA02",
+              "titleSha256": "bf2fcbaa13ed355a339f240cae33ba91b2e5d9a2aadf9666e28c911c97c84cc5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "EA02",
+              "titleSha256": "13d0653510ab491dfffb77d90544fabbbe1559bc0443a89861699009a7f4ab1a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "EA02",
+              "titleSha256": "0fd3c7b2524b1cb6c5e6286847f03600e6ea677437f35fa2364e29dd75a27b58",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "EA03",
+              "titleSha256": "4bd598a8c1994bb19e276716ec54162c78f9c97cc8967fcd019145fcb5aa62f0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "EA04",
+              "titleSha256": "86bb7786c9b1629475d97f3bb6f22d71faf218b2c7f862e2944a0ec88bfedda7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "EA05",
+              "titleSha256": "4135ae2b2e71e614076a87f55da4f6242d0021138a525d04c597ac50cd8d28bd",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "EA06",
+              "titleSha256": "aec4c390c19673d476f2a02c4df7c5cf85a0b644b2e7d41537f64c0387969d28",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "EA07",
+              "titleSha256": "b8088202b599d25bc27cf578a8a50c203f7a8dc6b8190a687f3881fd58541164",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "EA08",
+              "titleSha256": "1443daa579f871a622bdabfe6f5e159d97cbc6f73b47583d4ba8e8c65509044b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "EA09",
+              "titleSha256": "416a83111e7b32f9eb756cc39e8fd4fa3965b23df0aaa28831e3e93c4b5c7adb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "EA10",
+              "titleSha256": "2f30ec465ecf4dc4d25aa6cf4b0fb46170b868522021d2cec99d934ce65f77e1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "EA11",
+              "titleSha256": "3f6cb326a533684b4e6ccb281f0f7f01edcd51282c3b45c1a93f0db4a9a1676d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "EA12",
+              "titleSha256": "93a803f5adc2571ef1ce8654dab8cf88fab2951d5641450982379ec2b61ccb56",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "EA13",
+              "titleSha256": "e15c07d2f8e3a5831087a3ffcab9f316a5c4cdf4930f41f8fd25f7437df5358b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "EA14",
+              "titleSha256": "85947b58e286d93816adb60f65e7c2455780c63846c642fa488530734679e91e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "EA15",
+              "titleSha256": "a847428387184027852c9c00493caaf60b7b1b185c54880bd14ccc6833f66d9b",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/enrollment-authorization.spec.ts",
+          "sha256": "c7891e239df11cd3cb180609818ef3450aac0e29ce2e400b20f679e39991d04f",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": null,
+              "titleSha256": "1087c0e82a413482b5086472b94afd36947a64d7857f9800b1a2ff558cc05c67",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": null,
+              "titleSha256": "856c627afd17698443c2269a6019a88dff1f5a79e09e8978361733b1a749d636",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": null,
+              "titleSha256": "10be90a943f435fd6f88fcb153e66d910b520065cdd82a5e0c64a7446076b4a7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": null,
+              "titleSha256": "ab4a663e4fdf56df3e53725817385cc8bad91f13cc437ffbc1e9320a7581d0f4",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": null,
+              "titleSha256": "61245dacede4f0fa30070bbd0038cb7f84fd95c6e506ec6ede1760c04565d6ce",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": null,
+              "titleSha256": "b1d89698933abe012fd0f50e40fd7fc24912915405523cf12d090614312e8b2f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": null,
+              "titleSha256": "a79c7f2987757deb4b3ea0c86c5fe03b61c58746729a52641f3e261c4f4c3bda",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/enrollment-errors.spec.ts",
+          "sha256": "1c1833ab9d5e8db0b5ef8ae6d67f7baaa5cfa5c4327803d30f56f6b28932999d",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "EE01",
+              "titleSha256": "57c04acd3c47abc8c78ec029c73c9c8b32e1eb92c14f0054d889797b9cd3cee4",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "EE02",
+              "titleSha256": "3840ad47b225621e467cd69ac571ca7936cdb49d74d56785a457139b8ad6c028",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "EE01",
+              "titleSha256": "bbcc8dd67d5326326539d3d8b103390cde5f9fbedc02186b383d7eee9b3def04",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "EE02",
+              "titleSha256": "55a2b364cd344eba19686ca05b535cfe562f350670bc3ec32dbb3c144f407961",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "EE01",
+              "titleSha256": "1ba8ed7fd99820690df17086228e0912cece7c53a45d12ed225e874906aa8425",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "EE02",
+              "titleSha256": "4166d8ddcd883096507739b5b242ddbb80f916e0a47d7feb27fee848249d18a3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "EE01",
+              "titleSha256": "fd0a0a1794dfffb4898a33359872a48c2ab23bb4a83a147056aba334314c02a8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "EE02",
+              "titleSha256": "87af08c729cd060d1323d07bf5d16f172dc4eebbfaeecdbe819784c3c55fd944",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "EE01",
+              "titleSha256": "6b0f51a2b4d2da61b844239ec59253f20cd4c2ea9f8a9bc1259b8d1153e155e7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "EE02",
+              "titleSha256": "238ee6f77f5c69a753c09a3a1d2b34e67ce099440c335efb19f2ea62f6195886",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "EE01",
+              "titleSha256": "59bcd6c7ca6a155f2d529499a2f48458244b646ca48c526e0811e644f66a7b99",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "EE02",
+              "titleSha256": "be6210af5329dc6955941bd8339b337de2c2efe74cc40df6ee9c69c48bd489b1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "EE01",
+              "titleSha256": "9e41ab436895e3f242827f7e7a5c3b26b8556ab729514ed79b5d999de81ad5f6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "EE02",
+              "titleSha256": "3c23f5dd8558ec2f015a1150cf2397c102c0f63389d4fef5fda1356f200909fb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "EE01",
+              "titleSha256": "dc20c34279b3e2df9335e0833a112d653aa8a8798524ca288f8b593f2da21846",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "EE02",
+              "titleSha256": "fd3776488c2e122f6ea259ae495915c7262e6b45475357fcbf426958ebdd1987",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "EE01",
+              "titleSha256": "afcfff6cb7d8ad3b6f5dec0cf303a6ca32f675e72dab42293c863818ba23f112",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "EE02",
+              "titleSha256": "d2852c4c7d76b2129b9d89a1b0ee2640b27fdad6e5fd3c20ae683d658c764ff8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": "EE01",
+              "titleSha256": "bceed6aefc566a0f2ab49d0a9cd938ba51219b927174906d2b5545af511fd170",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": "EE02",
+              "titleSha256": "6b1795dcd8b1443c1e9e68f8f09935c14e6ad3a00d8ed39b1d9310d3b0e0d2cb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 21,
+              "id": "EE01",
+              "titleSha256": "2c5834618602df4c26d6b7068d40e7d279e72613746fd734874f0a938affdf71",
+              "status": "passed"
+            },
+            {
+              "ordinal": 22,
+              "id": "EE02",
+              "titleSha256": "8c755b1b6b434c689ecfd5d18492499df49dc91038295742041117bc65419dcc",
+              "status": "passed"
+            },
+            {
+              "ordinal": 23,
+              "id": "EE01",
+              "titleSha256": "5c904d531989b3ba669f3c30bb59a0d9ffddc80fa849f1978e204e5828ab406a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 24,
+              "id": "EE02",
+              "titleSha256": "1bf71764181cb8e406d213ed5f0a2f7de5893081aaf44af6cda17ff4afcfc799",
+              "status": "passed"
+            },
+            {
+              "ordinal": 25,
+              "id": "EE01",
+              "titleSha256": "65ccb1e1da8d97a91758a1a0576e34a7bf8ba975d85b1dcbfdba6cfa9d52beb9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 26,
+              "id": "EE02",
+              "titleSha256": "142840fd020994fdb293ff275f9df70349128ecce3761c6b5abca672dff9b1a3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 27,
+              "id": "EE01",
+              "titleSha256": "57f69c9b4e1705aa02bc08e1361002103c5ac698bd3221b026480f7e91f1d766",
+              "status": "passed"
+            },
+            {
+              "ordinal": 28,
+              "id": "EE02",
+              "titleSha256": "7c322145e6f3af4961fee62d513a85f562cab42efed67e6baae4cdacca90b0e0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 29,
+              "id": "EE01",
+              "titleSha256": "99748768c46bab0bd01b7bf2e1f268a532923030b7402233b0500f152e28ad31",
+              "status": "passed"
+            },
+            {
+              "ordinal": 30,
+              "id": "EE02",
+              "titleSha256": "fd7a8bb74446e0fbb7bd69ae13d6c7fc6bdc49a4100ee86dc1dc20191a94b67b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 31,
+              "id": "EE01",
+              "titleSha256": "4d9de8550018ab0fc80f98c59c5497c4a6dc89f0c0f62926cf41e7db61382fb6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 32,
+              "id": "EE02",
+              "titleSha256": "656c83094b4bb1577e5dc32d3c6aa77bfe9587030c42f07993d65a3059d0f1fb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 33,
+              "id": "EE01",
+              "titleSha256": "d34945730702abc8cf760f161888324032eebcab23fc83319a0b04c94196766c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 34,
+              "id": "EE02",
+              "titleSha256": "16ccc107168de2ce1ce7d043ae634eaa1222eb208696c4163e5aad0015c1d452",
+              "status": "passed"
+            },
+            {
+              "ordinal": 35,
+              "id": "EE01",
+              "titleSha256": "61daeb272ef1c386f619d6119186c902ff795de53937184dfb8dd4119431278b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 36,
+              "id": "EE02",
+              "titleSha256": "af1922f5d5e2e168c385f6a38799cae9c6789662a864ffc604a1f7b3b9981511",
+              "status": "passed"
+            },
+            {
+              "ordinal": 37,
+              "id": "EE03",
+              "titleSha256": "5fdad227775a48e2cd0967bbc7a5ca4adf0a8bd12f68d6520e59378de35e1179",
+              "status": "passed"
+            },
+            {
+              "ordinal": 38,
+              "id": "EE03",
+              "titleSha256": "d0241b6426326647cc429d18a6731a2945e01662ae0934bccca06851960a240d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 39,
+              "id": "EE03",
+              "titleSha256": "1201bbc6f44721a2bd7b91a2832384e47af093bba9c7d48a02097db63f9d9f93",
+              "status": "passed"
+            },
+            {
+              "ordinal": 40,
+              "id": "EE03",
+              "titleSha256": "7ca2df210ecdd93ab85313c862ee16b173d648f834d5108101e062d2cd130263",
+              "status": "passed"
+            },
+            {
+              "ordinal": 41,
+              "id": "EE03",
+              "titleSha256": "aca49350c5965516d27dff7e5d59e21a330a7bf02b40277e0b6e60935fac73f7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 42,
+              "id": "EE03",
+              "titleSha256": "b1fa07a92ebd2e5bf73cc09b8111eb388db4ee98acd8c6e02a85df04ad30b996",
+              "status": "passed"
+            },
+            {
+              "ordinal": 43,
+              "id": "EE03",
+              "titleSha256": "813fed911deafc6a147466e6f0abcf01233a4c95ed5498f7566f3d0273ce6ef7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 44,
+              "id": "EE03",
+              "titleSha256": "c77f8b3d1a245c389de3046b0b094bb96395e28f3fe64e6d7108d06c6c5b37d2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 45,
+              "id": "EE03",
+              "titleSha256": "6ab3b2e3073adf7a077efe27c4fa02a719ce7b803c54e740aa93bd303b399527",
+              "status": "passed"
+            },
+            {
+              "ordinal": 46,
+              "id": "EE03",
+              "titleSha256": "88530edb3158dbc7e0cd301823af4a0c5200e79ef1f2ca37cf9f0591370a3ab5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 47,
+              "id": "EE03",
+              "titleSha256": "1d3318dced9c9c7accb6d78b88c3525d227663271210cb022aeaa1a1a789da4b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 48,
+              "id": "EE03",
+              "titleSha256": "b48686311c6ed787c460be0a534dd665b6f3e98284e31648c61f0261c2778d94",
+              "status": "passed"
+            },
+            {
+              "ordinal": 49,
+              "id": "EE03",
+              "titleSha256": "e90d42f8934c6dcaba280dab2ed70d5074364980dc2ce0ce3987ab8826c9ed6f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 50,
+              "id": "EE04",
+              "titleSha256": "5095717e15e0d237b30f1d3c9faea68db866a2d2b73825cd0910a424822c704c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 51,
+              "id": "EE04",
+              "titleSha256": "4eef16733884d7b8baa982f081ca9643e3a6b27cd0336f5b42e4ef8e7ecc7259",
+              "status": "passed"
+            },
+            {
+              "ordinal": 52,
+              "id": "EE04",
+              "titleSha256": "7a149da79ecc065713ae216ee32d790e147a8037a70a34abcdb75eb955e9577a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 53,
+              "id": "EE04",
+              "titleSha256": "a1c299e0a705f6dec8763a3fa4d938642ba44c149bbfcdbda859f6934c59c25f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 54,
+              "id": "EE04",
+              "titleSha256": "f470f0e28a92261048cab750237b96c110a489d28499ee2672979bb2b24f78c4",
+              "status": "passed"
+            },
+            {
+              "ordinal": 55,
+              "id": "EE05",
+              "titleSha256": "6de403609b5de3f39dc7e275dff6639e578a29063cb0f26f2d207139554fdf19",
+              "status": "passed"
+            },
+            {
+              "ordinal": 56,
+              "id": "EE05",
+              "titleSha256": "690c0cf77048ba93ac66ef76058979b550faf115a97fec58c3c08320d793cdf9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 57,
+              "id": "EE05",
+              "titleSha256": "fae13df61b52d0d3beac1cbbad2be9aba915ec267ab4463047dbcdae8835cef7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 58,
+              "id": "EE05",
+              "titleSha256": "10307655736321b7f3d0e1c201c8fea66c61d764ac437e7e83934a2d93339786",
+              "status": "passed"
+            },
+            {
+              "ordinal": 59,
+              "id": "EE06",
+              "titleSha256": "7f1a494a5383387342bcb2d6b1025f2fad9693a12fbd424e6513fc722707b2e9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 60,
+              "id": "EE06",
+              "titleSha256": "11e01681aa89c3b704f4b2b9a048acb712af1814a5fcf527ce2b1bfa7d0aca32",
+              "status": "passed"
+            },
+            {
+              "ordinal": 61,
+              "id": "EE06",
+              "titleSha256": "eb63d69bff5b5cad8a70f3f0c274ed5459d39e17cb6d4482ddd8a2946914f9b2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 62,
+              "id": "EE06",
+              "titleSha256": "dadf04e6d683499709e0af1957cdac0bc8b34f0e28f129c80e9a06d305fd5393",
+              "status": "passed"
+            },
+            {
+              "ordinal": 63,
+              "id": "EE07",
+              "titleSha256": "5ca0793f949eb7e637a510b7ec4ade9ba5e09301d449fb0130e83a9e90ff5195",
+              "status": "passed"
+            },
+            {
+              "ordinal": 64,
+              "id": "EE08",
+              "titleSha256": "cf849c9701b800a1cf1df349514c1b20d302de9090261502c9a2b78286127e38",
+              "status": "passed"
+            },
+            {
+              "ordinal": 65,
+              "id": "EE10",
+              "titleSha256": "72a8771548ce87dd7c9b79e2ec94d5e09fcc713fb1e38a5d6bf7b5a7d7135f20",
+              "status": "passed"
+            },
+            {
+              "ordinal": 66,
+              "id": "EE11",
+              "titleSha256": "f0b6507c7b3d43735e55b93d46a8a9b8c2df277023f52200051ad680d71e2f3e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 67,
+              "id": "EE09",
+              "titleSha256": "10d9644c21c15bfd84ee3690d24247810db96eb8b84d7cec9ee7c27fa8761ec2",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/enrollment-expiration-http.spec.ts",
+          "sha256": "7d1655f5966e2fe2783eea9fd5daf97ebc106a5af990c68340c257ddc390b836",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "HX01",
+              "titleSha256": "e92e5ae6a6ef7c17618ae0900488cbeb7fb05da806f32ed95e287688aadc4fb2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "HX01",
+              "titleSha256": "527596db0e438168f63af197378577145ed4f239107683aa141bb617a894953b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "HX01",
+              "titleSha256": "c50a57d6f06c80bb8cb0a6965f5dbd74ae261935eaa1bcdb6eac972431300474",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "HX02",
+              "titleSha256": "388f2f4eb5a8b6bfdfd382b72538c1003b2cf9a6f360da7789916a60e4a9f87a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "HX03",
+              "titleSha256": "175712aabf1c1de9b263de9329d592b6c70d0bcaf9e90fd464b6c62b946fb843",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "HX04",
+              "titleSha256": "a3208e98a30039a30c008335bb966f37105083a7dcc6ffc5fb07d26984c25a6b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "HX05",
+              "titleSha256": "b7512f7768e607bae4f78b5a22ecba895637c5bd21fcbd07aabcfed66a225558",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "HX06",
+              "titleSha256": "afb18cc0a4d19be6dbc4dde105b881f47cfbae41ce87b9751edbcac757154afc",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "HX06",
+              "titleSha256": "90492b86853530a0d4a25fa128af352e33b928fd3f168d2e2e1e74d7da398282",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "HX07",
+              "titleSha256": "d300d31c292ea575b29b763e74a5d4ab14c4cd7b088dd9a939653194fcd919f1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "HX07",
+              "titleSha256": "6ad5ca6cc6614d91ed41d00382c6748edcf1c86ab842178b572625c6b6997cbe",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "HX07",
+              "titleSha256": "f7a8ff1abd119b8c3c586037bdd246af4a4d75eed8c66d0235e96045ed60dae9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "HX08",
+              "titleSha256": "b2f2ceeebc92312ff19e7890520ff87a5f8c1eaea3f1a435d10898341aaa6327",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "HX09",
+              "titleSha256": "50c02e71c91a585b35a3dbf3b03678aa3156bc26bf58499329d5a362077a7c85",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "HX10",
+              "titleSha256": "989dbf901b44f4f7c805ebfc4b91a267bd7adb15dd962cedb074d21ab88488d7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "HX11",
+              "titleSha256": "45c9f9dc4622b9dab983e159d2c94a3029c754c4a9ceff2d3bae09925b385d34",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/enrollment-http.spec.ts",
+          "sha256": "319150ebe63f483be7aed80ee2dd65a361491d4bf728f70617122d173010670c",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "EH01",
+              "titleSha256": "240bdcb9fa66dab5d850c4814daef01935a57215dddaba10b31bd0ee9ef69773",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "EH02",
+              "titleSha256": "04d9f18b55d5b5f2a7a15791fdd58e8bbd905609d47c607e289f0392294d0376",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "EH03",
+              "titleSha256": "41a8f8c9d341342eb3d3b57516da450d72b57121d4182f1e3b831f1765dfb3cd",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "EH04",
+              "titleSha256": "8f425ac48252a921fafa3cc633b222f6dbaf330cd1cc54705a6d459f1cc308aa",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/enrollment-payment-http.spec.ts",
+          "sha256": "bdf6f6443d9e614f78f5c2d74c656682eafed5651bdee1e19f087fabd7a44988",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "PH00a",
+              "titleSha256": "8d07f029c9d2c2d8161c33c80a1e537b9f71ae0b297e465c71caadb2700bbdc7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "PH00b",
+              "titleSha256": "c1b11c140859d145f4cd331ef0d5b5dc5eb929e3b55e6761221dbbd852646c76",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "PH00b",
+              "titleSha256": "f923142e8e186f3eb15b31117efbeac5307ceb98aa922608c9d79692b8a8e419",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "PH00c",
+              "titleSha256": "38b680656482217c70e2cf3af4348856520441af0a113104fdfdc193862236c9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "PH00c",
+              "titleSha256": "c93da894139cc325ebdb4e12e0e7064256b8f7550b70fca465ba5fee02436220",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "PH00c",
+              "titleSha256": "dfab19eaf274f224462c2721ddddfa1d1a529d5ed3e59d2c57bb79c274a488f6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "PH00c",
+              "titleSha256": "d5b3f4bc9d1e735b012b0e91bc5875c141c5e4c22202d113bc162b40f08e23f3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "PH00d",
+              "titleSha256": "154cf6fa338cbd4efffa6e683b4619792b0c06f49e5779674f165e22f0688a2d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "PH00d",
+              "titleSha256": "ddff9c9812ecd50ce212313e35ba77b8d4792a83daacf052e37ab780b7a04c9a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "PH00d",
+              "titleSha256": "e85ad3fe2161f2cf2aa53e68072f87d1e87eb1142478b967a65ce8a54073e6c4",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "PH01",
+              "titleSha256": "581f1c29ee5aa836924a85a6cf788a05d3e11743c2dec77b370c0d32d7554a27",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "PH01",
+              "titleSha256": "06f1df97558a082c5c3f468e37969bf6ed66a99470c574fb7ea92df4a19c1c55",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "PH01",
+              "titleSha256": "37ec7f5fbacc6fb0a22d493154ea7c63086369958cca57e5f7b5bd26fdc12c7d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "PH02",
+              "titleSha256": "12dc520295e4da9a8dd85d8f630269b4fca9830a1c3a4e88fbb80a295d342766",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "PH03",
+              "titleSha256": "7209724a5e3677ba427342aa34d1d09b29e9a57121251809c3e5ab72f7cc46f5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "PH03",
+              "titleSha256": "fa38c142d1f15417a270f95e49b534929e474e7685e3a52a0850dc9957b6b517",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "PH03",
+              "titleSha256": "4ec610e97626c86f606c1b208906c7ec75fa59b4872eb44229f38ed501cc76d0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "PH03",
+              "titleSha256": "ed411f05caee9b91bd49e68628e666727a647c1a33ef1568a799e4815babae4a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": "PH03",
+              "titleSha256": "d00326592a9a73e5e9ef00d8a04ccce276754b0bd1a51dc4b7dad0b82731a1a5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": "PH03",
+              "titleSha256": "71c1018829d0c2d021d394d2ae6eeca8a52e69ad08e39ea7e94b16f500a0740e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 21,
+              "id": "PH03",
+              "titleSha256": "7521c54a73749516dbf4af923b5eed21f53cea56551e36a0d2ac83a981b12aeb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 22,
+              "id": "PH03",
+              "titleSha256": "cfa9f549298f7ff37bfb0cf573c979dd84f49dc56e8c7dfa64085bb658e30264",
+              "status": "passed"
+            },
+            {
+              "ordinal": 23,
+              "id": "PH03",
+              "titleSha256": "d5a5762c56aa486e4057b13744ed3637b2397b9d3724bae9eea5a0175ba28e04",
+              "status": "passed"
+            },
+            {
+              "ordinal": 24,
+              "id": "PH03",
+              "titleSha256": "1fa95dd86fe7c4097e6d9a31b8d9c06899fcfea2d5708b6f4630fe7ecf0f2328",
+              "status": "passed"
+            },
+            {
+              "ordinal": 25,
+              "id": "PH04",
+              "titleSha256": "21ac48162663af02abdccc9085e1b810f85d55776ba84ecf20435ce3a8baa553",
+              "status": "passed"
+            },
+            {
+              "ordinal": 26,
+              "id": "PH05",
+              "titleSha256": "09c2c544201cb44c2b675320818d7a7fb3f7dc8de8160134505620ebbd60b66d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 27,
+              "id": "PH06",
+              "titleSha256": "76e7d6d7cbee66bf20c6880a9ef31c372d69f0686efb934d8e25b063d5bc2121",
+              "status": "passed"
+            },
+            {
+              "ordinal": 28,
+              "id": "PH06",
+              "titleSha256": "47407e70b681ef812425d262ea07f1a755081d5ca9e91ae62c087ad66085b468",
+              "status": "passed"
+            },
+            {
+              "ordinal": 29,
+              "id": "PH07",
+              "titleSha256": "1ed241b7e3d6221bd9f09d5ef281374a08e81bd1cf1ab3ed6b3294e926f640e0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 30,
+              "id": "PH08",
+              "titleSha256": "75622cbd092116c1695423a2facadb4ef4cff174d4e9ec4317c060c53589897c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 31,
+              "id": "PH08",
+              "titleSha256": "196e2a3dd8dff282829c6c524d7ad6efa9394919c2301efa58aa772fae5d39f2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 32,
+              "id": "PH08",
+              "titleSha256": "03424837c4a8baaa1dbb0dc2727deb6a3723dc9224e574148a12a821e84f1120",
+              "status": "passed"
+            },
+            {
+              "ordinal": 33,
+              "id": "PH08",
+              "titleSha256": "882eb54a04fae888d51fe653aaa18943a157bc7300d184dd297f3d217abc5a96",
+              "status": "passed"
+            },
+            {
+              "ordinal": 34,
+              "id": "PH09",
+              "titleSha256": "6c1bd6f93f9fc47c7de8c8488cb5a6659c0b16a0ea0cf43fa370e5e2eead4224",
+              "status": "passed"
+            },
+            {
+              "ordinal": 35,
+              "id": "PH10",
+              "titleSha256": "e7bd852489b0d4618a2393c91590687fa6865bbffbe7489ee17fe3270da6b8be",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/rate-limits.spec.ts",
+          "sha256": "769e4fb631e9527012ef2dd7f14c9fec329d9cf651305b97b65fc609af231e7d",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": null,
+              "titleSha256": "13cf3b5f2770fa3ce59773c9b976894c284993e08d4a0354e1f14ad4d4af543e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": null,
+              "titleSha256": "6bb03b85f316ef7ec4372cc72a8a9ab7e4ffaebcb1ad1ee3006666a8a1a2d1f9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": null,
+              "titleSha256": "53c2f8c4db3d9d7805f6853ac7799d6254e381d4d1ad19f8818c63cbea9c56dc",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": null,
+              "titleSha256": "6c8edc5467f4e887869fb8c9d67b955acd35723f447706da42cd8ed460ca77d8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": null,
+              "titleSha256": "1e9e4d0a721518a45d16d2d2d2561975d917d48bb617565fb781da9b89ac5d9f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": null,
+              "titleSha256": "2742e4aa27d5305bb1a474c854a29bb5f92ae1b01f3c3e735aebf593d9e385ec",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": null,
+              "titleSha256": "8e3a1f3c92341820243e905e180828bcdd304b7741e82690f7e4034a2b1f8784",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": null,
+              "titleSha256": "65c5f96cc83aec33c69d9b8fe2d2742313ea1e4cfff17a7a7dbd81f104f6d116",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": null,
+              "titleSha256": "a9c40fc3353a12d5e96ff9b31c38c62f0511f406671cec7fcc3a247ab38f6ae3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": null,
+              "titleSha256": "6901dceeab517fbe73f9cbcb10f619912b279509e694a0dee9ac44c954de076c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": null,
+              "titleSha256": "eb8eb244466c8a03567c8ef587fd709eb2bd101519e57e6856661408e7c5aaac",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": null,
+              "titleSha256": "e9f378813c1afa27b6fc031bc15892d741f9648fa94548627ecfbc6437663db9",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/reservation-authorization.spec.ts",
+          "sha256": "8cc20f08c98a546038e5d78e325051f813166690a954f5730dcb09b55d03eb29",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "AZ01",
+              "titleSha256": "cd430c3b88b003008360fcb4611264e1f21b5f930cd8b7eebf50835e9b1fd6b6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "AZ01",
+              "titleSha256": "e83580d3022179aeb12ce83721b435a5c6007626e9f9e7fe96c7ee9e0a5757d2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "AZ01",
+              "titleSha256": "a8b7144df28b3a0618d24af411fb53540319aacf184b5289043a25b650967cec",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "AZ01",
+              "titleSha256": "66b2cd40c27234de7cd76e642471797220e8a58eb3f8421168cbe5d08403a19d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "AZ01",
+              "titleSha256": "d50196eff2d882fca73d92d18c7187d7900cb2b60ba4ec82c1558bdaf9d228a4",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "AZ01",
+              "titleSha256": "d1fa39ddc9ca71da24d757687b11073d3d6bbb9fbdff9e6661f0fd591569f5a0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "AZ01",
+              "titleSha256": "2dc3659ff668e02d803764ecba2c9a794a154d0e3407eb1a20218850e65982a4",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "AZ01",
+              "titleSha256": "b7054af5bac762e2cedc121f66dc10d3c0f435a3b275450f8e2611e72ae0a350",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "AZ01",
+              "titleSha256": "2e7202a0de16d3362103991d59ac30575ef64c1ba223ed9e090e97803f3f664c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "AZ01",
+              "titleSha256": "040be8fdeee213e6285e7bedb05364ec5e5629d773aef4c6773f12e72632b3f2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "AZ01",
+              "titleSha256": "f5a5bfe2a63fa25ce24a68871924ec47a8f3550999ffee09cacb9ca40043d91b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "AZ01",
+              "titleSha256": "2a68c68cdce0b2d6083d410551739d8c09f699a849e3ff3ea0a5683864a5512a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "AZ01",
+              "titleSha256": "1ae6c563dbcbd03bc38b335b8ebdf8db1a880c632dbd6cc846e3cbb178ca69ec",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "AZ01",
+              "titleSha256": "5a2c332f2f04d49e1d0cf39afd2d9c94559ef525755ba367109fc05c7fe96d09",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "AZ01",
+              "titleSha256": "3ef5fa5b4a4b6f23c78d9cd0c95ec4c1e96dbabd08a241f4c30842d999f352c5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "AZ01",
+              "titleSha256": "390d8b0195c56e10e15ffc9a1ec9fd05bed64084a49b4e1a548558d362d7cc97",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "AZ01",
+              "titleSha256": "bece8171873c8112a8a46921a681c864c66616cc7ab34cf97696d6ef058caa77",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "AZ01",
+              "titleSha256": "7d6a0811d3cd53dbca5c6cac6ef9eb3901a142467d7a9756fad9bed03b3b1efd",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": "AZ01",
+              "titleSha256": "3cc141168323991051f6e51077d1ce9f6e157c6779366c1007c7102ca10fc104",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": "AZ01",
+              "titleSha256": "cb981b45984a3a3efb084fccaf2279573fa5bb18a5f712cf0178fab74ef4fe38",
+              "status": "passed"
+            },
+            {
+              "ordinal": 21,
+              "id": "AZ02",
+              "titleSha256": "fb1d2040de0bc57a4f1e8d18b95f254b02aa07f5c063189e735bb74a1f204fb3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 22,
+              "id": "AZ03",
+              "titleSha256": "5e3fa5d43c77331b98ff0e3c05670718dcdc4e5a97242ac2b9759e3102a05994",
+              "status": "passed"
+            },
+            {
+              "ordinal": 23,
+              "id": "AZ03",
+              "titleSha256": "87a30cc7ee90619875e1dcb9b96fec65ef72cf40a0ff8dba14a72578565de665",
+              "status": "passed"
+            },
+            {
+              "ordinal": 24,
+              "id": "AZ03",
+              "titleSha256": "78463d9f37cbe612da5b4016ea3747e3d345595f103f6a2bd27936d2f82db29e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 25,
+              "id": "AZ03",
+              "titleSha256": "3a08d9a48240ddaaaadddfb1fb5315f365751071b45e8ff11ca1db7dca163b9f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 26,
+              "id": "AZ03",
+              "titleSha256": "13edfdb8f1a890d78f1d9c65436c5fc85eb824a503dceb7ff6b3f5499813329b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 27,
+              "id": "AZ03",
+              "titleSha256": "d5667a4e078c0b45127f16e7dd3abb692301af56e98ef357fd9604fd1af2c6bd",
+              "status": "passed"
+            },
+            {
+              "ordinal": 28,
+              "id": "AZ03",
+              "titleSha256": "1302879dbee879b77944c4d0a3152bf35d0b82eeb3b4c77295480d79cfa50f86",
+              "status": "passed"
+            },
+            {
+              "ordinal": 29,
+              "id": "AZ03",
+              "titleSha256": "55c0e9d5905099a163c45fe07101e53789c3da6e2bc54cbb598cd45f7fb0614c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 30,
+              "id": "AZ04",
+              "titleSha256": "385a05e5b037ec88704da736be25fcc21f93eafed52d6b0037c5593a34255cc2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 31,
+              "id": "AZ04",
+              "titleSha256": "aded8bb1619584a2e0520f6d5108672e1b242cf9d69f20ed0c21669297b6c0ae",
+              "status": "passed"
+            },
+            {
+              "ordinal": 32,
+              "id": "AZ04",
+              "titleSha256": "482c1d3b856fd22cde66433e580d26368e09270f7e9475622d212e9ff72d5a23",
+              "status": "passed"
+            },
+            {
+              "ordinal": 33,
+              "id": "AZ04",
+              "titleSha256": "87da2157c70188a7904336ffaad7c6258a1df83c137e8a009a6ee24aebb59fb7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 34,
+              "id": "AZ04",
+              "titleSha256": "d95e6afee09960d51b5406b69f663a7d06af06be96fd507e3ae37f0eb8db0c3d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 35,
+              "id": "AZ05",
+              "titleSha256": "d349179cb95c73bb82e4fef236362922c6ac8857d9ff4fa73b8424180a468026",
+              "status": "passed"
+            },
+            {
+              "ordinal": 36,
+              "id": "AZ06",
+              "titleSha256": "4add65f14c416f9b802d3ce0c8ae13f9be676757f3bebbecb030d951953d98f1",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/api/tests/integration/secret-redaction.spec.ts",
+          "sha256": "3c1de30bbd943e0a6102783559c9327c89220201aa32e9fa612c0b9e5284efeb",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": null,
+              "titleSha256": "1e5fd3f218b7ef32c6f122a06518495c685afa9fc9b3ae692d16116e9c26f661",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": null,
+              "titleSha256": "4bfb95ceda70f134a76372cb3f8aafa39079cbd9541cd3b944084e651a6a4eeb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": null,
+              "titleSha256": "e4b3717f5f0adcc50dd58f0bdf549190a8e556b8c43674d6e5d504cb5aeccc20",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": null,
+              "titleSha256": "13f4ffdb7bc7b94dd6b20e21a6e2dfde06ec307f72ceafaca86552e7084c8fdb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": null,
+              "titleSha256": "9d92634bcab9ca705415af7ea9a3d1195cdda3cee46079f7a97c258a57d35d22",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": null,
+              "titleSha256": "2988485fa5f3f5c7a9ebeb2c2c81b1b9eb499111ef56e88b43fc0a0147724da2",
+              "status": "passed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "security-web",
+      "command": "npm exec --workspace apps/web -- vitest run src/features/enrollment/api.test.tsx src/features/enrollment/payment.test.tsx src/features/enrollment/controllers.test.tsx src/features/enrollment/admin-controllers.test.tsx src/app/enrollment-api.test.ts src/app/enrollment-client.test.ts src/app/enrollment-admin-client.test.ts src/features/enrollment/student-payments.test.tsx --maxWorkers=1 --reporter=default --reporter=json --outputFile=/reports/security-web.json",
+      "reportSha256": "04fada18e7aa9c448dc2a47a3ed0a0cda59ff896000fd4691f5ec082eb0d7501",
+      "passed": 185,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "source": "apps/web/src/app/enrollment-admin-client.test.ts",
+          "sha256": "da2f0e4bbc5802534ffd8402d1d14d4957dab53dc0ad08965e163eb577576f04",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "AC01",
+              "titleSha256": "c8f6d8b51f8cff054c977ba10cec1e89b6db0bbb22b4f637273a65827ecea7e8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "AC02",
+              "titleSha256": "f094e079d655e19313ce82feb5a1c19757cbd648dddb23fe7b13210069136a21",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "AC03",
+              "titleSha256": "520a3e399242c656cf50412686d874d60bad7dcb9b114b60d3b41d38b369d2e6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "AC04",
+              "titleSha256": "b7081a399d45bff1a87f58cb3ebc2934bd1b6429bbf017810e1ea70208dee963",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "AC05",
+              "titleSha256": "eec9b51e0f1fa64a1f716a275d2a76d9cd4738b4ec87eb906d45ad8c4e65afe8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "AC06",
+              "titleSha256": "0202665f53ed47964512d44d8f4856980b761ae2d06b8a32343d8c3ca8c475d7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "AC06",
+              "titleSha256": "d541233424c4e586a64021027ea815e48288c3b0846c3049871c24ed0d7de97b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "AC06",
+              "titleSha256": "f80d6c5b35c7e903ef9be58ae7827328762122952a909560c830547be322efc5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "AC06",
+              "titleSha256": "b0a9f302558d122bcd44448ffcc38494fba285bf8f51a2d08f13d0f66db6cc79",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "AC06",
+              "titleSha256": "b015b9123aa1dc4155c4fbcd2f55c2578d3a1ed21415bcd88506076825c6e71d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "AC06",
+              "titleSha256": "8d1e78102eb94b5f1dd6ac049e6beff0b87b533b432571411fb8adcd83a8e0e9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "AC06",
+              "titleSha256": "f36c6dc8a630079a8a2b295ece91c97cba3481a6e1fc23f486b982c6131871f1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "AC06",
+              "titleSha256": "acc94267893e8571b805b35a6fe8b3ba6d6a5a867e675f08d4e5bc02ac69cc51",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "AC06",
+              "titleSha256": "3f18e8cb3300049a22822db34ac6f5ff0041ce36ec3bf55f07fe058ffa752457",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "AC06",
+              "titleSha256": "fa1860b8cbb39d99c201cdebb1dda582b197fe64c8a460dfde2fb5532f5bf231",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "AC06",
+              "titleSha256": "87e783b147347367f2fd0d90b8fb7b8061b633cc3a86dbf204c81bd187b50397",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "AC07",
+              "titleSha256": "e3966ab2b4d578656ead68992790d63c7663db40e84a31ba4b358e4e62e93ea9",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "AC07",
+              "titleSha256": "e43f21367cba0ac4b9e4a4cc0d124d1f8e8c53386dc96727d217d38f24839ef6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": "AC07",
+              "titleSha256": "f5d9ec8bd408828daf8334bb76875f4060fa4125b05eeb9f16da7b0f94fe3f9d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": "AC07",
+              "titleSha256": "3a8643032cab3a7c5f5cdab597a57030106dddcd1e9712e51022e41d1ae5ddff",
+              "status": "passed"
+            },
+            {
+              "ordinal": 21,
+              "id": "AC07",
+              "titleSha256": "faa28002e4e9a898867d68ce3b7c5de389098fe639ca1dd63a20d6f6ea04c765",
+              "status": "passed"
+            },
+            {
+              "ordinal": 22,
+              "id": "AC07",
+              "titleSha256": "73c72d5a691493ab5e97a756be65a815ae742245caaa83b1488709002de3442f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 23,
+              "id": "AC08",
+              "titleSha256": "597c0fcf6bdb249d9892387c1f852ca88ee051e947a71f3c6a26af31aa24b8fe",
+              "status": "passed"
+            },
+            {
+              "ordinal": 24,
+              "id": "AC08",
+              "titleSha256": "141bce46103499275b6dc66b8615d6c70d84e270b2543c745eafe2beb9a84edb",
+              "status": "passed"
+            },
+            {
+              "ordinal": 25,
+              "id": "AC08",
+              "titleSha256": "5d2e28e6903bbf540a4c2da67ca9191aa9fe0ba37cc1561f46a5631aea08fb85",
+              "status": "passed"
+            },
+            {
+              "ordinal": 26,
+              "id": "AC08",
+              "titleSha256": "f4d94d53b592a80917a9c6cdc4119f24a4328103791657c72eb4c1dda1cc8927",
+              "status": "passed"
+            },
+            {
+              "ordinal": 27,
+              "id": "AC08",
+              "titleSha256": "455845836de5797018499e23e6f775e6e8b42064933f434440096e6d31e6ccf7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 28,
+              "id": "AC08",
+              "titleSha256": "db71b1d929d2e29235a5b38aade05e2b04e40a4b5dbab1edfff9c8f36b75b5a8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 29,
+              "id": "AC09",
+              "titleSha256": "55cb1bbf14a550b2fe2a44190bf6edefca7ad28bbc94e3bd8d5d405e4dc7a689",
+              "status": "passed"
+            },
+            {
+              "ordinal": 30,
+              "id": "AC10",
+              "titleSha256": "98f44cf69e13c2942440462e73e615decfc256e8fc18348b86d19dc305a64dca",
+              "status": "passed"
+            },
+            {
+              "ordinal": 31,
+              "id": "AC11",
+              "titleSha256": "fe718bc719fab1e03a26152cf03ae07c2d1966a937e3b743899cf7489ac2835d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 32,
+              "id": "AC12",
+              "titleSha256": "c6c5d62c02d4aa15105f6fd9a1b8f01fd5121cae682437f253ec6891af421926",
+              "status": "passed"
+            },
+            {
+              "ordinal": 33,
+              "id": "AC13",
+              "titleSha256": "73d1fb1286648138a72b644d3fcef0b87b3251f24d82fbfc1ed1e0636774353e",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/web/src/app/enrollment-api.test.ts",
+          "sha256": "e47ee6022ef42a38648f04299c31417f7335676dc4973ae5886c4d77bd884846",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": null,
+              "titleSha256": "98d81c1300a2b1ed5f799b7bdaf5387a4f2666fcec30a39cb4d46ca07ba1d74c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": null,
+              "titleSha256": "7b6520362050fe30d2b492f0bd0cb87fba48aa92a631a19b3f8f196e6be0487c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": null,
+              "titleSha256": "e234d7ab617988de8533ce8ede17d93b609fe1e55045b0b82076e9cc9c4e7842",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": null,
+              "titleSha256": "4c5aef5edc87e48d07a3ebc000a6e065dc063b726a7a92799371d3020ca373e3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": null,
+              "titleSha256": "4bd0a2fe7805f414824df05664d127223b146f221d47afae7b19748b321c9e6f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": null,
+              "titleSha256": "8937b3bf61221f75a9b7cb91c5e13654ee3e6ab98f0023347b992ac5bbda9823",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": null,
+              "titleSha256": "63bc05683254de4520ca5691da297b719db5fd249ee844d2e045aa0f378801f8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": null,
+              "titleSha256": "223539e1b6f0ff6774302ce5edb6c7902bee04290c9e14c937bff763f3e70568",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": null,
+              "titleSha256": "75ef021ad74a0173d1581054854688548d874cc0c73f5f4bda31151c3a832e8e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": null,
+              "titleSha256": "68019c925e467faaaa3e4e5566f13a22872b790364c8e3f51e563c4f5415d262",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": null,
+              "titleSha256": "7a96f53f854095dbb48416ce8182718d2d810f11f4d505869f5b58db01c6a346",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": null,
+              "titleSha256": "36ba8e0d3c9f2bf4f1dab0c89ff989aa9740dc30f03286972610d27baf0f84a0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": null,
+              "titleSha256": "f254920c184b59182320a77fb79e270c775b4508b625dc9f14369c0735779c53",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": null,
+              "titleSha256": "fa4a3cda52989db475395f1bed19eaf1b3bc724ec6b17daa0f5bfe01291a4de1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": null,
+              "titleSha256": "d76fe261d0122595981230209007852c20342eefaf0b63335f00049be319268d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": null,
+              "titleSha256": "e45b3c782dd34e77d64a6b6034658837d13e4f1884452b3bfb9dae06974b2c56",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": null,
+              "titleSha256": "14c2ce472d6837189e7226c69b4025f9277d7627613451f3fac0b1660e1382c6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": null,
+              "titleSha256": "629b6aceb0e5b1096e7f24411b101da1dd003c6db8556b3f49a8cbc21fdec0a7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": null,
+              "titleSha256": "0cc0cad23bdc1ddbdc1638d23db13a4bb2227287d9fc8383faa19ab8ee6fb9bd",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": null,
+              "titleSha256": "be7491087b969f912fab629dbdb0abf71f801720b87ec8a332b1969ff05d62d1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 21,
+              "id": null,
+              "titleSha256": "73e8575c423799708d1cabb02d8472eb66c654ac59f1cec3ab8f889191c07d2c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 22,
+              "id": null,
+              "titleSha256": "39b0c75a24b1d1fe351c88738db8a97fd243b246db360bb611449d0f71ccfea8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 23,
+              "id": null,
+              "titleSha256": "b6c3f2c9bd968dbd5d4a47130928ec9593d6a62a134ed78a958a95ad2aed810b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 24,
+              "id": null,
+              "titleSha256": "e0c6c82dfff906369160b53bb91b4b35f874f49651b88922df2212e79992dc2a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 25,
+              "id": null,
+              "titleSha256": "914710cf12c65d29cee30ea7e3e9dca6668ac5f9e172cbbe4ef520390fe00d5e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 26,
+              "id": null,
+              "titleSha256": "662979c12a29bac1251e261f9e9d8cef333ce04f1297bd4f979cbc62d40f68a5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 27,
+              "id": null,
+              "titleSha256": "720f681b6e403259df9af539d35fdf27aff118dc072d30bfbce18987002a722c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 28,
+              "id": null,
+              "titleSha256": "da370f1f16aeec6f7aa6154c829a26561484865569749ac6a3818a60768945f7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 29,
+              "id": null,
+              "titleSha256": "f5d77f5d59366621e57ec59ff74b63dc6b6658ab2f0cc3dee31c931219e56d3f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 30,
+              "id": null,
+              "titleSha256": "c87f4e757775eaa4c7124835a6edda07830a588416afea9e0754c9ee68fbc32e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 31,
+              "id": null,
+              "titleSha256": "2ff8ee09fdc99b6fc0ccb529854b31b7f31cf15ddc5668ea7eb8095d8ff068c7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 32,
+              "id": null,
+              "titleSha256": "8715c9fdb5aa122ec6a4da11b69b6d49162603d535b769352660190ca055131a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 33,
+              "id": null,
+              "titleSha256": "73ab1e3add79a3884b76d9e1f9d0644f3f7773c9088380ced86a0cc3329bbabe",
+              "status": "passed"
+            },
+            {
+              "ordinal": 34,
+              "id": null,
+              "titleSha256": "6b70c03bc134d514f0dfa0dc295aa63f5549691a5c34e1e8c96359fde42c0206",
+              "status": "passed"
+            },
+            {
+              "ordinal": 35,
+              "id": null,
+              "titleSha256": "f0796faf7f36c8deb32aa92d02bab0f43ac8890baa89a51cde756f2955dc353c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 36,
+              "id": null,
+              "titleSha256": "6d5bf62909ad7fe1abec83ea4799dfc27a4703d62f41981acad279cbd0f85326",
+              "status": "passed"
+            },
+            {
+              "ordinal": 37,
+              "id": null,
+              "titleSha256": "468e21f4134dfdd89fa5ee86fb45a4d503e74811669026cf3e5740eacd0345aa",
+              "status": "passed"
+            },
+            {
+              "ordinal": 38,
+              "id": null,
+              "titleSha256": "cd94aff1a1bcfea5d9ed49661500990aa12866d29776e07a20f9a7cc308c88b3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 39,
+              "id": null,
+              "titleSha256": "1eb959cfda9757512c7f3762420ef46a98f7714a831ad81091339abc97454e44",
+              "status": "passed"
+            },
+            {
+              "ordinal": 40,
+              "id": null,
+              "titleSha256": "a75256f4021ac9a5f132a0d0b7c22ac921e164751a9942a46a97b6283b41798a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 41,
+              "id": null,
+              "titleSha256": "451edbc50016aff172cb7c734dd9a1fd5a3cebafb56990ccfa0ac58f6a6a3417",
+              "status": "passed"
+            },
+            {
+              "ordinal": 42,
+              "id": null,
+              "titleSha256": "0f0d6ad8206f13a8ec68494f1ad202294e372b5a61d946e24532c92e9a0c9a59",
+              "status": "passed"
+            },
+            {
+              "ordinal": 43,
+              "id": null,
+              "titleSha256": "dbc4d03618647460829bafaf0e8b32cf5a0f2e1fe7df075e8b42ae6ab6ad2b9a",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/web/src/app/enrollment-client.test.ts",
+          "sha256": "0da8d244f4f6aeb086a0f39521f46c7711f380ff1f0336b275f64cbd4572d01e",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "WC01",
+              "titleSha256": "40f61bf4076b1a08530eb6cc31c0f21bee0a6038e7ec9854b23fd67acc587594",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "WC02",
+              "titleSha256": "8e820797d95cd243f12bc3a79e10d23df07ed735ec0abf5d249b96ec01ba3de7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "WC03",
+              "titleSha256": "65c656f0366039f9b885f77e179cab613b3eb651e6b10a90d2448e4e1f31f561",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "WC03",
+              "titleSha256": "85f57fd394bd7b10e05cb7bd41a6eab393c5665cb36e6b5ec5c12a41825f5f4c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "WC03",
+              "titleSha256": "e35a76c874b1f38c590fa898ead3369fe52561ca653b99f6c86400342250aa29",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "WC03",
+              "titleSha256": "f56d3db946ddf4e6ff7f2921f9b72a9f0a8eb781883ac868be651da8e5a4db46",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "WC03",
+              "titleSha256": "1d5209f0c39a6017da5fbc5ff0069b8eb585e733cb1d53b80aff6da70b79fbe1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "WC03",
+              "titleSha256": "4b690e3cd2771b0e688113b4a3e201a9dd1ec2ca54f5262d5d92cab55b01c5a5",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "WC03",
+              "titleSha256": "7f3c24f6b158d6a3642d4ce0679003e3601566691b524eb5204c29b555d7bbe4",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "WC03",
+              "titleSha256": "44ef909adbf05ad41508f203a12e263b32786c58e212ce3e8afb2f1e3a42482b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "WC04",
+              "titleSha256": "cb1d2dfc752d5ce73e8daff9abe51f25eeb1b01e0c8ca40948fa15b27ced22d8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "WC05",
+              "titleSha256": "107df2ca8eb0cd4e129d1808a6f71b37f382d68a8c5572f8e43b97d90fae4e87",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "WC06",
+              "titleSha256": "273bf43c4a7fcc2b77549087d998991fe7da2d313037c6cde062c3216bc1ab2e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "WC06",
+              "titleSha256": "8e861c733bb9c167ad8bbc08f632a0f5fdd9c4afe2f5b71b310d337165e5ca31",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "WC07",
+              "titleSha256": "66be2f09226b91c1905728b2a618d310ed12c4ba6088b81285a2b3cebf142da3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "WC07",
+              "titleSha256": "c2173f5fd8043aa81567e450aab08a73c543b9bc6ef7ab9540f300af17953030",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "WC07",
+              "titleSha256": "d0bfca01cc6487eba640dee4025a619b479bd8e0cb92dd3de7694cd711f8beaf",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "WC08",
+              "titleSha256": "bab33045ede0d7d5a44c6ea351ba822320ff9174029c9094da03ce27772978c2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": "WC09",
+              "titleSha256": "4e642d0ada6908f4df7326d1e4be1124634fb83338bb2cef43625ae1849be3a5",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/web/src/features/enrollment/admin-controllers.test.tsx",
+          "sha256": "e90f386e8717537dfde7f40ac93b0c0b29e591d1a282902830b75f7ea78d90c9",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": null,
+              "titleSha256": "cb7b07b613a6a8ecec8a131f49b3d854dbf173c314fc45939de88464e92f531a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": null,
+              "titleSha256": "398c03380131ea60c16ad090cd438dbbc5fae32a93485762d6e4455d73fccf58",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": null,
+              "titleSha256": "d6ca56dafb1d32a0375d5a1ec8732e8a1f902395ae376508e75766fc1d6cac78",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": null,
+              "titleSha256": "14beba63040a15e144867491746ba8b50779d670036aafc9ac68c7e799e2afe0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": null,
+              "titleSha256": "45c0c32576d018417c3a341a1524cf9fb6a0c8f4cfceab9d215bd74977c540f2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": null,
+              "titleSha256": "bca0ee93e7bfa8f51712ecbad7fd19c9aecfcc4ac00ba033825c80c2824864d7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": null,
+              "titleSha256": "d33c2e85118eb18855037e6ff6e3af3c1d17272e738fec451f64b66bc58e343b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": null,
+              "titleSha256": "d4b6ff75ca586740b01a3ea30e869024770d83bbe5c8892cd5ff0a022fd65792",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": null,
+              "titleSha256": "aa3f84ed9a69d4330306f36c55796dcaf82b47f3acfa78adb959825ac9cd8f50",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": null,
+              "titleSha256": "253f4435f840885719e6bf3ed89dcd9d69c9f6fc451207b21fc4357fa95a90b2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": null,
+              "titleSha256": "ecf9b00d6ef9186eac7e3f0e41d0c8295c96c2581650eb3379268d21a8e2f42c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": null,
+              "titleSha256": "c3792b18ee0e8b31a7305fdbe8a586e3264738ae2ff2f3da236761878d265073",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": null,
+              "titleSha256": "c04f565b41a7afaebb14dbe5424b104d23895603b9a36807aa01e959b7f9bda0",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": null,
+              "titleSha256": "bb6b5eb970b39975821de1a9acc104566c435a4ca484c7c915505129578735ff",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": null,
+              "titleSha256": "c2ed886843fbd1eb997dc5b5b09dcf8704b89597e63aa2ddbe241c345c0725e3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": null,
+              "titleSha256": "1c6a4e96f64fbc4846f39679f92119d121f1ad75b5a25c1c6f53169ca82f8545",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": null,
+              "titleSha256": "db803079249dd5d2a12f9f8c3afae463b32982bdbccf53c92425d10e2276ce54",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": null,
+              "titleSha256": "0de2b76db05d64858e20ec0cd97824514b3976396b7c6fece8e85195dba8705b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": null,
+              "titleSha256": "51ecb177ba2ed20c1571d93ad286d70c8c39cadf30886aff0b53c0a28b3e5ab8",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/web/src/features/enrollment/api.test.tsx",
+          "sha256": "3821b1e5990474f5d8eb9789359503ae44f181bc24f3fcd8331eab409c311259",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "WA01",
+              "titleSha256": "16535d2f149ae6a1ba8e757f89585661ec39ae54760f37d1c88e6efb8bade572",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "WA02",
+              "titleSha256": "8da42e80154ef1d38450c5fb6c0761bc9729f98555839591b551feaacca7b25a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "WA03",
+              "titleSha256": "75a5149f4d6701604195b6c51dc9b2d66edf2bbc1c643abfdb3e13ec6999f0c1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "WA04",
+              "titleSha256": "dad0b9386e587472a15cc90c779fd851983773bfd281ddcc3c489fa969e05221",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "WA05",
+              "titleSha256": "81602f7aad7efe786dcefa0edc5f4b06db87556fc247d0eb83509957520b944c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "WA05",
+              "titleSha256": "9b06254d25e148e18c71e68e297ddec266ff5862d027f15b2fb8ed9786702d6e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "WA06",
+              "titleSha256": "7480be51b679ae1e060976d99a61d255d338d6066bc4b7470fdb86cfbf5950d7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "WA06",
+              "titleSha256": "528973bf7c0681c47746b57875b043326fbaf6231376d585cae44ab5a4c15888",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "WA06",
+              "titleSha256": "b57c4b3e40a113aca82917c1f4589c7b3a06e6eb8ba5b7eb55e03996bbf00aef",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "WA06",
+              "titleSha256": "9ef7c679f8b320ee1ffe7e93687db65d700dd80e1168b0587144f388471cd355",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "WA07",
+              "titleSha256": "6f1f844130f67af2d458a54d3a19e9fda1d4ef4853c4c884c8011d1fcb79b3ac",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "WA08",
+              "titleSha256": "6b3e16282c5ad23d6519a3490b52ab7c8c43d54c17541cbc15765dccf35e299a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "WA08",
+              "titleSha256": "9280a548ab3acb851f724c621ac827bc5923428dee3ee127bae2b3e432302a16",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/web/src/features/enrollment/controllers.test.tsx",
+          "sha256": "fb5d384bc0731fdccf6775101cb233452da9f8ac673c7bfd34dc9150a505e501",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": null,
+              "titleSha256": "20a9fa4940a76a3d478c20d71a2fcfd9ca3eaf6e1959c9c05065e15e24df3502",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": null,
+              "titleSha256": "79326a1d44a22cc08a086c2952e71d8e9edeb9b19bc93def3228c10fe386b141",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": null,
+              "titleSha256": "839bf6107c5c4356a34b4a74212df8b3e75f55f7bd2dd3cc0f0d12e97f800062",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": null,
+              "titleSha256": "8a5c34b3ba30ebb82e4e268210493df5d93a581c583e004ba1cb0018f7c861dd",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": null,
+              "titleSha256": "2b4047fac6e481bb52a071cc581ec93e893f340e03cec1ecf18dfe1110c5017b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": null,
+              "titleSha256": "a85ec8c9c76aba6b564635f484382c869c91743e7bee70cde2c22e4783378e2e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": null,
+              "titleSha256": "d3a17b685681fd06a647704d80f9979a5da0d47739a8c56b9bf3ab8fe7391f2b",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": null,
+              "titleSha256": "604a33979c3722ea8d5e2f0036d6abfc0ba2cd22e37b814f08e2c6a421f7f795",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": null,
+              "titleSha256": "30d4c2db0074d2dc0aa0d2410dde40d4840e56ea590d23e20c6f346c6e00d346",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": null,
+              "titleSha256": "535d7fe8cb752ec7896e31c95674acb9d15c9e06eceee6b80e1871d7d0e7475e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": null,
+              "titleSha256": "00b34b9766002c999ceba89e104b1206ea3d15fad88c4077daffd7b32ccaf4b3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": null,
+              "titleSha256": "eb35ef2f27f3df7f586c62e696b3b1f156531a10715f676abe8786e01c328dcf",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": null,
+              "titleSha256": "fbaac2015ccfdcfa81e954bf574e6ccaeed496526702c95d07a2f3adf7c5e928",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": null,
+              "titleSha256": "b191d0e4be8a78456acbc6c2a5fd75a8d5eb69119675ad3c114a92cd9d1c2793",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": null,
+              "titleSha256": "afaab0209b4f9a92d1ef0b6a9a66d7c6bc638d261a64e4e548ef6b60dc61fe65",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": null,
+              "titleSha256": "dbd853126e1c5c64eb25d5fdd94eb5914928916bb6446de7ecd04407ac003d25",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": null,
+              "titleSha256": "6e09ea77c63562cc793f733f5a8099083c9c076fec025c668edd76424cb38581",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": null,
+              "titleSha256": "7cb20ff28bc237a4af33a9fd4cf07f2870c34ce0847e2ee154e9c5a611bdcbd8",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": null,
+              "titleSha256": "69e4c1fcee2fe879e396c96006a4092ea01c2dbc9e3971ad225ccbb6b3f4d4f2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": null,
+              "titleSha256": "d6a1119348fc982361a206d542974bd647580df6ddbfbb516630468ba749eb97",
+              "status": "passed"
+            },
+            {
+              "ordinal": 21,
+              "id": null,
+              "titleSha256": "afa9dfb94a96ca20fd339196c1f1793b9ecfc604a41f5811a784bd6973c3c8da",
+              "status": "passed"
+            },
+            {
+              "ordinal": 22,
+              "id": null,
+              "titleSha256": "cb6b78597322cecda36251843476d2c3be5538db421a5e9001cd28b9d199fe30",
+              "status": "passed"
+            },
+            {
+              "ordinal": 23,
+              "id": null,
+              "titleSha256": "aa216dd67991a487c2699e49d91b7955c6cee1244f625b32eca6c335cbfc7b3a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 24,
+              "id": null,
+              "titleSha256": "cf763e8ce67b47ad17530d4ce5f6aceea459b58c189b7a1fd5bc85a44a85e763",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/web/src/features/enrollment/payment.test.tsx",
+          "sha256": "e61a5e2e5b774574d479dc805cc7c06ded59bc7dd660f21cb965804d5111e479",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": "WP00",
+              "titleSha256": "3f675aa055fea1255614cf644902cd68eae8193884f8f2086bf728b081d02545",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": "WP01",
+              "titleSha256": "01279f0cc84b5f6ace06003368fa99c81351fa58f7c3fdde350e6d62025a0b65",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": "WP02",
+              "titleSha256": "182af24f75d528e07c9b5424e96bdf52a373bd5827e5cfa9d87ac9ffd13cb313",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": "WP03",
+              "titleSha256": "f5680052ff594129dd5c8a36d65dfbb796f23f861eae4cb38bc8206896e02e94",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": "WP03",
+              "titleSha256": "c2d478b873dd39dfde0c2e779fbee4b6f6f0625c989cb5b5b2acd4f8d8a40e96",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": "WP03",
+              "titleSha256": "04d9e77817b378fd488d73f0c3e539e4052cc816beca40cae5c4270bf70c1bb1",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": "WP04",
+              "titleSha256": "0e27b95c5f9b0dd82ac06c0542ea6f4192c6ec41e0b0b27c9cd2d38d14c99d4f",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": "WP05",
+              "titleSha256": "04ab78f990c4e70afd9cde086f159e3b265a2d415d18eb6d331d4486f2fea2f6",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": "WP06",
+              "titleSha256": "bd97fbf87b4414b25ebc2cb3f046bf2790148c5dd10f6e44af128711bddec27d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": "WP07",
+              "titleSha256": "fb6494468dd7c46725b9dd63acc996b1c5c9dd3335ab5f77dd44597da5c2fbb7",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": "WP07",
+              "titleSha256": "dc06ba6ab5c07bda7ade1eb88b65df2ebeac2f4abb4d738612a2bc0b5b58594e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": "WP08",
+              "titleSha256": "af1262e872e0ce0fef625bac342c9b0c5a88460fb0d100a3448093e972a6b010",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": "WP08",
+              "titleSha256": "c484dbc712c5866aa8b56505ecb55136ab8bf08d34c465ead658a2e76f6d9520",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": "WP08",
+              "titleSha256": "6080258ac00cb5f4d7b18c9218c917e3ca1a0e5f8389236465818c644517f9ad",
+              "status": "passed"
+            },
+            {
+              "ordinal": 15,
+              "id": "WP08",
+              "titleSha256": "32a7f79d7e7f5f883a468cf18a0f8cd5382b59f0e506f2bfaf6ac0b5fe3f333a",
+              "status": "passed"
+            },
+            {
+              "ordinal": 16,
+              "id": "WP09",
+              "titleSha256": "36368b1d56f0983111c522f22242b1bcbe99960bd09ff0e877c45fdc3a9c2826",
+              "status": "passed"
+            },
+            {
+              "ordinal": 17,
+              "id": "WP10",
+              "titleSha256": "2370d092071fd9ef2460cdac6b231ed2f6127ac522f94ecd3870dbefa161485e",
+              "status": "passed"
+            },
+            {
+              "ordinal": 18,
+              "id": "WP11",
+              "titleSha256": "d8bdad46fd51f76cc891f6eea909f43ff4455df334aaa03d14ece3b6a02ee250",
+              "status": "passed"
+            },
+            {
+              "ordinal": 19,
+              "id": "WP12",
+              "titleSha256": "8f9d5749de3ac0d80cb13d60661a589cbe43eab4204a59079f1db72c22fc9092",
+              "status": "passed"
+            },
+            {
+              "ordinal": 20,
+              "id": "WP13",
+              "titleSha256": "2d2e34cfc038f82485118b266f55d29e547154bc3b446572efd337400242eb2c",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "source": "apps/web/src/features/enrollment/student-payments.test.tsx",
+          "sha256": "2dacbdf4e57c2695076e5cde8fe1bbe0f2a19b3e0c5bc5b941ec7dbf0b686eca",
+          "cases": [
+            {
+              "ordinal": 1,
+              "id": null,
+              "titleSha256": "ac31e6d796a528ed03729450946bbcc9d65957543efaf8c8cb4d0d56f3bbf089",
+              "status": "passed"
+            },
+            {
+              "ordinal": 2,
+              "id": null,
+              "titleSha256": "b5a97d70ca067298612232506d60db1b5506c45088cd80de20d48a3a9b55300d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 3,
+              "id": null,
+              "titleSha256": "59703150db7a1db0fc1961f63dee574c32cf57091f370b68a15fd57ab92d48ee",
+              "status": "passed"
+            },
+            {
+              "ordinal": 4,
+              "id": null,
+              "titleSha256": "5b735d4a3668703da6cb4bc2a41ce82b409fa1945e76b61641cb9aaacebe124c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 5,
+              "id": null,
+              "titleSha256": "0efe7524d5fe5af565f3317b478c2a1310ed71015c345049527cbf712eb48c37",
+              "status": "passed"
+            },
+            {
+              "ordinal": 6,
+              "id": null,
+              "titleSha256": "da5f188d2d255f84bb5dbeca56e82d896bf827a6df665f5d188f5d1b63a0d989",
+              "status": "passed"
+            },
+            {
+              "ordinal": 7,
+              "id": null,
+              "titleSha256": "8664bab09f31020fd65ab5ef65fa941f6a19c01df455b7e33bf0df90849a4b66",
+              "status": "passed"
+            },
+            {
+              "ordinal": 8,
+              "id": null,
+              "titleSha256": "dc6556202721315c1c0b0b61ef6b3c7a24a72773b75ea0365c2f618f8a5f47f2",
+              "status": "passed"
+            },
+            {
+              "ordinal": 9,
+              "id": null,
+              "titleSha256": "34948aaef475c041dd4e6d735adb93b273cd3de659cad521ea4f9f98fa73d479",
+              "status": "passed"
+            },
+            {
+              "ordinal": 10,
+              "id": null,
+              "titleSha256": "3aa8c3f713a91cb7161b28afedd770829301330ce1af479e698dcfe74ccc520d",
+              "status": "passed"
+            },
+            {
+              "ordinal": 11,
+              "id": null,
+              "titleSha256": "890f5187b454334822d9bc9093364434ed49619ef04293a01aefb33f1381bde3",
+              "status": "passed"
+            },
+            {
+              "ordinal": 12,
+              "id": null,
+              "titleSha256": "7c3df79facedffcd25b93a3410ac47626f89b2459858b660a4ae7b20541b021c",
+              "status": "passed"
+            },
+            {
+              "ordinal": 13,
+              "id": null,
+              "titleSha256": "10fbc00d01c48789634e2080b1f9780ab05194f774dabc237999bd546da38324",
+              "status": "passed"
+            },
+            {
+              "ordinal": 14,
+              "id": null,
+              "titleSha256": "b3b4fe04887a6b9e960eac0961aa986f122fae94f0daededf4acd3a1e5aef423",
+              "status": "passed"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "project": "academic-offering-fa3d46bddbb8",
+    "appEnv": "test",
+    "publishedPorts": 0,
+    "serverVersion": "16.14 (Debian 16.14-1.pgdg12+1)",
+    "apiImage": "sha256:c13d8310193527418bb97f706420959e5ba9dc33815f6e99a46d179ed8fc68a8",
+    "imageSource": {
+      "imageSource": "MATCH",
+      "files": 533
+    },
+    "mounts": [
+      "current apps/api/tests, read-only",
+      "current apps/web/src, read-only"
+    ],
+    "preservedExistingSchemas": 5,
+    "closure": [
+      {
+        "service": "db",
+        "status": "exited",
+        "image": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+        "volume": [
+          "academic-offering-fa3d46bddbb8_postgres_data"
+        ]
+      },
+      {
+        "service": "mailpit",
+        "status": "exited",
+        "image": "sha256:ed9b00c609e77e99c79b93f1178255ebc271868920f2c69a8d166bd5634ed10d",
+        "volume": []
+      }
+    ]
+  },
+  "preservation": {
+    "baselineFiles": 960,
+    "productTestsConfigurationsAndMigrationsUnchanged": true,
+    "previousEvidenceUnchangedExceptAcceptanceAppend": true,
+    "acceptanceHistory": "byte-for-byte prefix preserved",
+    "protectedFilesUnchanged": 74
+  },
+  "scan": {
+    "status": "PASS",
+    "imageProductSourceComparison": "PASS",
+    "configuredSecretLiteralScan": {
+      "files": 95,
+      "configurations": 2,
+      "distinctValuesChecked": 18,
+      "matches": 0
+    },
+    "protectedFilesUnchanged": 74
+  },
+  "reviewedSources": [
+    {
+      "path": "apps/api/src/http/transport.ts",
+      "sha256": "d1b6cc54be67f406ee7cc2265b4b5c068d42c10f1ad9e844b4bfdc4f85d556eb"
+    },
+    {
+      "path": "apps/api/src/http/error.filter.ts",
+      "sha256": "15debf75ba6d716efbec08eae02659fcfdcab84bcd466762db37840d15cc2518"
+    },
+    {
+      "path": "apps/api/src/infrastructure/http/enrollment-contract.ts",
+      "sha256": "3fcee4a506810536ff1fe97653aebcd3369e4d16ce3fa0671c425951a7cf704f"
+    },
+    {
+      "path": "apps/api/src/infrastructure/logging/security-events.ts",
+      "sha256": "c6875bd44d190ebb309a20a764e33a85d2576e07155ef18348da0f1aaa2b2054"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/enrollment-transaction.ts",
+      "sha256": "5ed930d91580c03e096ef91463f97071f628188b77df6a2061ed94576283fd68"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/queries.ts",
+      "sha256": "1e2b03526fe25c79a49ecc5996a8a9a6239300aad0a96130f346b8984d97f439"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/audit.ts",
+      "sha256": "d94a549297106cc56a5d7fa34bdb3cb756bc70ec5809330d220e45ba0c52a8b2"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.ts",
+      "sha256": "ae91a81d57e6216bddd7a47ee56e9fa15207d0b894c119ed1214728b6d642a8d"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/payment-receipts.ts",
+      "sha256": "dcaf9b4946a862b1b8db05d169967798cf958903f5b7066a312f9016c303599f"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/infrastructure/payment-attempts.ts",
+      "sha256": "062a8937ffb7b3319dffa86b4eb431b22819d9143f88241da10a73121af6ad21"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/enrollment.module.ts",
+      "sha256": "edbb85e92fa6b59870b33dd5a38ea1bcd45cb63a1fc3c9c740d28b7d5a850813"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/public/errors.ts",
+      "sha256": "2ef06594181b9baab9a5c51ec14fb50c88e0e29f899a156abfb979c26565980b"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/entrypoints/http/input.ts",
+      "sha256": "81d5c3c39db50eeee1d7509e59c17b723e149858395c1133619dea622b54516a"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/entrypoints/http/orders.controller.ts",
+      "sha256": "0474a642707aed3fb9dec14d5ba1c69ed55de234022ef9685bfb01db418f49d3"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/entrypoints/http/admin.controller.ts",
+      "sha256": "dec5cd12432c36035c261d7499e01f0040fa8aa6fc131fdf3c2eb9ce350694b7"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/entrypoints/http/reservations.controller.ts",
+      "sha256": "89c852306a30b44790a0f60021913ac73ccf6a95f32ed12be6244aa2be69d401"
+    },
+    {
+      "path": "apps/api/src/modules/enrollment/application/follow-up.ts",
+      "sha256": "e771c7e83ebf0fb9d92fc520fc77130aa4e2e8d34174c69820c8e8f1cd472bda"
+    },
+    {
+      "path": "apps/web/src/app/http.ts",
+      "sha256": "a2a2c56190ca3f7c169eae022d921653f948e4f59c404b3c3fb2cd616d3467d9"
+    },
+    {
+      "path": "apps/web/src/app/session.tsx",
+      "sha256": "2ec8139054100595c012b5823036145b127bb9c1eac5362bbda996125bd6d0e3"
+    },
+    {
+      "path": "apps/web/src/features/enrollment/api.ts",
+      "sha256": "e58f67afc1cca96e594b75ebc95c8289ac5b1aeb29773ddcb61881a18b00fcd0"
+    },
+    {
+      "path": "apps/web/src/features/enrollment/incidents-page.tsx",
+      "sha256": "78c95918cbfeb231a3bee7d9a6d739b850e96db8b735f7b9538457b32b2ec8ee"
+    },
+    {
+      "path": "apps/api/tests/support/enrollment-migration.ts",
+      "sha256": "3ca6a788bf6ff648f61f6f641b75e570058628d8111a1562903b9a31986c18fd"
+    }
+  ],
+  "nextPair": {
+    "tasks": [
+      "T089",
+      "T090"
+    ],
+    "purpose": [
+      "Integrated human acceptance",
+      "Authorized physical 24h operational trial"
+    ],
+    "pendingGates": [
+      "T059/D02 provider and sandbox",
+      "T083 observed human results for T089",
+      "D13 agreements and authorization for T090"
+    ],
+    "alreadyCompleteDependency": "T086"
+  },
+  "limits": [
+    "Free administrative notes are authorized text, not protected by a DLP classifier",
+    "Existing log rotation describes code and does not approve financial retention or custody D13",
+    "Future provider adapter and external log collectors not certified",
+    "No real payments, provider requests, load, deployment or capacity approval",
+    "T083/T089/T090, D02, D10, D13 and T094 remain pending",
+    "001 T104/T108 and 002 T073/T074 remain pending",
+    "Global checklist remains 12/16"
+  ],
+  "tasks": {
+    "complete": 83,
+    "pending": 11
+  }
+}

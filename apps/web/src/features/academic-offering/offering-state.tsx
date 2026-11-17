@@ -6,6 +6,9 @@ import type { AdminCourse, AdminGroup, PreparedCommand } from './api';
 import './offering.css';
 
 export const stateLabels = { DRAFT: 'Borrador', PUBLISHED: 'Publicado', WITHDRAWN: 'Retirado', CANCELLED: 'Cancelado' };
+export function CommitmentNotice({error}:{error?:ApiFailure}){
+  return error?.code==='GROUP_COMMITMENTS_BLOCK_OPERATION'?<p role="alert">El servidor impide esta operación por compromisos vigentes o incidencias pendientes. No se aplicó el cambio. Puedes cambiar nombre, descripción o docente después de retirar el grupo, con revisión y republicación explícita. El período, los horarios, la capacidad y la cancelación siguen protegidos. Este formulario no resuelve pagos ni libera compromisos.</p>:null;
+}
 export function safeFailure(value: unknown): ApiFailure {
   return value instanceof ApiFailure ? value : new ApiFailure(503, 'TEMPORARILY_UNAVAILABLE', 'Servicio temporalmente no disponible. Comprueba el estado antes de reintentar.');
 }

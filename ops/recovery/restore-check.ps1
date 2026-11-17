@@ -30,7 +30,14 @@ try {
   $null = Invoke-RecoveryDocker @('exec','--user','postgres',$Container,'psql','-U','postgres','-d','postgres','--set','ON_ERROR_STOP=1','--command',('REVOKE ALL ON DATABASE '+$NewDatabase+' FROM PUBLIC'))
   # Conserva owners/ACL. Los roles globales deben existir previamente. Nunca --clean/--create.
   $null = Invoke-RecoveryDocker @('exec','--user','postgres',$Container,'pg_restore','--username','postgres','--no-password','--exit-on-error','--single-transaction','--dbname',$NewDatabase,$remoteFile)
-  return [pscustomobject]@{database=$NewDatabase;revision=$manifest.revision;startedAt=$started.ToString('o');completedAt=[DateTime]::UtcNow.ToString('o');archiveSha256=$manifest.cipherSha256;restored=$true;trafficReady=$false}
+  if ($manifest.PSObject.Properties.Name -contains 'materials') {
+    . (Join-Path $PSScriptRoot 'materials-inventory.ps1')
+    $materials = Get-RecoveryMaterialsInventory $Container $NewDatabase $manifest.materials.schema
+    if ($materials.sha256 -ne $manifest.materialsInventorySha256) { throw 'Inventario de materiales restaurado no coincide; mantener cuarentena.' }
+  }
+  $result = [ordered]@{database=$NewDatabase;revision=$manifest.revision;startedAt=$started.ToString('o');completedAt=[DateTime]::UtcNow.ToString('o');archiveSha256=$manifest.cipherSha256;restored=$true;trafficReady=$false}
+  if ($manifest.PSObject.Properties.Name -contains 'materials') { $result.materialsVerified = $true }
+  return [pscustomobject]$result
 } finally {
   if (Test-Path -LiteralPath $plainFile) { Remove-Item -LiteralPath $plainFile -Force }
   $null = Invoke-RecoveryDocker @('exec','--user','postgres',$Container,'rm','-f','--',$remoteFile)

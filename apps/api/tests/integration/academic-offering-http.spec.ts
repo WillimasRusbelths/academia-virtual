@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, beforeEach, expect, test } from 'vitest';
 import { academicOfferingDataset } from '../support/academic-offering.js';
@@ -20,7 +21,7 @@ const routes = () => [
 ];
 beforeAll(async () => { data = await academicOfferingDataset('academic_http'); http = await us1Http(data); }, 120000);
 beforeEach(async () => {
-  await data.context.isolated.ownerQuery('TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
+  await truncateFixtureTables(data.context, 'TRUNCATE "AcademicAuditEvent","AcademicCommand","AcademicSlot","AcademicGroup","AcademicCourse"');
   seed = await academicCatalogSeed(data);
 });
 afterAll(async () => { try { await http?.close(); } finally { await data?.cleanup(); } });

@@ -1,0 +1,68 @@
+{
+  "feature": "004-materiales-estudio",
+  "created": "2026-11-15",
+  "reviewed": "2026-11-16",
+  "timezone": "America/Lima",
+  "status": "specification-ready-for-planning",
+  "confirmedDecisions": {
+    "scope": "per group",
+    "managers": "currently assigned eligible teacher and administrator across groups",
+    "formats": [
+      "PDF",
+      "JPEG",
+      "PNG"
+    ],
+    "maximumFileBytes": 20000000,
+    "source": "Explicit user answers in this conversation on 2026-11-15"
+  },
+  "quality": {
+    "template": "spec-template resolved through local preset stack",
+    "stories": 3,
+    "functionalRequirements": 20,
+    "successCriteria": 7,
+    "checklistPassed": 16,
+    "checklistPending": 0,
+    "clarificationMarkers": 0,
+    "localLinksChecked": 6,
+    "scopeAssumptionsDistinguished": true
+  },
+  "preservation": {
+    "baselineFilesUnchanged": 966,
+    "protectedFilesUnchanged": 74,
+    "existingSpecsUnchanged": true,
+    "previousHumanEvidenceUnchanged": true,
+    "oldTaskCounts": {
+      "complete": 84,
+      "pending": 10
+    },
+    "branchUnchanged": "feat/003-reservas-ordenes-matricula",
+    "activeFeaturePointerUpdated": true
+  },
+  "artifacts": [
+    {
+      "path": "specs/004-materiales-estudio/spec.md",
+      "sha256": "b773e7bfe099e79e40590b4c51bbcab1b63affdb2fefaca0be19556de0e29212"
+    },
+    {
+      "path": "specs/004-materiales-estudio/checklists/requirements.md",
+      "sha256": "9272e319392d99c892f0c44a6c541935f9a67f306ea786b24c226c16b837d7e9"
+    }
+  ],
+  "execution": {
+    "planCreated": false,
+    "tasksCreated": false,
+    "productCodeChanged": false,
+    "productTestsRun": false,
+    "servicesStarted": false,
+    "migrationsApplied": false,
+    "externalRequests": false,
+    "hooks": "no extensions.yml"
+  },
+  "nextStep": "speckit-plan for 004",
+  "limits": [
+    "Specification quality is not product implementation or acceptance",
+    "D02/Izipay, D10/capacity and D13/operational custody-retention remain pending",
+    "Storage implementation and environment capacity belong to the plan; no service contracted",
+    "Materials human acceptance and backup/restore including files must be verified after implementation"
+  ]
+}

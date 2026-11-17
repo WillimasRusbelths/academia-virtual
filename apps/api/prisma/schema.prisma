@@ -105,6 +105,11 @@ model User {
   paymentAttempts         PaymentAttempt[]
   enrollments             Enrollment[]
   incidentFollowUps       IncidentFollowUp[]
+  materialsCreated        Material[] @relation("MaterialCreator")
+  materialsUpdated        Material[] @relation("MaterialUpdater")
+  materialUploads         MaterialUpload[]
+  materialCommands        MaterialCommand[]
+  materialAuditEvents     MaterialAuditEvent[]
 }
 
 model Session {
@@ -255,6 +260,9 @@ model AcademicGroup {
   id                                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   courseId                           String             @db.Uuid
   course                             AcademicCourse     @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  materials                          Material[]
+  materialUploads                    MaterialUpload[]
+  materialAuditEvents                MaterialAuditEvent[]
   name                               String
   description                        String?
   state                              AcademicGroupState @default(DRAFT)
@@ -609,3 +617,106 @@ model EnrollmentAuditEvent {
 }
 
 // CHECK, coordinadoras iniciales, índices parciales e inmutabilidad: 0006_enrollment.
+
+enum MaterialState {
+  PREPARED
+  PUBLISHED
+  WITHDRAWN
+}
+
+enum MaterialOperation {
+  UPLOAD_COMPLETE
+  EDIT
+  PUBLISH
+  WITHDRAW
+}
+
+model Material {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  groupId     String        @db.Uuid
+  group       AcademicGroup @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  title       String
+  description String?
+  state       MaterialState @default(PREPARED)
+  revision    BigInt        @default(1)
+  createdBy   String        @db.Uuid
+  creator     User          @relation("MaterialCreator", fields: [createdBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  updatedBy   String        @db.Uuid
+  updater     User          @relation("MaterialUpdater", fields: [updatedBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  createdAt   DateTime      @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime      @default(now()) @db.Timestamptz(6)
+  publishedAt DateTime?     @db.Timestamptz(6)
+  withdrawnAt DateTime?     @db.Timestamptz(6)
+  content     MaterialContent?
+  upload      MaterialUpload?
+  commands    MaterialCommand[]
+  auditEvents MaterialAuditEvent[]
+  @@index([groupId, state, createdAt, id])
+}
+
+model MaterialContent {
+  materialId   String   @id @db.Uuid
+  material     Material @relation(fields: [materialId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  bytes        Bytes
+  byteSize     Int
+  mediaType    String
+  downloadName String
+  sha256       String
+}
+
+model MaterialUpload {
+  uploadId      String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorId       String        @db.Uuid
+  actor         User          @relation(fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  intentionId   String        @db.Uuid
+  groupId       String        @db.Uuid
+  group         AcademicGroup @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  title         String
+  description   String?
+  downloadName  String
+  mediaType     String
+  byteSize      Int
+  sha256        String
+  payloadDigest Bytes
+  createdAt     DateTime      @default(now()) @db.Timestamptz(6)
+  materialId    String?       @unique @db.Uuid
+  material      Material?     @relation(fields: [materialId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  @@unique([actorId, intentionId])
+  @@index([actorId, createdAt])
+  @@index([groupId])
+}
+
+model MaterialCommand {
+  actorId         String            @db.Uuid
+  actor           User              @relation(fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  commandId       String            @db.Uuid
+  materialId      String            @db.Uuid
+  material        Material          @relation(fields: [materialId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  operation       MaterialOperation
+  payloadDigest   Bytes
+  appliedRevision BigInt
+  result          AuditResult
+  appliedAt       DateTime          @default(now()) @db.Timestamptz(6)
+  @@id([actorId, commandId])
+  @@index([materialId])
+}
+
+model MaterialAuditEvent {
+  id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorId     String            @db.Uuid
+  actor       User              @relation(fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  groupId     String            @db.Uuid
+  group       AcademicGroup     @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  materialId  String            @db.Uuid
+  material    Material          @relation(fields: [materialId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  intentionId String?           @db.Uuid
+  commandId   String?           @db.Uuid
+  operation   MaterialOperation
+  result      AuditResult
+  revision    BigInt
+  occurredAt  DateTime          @default(now()) @db.Timestamptz(6)
+  @@index([materialId, occurredAt, id])
+}
+
+// 0008_materials adds text/size/hash CHECKs, deferred content completeness,
+// immutable file/group/creator/intention and append-only command/audit history.

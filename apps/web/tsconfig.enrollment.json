@@ -16,8 +16,9 @@
   },
   "include": [
     "playwright.enrollment.config.ts",
-    "tests/support/enrollment-fixture.ts",
+    "tests/support/enrollment-*.ts",
     "tests/e2e/enrollment-*.spec.ts",
+    "tests/e2e/enrollment.spec.ts",
     "../api/tests/support/enrollment.ts",
     "../api/tests/integration/enrollment-harness.spec.ts",
     "../api/src/modules/enrollment/domain/*.test.ts",

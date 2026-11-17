@@ -3,14 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "eslint src tests playwright.config.ts playwright.academic-offering.config.ts playwright.enrollment.config.ts vite.config.ts eslint.config.js",
+    "lint": "eslint src tests playwright.config.ts playwright.academic-offering.config.ts playwright.enrollment.config.ts playwright.materials.config.ts vite.config.ts eslint.config.js",
     "typecheck:enrollment": "tsc -p tsconfig.enrollment.json",
+    "typecheck:materials": "tsc -p tsconfig.materials.json",
     "build": "tsc --noEmit && vite build",
     "dev": "vite",
     "preview": "vite preview",
     "test:unit": "vitest run src",
     "test:e2e": "npm run build && playwright test",
     "test:e2e:enrollment": "npm run test:e2e -- --config playwright.enrollment.config.ts",
+    "test:e2e:materials": "npm run test:e2e -- --config playwright.materials.config.ts --workers=1 --retries=0",
     "test:smoke": "vitest run src/app/runtime.test.tsx"
   },
   "dependencies": {

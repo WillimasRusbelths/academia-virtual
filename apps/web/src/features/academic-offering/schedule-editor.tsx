@@ -3,7 +3,7 @@ import type { ApiFailure } from '../../shared/api-client';
 import { FormField } from '../../shared/ui/form-field';
 import { Feedback } from '../../shared/ui/feedback';
 import type { AdminGroup, Slot, academicOfferingApi } from './api';
-import { focusInvalid, OfferingReview, useOfferingCommand } from './offering-state';
+import { CommitmentNotice,focusInvalid, OfferingReview, useOfferingCommand } from './offering-state';
 import { scheduleErrors } from './validation';
 
 const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -42,6 +42,7 @@ export function ScheduleEditor({ client, group, busy, onBusy, onSaved, onDenied,
       {error && <p id="schedule-error" className="field-error" role="alert">{error}</p>}
       <button type="button" disabled={disabled} aria-invalid={!slots.length && error ? true : undefined} aria-describedby={!slots.length && error ? 'schedule-error' : undefined} onClick={() => { command.changed(); setSlots(current => [...current, { dayOfWeek: 1, startTime: '', endTime: '' }]); setInvalid(undefined); }}>Añadir franja</button>
       <Feedback error={command.error} message={command.message} onRetry={() => void save()}/>
+      <CommitmentNotice error={command.error}/>
       <button type="submit" disabled={disabled}>{command.pending ? 'Guardando…' : 'Guardar horario'}</button>
       {command.error && [409, 503].includes(command.error.status) && <OfferingReview load={() => client.group(group.id)} replace={onReplace} denied={onDenied} disabled={disabled}/>}
     </form></section>;

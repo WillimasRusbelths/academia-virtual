@@ -7,6 +7,8 @@ producto implementadas o ejecutadas en esta etapa.** [Spec](spec.md), [plan](pla
 [tiempo](contracts/time.md) y [pagos](contracts/payments.md) son las fuentes vigentes.
 Las quince respuestas, constitución1.2.1 y el checklist12/16 no se modifican.
 
+**Actualización de implementación T069, 2026-11-12**: US3.01–US3.05 tienen checkpoint técnico local aprobado, con TV01–TV25 trazados a casos ejecutados. [Informe US3](evidence/us3.md) y [resultados verificables](evidence/us3-results.json). Las declaraciones de cero implementación/ejecución de RV001/RP007 describen la etapa histórica de diseño del 2026-10-30; el resultado vigente de US3 se registra abajo. Proveedor real, D13/24h físicas y aceptación humana integrada conservan sus puertas.
+
 ## Niveles, preparación y criterio de evidencia
 
 - **UNIT**: reglas puras sin Nest/PG ni reloj global; adaptadores de tiempo y pruebas
@@ -237,3 +239,18 @@ y RV004 en T071 y apps/web/tests/e2e/enrollment.spec.ts (T072/T082), con recorri
 US1/US2/US3 en sus suites específicas. Solo generar tareas no completa RV002–RV004.
 Al terminar planificación RV001/RP007, el primer bloque concreto es T001–T004.
 No implementación, esquema, pruebas de producto, smokes o servicios en esta etapa.
+
+
+## Evidencia local de US3 — T069
+
+Checkpoint técnico local aprobado el 2026-11-12: 609 casos únicos, 950 ejecuciones, sin fallos ni omisiones; seis casos PG/HTTP nuevos. Las 787 regresiones heredadas de T065–T066 se identifican por separado y no se cuentan como nuevas ejecuciones. La tabla siguiente actualiza la fila de US3 sin cerrar otros escenarios o puertas.
+
+| Escenario | Pruebas y aserciones finales | Estado |
+| --- | --- | --- |
+| US3.01 | TV01/07–09/22; duración exacta, persistencia y hora servidor ante reloj cliente/logout/recarga. | Aprobado técnico local |
+| US3.02 | TV02/13/16; límites −1/0/+1µs, GET efectivo sin escrituras, materialización única sin matrícula. | Aprobado técnico local |
+| US3.03 | TV06/12/13/21; Node/API reiniciados y worker retrasado reales; lector posterior a locks/commit. | Aprobado técnico local |
+| US3.04 | TV14/15/18/20; dos workers, normalización oportuna y rollback total; una revisión/auditoría. | Aprobado técnico local |
+| US3.05 | TV03/17/19/25; finalizador T051 real frente a vencimiento/reasignación; igualdad tardía sin matrícula/resurrección. | Aprobado técnico local |
+
+[US3: detalle de TV01–TV25, reglas UTC/Lima, PG/HTTP/E2E y límites](evidence/us3.md); [casos y manifiesto por fuente](evidence/us3-results.json). TC01/TC02 completan −1/0/+1µs del inicio Lima y fin original de matrícula. Se conservan las 24 h exactas, snapshots e historial. D13/T090 requieren operación/tiempo físico; D02/T056–T059 proveedor real; T089 humanos reales. T042 mantiene su aceptación previa en computador; este resultado no añade observación humana.

@@ -33,7 +33,7 @@ export function createOrdersController(api:Pick<EnrollmentApi,'orders'|'requests
   };
 }
 type DisplayOrder=Order&{readonly offeringUnavailable?:boolean;readonly incident?:unknown};
-interface OrderViewState extends Omit<OrdersState,'order'> {readonly order?:DisplayOrder;readonly message?:string}
+interface OrderViewState extends Omit<OrdersState,'order'> {readonly order?:DisplayOrder;readonly message?:string;readonly uncertain?:boolean}
 interface Actions {refresh:()=>void;list:(page?:number,requestPage?:number)=>void;open:(id:string)=>void;inspect:(intentionId:string)=>void}
 export function OrderPage({state,actions,payment}:{state:OrderViewState;actions?:Actions;payment?:ReactNode}){
   const notice=useRef<HTMLDivElement>(null);useEffect(()=>notice.current?.querySelector<HTMLElement>('[role]')?.focus(),[state.status,state.order?.id]);
@@ -41,21 +41,23 @@ export function OrderPage({state,actions,payment}:{state:OrderViewState;actions?
   return <EnrollmentLayout title="Mis órdenes y solicitudes"><div ref={notice}><Notice status={state.status} message={state.message}/></div>
     <div className="enrollment-actions"><button type="button" disabled={busy||!actions} onClick={actions?.refresh}>Consultar estado actualizado</button><button type="button" disabled={busy||!actions} onClick={()=>actions?.list()}>Recuperar mis órdenes y solicitudes</button></div>
     {state.request&&<section aria-label="Solicitud de reserva"><h2>Solicitud de reserva</h2><p className="enrollment-reference">Intención: {state.request.intentionId}</p><p>Estado: {state.request.state}</p>
+      {state.request.state==='CONFIRMED'&&<p><a href={'/mis-ordenes/'+state.request.orderId}>Abrir orden confirmada</a></p>}
       {state.request.state==='REJECTED'&&<p role="alert">{reasons[state.request.decisionCode]??'No se reservó ninguna plaza para esta solicitud.'}</p>}</section>}
     {ready&&order&&<section aria-labelledby="order-detail-title"><h2 id="order-detail-title">Detalle original de la orden</h2><p className="enrollment-reference">Referencia: {order.id}</p>
-      <p role="status">{order.state==='EXPIRED'?'Reserva vencida según el servidor. Puedes preparar una nueva selección.':order.state==='ENROLLED'?'Orden matriculada. Consulta las condiciones originales.':'Orden reservada según el servidor.'}</p>
-      {order.state==='EXPIRED'&&<p><a href="/reservar">Preparar nueva selección</a>. La intención anterior conserva su resultado original.</p>}
+      <p role="status">{state.uncertain?'Estado actual pendiente de consulta.':order.state==='EXPIRED'?'Reserva vencida según el servidor. Puedes preparar una nueva selección.':order.state==='ENROLLED'?'Orden matriculada. Consulta las condiciones originales.':'Orden reservada según el servidor.'}</p>
+      {order.state==='EXPIRED'&&!state.uncertain&&<><p><a href="/reservar">Preparar nueva selección</a>. La intención anterior conserva su resultado original.</p>
+        <p>Puedes volver a elegir sin penalización por dejar vencer la reserva. La nueva selección consulta las condiciones actuales y no asegura una plaza.</p></>}
       {(order.paymentMessage==='Oferta no disponible.'||order.offeringUnavailable)&&<p role="alert">Oferta no disponible para iniciar el pago. El detalle y el plazo originales se conservan.</p>}
       {!payment&&(order.paymentState==='INCIDENT'||Boolean(order.incidentSummary)||Boolean(order.incident))&&<p role="status">Pago en conciliación, sin matrícula.</p>}
       <dl><dt>Total original</dt><dd>{pen(order.totalMinor)}</dd><dt>Revisión</dt><dd>{order.revision}</dd><dt>Inicio confirmado (UTC)</dt><dd><time dateTime={order.confirmedAt}>{order.confirmedAt}</time></dd>
-        <dt>Vencimiento confirmado (UTC)</dt><dd><time dateTime={order.expiresAt}>{order.expiresAt}</time></dd><dt>Consulta del servidor (UTC)</dt><dd>{order.serverNow}</dd></dl>
+        <dt>Vencimiento confirmado (UTC)</dt><dd><time dateTime={order.expiresAt}>{order.expiresAt}</time></dd><dt>Consulta del servidor (UTC)</dt><dd><span aria-label="Hora del servidor">{order.serverNow}</span></dd></dl>
       <ul className="enrollment-cards">{order.items.map(item=><li key={item.groupId} className="enrollment-card"><h3>{item.courseName}</h3><p>{item.groupName} · {pen(item.priceMinor)}</p><p>Período original: {item.periodStart}–{item.periodEnd} · {item.timeZone}</p><Schedule slots={item.schedule}/>
         <p>Inicio del grupo (UTC): <time dateTime={item.groupStartAt}>{item.groupStartAt}</time></p><p>Límite original de matrícula (UTC): <time dateTime={item.enrollmentValidUntil}>{item.enrollmentValidUntil}</time></p></li>)}</ul>
       <p>El estado se consulta al servidor. Abrir esta vista o volver a iniciar sesión conserva el plazo original.</p>{payment}</section>}
-    {state.current&&<section aria-label="Orden con reservas vigentes"><h2>Orden con reservas vigentes</h2><p>{state.current.id} · {pen(state.current.totalMinor)}</p><button type="button" disabled={busy||!actions} onClick={()=>actions?.open(state.current!.id)}>Consultar orden vigente</button></section>}
+    {state.current&&<section aria-label="Orden con reservas vigentes"><h2>Orden con reservas vigentes</h2><p>{state.current.id} · {pen(state.current.totalMinor)}</p><a href={'/mis-ordenes/'+state.current.id}>Consultar orden vigente</a></section>}
     {state.orders&&<section aria-label="Historial de órdenes"><h2>Historial de órdenes</h2>{!state.orders.items.length&&<p role="status">No hay órdenes en esta página.</p>}
       <ul className="enrollment-cards">{state.orders.items.map(item=><li key={item.id} className="enrollment-card"><p className="enrollment-reference">{item.id}</p><p>{item.state==='EXPIRED'?'Vencida':item.state==='ENROLLED'?'Matriculada':'Reservada'} · {pen(item.totalMinor)}</p>
-        <button type="button" disabled={busy||!actions} onClick={()=>actions?.open(item.id)}>Consultar detalle original</button></li>)}</ul>
+        <a href={'/mis-ordenes/'+item.id}>Consultar detalle original</a></li>)}</ul>
       <Pagination page={state.orders.page} total={state.orders.total} pageSize={state.orders.pageSize} busy={busy} onPage={actions?page=>actions.list(page,state.requests?.page):undefined}/></section>}
     {state.requests&&<section aria-label="Solicitudes propias"><h2>Solicitudes propias</h2>{!state.requests.items.length&&<p role="status">No hay solicitudes en esta página.</p>}
       <ul className="enrollment-cards">{state.requests.items.map(item=><li key={item.id} className="enrollment-card"><p className="enrollment-reference">Intención: {item.intentionId}</p><p>{item.state==='ADMITTED'?'Admitida, en espera':item.state==='CONFIRMED'?'Reserva confirmada':'Rechazada'}</p>
@@ -76,7 +78,7 @@ interface PaymentApi {
   order(id:string,signal?:AbortSignal):Promise<unknown>;
 }
 export interface PaymentState extends Readonly<Record<string,unknown>> {
-  readonly status:string;readonly order?:Order;readonly orderId?:string;readonly initiationId?:string;readonly busy?:boolean;
+  readonly status:string;readonly order?:Order;readonly orderId?:string;readonly initiationId?:string;readonly busy?:boolean;readonly queryUncertain?:boolean;
 }
 const terminalPayment=(status:string)=>['APPLIED','INCIDENT','EXPIRED'].includes(status);
 const orderPaymentStatus=(order:Order)=>order.state==='ENROLLED'?'APPLIED':order.paymentState==='INCIDENT'?'INCIDENT':order.state==='EXPIRED'?'EXPIRED':order.paymentState==='PENDING'?'PENDING':'READY';
@@ -87,9 +89,9 @@ export function createPaymentController(api:PaymentApi,options:{initiationId:()=
   let generation=0,readGeneration=0,write:Promise<void>|undefined,writeAbort:AbortController|undefined,readAbort:AbortController|undefined;
   const listeners=new Set<()=>void>();
   const update=(next:PaymentState)=>{state=Object.freeze(next);for(const listener of listeners)listener();};
-  function failed(error:unknown){
+  function failed(error:unknown,queryUncertain=false){
     if(error instanceof ApiFailure&&['AUTH_REQUIRED','FORBIDDEN'].includes(error.code)){writeAbort?.abort();readAbort?.abort();generation++;update({status:error.code});return;}
-    if(!terminalPayment(state.status))update({...state,status:'UNCERTAIN',busy:false});
+    update({...state,status:terminalPayment(state.status)?state.status:'UNCERTAIN',queryUncertain:queryUncertain||state.queryUncertain,busy:false});
   }
   function send(orderId:string,initiationId:string){
     if(write)return write;const epoch=generation;writeAbort=new AbortController();
@@ -117,14 +119,14 @@ export function createPaymentController(api:PaymentApi,options:{initiationId:()=
         if(status==='READY'&&state.status==='FAILED_NO_CHARGE')status='FAILED_NO_CHARGE';
         if(status==='READY'&&state.status==='UNCERTAIN'&&state.initiationId)status='UNCERTAIN';
         if(terminalPayment(state.status)&&!terminalPayment(status))return;
-        update({...state,order:value,status,busy:Boolean(write)});
-      }catch(error){if(epoch===generation&&read===readGeneration)failed(error);}
+        update({...state,order:value,status,queryUncertain:false,busy:Boolean(write)});
+      }catch(error){if(epoch===generation&&read===readGeneration)failed(error,true);}
     },
     logout(){generation++;readGeneration++;writeAbort?.abort();readAbort?.abort();write=undefined;update({status:'EMPTY'});},
   };
 }
 export function PaymentPanel({state,actions}:{state:Readonly<Record<string,unknown>>;actions?:{start:()=>void;refresh:()=>void;replay?:()=>void}}){
-  const status=String(state.status),order=state.order as Order|undefined;
+  const status=String(state.status),order=state.order as Order|undefined,queryUncertain=Boolean(state.queryUncertain);
   const notice=useRef<HTMLParagraphElement>(null);useEffect(()=>{if(status!=='READY')notice.current?.focus();},[status]);
   const disabled=!actions||!order?.paymentAllowed||Boolean(state.busy)||!['READY','FAILED_NO_CHARGE'].includes(status);
   const labels:Record<string,string>={READY:'Inicia el pago solo cuando quieras continuar.',SUBMITTING:'Iniciación en curso. Consulta antes de repetir.',
@@ -132,7 +134,7 @@ export function PaymentPanel({state,actions}:{state:Readonly<Record<string,unkno
     UNCERTAIN:'Resultado incierto. Consulta el estado antes de repetir.',FAILED_NO_CHARGE:'Pago no iniciado: rechazo definitivo sin cobro. Puedes iniciar un nuevo intento explícito.',
     APPLIED:'Pago aplicado. Consulta tus matrículas.',INCIDENT:'Pago en conciliación, sin matrícula.',EXPIRED:'Plazo de pago vencido. Consulta la orden original.',
     AUTH_REQUIRED:'Debes volver a iniciar sesión.',FORBIDDEN:'Acceso no permitido.',EMPTY:'No hay información de pago.'};
-  return <section aria-label="Pago de la orden"><h2>Pago de la orden</h2><p ref={notice} role={['UNCERTAIN','AUTH_REQUIRED','FORBIDDEN'].includes(status)?'alert':'status'} tabIndex={-1}>{labels[status]??'Consulta el estado del pago.'}</p>
+  return <section aria-label="Pago de la orden"><h2>Pago de la orden</h2><p ref={notice} role={queryUncertain||['UNCERTAIN','AUTH_REQUIRED','FORBIDDEN'].includes(status)?'alert':'status'} tabIndex={-1}>{queryUncertain?'No se pudo actualizar el estado. Consulta de nuevo antes de continuar.':labels[status]??'Consulta el estado del pago.'}</p>
     {order&&<><p>Vencimiento original: {order.expiresAt}</p>{order.paymentMessage&&<p>Oferta no disponible para pagar el conjunto.</p>}
       <div className="enrollment-actions"><button type="button" disabled={disabled} onClick={actions?.start}>Iniciar pago</button><button type="button" disabled={!actions} onClick={actions?.refresh}>Consultar estado del pago</button>
         {status==='UNCERTAIN'&&Boolean(state.initiationId)&&<button type="button" disabled={!actions?.replay||Boolean(state.busy)} onClick={actions?.replay}>Repetir iniciación original</button>}</div></>}
@@ -144,6 +146,6 @@ function PayableOrderScreen({api,state,actions}:{api:EnrollmentApi;state:OrdersS
   const payment=useSyncExternalStore(flow.subscribe,flow.snapshot,flow.snapshot);
   useEffect(()=>()=>flow.logout(),[flow]);
   const privateCleared=['AUTH_REQUIRED','FORBIDDEN','EMPTY'].includes(payment.status);
-  return <OrderPage state={privateCleared?{status:payment.status}:{...state,order:payment.order??state.order}} actions={{...actions,refresh:()=>{void flow.refresh();}}}
+  return <OrderPage state={privateCleared?{status:payment.status}:{...state,order:payment.order??state.order,uncertain:payment.queryUncertain||payment.status==='UNCERTAIN'}} actions={{...actions,refresh:()=>{void flow.refresh();}}}
     payment={<PaymentPanel state={payment} actions={{start:()=>{void flow.start(state.order!.id);},refresh:()=>{void flow.refresh();},replay:()=>{void flow.replay();}}}/>}/>;
 }

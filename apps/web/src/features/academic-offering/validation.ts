@@ -1,4 +1,16 @@
-import type { Slot } from './api';
+import type { AdminGroup,GroupAttributes,Slot } from './api';
+export interface GroupDraft {name:string;description:string;capacity:string;periodStart:string;periodEnd:string;teacherUserId:string}
+/** Un cambio de texto no vuelve a enviar atributos académicos protegidos. */
+export function groupChanges(draft:GroupDraft,initial?:AdminGroup):Partial<GroupAttributes>{
+  return {
+    ...(!initial||draft.name!==initial.name?{name:draft.name}:{}),
+    ...(draft.description!==(initial?.description??'')?{description:draft.description.trim()||null}:{}),
+    ...(draft.capacity!==''&&draft.capacity!==String(initial?.capacity??'')?{capacity:Number(draft.capacity)}:{}),
+    ...(draft.periodStart&&draft.periodStart!==(initial?.periodStart??'')?{periodStart:draft.periodStart}:{}),
+    ...(draft.periodEnd&&draft.periodEnd!==(initial?.periodEnd??'')?{periodEnd:draft.periodEnd}:{}),
+    ...(draft.teacherUserId!==(initial?.teacher?.id??'')?{teacherUserId:draft.teacherUserId||null}:{}),
+  };
+}
 export type FieldErrors = Readonly<Record<string, string>>;
 export const capacityMessage = 'La capacidad debe ser un número entero entre 1 y 50';
 export function nameError(value: string): string | undefined { return value.trim() ? undefined : 'Escribe un nombre.'; }

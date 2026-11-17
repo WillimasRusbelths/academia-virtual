@@ -1,0 +1,104 @@
+{
+  "task": "T087",
+  "date": "2026-11-15",
+  "timezone": "America/Lima",
+  "status": "documentation-synchronized",
+  "finding": {
+    "id": "INV-DOC-01",
+    "status": "corrected-in-five-summary-documents",
+    "historicalRecordsPreserved": true
+  },
+  "trace": [
+    "FR-001",
+    "FR-002",
+    "FR-005",
+    "FR-006",
+    "FR-007",
+    "FR-008",
+    "FR-009",
+    "FR-014",
+    "FR-021",
+    "FR-022"
+  ],
+  "checks": {
+    "originalDescriptionsAndIds": {
+      "HU": 17,
+      "RF": 19,
+      "status": "PASS"
+    },
+    "existingTraceabilityMatrices": "unchanged",
+    "historicalReadmeDesignSection": "unchanged",
+    "acceptanceHistory": "byte-for-byte prefix preserved",
+    "preservedProtectedFiles": 74,
+    "productAndMigrationsUnchanged": true,
+    "previousEvidenceUnchangedExceptAcceptanceAppend": true,
+    "checklist": {
+      "complete": 12,
+      "pending": 4
+    },
+    "productTestsRun": false,
+    "servicesStarted": false,
+    "externalRequests": false,
+    "localMarkdownLinks": {
+      "checked": 232,
+      "anchors": 4,
+      "status": "PASS"
+    }
+  },
+  "sources": {
+    "code": [
+      "apps/web/src/app/enrollment-routes.tsx",
+      "apps/api/src/modules/enrollment/enrollment.module.ts"
+    ],
+    "evidence": [
+      "specs/003-reservas-ordenes-matricula/evidence/verification-results.json",
+      "specs/003-reservas-ordenes-matricula/evidence/t085-results.json",
+      "specs/003-reservas-ordenes-matricula/evidence/recovery-results.json",
+      "specs/003-reservas-ordenes-matricula/evidence/human-acceptance.md"
+    ],
+    "rule": "Existing evidence; no new functional test results"
+  },
+  "changedFiles": [
+    {
+      "path": "README.md",
+      "sha256": "d6cabe87452e6990a9fed525663a684f8a0920cbb00707c2888a3cb0a15c9af5"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/01-actores.md",
+      "sha256": "4d789d60d8f8ae1f06bb66556ab3a50dd70562151c8e055b9722dea43c7b4232"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/02-historias-del-usuario.md",
+      "sha256": "6ba92439fe466b10455c0faf86c7d532a06d01e281faa63e779ecb70ca96cccd"
+    },
+    {
+      "path": "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+      "sha256": "9054adf0c2347d2597b66e6a3b55f277f6e7421489c9592049467177d1844d24"
+    },
+    {
+      "path": "docs/alcance-mvp.md",
+      "sha256": "6cc376bc59fe5fd015ce8aaab48a12b89320f69ba5942cde3fab58c3de026c82"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/acceptance.md",
+      "sha256": "55931e8ed5ffcbf7a318335a6f8c19484593e25aa317632c0b7eeb0f858c5693"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/tasks.md",
+      "sha256": "d379d9a75aa6777e73283e23b2fa61f2f116e0ad78bfccace956bc4e70402620"
+    }
+  ],
+  "baselineFiles": 959,
+  "tasks": {
+    "complete": 82,
+    "pending": 12
+  },
+  "limits": [
+    "Catalog 002 keeps configured capacity; availability belongs to 003",
+    "Payment core locally tested with simulation; no provider adapter or real payments",
+    "T083, T056–T059/D02, T089, D10, D13/24h and T094 remain pending",
+    "001 T104/T108 and 002 T073/T074 unchanged",
+    "Remote CI and external SMTP not accredited",
+    "Other historical/design documents outside these five summaries are not resynchronized"
+  ]
+}

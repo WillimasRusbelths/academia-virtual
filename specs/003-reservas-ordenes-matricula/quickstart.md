@@ -1,9 +1,9 @@
-# Guía de verificación local futura — reservas, órdenes y matrícula
+# Guía de verificación local — reservas, órdenes y matrícula
 
-**RP004–RP006, 2026-10-30. No ejecutada.** Aún no existen las rutas, fixtures, migración
-o suites 003. Reutilizar los comandos existentes solo tras implementar el bloque
-correspondiente y completar RV001/tareas/análisis. El diseño RP005/RP006 está
-preparado; su revisión no acredita recorridos ni estado vivo de la instalación aislada.
+**Actualizada en T085, 2026-11-15.** Las rutas, fixtures, migraciones y suites 003
+están implementadas. El [checkpoint local T084](evidence/acceptance.md) registra
+los resultados ejecutados y sus límites; los comandos de esta guía no constituyen
+por sí mismos evidencia de una nueva ejecución ni de CI remoto.
 
 Fuentes: [plan](plan.md), [datos](data-model.md), [HTTP](contracts/api.md),
 [integración](contracts/integration.md), [UI](contracts/ui.md) y
@@ -23,10 +23,11 @@ Fuentes: [plan](plan.md), [datos](data-model.md), [HTTP](contracts/api.md),
 - Migración aditiva escrita/revisada y suites implementadas antes del tramo respectivo.
   Docker Desktop Linux/Compose y versiones actuales; no relajar TLS/hash/CSRF/cuotas.
 
-## Preparación futura con comandos existentes
+## Preparación con comandos existentes
 
-PowerShell, solo después de las guardas anteriores. No se ejecutaron estos comandos
-en RP004. Cada salida debe ser 0; detenerse ante fallo y clasificar su causa.
+PowerShell, solo después de las guardas anteriores. Cada salida debe ser 0;
+detenerse ante fallo y clasificar su causa. No iniciar una segunda ejecución
+simultánea sobre los mismos fixtures.
 
 ```powershell
 $trialRoot = 'D:\Proyectos\academia-virtual\.cache\academic-offering-validation\source'
@@ -50,8 +51,8 @@ docker @trial up -d --no-build --wait db mailpit
 if ($LASTEXITCODE -ne 0) { throw 'Dependencias no saludables.' }
 ```
 
-Generación/aplicación **futuras**, solo tras revisar SQL y los destinos efectivos de
-runtime/migración/test. La receta no autoriza aplicar cambios de esquema durante el plan.
+Generación/aplicación solo tras revisar SQL y los destinos efectivos de
+runtime/migración/test. Conservar las migraciones aplicadas y los datos existentes.
 
 ```powershell
 docker @trial run --rm --no-deps api npm run probe:generate
@@ -68,13 +69,19 @@ docker @trial up -d --no-build --wait api web
 if ($LASTEXITCODE -ne 0) { throw 'API/web no saludables.' }
 ```
 
-Comprobaciones existentes que descubrirán futuras suites en sus rutas habituales:
+Comprobaciones existentes que incluyen las suites implementadas:
 
 ```powershell
 docker @trial exec -T api npm run lint
 if ($LASTEXITCODE -ne 0) { throw 'Lint fallido.' }
 docker @trial exec -T api npm run build
 if ($LASTEXITCODE -ne 0) { throw 'Compilación/tipos fallidos.' }
+
+docker @trial exec -T api npm exec --workspace apps/api -- tsc -p tsconfig.enrollment.json
+if ($LASTEXITCODE -ne 0) { throw 'Tipos API de matrícula y soportes fallidos.' }
+
+docker @trial exec -T api npm run typecheck:enrollment --workspace @academia/web
+if ($LASTEXITCODE -ne 0) { throw 'Tipos E2E, soportes y configuración fallidos.' }
 docker @trial exec -T api npm run test:unit --workspace apps/api -- --maxWorkers=1
 if ($LASTEXITCODE -ne 0) { throw 'Reglas/arquitectura fallidas.' }
 docker @trial exec -T api npm run test:unit --workspace apps/web -- --maxWorkers=1
@@ -85,35 +92,44 @@ docker @trial exec -T api npm run test:crypto-mail
 if ($LASTEXITCODE -ne 0) { throw 'Regresión crypto/mail fallida.' }
 ```
 
-La configuración `apps/web/playwright.enrollment.config.ts` todavía no existe. Una
-vez preparada y añadida explícitamente al lint, usar el runner E2E existente:
+La configuración `apps/web/playwright.enrollment.config.ts` usa el runner existente,
+con proyectos escritorio y móvil. Está incluida en lint y en el tipado explícito:
 
 ```powershell
 docker @trial --profile tests run --rm --no-deps browser-tests npm run test:e2e --workspace @academia/web -- --config playwright.enrollment.config.ts
 if ($LASTEXITCODE -ne 0) { throw 'E2E de matrícula no aprobadas.' }
 ```
 
-Repetir identidad/oferta afectadas según el cambio. Reutilizar Actions con un ajuste
-de config/step para la nueva suite; no aumentar su límite de 20 min para ocultar fallos.
+El workflow `.github/workflows/v00-linux.yml` conserva UNIT, integración y las suites
+previas; añade los dos comandos de tipos y el comando E2E003 anterior. Mantiene
+`timeout-minutes: 20`, permisos de lectura y configuración efímera. No incorpora
+SDK, sandbox del proveedor ni carga, y no publica secretos ni artefactos de navegador.
+Su aprobación remota requiere una ejecución real de Actions; el checkpoint local
+no demuestra que el job completo termine dentro de ese presupuesto.
+
+Repetir identidad/oferta afectadas según el cambio; no aumentar el límite para ocultar fallos.
 No copiar conteos históricos como resultados nuevos ni ejecutar cargas/perfil 10/25.
 Build comprueba tipos de aplicación, no todos los soportes/tests/config Playwright.
-Al crear esos archivos, añadir comprobación explícita de tipos según el patrón
-selectivo de T001–T004 o una configuración de test mínima; registrar los archivos
-realmente incluidos. Vitest ejecutado no sustituye esa comprobación de tipos.
+`apps/api/tsconfig.enrollment.json` incluye los soportes `enrollment*.ts`, el helper
+de limpieza protegida y sus pruebas, además de los tests API enumerados allí.
+`apps/web/tsconfig.enrollment.json` incluye la configuración Playwright, todos los
+soportes `enrollment-*.ts`, las suites E2E003 y los soportes API importados. Las
+dependencias importadas se comprueban transitivamente. Vitest ejecutado no sustituye
+esa comprobación de tipos. No se afirma cobertura de tipos de todos los tests del repositorio.
 
-## Matriz base de comprobaciones pendientes
+## Matriz base y límites de verificación
 
 [RV001](verification.md) integra detalle/trazabilidad y [RP007](tasks.md) ordena
-las tareas, todavía pendientes de implementación. Esta matriz
-es guía de preparación, no tarea de pruebas implementada o aprobada.
+las tareas. Esta matriz conserva las exigencias del diseño; el estado ejecutado
+se consulta en las evidencias y tareas, sin inferir aprobación de todas las puertas.
 RP005 añade [contrato temporal](contracts/time.md) y [25 casos de diseño](temporal-verification.md):
 microsegundos antes/igual/después, mismo token tras locks, epoch negativo/año ampliado,
 worker detenido/concurrente, barrido acotado y recuperación de COMMIT incierto.
 [RP006](contracts/payments.md) añade [PV01–PV30](payment-verification.md):
 recibo técnico, verificación/efectos atómicos, dinero/IDs incompatibles, respuestas
 tardías, inciertos y lectores frente a conversión. Son 30 familias de diseño, no
-pruebas preparadas o ejecutadas. Integrar con TV03/TV25 sin duplicar conteos.
-No ejecutar esos casos en esta etapa ni confundir los IDs con tests preparados.
+pruebas adicionales por el solo hecho de enumerarlas. Consultar su ejecución en
+las evidencias e integrar con TV03/TV25 sin duplicar conteos.
 Para evidencia futura registrar versión de PostgreSQL/tzdata y salud de reloj;
 un retroceso arbitrario no queda resuelto por un estado terminal o contador local.
 

@@ -125,7 +125,10 @@ export async function insertEnrollmentRow(pool: Pool, table: EnrollmentTable, ro
 }
 
 /** Contrato físico de fixtures para T007/T008; se ejecuta solo tras migración real. */
-export async function seedEnrollmentGraph(context: EnrollmentMigrationContext,
+export async function seedEnrollmentGraph(context: {
+  student: { userId: string; sessionId: string }; admin: { userId: string };
+  courseId: string; groupId: string; database: { pool: Pool };
+},
   override?: { table: EnrollmentTable; values: FixtureRow }) {
   const studentId = context.student.userId, adminId = context.admin.userId;
   const requestId = randomUUID(), orderId = randomUUID(), itemId = randomUUID(), paymentId = randomUUID(), incidentPaymentId = randomUUID();

@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import { beforeAll,afterAll,test,expect } from 'vitest';
 import { identityDatabase } from '../support/identity-database.js';
@@ -12,7 +13,7 @@ beforeAll(async()=>{context=await identityDatabase('us5_cli_diagnostic');},12000
 afterAll(async()=>{await context?.cleanup();});
 for(let attempt=1;attempt<=8;attempt++)test(`diagnóstico CLI acotado ${attempt}: entrada, repetición y privacidad`,async()=>{
   // Exclusivamente el esquema nuevo t_* de esta suite; sin tocar la marca del ensayo manual.
-  await context.isolated.ownerQuery(`TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
+  await truncateFixtureTables(context, `TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
   const input={name:'Persona-'+randomUUID(),email:randomUUID()+'@example.test',
     operatorRef:'op_'+randomUUID().replaceAll('-',''),provisional:accessSecrets.issue().secret};

@@ -6,6 +6,15 @@ import { RequestMethod } from '@nestjs/common';
 import { METHOD_METADATA,PATH_METADATA } from '@nestjs/common/constants.js';
 import { expect,test } from 'vitest';
 import { ACCESS_POLICY } from '../../src/modules/authorization/public/session.js';
+import { MATERIALS_MANAGEMENT_POLICY, MATERIALS_READ_POLICY } from '../../src/modules/authorization/public/session.js';
+
+const materialsRoutes = ['GET /api/v1/materials/groups', 'GET /api/v1/materials/groups/:groupId',
+  'GET /api/v1/materials/groups/:groupId/items', 'GET /api/v1/materials/items/:materialId',
+  'GET /api/v1/materials/items/:materialId/content', 'HEAD /api/v1/materials/items/:materialId/content',
+  'POST /api/v1/materials/groups/:groupId/uploads', 'GET /api/v1/materials/uploads/:uploadId',
+  'PUT /api/v1/materials/uploads/:uploadId/content', 'POST /api/v1/materials/items/:materialId/publish',
+  'PATCH /api/v1/materials/items/:materialId', 'POST /api/v1/materials/items/:materialId/withdraw'];
+const materialsPolicy = (route: string) => /^(GET|HEAD) /.test(route) && !route.includes('/uploads/') ? MATERIALS_READ_POLICY : MATERIALS_MANAGEMENT_POLICY;
 
 /** Contrato futuro, solo fixtures de la puerta de políticas. No son rutas existentes. */
 const enrollmentRoutePolicies: Record<string,string> = {
@@ -39,6 +48,11 @@ function controllers(directory:string):string[] {
  * Al añadir rutas se actualiza el inventario y se vuelve a ejecutar esta puerta.
  */
 function validPolicy(route: string, policy: unknown): boolean {
+  if (/^\/api\/v1\/materials(?:\/|$)/.test(route.slice(route.indexOf(' ') + 1))) {
+    const expected = materialsPolicy(route);
+    return materialsRoutes.includes(route) && Array.isArray(policy) && policy.length === expected.length
+      && expected.every((value, index) => policy[index] === value);
+  }
   if (typeof policy !== 'string' || !['public','profile:read','users:manage','academic:manage','academic:read-published','academic:read-own',...enrollmentPermissions].includes(policy)) return false;
   const path = route.slice(route.indexOf(' ') + 1);
   if (/^\/api\/v1\/(?:admin\/)?enrollment(?:\/|$)/.test(path)) {
@@ -50,7 +64,7 @@ function validPolicy(route: string, policy: unknown): boolean {
   return true;
 }
 test('T088: todos los endpoints compilados tienen la política explícita de su contrato',async()=>{
-  const routes:Record<string,string>={};
+  const routes:Record<string,unknown>={};
   for(const filename of controllers(fileURLToPath(new URL('../../dist/src/',import.meta.url)))) {
     const exports=await import(pathToFileURL(filename).href);
     for(const target of Object.values(exports)) {
@@ -70,6 +84,7 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
     }
   }
   expect(routes).toEqual({
+    ...Object.fromEntries(materialsRoutes.map(route => [route, materialsPolicy(route)])),
     'GET /health/live':'public','GET /health/ready':'public',
     'GET /api/v1/admin/enrollment/courses/:courseId/price':'enrollment:price-manage',
     'PUT /api/v1/admin/enrollment/courses/:courseId/price':'enrollment:price-manage',
@@ -78,6 +93,11 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
     'POST /api/v1/enrollment/reservation-requests':'enrollment:reserve-own',
     'GET /api/v1/enrollment/reservation-requests':'enrollment:read-own',
     'GET /api/v1/enrollment/reservation-requests/:intentionId':'enrollment:read-own',
+    'GET /api/v1/admin/enrollment/orders':'enrollment:read-all',
+    'GET /api/v1/admin/enrollment/orders/:orderId':'enrollment:read-all',
+    'GET /api/v1/admin/enrollment/incidents':'enrollment:read-all',
+    'GET /api/v1/admin/enrollment/incidents/:incidentId':'enrollment:read-all',
+    'POST /api/v1/admin/enrollment/incidents/:incidentId/follow-ups':'enrollment:incident-follow-up',
     'GET /api/v1/enrollment/orders':'enrollment:read-own',
     'GET /api/v1/enrollment/orders/current':'enrollment:read-own',
     'GET /api/v1/enrollment/orders/:orderId':'enrollment:read-own',
@@ -126,6 +146,22 @@ test('T011 familia financiera desconocida no hereda un permiso genérico', () =>
     'DELETE /api/v1/enrollment/orders/:orderId']) for (const permission of ['public','academic:manage',...enrollmentPermissions]) {
     expect(validPolicy(route,permission)).toBe(false);
   }
+});
+
+test('T016/T026/T042/T053 materials routes require their closed audience policy and reject unsupported actions', () => {
+  for (const route of ['GET /api/v1/materials/groups', 'GET /api/v1/materials/items/:materialId/content',
+    'PUT /api/v1/materials/uploads/:uploadId/content', 'DELETE /api/v1/materials/items/:materialId']) {
+    for (const permission of ['public', 'profile:read', 'users:manage', 'academic:manage',
+      'materials:manage-all', 'materials:manage-own', 'materials:read-enrolled']) expect(validPolicy(route, permission)).toBe(false);
+  }
+  for (const route of materialsRoutes) {
+    expect(validPolicy(route, materialsPolicy(route))).toBe(true);
+    expect(validPolicy(route, materialsPolicy(route) === MATERIALS_READ_POLICY ? MATERIALS_MANAGEMENT_POLICY : MATERIALS_READ_POLICY)).toBe(false);
+    for (const policy of [undefined, [], ['profile:read'], ['materials:manage-all'],
+      ['materials:manage-all', 'materials:read-enrolled'], new Array(2)]) expect(validPolicy(route, policy)).toBe(false);
+  }
+  for (const route of ['DELETE /api/v1/materials/items/:materialId', 'PUT /api/v1/materials/items/:materialId',
+    'POST /api/v1/materials/items/:materialId/replace']) for (const policy of [MATERIALS_READ_POLICY, MATERIALS_MANAGEMENT_POLICY]) expect(validPolicy(route, policy)).toBe(false);
 });
 
 test.each([

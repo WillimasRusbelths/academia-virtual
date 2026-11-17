@@ -1,8 +1,11 @@
 import { ApiFailure, RequestCancelled } from '../shared/api-client';
-import type { ApiClient, ApiCode, ApiField, ApiRequest } from '../shared/api-client';
-import { createEnrollmentApi } from '../features/enrollment/api';
+import type { ApiClient, ApiCode, ApiField, ApiRequest, BinaryUploadClient, BinaryDownloadClient, BinaryDownload } from '../shared/api-client';
+import { createEnrollmentApi,createEnrollmentAdminApi } from '../features/enrollment/api';
+import { createMaterialsApi } from '../features/materials/api';
 
 export const enrollmentApi=(client:ApiClient)=>createEnrollmentApi(client);
+export const enrollmentAdminApi=(client:ApiClient)=>createEnrollmentAdminApi(client);
+export const materialsApi=(client:ApiClient)=>createMaterialsApi(client);
 
 const codes:Readonly<Record<number,readonly ApiCode[]>> = {
   400:['VALIDATION_ERROR','INVALID_ACTION_LINK'],401:['INVALID_CREDENTIALS','AUTH_REQUIRED'],
@@ -10,6 +13,8 @@ const codes:Readonly<Record<number,readonly ApiCode[]>> = {
   413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE'],
 };
 const messages:Readonly<Record<ApiCode,string>> = {
+  MATERIAL_VERSION_CONFLICT:'El material cambió. Consulta su estado y compara antes de confirmar otra acción.',
+  MATERIAL_STATE_CONFLICT:'El estado actual no permite esta acción.',
   VALIDATION_ERROR:'Revisa los campos indicados.',INVALID_ACTION_LINK:'El enlace no permite completar esta acción.',
   INVALID_CREDENTIALS:'No se pudo iniciar el acceso con esas credenciales.',AUTH_REQUIRED:'Debes volver a iniciar sesión.',
   REQUEST_NOT_ALLOWED:'Solicitud no permitida.',FORBIDDEN:'No tienes permiso para esta acción.',NOT_FOUND:'Recurso no encontrado.',
@@ -61,7 +66,24 @@ function enrollmentContract(path:string,method:string):EnrollmentContract|undefi
   return undefined;
 }
 const enrollmentFamily=(path:string)=>/^\/(?:admin\/)?enrollment(?:\/|$)/.test(path);
+const materialsFamily=(path:string)=>/^\/materials(?:\/|$)/.test(path);
+function materialsContract(path:string,method:string):EnrollmentContract|undefined {
+  const matches=(suffix:string)=>new RegExp('^/materials/'+suffix+'$','i').test(path);
+  const entry=(fields:readonly ApiField[]=[],conflicts:readonly ApiCode[]=[]):EnrollmentContract=>({fields,conflicts});
+  if(method==='GET') {
+    if(path==='/materials/groups')return entry(['page','pageSize']);
+    if(matches('groups/'+uuid+'/items'))return entry(['page','pageSize','state']);
+    if(matches('(?:groups|uploads|items)/'+uuid))return entry();
+    if(matches('items/'+uuid+'/content'))return entry();
+  }
+  if(method==='POST'&&matches('groups/'+uuid+'/uploads'))return entry(['intentionId','title','description','downloadName','mediaType','byteSize','sha256'],['IDEMPOTENCY_CONFLICT','MATERIAL_STATE_CONFLICT']);
+  if(method==='PUT'&&matches('uploads/'+uuid+'/content'))return entry([],['IDEMPOTENCY_CONFLICT','MATERIAL_STATE_CONFLICT']);
+  if(method==='POST'&&matches('items/'+uuid+'/(?:publish|withdraw)'))return entry(['commandId','expectedRevision'],['IDEMPOTENCY_CONFLICT','MATERIAL_STATE_CONFLICT','MATERIAL_VERSION_CONFLICT']);
+  if(method==='PATCH'&&matches('items/'+uuid))return entry(['commandId','expectedRevision','title','description'],['IDEMPOTENCY_CONFLICT','MATERIAL_STATE_CONFLICT','MATERIAL_VERSION_CONFLICT']);
+  return undefined;
+}
 function queryFields(path:string):readonly string[] {
+  const materials=materialsContract(path,'GET');if(materials)return materials.fields;
   const financial=enrollmentContract(path,'GET');if(financial)return financial.fields;
   if(path==='/admin/users')return ['q','role','status','page','pageSize'];
   if(path==='/admin/academic/courses'||new RegExp('^/admin/academic/courses/'+uuid+'/groups$','i').test(path))return ['q','state','page','pageSize'];
@@ -72,7 +94,7 @@ function queryFields(path:string):readonly string[] {
   return [];
 }
 const unconfirmed='No se pudo confirmar el resultado. Consúltalo antes de reintentar manualmente.';
-function unavailable(path?:string) { return new ApiFailure(503,'TEMPORARILY_UNAVAILABLE',path&&enrollmentFamily(path)?unconfirmed:messages.TEMPORARILY_UNAVAILABLE); }
+function unavailable(path?:string) { return new ApiFailure(503,'TEMPORARILY_UNAVAILABLE',path&&(enrollmentFamily(path)||materialsFamily(path))?unconfirmed:messages.TEMPORARILY_UNAVAILABLE); }
 function object(value:unknown):Record<string,unknown>|null {
   return value!==null && typeof value==='object' && !Array.isArray(value)?value as Record<string,unknown>:null;
 }
@@ -83,32 +105,38 @@ async function failure(response:Response,path:string,method:string):Promise<ApiF
   const code = error?.code;
   const adminAcademic=academicPath.test(path);const academic=adminAcademic||catalogPath.test(path)||teachingPath.test(path);
   const financial=enrollmentFamily(path),contract=enrollmentContract(path,method);
-  const allowedCodes:readonly string[]|undefined=financial?response.status===409?contract?.conflicts:
+  const materials=materialsFamily(path),materialContract=materialsContract(path,method);
+  const allowedCodes:readonly string[]|undefined=materials?response.status===409?materialContract?.conflicts:
+    ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[response.status]:financial?response.status===409?contract?.conflicts:
     ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[response.status]:adminAcademic&&response.status===409?academicConflicts:
     academic&&response.status===400?['VALIDATION_ERROR']:
       academic&&response.status===401?['AUTH_REQUIRED']:codes[response.status];
   if (typeof code!=='string' || !allowedCodes?.includes(code as ApiCode)) return unavailable(path);
   const retry = response.status===429?response.headers.get('Retry-After'):null;
   const seconds = retry && /^\d+$/.test(retry) && Number.isSafeInteger(Number(retry))?Number(retry):undefined;
-  const allowedFields:readonly string[]=financial?(response.status===400&&code==='VALIDATION_ERROR'?contract?.fields??[]:[]):academic?(code==='VALIDATION_ERROR'?(adminAcademic?academicFields:queryFields(path)):adminAcademic&&code==='TEACHER_NOT_ELIGIBLE'?['teacherUserId']:[]):fieldNames;
+  const allowedFields:readonly string[]=materials?(response.status===400&&code==='VALIDATION_ERROR'?materialContract?.fields??[]:[]):financial?(response.status===400&&code==='VALIDATION_ERROR'?contract?.fields??[]:[]):academic?(code==='VALIDATION_ERROR'?(adminAcademic?academicFields:queryFields(path)):adminAcademic&&code==='TEACHER_NOT_ELIGIBLE'?['teacherUserId']:[]):fieldNames;
   const fields = Array.isArray(error?.fields)?error.fields.flatMap(value => {
     const field = object(value)?.field;
     return typeof field==='string' && allowedFields.includes(field as ApiField)?[field as ApiField]:[];
   }):[];
   const conflicts=adminAcademic&&response.status===409&&['TEACHER_SCHEDULE_CONFLICT','COURSE_PUBLICATION_BLOCKED'].includes(code)
     &&Array.isArray(error?.conflictingGroupIds)?error.conflictingGroupIds.filter((id):id is string=>typeof id==='string'&&uuidPattern.test(id)).map(id=>id.toLowerCase()):[];
-  return new ApiFailure(response.status,code as ApiCode,financial&&code==='TEMPORARILY_UNAVAILABLE'?unconfirmed:messages[code as ApiCode],seconds,[...new Set(fields)],Object.freeze([...new Set(conflicts)]));
+  return new ApiFailure(response.status,code as ApiCode,(financial||materials)&&code==='TEMPORARILY_UNAVAILABLE'?unconfirmed:messages[code as ApiCode],seconds,[...new Set(fields)],Object.freeze([...new Set(conflicts)]));
 }
 
 /** Sin caché, almacenamiento de secretos ni replay. El navegador gestiona la cookie HttpOnly. */
-export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch = fetch):ApiClient & { cancelPending():void } {
+export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch = fetch):ApiClient & BinaryUploadClient & BinaryDownloadClient & { cancelPending():void } {
   let generation = 0;
   const pending = new Set<AbortController>();
   const cancelPending = () => { generation++; for (const operation of pending) operation.abort(); };
-  return {
-    cancelPending,
-    async request<T>(path:string,options:ApiRequest = {}):Promise<T|undefined> {
+  async function request<T>(path:string,options:ApiRequest = {},file?:File,download=false):Promise<T|undefined> {
       if (!/^\/[A-Za-z0-9/_-]+$/.test(path) || path.includes('//')) throw unavailable(path);
+      const method=options.method??'GET',material=materialsFamily(path),contract=materialsContract(path,method);
+      if(material&&!contract)throw unavailable(path);
+      const binaryPath=new RegExp('^/materials/uploads/'+uuid+'/content$','i').test(path);
+      const downloadPath=new RegExp('^/materials/items/'+uuid+'/content$','i').test(path);
+      if(download!==downloadPath||download&&method!=='GET')throw unavailable(path);
+      if(file!==undefined&&(!binaryPath||method!=='PUT'||!(file instanceof File))||binaryPath&&file===undefined)throw unavailable(path);
       const query=new URLSearchParams();
       if(options.query) {
         const allowed=queryFields(path);
@@ -126,10 +154,9 @@ export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch 
       if (options.signal?.aborted) abort();
       try {
         if (controller.signal.aborted) throw new RequestCancelled();
-        const method = options.method??'GET';
         const response = await transport(`/api/v1${path}${query.size?'?'+query.toString():''}`,{method,credentials:'same-origin',mode:'same-origin',redirect:'error',cache:'no-store',
-          headers:method==='GET'?{Accept:'application/json'}:{Accept:'application/json','Content-Type':'application/json','X-CSRF-Protection':'1'},
-          ...(method==='GET'?{}:{body:JSON.stringify(options.body??{})}),signal:controller.signal});
+          headers:method==='GET'?{Accept:download?'application/pdf, image/jpeg, image/png':'application/json'}:{Accept:'application/json','Content-Type':file?'application/octet-stream':'application/json','X-CSRF-Protection':'1'},
+          ...(method==='GET'?{}:{body:file??JSON.stringify(options.body??{})}),signal:controller.signal});
         if (controller.signal.aborted || generation!==started) throw new RequestCancelled();
         if (!response.ok) {
           const error = await failure(response,path,method);
@@ -140,19 +167,61 @@ export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch 
           }
           throw error;
         }
+        if(download) {
+          const metadata=downloadMetadata(response,path);
+          const blob=await response.blob();
+          if(controller.signal.aborted||generation!==started)throw new RequestCancelled();
+          if(blob.size!==metadata.byteSize||blob.type!==metadata.mediaType)throw unavailable(path);
+          return {blob,downloadName:metadata.downloadName} as T;
+        }
         if (response.status===204 || response.status===202) {
-          if(enrollmentFamily(path))throw unavailable(path);
+          if(enrollmentFamily(path)||material)throw unavailable(path);
           return undefined;
         }
         const body = object(await response.json());
         if (controller.signal.aborted || generation!==started) throw new RequestCancelled();
-        if (!body || !Object.hasOwn(body,'data') || enrollmentFamily(path)&&Object.keys(body).length!==1) throw unavailable(path);
+        if (!body || !Object.hasOwn(body,'data') || (enrollmentFamily(path)||material)&&Object.keys(body).length!==1) throw unavailable(path);
+        if(material) {
+          const creation=binaryPath||method==='POST'&&path.endsWith('/uploads');
+          if(!creation&&response.status!==200||creation&&![200,201].includes(response.status))throw unavailable(path);
+          if(creation) {
+            const data=object(body.data),replayed=binaryPath?data?.replayed:object(data?.command)?.replayed;
+            if(typeof replayed!=='boolean'||response.status!==(replayed?200:201))throw unavailable(path);
+          }
+        }
         return body.data as T;
       } catch (error) {
         if (error instanceof ApiFailure || error instanceof RequestCancelled) throw error;
         if (controller.signal.aborted || generation!==started) throw new RequestCancelled();
         throw unavailable(path);
       } finally { pending.delete(controller);options.signal?.removeEventListener('abort',abort); }
+  }
+  return {cancelPending,request,
+    async download(path:string,signal?:AbortSignal):Promise<BinaryDownload> {
+      const data=await request<BinaryDownload>(path,{signal},undefined,true);
+      if(data===undefined)throw unavailable(path);return data;
+    },
+    async upload<T>(path:string,file:File,signal?:AbortSignal):Promise<T> {
+      const data=await request<T>(path,{method:'PUT',signal},file);
+      if(data===undefined)throw unavailable(path);return data;
     },
   };
+}
+
+function downloadMetadata(response:Response,path:string) {
+  const size=response.headers.get('Content-Length'),mediaType=response.headers.get('Content-Type')??'';
+  const disposition=response.headers.get('Content-Disposition')??'';
+  const name=/^attachment;\s*filename="[\x20-\x21\x23-\x5b\x5d-\x7e]+";\s*filename\*=UTF-8''([^;\s]+)$/i.exec(disposition);
+  const suffix={'application/pdf':/\.pdf$/i,'image/jpeg':/\.jpe?g$/i,'image/png':/\.png$/i}[mediaType];
+  if(response.status!==200||response.redirected||!size||!/^[1-9]\d*$/.test(size)
+    ||!Number.isSafeInteger(Number(size))||Number(size)>20_000_000||!suffix||!name
+    ||response.headers.get('Cache-Control')!=='no-store'||response.headers.get('X-Content-Type-Options')!=='nosniff'
+    ||response.headers.get('Referrer-Policy')!=='no-referrer'
+    ||['Content-Range','Location','ETag'].some(header=>response.headers.has(header))
+    ||!['identity',null].includes(response.headers.get('Content-Encoding')))throw unavailable(path);
+  let downloadName:string;
+  try { downloadName=decodeURIComponent(name[1]); } catch { throw unavailable(path); }
+  if(!downloadName||downloadName.trim()!==downloadName||[...downloadName].length>180
+    ||/[\p{Cc}\p{Surrogate}/\\<>:"|?*]/u.test(downloadName)||!suffix.test(downloadName))throw unavailable(path);
+  return {byteSize:Number(size),mediaType,downloadName};
 }

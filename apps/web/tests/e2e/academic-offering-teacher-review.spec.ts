@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import type { Page,Request } from '@playwright/test';
 import { test, expect } from '../support/academic-offering-fixture';
 import { activate, choose, controlsAccessible, pageFits, typeField } from '../support/accessibility';
 import { accessUi, enterOffering, identityUsersFingerprint, reviewSeed } from '../support/academic-us4-browser';
@@ -59,8 +59,13 @@ for(const kind of ['status','role'] as const)test(`R02 ${kind}: pérdida y recup
     await publicHidden(student,seed.courseId,seed.groupId);
     const before=await identityUsersFingerprint(offering);await transition(page,seed.groupId,'withdraw');
     await expect(page.getByLabel('Docente asignado',{exact:true})).toHaveValue(seed.teacherId);
+    let patches=0;const observed=(request:Request)=>{if(request.method()==='PATCH'&&request.url().endsWith(`/groups/${seed.groupId}`))patches++;};page.on('request',observed);
+    await activate(page,page.getByRole('button',{name:'Guardar grupo',exact:true}));await expect(page.getByRole('status').filter({hasText:'No hay cambios para guardar.'})).toBeVisible();expect(patches).toBe(0);
+    await typeField(page,page.getByLabel('Descripción del grupo (opcional)',{exact:true}),`Revisión docente ${kind} confirmada por administrador`);
     const saved=page.waitForResponse(r=>r.request().method()==='PATCH'&&r.url().endsWith(`/groups/${seed.groupId}`));
-    await activate(page,page.getByRole('button',{name:'Guardar grupo',exact:true}));expect((await saved).status()).toBe(200);
+    await activate(page,page.getByRole('button',{name:'Guardar grupo',exact:true}));const response=await saved;expect(response.status()).toBe(200);
+    expect(Object.keys(response.request().postDataJSON()).sort()).toEqual(['commandId','description','expectedRevision']);
+    expect(patches).toBe(1);page.off('request',observed);
     expect((await snapshot(offering,seed.groupId)).state).toBe('WITHDRAWN');await publicHidden(student,seed.courseId,seed.groupId);
     await transition(page,seed.groupId,'publish');await expect(page.getByText(/Revisión docente requerida/)).toHaveCount(0);
     await expect(page.getByLabel('Nombre',{exact:true})).toBeDisabled();expect(await identityUsersFingerprint(offering)).toBe(before);

@@ -13,6 +13,19 @@ function messages(code: string, filename: string, rule: 'api-layers' | 'web-laye
 }
 
 describe('límites del monolito modular', () => {
+  test('T016 materials keeps IO in infrastructure and consumes only public owner contracts', () => {
+    for (const layer of ['application', 'domain', 'public']) {
+      const file = `apps/api/src/modules/materials/${layer}/contract.ts`;
+      expect(messages("import 'pg';", file, 'api-layers')[0]?.messageId).toBe('external');
+      expect(messages("import '@nestjs/common';", file, 'api-layers')[0]?.messageId).toBe('external');
+      expect(messages("import '../../../infrastructure/database/materials-transaction.js';", file, 'api-layers')[0]?.messageId).toBe('escape');
+    }
+    const file = 'apps/api/src/modules/materials/infrastructure/material-queries.ts';
+    for (const owner of ['academic-offering', 'enrollment', 'users', 'identity']) {
+      expect(messages(`import '../../${owner}/infrastructure/store.js';`, file, 'api-layers')[0]?.messageId).toBe('module');
+      expect(messages(`import '../../${owner}/public/contract.js';`, file, 'api-layers')).toHaveLength(0);
+    }
+  });
   test('T011 enrollment conserva barreras de IO y de dueño, sin excepciones nuevas', () => {
     for (const layer of ['domain','application','public']) {
       const file = `apps/api/src/modules/enrollment/${layer}/boundary.ts`;

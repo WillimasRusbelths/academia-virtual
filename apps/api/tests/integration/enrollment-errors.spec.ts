@@ -138,7 +138,7 @@ test('EE11 conflicto financiero usa acción propia sin simular comando administr
     expect(JSON.stringify(saved)).not.toContain(privateText);
   }
 });
-test('EE09 HTTP real mantiene tamaño, CSRF/origen y no crea endpoints financieros',async()=>{
+test('EE09 HTTP real mantiene tamaño, CSRF/origen y no permite confirmación financiera manual',async()=>{
   const context=await preEnrollmentDatabase();let http:Awaited<ReturnType<typeof us1Http>>|undefined;
   try{
     await context.applyEnrollment();http=await us1Http({context});const before=await financialFingerprint(context.database.pool);
@@ -149,7 +149,9 @@ test('EE09 HTTP real mantiene tamaño, CSRF/origen y no crea endpoints financier
       const response=await fetch(url,{method:'PATCH',headers,body:JSON.stringify(body)});expect(response.status).toBe(status);
       expect(response.headers.get('cache-control')).toBe('no-store');expect(JSON.stringify(await response.json())).not.toContain(privateText);
     }
-    expect((await http.get('/admin/enrollment/orders',context.admin.secret)).status).toBe(404);
+    const orders=await http.get('/admin/enrollment/orders',context.admin.secret);expect(orders.status).toBe(200);
+    expect((await orders.json()).data).toMatchObject({items:[],total:0});
+    expect((await http.post('/admin/enrollment/orders/'+randomUUID()+'/confirm-payment',{},context.admin.secret)).status).toBe(404);
     expect(await financialFingerprint(context.database.pool)).toBe(before);
   }finally{try{await http?.close();}finally{await context.cleanup();}}
 },120000);

@@ -3,7 +3,7 @@ import type { ApiFailure } from '../../shared/api-client';
 import { FormField } from '../../shared/ui/form-field';
 import { Feedback } from '../../shared/ui/feedback';
 import type { AdminCourse, AdminGroup, PreparedCommand } from './api';
-import { focusInvalid, OfferingConfirmation, OfferingReview, useOfferingCommand } from './offering-state';
+import { CommitmentNotice,focusInvalid, OfferingConfirmation, OfferingReview, useOfferingCommand } from './offering-state';
 
 /** Transiciones explícitas sobre la revisión guardada; backend conserva la autoridad. */
 export function MaintenanceAction<T extends AdminCourse | AdminGroup>({ value, dirty, busy, onBusy, withdraw, cancel, onSaved, onDenied, load, onReplace }: {
@@ -42,6 +42,7 @@ export function MaintenanceAction<T extends AdminCourse | AdminGroup>({ value, d
         </form></> : <p>{group ? 'El grupo dejará de ofrecerse y podrá editarse. Su publicación posterior requiere otra confirmación.'
           : 'El curso y sus grupos dejarán de ofrecerse al alumno. No cambia el estado ni se libera la programación de sus grupos publicados.'}</p>}
       <Feedback error={command.error}/>
+      <CommitmentNotice error={command.error}/>
       {command.error?.status === 503 && <p>Puedes comprobar el estado o confirmar de nuevo para repetir la misma intención.</p>}
       {command.error && [409, 503].includes(command.error.status) && <OfferingReview load={load} denied={onDenied} disabled={command.pending}
         replace={saved => { command.discard(); close(); onReplace(saved); }}/>}

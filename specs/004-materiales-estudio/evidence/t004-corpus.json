@@ -1,0 +1,168 @@
+{
+  "clientDate": "2026-11-16",
+  "scope": "Synthetic fixtures only, not production format validation",
+  "files": [
+    {
+      "id": "pdf-valid",
+      "name": "estudio.pdf",
+      "mediaType": "application/pdf",
+      "expected": "ACCEPT",
+      "reason": "Complete synthetic document/image",
+      "byteSize": 417,
+      "sha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5"
+    },
+    {
+      "id": "pdf-limit",
+      "name": "limite.pdf",
+      "mediaType": "application/pdf",
+      "expected": "ACCEPT",
+      "reason": "Exactly 20 000 000 bytes, complete format",
+      "byteSize": 20000000,
+      "sha256": "0d97becb3537c80e0ae700b9b503c6ea035f0f1b5c13e81fbb328ec7b8eae9d4"
+    },
+    {
+      "id": "pdf-excess",
+      "name": "exceso.pdf",
+      "mediaType": "application/pdf",
+      "expected": "REJECT",
+      "reason": "20 000 001 bytes, complete format",
+      "byteSize": 20000001,
+      "sha256": "7d9c4294c27ff0b4753ecfd10bce103b12f09bd6ff939d77d0d8683f0fb7ea81"
+    },
+    {
+      "id": "pdf-truncated",
+      "name": "cortado.pdf",
+      "mediaType": "application/pdf",
+      "expected": "REJECT",
+      "reason": "Missing final structure",
+      "byteSize": 409,
+      "sha256": "64113063f91830f9ede4b05bd40033896a28521abeea0e44b80ea948519f76f2"
+    },
+    {
+      "id": "jpeg-valid",
+      "name": "estudio.jpeg",
+      "mediaType": "image/jpeg",
+      "expected": "ACCEPT",
+      "reason": "Complete synthetic document/image",
+      "byteSize": 137,
+      "sha256": "d7e98b662c74dcc8fd2a62381df06a4baf558919188bea95c09f06ee8da7a737"
+    },
+    {
+      "id": "jpeg-limit",
+      "name": "limite.jpeg",
+      "mediaType": "image/jpeg",
+      "expected": "ACCEPT",
+      "reason": "Exactly 20 000 000 bytes, complete format",
+      "byteSize": 20000000,
+      "sha256": "bba4f8570ea94be371667420cdcc78f871205ea95eaf5ca6fb9334c06b7ba5b6"
+    },
+    {
+      "id": "jpeg-excess",
+      "name": "exceso.jpeg",
+      "mediaType": "image/jpeg",
+      "expected": "REJECT",
+      "reason": "20 000 001 bytes, complete format",
+      "byteSize": 20000001,
+      "sha256": "82132d072eddcf5bfb8e1d05bdd7a3389addd4c1ca11646af332836072d30dba"
+    },
+    {
+      "id": "jpeg-truncated",
+      "name": "cortado.jpeg",
+      "mediaType": "image/jpeg",
+      "expected": "REJECT",
+      "reason": "Missing final structure",
+      "byteSize": 129,
+      "sha256": "3c395ab2301cd77dcad09ea507e1d2b39979560c6a3281ecbb7e300afc643903"
+    },
+    {
+      "id": "png-valid",
+      "name": "estudio.png",
+      "mediaType": "image/png",
+      "expected": "ACCEPT",
+      "reason": "Complete synthetic document/image",
+      "byteSize": 67,
+      "sha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108"
+    },
+    {
+      "id": "png-limit",
+      "name": "limite.png",
+      "mediaType": "image/png",
+      "expected": "ACCEPT",
+      "reason": "Exactly 20 000 000 bytes, complete format",
+      "byteSize": 20000000,
+      "sha256": "9f5696680645b18bdc6bd234ca52440593f72bf7cb81970a6d162430eafce5fb"
+    },
+    {
+      "id": "png-excess",
+      "name": "exceso.png",
+      "mediaType": "image/png",
+      "expected": "REJECT",
+      "reason": "20 000 001 bytes, complete format",
+      "byteSize": 20000001,
+      "sha256": "27b38e2a5322ae96495d9e414e1fa91d17a316c669bec1e5163eb68886179f7d"
+    },
+    {
+      "id": "png-truncated",
+      "name": "cortado.png",
+      "mediaType": "image/png",
+      "expected": "REJECT",
+      "reason": "Missing final structure",
+      "byteSize": 59,
+      "sha256": "d431c2ef721dce9d89892021fa368723639acd1acc2aca3839240e69aa0bf19e"
+    },
+    {
+      "id": "jpg-valid",
+      "name": "estudio.jpg",
+      "mediaType": "image/jpeg",
+      "expected": "ACCEPT",
+      "reason": "JPEG extension alias",
+      "byteSize": 137,
+      "sha256": "d7e98b662c74dcc8fd2a62381df06a4baf558919188bea95c09f06ee8da7a737"
+    },
+    {
+      "id": "empty",
+      "name": "vacio.pdf",
+      "mediaType": "application/pdf",
+      "expected": "REJECT",
+      "reason": "Zero bytes",
+      "byteSize": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "one-byte",
+      "name": "uno.pdf",
+      "mediaType": "application/pdf",
+      "expected": "REJECT",
+      "reason": "1 byte is within size range 1–20 000 000, but not a valid format",
+      "byteSize": 1,
+      "sha256": "bbf3f11cb5b43e700273a78d12de55e4a7eab741ed2abf13787a4d2dc832b8ec"
+    },
+    {
+      "id": "false-extension",
+      "name": "falso.pdf",
+      "mediaType": "application/pdf",
+      "expected": "REJECT",
+      "reason": "PNG contents declared as PDF",
+      "byteSize": 67,
+      "sha256": "a1abfd410973b0111c215baa879b9edcd739e601659ba44168269767cc2e9108"
+    },
+    {
+      "id": "same-name-first",
+      "name": "estudio.pdf",
+      "mediaType": "application/pdf",
+      "expected": "ACCEPT",
+      "reason": "Same download name, first contents",
+      "byteSize": 417,
+      "sha256": "a348d7c967ffaabbdf90d5363baa6b65f637a246538785ecb2aca3218d41dfd5"
+    },
+    {
+      "id": "same-name-second",
+      "name": "estudio.pdf",
+      "mediaType": "application/pdf",
+      "expected": "ACCEPT",
+      "reason": "Same download name, distinct complete contents",
+      "byteSize": 1024,
+      "sha256": "b5910f98da3442585c595eef3389751306d47be6077dad6f965db2ce55794d6e"
+    }
+  ]
+}

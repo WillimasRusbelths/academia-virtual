@@ -4,7 +4,7 @@ import { academicOfferingApi } from './api';
 import { LoadingState, useOfferingResource } from './offering-state';
 import { TeachingLayout, TeachingSummary } from './teaching-groups-page';
 
-export function TeachingGroupPage({ api, id }: { api: ApiClient; id: string }) {
+export function TeachingGroupPage({ api, id, materialsHref }: { api: ApiClient; id: string; materialsHref?:string }) {
   const client = useMemo(() => academicOfferingApi(api), [api]);
   const load = useCallback((signal: AbortSignal) => client.teachingGroup(id, signal), [client, id]);
   const resource = useOfferingResource(load);
@@ -12,6 +12,7 @@ export function TeachingGroupPage({ api, id }: { api: ApiClient; id: string }) {
     {resource.error?.status === 404 ? <p role="status">Grupo no disponible</p>
       : <LoadingState loading={resource.loading} error={resource.error} retry={resource.reload}/>}
     {resource.data && <><h2>{resource.data.name}</h2><p>{resource.data.course.name}</p>
+      {materialsHref&&<p><a href={materialsHref}>Gestionar materiales del grupo</a></p>}
       <p>{resource.data.course.description ?? 'Sin configurar'}</p><TeachingSummary group={resource.data}/></>}
   </TeachingLayout>;
 }

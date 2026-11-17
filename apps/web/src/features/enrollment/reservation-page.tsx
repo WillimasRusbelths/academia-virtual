@@ -63,7 +63,7 @@ interface Actions {select:(groupId:string)=>void;preview:()=>void;confirm:()=>vo
 export function ReservationPage({state,actions}:{state:ReservationViewState;actions?:Actions}){
   const [search,setSearch]=useState(state.q??'');const message=useRef<HTMLDivElement>(null);
   useEffect(()=>{if(['ADMITTED','CONFIRMED','REJECTED','UNCERTAIN','VALIDATION_ERROR','AUTH_REQUIRED','FORBIDDEN'].includes(state.status))message.current?.querySelector<HTMLElement>('[role]')?.focus();},[state.status]);
-  const busy=Boolean(state.busy),locked=Boolean(state.intentionId||state.request)||busy,selected=state.selected??[],items=state.items??[];
+  const busy=Boolean(state.busy),locked=Boolean(state.intentionId||state.request)||busy||['ERROR','UNCERTAIN','AUTH_REQUIRED','FORBIDDEN','LOADING'].includes(state.status),selected=state.selected??[],items=state.items??[];
   const selectedCourses=new Set(state.selectedCourseIds??items.filter(i=>selected.includes(i.groupId)).map(i=>i.courseId));
   return <EnrollmentLayout title="Reservar cursos"><p>Elige un grupo por curso. El resumen es orientativo y la confirmación vuelve a comprobar precio y disponibilidad.</p>
     <div ref={message}><Notice status={state.status} message={state.message}/></div>
@@ -77,7 +77,7 @@ export function ReservationPage({state,actions}:{state:ReservationViewState;acti
     <form aria-label="Buscar grupos para reservar" onSubmit={event=>{event.preventDefault();actions?.load(1,search);}}><label htmlFor="reservation-search">Buscar curso o grupo</label>{' '}
       <input id="reservation-search" value={search} disabled={busy} onChange={event=>setSearch(event.target.value)}/><button type="submit" disabled={busy||!actions}>Buscar</button></form>
     {state.evaluatedAt&&<p>Inventario evaluado en <time dateTime={state.evaluatedAt}>{state.evaluatedAt}</time> (UTC).</p>}
-    {!items.length&&state.status!=='LOADING'&&<p role="status">No hay grupos disponibles para esta consulta.</p>}
+    {!items.length&&state.status==='EMPTY'&&<p role="status">No hay grupos disponibles para esta consulta.</p>}
     <fieldset disabled={locked||!actions} aria-describedby="reservation-selection-help reservation-validation" aria-invalid={state.status==='VALIDATION_ERROR'}><legend>Selección de grupos</legend><p id="reservation-selection-help">Selecciona como máximo un grupo por curso. Un precio sin definir no permite reservar.</p>
       <ul className="enrollment-cards">{items.map(item=><li className="enrollment-card" key={item.groupId}><h2>{item.courseName}</h2><h3>{item.groupName}</h3>
         <p>{item.periodStart}–{item.periodEnd} · {item.timeZone}</p><p>Docente: {item.teacherName??'No disponible'}</p><Schedule slots={item.schedule??[]}/>
@@ -110,7 +110,7 @@ export function createReservationController(api:EnrollmentApi,options:{intention
   const clearDraft=()=>{previewVersion++;preview=undefined;confirmed=false;};
   const clearPrivate=()=>{generation++;loadVersion++;previewVersion++;for(const operation of pending)operation.abort();pending.clear();selected=[];preview=undefined;confirmed=false;catalog=empty();loading=false;previewing=false;};
   flow.subscribe(()=>{if(['AUTH_REQUIRED','FORBIDDEN'].includes(flow.snapshot().state))clearPrivate();emit();});
-  const fail=(error:unknown)=>{status=failureStatus(error);if(['AUTH_REQUIRED','FORBIDDEN'].includes(status)){clearPrivate();flow.logout();}emit();};
+  const fail=(error:unknown)=>{status=failureStatus(error);clearDraft();if(['AUTH_REQUIRED','FORBIDDEN'].includes(status)){clearPrivate();flow.logout();}emit();};
   async function load(page=1,q=''){
     const epoch=generation,version=++loadVersion,operation=new AbortController();pending.add(operation);loading=true;status='LOADING';emit();
     try{const result=await api.offerings({page,pageSize:20,q},operation.signal);if(epoch===generation&&version===loadVersion){catalog={...result,q};status=result.items.length?'READY':'EMPTY';}}

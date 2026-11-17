@@ -10,6 +10,10 @@ import { formatInstant } from '../domain/instant.js';
 import { createEnrollmentFinancialParticipant } from './enrollment-store.js';
 import { postgresInstantParameter } from './temporal.js';
 import { ENROLLMENT_ERROR_MESSAGES } from '../public/errors.js';
+import type { AdministrativeOrderPage,AdministrativeOrderView,IncidentView } from '../application/queries.js';
+import type { FollowUpView } from '../application/follow-up.js';
+import { administrativeTopology } from './admin-topology.js';
+import type { AdministrativeSelection } from './admin-topology.js';
 
 const empty=():EnrollmentTopology=>({accountIds:[],courseIds:[],groupIds:[],orderIds:[],attemptIds:[],receiptIds:[],paymentIds:[],enrollmentIds:[],incidentIds:[]});
 const invalid=()=>new EnrollmentError({code:'VALIDATION_ERROR'});
@@ -42,7 +46,19 @@ export function createEnrollmentQueries(pool:Pool,authorization:EnrollmentTransa
     let selection:Selection;
     return run({actor,permission,mode:'READ',
       async discover(client){selection=await select(client);return topology(client,actor.userId,selection);},
-      recheck:client=>topology(client,actor.userId,selection),apply});
+      recheck:client=>topology(client,actor.userId,selection),async apply(context){
+        // Solo hechos cubiertos por los locks del lector. Una hora anterior a
+        // confirmación/pago/materialización no significa que haya cupo libre.
+        // Se compara con el mismo token posterior a locks; GET sigue sin escribir.
+        const row=(await context.client.query<{known:string|null}>(`SELECT (extract(epoch FROM greatest(
+          (SELECT greatest(max("confirmedAt"),max("expirationProcessedAt")) FROM "EnrollmentOrder" WHERE id=ANY($1::uuid[])),
+          (SELECT max("verificationFinishedAt") FROM "VerifiedPayment" WHERE "orderId"=ANY($1::uuid[])),
+          (SELECT max(e."confirmedAt") FROM "Enrollment" e JOIN "EnrollmentOrderItem" i ON i.id=e."orderItemId" WHERE i."orderId"=ANY($1::uuid[])),
+          (SELECT max("admittedAt") FROM "ReservationRequest" WHERE $2::boolean AND "studentId"=$3)
+        ))*1000000)::numeric(30,0)::text AS known`,[context.locked.orderIds,selection.ownOrders??false,actor.userId])).rows[0];
+        if(row.known!==null&&context.decision.at<BigInt(row.known))throw new EnrollmentTransactionUnavailable();
+        return apply(context);
+      }});
   }
   async function inventory(context:EnrollmentTransactionContext,groupIds:readonly string[],strict:boolean):Promise<InventoryItem[]>{
     const snapshots=await offeringFactory(context.client).snapshots(groupIds);
@@ -61,6 +77,61 @@ export function createEnrollmentQueries(pool:Pool,authorization:EnrollmentTransa
         reserved:row.reserved,occupied:row.occupied,available:s.capacity-row.reserved-row.occupied,priceMinor:row.priceMinor,currency:'PEN'});
     }
     return rows;
+  }
+  type AdminSelection={selection:AdministrativeSelection;ids:readonly string[];total:number};
+  function administrativeRead<T>(actor:SessionActor,select:(client:PoolClient)=>Promise<AdminSelection>,project:(context:EnrollmentTransactionContext,selected:AdminSelection)=>Promise<T>):Promise<T>{
+    let selected:AdminSelection;
+    const checked=async(client:PoolClient)=>{const current=await select(client);if(JSON.stringify(current)!==JSON.stringify(selected))throw new ReadTopologyChanged();return current;};
+    return run({actor,permission:'enrollment:read-all',mode:'READ',
+      async discover(client){selected=await select(client);return administrativeTopology(client,offeringFactory(client),selected.selection);},
+      async recheck(client){await checked(client);return administrativeTopology(client,offeringFactory(client),selected.selection);},
+      async apply(context){
+        await checked(context.client);
+        const known=(await context.client.query<{at:string|null}>(`SELECT (extract(epoch FROM greatest(
+          (SELECT greatest(max("confirmedAt"),max("expirationProcessedAt")) FROM "EnrollmentOrder" WHERE id=ANY($1::uuid[])),
+          (SELECT max("verificationFinishedAt") FROM "VerifiedPayment" WHERE id=ANY($2::uuid[])),
+          (SELECT max("confirmedAt") FROM "Enrollment" WHERE id=ANY($3::uuid[])),
+          (SELECT max("openedAt") FROM "PaymentIncident" WHERE id=ANY($4::uuid[])),
+          (SELECT max("recordedAt") FROM "IncidentFollowUp" WHERE "incidentId"=ANY($4::uuid[]))
+        ))*1000000)::numeric(30,0)::text AS at`,[context.locked.orderIds,context.locked.paymentIds,context.locked.enrollmentIds,context.locked.incidentIds])).rows[0];
+        if(known.at!==null&&context.decision.at<BigInt(known.at))throw new EnrollmentTransactionUnavailable();
+        return project(context,selected);
+      }});
+  }
+  function administrativePage(input:AdministrativeOrderPage,orders:boolean):AdministrativeOrderPage {
+    if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!['page','pageSize',...(orders?['studentId']:[])].includes(key)))throw invalid();
+    const pagination=page({page:input.page,pageSize:input.pageSize});
+    return {...pagination,...(input.studentId===undefined?{}:{studentId:enrollmentUuid(input.studentId)})};
+  }
+  async function selectedPage(client:PoolClient,pagination:AdministrativeOrderPage,orders:boolean):Promise<AdminSelection>{
+    // Tabla/orden son constantes internas; valores externos siempre parametrizados.
+    const query=orders?`SELECT id,"confirmedAt" AS at FROM "EnrollmentOrder" WHERE ($3::uuid IS NULL OR "studentId"=$3)`
+      :`SELECT id,"openedAt" AS at FROM "PaymentIncident"`;
+    const row=(await client.query<{total:string;ids:string[]}>(`WITH filtered AS (${query}) SELECT count(*)::text AS total,
+      ARRAY(SELECT id FROM filtered ORDER BY at DESC,id LIMIT $1 OFFSET $2) AS ids FROM filtered`,
+    [pagination.pageSize,(pagination.page-1)*pagination.pageSize,...(orders?[pagination.studentId??null]:[])])).rows[0];
+    const total=Number(row.total);if(!Number.isSafeInteger(total))throw new EnrollmentTransactionUnavailable();
+    return {selection:{orderIds:orders?row.ids:[],incidentIds:orders?[]:row.ids},ids:row.ids,total};
+  }
+  async function administrativeOrder(context:EnrollmentTransactionContext,id:string):Promise<AdministrativeOrderView|null>{
+    if(!context.locked.orderIds.includes(id))return null;
+    const row=(await context.client.query<{studentId:string}>('SELECT "studentId" FROM "EnrollmentOrder" WHERE id=$1',[id])).rows[0];
+    if(!row)throw new ReadTopologyChanged();
+    const view=await orderView(context,id,row.studentId);return view?{...view,studentId:row.studentId}:null;
+  }
+  async function incidentView(context:EnrollmentTransactionContext,id:string):Promise<IncidentView|null>{
+    if(!context.locked.incidentIds.includes(id))return null;
+    type Row={id:string;orderId:string|null;verifiedPaymentId:string;reason:string;affectedGroupIds:string[];opened:string;amountUnits:string;amountScale:number;currency:string;verified:string};
+    const row=(await context.client.query<Row>(`SELECT i.id,i."orderId",i."verifiedPaymentId",i.reason,i."affectedGroupIds",
+      (extract(epoch FROM i."openedAt")*1000000)::numeric(30,0)::text AS opened,p."amountUnits"::text,p."amountScale",p.currency,
+      (extract(epoch FROM p."verificationFinishedAt")*1000000)::numeric(30,0)::text AS verified
+      FROM "PaymentIncident" i JOIN "VerifiedPayment" p ON p.id=i."verifiedPaymentId" WHERE i.id=$1`,[id])).rows[0];
+    if(!row||!context.locked.paymentIds.includes(row.verifiedPaymentId)||row.orderId!==null&&!context.locked.orderIds.includes(row.orderId)||row.affectedGroupIds.some(group=>!context.locked.groupIds.includes(group)))throw new ReadTopologyChanged();
+    const notes=(await context.client.query<FollowUpView&{at:string}>(`SELECT id,"incidentId","adminUserId","commandId",content,
+      (extract(epoch FROM "recordedAt")*1000000)::numeric(30,0)::text AS at FROM "IncidentFollowUp" WHERE "incidentId"=$1 ORDER BY "recordedAt",id`,[id])).rows;
+    return {id:row.id,orderId:row.orderId,reason:row.reason,affectedGroupIds:[...row.affectedGroupIds],openedAt:formatInstant(BigInt(row.opened)),
+      payment:{amountUnits:row.amountUnits,amountScale:row.amountScale,currency:row.currency,verifiedAt:formatInstant(BigInt(row.verified))},
+      followUps:notes.map(note=>({id:note.id,incidentId:note.incidentId,adminUserId:note.adminUserId,commandId:note.commandId,content:note.content,recordedAt:formatInstant(BigInt(note.at))}))};
   }
   async function orderView(context:EnrollmentTransactionContext,id:string,studentId:string):Promise<OrderView|null>{
     if(!context.locked.orderIds.includes(id))return null;
@@ -116,6 +187,16 @@ export function createEnrollmentQueries(pool:Pool,authorization:EnrollmentTransa
     });
   }
   return {
+    adminOrders(actor,input){const pagination=administrativePage(input,true);return administrativeRead(actor,client=>selectedPage(client,pagination,true),async(context,selection)=>{
+      const items:AdministrativeOrderView[]=[];for(const id of selection.ids){const row=await administrativeOrder(context,id);if(!row)throw new ReadTopologyChanged();items.push(row);}
+      return {page:pagination.page,pageSize:pagination.pageSize,total:selection.total,items};
+    });},
+    adminOrder(actor,input){const id=enrollmentUuid(input);return administrativeRead(actor,async()=>({selection:{orderIds:[id],incidentIds:[]},ids:[id],total:1}),context=>administrativeOrder(context,id));},
+    incidents(actor,input){const pagination=administrativePage(input,false);return administrativeRead(actor,client=>selectedPage(client,pagination,false),async(context,selection)=>{
+      const items:IncidentView[]=[];for(const id of selection.ids){const row=await incidentView(context,id);if(!row)throw new ReadTopologyChanged();items.push(row);}
+      return {page:pagination.page,pageSize:pagination.pageSize,total:selection.total,items};
+    });},
+    incident(actor,input){const id=enrollmentUuid(input);return administrativeRead(actor,async()=>({selection:{orderIds:[],incidentIds:[id]},ids:[id],total:1}),context=>incidentView(context,id));},
     enrollment(actor,input){const id=enrollmentUuid(input);return read(actor,'enrollment:read-own',async()=>({ownOrders:true}),async context=>(await enrollmentRows(context,actor.userId,id))[0]??null);},
     enrollments(actor,input){const pagination=page(input);return read(actor,'enrollment:read-own',async()=>({ownOrders:true}),async context=>{
       const rows=await enrollmentRows(context,actor.userId,null);return {...pagination,total:rows.length,items:rows.slice((pagination.page-1)*pagination.pageSize,pagination.page*pagination.pageSize)};

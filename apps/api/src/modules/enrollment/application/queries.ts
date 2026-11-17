@@ -1,4 +1,5 @@
 import type { SessionActor } from '../../authorization/public/session.js';
+import type { FollowUpView } from './follow-up.js';
 import type { OriginalOrderItem, OrderState } from '../public/enrollment.js';
 export const ENROLLMENT_QUERIES=Symbol('ENROLLMENT_QUERIES');
 
@@ -17,6 +18,8 @@ export interface OrderItemView extends Omit<OriginalOrderItem,'priceMinor'|'grou
   readonly priceMinor:string;readonly groupStartAt:string;readonly enrollmentValidUntil:string;
 }
 export interface OrderView {
+  /** state es efectivo en serverNow. La materialización interna no forma parte
+   * del DTO ni condiciona que el alumno pueda consultar el vencimiento. */
   readonly id:string;readonly revision:string;readonly state:OrderState;readonly totalMinor:string;readonly currency:'PEN';
   readonly confirmedAt:string;readonly expiresAt:string;readonly serverNow:string;readonly items:readonly OrderItemView[];
   readonly paymentAllowed:boolean;readonly paymentMessage:string|null;
@@ -31,7 +34,18 @@ export interface EnrollmentView {
 export type RequestView={readonly id:string;readonly intentionId:string;readonly admittedAt:string}&(
   {readonly state:'ADMITTED'}|{readonly state:'CONFIRMED';readonly orderId:string}|{readonly state:'REJECTED';readonly decisionCode:string});
 /** Puertos de lectura propios; ninguna entrada acepta titular, dinero o reloj. */
+export interface AdministrativeOrderPage extends EnrollmentPage {readonly studentId?:string}
+export interface AdministrativeOrderView extends OrderView {readonly studentId:string}
+export interface IncidentView {
+  readonly id:string;readonly orderId:string|null;readonly reason:string;readonly openedAt:string;
+  readonly affectedGroupIds:readonly string[];readonly followUps:readonly FollowUpView[];
+  readonly payment:{readonly amountUnits:string;readonly amountScale:number;readonly currency:string;readonly verifiedAt:string};
+}
 export interface EnrollmentQueries {
+  adminOrders(actor:SessionActor,input:AdministrativeOrderPage):Promise<PageResult<AdministrativeOrderView>>;
+  adminOrder(actor:SessionActor,id:string):Promise<AdministrativeOrderView|null>;
+  incidents(actor:SessionActor,input:EnrollmentPage):Promise<PageResult<IncidentView>>;
+  incident(actor:SessionActor,id:string):Promise<IncidentView|null>;
   offerings(actor:SessionActor,input:OfferingPage):Promise<InventoryResult&PageResult<InventoryItem>>;
   preview(actor:SessionActor,groupIds:readonly string[]):Promise<InventoryResult>;
   request(actor:SessionActor,intentionId:string):Promise<RequestView|null>;

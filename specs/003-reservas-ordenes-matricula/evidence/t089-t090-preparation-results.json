@@ -1,0 +1,118 @@
+{
+  "tasks": [
+    "T089",
+    "T090"
+  ],
+  "date": "2026-11-15",
+  "timezone": "America/Lima",
+  "status": "prepared-not-executed",
+  "taskCompletionChanged": false,
+  "gates": {
+    "T089": {
+      "completeDependencies": [
+        "T042",
+        "T069",
+        "T084"
+      ],
+      "pendingDependencies": [
+        "T083",
+        "T059"
+      ],
+      "humanSessionPerformed": false,
+      "newParticipantObservations": 0,
+      "guide": "evidence/human-integrated-guide.md"
+    },
+    "T090": {
+      "completeDependencies": [
+        "T086"
+      ],
+      "pendingDependencies": [
+        "T059"
+      ],
+      "operationalAgreements": "D13 pending",
+      "authorizationForConcreteTarget": false,
+      "target": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "physicalElapsedSeconds": null,
+      "externalRequests": 0,
+      "plan": "evidence/operation.md"
+    }
+  },
+  "checks": {
+    "baselineFiles": 962,
+    "modifiedExistingFiles": [
+      "ops/recovery/README.md",
+      "specs/003-reservas-ordenes-matricula/evidence/acceptance.md",
+      "specs/003-reservas-ordenes-matricula/evidence/human-acceptance.md",
+      "specs/003-reservas-ordenes-matricula/tasks.md"
+    ],
+    "historicalPrefixes": "byte-for-byte preserved for human evidence, acceptance and recovery README",
+    "protectedFilesUnchanged": 74,
+    "productTestsConfigAndMigrationsUnchanged": true,
+    "humanCasesPrepared": 9,
+    "taskCounts": {
+      "complete": 83,
+      "pending": 11
+    },
+    "checklist": {
+      "complete": 12,
+      "pending": 4
+    },
+    "productTestsRun": false,
+    "servicesStarted": false,
+    "providerContractInvented": false,
+    "loadOrDeploymentRun": false,
+    "hooks": "none registered",
+    "localLinks": {
+      "checked": 117,
+      "status": "PASS"
+    },
+    "configuredSecretLiteralScan": {
+      "files": 98,
+      "configurations": 2,
+      "distinctValuesChecked": 18,
+      "matches": 0
+    },
+    "addedFiles": [
+      "specs/003-reservas-ordenes-matricula/evidence/human-integrated-guide.md",
+      "specs/003-reservas-ordenes-matricula/evidence/operation.md",
+      "specs/003-reservas-ordenes-matricula/evidence/t089-t090-preparation-results.json"
+    ],
+    "deletedFiles": 0
+  },
+  "artifacts": [
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/human-integrated-guide.md",
+      "sha256": "5fa454f6c145a45ecbd72abdfaed4e88fae5efea16bf5d125cec8ef1da26ff50"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/operation.md",
+      "sha256": "d574138f185932968a312f13940824123d7b643b9a20de360999323f345825d2"
+    },
+    {
+      "path": "ops/recovery/README.md",
+      "sha256": "62274b487f7a172a4c01c65f94eb4a5b019e19e6e099208c510205cf531103b9"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/acceptance.md",
+      "sha256": "b444d107faff06c2fa296c869b6300c53d4fa61d48b3f2856002c7beb6cc705d"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/human-acceptance.md",
+      "sha256": "bc5fb1c2a9eb6522ed4e83868c8d9d1ce6f6a1f250ad4258f7d16c65bf7b97a2"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/tasks.md",
+      "sha256": "24d01d3bdb6c957ea933a42f965d965319d9dfc5182a33bbfae95e9e3eba5c52"
+    }
+  ],
+  "nextAction": "Obtain real T083 observations and authorized provider modality/documentation; complete T056–T059 before integrated execution; agree D13 and concrete operational authorization before starting T090",
+  "limits": [
+    "No new human acceptance claimed; original T042 remains desktop-only",
+    "No real sandbox result or provider integration claimed",
+    "No operational 24h, custody, retention or RPO/RTO acceptance claimed",
+    "T083, T089, T090, D02, D10, D13 and T094 remain pending",
+    "001 T104/T108 and 002 T073/T074 remain pending"
+  ]
+}

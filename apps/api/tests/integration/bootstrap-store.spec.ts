@@ -1,3 +1,4 @@
+import { truncateFixtureTables } from '../support/fixture-truncate.js';
 import { randomUUID } from 'node:crypto';
 import { afterAll, afterEach, beforeAll, expect, test, vi } from 'vitest';
 import { identityDatabase } from '../support/identity-database.js';
@@ -29,7 +30,7 @@ beforeAll(async () => {
 afterEach(async () => {
   vi.restoreAllMocks();
   // Exclusivamente el esquema aleatorio de esta suite en *_test. No restablecer marcas reales.
-  await context.isolated.ownerQuery(`DROP FUNCTION IF EXISTS bootstrap_test_failure() CASCADE;
+  await truncateFixtureTables(context, `DROP FUNCTION IF EXISTS bootstrap_test_failure() CASCADE;
     TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent","SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
     INSERT INTO "SystemState" (id) VALUES (1);`);
 });
@@ -214,7 +215,7 @@ test('fallo de cuotas o singleton ausente falla cerrado sin recrear el estado',a
   const f = await prepared();const spy = vi.spyOn(rates,'admitMail').mockRejectedValueOnce(new Error(randomUUID()));
   await expect(store().bootstrap(f.input)).rejects.toThrow(BootstrapUnavailable);
   expect(await counts()).toEqual(empty);spy.mockRestore();
-  await context.isolated.ownerQuery('TRUNCATE "SystemState"');
+  await truncateFixtureTables(context, 'TRUNCATE "SystemState"');
   await expect(store().bootstrap(f.input)).rejects.toThrow(BootstrapUnavailable);
   expect(await counts()).toEqual(empty);
   expect(Number((await context.database.pool.query<{ count:string }>('SELECT count(*) FROM "SystemState"')).rows[0].count)).toBe(0);

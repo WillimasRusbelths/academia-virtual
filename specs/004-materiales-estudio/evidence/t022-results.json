@@ -1,0 +1,540 @@
+{
+  "clientDate": "2026-11-16",
+  "clientTimezone": "America/Lima",
+  "scope": "T022 atomic completion; no publication or HTTP handlers",
+  "tasks": {
+    "completed": 22,
+    "pending": 46
+  },
+  "validation": {
+    "red": {
+      "exitCode": 1,
+      "success": false,
+      "total": 15,
+      "passed": 0,
+      "failed": 15,
+      "pending": 0,
+      "files": 1,
+      "reportSha256": "d5802e6c71e7c41048213294b5c4b438bfdf7d8a8e2b439b7550ffaef3af9ce8",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-complete.spec.ts",
+          "status": "failed",
+          "passed": 0,
+          "failed": 15,
+          "failureKinds": [
+            "Error: T022: atomic upload completion not implemented"
+          ]
+        }
+      ]
+    },
+    "first": {
+      "exitCode": 1,
+      "success": false,
+      "total": 15,
+      "passed": 13,
+      "failed": 2,
+      "pending": 0,
+      "files": 1,
+      "reportSha256": "9b8cb623d9b8ace97d2fcdce77dea225636040699b3e22015c08949a889c2d04",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-complete.spec.ts",
+          "status": "failed",
+          "passed": 13,
+          "failed": 2,
+          "failureKinds": [
+            "error: Cancelacion terminal",
+            "Error: Recurso no encontrado."
+          ]
+        }
+      ]
+    },
+    "focused": {
+      "exitCode": 0,
+      "success": true,
+      "total": 17,
+      "passed": 17,
+      "failed": 0,
+      "pending": 0,
+      "files": 1,
+      "reportSha256": "da08ada146bf9caea1306e92ba5a613935e8d3b601e9080e5347156f266ee113",
+      "suites": [
+        {
+          "file": "apps/api/tests/integration/materials-complete.spec.ts",
+          "status": "passed",
+          "passed": 17,
+          "failed": 0,
+          "failureKinds": []
+        }
+      ]
+    },
+    "final": {
+      "exitCode": 0,
+      "success": true,
+      "total": 905,
+      "passed": 905,
+      "failed": 0,
+      "pending": 0,
+      "files": 47,
+      "reportSha256": "7d7f7d0c41e8c5367e1e2258598a33a841347b109f2144998f439c042678dae7",
+      "suites": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "status": "passed",
+          "passed": 24,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-admission.spec.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-complete.spec.ts",
+          "status": "passed",
+          "passed": 19,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-errors.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-files.spec.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-fixture.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-format.spec.ts",
+          "status": "passed",
+          "passed": 30,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-schema.spec.ts",
+          "status": "passed",
+          "passed": 11,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/tests/integration/materials-upload-intents.spec.ts",
+          "status": "passed",
+          "passed": 21,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "status": "passed",
+          "passed": 115,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts",
+          "status": "passed",
+          "passed": 2,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/commitments.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+          "status": "passed",
+          "passed": 22,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+          "status": "passed",
+          "passed": 8,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+          "status": "passed",
+          "passed": 23,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+          "status": "passed",
+          "passed": 13,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-invariants.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-verification.test.ts",
+          "status": "passed",
+          "passed": 38,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+          "status": "passed",
+          "passed": 86,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/expire-reservations.test.ts",
+          "status": "passed",
+          "passed": 15,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/follow-up.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "status": "passed",
+          "passed": 39,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+          "status": "passed",
+          "passed": 27,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "status": "passed",
+          "passed": 10,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "status": "passed",
+          "passed": 91,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "status": "passed",
+          "passed": 42,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "status": "passed",
+          "passed": 6,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "status": "passed",
+          "passed": 12,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "status": "passed",
+          "passed": 7,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "status": "passed",
+          "passed": 4,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "status": "passed",
+          "passed": 20,
+          "failed": 0,
+          "failureKinds": []
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "failureKinds": []
+        }
+      ]
+    },
+    "completeCasesPassed": 19,
+    "previousRegressionPassed": 886,
+    "maxWorkers": 2,
+    "lintApiExitCode": 0,
+    "apiMaterialsTypecheckExitCode": 0,
+    "prismaGenerateExitCode": 0,
+    "apiBuildExitCode": 0,
+    "corrections": [
+      "Initial test typecheck used parameters with one-argument ownerQuery; use a separate runtime connection",
+      "First runtime suite attempted to restore terminal group cancellation; use a dedicated group and preserve the terminal rule"
+    ]
+  },
+  "integrity": {
+    "preparedContentUploadAuditSingleCommit": true,
+    "duplicateCreatesOneMaterialAndAudit": true,
+    "rollbackFaultStages": [
+      "content",
+      "link",
+      "audit",
+      "before-commit"
+    ],
+    "previousMaterialBytesPreserved": true,
+    "finalSessionRevalidationRollback": true,
+    "committedButResponseLostSimulated": true,
+    "ambiguousCommitAutomaticallyRetried": false,
+    "privateValidatedSnapshotTested": true,
+    "realFileLimitBytesPersisted": 20000000,
+    "replayLocksLinkedMaterialBeforeUpload": true
+  },
+  "preservation": {
+    "comparedFiles": 50,
+    "changedFiles": [
+      "apps/api/src/modules/materials/application/ports.ts",
+      "specs/004-materiales-estudio/tasks.md",
+      "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "apps/api/src/app.module.ts",
+      "apps/api/src/infrastructure/database/materials-transaction.ts",
+      "apps/api/src/modules/materials/infrastructure/material-queries.ts",
+      "specs/004-materiales-estudio/verification.md",
+      "apps/api/src/modules/materials/application/uploads.ts"
+    ],
+    "onlyExpectedFilesChanged": true,
+    "checkpoints": [
+      {
+        "path": "specs/004-materiales-estudio/evidence/t005-t008-results.json",
+        "sha256": "638bfc50b4e1b33393d0a9b780a97e3fcaccce3d2b1a0e80deb3ada95def1578"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+        "sha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t017-t019-results.json",
+        "sha256": "ae0866a5e9e86aaeeb1b2201156a48311b1cf27df9c2c46751adfa78dd17f87a"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t020-results.json",
+        "sha256": "1b248cc05182b101e9d1acf889d2137ad6503a851558c4e9cc8e86b15f9e622d"
+      },
+      {
+        "path": "specs/004-materiales-estudio/evidence/t021-results.json",
+        "sha256": "77300d9032c75d57b4bf518886df927e11210d19a9b6c6e4892f123b9a91b660"
+      }
+    ],
+    "migrationsChanged": false,
+    "dependenciesChanged": false,
+    "materialsHttpAndUiTestsChanged": false,
+    "manualDataChanged": false
+  },
+  "files": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "2665d2c18835d3462c796c5130d1fd527e3e9d09497c8f8d685d0ab688c3a45d"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/materials-transaction.ts",
+      "sha256": "436c3856774db204f32018c4d2dc34b8df5b6133c79c454f2268d5e4fc4ca3ad"
+    },
+    {
+      "path": "apps/api/src/modules/materials/application/ports.ts",
+      "sha256": "28454798ccdce139ee9dfc6af5f23993d9d62eb76a5ad0f739e22dae94079a44"
+    },
+    {
+      "path": "apps/api/src/modules/materials/application/uploads.ts",
+      "sha256": "7e945192b8e8eea4f98db341f6fa633f568455685ae3febb11054d34ab743a4f"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/material-queries.ts",
+      "sha256": "a05213c0472f6430d97db5b29514274afeb36376f6aee132f5e5c052da27ce85"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "55783925b7a00d890ecb2c34ec1eb51c5ca4ccc1601a3736e0f124f8cfcb63c7"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "110dfc45b512a3530fbf2a6ab39f978abc8f7b21fd55da52bb7dd2483f8a2b18"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "051b2241d4af78f47c84adcb33984e7d34a459059ae964eeb632ca2337b0e5a0"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/material-store.ts",
+      "sha256": "deec3a61bf05a73924615d937d4fa22489eead0d82919de3509ca048fe2f3d04"
+    },
+    {
+      "path": "apps/api/src/modules/materials/infrastructure/content-store.ts",
+      "sha256": "8e64e8c4733c14d562d381687aa1b0a517c580ec6853665d6850217b40c29dbd"
+    },
+    {
+      "path": "apps/api/tests/integration/materials-complete.spec.ts",
+      "sha256": "4a71bb5f6d61b662e488464dfe5f91e4cc6e4655cddb657e835d1098fd6f7bba"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t022.md",
+      "sha256": "d668d58b10c68c8ecde0646ac484f270b19e0e31b4522716ce89c08930d72e67"
+    }
+  ],
+  "limitations": [
+    "No explicit publication, materials HTTP receiver/routes or UI",
+    "No network/process termination; commit acknowledgement loss and storage faults are test-client injections against real PostgreSQL",
+    "No transfer resource or capacity measurement; admission/receiver is T024 and resource measurement is T063/D10",
+    "WITHDRAWN replay state is SQL test setup, not implemented withdrawal command",
+    "No T018/T019 rerun; HTTP/UI behavior remains absent",
+    "No US1 acceptance or closure of US2/US3, human acceptance or D10/D13"
+  ]
+}
