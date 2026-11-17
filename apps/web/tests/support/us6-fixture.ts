@@ -3,6 +3,7 @@ import path from 'node:path';
 import { setTimeout as pause } from 'node:timers/promises';
 import { test as base,expect } from '@playwright/test';
 import { identityDatabase } from '../../../api/tests/support/identity-database.js';
+import { truncateFixtureTables } from '../../../api/tests/support/fixture-truncate.js';
 import { us1Http } from '../../../api/tests/support/us1-http.js';
 import { repositoryRoot } from '../../../api/src/infrastructure/config/environment.js';
 import { assertMailpitAvailable } from '../../../api/tests/support/mailpit.js';
@@ -29,9 +30,9 @@ async function bootstrapEnvironment(){
     return {context,async reset(){
       if(!/^t_[a-z0-9_]+$/.test(context.environment.databaseSchema))throw new Error('Restablecimiento de ensayo no permitido.');
       await scheduler.beforeApplicationShutdown();
-      // La migración aditiva incorpora FK a User: limpiar también sus tablas en este
-      // esquema ficticio, con lista explícita y sin CASCADE sobre datos compartidos.
-      await context.isolated.ownerQuery(`TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent",
+      // Incluir solo dependientes vacías del mismo esquema; rechazar filas de negocio
+      // y conservar coordinadoras, sin CASCADE ni limpieza de datos compartidos.
+      await truncateFixtureTables(context, `TRUNCATE "AcademicSlot","AcademicGroup","AcademicCourse","AcademicCommand","AcademicAuditEvent",
         "SystemState","AuditEvent","MailDelivery","ActionToken","Session","User","RateEvent","RateBucket";
         INSERT INTO "SystemState" (id) VALUES (1);`);
       scheduler.onApplicationBootstrap();
