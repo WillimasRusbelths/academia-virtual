@@ -9,6 +9,12 @@ autorización vigente en solicitudes directas, vencimiento y control del emisor
 anterior. La [viabilidad inicial](video-feasibility.md) y la
 [investigación](research.md) no acreditan una integración que lo cumpla.
 
+La [propuesta de alcance del ensayo](evidence/video-scope-proposal.md) ya contiene
+texto concreto para principio VIII, FR/SC y escenarios afectados, e impacto en
+plan/contratos/tareas. Está **preparada, no adoptada**: la autorización para redactar
+y corregir no se registra como aprobación de una enmienda aún no revisada.
+Esta preparación no cambia el estado NO PASADO de G-V005 ni habilita el adaptador.
+
 ## Opciones revisables
 
 **Aclaración V04 del responsable**: YouTube será la integración de prueba del MVP;

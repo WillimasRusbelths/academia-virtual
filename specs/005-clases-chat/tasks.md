@@ -1,12 +1,20 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado inicial**: 0/86 ejecutadas. Crear esta lista no implementa la aplicación.
+**Estado**: 0/86 completadas. Crear esta lista no implementa la aplicación.
 IDs locales a 005. [Spec](spec.md), [plan parcial](plan.md),
 [investigación](research.md), [modelo](data-model.md),
 [HTTP](contracts/api.md), [Socket.IO](contracts/realtime.md),
 [integración](contracts/integration.md), [UI](contracts/ui.md),
 [guía](quickstart.md). Constitución 1.2.1; V01–V04 conservadas.
+
+**Correcciones posteriores al análisis**: índice actual en
+[tasks-coverage.json](evidence/tasks-coverage.json), con referencias abreviadas
+expandidas; [propuesta de alcance audiovisual](evidence/video-scope-proposal.md)
+preparada para revisión, todavía no adoptada. El índice original se conserva como
+checkpoint histórico, con su limitación documentada. Ninguna tarea está completada;
+la propuesta adelanta documentación de T034, que conserva sus prerrequisitos y
+queda pendiente del registro de decisión, sin dar por ejecutada su aceptación.
 
 ## Reglas y límites de ejecución
 
@@ -164,9 +172,9 @@ avanzar sin T039; cierre integral no. D10/D13 requieren decisiones/entorno reale
 - [ ] T081 Completar recorrido humano de emisión real y acceso permitido/denegado con evidencia en `specs/005-clases-chat/evidence/human-video.md`; separar reproducción YouTube y protección, no cerrar SC-007 completo sin su recorrido ni SC-003 sin T039. FR-008/009/021/023; SC-003/007. Tras T037–T038 y participantes/entorno disponibles; aceptación integral bloqueada por T039.
 - [ ] T082 Acordar y verificar custodia/copia/clave/destino externo/retención/RPO/RTO y recuperación real de la versión de clases en `specs/005-clases-chat/operation.md`, enlazando pendientes D13 previos; protocolo no es operación ejecutada. FR-022/023; SC-006. Tras T078 y decisiones/equipo disponibles; antes de demo persistente o publicación.
 - [ ] T083 Preparar escenario de chat con cliente Socket.IO real y lecturas HTTP, alinear D10 con rúbrica y ejecutar solo en destino/generador autorizados en `load-tests/classes/scenario.ts` y `specs/005-clases-chat/capacity.md`; población≥15.000, meta2.500 activos con mezcla/ventana/conexiones/mensajes/reproducciones/latencia/errores/recursos/costo separados; pagos simulados y video real aparte, sin contratar o afirmar capacidad desde ensayo local. FR-023; SC-008. Tras T079, rúbrica/infraestructura autorizada disponibles; aprobación combinada sigue en 007.
-- [ ] T084 Sincronizar estado actual en `specs/005-clases-chat/spec.md`, `specs/005-clases-chat/plan.md`, `specs/005-clases-chat/quickstart.md`, `specs/005-clases-chat/verification.md` y `docs/planificacion/hoja-ruta-005-007.md`, conservando evidencias previas, V04/Cloudflare fuera del MVP, resultados parciales y tareas bloqueadas; no reescribir specs cerrados o cerrar pendientes heredados. FR-023. Tras T076–T080; reflejar T082–T083 pendientes si faltan.
+- [ ] T084 Sincronizar estado actual en `specs/005-clases-chat/spec.md`, `specs/005-clases-chat/plan.md`, `specs/005-clases-chat/quickstart.md`, `specs/005-clases-chat/verification.md` y `docs/planificacion/hoja-ruta-005-007.md`, conservando evidencias previas, V04/Cloudflare fuera del MVP, resultados parciales y tareas bloqueadas; no reescribir specs cerrados o cerrar pendientes heredados. FR-023. Tras T076–T079; registrar T080–T083 como pendientes si faltan personas/acuerdos/entorno, sin esperar su ejecución para actualizar documentos.
 - [ ] T085 Elaborar revisión preliminar FR/SC/24 escenarios y límites pendientes en `specs/005-clases-chat/evidence/final-acceptance.md`; registrar implementado/probado/simulado/no observado/bloqueado, YouTube versus protección y tareas sin ejecutar; puede entregarse con brechas, sin llamar completo al spec. FR-023; SC-001–SC-008. Tras T084.
-- [ ] T086 Cerrar aceptación integral en `specs/005-clases-chat/evidence/final-acceptance.md` solo con evidencia de todos los requisitos/escenarios vigentes, T040/T078/T081–T083 y D13/D10 aplicables resueltos; no marcar completada por presupuesto de tiempo, reproducción de prueba, mocks o checklist. **BLOQUEADA** mientras cualquiera de esas condiciones falte. FR-001–FR-023; SC-001–SC-008. Tras T085 y todas las condiciones anteriores.
+- [ ] T086 Cerrar aceptación integral en `specs/005-clases-chat/evidence/final-acceptance.md` solo con evidencia de todos los requisitos/escenarios vigentes, T040/T078/T080–T083 y D13/D10 aplicables resueltos; no marcar completada por presupuesto de tiempo, reproducción de prueba, mocks o checklist. **BLOQUEADA** mientras cualquiera de esas condiciones falte. FR-001–FR-023; SC-001–SC-008. Tras T040/T078/T080–T085 y todas las condiciones anteriores.
 
 ## Dependencias y orden de entrega
 
@@ -176,9 +184,9 @@ T001 → T002 → {T003,T004} → T005–T009
 → US1 T018–T029 → US2 consulta T030–T033
                   ├→ T034 → T036 → T037 → T038 (ensayo separado)
                   │    └→ T035 [BLOQUEADA] → T039 [BLOQUEADA] → T040 [BLOQUEADA]
-                  └→ US3 T041–T062 → US4 T063–T074 → T075–T080/T084–T085
-                                                           ├→ T081/T082/T083
-                                                           └→ T086 [BLOQUEADA]
+                  └→ US3 T041–T062 → US4 T063–T074 → T075–T079 → T084–T085
+                                                           ├→ T080–T083 (condiciones externas)
+                                                           └→ T086 [BLOQUEADA; exige también T080–T083]
 ```
 
 Las dependencias «Tras» de cada tarea son la autoridad cuando el dibujo resume

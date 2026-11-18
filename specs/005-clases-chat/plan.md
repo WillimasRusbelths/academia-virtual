@@ -21,6 +21,10 @@ esta previsión no implementa Cloudflare ni acredita que satisfaga los controles
 Prueba de reproducción YouTube y aceptación de video protegido se registran por
 separado; V04 no es una enmienda implícita de FR-008/009 o principio VIII.
 
+Se preparó una [propuesta concreta de ajuste del ensayo](evidence/video-scope-proposal.md)
+para revisar texto anterior/propuesto, impacto y aprobación. No se adoptó ni
+modificó la constitución. G-V005 sigue no pasado; el diseño independiente permanece.
+
 ## Summary
 
 Añadir `classes` al monolito: sesiones manuales por grupo, una sola en curso;

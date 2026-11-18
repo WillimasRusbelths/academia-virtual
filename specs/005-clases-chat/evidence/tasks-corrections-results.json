@@ -1,0 +1,373 @@
+{
+  "date": "2026-11-17",
+  "timezone": "America/Lima",
+  "baseline": "460768330babb5f0a1f077f221d8f6ad8883633c",
+  "status": "I1_I2_CORREGIDOS_C1_PROPUESTA_PENDIENTE",
+  "findings": {
+    "I1": "CORREGIDO",
+    "I2": "CORREGIDO",
+    "C1": "PROPUESTA_PREPARADA_NO_ADOPTADA"
+  },
+  "implementationPerformed": false,
+  "productTestsExecuted": false,
+  "constitutionAmended": false,
+  "videoGate": "NO_PASADO",
+  "totalTasks": 86,
+  "completedTasks": 0,
+  "proposal": "specs/005-clases-chat/evidence/video-scope-proposal.md",
+  "restoredAssociations": {
+    "FR-001": [],
+    "FR-002": [],
+    "FR-003": [
+      "T006",
+      "T007",
+      "T019",
+      "T022",
+      "T028"
+    ],
+    "FR-004": [],
+    "FR-005": [
+      "T009",
+      "T010",
+      "T011"
+    ],
+    "FR-006": [
+      "T009",
+      "T010",
+      "T011"
+    ],
+    "FR-007": [
+      "T014",
+      "T060"
+    ],
+    "FR-008": [
+      "T038"
+    ],
+    "FR-009": [
+      "T016",
+      "T033",
+      "T034",
+      "T035",
+      "T036",
+      "T038",
+      "T039",
+      "T081"
+    ],
+    "FR-010": [
+      "T010"
+    ],
+    "FR-011": [
+      "T045",
+      "T060"
+    ],
+    "FR-012": [
+      "T006",
+      "T007",
+      "T021",
+      "T060"
+    ],
+    "FR-013": [
+      "T005",
+      "T006",
+      "T007",
+      "T014",
+      "T015",
+      "T019",
+      "T021",
+      "T022",
+      "T023",
+      "T027",
+      "T028",
+      "T060",
+      "T067",
+      "T071"
+    ],
+    "FR-014": [
+      "T044",
+      "T051",
+      "T053",
+      "T055",
+      "T056",
+      "T057",
+      "T060",
+      "T079"
+    ],
+    "FR-015": [
+      "T057",
+      "T061"
+    ],
+    "FR-016": [
+      "T006",
+      "T007",
+      "T058",
+      "T066",
+      "T068",
+      "T071"
+    ],
+    "FR-017": [
+      "T006",
+      "T007",
+      "T009",
+      "T012",
+      "T064",
+      "T065",
+      "T067",
+      "T068",
+      "T070",
+      "T071"
+    ],
+    "FR-018": [
+      "T005",
+      "T007",
+      "T009",
+      "T014",
+      "T015",
+      "T018",
+      "T019",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T027",
+      "T028",
+      "T046",
+      "T060",
+      "T065",
+      "T067"
+    ],
+    "FR-019": [
+      "T005",
+      "T007",
+      "T009",
+      "T015",
+      "T017",
+      "T019",
+      "T023",
+      "T024",
+      "T030",
+      "T031",
+      "T043",
+      "T044",
+      "T047",
+      "T048",
+      "T051",
+      "T052",
+      "T053",
+      "T055",
+      "T064",
+      "T066",
+      "T068",
+      "T070"
+    ],
+    "FR-020": [
+      "T021",
+      "T028",
+      "T046",
+      "T066",
+      "T073"
+    ],
+    "FR-021": [
+      "T017",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T032",
+      "T044",
+      "T049",
+      "T050",
+      "T052",
+      "T053",
+      "T054",
+      "T055",
+      "T056",
+      "T057",
+      "T058",
+      "T059",
+      "T064",
+      "T070",
+      "T072",
+      "T081"
+    ],
+    "FR-022": [
+      "T006",
+      "T007",
+      "T008",
+      "T061"
+    ],
+    "FR-023": [
+      "T002",
+      "T004",
+      "T016",
+      "T033",
+      "T034",
+      "T036",
+      "T037",
+      "T038",
+      "T040",
+      "T059",
+      "T075",
+      "T079",
+      "T080",
+      "T081",
+      "T082"
+    ],
+    "SC-001": [],
+    "SC-002": [
+      "T028",
+      "T029",
+      "T076"
+    ],
+    "SC-003": [
+      "T034",
+      "T038",
+      "T039"
+    ],
+    "SC-004": [
+      "T057",
+      "T076"
+    ],
+    "SC-005": [
+      "T042",
+      "T043",
+      "T059",
+      "T062",
+      "T072",
+      "T076"
+    ],
+    "SC-006": [
+      "T061"
+    ],
+    "SC-007": [
+      "T027",
+      "T034",
+      "T037",
+      "T059",
+      "T072"
+    ],
+    "SC-008": [
+      "T062"
+    ]
+  },
+  "coverageIndex": "specs/005-clases-chat/evidence/tasks-coverage.json",
+  "parserRegressionCases": 10,
+  "validationPassed": true,
+  "checks": [
+    {
+      "name": "regresion-parser-10-casos",
+      "pass": true
+    },
+    {
+      "name": "86-tareas-no-completadas",
+      "pass": true
+    },
+    {
+      "name": "ids-unicos-secuenciales",
+      "pass": true
+    },
+    {
+      "name": "rutas-concretas",
+      "pass": true
+    },
+    {
+      "name": "etiquetas-por-fase",
+      "pass": true
+    },
+    {
+      "name": "dependencias-previas-validas",
+      "pass": true
+    },
+    {
+      "name": "T084-no-espera-humanos",
+      "pass": true
+    },
+    {
+      "name": "T085-permite-preliminar",
+      "pass": true
+    },
+    {
+      "name": "T086-sigue-exigiendo-humanos-y-puertas",
+      "pass": true
+    },
+    {
+      "name": "bloqueos-video-conservados",
+      "pass": true
+    },
+    {
+      "name": "31-requisitos-con-asociacion",
+      "pass": true
+    },
+    {
+      "name": "sin-referencias-desconocidas",
+      "pass": true
+    },
+    {
+      "name": "sin-tareas-huerfanas",
+      "pass": true
+    },
+    {
+      "name": "regresion-FR009-FR017-FR021",
+      "pass": true
+    },
+    {
+      "name": "cuerpo-funcional-spec-vigente-preservado",
+      "pass": true
+    },
+    {
+      "name": "alcance-vigente-4-24-23-8",
+      "pass": true
+    },
+    {
+      "name": "constitucion-y-evidencias-previas-intactas",
+      "pass": true
+    },
+    {
+      "name": "propuesta-no-adoptada",
+      "pass": true
+    },
+    {
+      "name": "cloudflare-fuera-del-mvp",
+      "pass": true
+    },
+    {
+      "name": "puntero-y-rama-005",
+      "pass": true
+    },
+    {
+      "name": "cambios-limitados-a-correccion",
+      "pass": true,
+      "detail": [
+        "specs/005-clases-chat/plan.md",
+        "specs/005-clases-chat/spec.md",
+        "specs/005-clases-chat/tasks.md",
+        "specs/005-clases-chat/video-gate.md",
+        "ops/specs/task-references.mjs",
+        "ops/specs/validate-005-tasks.mjs",
+        "specs/005-clases-chat/evidence/tasks-corrections-report.md",
+        "specs/005-clases-chat/evidence/tasks-corrections-results.json",
+        "specs/005-clases-chat/evidence/tasks-coverage.json",
+        "specs/005-clases-chat/evidence/video-scope-proposal.md"
+      ]
+    },
+    {
+      "name": "indice-actual-coincide",
+      "pass": true
+    },
+    {
+      "name": "enlaces-locales",
+      "pass": true,
+      "detail": {
+        "count": 49,
+        "broken": []
+      }
+    }
+  ],
+  "hashes": {
+    "specs/005-clases-chat/tasks.md": "8c2d3e27ebc0699f7893f72d997604fe174e69aa41c917800d758286dbe28cbb",
+    "specs/005-clases-chat/evidence/video-scope-proposal.md": "f60ff8d73e27aa4bac6bc094ddd34ec06d5c67c5dd96dea39e8200d62015f4c2",
+    "ops/specs/task-references.mjs": "6896e77e0f14fe7b6ad964912a0bbd86efa43dc14c816365053f34b1f00603a2",
+    "ops/specs/validate-005-tasks.mjs": "4f637e88ce64f2966e61a69b9d99c7d17467dd9109d3b52b3c25d6c7ad152132",
+    "specs/005-clases-chat/evidence/tasks-generation-results.json": "4d2f6330ed2bb71311e24249de8630330f9bf92d68044033954c3704cfb5c6c5"
+  }
+}

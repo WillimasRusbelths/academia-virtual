@@ -19,6 +19,11 @@ protegido demostrado. Se conserva el alcance funcional que sigue.
 todavía sin ejecutar. La generación no resuelve G-V005 ni aprueba implementación;
 el análisis de consistencia se realiza después de generar la lista.
 
+**Correcciones posteriores**: [propuesta del ensayo YouTube](evidence/video-scope-proposal.md)
+preparada para revisión, todavía no adoptada; [índice de tareas corregido](evidence/tasks-coverage.json).
+Los requisitos y criterios que siguen conservan su texto vigente hasta decidir
+expresamente la propuesta; Cloudflare continúa fuera del MVP.
+
 **Cierre de specify — 2026-11-17**: alcance documental de 005 terminado en esta
 pasada: cuatro historias, 24 escenarios, 23 FR y ocho SC. Se conserva V01–V03 y
 el alcance funcional ya acordado. La secuencia posterior queda en la
