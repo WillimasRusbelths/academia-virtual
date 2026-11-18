@@ -1,13 +1,19 @@
 # Especificación: clases en vivo y chat por grupo — 005
 
-**Feature Branch**: trabajo en `feat/003-reservas-ordenes-matricula`; no se crea
-ni cambia de rama. El directorio 005 identifica este incremento.
+**Feature Branch**: `feat/005-clases-chat`, creada desde `origin/main` después del
+merge del PR #5. La especificación inicial se redactó en
+`feat/003-reservas-ordenes-matricula`; se conserva su evidencia histórica.
 
 **Created**: 2026-11-17, America/Lima.
 
 **Status**: Especificado y aclarado en tres decisiones de alcance; pendiente de
 plan, tareas, implementación y verificación. Viabilidad del video protegido
 D07/D08 pendiente; esta especificación no acredita reproducción o protección.
+
+**Actualización de planificación — 2026-11-17**: [plan parcial](plan.md), modelo
+y contratos de sesiones/chat redactados; todavía sin tareas o código. El flujo
+plan completo sigue pendiente por [G-V005](video-gate.md), sin mecanismo de video
+protegido demostrado. Se conserva el alcance funcional que sigue.
 
 **Cierre de specify — 2026-11-17**: alcance documental de 005 terminado en esta
 pasada: cuatro historias, 24 escenarios, 23 FR y ocho SC. Se conserva V01–V03 y

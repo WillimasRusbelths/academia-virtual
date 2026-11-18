@@ -1,0 +1,203 @@
+{
+  "date": "2026-11-17",
+  "timezone": "America/Lima",
+  "branch": "feat/005-clases-chat",
+  "base": "c24dcdbe0cac72d85fc17585615240188c8dee96",
+  "documentationCheckpoint": "b674c7f8de81c4c33ebdaf60820a637dbca5edc6",
+  "scope": "plan parcial de sesiones/chat; video bloqueado",
+  "workflowStatus": "PARTIAL_VIDEO_GATE_ERROR",
+  "videoGate": "NO_PASADO",
+  "implementationPerformed": false,
+  "testsExecuted": false,
+  "infrastructurePurchased": false,
+  "productionPublished": false,
+  "counts": {
+    "stories": 4,
+    "scenarios": 24,
+    "requirements": 23,
+    "criteria": 8
+  },
+  "checks": [
+    {
+      "name": "rama005",
+      "pass": true,
+      "detail": "feat/005-clases-chat"
+    },
+    {
+      "name": "base-merge-presente",
+      "pass": true
+    },
+    {
+      "name": "puntero005",
+      "pass": true
+    },
+    {
+      "name": "sin-hooks",
+      "pass": true
+    },
+    {
+      "name": "sin-tasks-prematuras",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/plan.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/research.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/data-model.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/video-gate.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/contracts/api.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/contracts/realtime.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/contracts/integration.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/contracts/ui.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/quickstart.md",
+      "pass": true
+    },
+    {
+      "name": "artefacto:specs/005-clases-chat/evidence/planning-review.md",
+      "pass": true
+    },
+    {
+      "name": "cuerpo-funcional-spec-inmutable",
+      "pass": true
+    },
+    {
+      "name": "alcance-4-24-23-8",
+      "pass": true,
+      "detail": {
+        "stories": 4,
+        "scenarios": 24,
+        "requirements": 23,
+        "criteria": 8
+      }
+    },
+    {
+      "name": "solo-documentos-autorizados",
+      "pass": true,
+      "detail": [
+        "docs/planificacion/hoja-ruta-005-007.md",
+        "docs/planificacion/revision-paneles-006.md",
+        "specs/005-clases-chat/checklists/requirements.md",
+        "specs/005-clases-chat/evidence/scope-roadmap-report.md",
+        "specs/005-clases-chat/evidence/scope-roadmap-results.json",
+        "specs/005-clases-chat/spec.md",
+        "specs/005-clases-chat/contracts/api.md",
+        "specs/005-clases-chat/contracts/integration.md",
+        "specs/005-clases-chat/contracts/realtime.md",
+        "specs/005-clases-chat/contracts/ui.md",
+        "specs/005-clases-chat/data-model.md",
+        "specs/005-clases-chat/evidence/planning-review.json",
+        "specs/005-clases-chat/evidence/planning-review.md",
+        "specs/005-clases-chat/plan.md",
+        "specs/005-clases-chat/quickstart.md",
+        "specs/005-clases-chat/research.md",
+        "specs/005-clases-chat/video-gate.md"
+      ]
+    },
+    {
+      "name": "sin-rama006007",
+      "pass": true
+    },
+    {
+      "name": "sin-directorios006007",
+      "pass": true
+    },
+    {
+      "name": "enlaces-locales",
+      "pass": true,
+      "detail": {
+        "count": 39,
+        "broken": []
+      }
+    },
+    {
+      "name": "plan-explicitamente-parcial",
+      "pass": true
+    },
+    {
+      "name": "video-no-adoptado",
+      "pass": true
+    },
+    {
+      "name": "tickets-no-renuevan",
+      "pass": true
+    },
+    {
+      "name": "historial-no-avanza-cursor",
+      "pass": true
+    },
+    {
+      "name": "checkpoint-inmutable:specs/005-clases-chat/evidence/specification-results.json",
+      "pass": true
+    },
+    {
+      "name": "checkpoint-inmutable:specs/005-clases-chat/evidence/scope-roadmap-results.json",
+      "pass": true
+    }
+  ],
+  "validationPassed": true,
+  "artifacts": [
+    {
+      "path": "specs/005-clases-chat/plan.md",
+      "sha256": "4c5f87f11f76d4dd5836925e3cc597fa426093fdafdf25eb0e6f7933329c7a38"
+    },
+    {
+      "path": "specs/005-clases-chat/research.md",
+      "sha256": "e066387e2d318b842ca5ce2d4aa04becac38b68714bdcffc19b2ea6f9a9510fb"
+    },
+    {
+      "path": "specs/005-clases-chat/data-model.md",
+      "sha256": "ad230a411de9f88ea68b13b3631481face591b79395ecef804d5be278f063d3a"
+    },
+    {
+      "path": "specs/005-clases-chat/video-gate.md",
+      "sha256": "0916623761b451b65ed785cc2eb8ef5d9586da70e29072a472b7b94de01aa013"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/api.md",
+      "sha256": "1471096ad51c2cbdb2dc0bb7bab5d60c1a90dfa9430f3022bf1b3f39f20b8b7e"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/realtime.md",
+      "sha256": "3e976f809c65dce1900e9f53d62755932500985fba47d64a2886385dc7775187"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/integration.md",
+      "sha256": "53449d0ff1c1a2c8ce628ce0ac3a0e197760d26a61acb721b82ceed0b46e545f"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/ui.md",
+      "sha256": "37fda9c5f98174d34b423b06e77431bf64982842869c4effd47d48f88642b10e"
+    },
+    {
+      "path": "specs/005-clases-chat/quickstart.md",
+      "sha256": "c13824d311da994cd05672a8378d98743bc844e5f6885902d3e825f5b15e9e66"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/planning-review.md",
+      "sha256": "40623e94278cba16077d4bf9f448e341061cc2a055be719d5988ce84ccb7f5b3"
+    }
+  ]
+}
