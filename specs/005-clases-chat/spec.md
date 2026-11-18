@@ -11,9 +11,13 @@ plan, tareas, implementación y verificación. Viabilidad del video protegido
 D07/D08 pendiente; esta especificación no acredita reproducción o protección.
 
 **Actualización de planificación — 2026-11-17**: [plan parcial](plan.md), modelo
-y contratos de sesiones/chat redactados; todavía sin tareas o código. El flujo
+y contratos de sesiones/chat redactados en ese bloque, sin código. El flujo
 plan completo sigue pendiente por [G-V005](video-gate.md), sin mecanismo de video
 protegido demostrado. Se conserva el alcance funcional que sigue.
+
+**Bloque posterior de tareas — 2026-11-17**: [tasks.md](tasks.md) enumera T001–T086,
+todavía sin ejecutar. La generación no resuelve G-V005 ni aprueba implementación;
+el análisis de consistencia se realiza después de generar la lista.
 
 **Cierre de specify — 2026-11-17**: alcance documental de 005 terminado en esta
 pasada: cuatro historias, 24 escenarios, 23 FR y ocho SC. Se conserva V01–V03 y

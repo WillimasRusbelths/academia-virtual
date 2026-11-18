@@ -99,7 +99,9 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-`tasks.md` corresponde al siguiente bloque; este plan no lo genera.
+La lista posterior [tasks.md](tasks.md) organiza T001–T086, todavía sin ejecutar.
+Se generó después de este diseño; no convierte el plan parcial en aprobación
+integral ni resuelve G-V005. El análisis posterior debe comprobar sus dependencias.
 
 ### Source Code (repository root)
 
