@@ -1,4 +1,5 @@
-import { AuthorizationFailure, permits, type SessionPermission, type SessionActor,
+import { AuthorizationFailure, permits, MATERIALS_MANAGEMENT_POLICY, MATERIALS_READ_POLICY,
+  CLASSES_MANAGEMENT_POLICY, CLASSES_PARTICIPATION_POLICY, type SessionPermission, type SessionActor,
   type SessionRepository } from '../public/session.js';
 
 export const SESSION_LOOKUP = Symbol('SessionLookup');
@@ -10,11 +11,13 @@ export class SessionLookup {
   async authorize(secret: string | null, permission: SessionPermission): Promise<SessionActor> {
     const actor = secret === null ? null : await this.sessions.lookup(secret);
     if (!actor) throw new AuthorizationFailure('AUTH_REQUIRED');
+    // Match only the four explicit tuples. Compare from the complete constant,
+    // so sparse arrays, mixed domains and arbitrary OR-policies cannot pass.
+    const policy = [MATERIALS_MANAGEMENT_POLICY, MATERIALS_READ_POLICY, CLASSES_MANAGEMENT_POLICY, CLASSES_PARTICIPATION_POLICY]
+      .find(expected => Array.isArray(permission) && permission.length === expected.length
+        && expected.every((required, index) => permission[index] === required));
     const allowed = typeof permission === 'string' ? permits(actor.role, permission)
-      : Array.isArray(permission) && (permission.length === 2 || (permission.length === 3 && permission[2] === 'materials:read-enrolled')) && permission[0] === 'materials:manage-all'
-        && permission[1] === 'materials:manage-own'
-        && (permits(actor.role, 'materials:manage-all') || permits(actor.role, 'materials:manage-own')
-          || (permission.length === 3 && permits(actor.role, 'materials:read-enrolled')));
+      : policy?.some(required => permits(actor.role, required)) === true;
     if (!allowed) throw new AuthorizationFailure('FORBIDDEN');
     return actor;
   }

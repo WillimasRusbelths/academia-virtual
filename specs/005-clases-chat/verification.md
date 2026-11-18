@@ -18,6 +18,13 @@ Avance T008–T009: fixtures aisladas verificadas y suite de autoridad escrita.
 de los casos aún sin coordinador/composición real (T014/T017). Ninguna fila
 de permisos/carreras o FR/SC se aprueba por escribir esas pruebas.
 
+Avance T010–T013: matriz cerrada de permisos, sesiones PostgreSQL y participantes
+de oferta/matrícula/autores verificados de forma aislada. [Evidencia](evidence/t010-t013.md).
+La vigencia del participante usa el token del titular de la transacción de ensayo;
+no sustituye la matriz de autoridad integral del coordinador pendiente. Autores
+solo proyecta referencias autorizadas, sin roster o endpoint global nuevo.
+Las 24 filas de aceptación y sus FR/SC no se completan por este bloque.
+
 ## Estados y evidencia
 
 Cada fila empieza PENDIENTE. Cambiar a PROBADO solo con commit, configuración

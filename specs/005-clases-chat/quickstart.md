@@ -6,9 +6,13 @@ multimedia externa. [Adopción](evidence/video-scope-adoption.md).
 T008–T009 añaden fixtures y pruebas de autoridad previas al coordinador;
 [evidencia y límites](evidence/t008-t009.md). La autoridad aún no está verificada.
 
+T010–T013 implementan permisos y participantes de oferta, matrícula y autores:
+[evidencia](evidence/t010-t013.md). Aún falta la autorización completa por recurso
+y su matriz T009, que se ejecutará con T014/T017.
+
 T001–T004 prepararon entorno/dependencias y [matriz](verification.md).
 T005–T007 implementan contratos/puertos, pruebas SQL y migración 0010:
-[evidencia](evidence/t005-t007.md). Aún no hay gestión/chat, fixtures compartidas
+[evidencia](evidence/t005-t007.md). Las fixtures compartidas están verificadas; aún no hay gestión/chat
 o transporte de clases. La persistencia no acredita reproducción real.
 
 ## Preparación segura

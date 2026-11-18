@@ -1,10 +1,12 @@
 # Integración, autoridad y orden transaccional — 005
 
-2026-11-17. Diseño pendiente de implementación y pruebas.
+2026-11-18. Fronteras de autorización/oferta/matrícula/autores implementadas y
+probadas en T010–T013 ([evidencia](../evidence/t010-t013.md)). El protocolo del
+coordinador y la composición siguen pendientes de T014/T017.
 
 ## Fronteras públicas
 
-| Propietario | Contrato propuesto / autoridad |
+| Propietario | Contrato / autoridad |
 | --- | --- |
 | Autorización | `classes:manage-all` ADMIN; `classes:manage-own` TEACHER; `classes:participate-enrolled` STUDENT; denegación por defecto |
 | Oferta | `public/classes-access.ts`: descubrir grupo/curso/docente, snapshots mínimos/estado/elegibilidad, grupos gestionables |
@@ -19,7 +21,11 @@ La participación general nunca basta: recurso/estado/matrícula se comprueban e
 transacción. API de usuarios mínima para autores es una extensión técnica explícita
 con prueba de privacidad; no crear consulta de cuentas o roster global en el chat.
 
-AppModule conecta adaptadores de propietarios al mismo PoolClient del coordinador.
+AppModule deberá conectar estos adaptadores al mismo PoolClient del coordinador.
+La proyección de autores recibe un scope activo que valida los IDs referenciados
+por contenido ya autorizado; no expone correo, estado privado o búsqueda global.
+El participante de matrícula puede validar el derecho original de un alumno objetivo
+con hasAccess; comprobar su cuenta/rol y clase/grupo sigue a cargo del coordinador.
 Clases no consulta tablas ajenas ni importa infrastructure ajena. Descubrimiento
 de matrícula no autoriza; usar sus fechas originales y condiciones de 003.
 No nested BEGIN, coordinadores anidados o presupuesto adicional de retry.

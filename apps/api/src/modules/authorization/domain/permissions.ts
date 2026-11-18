@@ -4,7 +4,8 @@ export type Permission = 'profile:read' | 'users:manage'
   | 'academic:manage' | 'academic:read-published' | 'academic:read-own'
   | 'enrollment:price-manage' | 'enrollment:reserve-own' | 'enrollment:pay-own'
   | 'enrollment:read-own' | 'enrollment:read-all' | 'enrollment:incident-follow-up'
-  | 'materials:manage-all' | 'materials:manage-own' | 'materials:read-enrolled';
+  | 'materials:manage-all' | 'materials:manage-own' | 'materials:read-enrolled'
+  | 'classes:manage-all' | 'classes:manage-own' | 'classes:participate-enrolled';
 
 /** Matriz cerrada del backend; pertenencia/visibilidad se filtran además en oferta. */
 export function permits(role: Role, permission: Permission): boolean {
@@ -20,5 +21,8 @@ export function permits(role: Role, permission: Permission): boolean {
   if (permission === 'materials:manage-all') return role === 'ADMIN';
   if (permission === 'materials:manage-own') return role === 'TEACHER';
   if (permission === 'materials:read-enrolled') return role === 'STUDENT';
+  if (permission === 'classes:manage-all') return role === 'ADMIN';
+  if (permission === 'classes:manage-own') return role === 'TEACHER';
+  if (permission === 'classes:participate-enrolled') return role === 'STUDENT';
   return false;
 }

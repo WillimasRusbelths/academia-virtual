@@ -7,7 +7,8 @@ merge del PR #5. La especificación inicial se redactó en
 **Created**: 2026-11-17, America/Lima.
 
 **Status**: Alcance del ensayo MVP aprobado por el responsable el 2026-11-17,
-constitución 2.0.0. T001–T009 completadas: contratos, persistencia, fixtures y escritura de pruebas;
+constitución 2.0.0. T001–T013 completadas: contratos, persistencia, fixtures, permisos y participantes
+([evidencia T010–T013](evidence/t010-t013.md));
 la autoridad sigue pendiente de ejecución funcional con T014/T017
 ([evidencia T008–T009](evidence/t008-t009.md));
 gestión/chat y reproducción real pendientes. [Evidencia](evidence/t005-t007.md).

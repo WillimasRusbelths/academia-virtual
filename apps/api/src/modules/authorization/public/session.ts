@@ -5,7 +5,10 @@ export const ACCESS_POLICY='academia.access-policy';
 /** Closed alternative for shared manager routes; resource authority is checked again in the transaction. */
 export const MATERIALS_MANAGEMENT_POLICY = Object.freeze(['materials:manage-all', 'materials:manage-own'] as const);
 export const MATERIALS_READ_POLICY = Object.freeze([...MATERIALS_MANAGEMENT_POLICY, 'materials:read-enrolled'] as const);
-export type SessionPermission = Permission | typeof MATERIALS_MANAGEMENT_POLICY | typeof MATERIALS_READ_POLICY;
+export const CLASSES_MANAGEMENT_POLICY = Object.freeze(['classes:manage-all', 'classes:manage-own'] as const);
+export const CLASSES_PARTICIPATION_POLICY = Object.freeze([...CLASSES_MANAGEMENT_POLICY, 'classes:participate-enrolled'] as const);
+export type SessionPermission = Permission | typeof MATERIALS_MANAGEMENT_POLICY | typeof MATERIALS_READ_POLICY
+  | typeof CLASSES_MANAGEMENT_POLICY | typeof CLASSES_PARTICIPATION_POLICY;
 
 /** Datos internos de autorización, nunca una vista pública ni una credencial del cliente. */
 export interface SessionActor {
