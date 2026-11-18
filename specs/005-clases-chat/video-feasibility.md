@@ -1,5 +1,9 @@
 # Viabilidad inicial de video — 005 / D07–D08
 
+**Registro inicial histórico.** V05 y constitución 2.0.0 adoptaron después el
+[ensayo YouTube con límite externo](evidence/video-scope-adoption.md). El análisis
+original que sigue no se reescribe como resultado de protección o reproducción.
+
 2026-11-17, America/Lima. **Revisión documental, sin emisión o prueba de red real.**
 Este documento acompaña al [spec](spec.md); no sustituye el plan ni acredita RF16.
 

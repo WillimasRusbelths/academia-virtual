@@ -137,29 +137,33 @@ automáticamente. Sin purga o retención implícita; medir crecimiento del regis
 **Alternativas**: memoria como fuente del chat pierde confirmados; otra base/broker
 añade coordinación sin evidencia de necesidad. D13 externo sigue pendiente.
 
-## R005-09 — video, investigación sin decisión sustitutoria
+## R005-09 — ensayo YouTube aprobado en V05
 
-**Decisión**: **G-V005 NO PASADO**, adaptador deshabilitado. DEC01 continúa vigente;
-no hay contrato final de emisión/segmentos o aprobación de implementación real.
-Sesiones/chat se diseñan como alcance independiente; plan completo sigue parcial.
+**Decisión**: constitución 2.0.0 y aprobación del responsable permiten el ensayo
+YouTube Live + OBS con controles propios y limitación externa declarada.
+Cloudflare queda fuera del MVP. [Adopción](evidence/video-scope-adoption.md) y
+[contrato](contracts/video.md). No hay implementación, prueba real o aceptación
+académica acreditadas por actualizar el diseño.
 
-**Razón/fuentes**: la ayuda de YouTube permite ver/compartir videos ocultos a quien
-posea enlace. [Privacidad oficial](https://support.google.com/youtube/answer/157177?hl=es).
-IFrame API documenta reproducción/eventos, no autorización por matrícula en cada
-entrega. [API oficial](https://developers.google.com/youtube/iframe_api_reference).
-Inferencia limitada: iframe oculto detrás de login no cumple FR-008; no se afirma
-haber probado todas las opciones de YouTube.
+**Razón**: la referencia YouTube puede compartirse; el proveedor no se presenta
+como autorizado por matrícula. La revisión inicial era incompatible con el
+criterio anterior y se conserva como evidencia histórica. El cambio fue aprobado
+explícitamente, no por inferir protección de un enlace oculto.
+[Privacidad oficial](https://support.google.com/youtube/answer/157177?hl=es).
 
-**Alternativas condicionales**: distribuidor externo con autorización vigente en
-cada entrega, o SRS/HLS privado con control propio. Ambas requieren revisar DEC01
-y medir costo. SRS genera HLS y tiene callbacks; `on_hls` notifica generación,
-no autoriza cada descarga. [HLS SRS](https://ossrs.net/lts/en-us/docs/v6/doc/hls),
-[callbacks SRS](https://ossrs.net/lts/en-us/docs/v6/doc/http-callback).
-Nginx `auth_request` permite subsolicitud de autorización, pero no prueba que la
-imagen/proxy actuales lo incluyan o que el origen esté aislado.
-[Módulo oficial](https://nginx.org/en/docs/http/ngx_http_auth_request_module.html).
-Validar solo `on_publish` no corta emisión abierta de un docente revocado.
+**Diseño**: ID YOUTUBE_DEMO validado, fila de referencia versionada y ledger común;
+GET de reproducción propio solo entrega ID en LIVE y con permiso actual.
+Player usa IFrame API oficial y origen exacto, sin relaying de video o credenciales
+YouTube en el servidor. Los eventos de player distinguen reproducción observada
+de configuración; su carga/iframe no acredita señal. API own no visita URLs del cliente.
+[IFrame API](https://developers.google.com/youtube/iframe_api_reference),
+[parámetros](https://developers.google.com/youtube/player_parameters).
 
-**Pendiente real, no resuelto por investigación**: mecanismo/proveedor compatible
-y prueba temprana de [G-V005](video-gate.md). Reducir protección exigiría enmienda;
-no se propone adoptarla. D07/D08/D10/D13 permanecen abiertos con su alcance propio.
+**Alternativas**: privacy-enhanced embed puede evaluarse después; el ensayo usa
+el origen oficial www.youtube.com con allowlist CSP explícita y referrerPolicy
+de origen para iframe. No sustituir por scraping/proxy si el proveedor rechaza
+embedding. Un gestor externo o SRS/HLS requieren otro incremento, no este MVP.
+
+**Pendientes**: ejecución real de G-V005, observación humana, D10/D13 y validación
+del profesor si el cambio afecta evaluación. La protección futura completa sigue
+exigiendo entrega directa/vencida autorizada antes de anunciarse como tal.

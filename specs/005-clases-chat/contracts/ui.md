@@ -31,9 +31,13 @@ solo por timeout. Recurso actualizado no pierde atribución original.
 
 Separar estado de clase, transporte de chat y reproducción. Estados vacío/cargando,
 PREPARED, LIVE, FINISHED, no habilitado, esperando emisión, desconexión y error no se
-deducen unos de otros. Mientras G-V005 esté pendiente: video no habilitado, sin URL
-o simulación presentada como señal. Espera/señal/reproductor reales solo se completan
-después del contrato de video; su aceptación sigue bloqueada.
+deducen unos de otros. Referencia y player del ensayo siguen [contrato](video.md):
+gestor actual asocia ID sin secretos, alumno obtiene ID solo en LIVE vigente.
+Aviso visible de enlace compartible y prueba YouTube. La configuración no confirma
+señal; eventos del player y observación real distinguen reproducción/pausa/fallo.
+Al perder autoridad o recibir cierre/cambio de referencia, destruir iframe y
+reautorizar; sin reutilizar callbacks de otra generación. Emisión/detención en
+OBS/YouTube son manuales. No prometer corte del enlace externo.
 
 ## Chat, recuperación y moderación
 

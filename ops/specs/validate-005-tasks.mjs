@@ -8,7 +8,7 @@ import {extractRequirementReferences} from './task-references.mjs';
 const write = process.argv.includes('--write');
 if (process.argv.slice(2).some(arg => arg !== '--write')) throw new Error('Uso: node ops/specs/validate-005-tasks.mjs [--write]');
 const dir = 'specs/005-clases-chat/';
-const base = '460768330babb5f0a1f077f221d8f6ad8883633c';
+const base = '2486034d6be22fd60aad3cc740f7b4599a15aa9b';
 const read = file => fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
 const git = (...args) => execFileSync('git', args, {encoding: 'utf8', windowsHide: true}).trim();
 const checks = [];
@@ -59,7 +59,9 @@ check('T084-no-espera-humanos', ['T076', 'T077', 'T078', 'T079'].every(id => dep
   && !['T080', 'T081', 'T082', 'T083'].some(id => deps('T084').includes(id)));
 check('T085-permite-preliminar', deps('T085').length === 1 && deps('T085')[0] === 'T084');
 check('T086-sigue-exigiendo-humanos-y-puertas', ['T040', 'T078', 'T080', 'T081', 'T082', 'T083', 'T084', 'T085'].every(id => deps('T086').includes(id)));
-check('bloqueos-video-conservados', ['T035', 'T039', 'T040', 'T086'].every(id => tasks.find(task => task.id === id)?.text.includes('BLOQUEADA')));
+check('ensayo-sin-bloqueo-de-proteccion-externa', !['T035', 'T039', 'T040'].some(id => tasks.find(task => task.id === id)?.text.includes('BLOQUEADA'))
+  && tasks.find(task => task.id === 'T039').text.includes('PENDIENTE EXTERNO')
+  && tasks.find(task => task.id === 'T086').text.includes('PENDIENTE DE EVIDENCIA'));
 const byRequirement = Object.fromEntries(requirements.map(key => [key, tasks.filter(task => task.references.includes(key)).map(task => task.id)]));
 check('31-requisitos-con-asociacion', requirements.length === 31 && Object.values(byRequirement).every(list => list.length));
 check('sin-referencias-desconocidas', tasks.every(task => task.references.every(key => requirements.includes(key))));
@@ -67,24 +69,48 @@ check('sin-tareas-huerfanas', tasks.every(task => task.references.some(key => ke
 check('regresion-FR009-FR017-FR021', byRequirement['FR-009'].includes('T039')
   && byRequirement['FR-017'].includes('T067') && byRequirement['FR-021'].includes('T025'));
 const priorSpec = git('show', base + ':' + dir + 'spec.md').replace(/\r\n/g, '\n');
-check('cuerpo-funcional-spec-vigente-preservado', spec.slice(spec.indexOf('**Input**')).trim() === priorSpec.slice(priorSpec.indexOf('**Input**')).trim());
+const normalize = value => value.replace(/\s+/g, ' ').trim();
+const requirementText = (document, key) => new RegExp('^- \\*\\*' + key + '\\*\\*:[\\s\\S]*?(?=\\n- \\*\\*(?:FR|SC)-|\\n\\n###|\\n\\n##)', 'm').exec(document)?.[0];
+const changedIds = new Set(['FR-005', 'FR-006', 'FR-008', 'FR-009', 'FR-021', 'FR-023', 'SC-002', 'SC-003', 'SC-007']);
+check('FR-SC-no-afectados-preservados', requirements.filter(key => !changedIds.has(key)).every(key => normalize(requirementText(spec, key)) === normalize(requirementText(priorSpec, key))));
+const proposal = read(dir + 'evidence/video-scope-proposal.md');
+check('reemplazos-son-texto-aprobado', [...changedIds].every(key => {
+  const approved = proposal.split('**' + key + ' propuesto**: ')[1]?.split('\n\n')[0];
+  return approved && normalize(requirementText(spec, key).split('**: ')[1]) === normalize(approved);
+}));
+const constitution = read('.specify/memory/constitution.md');
+const oldConstitution = git('show', base + ':.specify/memory/constitution.md').replace(/\r\n/g, '\n');
+const principle = (document, number) => new RegExp('^### ' + number + '\\.[\\s\\S]*?(?=^### |^## |$(?![\\s\\S]))', 'm').exec(document)?.[0];
+check('otros-diez-principios-preservados', ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'IX', 'X', 'XI'].every(number => normalize(principle(constitution, number)) === normalize(principle(oldConstitution, number))));
+const approvedPrinciple = proposal.slice(proposal.indexOf('> ### VIII.'), proposal.indexOf('\nSi se aprueba')).replace(/^> ?/gm, '');
+check('VIII-es-texto-aprobado', normalize(principle(constitution, 'VIII')) === normalize(approvedPrinciple));
+check('constitucion-2-ratificacion-sin-scratch', constitution.includes('**Versión**: 2.0.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-11-17') && !constitution.includes('SYNC IMPACT REPORT'));
 const scope = {stories: (spec.match(/^### User Story /gm) ?? []).length,
   scenarios: (spec.match(/^\d+\. \*\*Given\*\*/gm) ?? []).length,
   requirements: (spec.match(/^- \*\*FR-\d{3}\*\*/gm) ?? []).length,
   criteria: (spec.match(/^- \*\*SC-\d{3}\*\*/gm) ?? []).length};
 check('alcance-vigente-4-24-23-8', JSON.stringify(scope) === JSON.stringify({stories: 4, scenarios: 24, requirements: 23, criteria: 8}));
-check('constitucion-y-evidencias-previas-intactas', git('diff', '--name-only', base, '--', '.specify/memory/constitution.md',
-  dir + 'evidence/tasks-generation-results.json', dir + 'evidence/tasks-generation-report.md', dir + 'evidence/planning-review.json') === '');
-check('propuesta-no-adoptada', read(dir + 'evidence/video-scope-proposal.md').includes('PROPUESTA PREPARADA, NO ADOPTADA')
-  && read(dir + 'video-gate.md').includes('NO PASADO'));
-check('cloudflare-fuera-del-mvp', tasksText.includes('Cloudflare queda fuera del MVP (V04)'));
+check('evidencias-previas-intactas', git('diff', '--name-only', base, '--',
+  dir + 'evidence/tasks-generation-results.json', dir + 'evidence/tasks-generation-report.md', dir + 'evidence/planning-review.json',
+  dir + 'evidence/tasks-corrections-results.json', dir + 'evidence/tasks-corrections-report.md', dir + 'evidence/video-scope-proposal.md') === '');
+check('adopcion-sin-prueba-inventada', read(dir + 'evidence/video-scope-adoption.md').includes('APROBADO POR EL RESPONSABLE')
+  && read(dir + 'video-gate.md').includes('ALCANCE APROBADO / PRUEBA REAL PENDIENTE'));
+check('cloudflare-fuera-del-mvp', tasksText.includes('Cloudflare queda fuera del MVP (V04/V05)'));
+check('API-20-rutas-propuestas', (read(dir + 'contracts/api.md').match(/^\| (GET|PUT|POST|PATCH) /gm) ?? []).length === 20);
+check('sondeo-video-no-renueva', read(dir + 'contracts/integration.md').includes('GET changes, GET video y POST socket-tickets nunca llaman accept') && tasks.find(task => task.id === 'T017').text.includes('GET video'));
+check('aplicacion-CI-migraciones-y-specs-cerrados-intactos', git('diff', '--name-only', base, '--', 'apps', '.github', 'package.json', 'package-lock.json',
+  'specs/001-identidad-acceso-roles', 'specs/002-oferta-academica', 'specs/003-reservas-ordenes-matricula', 'specs/004-materiales-estudio') === '');
 check('puntero-y-rama-005', JSON.parse(read('.specify/feature.json')).feature_directory === 'specs/005-clases-chat'
   && git('branch', '--show-current') === 'feat/005-clases-chat');
 const changed = [...new Set([...git('diff', '--name-only', base).split(/\r?\n/), ...git('ls-files', '--others', '--exclude-standard').split(/\r?\n/)].filter(Boolean))];
-check('cambios-limitados-a-correccion', changed.every(file => file.startsWith(dir) || ['ops/specs/task-references.mjs', 'ops/specs/validate-005-tasks.mjs'].includes(file)), changed);
+check('cambios-limitados-a-adopcion', changed.every(file => file.startsWith(dir) || [
+  '.specify/memory/constitution.md', 'ops/specs/task-references.mjs', 'ops/specs/validate-005-tasks.mjs',
+  'docs/alcance-mvp.md', 'docs/decisiones-pendientes.md', 'docs/planificacion/hoja-ruta-005-007.md',
+  ...['03-requisitos-funcionales', '04-atributos-de-calidad', '05-restricciones', '06-driver-arquitectonicos', '07-decisiones-arquitectonicas', '08-escenarios-atributos-calidad'].map(name => 'docs/01-analisis-de-sistema/' + name + '.md')
+].includes(file)), changed);
 const previous = JSON.parse(read(dir + 'evidence/tasks-generation-results.json'));
 const restoredAssociations = Object.fromEntries(requirements.map(key => [key, byRequirement[key].filter(id => !(previous.coverage[key] ?? []).includes(id))]));
-const index = {date: '2026-11-17', timezone: 'America/Lima', baseline: base, status: 'INDICE_ACTUAL_CORREGIDO',
+const index = {date: '2026-11-17', timezone: 'America/Lima', baseline: base, status: 'INDICE_ACTUAL_V05_APROBADA',
   totalTasks: tasks.length, completedTasks: 0, scope, coverageMeaning: 'asociación documental, incluidas tareas bloqueadas; no es implementación o aceptación',
   byRequirement, byTask: Object.fromEntries(tasks.map(task => [task.id, task.references])),
   restoredAssociationCount: Object.values(restoredAssociations).reduce((count, values) => count + values.length, 0),
@@ -95,26 +121,31 @@ if (write) fs.writeFileSync(dir + 'evidence/tasks-coverage.json', JSON.stringify
 check('indice-actual-coincide', fs.existsSync(dir + 'evidence/tasks-coverage.json')
   && read(dir + 'evidence/tasks-coverage.json').trim() === JSON.stringify(index, null, 2));
 const broken = []; let localLinks = 0;
-for (const file of [dir + 'tasks.md', dir + 'spec.md', dir + 'plan.md', dir + 'video-gate.md',
-  dir + 'evidence/video-scope-proposal.md', dir + 'evidence/tasks-corrections-report.md']) {
+for (const file of [dir + 'tasks.md', dir + 'spec.md', dir + 'plan.md', dir + 'video-gate.md', dir + 'data-model.md', dir + 'quickstart.md',
+  ...['api', 'integration', 'realtime', 'ui', 'video'].map(name => dir + 'contracts/' + name + '.md'),
+  dir + 'evidence/video-scope-adoption.md', dir + 'evidence/video-scope-proposal.md', dir + 'evidence/tasks-corrections-report.md',
+  '.specify/memory/constitution.md', 'docs/alcance-mvp.md', 'docs/decisiones-pendientes.md', 'docs/planificacion/hoja-ruta-005-007.md',
+  ...['03-requisitos-funcionales', '04-atributos-de-calidad', '05-restricciones', '06-driver-arquitectonicos', '07-decisiones-arquitectonicas', '08-escenarios-atributos-calidad'].map(name => 'docs/01-analisis-de-sistema/' + name + '.md')]) {
   for (const match of read(file).matchAll(/\[[^\]]+\]\(([^)]+)\)/g)) {
     if (/^(https?:|#)/.test(match[1])) continue;
     localLinks++;
     const target = path.resolve(path.dirname(file), match[1].split('#')[0]);
-    if (!fs.existsSync(target) && !(write && target === path.resolve(dir + 'evidence/tasks-corrections-results.json'))) broken.push({file, target: match[1]});
+    if (!fs.existsSync(target) && !(write && target === path.resolve(dir + 'evidence/video-scope-adoption-results.json'))) broken.push({file, target: match[1]});
   }
 }
 check('enlaces-locales', broken.length === 0, {count: localLinks, broken});
 const result = {date: '2026-11-17', timezone: 'America/Lima', baseline: base,
-  status: checks.every(item => item.pass) ? 'I1_I2_CORREGIDOS_C1_PROPUESTA_PENDIENTE' : 'VALIDACION_FALLIDA',
-  findings: {I1: 'CORREGIDO', I2: 'CORREGIDO', C1: 'PROPUESTA_PREPARADA_NO_ADOPTADA'},
-  implementationPerformed: false, productTestsExecuted: false, constitutionAmended: false, videoGate: 'NO_PASADO',
-  totalTasks: tasks.length, completedTasks: 0, proposal: dir + 'evidence/video-scope-proposal.md',
+  status: checks.every(item => item.pass) ? 'V05_ADOPTADA_DOCUMENTALMENTE_PRUEBAS_PENDIENTES' : 'VALIDACION_FALLIDA',
+  findings: {I1: 'CORREGIDO', I2: 'CORREGIDO', C1: 'RESUELTO_ALCANCE_APROBADO_NO_ES_PRUEBA'},
+  implementationPerformed: false, productTestsExecuted: false, constitutionAmended: true, constitutionVersion: '2.0.0', videoGate: 'PRUEBA_REAL_PENDIENTE',
+  professorValidation: 'NO_COMUNICADA_REQUERIDA_SI_AFECTA_EVALUACION',
+  totalTasks: tasks.length, completedTasks: 0, proposal: dir + 'evidence/video-scope-proposal.md', adoption: dir + 'evidence/video-scope-adoption.md',
   restoredAssociations, coverageIndex: dir + 'evidence/tasks-coverage.json',
   parserRegressionCases: 10, validationPassed: checks.every(item => item.pass), checks,
-  hashes: Object.fromEntries([dir + 'tasks.md', dir + 'evidence/video-scope-proposal.md', 'ops/specs/task-references.mjs',
+  hashes: Object.fromEntries([dir + 'tasks.md', dir + 'spec.md', dir + 'plan.md', dir + 'contracts/video.md', '.specify/memory/constitution.md',
+    dir + 'evidence/video-scope-proposal.md', 'ops/specs/task-references.mjs',
     'ops/specs/validate-005-tasks.mjs', dir + 'evidence/tasks-generation-results.json'].map(file => [file, hash(file)]))};
-if (write) fs.writeFileSync(dir + 'evidence/tasks-corrections-results.json', JSON.stringify(result, null, 2) + '\n');
+if (write) fs.writeFileSync(dir + 'evidence/video-scope-adoption-results.json', JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify({validationPassed: result.validationPassed, status: result.status, totalTasks: tasks.length,
   requirementsWithTask: Object.keys(byRequirement).length, restoredAssociations: index.restoredAssociationCount,
   parserRegressionCases: 10, structuralChecks: checks.length, localLinks, failed: checks.filter(item => !item.pass)}, null, 2));

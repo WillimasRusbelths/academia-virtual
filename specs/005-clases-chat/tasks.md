@@ -2,19 +2,18 @@
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
 **Estado**: 0/86 completadas. Crear esta lista no implementa la aplicación.
-IDs locales a 005. [Spec](spec.md), [plan parcial](plan.md),
+IDs locales a 005. [Spec](spec.md), [plan](plan.md),
 [investigación](research.md), [modelo](data-model.md),
 [HTTP](contracts/api.md), [Socket.IO](contracts/realtime.md),
 [integración](contracts/integration.md), [UI](contracts/ui.md),
-[guía](quickstart.md). Constitución 1.2.1; V01–V04 conservadas.
+[guía](quickstart.md). Constitución 2.0.0; V01–V05 conservadas.
 
-**Correcciones posteriores al análisis**: índice actual en
-[tasks-coverage.json](evidence/tasks-coverage.json), con referencias abreviadas
-expandidas; [propuesta de alcance audiovisual](evidence/video-scope-proposal.md)
-preparada para revisión, todavía no adoptada. El índice original se conserva como
-checkpoint histórico, con su limitación documentada. Ninguna tarea está completada;
-la propuesta adelanta documentación de T034, que conserva sus prerrequisitos y
-queda pendiente del registro de decisión, sin dar por ejecutada su aceptación.
+**Adopción V05**: el responsable aprobó el [alcance del ensayo YouTube](evidence/video-scope-adoption.md).
+El [índice actual](evidence/tasks-coverage.json) conserva referencias expandidas;
+los checkpoints anteriores mantienen su estado histórico. T034–T040 se ajustan
+al contrato del ensayo aprobado, sin exigir protección externa completa o Cloudflare.
+Los documentos ya preparados se verifican contra la matriz de T003 antes del código;
+ninguna tarea se marca completa por esta sincronización documental.
 
 ## Reglas y límites de ejecución
 
@@ -25,11 +24,12 @@ Pruebas incluidas porque FR/SC y constitución exigen permisos, integridad,
 concurrencia, recuperación y recorridos. Escribirlas antes del comportamiento;
 un fallo de import/configuración no acredita el rechazo funcional esperado.
 
-**El plan integral sigue parcial.** G-V005 no pasado; T034–T040 distinguen decisión,
-ensayo de YouTube y aceptación protegida. No implementar Cloudflare/SRS ni contratar
-un sustituto. Cloudflare queda fuera del MVP (V04). T035/T039/T040 y el cierre
-integral no se ejecutan sin resolver sus condiciones. Una reproducción YouTube
-exitosa no satisface por sí sola FR-008/009, SC-003 o principio VIII.
+**Alcance aprobado, pruebas pendientes.** G-V005 exige reproducción YouTube real,
+controles propios y límites externos documentados. No es un bloqueo por requerir
+un gestor protegido. Cloudflare queda fuera del MVP (V04/V05). T037–T040 implementan
+y verifican el ensayo tras diseño y análisis; T039/T081 requieren cuenta/entorno/
+personas autorizadas. No anunciar el enlace como video exclusivo ni dar por probado
+lo que solo tiene dobles. Protección multimedia futura requiere otro incremento.
 
 Los campos citados entre comillas son restricciones del modelo. Revisiones y
 eventSeq viajan como string decimal, sin pérdida de microsegundos; UUID canónico,
@@ -45,7 +45,7 @@ Objetivo: baseline y ensayo reproducible sin cambiar el entorno manual.
 
 - [ ] T001 Registrar HEAD/rama/puntero 005, hashes de configuración sin contenido, archivos previos y pendientes 001–004 en `specs/005-clases-chat/evidence/t001-baseline.json`; comprobar estado Git antes de editar y preservar los checkpoints históricos. FR-023. Sin dependencias.
 - [ ] T002 Documentar configuración privada y comandos del harness en `specs/005-clases-chat/evidence/implementation-environment.md`, reutilizando `ops/docker/test-harness.md`; APP_ENV=test, owner/runtime separados, proyecto/BD/volumen de ensayo, sin publicar puertos o alterar `.env` manual; migraciones antes de API. FR-022/023. Tras T001.
-- [ ] T003 [P] Crear `specs/005-clases-chat/verification.md` con 24 escenarios y Q01–Q16 de quickstart, matriz de roles/propiedad/estado/sesión/vigencia, FR-001–FR-023 y SC-001–SC-008; separar resultados automáticos, YouTube de prueba, protección, humanos y D10/D13. Tras T001–T002.
+- [ ] T003 [P] Crear `specs/005-clases-chat/verification.md` con 24 escenarios y Q01–Q16 de quickstart, matriz de roles/propiedad/estado/sesión/vigencia, FR-001–FR-023 y SC-001–SC-008; separar pruebas propias, reproducción real, límites externos, humanos, validación académica si aplica y D10/D13. Tras T001–T002.
 - [ ] T004 [P] Verificar versiones oficiales compatibles y fijar Socket.IO 4.x y cliente en `apps/api/package.json`, `apps/web/package.json` y `package-lock.json`; registrar versión/licencia/compatibilidad en `specs/005-clases-chat/evidence/dependencies.md`, sin añadir Redis/gateway Nest u otro servicio; comprobar instalación reproducible en harness. FR-014/023. Tras T001–T002.
 
 **Primer bloque recomendado**: T001–T004. Preparación y dependencias no entregan
@@ -55,9 +55,9 @@ clases o chat; registrar sus resultados antes de continuar.
 
 Bloquea historias hasta comprobar almacenamiento, contratos y autoridad.
 
-- [ ] T005 Definir DTO y puertos sin SQL/Nest/Socket en `apps/api/src/modules/classes/public/classes.ts`, `apps/api/src/modules/classes/application/ports.ts` y `apps/api/src/modules/classes/public/errors.ts`: estados «PREPARED / LIVE / FINISHED / CANCELLED», «bigint positivo como decimal string en JSON, nunca number», decisión temporal «timestamptz(6)» y resultados APPLIED/NO_CHANGE/NOT_CONFIRMED; tipar viewVersion desde el último evento que afectó cada recurso (mensaje SEND/HIDE, textos/estado de sesión o restricción), distinguiéndola de revisión de gestión y cursor global. FR-001–FR-003/013/018/019. Tras T003–T004.
-- [ ] T006 Escribir pruebas SQL de restricciones/rollback e índices en `apps/api/tests/integration/classes-schema.spec.ts`: identidad inmutable, FK RESTRICT, estados/fechas, LIVE único por grupo, duplicados de mensajes/comandos/eventos y ocultación coherente; verificar fallo por ausencia del comportamiento antes de T007. FR-001/003/012/013/016/017/022. Tras T005.
-- [ ] T007 Añadir modelo y migración aditiva `apps/api/prisma/schema.prisma` y `apps/api/prisma/migrations/0010_classes_chat/migration.sql`: ClassSession «PK y grupo único inmutable, FK AcademicGroup», «Título trim 1–160; descripción null o ≤2000», revision «≥1», lastEventSeq «≥0», creador inmutable y fechas coherentes/monotónicas; mensaje «Texto trim 1–1000, original interno inmutable», «UNIQUE(classId,messageSeq)», hiddenAt/hiddenBy/hiddenEventSeq «Nulos o terna completa»; restricción PK(classId,studentId), revisión inicial 1; comando PK(actorId,commandId), digest SHA-256, referencias sin DTO; cambio PK(classId,eventSeq), eventSeq>0; auditoría atribuible; índices/constraints/triggers y timestamps nulos según `specs/005-clases-chat/data-model.md`, runtime DML, sin editar 0001–0009 ni almacenar credenciales de video. FR-001/003/012/013/016–FR-020/022. Tras T006.
+- [ ] T005 Definir DTO y puertos sin SQL/Nest/Socket en `apps/api/src/modules/classes/public/classes.ts`, `apps/api/src/modules/classes/application/ports.ts` y `apps/api/src/modules/classes/public/errors.ts`: estados «PREPARED / LIVE / FINISHED / CANCELLED», «bigint positivo como decimal string en JSON, nunca number», decisión temporal «timestamptz(6)» y resultados APPLIED/NO_CHANGE/NOT_CONFIRMED; añadir referencia YOUTUBE_DEMO con CONFIGURED/NOT_CONFIGURED/CLASS_NOT_LIVE, revisión 0 ausente o positiva persistida; tipar viewVersion desde el último evento que afectó cada recurso (mensaje SEND/HIDE, textos/estado de sesión o restricción), distinguiéndola de revisión de gestión y cursor global. FR-001–FR-003/013/018/019. Tras T003–T004.
+- [ ] T006 Escribir pruebas SQL de restricciones/rollback e índices en `apps/api/tests/integration/classes-schema.spec.ts`: identidad inmutable, FK RESTRICT, estados/fechas, LIVE único por grupo, referencia con provider/ID/revisión válidos y FK de clase, duplicados de mensajes/comandos/eventos y ocultación coherente; verificar fallo por ausencia del comportamiento antes de T007. FR-001/003/012/013/016/017/022. Tras T005.
+- [ ] T007 Añadir modelo y migración aditiva `apps/api/prisma/schema.prisma` y `apps/api/prisma/migrations/0010_classes_chat/migration.sql`: ClassSession «PK y grupo único inmutable, FK AcademicGroup», «Título trim 1–160; descripción null o ≤2000», revision «≥1», lastEventSeq «≥0», creador inmutable y fechas coherentes/monotónicas; mensaje «Texto trim 1–1000, original interno inmutable», «UNIQUE(classId,messageSeq)», hiddenAt/hiddenBy/hiddenEventSeq «Nulos o terna completa»; restricción PK(classId,studentId), revisión inicial 1; comando PK(actorId,commandId), digest SHA-256, referencias sin DTO; cambio PK(classId,eventSeq), eventSeq>0; auditoría atribuible; índices/constraints/triggers y timestamps nulos según `specs/005-clases-chat/data-model.md`, runtime DML, sin editar 0001–0009 ni almacenar credenciales de video; ClassVideoReference PK classId/FK RESTRICT, provider YOUTUBE_DEMO, videoId null o 11 ASCII [A-Za-z0-9_-], revision≥1, updatedBy y updatedAt, evento VIDEO_REFERENCE_CHANGED sin ID en deltas de alumno. FR-001/003/012/013/016–FR-020/022. Tras T006.
 - [ ] T008 Crear fixtures aisladas en `apps/api/tests/support/classes.ts` y `apps/api/tests/support/classes-temporal.ts`: grupos propio/ajeno/cancelado/retirado, docentes actual/anterior/deshabilitado, alumnos con matrícula original y fin±1 μs, clases/mensajes ficticios; reutilizar dueños de datos y pagos simulados sin modificar reglas 003. FR-005–FR-007/022. Tras T007.
 - [ ] T009 Escribir pruebas de matriz, orden de locks, topología cambiante y vigencia exacta en `apps/api/tests/integration/classes-authority.spec.ts`; incluir dos actores con cuentas distintas, actor objetivo de moderación, revocación/asignación/cancelación/retirada y BD indisponible. FR-002/005–FR-007/017/018/019. Tras T008.
 - [ ] T010 [P] Extender matriz cerrada y políticas en `apps/api/src/modules/authorization/domain/permissions.ts`, `apps/api/src/modules/authorization/public/session.ts` y `apps/api/src/modules/authorization/application/session-lookup.ts`, con sus pruebas: ADMIN manage-all, TEACHER manage-own, STUDENT participate-enrolled; tuplas CLASSES explícitas, permiso desconocido denegado y políticas previas intactas. FR-002/005/006/010. Tras T009.
@@ -67,7 +67,7 @@ Bloquea historias hasta comprobar almacenamiento, contratos y autoridad.
 - [ ] T014 Implementar coordinador `apps/api/src/infrastructure/database/classes-transaction.ts`: accountTransaction con un presupuesto, cuentas UUID→sesión→curso→grupo→clase→filas subordinadas/ledger, SHARE al leer y clase UPDATE desde el comienzo al escribir; recheck topología, token μs tras locks y revalidación final; no locks financieros o transacción durante espera de red. Ejecutar T009. FR-006/007/013/018. Tras T010–T013.
 - [ ] T015 Implementar ledger/digest y errores seguros en `apps/api/src/modules/classes/infrastructure/command-store.ts`, `apps/api/src/http/error.filter.ts` y `apps/api/src/infrastructure/logging/security-events.ts`: autoridad antes del receipt, resultado único sin DTO original, COMMIT incierto sin retry automático, NO_CHANGE sin evento nuevo, rechazos atribuibles sin registrar cuerpos/secretos. FR-012/013/018–FR-020. Tras T014.
 - [ ] T016 Implementar `apps/api/src/modules/classes/infrastructure/video-disabled.ts` y prueba `apps/api/src/modules/classes/infrastructure/video-disabled.test.ts`: tras autorización responde NOT_CONFIGURED, sin URL/token/streamKey; doble de prueba no habilita reproducción protegida ni servicio externo. FR-008/009/023. Tras T015.
-- [ ] T017 Componer la fundación en `apps/api/src/app.module.ts` y políticas/adaptación de AcceptedSessionInterceptor en `apps/api/src/modules/authorization/entrypoints/http/access.guard.ts`. GET changes y POST socket-tickets nunca renuevan actividad, sin flag cliente ni cambio de expiración absoluta; ampliar `apps/api/tests/architecture/import-boundaries.spec.ts` y pruebas de sesión antes de handlers públicos. FR-006/019/021. Tras T016.
+- [ ] T017 Componer la fundación en `apps/api/src/app.module.ts` y políticas/adaptación de AcceptedSessionInterceptor en `apps/api/src/modules/authorization/entrypoints/http/access.guard.ts`. GET changes, GET video y POST socket-tickets nunca renuevan actividad, sin flag cliente ni cambio de expiración absoluta; ampliar `apps/api/tests/architecture/import-boundaries.spec.ts` y pruebas de sesión antes de handlers públicos. FR-006/019/021. Tras T016.
 
 Checkpoint: T006/T009/T013 y regresión de permisos aprobados, sin importar
 infraestructura ajena o relajar guards. Las historias parten de T017.
@@ -94,22 +94,23 @@ preparar/iniciar/finalizar con docente propio/admin; dos inicios dejan una LIVE.
 
 Entrega independiente disponible: encontrar sesiones autorizadas y distinguir
 reproducción no habilitada. **US2 completa no está resuelta** por esa entrega.
-YouTube real es un ensayo del MVP; Cloudflare queda fuera. Protección sigue en G-V005.
+YouTube real es un ensayo del MVP; Cloudflare queda fuera. G-V005 exige prueba real y límites externos conforme a constitución 2.0.0.
 
 - [ ] T030 [P] [US2] Escribir matriz PG/HTTP de grupos/sesiones/video deshabilitado en `apps/api/tests/integration/classes-access.spec.ts`: visitante/propio/ajeno/fin±1 μs, sesión revocada, oferta retirada/docente cambiado, grupo cancelado y referencias indistinguibles. FR-005–FR-009/019; US2.1/US2.3–US2.6; SC-002 parcial. Tras T029.
 - [ ] T031 [US2] Implementar grupos/contexto/listas/detalle en `apps/api/src/modules/classes/infrastructure/class-queries.ts` y lecturas HTTP en `apps/api/src/modules/classes/entrypoints/http/classes.controller.ts`: autorizar antes de total, page≥1/pageSize 1–50 (20 defecto), grupos name/id y sesiones createdAt DESC,id DESC; alumno excluye canceladas y no depende de oferta visible/docente habilitado. FR-005–FR-007/019. Tras T030.
 - [ ] T032 [US2] Implementar navegación y aula mínima del alumno en `apps/web/src/features/classes/student-page.tsx`, `apps/web/src/features/classes/classroom.tsx` y `apps/web/src/app/classes-routes.tsx`; distinguir PREPARED/LIVE/FINISHED y señal aún no habilitada, referencias ajenas/permiso perdido, sin iframe supuesto como protegido. FR-004–FR-007/021. Tras T031.
 - [ ] T033 [US2] Verificar GET video NOT_CONFIGURED con permiso actual, sin URL/secretos, y pruebas UI en `apps/api/tests/integration/classes-video-disabled.spec.ts` y `apps/web/src/features/classes/classroom.test.tsx`; cerrar evidencia de consulta parcial en `specs/005-clases-chat/evidence/us2-access.md`. No cerrar SC-003. FR-008/009/023. Tras T032.
-- [ ] T034 [P] [US2] Preparar propuesta revisable en `specs/005-clases-chat/evidence/video-scope-proposal.md`: texto vigente/propuesto, limitación del ensayo YouTube V04, impacto en FR-008/009/SC-002/003/007 y principio VIII, responsable/profesor si afecta evaluación; registrar decisión real en `specs/005-clases-chat/video-gate.md`, sin enmendar o dar por aprobada la propuesta. FR-008/009/023. Tras T003; documental y compatible con continuar T041.
-- [ ] T035 [US2] Completar contrato concreto de emisión/reproducción en `specs/005-clases-chat/contracts/video.md` y diseño/entidad en `specs/005-clases-chat/data-model.md`, identificando entrega directa, origen/caché, expiración y revocación del emisor. **BLOQUEADA** hasta decisión/mecanismo compatibles de T034; no sustituir con iframe oculto, Cloudflare o SRS, ni reinterpretar la constitución. FR-008/009; SC-003. Tras T034 y resolución efectiva de diseño; repetir plan/análisis antes de adoptar implementación.
-- [ ] T036 [US2] Preparar protocolo reproducible de ensayo aislado YouTube+OBS en `specs/005-clases-chat/evidence/youtube-rehearsal.md`: contenido ficticio, cuenta/entorno autorizados, link/configuración privada fuera de Git, duración/calidad/latencia/tráfico/fallos a observar, flujo de inicio/fin manual y límites conocidos; no publicar integración productiva. FR-004/009/023; V04. Tras T033–T034; no requiere contratar un gestor.
-- [ ] T037 [US2] Ejecutar ensayo real autorizado de emisión/reproducción YouTube y registrar solo evidencia saneada en `specs/005-clases-chat/evidence/youtube-rehearsal-results.json`; distinguir señal/reproducción, dispositivos, cuenta emisora actual y cierre manual en proveedor. **PENDIENTE EXTERNO** hasta cuenta/entorno disponibles; ningún secreto o emisión personal por iniciativa del agente. FR-004/023; parte de US2.2/SC-003/007. Tras T036.
-- [ ] T038 [US2] Ejecutar casos de referencia compartida/directa, matrícula vencida, sesión revocada, clase finalizada y cambio de emisor sobre el alcance ensayado, registrando permisos efectivos y limitaciones sin datos privados en `specs/005-clases-chat/evidence/youtube-access-results.md`; si falla protección, conservar G-V005 no pasado, sin rebautizar el fallo como aceptación. FR-006/008/009/023; US2.3–US2.7; SC-002/003 pendientes si incumplen. Tras T037.
-- [ ] T039 [US2] Implementar y probar el contrato aprobado de T035 en `apps/api/src/modules/classes/infrastructure/video-access.ts`, `apps/api/src/modules/classes/entrypoints/http/video.controller.ts`, `apps/web/src/features/classes/video-player.tsx` y `apps/api/tests/integration/classes-video-access.spec.ts`; cubrir solicitudes directas, permiso exacto y revocación/fin del emisor, sin nuevas entregas indebidas. **BLOQUEADA** por G-V005 y falta de diseño; estos archivos no constituyen contrato aprobado ni permiten Cloudflare en el MVP. FR-008/009; SC-002/003. Tras T035/T038 y análisis aprobado del diseño concreto.
-- [ ] T040 [US2] Auditar escenarios US2.1–US2.7 y separar reproducción de prueba/protección aceptada en `specs/005-clases-chat/evidence/us2-acceptance.md`; no marcar completa US2, FR-008/009 o SC-003 con solo T033/T037. **BLOQUEADA para aceptación completa** hasta T039 y evidencia directa conforme a constitución vigente. FR-005–FR-009/023. Tras T033/T038/T039.
+- [ ] T034 [P] [US2] Verificar el registro de aprobación V05 y enmienda 2.0.0 en `specs/005-clases-chat/evidence/video-scope-adoption.md` contra la matriz T003: alcance propio/externo, FR-005/006/008/009/021/023, SC-002/003/007 y profesor si afecta evaluación; preservar borrador/checkpoints previos, sin atribuir aceptación académica o reproducción real. FR-008/009/023. Tras T003; compatible con continuar T041.
+- [ ] T035 [US2] Revisar/completar `specs/005-clases-chat/contracts/video.md` y `specs/005-clases-chat/data-model.md` conforme a V05: ClassVideoReference, ID validado/revisión, edición por gestor en PREPARED/LIVE, entrega solo LIVE autorizada, retirada del player y operación manual externa; comprobar límites de G-V005 y fuentes oficiales del player antes de adoptar implementación. FR-005/006/008/009; SC-002/003. Tras T034; diseño ya redactado, sin ejecución por existir el archivo.
+- [ ] T036 [US2] Escribir primero pruebas de referencia/replay/validación/origen/player en `apps/api/tests/integration/classes-video-access.spec.ts` y `apps/web/src/features/classes/video-player.test.tsx`; preparar `specs/005-clases-chat/evidence/youtube-rehearsal.md` con cuenta/contenido autorizados, CSP/referer, duración/calidad/fallos y detener manualmente YouTube, sin publicar secretos o señal por iniciativa del agente. FR-004/005/006/008/009/023; SC-002/003. Tras T033–T035.
+- [ ] T037 [US2] Implementar referencia de ensayo en `apps/api/src/modules/classes/infrastructure/video-access.ts` y `apps/api/src/modules/classes/entrypoints/http/video.controller.ts`: GET/PUT de configuración para gestor actual, ID null o «11 caracteres ASCII [A-Za-z0-9_-]», expectedRevision/commandId, ledger/evento/auditoría atómicos; GET video solo entrega CONFIGURED en LIVE vigente, NOT_CONFIGURED/CLASS_NOT_LIVE sin ID y nunca renueva inactividad. Sin secretos, OAuth, solicitudes a URLs del cliente o relay de video. FR-005/006/008/009/013/019; SC-002/003. Tras T036.
+- [ ] T038 [US2] Implementar `apps/web/src/features/classes/video-player.tsx`, gestión de ID en `apps/web/src/features/classes/management-page.tsx` y CSP/cabeceras en `apps/web/index.html` y `apps/web/vite.config.ts` según contrato: iframe/API oficiales, origin exacto, sin autoplay, aviso de enlace compartible, onReady distinto de PLAYING, sondeo pasivo/teardown al perder acceso/cambio de referencia/logout y callbacks descartados; probar con dobles sin contarlos como emisión real. FR-004/006/008/009/021; SC-002/003 parcial. Tras T037.
+- [ ] T039 [US2] Ejecutar T036, ampliar inventarios de rutas y E2E `apps/web/tests/e2e/classes-video.spec.ts`; ejecutar ensayo YouTube autorizado y registrar `specs/005-clases-chat/evidence/youtube-rehearsal-results.json` y `specs/005-clases-chat/evidence/youtube-access-results.md`: reproducción observada, negativas de recursos propios/fin exacto, límite del enlace externo y operación manual del emisor. **PENDIENTE EXTERNO** para evidencia real hasta cuenta/entorno disponibles; un doble no completa esta parte, no se exige corte externo por matrícula ni Cloudflare. FR-004/005/006/008/009/023; SC-002/003. Tras T038.
+- [ ] T040 [US2] Auditar US2.1–US2.7 y G-V005 del ensayo en `specs/005-clases-chat/evidence/us2-acceptance.md`: controles propios, reproducción real y límites externos separados; no cerrar SC-003 solo con T033 o player simulado, ni acreditar protección multimedia completa. FR-005–FR-009/023; SC-002/003. Tras T033/T039 y evidencia real del alcance aprobado.
 
-T034/T036 preparan ensayo, no aprobación. Saltar T035/T039/T040 bloqueadas para
-continuar US3; no colocar Cloudflare como dependencia ni habilitar video productivo.
+T034 verifica la aprobación ya registrada y T035 el contrato antes del código.
+US3 continúa tras T033 sin esperar cuenta/emisión real de T039; Cloudflare no es
+dependencia. US2/SC-003 solo se aceptan con evidencia real del ensayo.
 
 ## Fase 5 — US3: chat e historial recuperable (P1, T041–T062)
 
@@ -132,7 +133,7 @@ Prueba independiente con clases ficticias LIVE sin necesitar video.
 - [ ] T054 [US3] Implementar conexión y degradación en `apps/web/src/features/classes/chat-connection.ts`: ticket nuevo en reconexión de la misma generación, snapshot+delta, avisos y sondeo GET changes cada 5 s visible, una lectura en vuelo/backoff; cero reenvíos de comandos o borradores. FR-014/021. Tras T053.
 - [ ] T055 [US3] Implementar reautorización/admisión/cierre en `apps/api/src/modules/classes/infrastructure/socket-lifecycle.ts` y configuración validada en `apps/api/src/infrastructure/config/environment.ts`: «4 sockets por actor entre sesiones, 3.000 por proceso», una clase/socket, un aviso pendiente/socket, barrido≤5 s auxiliar y revisión antes de cada entrega; liberar plazas en error/cierre, sin conexión PG por socket/cola ilimitada o renovación de actividad. FR-006/014/019/021. Tras T054.
 - [ ] T056 [US3] Componer servidor/cierre ordenado en `apps/api/src/app.module.ts`, `apps/api/src/main.ts` y `apps/api/src/modules/classes/classes.module.ts`; conectar antes de listen y cerrar sockets antes de BD; integrar generación de cuenta/logout/abort en `apps/web/src/app/session.tsx` y aula. FR-006/014/021. Tras T055.
-- [ ] T057 [US3] Ejecutar matriz HTTP/socket de T042–T044 y pruebas de no renovación por GET changes/POST tickets, inactividad real/absoluta y BD caída en `apps/api/tests/integration/classes-session.spec.ts`; comprobar contenido denegado con socket abierto y aceptación intencional previa intacta. FR-006/014/015/021; SC-002/004. Tras T056.
+- [ ] T057 [US3] Ejecutar matriz HTTP/socket de T042–T044 y pruebas de no renovación por GET changes/GET video/POST tickets, inactividad real/absoluta y BD caída en `apps/api/tests/integration/classes-session.spec.ts`; comprobar contenido denegado con socket abierto y aceptación intencional previa intacta. FR-006/014/015/021; SC-002/004. Tras T056.
 - [ ] T058 [US3] Escribir/ejecutar UI con respuestas tardías/snapshot viejo/tombstone, generación cambiada, logout fallido, historial y foco en `apps/web/src/features/classes/chat-state.test.ts` y `apps/web/src/features/classes/chat.test.tsx`; ninguna respuesta anterior restaura texto ocultado o borrador de otra sesión. FR-014/016/021. Tras T057.
 - [ ] T059 [US3] Ejecutar E2E de dos grupos, dos conexiones, historial finalizado, caída/reconexión e intención incierta en `apps/web/tests/e2e/classes-chat.spec.ts`; comprobar desktop/móvil y teclado sin confundir simulación de señal con reproducción real. FR-010–FR-015/021/023; SC-004/005/007 parcial. Tras T058.
 - [ ] T060 [US3] Añadir/ejecutar carreras con barreras en `apps/api/tests/integration/classes-chat-races.spec.ts`: dos cuentas, cuota simultánea, finalize/revoke/reassign/cancel/fin exacto contra envío/lectura; verificar ambos órdenes, sin deadlock de promoción o efecto duplicado, estado persistido final. FR-006/007/011–FR-015/018. Tras T059.
@@ -163,18 +164,18 @@ tras reconectar; otra clase no hereda silencio; FINISHED permite ocultar.
 Sin [USn], porque cubre varias historias. Regresión/restore/ensayo local pueden
 avanzar sin T039; cierre integral no. D10/D13 requieren decisiones/entorno reales.
 
-- [ ] T075 Incorporar scripts/tipos/lint y suites de clases al CI en `apps/api/package.json`, `apps/api/tsconfig.classes.json`, `apps/web/package.json`, `apps/web/tsconfig.classes.json` y `.github/workflows/v00-linux.yml`; preservar migraciones antes de inicio y todas las suites 001–004, sin quitar asserts para pasar; ruta protegida de video aún bloqueada no se anuncia como verificada. FR-022/023. Tras T074 y T033.
+- [ ] T075 Incorporar scripts/tipos/lint y suites de clases al CI en `apps/api/package.json`, `apps/api/tsconfig.classes.json`, `apps/web/package.json`, `apps/web/tsconfig.classes.json` y `.github/workflows/v00-linux.yml`; preservar migraciones antes de inicio y todas las suites 001–004; tests locales con doble de player se distinguen del ensayo YouTube externo, sin quitar asserts para pasar. FR-022/023. Tras T074 y T033.
 - [ ] T076 Ejecutar regresión lint/tipos/build/unitarias/arquitectura/PG/HTTP/Socket.IO/E2E y Q01–Q16 aplicables, registrar versión/resultados en `specs/005-clases-chat/evidence/automated.md`; separar requisitos de video pendientes y fallos reales sin contarlos como aprobados. FR-001–FR-023; SC-001/002/004/005. Tras T075.
 - [ ] T077 Ampliar ensayo de upgrade desde 0009 y reinicio en `ops/recovery/rehearse-classes.ps1`, con `specs/005-clases-chat/evidence/upgrade-restart.md`: constraints, estados/lastEventSeq/orden, mensajes/moderación/receipts conservados, sin clase/señal/reenvío automáticos; laboratorio separado. FR-022; SC-006. Tras T076.
-- [ ] T078 Ejecutar restore cifrado aislado con tablas/índices/contadores/mensajes/ocultación/silencio, accesos restaurados invalidados y decisiones post-backup perdidas revisadas en `ops/recovery/rehearse-classes.ps1`; registrar `specs/005-clases-chat/evidence/recovery.md`, sin restaurar sobre BD existente o dar D13 externo por cumplido. FR-022; SC-006. Tras T077.
+- [ ] T078 Ejecutar restore cifrado aislado con tablas/índices/contadores/mensajes/ocultación/silencio y referencia/versiones de video (sin señal audiovisual), accesos restaurados invalidados y decisiones post-backup perdidas revisadas en `ops/recovery/rehearse-classes.ps1`; registrar `specs/005-clases-chat/evidence/recovery.md`, sin restaurar sobre BD existente o dar D13 externo por cumplido. FR-022; SC-006. Tras T077.
 - [ ] T079 Medir recursos locales con corpus de chat y cliente lento/avisos perdidos en `apps/api/tests/support/classes-resources.mjs` y `specs/005-clases-chat/evidence/local-resources.md`: memoria, sockets/plazas, pool, consultas/fanout, confirmaciones/sync, reconexión, BD/WAL/backups; distinguir límite configurado de carga alcanzada. FR-011/014/023; SC-008 parcial. Tras T076.
 - [ ] T080 Preparar y ejecutar observación consentida de gestión/chat/moderación con docente/alumno/responsable en `specs/005-clases-chat/evidence/human-acceptance.md`; registrar éxito/ayuda/dispositivo/modalidad sin nombres, no inferir consentimiento del ensayo 004 y declarar móvil/teclado no observados. FR-021/023; SC-007 parcial. Tras T076 y participantes disponibles.
-- [ ] T081 Completar recorrido humano de emisión real y acceso permitido/denegado con evidencia en `specs/005-clases-chat/evidence/human-video.md`; separar reproducción YouTube y protección, no cerrar SC-007 completo sin su recorrido ni SC-003 sin T039. FR-008/009/021/023; SC-003/007. Tras T037–T038 y participantes/entorno disponibles; aceptación integral bloqueada por T039.
+- [ ] T081 Completar recorrido consentido de emisión/reproducción YouTube con docente/alumno y responsable en `specs/005-clases-chat/evidence/human-video.md`: acceso propio, aviso de límite externo, moderación/finalización y detención manual en proveedor; registrar dificultad/ayuda/dispositivo/modalidad, sin cerrar SC-007 con mocks o modalidades no observadas. FR-008/009/021/023; SC-003/007. Tras T039 y participantes/entorno autorizados disponibles.
 - [ ] T082 Acordar y verificar custodia/copia/clave/destino externo/retención/RPO/RTO y recuperación real de la versión de clases en `specs/005-clases-chat/operation.md`, enlazando pendientes D13 previos; protocolo no es operación ejecutada. FR-022/023; SC-006. Tras T078 y decisiones/equipo disponibles; antes de demo persistente o publicación.
 - [ ] T083 Preparar escenario de chat con cliente Socket.IO real y lecturas HTTP, alinear D10 con rúbrica y ejecutar solo en destino/generador autorizados en `load-tests/classes/scenario.ts` y `specs/005-clases-chat/capacity.md`; población≥15.000, meta2.500 activos con mezcla/ventana/conexiones/mensajes/reproducciones/latencia/errores/recursos/costo separados; pagos simulados y video real aparte, sin contratar o afirmar capacidad desde ensayo local. FR-023; SC-008. Tras T079, rúbrica/infraestructura autorizada disponibles; aprobación combinada sigue en 007.
-- [ ] T084 Sincronizar estado actual en `specs/005-clases-chat/spec.md`, `specs/005-clases-chat/plan.md`, `specs/005-clases-chat/quickstart.md`, `specs/005-clases-chat/verification.md` y `docs/planificacion/hoja-ruta-005-007.md`, conservando evidencias previas, V04/Cloudflare fuera del MVP, resultados parciales y tareas bloqueadas; no reescribir specs cerrados o cerrar pendientes heredados. FR-023. Tras T076–T079; registrar T080–T083 como pendientes si faltan personas/acuerdos/entorno, sin esperar su ejecución para actualizar documentos.
-- [ ] T085 Elaborar revisión preliminar FR/SC/24 escenarios y límites pendientes en `specs/005-clases-chat/evidence/final-acceptance.md`; registrar implementado/probado/simulado/no observado/bloqueado, YouTube versus protección y tareas sin ejecutar; puede entregarse con brechas, sin llamar completo al spec. FR-023; SC-001–SC-008. Tras T084.
-- [ ] T086 Cerrar aceptación integral en `specs/005-clases-chat/evidence/final-acceptance.md` solo con evidencia de todos los requisitos/escenarios vigentes, T040/T078/T080–T083 y D13/D10 aplicables resueltos; no marcar completada por presupuesto de tiempo, reproducción de prueba, mocks o checklist. **BLOQUEADA** mientras cualquiera de esas condiciones falte. FR-001–FR-023; SC-001–SC-008. Tras T040/T078/T080–T085 y todas las condiciones anteriores.
+- [ ] T084 Sincronizar estado actual en `specs/005-clases-chat/spec.md`, `specs/005-clases-chat/plan.md`, `specs/005-clases-chat/quickstart.md`, `specs/005-clases-chat/verification.md` y `docs/planificacion/hoja-ruta-005-007.md`, conservando checkpoints, V04/V05 y Cloudflare fuera del MVP, resultados parciales, límites externos y validación académica si aplica; no reescribir specs cerrados o cerrar pendientes heredados. FR-023. Tras T076–T079; registrar T080–T083 pendientes si faltan personas/acuerdos/entorno, sin esperar su ejecución para actualizar documentos.
+- [ ] T085 Elaborar revisión preliminar FR/SC/24 escenarios y límites pendientes en `specs/005-clases-chat/evidence/final-acceptance.md`; registrar implementado/probado/simulado/no observado/pendiente, controles propios versus video externo, tareas y validación académica si aplica; puede entregarse con brechas, sin llamar completo al spec. FR-023; SC-001–SC-008. Tras T084.
+- [ ] T086 Cerrar aceptación integral en `specs/005-clases-chat/evidence/final-acceptance.md` solo con evidencia de todos los requisitos/escenarios vigentes, T040/T078/T080–T083 y D13/D10 aplicables; conservar validación del profesor pendiente si cambia criterios de evaluación y no declarar aceptación académica sin ella. **PENDIENTE DE EVIDENCIA** mientras falte una condición; presupuesto de tiempo, aprobación documental o mocks no cierran el spec. FR-001–FR-023; SC-001–SC-008. Tras T040/T078/T080–T085 y todas las condiciones anteriores.
 
 ## Dependencias y orden de entrega
 
@@ -182,11 +183,11 @@ avanzar sin T039; cierre integral no. D10/D13 requieren decisiones/entorno reale
 T001 → T002 → {T003,T004} → T005–T009
                            → {T010,T011,T012,T013} → T014–T017
 → US1 T018–T029 → US2 consulta T030–T033
-                  ├→ T034 → T036 → T037 → T038 (ensayo separado)
-                  │    └→ T035 [BLOQUEADA] → T039 [BLOQUEADA] → T040 [BLOQUEADA]
+                  ├→ T034 → T035 → T036 → T037 → T038 → T039 → T040
+                  │                                    (ensayo real pendiente)
                   └→ US3 T041–T062 → US4 T063–T074 → T075–T079 → T084–T085
                                                            ├→ T080–T083 (condiciones externas)
-                                                           └→ T086 [BLOQUEADA; exige también T080–T083]
+                                                           └→ T086 [evidencia pendiente; exige también T080–T083]
 ```
 
 Las dependencias «Tras» de cada tarea son la autoridad cuando el dibujo resume
@@ -198,7 +199,7 @@ para US3/US4. No generar rama/spec 006/007 o implementación post-MVP desde esta
 | Historia | Ejemplo de trabajo en archivos distintos tras prerrequisitos | Entrega verificable |
 | --- | --- | --- |
 | US1 | T018 dominio y T019 HTTP | Gestión sin señal; competencia deja una LIVE |
-| US2 | T030 matriz y T034 propuesta documental tras sus respectivos prerrequisitos | Consulta autorizada y ensayo por separado; historia completa bloqueada |
+| US2 | T030 matriz y T034 propuesta documental tras sus respectivos prerrequisitos | Consulta autorizada y ensayo real separado; aceptación pendiente |
 | US3 | T041/T042/T043/T044 en suites distintas tras T033 | Chat de dos clases, replay, reconexión e historial vigente |
 | US4 | T063 backend y T064 UI tras T062 | Ocultación/silencio propios persistidos, sin efecto en otra clase |
 
@@ -212,9 +213,10 @@ runners. Una marca [P] no permite saltar dependencias, gates o pruebas previas.
 Primer incremento técnico: T001–T017 y US1, verificable sin video. Después consulta
 US2 parcial, chat y moderación. Cada checkpoint registra commit, pruebas y límites;
 las tareas humanas/operativas mantienen [ ] si faltan personas, acuerdos o entorno.
-YouTube de prueba tiene su propia evidencia; protección y cierre integral siguen
-pendientes según G-V005. Ninguna tarea exige Cloudflare dentro del MVP.
+YouTube de prueba requiere evidencia real para G-V005 y límites externos explícitos.
+La protección multimedia completa pertenece al incremento posterior; ninguna tarea
+exige Cloudflare dentro del MVP. El cierre integral sigue pendiente de verificación.
 
-El análisis de consistencia posterior debe revisar cobertura real, contradicción
-de video y bloqueos antes de `speckit-implement`. Enumerar una tarea condicional
+El análisis de consistencia posterior debe revisar cobertura real, alcance
+de video aprobado y evidencia pendiente antes de `speckit-implement`. Enumerar una tarea condicional
 no resuelve su diseño ni demuestra cumplimiento; el informe no debe dar un pase global.

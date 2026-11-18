@@ -6,30 +6,23 @@ merge del PR #5. La especificación inicial se redactó en
 
 **Created**: 2026-11-17, America/Lima.
 
-**Status**: Especificado y aclarado en cuatro decisiones de alcance; pendiente de
-plan, tareas, implementación y verificación. Viabilidad del video protegido
-D07/D08 pendiente; esta especificación no acredita reproducción o protección.
+**Status**: Alcance del ensayo MVP aprobado por el responsable el 2026-11-17,
+constitución 2.0.0. Diseño y tareas sincronizados, sin implementación o pruebas
+de reproducción nuevas. Validación académica pendiente si afecta evaluación.
 
-**Actualización de planificación — 2026-11-17**: [plan parcial](plan.md), modelo
-y contratos de sesiones/chat redactados en ese bloque, sin código. El flujo
-plan completo sigue pendiente por [G-V005](video-gate.md), sin mecanismo de video
-protegido demostrado. Se conserva el alcance funcional que sigue.
+**Aprobación V05**: «entoces la apruebo», sobre la propuesta concreta de YouTube
+como ensayo con referencia compartible y Cloudflare fuera del MVP. El
+[registro de adopción](evidence/video-scope-adoption.md) conserva texto aprobado,
+impacto y límites. Se mantienen cuatro historias, 24 escenarios, 23 FR y ocho SC.
 
-**Bloque posterior de tareas — 2026-11-17**: [tasks.md](tasks.md) enumera T001–T086,
-todavía sin ejecutar. La generación no resuelve G-V005 ni aprueba implementación;
-el análisis de consistencia se realiza después de generar la lista.
+[Plan](plan.md), [contrato audiovisual](contracts/video.md) y [tareas](tasks.md)
+describen trabajo futuro. [G-V005](video-gate.md) exige prueba real del ensayo;
+la protección multimedia completa pertenece a un incremento posterior.
+Los checkpoints anteriores describen su revisión histórica y no se reescriben.
 
-**Correcciones posteriores**: [propuesta del ensayo YouTube](evidence/video-scope-proposal.md)
-preparada para revisión, todavía no adoptada; [índice de tareas corregido](evidence/tasks-coverage.json).
-Los requisitos y criterios que siguen conservan su texto vigente hasta decidir
-expresamente la propuesta; Cloudflare continúa fuera del MVP.
-
-**Cierre de specify — 2026-11-17**: alcance documental de 005 terminado en esta
-pasada: cuatro historias, 24 escenarios, 23 FR y ocho SC. Se conserva V01–V03 y
-el alcance funcional ya acordado. La secuencia posterior queda en la
-[hoja de ruta 005 → 006 → 007](../../docs/planificacion/hoja-ruta-005-007.md),
-con [revisión de paneles por rol](../../docs/planificacion/revision-paneles-006.md).
-No se crean ramas, planes, tareas o implementaciones de 006/007 en esta pasada.
+Secuencia posterior: [005 → 006 → 007](../../docs/planificacion/hoja-ruta-005-007.md),
+con [revisión de paneles](../../docs/planificacion/revision-paneles-006.md).
+Cloudflare queda fuera de esos tres specs; no se crean ramas de 006/007.
 
 **Input**: el responsable aceptó iniciar el siguiente spec de clases en vivo y
 chat por grupo y confirmó V01–V03 en esta conversación.
@@ -37,7 +30,7 @@ chat por grupo y confirmó V01–V03 en esta conversación.
 Fuentes: [alcance MVP](../../docs/alcance-mvp.md), HU15/HU16 de
 [historias](../../docs/01-analisis-de-sistema/02-historias-del-usuario.md), RF08/RF16/RF17/RF19 de
 [requisitos](../../docs/01-analisis-de-sistema/03-requisitos-funcionales.md),
-[constitución 1.2.1](../../.specify/memory/constitution.md),
+[constitución 2.0.0](../../.specify/memory/constitution.md),
 [DEC01](../../docs/01-analisis-de-sistema/07-decisiones-arquitectonicas.md),
 [D07–D10/D13](../../docs/decisiones-pendientes.md) y specs
 [001](../001-identidad-acceso-roles/spec.md), [002](../002-oferta-academica/spec.md),
@@ -83,40 +76,41 @@ mismo grupo. Entrega el control de sesiones aun con reproducción no habilitada.
 
 ### User Story 2 - Entrar y seguir una clase autorizada (Priority: P1)
 
-Como alumno con matrícula vigente del grupo, quiero encontrar sus sesiones y
-seguir la clase en curso, para recibir la explicación del docente sin acceder
-a clases ajenas. Mi participación audiovisual no forma parte de este incremento.
+Como alumno con matrícula vigente quiero encontrar mis sesiones y reproducir
+la emisión YouTube de prueba dentro del aula. La aplicación controla sus propios
+recursos; el enlace externo puede compartirse y no se anuncia como video protegido.
 
-**Why this priority**: entrega el contenido de la clase y mantiene el acceso
-académico adquirido, también ante referencias compartidas o permisos vencidos.
+**Why this priority**: permite demostrar la clase con el proveedor elegido y
+comprobar acceso vigente al aula sin atribuir controles externos inexistentes.
 
-**Independent Test**: con una sesión ficticia y una emisión autorizada de prueba,
-probar un alumno vigente, uno de otro grupo, uno sin matrícula y uno al finalizar
-su vigencia. La reproducción real y las solicitudes directas requieren la prueba
-de viabilidad; una pantalla simulada no satisface esta historia completa.
+**Independent Test**: con cuentas/contenido autorizados, reproducir YouTube
+realmente; comprobar referencias nuevas y chat propios permitidos/denegados al
+instante exacto. Ensayar referencia compartida aparte y registrar la limitación.
+Un iframe creado o una simulación no acredita reproducción real.
 
 **Acceptance Scenarios**:
 
-1. **Given** alumno activo con matrícula vigente propia, **When** consulta su grupo,
-   **Then** ve las sesiones preparadas, en curso y finalizadas autorizadas, con
-   títulos/estados; las preparadas no reproducen y las finalizadas no ofrecen grabación.
-2. **Given** clase en curso con emisión disponible y permiso actual, **When** el
-   alumno inicia la reproducción, **Then** recibe video autorizado y distingue
-   reproducción de espera por emisión, desconexión o indisponibilidad del servicio.
-3. **Given** visitante, alumno sin matrícula o matriculado en otro grupo, **When**
-   solicita la clase o directamente una referencia de video previamente obtenida,
-   **Then** no recibe contenido ni datos privados de la clase.
-4. **Given** matrícula que alcanza su fin original, **When** se solicita contenido
-   nuevo en ese instante o después, **Then** se deniega aun con la página abierta;
-   inmediatamente antes se permite si cumple las demás condiciones.
-5. **Given** oferta retirada o cambio de docente, **When** el alumno conserva una
-   matrícula vigente y la clase sigue en curso, **Then** esos cambios no revocan por
-   sí mismos su derecho académico; los permisos de emisión del docente se revalidan.
-6. **Given** cierre/revocación de sesión o deshabilitación de cuenta, **When** la
-   conexión ya estaba abierta o llega una respuesta tardía, **Then** se dejan de
-   entregar contenidos nuevos y la interfaz descarta datos de la sesión anterior.
-7. **Given** finalización de clase, **When** se solicita más video mediante una
-   referencia conocida, **Then** se deniega; no se promete borrar contenido ya recibido.
+1. **Given** alumno con matrícula vigente, **When** consulta su grupo, **Then** ve
+   sesiones autorizadas preparadas/en curso/finalizadas; preparadas no reproducen
+   y finalizadas no ofrecen grabación.
+2. **Given** LIVE con referencia configurada y permiso, **When** inicia reproducción,
+   **Then** reproduce YouTube realmente, distingue espera/error/estado y conoce
+   el límite del enlace compartible.
+3. **Given** visitante/sin matrícula/otro grupo, **When** solicita datos o referencia
+   desde Academia, **Then** se deniega; una referencia YouTube ya compartida se
+   ensaya aparte sin prometer denegación por parte del proveedor.
+4. **Given** fin original de matrícula, **When** consulta en ese instante o después,
+   **Then** API/chat/reconexión/referencia nueva se deniegan; la UI retira el player
+   al detectar pérdida. No se acredita revocar el enlace YouTube conocido.
+5. **Given** oferta retirada o cambio docente, **When** mantiene matrícula vigente,
+   **Then** conserva su derecho; la gestión de referencia exige responsable actual.
+   Continuación/revocación de la emisión YouTube se opera y registra manualmente.
+6. **Given** cierre/revocación/deshabilitación, **When** había aula/conexión abierta,
+   **Then** se deniegan entregas propias nuevas y se descartan respuestas y player
+   de la sesión anterior; reproducción externa no se presenta como controlada.
+7. **Given** finalización de clase, **When** pide nueva referencia desde Academia,
+   **Then** se deniega y el player se retira al detectar el cierre; el responsable
+   detiene YouTube manualmente y registra resultado, sin prometer revocar el enlace.
 
 ---
 
@@ -190,11 +184,11 @@ historial visible, permisos y registro de las decisiones.
   en curso se finaliza. Una clase finalizada/cancelada no se reabre ni cambia de grupo.
 - Iniciar no garantiza señal de video. Una interrupción o reinicio no finaliza,
   reinicia ni publica clases automáticamente; la UI muestra indisponibilidad real.
-- Permiso de docente revocado durante emisión o moderación: nuevas acciones y
-  nuevas entregas de su emisión deben quedar denegadas; conservar atribución original
-  y permitir que el responsable actual recupere el control sin heredar secretos.
+- Permiso docente revocado: denegar nuevas acciones de gestión/moderación propias.
+  La emisión YouTube abierta requiere operación manual del titular; no se promete
+  cortarla desde Academia. Responsable actual gestiona referencia sin heredar secretos.
 - Grupo retirado de oferta conserva acceso de alumnos con matrícula vigente;
-  grupo cancelado no permite iniciar sesiones ni entregar contenido nuevo.
+  grupo cancelado no permite iniciar sesiones ni entregar contenido propio nuevo.
 - Vencimiento, revocación, finalización, ocultación o silenciamiento que compiten
   con un envío se resuelven con un orden autoritativo y sin contenido nuevo indebido.
 - Ocultar no permite recuperar texto original por una respuesta tardía, búsqueda
@@ -222,24 +216,32 @@ historial visible, permisos y registro de las decisiones.
 - **FR-004**: Crear o iniciar una sesión NO DEBE equivaler a confirmar emisión
   disponible. El usuario distingue estado de clase, señal disponible, espera y error;
   no se inicia ni reabre una clase automáticamente por horario, señal o reinicio.
-- **FR-005**: El alumno DEBE consultar exclusivamente sesiones no canceladas de sus
-  grupos con matrícula propia vigente. Reserva, pago pendiente, autoría, curso igual
-  u oferta visible no sustituyen la matrícula. Reproducción exige clase en curso.
-- **FR-006**: El permiso DEBE revalidarse en cada operación nueva y durante conexiones
-  persistentes: sesión/cuenta activas, rol actual, grupo, estado de clase y matrícula
-  o asignación/habilitación docente aplicables. Revocación/vencimiento impiden nuevas
-  entregas autorizadas; una conexión establecida no mantiene un derecho anterior.
+- **FR-005**: El alumno DEBE consultar exclusivamente sesiones no canceladas
+  de sus grupos con matrícula propia vigente. Reserva, pago pendiente, autoría, curso
+  igual u oferta visible no sustituyen la matrícula. Entregar desde Academia Virtual
+  la referencia de reproducción del ensayo exige clase en curso; la referencia
+  externa compartida no demuestra autorización por matrícula en YouTube.
+- **FR-006**: El permiso DEBE revalidarse en cada operación y entrega nueva
+  de recursos gestionados por Academia Virtual y durante sus conexiones persistentes:
+  sesión/cuenta activas, rol actual, grupo, estado de clase y matrícula o asignación/
+  habilitación docente aplicables. Revocación/vencimiento impiden nuevas entregas
+  propias. La interfaz descarta respuestas anteriores y retira el reproductor al
+  detectar pérdida de permiso; esto no acredita cortar reproducción externa de YouTube.
 - **FR-007**: La vigencia del alumno DEBE reutilizar inicio/fin originales confirmados
   por 003, con exclusión del instante exacto final. No se extienden fechas, crean
   matrículas ni alteran cupos/órdenes/pagos. Retirar oferta o cambiar docente no revoca
   por sí mismo la matrícula ni convierte al docente anterior en responsable actual.
-- **FR-008**: El video DEBE exigir autorización vigente de la clase incluso en solicitudes
-  directas de manifiestos y segmentos. Proteger la página u ocultar un enlace no basta.
-  No se habilita como video protegido una integración que no demuestre esas condiciones.
-- **FR-009**: Solo el responsable actual autorizado DEBE poder aportar la emisión.
-  Credenciales de emisión no se entregan al alumno ni aparecen en registros públicos;
-  ante cambio/revocación docente se bloquea el uso anterior y se revisa la continuación
-  autorizada. No se promete retirar bytes ya recibidos ni impedir capturas de pantalla.
+- **FR-008**: El ensayo del MVP DEBE usar YouTube Live con OBS, comprobar el
+  acceso autorizado a la referencia que entrega la aplicación y realizar reproducción
+  real. DEBE advertir y registrar que el enlace puede compartirse y que no se acredita
+  autorizar manifiestos/segmentos del proveedor por matrícula o impedir reproducción
+  directa tras vencimiento. La integración NO DEBE anunciarse como video protegido.
+- **FR-009**: Solo el responsable actual autorizado DEBE poder asociar o
+  cambiar la referencia de emisión de una clase dentro de Academia Virtual. Secretos
+  de OBS/YouTube no se entregan al alumno ni se registran en la aplicación. La pérdida
+  de permiso bloquea nuevas acciones propias. Iniciar/detener o revocar una emisión
+  en YouTube requiere la operación del responsable de la cuenta emisora, registrada
+  en el ensayo; no se presume control automático de esa cuenta o de un emisor anterior.
 - **FR-010**: Alumno con matrícula vigente, docente actual habilitado y administrador
   DEBEN leer y enviar texto únicamente en el chat de la sesión en curso autorizada.
   La participación del alumno excluye audio, cámara y transmisión de pantalla.
@@ -278,17 +280,21 @@ historial visible, permisos y registro de las decisiones.
 - **FR-020**: Inicio/finalización/cancelación, moderación y rechazos relevantes DEBEN
   ser atribuibles con actor/fecha/acción/resultado, sin registrar credenciales o cuerpos
   privados en logs generales. El historial interno no se ofrece como una exportación nueva.
-- **FR-021**: La interfaz DEBE distinguir vacío, espera de emisión, cargando, enviado,
-  incierto, desconectado, acceso perdido y fallo recuperable; permitir teclado y uso
-  en computador/móvil, con foco y estados accesibles. Logout/cambio de cuenta descarta
-  mensajes, borradores, conexiones y respuestas tardías de la sesión previa.
+- **FR-021**: La interfaz DEBE distinguir vacío, cargando, emisión no
+  configurada, espera/señal observada, enviado, incierto, desconectado, acceso perdido
+  y fallo recuperable, con teclado, computador/móvil, foco y estados accesibles. DEBE
+  informar que la reproducción YouTube corresponde al ensayo y su enlace puede
+  compartirse. Logout/cambio de cuenta descarta mensajes, borradores, conexiones,
+  reproductor y respuestas tardías de la sesión previa.
 - **FR-022**: Pruebas y recuperación DEBEN conservar sesiones, mensajes, orden y
   moderación confirmados, sin reaperturas, reenvíos o emisión automática. Restore
   exige invalidar accesos restaurados y revisar decisiones posteriores perdidas antes
   de reabrir; no restaura señales audiovisuales ni aprueba D13 por sí solo.
-- **FR-023**: La aceptación DEBE separar gestión/chat locales, emisión y reproducción
-  reales, permisos directos/vencidos, observación humana y capacidad medida. No
-  presenta 2500 activos como logrado ni habilita persistencia/publicación sin D13.
+- **FR-023**: La aceptación DEBE separar gestión/chat, controles propios de
+  Academia Virtual, reproducción YouTube real, limitaciones de acceso externo,
+  observación humana y capacidad medida. NO DEBE presentar el ensayo como protección
+  multimedia por matrícula ni 2.500 activos como logrados. D10/D13 conservan sus
+  puertas; no habilitar persistencia/publicación sin D13. Cloudflare queda fuera del MVP.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -313,12 +319,17 @@ historial visible, permisos y registro de las decisiones.
 - **SC-001**: En todos los escenarios de gestión, responsables permitidos completan
   preparar/iniciar/finalizar; ante dos inicios simultáneos del mismo grupo queda
   exactamente una sesión en curso, sin efectos duplicados por repetición.
-- **SC-002**: En el 100% de la matriz definida por visitante/alumno/docente/admin,
+- **SC-002**: En el 100% de la matriz de visitante/alumno/docente/admin,
   grupo propio/ajeno, sesión activa/revocada y matrícula antes/en/después del fin,
-  el acceso nuevo coincide con FR-005–009/010/015, incluida conexión ya establecida.
-- **SC-003**: Una emisión de prueba autorizada se reproduce realmente y las solicitudes
-  directas sin permiso o vencidas no reciben manifiestos/segmentos nuevos. Registrar
-  calidad, duración y fallos observados; una simulación no cumple este resultado.
+  el acceso a recursos propios coincide con FR-005–009/010/015, incluidas conexiones
+  ya establecidas. Las referencias externas YouTube se observan y reportan como
+  limitación separada; no se cuentan como control propio aprobado.
+- **SC-003**: Una emisión de prueba autorizada YouTube se reproduce realmente
+  en navegador desde una clase en curso. La API deniega obtener referencias nuevas
+  sin permiso, vencido o después de finalizar; la UI retira el reproductor al detectar
+  pérdida de acceso. Registrar duración, calidad, fallos y pruebas con referencia
+  externa compartida, sin presentar estas últimas como acceso protegido o revocado.
+  Una simulación no acredita reproducción real ni control de YouTube.
 - **SC-004**: En cada escenario de intercambio/reconexión, los participantes autorizados
   de una clase reciben exactamente una representación de cada mensaje confirmado,
   en orden, y cero mensajes de otra clase; se rechazan límites y texto inválido.
@@ -328,10 +339,11 @@ historial visible, permisos y registro de las decisiones.
 - **SC-006**: Reinicio y restauración aislados conservan estados/mensajes/moderación
   del punto respaldado; sesiones antiguas denegadas y decisiones posteriores perdidas
   identificadas/revisadas. Verificar que no se duplican envíos ni se reabren clases.
-- **SC-007**: Con consentimiento, un docente y un alumno reales realizan entrar a
-  clase, seguir emisión y participar/consultar chat; un responsable realiza moderación
-  y finalización. Registrar resultado, dificultad y ayuda por dispositivo y teclado,
-  identificando expresamente modalidades no observadas y dependencias de emisión.
+- **SC-007**: Con consentimiento, un docente y un alumno reales realizan
+  entrar a clase, seguir emisión YouTube de prueba y participar/consultar chat; un
+  responsable realiza moderación, finalización y detención manual de emisión en el
+  proveedor. Registrar resultado/dificultad/ayuda por dispositivo/modalidad y
+  limitaciones externas; modalidades no observadas permanecen identificadas.
 - **SC-008**: Cada evaluación de capacidad informa población, activos, conexiones,
   mensajes, reproducciones reales, duración, errores, latencia, recursos y costo
   observados. El objetivo combinado solo se acepta con mezcla/rúbrica D10 acordadas;
@@ -367,11 +379,10 @@ qué verificar; no registra pruebas ejecutadas ni reemplaza la futura matriz té
 | V03 | Moderación inicial | «Docente/admin pueden ocultar mensajes y silenciar a un alumno durante esa clase» | Moderación por responsabilidad actual y restricción acotada a la sesión |
 | V04 | Proveedor de prueba del MVP y evolución posterior | YouTube se usará como prueba del MVP; Cloudflare se prevé después y no entra en este MVP | Mantener YouTube Live + OBS para el ensayo; Cloudflare queda fuera de 005/006/007 y no bloquea por falta de contratación o implementación. La aclaración no acredita protección de video ni modifica por sí sola FR-008/009 o la constitución. |
 
-V04 aclara la secuencia de proveedores, no solicita incorporar Cloudflare ahora.
-La prueba de YouTube debe distinguir reproducción/recorrido demostrado de acceso
-protegido no demostrado. No se exige elegir o contratar un sustituto para ensayar
-el MVP. La discrepancia con la obligación actual queda registrada en
-[G-V005](video-gate.md); no se da por resuelta al llamarlo una prueba.
+| V05 | Aprobación del alcance concreto del ensayo | «entoces la apruebo» | Aprueba la propuesta revisable y enmienda 2.0.0: YouTube de prueba con límite externo; Cloudflare posterior. Validación del profesor pendiente si afecta criterios de evaluación. |
+
+V04 fija proveedores; V05 aprueba el ajuste explícito del alcance. No hay nueva
+aprobación de reproducción, capacidad o publicación por modificar documentos.
 
 ### Supuestos delimitados para este incremento
 
@@ -404,33 +415,23 @@ temporal de 003. Materiales 004 mantiene sus archivos y tareas pendientes T065,
 T066 y T068; no se le atribuye cierre por iniciar 005. No se modifican reglas
 financieras, obligaciones de recuperación ni evidencia de los specs anteriores.
 
-La elección vigente de emisión consta en DEC01; la obligación de acceso protegido
-consta en principio VIII/RF16. La [revisión documental inicial de viabilidad](video-feasibility.md)
-identifica una limitación de la modalidad de enlace oculto y la diferencia entre
-elección de proveedor y cumplimiento demostrado. No se cambia proveedor ni se
-rebaja la protección por iniciar este spec.
-
-Antes de comprometer la implementación de reproducción se DEBE ejecutar una prueba
-autorizada de emisión/reproducción y acceso directo permitido/denegado/vencido,
-registrando recursos, tráfico y costo. Si no cumple, mantener esa parte pendiente
-y presentar alternativas verificables; cambiar una obligación constitucional exige
-su proceso de aprobación y, si afecta evaluación, validación con el profesor.
-Gestión y chat pueden planificarse con límites claros sin simular aceptación de video.
-
-D07/D08, configuración/cuenta emisora autorizada y conexión del docente son
-dependencias de video; D10 lo es de capacidad combinada y D13 de demo persistente
-o publicación. No se contrata VPS, se inicia emisión pública ni se opera con
-cuentas personales mediante esta especificación. El siguiente paso es el plan
-técnico con la investigación/prueba temprana, seguido de tareas y análisis previo
-a implementar. No quedan preguntas de alcance sin respuesta en V01–V03.
+La elección vigente es YouTube Live + OBS para el ensayo aprobado en V05 y
+constitución 2.0.0. [Contrato audiovisual](contracts/video.md) y
+[G-V005](video-gate.md) separan controles propios, reproducción real y límites
+externos. Debe ejecutarse una prueba autorizada antes de aceptar reproducción;
+un doble de tests no la acredita. D07/D08 quedan pendientes de evidencia del ensayo,
+D10 de capacidad combinada y D13 antes de demo persistente o publicación.
+La aprobación del responsable no acredita validación del profesor si afecta evaluación.
+No se contrata infraestructura o emite señal por actualizar el spec.
 
 ### Frontera con los siguientes incrementos
 
 005 entrega sesiones, acceso a clase, chat e historial y moderación de sus cuatro
 historias, con recuperación y comprobaciones propias. No incorpora un rediseño
 global de pantallas, paneles agregados de todos los módulos ni despliegue del MVP.
-La protección real del video sigue siendo requisito de 005; no se traslada su
-incumplimiento a 007 para declarar completa la reproducción mediante un enlace oculto.
+005 verifica el ensayo YouTube y sus controles propios con límites explícitos.
+La protección multimedia completa y Cloudflare quedan fuera del MVP y requieren
+un incremento posterior; 007 no podrá anunciar el ensayo como video protegido.
 
 006 será **Pulido de la aplicación**: navegación por rol, presentación coherente,
 escritorio/móvil, accesibilidad y estados en pantallas anteriores y las de 005

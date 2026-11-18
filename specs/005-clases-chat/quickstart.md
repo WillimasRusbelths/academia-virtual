@@ -1,7 +1,8 @@
 # Preparación y validación prevista — 005
 
-2026-11-17. **Guía de pruebas futuras, no evidencia de ejecución.** Gestión/chat
-tienen diseño parcial; video y aceptación integral siguen en [G-V005](video-gate.md).
+2026-11-17. **Guía de pruebas futuras, no evidencia de ejecución.** Alcance V05 y diseño
+del ensayo sincronizados; [G-V005](video-gate.md) exige evidencia real, no protección
+multimedia externa. [Adopción](evidence/video-scope-adoption.md).
 No hay código, migración, fixtures o scripts de clases implementados todavía.
 
 ## Preparación segura
@@ -70,7 +71,7 @@ No contar archivos encontrados, comandos lanzados o esta guía como pruebas apro
 | Q13 | Logout/cambio cuenta con fetch/socket/borrador pendiente; error logout | Nada de sesión anterior reaparece o se reenvía; estado explícito recuperable. US2.6, FR-021, SC-002/007 |
 | Q14 | Inspeccionar DTOs, logs/errores y auditoría de acciones/rechazos | Sin correos/secretos/texto oculto; actor/fecha/resultado atribuibles. FR-019/020, SC-002/005 |
 | Q15 | Upgrade desde 0009, reinicio y restore en BD nueva con decisiones post-backup | Estados/mensajes/moderación/cursor coherentes; accesos restaurados denegados y pérdidas revisadas. FR-022, SC-006 |
-| Q16 | Video deshabilitado con alumno vigente y ajeno | NOT_CONFIGURED solo al autorizado, sin URL/credencial/iframe; **no acredita US2.2–7 o SC-003**. FR-008/009/023 |
+| Q16 | Asociar/retirar referencia por gestor, revisión/replay, ID/URL/HTML inválidos, player simulado y permiso perdido | ID solo en LIVE vigente; CSP/referer/origin, aviso, teardown y generaciones. Doble no acredita emisión YouTube real o protección externa. FR-005/006/008/009/021/023 |
 
 Carreras Q03/Q04/Q08–Q10 incluyen cambios de asignación/eligibilidad, retirada de
 oferta, cancelación y revocación, con ambos órdenes y estado persistido final.
@@ -84,10 +85,12 @@ No repetir suites por cambios solo documentales en este bloque.
 
 ## Video real — pendiente
 
-Ejecutar la matriz de [G-V005](video-gate.md) después de resolver mecanismo y
-entorno autorizado, antes de comprometer su implementación concreta. Pruebas con
-dobles no cumplen US2/FR-008–009/SC-003. No contratar VPS, emitir en cuentas
-personales o publicar producción para preparar la guía.
+Ejecutar [contrato del ensayo](contracts/video.md) y matriz [G-V005](video-gate.md)
+con cuenta/contenido autorizados después de implementar el contrato propio. Pruebas
+con dobles verifican interfaz pero no completan reproducción US2/SC-003. Registrar
+referencia compartida y límites externos; no exigir denegación multimedia YouTube
+por matrícula. No contratar/publicar o emitir en cuentas personales por iniciativa
+del agente. Validación del profesor pendiente si afecta evaluación.
 
 ## Ensayo humano — pendiente
 

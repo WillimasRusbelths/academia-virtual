@@ -1,29 +1,19 @@
 # Plan técnico: clases en vivo y chat por grupo — 005
 
 **Rama Git**: `feat/005-clases-chat`. **Fecha**: 2026-11-17, America/Lima.
-**Entrada**: [spec.md](spec.md), V01–V03; constitución 1.2.1.
+**Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: diseño parcial, sin implementación.** Gestión de sesiones y chat tienen
-diseño delimitado para generar sus tareas y someterlas a análisis. La puerta
-**G-V005 está NO PASADA**: no existe integración de reproducción protegida
-seleccionada y verificada. El flujo `plan` completo no se declara aprobado;
-US2/FR-008–009/SC-003 y aceptación integral permanecen bloqueados. No hay una
-excepción constitucional ni autorización para publicar, contratar o cambiar DEC01.
-SC-002 conserva pendientes sus casos de video; SC-007, seguir una emisión real;
-SC-008, capacidad observada y combinada. Evidencia local de chat no los cierra.
+**Estado: diseño sincronizado del ensayo MVP; sin implementación.** El responsable
+aprobó V05 y la enmienda 2.0.0. YouTube Live + OBS se usa para probar emisión y
+reproducción, con permisos propios de aula/referencia/chat y límite externo explícito.
+Cloudflare queda fuera del MVP. [Adopción](evidence/video-scope-adoption.md).
 
-**Aclaración posterior V04**: el responsable confirma YouTube como integración de
-prueba del MVP y Cloudflare para una etapa posterior, fuera de este MVP. No incluir
-Cloudflare en tareas o dependencias de 005/006/007, ni exigir seleccionar un gestor
-alternativo para el ensayo. El puerto permite sustituir proveedor en el futuro;
-esta previsión no implementa Cloudflare ni acredita que satisfaga los controles.
-Prueba de reproducción YouTube y aceptación de video protegido se registran por
-separado; V04 no es una enmienda implícita de FR-008/009 o principio VIII.
-
-Se preparó una [propuesta concreta de ajuste del ensayo](evidence/video-scope-proposal.md)
-para revisar texto anterior/propuesto, impacto y aprobación. No se adoptó ni
-modificó la constitución. G-V005 sigue no pasado; el diseño independiente permanece.
+[G-V005](video-gate.md) sigue pendiente de pruebas reales y no es un bloqueo por
+exigir autorización multimedia del proveedor. [Contrato de video](contracts/video.md)
+define referencia/versiones, controles propios, player, CSP y ensayo manual.
+Ningún FR/SC se declara implementado por aprobar el alcance. Validación académica
+pendiente si cambia criterios de evaluación; D10/D13 conservan sus puertas.
 
 ## Summary
 
@@ -37,10 +27,11 @@ necesita sincronizar, sin difundir cuerpos de mensajes. PostgreSQL conserva
 mensajes y una secuencia de cambios por clase; recuperar no depende de que una
 conexión sobreviva. Reautorizar operaciones y avisos; una sala no acredita permiso.
 
-Video queda detrás de un puerto sin adaptador habilitado: no devuelve URL ni
-credenciales, ni presenta una maqueta como reproducción. La
-[investigación](research.md) registra opciones y la [puerta de video](video-gate.md)
-define lo que falta. El resto puede avanzar sin trasladar la protección al spec 007.
+Video usa un puerto separado, inicializado como no configurado; el adaptador futuro
+solo devuelve el ID de ensayo a participantes autorizados de clase LIVE. El
+backend no sirve segmentos, integra cuenta YouTube o almacena streamKeys. Gestión
+y player se construyen bajo el contrato aprobado, con pruebas reales separadas de
+los dobles locales. [Investigación actualizada](research.md).
 
 ## Technical Context
 
@@ -67,24 +58,23 @@ matrícula, asistencia, calificaciones, grabaciones, chat externo o paneles gene
 
 ## Constitution Check
 
-Revisión previa y posterior al diseño, sin enmendar la constitución:
+Revisión del diseño frente a la constitución 2.0.0 adoptada en V05:
 
 | Principio | Diseño y evidencia requerida | Resultado |
 | --- | --- | --- |
-| I. Incrementos | V01–V03; tareas/análisis antes del código | Parcial: sesiones/chat; video sin resolver |
+| I. Incrementos | V01–V05; tareas/análisis antes del código | Diseño de sesiones/chat/ensayo sincronizado; implementación pendiente |
 | II. Backend | Cuenta/sesión/rol y grupo/matrícula actuales en cada operación | Diseñado; matriz/carreras por probar |
 | III–VII. Finanzas | Solo leer derecho original de 003 por contrato público | Sin cambios financieros ni aceptación de Izipay |
-| VIII. Video | Proteger entrega directa y vencida, no solo página | **ERROR G-V005; no habilitar reproducción** |
+| VIII. Video | Ensayo YouTube, permisos propios y límite externo explícito | Alcance aprobado; reproducción real y evidencia pendientes |
 | IX. Entornos | Harness aislado y datos ficticios, sin tocar `.env`/BD manual | Diseñado; sin servicios iniciados |
 | X. Recuperación | Dump conjunto, restore aislado, accesos invalidados | Ensayo futuro; D13 operativo pendiente |
 | XI. Capacidad | Separar cuentas/activos/conexiones/mensajes/video | No medida ni aprobada; D10 pendiente |
 | Arquitectura/costo | Un proceso/pool, fronteras públicas | Compatible para el alcance independiente |
 
-El error de VIII se delimita a reproducción; no se presenta como aprobación
-global del plan. [G-V005](video-gate.md) bloquea adopción del adaptador real y
-cierre de US2/005. Se redactan artefactos independientes de sesiones/chat.
-Antes de implementar: tareas explícitas, análisis consistente y ningún camino
-que entregue video bajo autorización simulada.
+C1 se resuelve como discrepancia de alcance por V05/enmienda 2.0.0; no como
+protección demostrada. No hay excepción tácita o video protegido aprobado.
+Antes de código, revisar tareas/contratos y realizar análisis. La aprobación del
+responsable no sustituye validación académica cuando afecte evaluación.
 
 ## Project Structure
 
@@ -98,14 +88,14 @@ specs/005-clases-chat/
   research.md
   data-model.md
   video-gate.md
-  contracts/{api,realtime,integration,ui}.md
+  contracts/{api,realtime,integration,ui,video}.md
   quickstart.md
   evidence/planning-review.{md,json}
 ```
 
 La lista posterior [tasks.md](tasks.md) organiza T001–T086, todavía sin ejecutar.
-Se generó después de este diseño; no convierte el plan parcial en aprobación
-integral ni resuelve G-V005. El análisis posterior debe comprobar sus dependencias.
+Se generó después del diseño inicial; no acredita implementación o aceptación
+integral. G-V005 exige ensayo real del alcance aprobado; el análisis comprueba dependencias.
 
 ### Source Code (repository root)
 
@@ -116,15 +106,16 @@ apps/api/src/modules/classes/
   domain/{class-session,message,moderation}.ts
   application/{ports,commands,queries}.ts
   public/{classes,errors}.ts
-  infrastructure/{class-store,chat-store,change-store,tickets,video-disabled}.ts
+  infrastructure/{class-store,chat-store,change-store,tickets,video-disabled,video-access}.ts
   entrypoints/http/classes.controller.ts
+  entrypoints/http/video.controller.ts
   entrypoints/realtime/class-socket.ts
 apps/api/src/infrastructure/database/classes-transaction.ts
 apps/api/src/modules/academic-offering/public/classes-access.ts
 apps/api/src/modules/enrollment/public/classes-access.ts
 apps/api/prisma/migrations/0010_classes_chat/migration.sql
 apps/api/tests/integration/classes-*.spec.ts
-apps/web/src/features/classes/{api.ts,management-page.tsx,classroom.tsx,chat.tsx}
+apps/web/src/features/classes/{api.ts,management-page.tsx,classroom.tsx,chat.tsx,video-player.tsx}
 apps/web/src/app/classes-routes.tsx
 apps/web/tests/e2e/classes-*.spec.ts
 apps/web/tests/support/classes-fixture.ts
@@ -150,14 +141,15 @@ de rutas se amplían de forma explícita y con regresión.
    No reenviar comandos automáticamente tras iniciar sesión.
 5. Moderación y UI por rol: generaciones de sesión, conflictos y accesibilidad.
 6. Regresión 001–004, upgrade/reinicio/restore y ensayo humano de lo disponible.
-7. Resolver G-V005 con decisión y prueba temprana antes de implementación concreta
-   de video. Completar sus contratos/tareas y repetir análisis. US2 y cierre
-   integral no se aceptan antes de esa evidencia.
+7. Implementar referencia/gestión/player según contrato del ensayo. Los tests
+   locales pueden usar doble; emisión/reproducción YouTube y permisos propios
+   requieren prueba real autorizada separada. Registrar límites externos,
+   calidad/fallos y operación manual al finalizar antes de aceptar US2.
 
 | Historia / requisitos | Diseño principal | Verificación prevista |
 | --- | --- | --- |
 | US1 / FR-001–004,013,018 | Estados/revisión, índice único parcial, ledger | Dos inicios, docente cambiado, replay/COMMIT incierto |
-| US2 / FR-005–009 | Consulta vigente; puerto video deshabilitado | Matriz/instante exacto; video real **bloqueado** |
+| US2 / FR-005–009 | Consulta vigente, referencia YOUTUBE_DEMO y player | Matriz exacta, límites externos y ensayo real pendiente |
 | US3 / FR-010–015 | HTTP + cambios durables + avisos Socket.IO | Cuota, múltiples conexiones, gaps, reconexión/finalización |
 | US4 / FR-016–020 | Tombstones, silencio por clase, auditoría | Respuesta tardía, carreras y aislamiento |
 | Transversal / FR-021–023 | Generación UI, restore y evidencia separada | Teclado/móvil, cuentas cambiadas, recuperación/capacidad |
@@ -179,11 +171,12 @@ la UI descarta proyecciones anteriores al cambio que ya observó. Documentar esa
 frontera y probar que nuevas consultas/replays no recuperan texto ocultado.
 
 D13 antes de demo persistente/publicación; D10 antes de afirmar capacidad.
-G-V005 conserva D07/D08. No se cierran pendientes de 001–004. 006/007 conservan
+G-V005 conserva la necesidad de evidencia de D07/D08 del ensayo. No se cierran pendientes de 001–004. 006/007 conservan
 su [hoja de ruta](../../docs/planificacion/hoja-ruta-005-007.md), sin implementación.
 
 ## Complexity Tracking
 
-No se solicita excepción. Cambios durables en PostgreSQL y sockets sin texto
-evitan depender de broker/replay de paquetes privados. Video permanece bloqueado
-por una brecha real, sin convertirla en una desviación aceptada.
+La enmienda 2.0.0 aprobada delimita el ensayo; no se solicita excepción adicional.
+Cambios durables en PostgreSQL y sockets sin texto evitan broker/replay privado.
+La referencia de video versionada usa el mismo coordinador/ledger y no convierte
+el backend en distribuidor de video. Cloudflare requiere otro incremento.

@@ -38,7 +38,7 @@ gratuitos ni precios todavía no comprobados.
 | Reserva, orden y matrícula | Reserva previa de 24 h exactas, varios cursos todos o ninguno, precio por curso/PEN conservado, orden desglosada/pago total/matrícula por curso/grupo. Una orden con reservas vigentes por alumno y un grupo por curso, sin duplicados vigentes. Prioridad registrada por servidor; elegibilidad visible/docente/revisión/precio/capacidad al confirmar antes de fecha inicial America/Lima. D06 impide conflictos efectivos propios, contiguos permitidos. Vigencia de matrícula hasta fin de fecha final original. Alumno propio, administrador consulta/seguimiento; docente/visitante sin acceso financiero. | Implementado y verificado localmente en 003/T084: reserva, orden, recuperación, vencimiento y administración. Oferta oculta conserva compromisos/plazo y pausa pago/confirmación total. Bloqueantes vigentes o incidencias impiden cambios estructurales/cancelación; textos/docente según reglas aprobadas. Historial no revive. T042 humana favorable solo en computador; T083/T089/T094 pendientes. D02/D10/D13 no aprobadas. |
 | Pago | Izipay elegida, integración pendiente. Pago total por orden; solo verificación antes de vencer permite matrícula. Tardío o sin plaza válida: pago en conciliación sin matrícula, seguimiento administrativo sin cerrar incidencia ni extender plazo. | Núcleo local de intentos, verificación normalizada, conciliación atómica e incidencias implementado y probado con simulación de test. Adaptador Izipay real y sandbox T056–T059/D02 pendientes; iniciación indisponible sin configuración. Economía fuera del incremento: sin devolución/traslado/asignación manual ni cobros reales antes de política/procedimiento aprobados. |
 | Materiales | Acceso a materiales por curso sujeto a autorización. | Formatos, límites, almacenamiento y reglas de publicación. |
-| Clase en vivo | Emisión del docente con OBS hacia YouTube Live; alumnos como espectadores con participación solo por chat. | Calidad, latencia, simultaneidad, costo y compatibilidad del control de acceso con RF16. |
+| Clase en vivo | Ensayo de emisión OBS → YouTube Live; alumno espectador con chat propio. Aula/referencia autorizadas por Academia, enlace externo compartible. | Calidad, reproducción real, controles propios, límites externos y costo según V05/constitución 2.0.0; Cloudflare fuera del MVP. |
 | Paneles | Vistas básicas para cada rol según sus operaciones autorizadas. | Acciones y datos mínimos por panel. |
 
 ## Exclusiones de esta etapa y del MVP
@@ -71,7 +71,7 @@ externas mantienen sus puertas.
 | Backend | NestJS y TypeScript; monolito modular con identidad/usuarios/autorización/oferta/matrícula. | Reglas, permisos y carreras locales comprobados en T084. Capacidad global no demostrada. |
 | Datos | PostgreSQL y Prisma; siete migraciones aditivas hasta 0007. | Cuatro de identidad, 0005 académica y 0006–0007 de matrícula. Upgrade desde 0005 y restore ficticio T086 comprobados; D13 operativo pendiente. |
 | Chat | Socket.IO con autorización por clase. | Aislamiento de clases, reconexión y carga definida. |
-| Video | OBS del docente → YouTube Live, elección DA03/DEC01 para el MVP. | Integración, acceso directo, permisos vencidos y compatibilidad con RF16; latencia, consumo y costo. |
+| Video | OBS del docente → YouTube Live de prueba; referencia versionada y player con aviso de límite externo. | Integración/ensayo propios D07/D08 pendientes; no acredita revocación del enlace YouTube por matrícula. Cloudflare posterior. |
 | Entorno local | Docker Compose con PostgreSQL, Mailpit, API y web. | Arranque y verificaciones locales comprobados en `47c8338`; no acredita funcionalidades ni producción. |
 | Publicación propuesta | VPS, Nginx/HTTPS y acceso controlado durante apertura de matrícula, manteniendo monolito/PostgreSQL. | D09/D10/D13, costo total y pruebas desde otro equipo; sin despliegue ni contratación. AWS se evaluará después, no se adopta. |
 
@@ -81,9 +81,9 @@ de las reglas de órdenes y matrículas para permitir sustituirlo. Los pendiente
 contexto de esta decisión se registran en D02 de decisiones pendientes.
 
 El diseño debe conservar límites de módulos que permitan evolucionar sin anticipar
-infraestructura distribuida. La viabilidad del video exige una prueba temprana: una
-emisión autorizada, reproducción real, solicitudes directas sin permiso y medición del
-tráfico. Esa prueba no demuestra por sí sola la carga combinada ni el objetivo de 2500 activos.
+infraestructura distribuida. La viabilidad del ensayo exige emisión autorizada, reproducción real, negativas
+de recursos propios y registro de límites externos/tráfico. La protección multimedia
+completa se exige antes de anunciar un incremento posterior como video protegido. Esa prueba no demuestra por sí sola la carga combinada ni el objetivo de 2500 activos.
 
 ## Evidencia requerida para la capacidad
 
@@ -115,3 +115,11 @@ arquitectura y contratar alojamiento. Los incrementos siguientes abarcarán inte
 según dependencias y resultados de esa investigación.
 
 Las decisiones abiertas se mantienen en [decisiones pendientes](decisiones-pendientes.md).
+
+## Alcance audiovisual aprobado V05
+
+Constitución 2.0.0 y [adopción](../specs/005-clases-chat/evidence/video-scope-adoption.md):
+YouTube de prueba, permisos propios intactos y límite de enlace compartible explícito.
+No se incluye Cloudflare en 005/006/007 ni se acredita prueba real por aprobar el alcance.
+Los registros anteriores describen sus checkpoints; validación académica pendiente si
+afecta evaluación, sin cambiar metas ≥15.000 cuentas/2.500 activos ni D10/D13.

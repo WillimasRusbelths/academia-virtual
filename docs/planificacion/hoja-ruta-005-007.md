@@ -13,8 +13,9 @@ como prueba del MVP. Cloudflare se prevé para una etapa posterior y queda fuera
 del alcance de 005, 006 y 007; no se exige implementarlo o contratarlo para esos
 incrementos. Conservar la integración desacoplada facilita esa evolución, sin
 prometer compatibilidad ya implementada. Distinguir la reproducción de prueba
-de YouTube de la protección pendiente: esta aclaración no elimina por sí sola
-FR-008/009, RF16 o principio VIII ni presenta D07/D08 como aprobadas.
+de YouTube de la protección futura. V05 aprobó después la propuesta concreta y
+constitución 2.0.0: controles propios y límite externo explícito; D07/D08 siguen
+pendientes de evidencia real. Validación académica pendiente si afecta evaluación.
 
 | Incremento | Alcance y salida exigida | Qué puede avanzar sin esperar otras brechas |
 | --- | --- | --- |
@@ -39,10 +40,10 @@ de 001–004 ni omitir decisiones de sus responsables.
 - Chat textual con confirmación/repetición segura y recuperación; finalizado,
   historial de solo lectura mientras siga vigente el acceso. Ocultación de
   mensajes y silencio/rehabilitación del alumno solo durante esa clase.
-- Acceso directo y vencido al contenido audiovisual debe comprobarse realmente.
-  La [revisión inicial de video](../../specs/005-clases-chat/video-feasibility.md)
-  no acepta un enlace oculto como protección por matrícula, no cambia proveedor
-  ni rebaja principio VIII/RF16. Esa brecha debe tratarse dentro del trabajo de 005.
+- Ensayo YouTube real con negativas propias de aula/referencia/chat y límites
+  externos conforme a V05/constitución 2.0.0. La [revisión inicial histórica](../../specs/005-clases-chat/video-feasibility.md)
+  no demuestra protección; el [registro de adopción](../../specs/005-clases-chat/evidence/video-scope-adoption.md)
+  documenta el cambio explícito, sin incluir Cloudflare o video protegido completo.
 - No incorpora paneles agregados globales, asistencia/notas, nuevas reglas de
   pagos, grabaciones, participación audiovisual del alumno o despliegue del MVP.
 
@@ -128,7 +129,7 @@ segundo VPS por defecto ni se asume que la laptop soporte 2500 usuarios simulado
 | Administrador | Cuentas, oferta, precios/compromisos/incidencias y seguimiento, materiales y gestión de clases; conservación de bloqueos y auditoría, sin inventar resolución económica |
 | Correo | Mailpit es simulación local; entrega externa, remitente, recuperación, límites y costo necesitan prueba propia para calificarse como integración real |
 | Pagos | Adaptador/proveedor Izipay y sandbox se validan por separado según 003/D02. La carga usa pagos simulados; nunca es evidencia de integración real ni genera cobros reales |
-| Video | Reproducción real del proveedor y acceso directo/vencido según 005; prueba sintética o abrir páginas se declara como tal. No exige a Academia servir segmentos externos si el proveedor los distribuye, pero mantiene el requisito de protección de contenido |
+| Video | Ensayo YouTube con reproducción real, negativas propias según 005 y límites externos declarados; iframe/página o doble no acredita consumidores reales. No exige protección multimedia externa al ensayo ni Cloudflare en el MVP |
 | Chat | Clientes compatibles con el protocolo realmente implementado y autorización de clase; conectividad genérica no acredita intercambio ni recuperación |
 
 Incluir recorrido de extremo a extremo con personas reales por rol y medios
@@ -210,7 +211,9 @@ La prueba debe separar tráfico: login/matrícula/autorización/clases/chat y su
 servidores son Academia; señal y reproducción externa son el proveedor. Si la
 solución elegida hace pasar video por el VPS, medir y presupuestar ese tráfico
 propio adicional; no seguir llamándolo externo para ocultar costos o saturación.
-No se cambia la obligación de proteger solicitudes directas/vencidas de 005.
+V05/constitución 2.0.0 exige negativas directas/vencidas de recursos propios y
+reproducción real del ensayo, declarando límite del enlace externo. Protección
+multimedia completa se valida en un incremento posterior, fuera del MVP.
 
 ### Aprobación, discrepancias y resultados
 

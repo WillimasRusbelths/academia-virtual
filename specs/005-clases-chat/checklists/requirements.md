@@ -57,3 +57,12 @@ secuencia futura; no hay nuevas ramas, código, infraestructura o producción.
 La protección real de video no se retira de 005. El siguiente paso propio de 005
 es planificar, investigar la viabilidad de video y generar/analizar tareas antes
 de implementar; terminar specify no equivale a terminar la funcionalidad.
+
+## Revisión tras aprobación V05
+
+El responsable aprobó la propuesta concreta; constitución 2.0.0 y
+[adopción](../evidence/video-scope-adoption.md) son el alcance actual. Las notas
+anteriores describen sus checkpoints originales. Cuatro historias/24 escenarios/
+23 FR/ocho SC se conservan con criterios del ensayo YouTube, permisos propios y
+límite externo declarado. Cloudflare fuera del MVP; contratos/tareas sincronizados,
+sin implementación, reproducción real o validación académica por esta edición.

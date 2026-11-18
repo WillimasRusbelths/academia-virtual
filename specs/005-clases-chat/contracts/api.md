@@ -26,12 +26,14 @@ No nueva excepción binaria. [Políticas y transacciones](integration.md).
 | POST /classes/sessions/:classId/students/:studentId/unmute | Gestor rehabilita, LIVE |
 | GET /classes/commands/:commandId | Resultado de comando propio con autorización actual |
 | POST /classes/sessions/:classId/socket-tickets | Ticket efímero, no habilita escritura/lectura nueva por sí solo |
-| GET /classes/sessions/:classId/video | Autorizado: NOT_CONFIGURED; no URL/credencial |
+| GET /classes/sessions/:classId/video | LIVE autorizada: CONFIGURED con ID de prueba; sin señal garantizada |
+| GET /classes/sessions/:classId/video-reference | Gestor actual: configuración/revisión, sin secretos |
+| PUT /classes/sessions/:classId/video-reference | Gestor actual PREPARED/LIVE: asociar/retirar ID versionado |
 
-No existe endpoint de emisión o segmentos aprobado en este bloque: [G-V005](../video-gate.md).
+El [contrato de video](video.md) detalla referencia y player del ensayo. No hay endpoint de emisión o segmentos propio. [G-V005](../video-gate.md) exige prueba real.
 PREPARED muestra información, pero messages/changes/tickets requieren LIVE o
 FINISHED; en FINISHED el chat solo permite lectura y ocultación. Grupo cancelado no entrega
-contenido de chat/video nuevo; admin puede consultar metadatos históricos y
+contenido propio de chat/referencia nuevo; admin puede consultar metadatos históricos y
 finalizar/cancelar para cerrar estado, sin reabrir o enviar. Docente ajeno/anterior
 no conserva gestión por autoría. No hay endpoint público de clases/chat.
 
@@ -129,6 +131,8 @@ clases en allowlists específicas, sin ampliar genéricamente contratos previos.
 | 429 | RATE_LIMITED: cuota o admisión por actor; Retry-After técnico |
 | 503 | TEMPORARILY_UNAVAILABLE: BD/recursos, resultado incierto o servicio degradado |
 
-Video deshabilitado es 200 `{data:{status:'NOT_CONFIGURED'}}` para autorizado,
-no un error de permiso ni una supuesta señal disponible. Accesos ajenos mantienen 404.
+Video propio: 200 CONFIGURED con ID solo si LIVE configurada y permiso vigente;
+NOT_CONFIGURED o CLASS_NOT_LIVE sin ID según contrato. CONFIGURED no acredita
+señal ni exclusividad; accesos ajenos mantienen 404. GET video es consulta pasiva,
+sin renovación de inactividad, incluso en sondeo. No retorna streamKey o tokens.
 Sin cache público, logs de texto/cookies/tickets o respuestas de clase tras logout.

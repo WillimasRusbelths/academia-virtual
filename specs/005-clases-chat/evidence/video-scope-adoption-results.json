@@ -1,0 +1,449 @@
+{
+  "date": "2026-11-17",
+  "timezone": "America/Lima",
+  "baseline": "2486034d6be22fd60aad3cc740f7b4599a15aa9b",
+  "status": "V05_ADOPTADA_DOCUMENTALMENTE_PRUEBAS_PENDIENTES",
+  "findings": {
+    "I1": "CORREGIDO",
+    "I2": "CORREGIDO",
+    "C1": "RESUELTO_ALCANCE_APROBADO_NO_ES_PRUEBA"
+  },
+  "implementationPerformed": false,
+  "productTestsExecuted": false,
+  "constitutionAmended": true,
+  "constitutionVersion": "2.0.0",
+  "videoGate": "PRUEBA_REAL_PENDIENTE",
+  "professorValidation": "NO_COMUNICADA_REQUERIDA_SI_AFECTA_EVALUACION",
+  "totalTasks": 86,
+  "completedTasks": 0,
+  "proposal": "specs/005-clases-chat/evidence/video-scope-proposal.md",
+  "adoption": "specs/005-clases-chat/evidence/video-scope-adoption.md",
+  "restoredAssociations": {
+    "FR-001": [],
+    "FR-002": [],
+    "FR-003": [
+      "T006",
+      "T007",
+      "T019",
+      "T022",
+      "T028"
+    ],
+    "FR-004": [
+      "T038",
+      "T039"
+    ],
+    "FR-005": [
+      "T009",
+      "T010",
+      "T011",
+      "T034",
+      "T035",
+      "T036",
+      "T037",
+      "T039"
+    ],
+    "FR-006": [
+      "T009",
+      "T010",
+      "T011",
+      "T034",
+      "T035",
+      "T036",
+      "T037",
+      "T039"
+    ],
+    "FR-007": [
+      "T014",
+      "T060"
+    ],
+    "FR-008": [
+      "T036",
+      "T037",
+      "T038"
+    ],
+    "FR-009": [
+      "T016",
+      "T033",
+      "T034",
+      "T035",
+      "T036",
+      "T037",
+      "T038",
+      "T039",
+      "T081"
+    ],
+    "FR-010": [
+      "T010"
+    ],
+    "FR-011": [
+      "T045",
+      "T060"
+    ],
+    "FR-012": [
+      "T006",
+      "T007",
+      "T021",
+      "T060"
+    ],
+    "FR-013": [
+      "T005",
+      "T006",
+      "T007",
+      "T014",
+      "T015",
+      "T019",
+      "T021",
+      "T022",
+      "T023",
+      "T027",
+      "T028",
+      "T037",
+      "T060",
+      "T067",
+      "T071"
+    ],
+    "FR-014": [
+      "T044",
+      "T051",
+      "T053",
+      "T055",
+      "T056",
+      "T057",
+      "T060",
+      "T079"
+    ],
+    "FR-015": [
+      "T057",
+      "T061"
+    ],
+    "FR-016": [
+      "T006",
+      "T007",
+      "T058",
+      "T066",
+      "T068",
+      "T071"
+    ],
+    "FR-017": [
+      "T006",
+      "T007",
+      "T009",
+      "T012",
+      "T064",
+      "T065",
+      "T067",
+      "T068",
+      "T070",
+      "T071"
+    ],
+    "FR-018": [
+      "T005",
+      "T007",
+      "T009",
+      "T014",
+      "T015",
+      "T018",
+      "T019",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T027",
+      "T028",
+      "T046",
+      "T060",
+      "T065",
+      "T067"
+    ],
+    "FR-019": [
+      "T005",
+      "T007",
+      "T009",
+      "T015",
+      "T017",
+      "T019",
+      "T023",
+      "T024",
+      "T030",
+      "T031",
+      "T037",
+      "T043",
+      "T044",
+      "T047",
+      "T048",
+      "T051",
+      "T052",
+      "T053",
+      "T055",
+      "T064",
+      "T066",
+      "T068",
+      "T070"
+    ],
+    "FR-020": [
+      "T021",
+      "T028",
+      "T046",
+      "T066",
+      "T073"
+    ],
+    "FR-021": [
+      "T017",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T032",
+      "T034",
+      "T038",
+      "T044",
+      "T049",
+      "T050",
+      "T052",
+      "T053",
+      "T054",
+      "T055",
+      "T056",
+      "T057",
+      "T058",
+      "T059",
+      "T064",
+      "T070",
+      "T072",
+      "T081"
+    ],
+    "FR-022": [
+      "T006",
+      "T007",
+      "T008",
+      "T061"
+    ],
+    "FR-023": [
+      "T002",
+      "T004",
+      "T016",
+      "T033",
+      "T034",
+      "T036",
+      "T039",
+      "T040",
+      "T059",
+      "T075",
+      "T079",
+      "T080",
+      "T081",
+      "T082"
+    ],
+    "SC-001": [],
+    "SC-002": [
+      "T028",
+      "T029",
+      "T035",
+      "T036",
+      "T037",
+      "T040",
+      "T076"
+    ],
+    "SC-003": [
+      "T034",
+      "T036",
+      "T038",
+      "T039"
+    ],
+    "SC-004": [
+      "T057",
+      "T076"
+    ],
+    "SC-005": [
+      "T042",
+      "T043",
+      "T059",
+      "T062",
+      "T072",
+      "T076"
+    ],
+    "SC-006": [
+      "T061"
+    ],
+    "SC-007": [
+      "T027",
+      "T034",
+      "T059",
+      "T072"
+    ],
+    "SC-008": [
+      "T062"
+    ]
+  },
+  "coverageIndex": "specs/005-clases-chat/evidence/tasks-coverage.json",
+  "parserRegressionCases": 10,
+  "validationPassed": true,
+  "checks": [
+    {
+      "name": "regresion-parser-10-casos",
+      "pass": true
+    },
+    {
+      "name": "86-tareas-no-completadas",
+      "pass": true
+    },
+    {
+      "name": "ids-unicos-secuenciales",
+      "pass": true
+    },
+    {
+      "name": "rutas-concretas",
+      "pass": true
+    },
+    {
+      "name": "etiquetas-por-fase",
+      "pass": true
+    },
+    {
+      "name": "dependencias-previas-validas",
+      "pass": true
+    },
+    {
+      "name": "T084-no-espera-humanos",
+      "pass": true
+    },
+    {
+      "name": "T085-permite-preliminar",
+      "pass": true
+    },
+    {
+      "name": "T086-sigue-exigiendo-humanos-y-puertas",
+      "pass": true
+    },
+    {
+      "name": "ensayo-sin-bloqueo-de-proteccion-externa",
+      "pass": true
+    },
+    {
+      "name": "31-requisitos-con-asociacion",
+      "pass": true
+    },
+    {
+      "name": "sin-referencias-desconocidas",
+      "pass": true
+    },
+    {
+      "name": "sin-tareas-huerfanas",
+      "pass": true
+    },
+    {
+      "name": "regresion-FR009-FR017-FR021",
+      "pass": true
+    },
+    {
+      "name": "FR-SC-no-afectados-preservados",
+      "pass": true
+    },
+    {
+      "name": "reemplazos-son-texto-aprobado",
+      "pass": true
+    },
+    {
+      "name": "otros-diez-principios-preservados",
+      "pass": true
+    },
+    {
+      "name": "VIII-es-texto-aprobado",
+      "pass": true
+    },
+    {
+      "name": "constitucion-2-ratificacion-sin-scratch",
+      "pass": true
+    },
+    {
+      "name": "alcance-vigente-4-24-23-8",
+      "pass": true
+    },
+    {
+      "name": "evidencias-previas-intactas",
+      "pass": true
+    },
+    {
+      "name": "adopcion-sin-prueba-inventada",
+      "pass": true
+    },
+    {
+      "name": "cloudflare-fuera-del-mvp",
+      "pass": true
+    },
+    {
+      "name": "API-20-rutas-propuestas",
+      "pass": true
+    },
+    {
+      "name": "sondeo-video-no-renueva",
+      "pass": true
+    },
+    {
+      "name": "aplicacion-CI-migraciones-y-specs-cerrados-intactos",
+      "pass": true
+    },
+    {
+      "name": "puntero-y-rama-005",
+      "pass": true
+    },
+    {
+      "name": "cambios-limitados-a-adopcion",
+      "pass": true,
+      "detail": [
+        ".specify/memory/constitution.md",
+        "docs/01-analisis-de-sistema/03-requisitos-funcionales.md",
+        "docs/01-analisis-de-sistema/04-atributos-de-calidad.md",
+        "docs/01-analisis-de-sistema/05-restricciones.md",
+        "docs/01-analisis-de-sistema/06-driver-arquitectonicos.md",
+        "docs/01-analisis-de-sistema/07-decisiones-arquitectonicas.md",
+        "docs/01-analisis-de-sistema/08-escenarios-atributos-calidad.md",
+        "docs/alcance-mvp.md",
+        "docs/decisiones-pendientes.md",
+        "docs/planificacion/hoja-ruta-005-007.md",
+        "ops/specs/validate-005-tasks.mjs",
+        "specs/005-clases-chat/checklists/requirements.md",
+        "specs/005-clases-chat/contracts/api.md",
+        "specs/005-clases-chat/contracts/integration.md",
+        "specs/005-clases-chat/contracts/realtime.md",
+        "specs/005-clases-chat/contracts/ui.md",
+        "specs/005-clases-chat/data-model.md",
+        "specs/005-clases-chat/evidence/tasks-coverage.json",
+        "specs/005-clases-chat/plan.md",
+        "specs/005-clases-chat/quickstart.md",
+        "specs/005-clases-chat/research.md",
+        "specs/005-clases-chat/spec.md",
+        "specs/005-clases-chat/tasks.md",
+        "specs/005-clases-chat/video-feasibility.md",
+        "specs/005-clases-chat/video-gate.md",
+        "specs/005-clases-chat/contracts/video.md",
+        "specs/005-clases-chat/evidence/video-scope-adoption-results.json",
+        "specs/005-clases-chat/evidence/video-scope-adoption.md"
+      ]
+    },
+    {
+      "name": "indice-actual-coincide",
+      "pass": true
+    },
+    {
+      "name": "enlaces-locales",
+      "pass": true,
+      "detail": {
+        "count": 190,
+        "broken": []
+      }
+    }
+  ],
+  "hashes": {
+    "specs/005-clases-chat/tasks.md": "59d10df6f505d7971e9ceb61067813435ddcb38653662007c56ade858846bde0",
+    "specs/005-clases-chat/spec.md": "d42591490cd8bb5104cde8e3338fd4c21265e73030548abd9b42e7bde453de49",
+    "specs/005-clases-chat/plan.md": "ab738fa6f54bec1890b968ed41236e7d6886dd373b3e89efcfe36bc3d90e5a83",
+    "specs/005-clases-chat/contracts/video.md": "f42bfe5c7968bbc9024831d5f9320da998154b89b468c6304d868afd9fde5d25",
+    ".specify/memory/constitution.md": "f3722c0d1597a57b65cd72e3766a387e81a27ddfab4b63db962ea646b6cbcb1b",
+    "specs/005-clases-chat/evidence/video-scope-proposal.md": "f60ff8d73e27aa4bac6bc094ddd34ec06d5c67c5dd96dea39e8200d62015f4c2",
+    "ops/specs/task-references.mjs": "6896e77e0f14fe7b6ad964912a0bbd86efa43dc14c816365053f34b1f00603a2",
+    "ops/specs/validate-005-tasks.mjs": "3f472e7c7db871bd2f0ee3faaf9ec02eb36ad7bc49ec6dc3bcc39d54074167a8",
+    "specs/005-clases-chat/evidence/tasks-generation-results.json": "4d2f6330ed2bb71311e24249de8630330f9bf92d68044033954c3704cfb5c6c5"
+  }
+}

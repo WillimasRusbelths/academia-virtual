@@ -84,11 +84,11 @@ puede hacerlo como en 001. Nunca ampliar caducidad absoluta, renovar por rechazo
 o reutilizar una identidad de otra generación. Pruebas de identidad y sesión son
 regresión obligatoria de esta adaptación.
 
-Política fija del servidor: GET changes y POST socket-tickets nunca llaman accept,
+Política fija del servidor: GET changes, GET video y POST socket-tickets nunca llaman accept,
 incluida su reconexión automática; upgrade/barrido/avisos tampoco. GET messages
 para abrir/paginar y comandos confirmados siguen aceptación HTTP existente. No
-decidir renovación por un flag cliente `intentional`. Sondeo automático solo usa
-GET changes, nunca GET messages u otro endpoint que renueve sesión por actividad.
+decidir renovación por un flag cliente `intentional`. Sondeo automático usa
+GET changes y GET video, nunca GET messages u otro endpoint que renueve sesión por actividad.
 
 ## Recuperación
 
@@ -98,3 +98,10 @@ restore en BD nueva, cuarentena e invalidación existente de accesos restaurados
 Tickets/sockets descartados; estados y moderación permanecen; no reapertura,
 reenvío o emisión automática. Registrar decisiones posteriores perdidas y su
 revisión antes de abrir. D13 externo y rúbrica/capacidad D10 siguen pendientes.
+
+## Referencia del ensayo audiovisual
+
+ClassVideoReference se gestiona con clase UPDATE y revisión independiente, ledger/
+evento/auditoría conjuntos. Cambiar/retirar asociación no controla la cuenta YouTube
+o señal externa. Deltas no incluyen ID de video a alumnos; notifican revisión para
+invalidar player y consultar referencia autorizada LIVE. [Contrato](video.md).

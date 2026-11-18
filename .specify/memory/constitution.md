@@ -65,12 +65,27 @@ Su integración NO está implementada. Siguen pendientes tarifas finales, límit
 al entorno de pruebas y habilitación de Yape para la modalidad contratada. NO se DEBE
 presentar el servicio como ilimitado. Una simulación exitosa NO valida la integración real.
 
-### VIII. Acceso protegido al video
+### VIII. Ensayo audiovisual del MVP y protección del video
 
-El acceso a manifiestos y segmentos HLS DEBE exigir autorización acorde con la clase y
-la matrícula aplicable, también al solicitar directamente sus URL. Ocultar enlaces NO es
-control de acceso. Se DEBEN probar solicitudes autorizadas, no autorizadas y con autorización
-vencida, según el mecanismo elegido. NO se DEBE prometer impedir grabaciones de pantalla.
+Para el ensayo del MVP de clases y chat se permite YouTube Live con OBS y contenido
+de prueba autorizado. Academia Virtual DEBE comprobar sesión, cuenta, rol, clase y
+matrícula o responsabilidad vigente en cada acceso a sus recursos de aula, referencia
+de reproducción y chat. Al perder permiso o finalizar la clase DEBE denegar nuevas
+entregas propias y retirar el reproductor de su interfaz cuando detecte ese cambio.
+
+La prueba de YouTube NO DEBE presentarse como protección del contenido por matrícula:
+una referencia compartida puede permitir reproducción externa, y cerrar el aula o
+revocar una sesión de Academia Virtual no acredita revocar el acceso en YouTube.
+Se DEBEN comprobar y documentar los controles propios y las limitaciones externas
+mediante una emisión y reproducción reales. Ocultar enlaces NO es control de acceso.
+
+Antes de ofrecer una integración como video protegido, el acceso a sus manifiestos
+y segmentos DEBE exigir autorización vigente acorde con la clase y matrícula, también
+por URL directa y con autorización vencida. Se DEBE comprobar asimismo el control del
+emisor actual y la revocación de credenciales y emisiones anteriores. Ese incremento
+se define y valida por separado; Cloudflare se contempla después del MVP y su elección
+futura no acredita esos controles ni autoriza su contratación. NO se DEBE prometer
+impedir grabaciones de pantalla.
 
 ### IX. Separación de entornos
 
@@ -122,8 +137,10 @@ no se rebautiza como validación de 2500 ni se elimina por el nuevo objetivo.
   para permitir cambiar de pasarela sin redefinir esas reglas. La elección del proveedor
   NO resuelve las decisiones de reservas, vigencia, reembolsos ni confirmación de pagos.
 - La base técnica propuesta es React, TypeScript y Vite; NestJS y TypeScript como monolito
-  modular; PostgreSQL con Prisma; Socket.IO autorizado por clase; OBS → SRS → HLS con
-  HLS.js o reproducción nativa; Docker Compose local; y Nginx con HTTPS para publicación.
+  modular; PostgreSQL con Prisma; Socket.IO autorizado por clase; OBS → YouTube Live para
+  el ensayo audiovisual del MVP; Docker Compose local; y Nginx con HTTPS para publicación.
+  SRS/HLS se conserva como alternativa histórica no adoptada; Cloudflare se evaluará
+  fuera del MVP en un incremento separado, sin contratación implícita.
   Estas tecnologías DEBEN evaluarse en los planes; su registro NO acredita instalación
   ni viabilidad. Los cambios DEBEN justificar su relación con alcance, costo y evidencia.
 - La viabilidad del video, su autorización, ancho de banda y costo DEBEN someterse a una
@@ -160,10 +177,13 @@ La validación de capacidad DEBE documentar por separado:
 - **Chat:** conexiones autorizadas por clase, distribución por grupos, frecuencia de
   mensajes, duración y reconexiones. La herramienta y el cliente de prueba DEBEN hablar
   el protocolo Socket.IO utilizado; una conexión WebSocket aislada no basta para validarlo.
-- **Video:** consumidores que descarguen realmente manifiestos y segmentos HLS durante
-  el período de medición, con la autorización prevista. Abrir 1000 páginas NO demuestra
-  1000 reproducciones. Registrar tasa de descarga, calidad/bitrate, emisiones simultáneas,
-  tráfico y fallos; distinguir descarga de segmentos de reproducción fluida en navegador.
+- **Video del ensayo MVP:** consumidores que reproduzcan realmente YouTube en navegador
+  durante el período medido; abrir páginas o crear iframes NO demuestra reproducciones.
+  Registrar reproducción observada, calidad/bitrate cuando sean medibles, duración,
+  emisiones simultáneas, tráfico observable y fallos; declarar métricas no observables
+  y limitaciones del proveedor. Separar controles propios de acceso del contenido externo.
+  Para una integración futura de video protegido, medir además solicitudes reales de
+  manifiestos/segmentos con su autorización, distinguiendo descarga de reproducción fluida.
 
 Cada informe DEBE registrar versión del código, configuración y scripts reproducibles sin
 secretos, infraestructura, duración, patrón y carga alcanzada, concurrencia, solicitudes
@@ -203,4 +223,14 @@ evidencias anteriores con su versión original; sin cambios de código, esquema,
 plantillas o configuración. Las demás decisiones y puertas conservan sus propios
 estados y aprobaciones, sin aceptación funcional ni capacidad acreditada.
 
-**Versión**: 1.2.1 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-10-30
+Enmienda **2.0.0**, 2026-11-17: el responsable aprobó expresamente «entoces la apruebo»
+después de revisar la propuesta de ensayo YouTube. Es MAJOR porque el MVP de prueba deja
+de exigir que YouTube autorice sus entregas multimedia por matrícula; se mantiene esa
+obligación antes de ofrecer una integración como video protegido. Los permisos propios
+de aula/referencia/chat, materiales y finanzas no se reducen. Se sincronizan orientación
+tecnológica y medición del ensayo. Cloudflare queda fuera de 005/006/007. El alcance
+aprobado no acredita implementación, reproducción real o capacidad. La validación del
+profesor sigue pendiente si el cambio afecta criterios de evaluación; no se declara
+aceptación académica del criterio modificado. Ratificación original preservada.
+
+**Versión**: 2.0.0 | **Ratificación**: 2026-09-22 | **Última modificación**: 2026-11-17

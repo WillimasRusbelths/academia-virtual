@@ -84,7 +84,7 @@ No hay segundo envío automático. Error previo a commit no crea resultado aplic
 
 PK `(classId,eventSeq)`; eventSeq >0, asignado desde lastEventSeq con clase UPDATE.
 Tipos CREATED/EDITED/STARTED/FINISHED/CANCELLED/MESSAGE_SENT/MESSAGE_HIDDEN/
-STUDENT_MUTED/STUDENT_UNMUTED. Referencias mínimas, actor interno, occurredAt,
+STUDENT_MUTED/STUDENT_UNMUTED/VIDEO_REFERENCE_CHANGED. Referencias mínimas, actor interno, occurredAt,
 messageId/targetStudentId/revisión según tipo. **Sin cuerpo original serializado.**
 
 Registro append-only, persistido junto con efecto/receipt/auditoría. Replay/NO_CHANGE
@@ -109,12 +109,25 @@ mapa máximo 3.000 entradas y 4 pendientes por sesión; sin renovación automát
 Rechazar admisión al alcanzar límite; eliminar expirados/consumidos. El ticket
 no sobrevive reinicio/restore ni autoriza contenido por sí mismo.
 
-## VideoAccess — sin modelo productivo aprobado
+## ClassVideoReference — referencia de ensayo aprobada, todavía sin implementar
 
-Puerto de consulta con estado NOT_CONFIGURED, sin URL/credencial. No añadir columnas
-de streamKey o enlaces de YouTube como si fuesen secretos protegidos. La entidad
-de emisión del spec requiere diseño definitivo después de [G-V005](video-gate.md).
-Ese componente falta de forma explícita; no se sustituye por una implementación ficticia.
+PK classId, FK RESTRICT a ClassSession. provider constante YOUTUBE_DEMO;
+videoId null o 11 caracteres ASCII `[A-Za-z0-9_-]`, sin URL/HTML/secretos;
+revision bigint ≥1, updatedBy FK User y updatedAt timestamptz(6). Sin fila se
+proyecta revisión 0 y referencia no configurada. Retirar referencia conserva fila
+con videoId null e incrementa revisión. No modifica estado o revisión de gestión.
+
+PUT usa commandId/expectedRevision y clase UPDATE; evento VIDEO_REFERENCE_CHANGED,
+ledger/auditoría atómicos. Añadir el tipo al log ClassChange, con referencia/revisión,
+sin ID multimedia en deltas a alumnos cuando no puedan obtener reproducción. El
+delta invalida el player; el ID se pide de nuevo por consulta autorizada LIVE.
+Gestor actual edita solo PREPARED/LIVE de grupo no cancelado; no hereda secretos
+de una cuenta emisora. La migración 0010 propuesta incluye esta tabla, aún no aplicada.
+
+VideoAccess devuelve CONFIGURED/NOT_CONFIGURED/CLASS_NOT_LIVE bajo permiso actual,
+según [contrato](contracts/video.md). CONFIGURED no acredita señal o protección.
+Emisión/detención y credencial OBS se gestionan manualmente en el proveedor.
+Cloudflare/protección multimedia posterior quedan fuera del modelo del MVP.
 
 ## Recuperación e integridad
 

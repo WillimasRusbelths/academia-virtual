@@ -39,7 +39,7 @@ no sustituye comprobación antes de operación/aviso. Heartbeats técnicos no re
 aceptación; el endpoint de sondeo automático/sync no debe renovar por mero tráfico
 de fondo. Adaptar esa distinción explícitamente en el interceptor con sus pruebas,
 sin cambiar caducidad absoluta o reglas de identidad.
-La política fija excluye GET changes y POST socket-tickets de accept, incluso al
+La política fija excluye GET changes, GET video y POST socket-tickets de accept, incluso al
 reconectar. No usa un indicador del cliente para decidir si renueva inactividad.
 
 Un commit puede generar un aviso por socket autorizado; agrupar avisos cuando ya

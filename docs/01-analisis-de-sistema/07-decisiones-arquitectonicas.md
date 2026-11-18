@@ -23,7 +23,7 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 | R10 | Pruebas de carga y optimización basada en mediciones. | DA05 | Dimensionar consultas, conexiones y recursos con evidencia. | Estrategia aceptada; 2500 usuarios concurrentes activos pendientes de demostrar. |
 | R11, R12 | Docker Compose para una operación local reproducible. | DA04, DA10 | Ejecutar dependencias y aplicaciones con configuración y procedimiento comunes. | Entorno local comprobado en el commit 47c8338. |
 | D02 | Izipay mediante un adaptador; PostgreSQL, transacciones e idempotencia para pagos y matrículas. | DA02, DA06 | Verificar el pago y evitar duplicados o inconsistencias entre cobro y acceso. | Pasarela elegida; integración y reglas pendientes. |
-| DEC01 | Video mediante YouTube Live con OBS. | DA03 | Externalizar emisión y distribución dentro de las restricciones del proyecto. | Elección aceptada; integración y control de acceso pendientes de validación. |
+| DEC01 | Ensayo YouTube Live con OBS, permisos propios y límite externo explícito. | DA03 | Externalizar distribución del ensayo sin prometer autorización multimedia por matrícula. | Alcance V05 aprobado; implementación/reproducción real pendientes. Cloudflare fuera del MVP. |
 | D13 | Respaldo y recuperación verificables, con políticas operativas por definir. | DA08 | Recuperar datos y restablecer un estado seguro tras un incidente. | Necesidad aceptada; políticas propuestas y restauración pendientes. |
 
 ## R01 — Estructura y dependencias internas
@@ -122,13 +122,20 @@ Se conservan los identificadores R01–R12 de la [investigación de identidad](.
 - **Consecuencias y limitaciones:** condiciones comerciales y acceso a pruebas de Izipay están pendientes. D01–D06 deben resolver atomicidad por orden, cupos, vigencia y demás reglas antes de implementar; los mecanismos técnicos no resuelven esas políticas.
 - **Estado:** elección de pasarela aceptada y mecanismos exigidos por los requisitos; integración e implementación pendientes. No hay pagos ni matrículas validados.
 
-## DEC01 — Emisión y acceso al video
+## DEC01 — Ensayo YouTube y acceso propio al aula
 
-- **Contexto:** DA03 exige viabilidad económica y acceso restringido; RF16, AC04 y RT08 mantienen condiciones de protección por comprobar.
-- **Decisión:** utilizar YouTube Live con OBS para emisión y distribución, conforme a la selección vigente en DA03.
-- **Justificación:** delegar distribución evita operar infraestructura propia de video dentro del plazo y presupuesto disponibles.
-- **Consecuencias y limitaciones:** validar compatibilidad con los controles exigidos por RF16, incluido acceso directo y permisos vencidos. Una página autenticada o un enlace no publicado no demuestran restricción del video; tampoco se garantiza impedir grabaciones. Si la elección no satisface esos controles, se requiere revisar la decisión.
-- **Estado:** elección aceptada; integración, reproducción y control de acceso pendientes de validación. Las formulaciones de protección de video en otros documentos permanecen pendientes de compatibilidad con esta elección.
+- **Contexto:** V05/constitución 2.0.0 aprueban el ensayo MVP; RF16/AC04/RT08
+  distinguen controles propios y límite del enlace externo. No se cambia proveedor.
+- **Decisión:** YouTube Live con OBS para emisión/reproducción de prueba. Cuenta
+  emisora y señal se operan manualmente; Academia gestiona referencia bajo permiso.
+- **Justificación:** permite demostrar clases/chat con el proveedor elegido y
+  conservar un puerto sustituible, sin anunciar exclusividad del contenido.
+- **Consecuencias:** referencia obtenida puede compartirse; perder matrícula,
+  cerrar aula o finalizar no revoca por sí solo la reproducción externa. Denegar
+  entregas propias y retirar player al detectar pérdida; ensayar límites reales.
+- **Estado:** aprobación responsable registrada; implementación/prueba/capacidad
+  y validación del profesor si afecta evaluación pendientes. Cloudflare y video
+  protegido completo requieren otro incremento. [Adopción](../../specs/005-clases-chat/evidence/video-scope-adoption.md).
 
 ## D13 — Disponibilidad y recuperación
 
