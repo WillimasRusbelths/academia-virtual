@@ -13,6 +13,14 @@ excepción constitucional ni autorización para publicar, contratar o cambiar DE
 SC-002 conserva pendientes sus casos de video; SC-007, seguir una emisión real;
 SC-008, capacidad observada y combinada. Evidencia local de chat no los cierra.
 
+**Aclaración posterior V04**: el responsable confirma YouTube como integración de
+prueba del MVP y Cloudflare para una etapa posterior, fuera de este MVP. No incluir
+Cloudflare en tareas o dependencias de 005/006/007, ni exigir seleccionar un gestor
+alternativo para el ensayo. El puerto permite sustituir proveedor en el futuro;
+esta previsión no implementa Cloudflare ni acredita que satisfaga los controles.
+Prueba de reproducción YouTube y aceptación de video protegido se registran por
+separado; V04 no es una enmienda implícita de FR-008/009 o principio VIII.
+
 ## Summary
 
 Añadir `classes` al monolito: sesiones manuales por grupo, una sola en curso;

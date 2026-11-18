@@ -8,6 +8,14 @@ permanece en 005; esta hoja no sustituye specify/plan/tasks de los futuros specs
 
 ## Secuencia y dependencias
 
+**Aclaración posterior V04 — proveedor de video**: YouTube Live + OBS se usará
+como prueba del MVP. Cloudflare se prevé para una etapa posterior y queda fuera
+del alcance de 005, 006 y 007; no se exige implementarlo o contratarlo para esos
+incrementos. Conservar la integración desacoplada facilita esa evolución, sin
+prometer compatibilidad ya implementada. Distinguir la reproducción de prueba
+de YouTube de la protección pendiente: esta aclaración no elimina por sí sola
+FR-008/009, RF16 o principio VIII ni presenta D07/D08 como aprobadas.
+
 | Incremento | Alcance y salida exigida | Qué puede avanzar sin esperar otras brechas |
 | --- | --- | --- |
 | 005 — Clases en vivo y chat por grupo | [Especificación terminada](../../specs/005-clases-chat/spec.md): gestión manual, acceso autorizado, chat/historial y moderación; luego plan, tareas, análisis e implementación con evidencia | Gestión/chat se pueden planificar por separado de la prueba de emisión; no declarar reproducción protegida completa si falla su control de acceso |

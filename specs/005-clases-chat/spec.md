@@ -6,7 +6,7 @@ merge del PR #5. La especificación inicial se redactó en
 
 **Created**: 2026-11-17, America/Lima.
 
-**Status**: Especificado y aclarado en tres decisiones de alcance; pendiente de
+**Status**: Especificado y aclarado en cuatro decisiones de alcance; pendiente de
 plan, tareas, implementación y verificación. Viabilidad del video protegido
 D07/D08 pendiente; esta especificación no acredita reproducción o protección.
 
@@ -356,6 +356,13 @@ qué verificar; no registra pruebas ejecutadas ni reemplaza la futura matriz té
 | V01 | Organización e inicio de sesiones | «Sesiones manuales; una en vivo por grupo» | Gestión por docente propio/admin, sin creación automática por horario; una sola en curso por grupo |
 | V02 | Chat al finalizar | «Conservar historial de solo lectura mientras la matrícula siga vigente» | Finalizar bloquea envío, permite lectura vigente; no aprueba retención interna infinita |
 | V03 | Moderación inicial | «Docente/admin pueden ocultar mensajes y silenciar a un alumno durante esa clase» | Moderación por responsabilidad actual y restricción acotada a la sesión |
+| V04 | Proveedor de prueba del MVP y evolución posterior | YouTube se usará como prueba del MVP; Cloudflare se prevé después y no entra en este MVP | Mantener YouTube Live + OBS para el ensayo; Cloudflare queda fuera de 005/006/007 y no bloquea por falta de contratación o implementación. La aclaración no acredita protección de video ni modifica por sí sola FR-008/009 o la constitución. |
+
+V04 aclara la secuencia de proveedores, no solicita incorporar Cloudflare ahora.
+La prueba de YouTube debe distinguir reproducción/recorrido demostrado de acceso
+protegido no demostrado. No se exige elegir o contratar un sustituto para ensayar
+el MVP. La discrepancia con la obligación actual queda registrada en
+[G-V005](video-gate.md); no se da por resuelta al llamarlo una prueba.
 
 ### Supuestos delimitados para este incremento
 

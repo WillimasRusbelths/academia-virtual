@@ -1,7 +1,8 @@
 # G-V005 — decisión y prueba temprana de video protegido
 
-2026-11-17, America/Lima. **NO PASADO / BLOQUEANTE para reproducción real y cierre
-integral de 005.** Documento de planificación; ningún ensayo ejecutado.
+2026-11-17, America/Lima. **NO PASADO / BLOQUEANTE para aceptar reproducción como
+video protegido y para el cierre integral de 005.** Documento de planificación;
+ningún ensayo ejecutado. No impide preparar el ensayo separado de YouTube.
 
 DEC01/DA03 mantiene YouTube Live + OBS. El principio VIII y FR-008/009 exigen
 autorización vigente en solicitudes directas, vencimiento y control del emisor
@@ -10,6 +11,13 @@ anterior. La [viabilidad inicial](video-feasibility.md) y la
 
 ## Opciones revisables
 
+**Aclaración V04 del responsable**: YouTube será la integración de prueba del MVP;
+Cloudflare se contempla después, fuera del MVP. No añadir Cloudflare ni otro
+gestor como requisito de 005/006/007. Las opciones de esta tabla se conservan como
+investigación, no como selección necesaria antes de probar YouTube. Un ensayo
+aislado/autorizado puede acreditar reproducción y recorrido observado, manteniendo
+la limitación de protección identificada y sin cerrar SC-003 por esa sola prueba.
+
 | Opción | Estado y decisión necesaria |
 | --- | --- |
 | Mecanismo permitido de YouTube que cumpla las condiciones | No identificado; demostrar antes de adoptar. Un iframe oculto no basta. |
@@ -17,9 +25,10 @@ anterior. La [viabilidad inicial](video-feasibility.md) y la
 | OBS → SRS → HLS con origen privado y autorización propia | Alternativa condicional, no adoptada. Revisar DEC01 y medir recursos/tráfico/costo. El VPS atendería video. |
 | Enlace oculto con protección menor | Cambia una obligación: requiere proceso de enmienda y aprobación del responsable/profesor cuando afecte evaluación. Fuera de esta decisión técnica. |
 
-**Recomendación actual**: conservar el bloqueo y avanzar sesiones/chat de forma
-independiente; comparar alternativas protegidas antes de elegir alojamiento.
-La propuesta SRS de la constitución no sustituye automáticamente DEC01.
+**Dirección actual tras V04**: preparar la prueba de YouTube y avanzar sesiones/chat,
+separando evidencia de reproducción de protección pendiente. Evaluar Cloudflare
+después del MVP; no contratarlo o implementarlo en esta secuencia. La propuesta
+SRS de la constitución tampoco sustituye automáticamente DEC01.
 
 ## Evidencia que abre la puerta
 
