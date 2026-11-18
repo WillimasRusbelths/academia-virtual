@@ -16,6 +16,7 @@ export interface ClassesTransactionContext {
   readonly actor: SessionActor;
   readonly groups: readonly ClassesGroupSnapshot[];
   readonly classId: string | null;
+  readonly commandId?: string;
   readonly mode: 'READ' | 'WRITE';
   readonly decision: ClassDecision;
   assertActive(): void;
@@ -33,7 +34,11 @@ export type ClassesTransaction = <T>(actor: SessionActor, permission: ClassesPer
 class TopologyChanged extends Error { readonly transactionAborted = true; }
 const keys = ['accountIds', 'courseIds', 'groupIds', 'classIds'] as const;
 async function discover(client: PoolClient, offering: ClassesGroupAccess, actor: SessionActor, target: ClassesTarget): Promise<ClassesTopology> {
-  const classId = target.kind === 'CLASS' ? target.id : target.kind === 'STUDENT' ? target.classId : null;
+  // Discovery exposes references only, not a receipt or stored payload. Re-read
+  // after actor/resource locks before any result is projected.
+  const classId = target.kind === 'CLASS' ? target.id : target.kind === 'STUDENT' ? target.classId
+    : target.kind === 'COMMAND' ? (await client.query<{ classId: string }>(
+      'SELECT "classId" FROM "ClassCommand" WHERE "actorId"=$1 AND "commandId"=$2', [actor.userId, target.id])).rows[0]?.classId : null;
   const groupId = target.kind === 'GROUP' ? target.id :
     (await client.query<{ groupId: string }>('SELECT "groupId" FROM "ClassSession" WHERE id=$1', [classId])).rows[0]?.groupId;
   const groups = await offering.discover(groupId ? [groupId] : []);
@@ -52,7 +57,8 @@ export function createClassesTransaction(pool: Pool, dependencies: ClassesTransa
   return async (actor, permission, input, mode, apply) => {
     if (!permits(actor.role, permission) || !['classes:manage-all', 'classes:manage-own', 'classes:participate-enrolled'].includes(permission))
       throw new AuthorizationFailure('FORBIDDEN');
-    if (!['READ', 'WRITE'].includes(mode) || !['GROUP', 'CLASS', 'STUDENT'].includes(input.kind)) throw new ClassError('FORBIDDEN');
+    if (!['READ', 'WRITE'].includes(mode) || !['GROUP', 'CLASS', 'STUDENT', 'COMMAND'].includes(input.kind)
+      || input.kind === 'COMMAND' && mode !== 'READ') throw new ClassError('FORBIDDEN');
     if (input.kind === 'STUDENT' && actor.role === 'STUDENT' || input.kind === 'GROUP' && actor.role === 'STUDENT' && mode === 'WRITE')
       throw new ClassError('FORBIDDEN');
     const ids = input.kind === 'STUDENT' ? [input.classId, input.studentId] : [input.id];
@@ -87,10 +93,10 @@ export function createClassesTransaction(pool: Pool, dependencies: ClassesTransa
       });
       try {
         const groups = await offering.snapshots(found.groupIds, actor.role === 'STUDENT' ? 'STUDENT' : undefined);
-        if (groups.length !== 1) throw new ClassError('NOT_FOUND');
+        if (groups.length !== 1 && !(target.kind === 'COMMAND' && groups.length === 0 && found.classIds.length === 0)) throw new ClassError('NOT_FOUND');
         const group = groups[0], enrollment = dependencies.enrollment(client, scope);
-        if (actor.role === 'TEACHER' && (group.teacherUserId !== actor.userId || !group.teacherEligible || group.state === 'CANCELLED')) throw new ClassError('NOT_FOUND');
-        if (actor.role === 'STUDENT' && (group.state === 'CANCELLED' || !await enrollment.hasAccess(actor.userId, group.groupId, decision))) throw new ClassError('NOT_FOUND');
+        if (group && actor.role === 'TEACHER' && (group.teacherUserId !== actor.userId || !group.teacherEligible || group.state === 'CANCELLED')) throw new ClassError('NOT_FOUND');
+        if (group && actor.role === 'STUDENT' && (group.state === 'CANCELLED' || !await enrollment.hasAccess(actor.userId, group.groupId, decision))) throw new ClassError('NOT_FOUND');
         if (target.kind === 'STUDENT') {
           const students = await dependencies.authors(client, assertActive, [target.studentId]).byIds([target.studentId]);
           if (students[0]?.role !== 'STUDENT' || !await enrollment.hasAccess(target.studentId, group.groupId, decision)) throw new ClassError('NOT_FOUND');
@@ -103,7 +109,7 @@ export function createClassesTransaction(pool: Pool, dependencies: ClassesTransa
           UNION ALL SELECT "occurredAt" FROM "ClassChange" WHERE "classId"=ANY($1::uuid[])) known`, [found.classIds])).rows[0].at;
         if (facts !== null && (!/^-?\d+$/.test(facts) || BigInt(facts) > decision.at)) throw new ClassError('TEMPORARILY_UNAVAILABLE');
         const context: ClassesTransactionContext = Object.freeze({ ...scope, client, actor, groups: Object.freeze(groups),
-          classId: found.classIds[0] ?? null, mode });
+          classId: found.classIds[0] ?? null, mode, ...(target.kind === 'COMMAND' ? { commandId: target.id } : {}) });
         let result: Awaited<ReturnType<typeof apply>>;
         try { result = await apply(context); }
         catch (error) { if (error instanceof Error && !('code' in error)) callbackError = error; throw error; }

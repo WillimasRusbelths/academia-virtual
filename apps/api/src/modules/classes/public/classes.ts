@@ -3,20 +3,21 @@
  * Revision persistida >0; ExpectedRevision permite 0 solo si el recurso no existe.
  * UTCInstant conserva seis decimales de timestamptz(6); no usar Date para autoridad.
  */
+export { normalizeClassTexts, prepareClassSession, transitionClassSession } from '../domain/class-session.js';
+import type { ClassState, ClassTexts } from '../domain/class-session.js';
+export type { ClassState, ClassTexts } from '../domain/class-session.js';
 export type UUID = string;
 export type Revision = string;
 export type ExpectedRevision = string;
 export type EventSeq = string;
 export type UTCInstant = string;
 export type InstantUs = bigint;
-export type ClassState = 'PREPARED' | 'LIVE' | 'FINISHED' | 'CANCELLED';
 export type ClassOperation = 'CREATE' | 'EDIT' | 'START' | 'FINISH' | 'CANCEL'
   | 'SEND' | 'HIDE' | 'MUTE' | 'UNMUTE' | 'VIDEO_REFERENCE_SET';
 export type ClassChangeType = 'CREATED' | 'EDITED' | 'STARTED' | 'FINISHED' | 'CANCELLED'
   | 'MESSAGE_SENT' | 'MESSAGE_HIDDEN' | 'STUDENT_MUTED' | 'STUDENT_UNMUTED' | 'VIDEO_REFERENCE_CHANGED';
 export type ClassResult = 'APPLIED' | 'NO_CHANGE';
 
-export interface ClassTexts { readonly title: string; readonly description: string | null }
 export interface ClassCreateInput extends ClassTexts { readonly commandId: UUID }
 export interface ClassCommandInput { readonly commandId: UUID; readonly expectedRevision: ExpectedRevision }
 export interface ClassEditInput extends ClassCommandInput, ClassTexts {}

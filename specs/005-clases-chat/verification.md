@@ -39,6 +39,18 @@ rotos ni skips; no prueban aún rechazo funcional, permisos o replay HTTP.
 Los fundamentos anteriores mantienen su regresión; las 24 aceptaciones y FR/SC
 conservan PENDIENTE. Siguiente implementación: T020–T023.
 
+Avance T020–T023: [gestión manual de clases en API verificada](evidence/t020-t023.md).
+Las 44 pruebas puras y 55 HTTP preparadas en T018–T019 ya pasan contra funciones
+y handlers reales. Ocho casos nuevos verifican persistencia, rollback, dos
+gestores concurrentes y recuperación de un CREATE cuyo COMMIT confirmó pero cuya
+respuesta se pierde artificialmente. Inventario cerrado de seis rutas aprobado.
+La regresión global pasó 3350/3356; los seis fallos de aislamiento de logs se
+corrigieron en la fixture HTTP nueva y su reejecución posterior a clases pasó
+6/6, con 134/134 casos de clases y 887/887 unitarias. No se repitió la pasada
+global tras ese cambio exclusivo de fixture. No sustituye E2E, carreras T028
+o US1 completa. Las 24 aceptaciones y FR/SC conservan PENDIENTE. Sigue T030–T031
+como soporte de lectura antes de T024–T026.
+
 ## Estados y evidencia
 
 Cada fila empieza PENDIENTE. Cambiar a PROBADO solo con commit, configuración

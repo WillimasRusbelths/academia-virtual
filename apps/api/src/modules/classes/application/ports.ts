@@ -16,6 +16,7 @@ export interface ClassesTopology {
   readonly classIds: readonly UUID[];
 }
 export type ClassesTarget = { readonly kind: 'GROUP' | 'CLASS'; readonly id: UUID }
+  | { readonly kind: 'COMMAND'; readonly id: UUID }
   | { readonly kind: 'STUDENT'; readonly classId: UUID; readonly studentId: UUID };
 export interface ClassesQueries {
   groups(page: ClassesPagination): Promise<ClassesPage<ClassGroup | ManagedClassGroup>>;
@@ -30,6 +31,15 @@ export interface ClassesCommands {
   start(classId: UUID, input: ClassCommandInput): Promise<ClassCommandResponse<ManagedClassSession>>;
   finish(classId: UUID, input: ClassCommandInput): Promise<ClassCommandResponse<ManagedClassSession>>;
   cancel(classId: UUID, input: ClassCommandInput): Promise<ClassCommandResponse<ManagedClassSession>>;
+}
+/** Management use cases depend on transactional persistence, never SQL/Nest. */
+export interface ClassesManagementStore {
+  create(actor: SessionActor, groupId: UUID, input: ClassCreateInput): Promise<ClassCommandResponse<ManagedClassSession>>;
+  edit(actor: SessionActor, classId: UUID, input: ClassEditInput): Promise<ClassCommandResponse<ManagedClassSession>>;
+  start(actor: SessionActor, classId: UUID, input: ClassCommandInput): Promise<ClassCommandResponse<ManagedClassSession>>;
+  finish(actor: SessionActor, classId: UUID, input: ClassCommandInput): Promise<ClassCommandResponse<ManagedClassSession>>;
+  cancel(actor: SessionActor, classId: UUID, input: ClassCommandInput): Promise<ClassCommandResponse<ManagedClassSession>>;
+  command(actor: SessionActor, commandId: UUID): Promise<ClassCommandLookup>;
 }
 export interface ClassesChat {
   send(classId: UUID, input: ClassSendInput): Promise<ClassCommandResponse<ClassMessageView>>;

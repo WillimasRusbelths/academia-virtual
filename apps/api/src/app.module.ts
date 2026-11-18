@@ -68,10 +68,13 @@ import { createClassAuthors } from './modules/users/infrastructure/class-authors
 import { createClassCommandStore } from './modules/classes/infrastructure/command-store.js';
 import { createDisabledClassVideo } from './modules/classes/infrastructure/video-disabled.js';
 import { ClassError } from './modules/classes/public/errors.js';
+import { createClassesCommands } from './modules/classes/application/commands.js';
+import { createClassesManagementStore, createClassSessionStore } from './modules/classes/infrastructure/class-store.js';
+import { ClassesModule } from './modules/classes/classes.module.js';
 
 export const CLASSES_FOUNDATION = 'CLASSES_FOUNDATION';
-/** Authorized foundation only. Application use cases/handlers arrive in later
- * tasks; their unavailable capabilities fail closed instead of faking success. */
+/** Shared transaction and management capabilities. Future read/chat/video
+ * handlers remain unavailable until their dedicated implementation tasks. */
 export function createClassesFoundation(_environment: Environment, pool: Parameters<typeof createClassesTransaction>[0]) {
   const sessions = new PostgresSessionStore(pool);
   const transaction = createClassesTransaction(pool, {
@@ -85,9 +88,10 @@ export function createClassesFoundation(_environment: Environment, pool: Paramet
   });
   const run: ClassesCoordinator['run'] = (actor, permission, target, mode, apply) => transaction(actor, permission, target, mode, async context => {
     const unavailable = async (): Promise<never> => { context.assertActive(); throw new ClassError('TEMPORARILY_UNAVAILABLE'); };
+    const store = createClassSessionStore(context);
     const capabilities: ClassesCapabilities = Object.freeze({ decision: context.decision,
-      queries: Object.freeze({ groups: unavailable, group: unavailable, sessions: unavailable, session: unavailable, command: unavailable }),
-      commands: Object.freeze({ create: unavailable, edit: unavailable, start: unavailable, finish: unavailable, cancel: unavailable }),
+      queries: Object.freeze({ groups: unavailable, group: unavailable, sessions: unavailable, session: unavailable, command: store.command }),
+      commands: store.commands,
       chat: Object.freeze({ send: unavailable, history: unavailable, changes: unavailable }),
       moderation: Object.freeze({ hide: unavailable, mute: unavailable, unmute: unavailable }),
       video: Object.freeze({ reference: unavailable, setReference: unavailable, async access(classId: string) {
@@ -97,7 +101,7 @@ export function createClassesFoundation(_environment: Environment, pool: Paramet
       } }), audit: createClassCommandStore(context).audit });
     return apply(capabilities);
   });
-  return Object.freeze({ run, transaction });
+  return Object.freeze({ run, transaction, management: createClassesCommands(createClassesManagementStore(transaction)) });
 }
 
 export const MATERIALS_FOUNDATION = 'MATERIALS_FOUNDATION';
@@ -136,6 +140,7 @@ export class AppModule {
     const classes = createClassesFoundation(environment, database.pool);
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(sessions,cookie),
+        ClassesModule.forRoot(classes.management),
         MaterialsModule.forRoot(materials, materials.receiveContent, materials.readContent),
         EnrollmentModule.forRoot(new EnrollmentPrices(createEnrollmentPriceStore(database.pool,academicAuthorization,createCourseReferenceParticipant)),
           createEnrollmentQueries(database.pool,academicAuthorization,createReservationOfferingParticipant),createReservationAdmission(database.pool,academicAuthorization),

@@ -1,22 +1,37 @@
 import { randomUUID } from 'node:crypto';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { afterAll, beforeAll, beforeEach, expect, test } from 'vitest';
 import { classesFixture, type ClassesFixture } from '../support/classes.js';
 import { us1Http } from '../support/us1-http.js';
 import { financialFingerprint } from '../support/enrollment-maintenance.js';
 import type { ClassCommandResponse, ClassSessionView } from '../../src/modules/classes/public/classes.js';
+import { SecurityEvents } from '../../src/infrastructure/logging/security-events.js';
 
 // T019 uses the real composition, transport, database and session cookies.
 // No test controllers or fake authority. Until T023, the positive route probe
 // fails explicitly: an unregistered route's 404 must not pass security cases.
 let f: ClassesFixture, http: Awaited<ReturnType<typeof us1Http>>, financialBefore: string;
+let logDirectory: string | undefined, logs: SecurityEvents | undefined;
 beforeAll(async () => {
   f = await classesFixture(); financialBefore = await financialFingerprint(f.pool);
-  http = await us1Http({ context: f });
+  // Keep real class security events out of other suites' global identity logs.
+  logDirectory = mkdtempSync(path.join(tmpdir(), 'classes-management-'));
+  logs = new SecurityEvents(logDirectory);
+  http = await us1Http({ context: f }, f.environment.appOrigin, logs);
 }, 120000);
 afterAll(async () => {
   try {
     if (f) expect(await financialFingerprint(f.pool)).toBe(financialBefore);
-  } finally { try { await http?.close(); } finally { await f?.cleanup(); } }
+  } finally {
+    try { await http?.close(); } finally {
+      try { await f?.cleanup(); } finally {
+        logs?.onApplicationShutdown();
+        if (logDirectory && path.dirname(logDirectory) === tmpdir()) rmSync(logDirectory, { recursive: true, force: true });
+      }
+    }
+  }
 });
 beforeEach(async () => {
   const response = await request('GET', `/commands/${randomUUID()}`);

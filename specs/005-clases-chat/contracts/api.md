@@ -1,6 +1,9 @@
 # Contrato HTTP propuesto — clases 005
 
-2026-11-17. **Rutas aún no implementadas.** Prefijo real `/api/v1`; las rutas de
+2026-11-18. **Gestión implementada en T020–T023**: POST groups/:groupId/sessions,
+PATCH sessions/:classId, POST start/finish/cancel y GET commands/:commandId
+([evidencia](../evidence/t020-t023.md)). Las demás rutas siguen propuestas.
+Prefijo real `/api/v1`; las rutas de
 la tabla son relativas a él. JSON cerrado ≤16 KiB, cookie existente, no-store.
 Escrituras exigen Origin exacto, `X-CSRF-Protection: 1` y procedencia verificada.
 No nueva excepción binaria. [Políticas y transacciones](integration.md).

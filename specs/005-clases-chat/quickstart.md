@@ -8,18 +8,18 @@ T008–T009 añaden fixtures y pruebas de autoridad previas al coordinador;
 
 T010–T013 implementan permisos y participantes de oferta, matrícula y autores:
 [evidencia](evidence/t010-t013.md). T014–T017 ya verifica el coordinador y T009:
-[último bloque](evidence/t014-t017.md). Aún faltan handlers y autorización por operación,
-además de recorridos de gestión/chat y transporte.
+[fundamentos](evidence/t014-t017.md). T020–T023 verifica la gestión manual en API:
+[último bloque](evidence/t020-t023.md). Faltan cliente/UI, consultas de aula y chat.
 
 T018–T019 escribe las suites de dominio y HTTP: [informe](evidence/t018-t019.md).
-Se ejecutan con el comando normal de unitarias/integración y fallan explícitamente
-por T020/T023 pendientes. La suite HTTP exige primero una ruta real positiva;
+El checkpoint previo conserva su rojo; ahora pasan con T020–T023 mediante los
+comandos normales de unitarias/integración. La suite HTTP exige primero una ruta real positiva;
 ningún 404 por falta de handler cuenta como denegación de permisos probada.
 
 T001–T004 prepararon entorno/dependencias y [matriz](verification.md).
 T005–T007 implementan contratos/puertos, pruebas SQL y migración 0010:
-[evidencia](evidence/t005-t007.md). Las fixtures compartidas están verificadas; aún no hay gestión/chat
-o transporte de clases. La persistencia no acredita reproducción real.
+[evidencia](evidence/t005-t007.md). Las fixtures compartidas y la gestión de API
+están verificadas; chat, consultas de aula y transporte de esos recursos aún pendientes. La persistencia no acredita reproducción real.
 
 ## Preparación segura
 
@@ -50,7 +50,16 @@ suponer que validan clases antes de que se implemente. Mantener el orden de inic
 corregido del CI: db/mailpit→compatibilidad→migraciones→api/web. No desactivar
 guardas de arranque para compensar una BD sin migrar.
 
-## Comprobaciones automatizadas a implementar
+## Comprobaciones automatizadas
+
+Gestión de backend ya ejecutada en el harness aislado:
+
+```sh
+npm run test:unit --workspace @academia/api -- --maxWorkers=2
+npm exec --workspace @academia/api -- vitest run tests/integration/classes-management-http.spec.ts tests/integration/classes-management-store.spec.ts --maxWorkers=2
+```
+
+### Comprobaciones futuras de aula/chat/UI
 
 Los nombres siguientes son una propuesta de archivos; no existen aún. Desde raíz,
 en el runner aislado y después de compilar/generar clientes:

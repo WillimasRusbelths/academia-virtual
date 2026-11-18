@@ -3,7 +3,9 @@
 2026-11-18. Fronteras de autorización/oferta/matrícula/autores implementadas y
 probadas en T010–T013 ([evidencia](../evidence/t010-t013.md)). Coordinador, ledger y
 composición fundacional verificados en [T014–T017](../evidence/t014-t017.md).
-Los pasos de efectos de gestión/chat y su transporte siguen como contrato de tareas posteriores.
+T020–T023 verifica efectos y seis rutas de gestión ([evidencia](../evidence/t020-t023.md));
+COMMAND descubre referencias propias, revalida topología/autoridad bajo locks y
+solo después lee receipts. Aula/chat y su transporte siguen en tareas posteriores.
 
 ## Fronteras públicas
 

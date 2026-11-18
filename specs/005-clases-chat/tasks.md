@@ -1,10 +1,10 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado**: 19/86 completadas: T001–T019; fundamentos verificados y pruebas US1 escritas.
-T018–T019 están en rojo por las implementaciones pendientes T020–T023; no acreditan comportamiento funcional.
+**Estado**: 23/86 completadas: T001–T023; fundamentos y gestión manual de clases en API verificados.
+Las 44 pruebas de dominio y 55 HTTP de T018–T019 ya pasan con T020–T023; su checkpoint previo se conserva.
 La matriz T009 ya fue ejecutada con el coordinador/composición de T014–T017; no se completan todavía historias o FR/SC.
-El comportamiento funcional de clases/chat y sus FR/SC permanece pendiente.
+El recorrido completo con interfaz, chat y sus FR/SC permanece pendiente; gestión de backend verificada.
 IDs locales a 005. [Spec](spec.md), [plan](plan.md),
 [investigación](research.md), [modelo](data-model.md),
 [HTTP](contracts/api.md), [Socket.IO](contracts/realtime.md),
@@ -57,9 +57,11 @@ T008–T009: [fixtures y pruebas de autoridad](evidence/t008-t009.md). La matriz
 de autoridad se escribió en ese checkpoint y ahora pasa con el coordinador/composición real de T014–T017.
 T010–T013: [permisos y participantes verificados](evidence/t010-t013.md).
 T014–T017: [coordinador, ledger y composición verificados](evidence/t014-t017.md).
-T018–T019: [pruebas de dominio y HTTP escritas, validación funcional pendiente](evidence/t018-t019.md).
-Todavía no se entregan gestión de clases o chat. Siguiente bloque: **T020–T023**,
-reglas puras, persistencia, casos de uso y rutas de gestión; hacer pasar T018–T019.
+T018–T019 conservan su [checkpoint previo de pruebas escritas](evidence/t018-t019.md).
+T020–T023: [gestión manual en API verificada](evidence/t020-t023.md), incluidas esas suites.
+Siguiente bloque: **T030–T031**, consultas compartidas que requiere la gestión;
+después **T024–T026**, cliente, pantalla y navegación por rol.
+Todavía faltan interfaz, recorridos completos, aula y chat.
 Actualizar el índice vigente con `node ops/specs/update-005-coverage.mjs --write`;
 el validador de adopción anterior conserva su checkpoint de cero tareas ejecutadas.
 
@@ -86,16 +88,23 @@ infraestructura ajena o relajar guards. Las historias parten de T017.
 
 ## Fase 3 — US1: preparar y conducir clase (P1, T018–T029)
 
+Orden ajustado al cerrar T020–T023: las lecturas compartidas T030–T031 se
+ejecutan después de T023 y antes de T024–T026. La gestión necesita listar grupos
+y sesiones y recuperar un detalle tras recargar; esos endpoints ya estaban
+especificados, pero su implementación quedaba después del E2E de gestión.
+Se mantienen sus IDs/US2, alcance y permisos; no se marcan completadas por
+corregir esta dependencia. El aula del alumno T032 espera T029 y T031.
+
 Objetivo: gestión manual completa sin necesitar señal. Prueba independiente:
 preparar/iniciar/finalizar con docente propio/admin; dos inicios dejan una LIVE.
 
 - [x] T018 [P] [US1] Escribir pruebas de texto/estados/revisión en `apps/api/src/modules/classes/domain/class-session.test.ts`: Unicode/trim, «Título trim 1–160; descripción null o ≤2000», PREPARED→LIVE→FINISHED o PREPARED→CANCELLED, terminales sin reapertura y edición de textos sin cambiar identidad/estado. FR-001–FR-004/018; US1.1–US1.4/US1.6. Tras T017.
 - [x] T019 [P] [US1] Escribir pruebas HTTP de creación/edición/transiciones y replay en `apps/api/tests/integration/classes-management-http.spec.ts`, incluyendo campos extra, CSRF/origen, permisos perdidos, revisión obsoleta y consulta de commands propia/no confirmada. FR-002/003/013/018/019; US1.5–US1.6. Tras T017.
-- [ ] T020 [US1] Implementar reglas puras en `apps/api/src/modules/classes/domain/class-session.ts`; mantener grupo/creador, fechas y revisiones según T018; iniciar no confirma señal ni disponibilidad, no automatizar por horario/reinicio. FR-001–FR-004. Tras T018–T019.
-- [ ] T021 [US1] Implementar persistencia de creación/textos/estados en `apps/api/src/modules/classes/infrastructure/class-store.ts`: grupo UPDATE al competir inicios, índice LIVE como segunda defensa, evento/receipt/auditoría atómicos y contador de cambios bajo clase UPDATE. FR-003/012/013/018/020. Tras T020.
-- [ ] T022 [US1] Implementar casos de uso en `apps/api/src/modules/classes/application/commands.ts`: autoridad actual antes de ledger, revisión esperada, NO_CHANGE, terminales y COMMIT incierto sin repetir efectos. FR-002/003/013/018. Tras T021.
-- [ ] T023 [US1] Exponer solo rutas de gestión definidas en `apps/api/src/modules/classes/entrypoints/http/classes.controller.ts` y `apps/api/src/modules/classes/classes.module.ts`; crear/editar/start/finish/cancel y GET commands, envelopes/errores por familia e inventario `apps/api/tests/architecture/endpoint-policies.spec.ts`; ejecutar T019. FR-001–FR-004/013/018–FR-020. Tras T022.
-- [ ] T024 [US1] Añadir DTO/cliente cerrado de gestión en `apps/web/src/features/classes/api.ts` y allowlists específicas en `apps/web/src/app/http.ts` y `apps/web/src/shared/api-client.ts`; campos/códigos de clases no amplían contratos anteriores, mismo commandId al consultar/reintentar resultado incierto. FR-013/018/019/021. Tras T023.
+- [x] T020 [US1] Implementar reglas puras en `apps/api/src/modules/classes/domain/class-session.ts`; mantener grupo/creador, fechas y revisiones según T018; iniciar no confirma señal ni disponibilidad, no automatizar por horario/reinicio. FR-001–FR-004. Tras T018–T019.
+- [x] T021 [US1] Implementar persistencia de creación/textos/estados en `apps/api/src/modules/classes/infrastructure/class-store.ts`: grupo UPDATE al competir inicios, índice LIVE como segunda defensa, evento/receipt/auditoría atómicos y contador de cambios bajo clase UPDATE. FR-003/012/013/018/020. Tras T020.
+- [x] T022 [US1] Implementar casos de uso en `apps/api/src/modules/classes/application/commands.ts`: autoridad actual antes de ledger, revisión esperada, NO_CHANGE, terminales y COMMIT incierto sin repetir efectos. FR-002/003/013/018. Tras T021.
+- [x] T023 [US1] Exponer solo rutas de gestión definidas en `apps/api/src/modules/classes/entrypoints/http/classes.controller.ts` y `apps/api/src/modules/classes/classes.module.ts`; crear/editar/start/finish/cancel y GET commands, envelopes/errores por familia e inventario `apps/api/tests/architecture/endpoint-policies.spec.ts`; ejecutar T019. FR-001–FR-004/013/018–FR-020. Tras T022.
+- [ ] T024 [US1] Añadir DTO/cliente cerrado de gestión en `apps/web/src/features/classes/api.ts` y allowlists específicas en `apps/web/src/app/http.ts` y `apps/web/src/shared/api-client.ts`; campos/códigos de clases no amplían contratos anteriores, mismo commandId al consultar/reintentar resultado incierto. FR-013/018/019/021. Tras T031.
 - [ ] T025 [US1] Crear gestión en `apps/web/src/features/classes/management-page.tsx`: preparar/corregir, confirmación explícita de transiciones, conflictos comparables, estado separado de señal, vacío/carga/error y foco accesible. FR-001–FR-004/018/021. Tras T024.
 - [ ] T026 [US1] Integrar rutas/enlace de gestor por rol en `apps/web/src/app/classes-routes.tsx`, `apps/web/src/app/router.tsx`, `apps/web/src/app/App.tsx` y `apps/web/src/features/profile/home-page.tsx`, sin crear dashboard global ni importar lateralmente features. FR-002/021. Tras T025.
 - [ ] T027 [US1] Crear fixture/configuración y E2E en `apps/web/tests/support/classes-fixture.ts`, `apps/web/playwright.classes.config.ts` y `apps/web/tests/e2e/classes-management.spec.ts`: desktop/móvil, teclado, docente/admin/ajeno, conflicto/replay y terminales, sin necesitar emisión real. FR-001–FR-004/013/018/021; SC-001 y parte de SC-002/007. Tras T026.
@@ -108,9 +117,9 @@ Entrega independiente disponible: encontrar sesiones autorizadas y distinguir
 reproducción no habilitada. **US2 completa no está resuelta** por esa entrega.
 YouTube real es un ensayo del MVP; Cloudflare queda fuera. G-V005 exige prueba real y límites externos conforme a constitución 2.0.0.
 
-- [ ] T030 [P] [US2] Escribir matriz PG/HTTP de grupos/sesiones/video deshabilitado en `apps/api/tests/integration/classes-access.spec.ts`: visitante/propio/ajeno/fin±1 μs, sesión revocada, oferta retirada/docente cambiado, grupo cancelado y referencias indistinguibles. FR-005–FR-009/019; US2.1/US2.3–US2.6; SC-002 parcial. Tras T029.
+- [ ] T030 [P] [US2] Escribir matriz PG/HTTP de grupos/sesiones/video deshabilitado en `apps/api/tests/integration/classes-access.spec.ts`: visitante/propio/ajeno/fin±1 μs, sesión revocada, oferta retirada/docente cambiado, grupo cancelado y referencias indistinguibles. FR-005–FR-009/019; US2.1/US2.3–US2.6; SC-002 parcial. Tras T023.
 - [ ] T031 [US2] Implementar grupos/contexto/listas/detalle en `apps/api/src/modules/classes/infrastructure/class-queries.ts` y lecturas HTTP en `apps/api/src/modules/classes/entrypoints/http/classes.controller.ts`: autorizar antes de total, page≥1/pageSize 1–50 (20 defecto), grupos name/id y sesiones createdAt DESC,id DESC; alumno excluye canceladas y no depende de oferta visible/docente habilitado. FR-005–FR-007/019. Tras T030.
-- [ ] T032 [US2] Implementar navegación y aula mínima del alumno en `apps/web/src/features/classes/student-page.tsx`, `apps/web/src/features/classes/classroom.tsx` y `apps/web/src/app/classes-routes.tsx`; distinguir PREPARED/LIVE/FINISHED y señal aún no habilitada, referencias ajenas/permiso perdido, sin iframe supuesto como protegido. FR-004–FR-007/021. Tras T031.
+- [ ] T032 [US2] Implementar navegación y aula mínima del alumno en `apps/web/src/features/classes/student-page.tsx`, `apps/web/src/features/classes/classroom.tsx` y `apps/web/src/app/classes-routes.tsx`; distinguir PREPARED/LIVE/FINISHED y señal aún no habilitada, referencias ajenas/permiso perdido, sin iframe supuesto como protegido. FR-004–FR-007/021. Tras T029 y T031.
 - [ ] T033 [US2] Verificar GET video NOT_CONFIGURED con permiso actual, sin URL/secretos, y pruebas UI en `apps/api/tests/integration/classes-video-disabled.spec.ts` y `apps/web/src/features/classes/classroom.test.tsx`; cerrar evidencia de consulta parcial en `specs/005-clases-chat/evidence/us2-access.md`. No cerrar SC-003. FR-008/009/023. Tras T032.
 - [ ] T034 [P] [US2] Verificar el registro de aprobación V05 y enmienda 2.0.0 en `specs/005-clases-chat/evidence/video-scope-adoption.md` contra la matriz T003: alcance propio/externo, FR-005/006/008/009/021/023, SC-002/003/007 y profesor si afecta evaluación; preservar borrador/checkpoints previos, sin atribuir aceptación académica o reproducción real. FR-008/009/023. Tras T003; compatible con continuar T041.
 - [ ] T035 [US2] Revisar/completar `specs/005-clases-chat/contracts/video.md` y `specs/005-clases-chat/data-model.md` conforme a V05: ClassVideoReference, ID validado/revisión, edición por gestor en PREPARED/LIVE, entrega solo LIVE autorizada, retirada del player y operación manual externa; comprobar límites de G-V005 y fuentes oficiales del player antes de adoptar implementación. FR-005/006/008/009; SC-002/003. Tras T034; diseño ya redactado, sin ejecución por existir el archivo.
@@ -194,7 +203,8 @@ avanzar sin T039; cierre integral no. D10/D13 requieren decisiones/entorno reale
 ```text
 T001 → T002 → {T003,T004} → T005–T009
                            → {T010,T011,T012,T013} → T014–T017
-→ US1 T018–T029 → US2 consulta T030–T033
+→ US1 backend T018–T023 → consultas compartidas T030–T031
+→ US1 cliente/UI/E2E T024–T029 → US2 aula T032–T033
                   ├→ T034 → T035 → T036 → T037 → T038 → T039 → T040
                   │                                    (ensayo real pendiente)
                   └→ US3 T041–T062 → US4 T063–T074 → T075–T079 → T084–T085

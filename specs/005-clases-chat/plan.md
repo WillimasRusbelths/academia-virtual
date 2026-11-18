@@ -4,13 +4,15 @@
 **Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: T001–T019 completadas; fundamentos verificados y pruebas US1 escritas.**
-[T018–T019](evidence/t018-t019.md) conserva 99 casos en rojo por T020–T023 pendientes; no se acredita gestión funcional ni CI verde.
-[Evidencia T014–T017](evidence/t014-t017.md). Gestión/chat/HTTP y pantallas siguen pendientes.
-[Evidencia T010–T013](evidence/t010-t013.md). Los participantes ya se integraron en T014–T017.
-Las 40 pruebas de autoridad T009 ya pasan con el coordinador real; no completan la aceptación de las historias.
-[Evidencia T008–T009](evidence/t008-t009.md).
-Gestión/chat y transporte funcional pendientes. [Evidencia T005–T007](evidence/t005-t007.md).
+**Estado: T001–T023 completadas; fundamentos y gestión manual en API verificados.**
+[Evidencia T020–T023](evidence/t020-t023.md): dominio, persistencia, casos de uso y seis rutas reales.
+Las 44 pruebas puras y 55 HTTP de T018–T019 ya pasan; su [checkpoint previo](evidence/t018-t019.md) se conserva.
+Faltan interfaz/cliente de gestión, consultas de aula, chat, sockets y reproducción real; US1 y FR/SC completos siguen pendientes.
+Orden corregido sin ampliar alcance: T030–T031 tras T023 aporta las consultas
+compartidas que necesita T024–T026. Se conservan IDs/US2 y sus pendientes;
+T032 espera T029 y T031. [Dependencias](tasks.md).
+[Fundamentos T014–T017](evidence/t014-t017.md), [participantes T010–T013](evidence/t010-t013.md),
+[fixtures T008–T009](evidence/t008-t009.md) y [persistencia T005–T007](evidence/t005-t007.md) conservan sus evidencias.
 La preparación conserva su [checkpoint](evidence/t001-t004-results.json). El responsable
 aprobó V05 y la enmienda 2.0.0. YouTube Live + OBS se usa para probar emisión y
 reproducción, con permisos propios de aula/referencia/chat y límite externo explícito.
@@ -101,15 +103,16 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-La lista [tasks.md](tasks.md) organiza T001–T086: diecinueve tareas
-completadas, 67 pendientes. T018–T019 completan la escritura de pruebas, con aceptación pendiente. [Matriz](verification.md) creada en T003; todavía no
+La lista [tasks.md](tasks.md) organiza T001–T086: veintitrés tareas
+completadas, 63 pendientes. Gestión en API verificada; aceptación completa pendiente. [Matriz](verification.md) creada en T003; todavía no
 acredita aceptación funcional. G-V005 exige ensayo real del alcance aprobado.
 
 ### Source Code (repository root)
 
 Contratos/persistencia, fixtures, permisos y participantes de oferta/matrícula/autores
 ya implementados en T005–T013. T014–T017 añade coordinador, ledger, video no
-configurado y composición. Stores de casos de uso y entrypoints aún pendientes:
+configurado y composición. T020–T023 añade dominio/store/casos de uso y seis
+entrypoints de gestión; consultas de aula, chat y sus handlers aún pendientes:
 
 ```text
 apps/api/src/modules/classes/

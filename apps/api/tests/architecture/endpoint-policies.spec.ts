@@ -7,6 +7,13 @@ import { METHOD_METADATA,PATH_METADATA } from '@nestjs/common/constants.js';
 import { expect,test } from 'vitest';
 import { ACCESS_POLICY } from '../../src/modules/authorization/public/session.js';
 import { MATERIALS_MANAGEMENT_POLICY, MATERIALS_READ_POLICY } from '../../src/modules/authorization/public/session.js';
+import { CLASSES_MANAGEMENT_POLICY, CLASSES_PARTICIPATION_POLICY } from '../../src/modules/authorization/public/session.js';
+
+const classesRoutes = ['POST /api/v1/classes/groups/:groupId/sessions', 'PATCH /api/v1/classes/sessions/:classId',
+  'POST /api/v1/classes/sessions/:classId/start', 'POST /api/v1/classes/sessions/:classId/finish',
+  'POST /api/v1/classes/sessions/:classId/cancel', 'GET /api/v1/classes/commands/:commandId'];
+const classesPolicy = (route: string) => route === 'GET /api/v1/classes/commands/:commandId'
+  ? CLASSES_PARTICIPATION_POLICY : CLASSES_MANAGEMENT_POLICY;
 
 const materialsRoutes = ['GET /api/v1/materials/groups', 'GET /api/v1/materials/groups/:groupId',
   'GET /api/v1/materials/groups/:groupId/items', 'GET /api/v1/materials/items/:materialId',
@@ -48,6 +55,11 @@ function controllers(directory:string):string[] {
  * Al añadir rutas se actualiza el inventario y se vuelve a ejecutar esta puerta.
  */
 function validPolicy(route: string, policy: unknown): boolean {
+  if (/^\/api\/v1\/classes(?:\/|$)/.test(route.slice(route.indexOf(' ') + 1))) {
+    const expected = classesPolicy(route);
+    return classesRoutes.includes(route) && Array.isArray(policy) && policy.length === expected.length
+      && expected.every((value, index) => policy[index] === value);
+  }
   if (/^\/api\/v1\/materials(?:\/|$)/.test(route.slice(route.indexOf(' ') + 1))) {
     const expected = materialsPolicy(route);
     return materialsRoutes.includes(route) && Array.isArray(policy) && policy.length === expected.length
@@ -84,6 +96,7 @@ test('T088: todos los endpoints compilados tienen la política explícita de su 
     }
   }
   expect(routes).toEqual({
+    ...Object.fromEntries(classesRoutes.map(route => [route, classesPolicy(route)])),
     ...Object.fromEntries(materialsRoutes.map(route => [route, materialsPolicy(route)])),
     'GET /health/live':'public','GET /health/ready':'public',
     'GET /api/v1/admin/enrollment/courses/:courseId/price':'enrollment:price-manage',
@@ -162,6 +175,18 @@ test('T016/T026/T042/T053 materials routes require their closed audience policy 
   }
   for (const route of ['DELETE /api/v1/materials/items/:materialId', 'PUT /api/v1/materials/items/:materialId',
     'POST /api/v1/materials/items/:materialId/replace']) for (const policy of [MATERIALS_READ_POLICY, MATERIALS_MANAGEMENT_POLICY]) expect(validPolicy(route, policy)).toBe(false);
+});
+
+test('T023 classes management routes require their exact closed policy and future routes stay absent', () => {
+  for (const route of classesRoutes) {
+    expect(validPolicy(route, classesPolicy(route))).toBe(true);
+    const opposite = classesPolicy(route) === CLASSES_MANAGEMENT_POLICY ? CLASSES_PARTICIPATION_POLICY : CLASSES_MANAGEMENT_POLICY;
+    for (const policy of [undefined, 'public', 'profile:read', [], ['classes:manage-all'], opposite,
+      ['classes:manage-all', 'classes:manage-own', 'profile:read'], new Array(2)]) expect(validPolicy(route, policy)).toBe(false);
+  }
+  for (const route of ['GET /api/v1/classes/sessions/:classId/messages', 'GET /api/v1/classes/sessions/:classId/video',
+    'POST /api/v1/classes/sessions/:classId/reopen', 'DELETE /api/v1/classes/sessions/:classId'])
+    for (const policy of [CLASSES_MANAGEMENT_POLICY, CLASSES_PARTICIPATION_POLICY]) expect(validPolicy(route, policy)).toBe(false);
 });
 
 test.each([
