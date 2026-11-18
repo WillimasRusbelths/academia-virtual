@@ -4,7 +4,8 @@
 **Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: diseño sincronizado del ensayo MVP; sin implementación.** El responsable
+**Estado: preparación T001–T004 completada; implementación funcional pendiente.**
+Resultados en [evidencia del bloque](evidence/t001-t004-results.json). El responsable
 aprobó V05 y la enmienda 2.0.0. YouTube Live + OBS se usa para probar emisión y
 reproducción, con permisos propios de aula/referencia/chat y límite externo explícito.
 Cloudflare queda fuera del MVP. [Adopción](evidence/video-scope-adoption.md).
@@ -37,8 +38,9 @@ los dobles locales. [Investigación actualizada](research.md).
 
 **Language/Version**: TypeScript 6.0.3, Node 22.23.1, npm 10.9.8 existentes.
 **Primary Dependencies**: NestJS/platform-express 12.1.0, Prisma 7.10.0, pg,
-React 19 y Vite 8. Proponer Socket.IO 4.x y socket.io-client compatibles,
-con versión exacta y lockfile revisados al implementar; no instalados aquí.
+React 19 y Vite 8. Socket.IO y socket.io-client **4.8.4** fijados en T004,
+instalación con npm ci, tipos y protocolo básico comprobados en Linux;
+[dependencias](evidence/dependencies.md). Transporte funcional todavía pendiente.
 Integración en servidor HTTP existente, sin requerir adaptador Nest adicional.
 **Storage**: PostgreSQL 16, mismo pool; migración aditiva propuesta
 `0010_classes_chat`, después de 0009, sin modificar migraciones aplicadas.
@@ -93,9 +95,9 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-La lista posterior [tasks.md](tasks.md) organiza T001–T086, todavía sin ejecutar.
-Se generó después del diseño inicial; no acredita implementación o aceptación
-integral. G-V005 exige ensayo real del alcance aprobado; el análisis comprueba dependencias.
+La lista [tasks.md](tasks.md) organiza T001–T086: cuatro tareas de preparación
+completadas, 82 pendientes. [Matriz](verification.md) creada en T003; todavía no
+acredita aceptación funcional. G-V005 exige ensayo real del alcance aprobado.
 
 ### Source Code (repository root)
 

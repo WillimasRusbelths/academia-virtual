@@ -3,7 +3,9 @@
 2026-11-17. **Guía de pruebas futuras, no evidencia de ejecución.** Alcance V05 y diseño
 del ensayo sincronizados; [G-V005](video-gate.md) exige evidencia real, no protección
 multimedia externa. [Adopción](evidence/video-scope-adoption.md).
-No hay código, migración, fixtures o scripts de clases implementados todavía.
+T001–T004 ya prepararon el entorno, dependencias y [matriz](verification.md):
+[resultados](evidence/t001-t004-results.json). Aún no hay módulo funcional,
+migración 0010 o fixtures de clases. Este bloque no acredita reproducción real.
 
 ## Preparación segura
 

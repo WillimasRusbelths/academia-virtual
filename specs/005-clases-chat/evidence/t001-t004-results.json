@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-17",
+  "timezone": "America/Lima",
+  "baselineCommit": "cf01666c86c1a5cd56d9cbf9e6634f85d9a6a3b4",
+  "branch": "feat/005-clases-chat",
+  "tasksCompleted": [
+    "T001",
+    "T002",
+    "T003",
+    "T004"
+  ],
+  "completedTasks": 4,
+  "totalTasks": 86,
+  "functionalClassesImplemented": false,
+  "classesAcceptanceTestsExecuted": false,
+  "videoRealTestExecuted": false,
+  "harness": {
+    "project": "classes-140bf3835fae",
+    "descriptor": ".cache/classes-140bf3835fae/harness.json",
+    "appEnv": "test",
+    "publishedPorts": 0,
+    "internalNetwork": true,
+    "externalVolumes": 0,
+    "volume": "classes-140bf3835fae_postgres_data",
+    "ownerRuntimeSeparated": true,
+    "manualConfigurationRead": false,
+    "subnet": "10.254.5.0/24",
+    "imageId": "sha256:2ae3236b3bf4b4fb7e8b7af1d66823eec4f57e27c33dd061cbe15c1a945101c3",
+    "finalServices": "db/mailpit detenidos; API/web no iniciados; volumen conservado"
+  },
+  "dependencyMetadata": [
+    {
+      "name": "socket.io",
+      "version": "4.8.4",
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.2.0"
+      },
+      "repository": {
+        "url": "git+https://github.com/socketio/socket.io.git",
+        "type": "git"
+      },
+      "integrity": "sha512-9ZV9zg8vN8hO3Y25DhR7nUkJ1VDnBhq5O/JrXhFT9s6+F0gqytSASTHVfCFc2mJXaTfARroErplXlzFWwETZqQ==",
+      "dependencies": {
+        "cors": "~2.8.5",
+        "debug": "~4.4.1",
+        "accepts": "~1.3.4",
+        "engine.io": "~6.6.0",
+        "socket.io-parser": "~4.2.4",
+        "socket.io-adapter": "~2.5.2"
+      }
+    },
+    {
+      "name": "socket.io-client",
+      "version": "4.8.4",
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.0.0"
+      },
+      "repository": {
+        "url": "git+https://github.com/socketio/socket.io.git",
+        "type": "git"
+      },
+      "integrity": "sha512-7wjKAvVXYOJsbmUgkWbnhPD4bFpkqrUR0++XOjpGFmqDqsqV1CI93VTraeExLxpjxEqrWgFoSRZu1ihjLWfkAA==",
+      "dependencies": {
+        "debug": "~4.4.1",
+        "engine.io-client": "~6.6.1",
+        "socket.io-parser": "~4.2.4",
+        "@socket.io/component-emitter": "~3.1.0"
+      }
+    }
+  ],
+  "previousPackageVersionChanges": 0,
+  "addedLockEntries": 20,
+  "executedChecks": {
+    "linuxNpmCi": true,
+    "apiImageBuild": true,
+    "rootLint": true,
+    "apiAndWebBuild": true,
+    "typescriptSocketInterfaces": true,
+    "socketIoApiClient": "conectado a /classes por websocket y señal recibida",
+    "socketIoWebClient": "conectado a /classes por websocket y señal recibida",
+    "probeMigrate": true,
+    "probeOwnerRuntimeCheck": true,
+    "productMigrationDeploy": true,
+    "productMigrationRange": "0001–0009 (9 de producto + 0001_probe en el ledger del laboratorio)",
+    "runtimeCreatePublic": false,
+    "ownerRuntimeSuperuserCreatedbCreaterole": false,
+    "unit": [
+      {
+        "workspace": "api",
+        "success": true,
+        "tests": 809,
+        "passed": 809,
+        "failed": 0,
+        "pending": 0
+      },
+      {
+        "workspace": "web",
+        "success": true,
+        "tests": 614,
+        "passed": 614,
+        "failed": 0,
+        "pending": 0
+      }
+    ]
+  },
+  "incidents": [
+    {
+      "issue": "Docker sin motor al inicio",
+      "resolution": "Docker Desktop iniciado; ningún contenedor previo activo"
+    },
+    {
+      "issue": "Pools automáticos de subred agotados",
+      "resolution": "Subred interna libre comprobada; no se borraron redes/volúmenes anteriores"
+    },
+    {
+      "issue": "Resumen final node -e perdió comillas en PowerShell",
+      "resolution": "Las suites ya habían pasado; se verificaron sus JSON desde PowerShell sin repetir pruebas"
+    }
+  ],
+  "matrix": {
+    "scenarios": 24,
+    "technicalCases": 16,
+    "requirements": 31,
+    "status": "PENDIENTE aceptación funcional"
+  },
+  "checks": [
+    {
+      "name": "configuracion-manual-conservada",
+      "pass": true
+    },
+    {
+      "name": "specs-cerrados-y-checkpoints-conservados",
+      "pass": true
+    },
+    {
+      "name": "rama-y-puntero-005",
+      "pass": true
+    },
+    {
+      "name": "versiones-anteriores-lock-intactas",
+      "pass": true
+    },
+    {
+      "name": "versiones-e-integridades-oficiales",
+      "pass": true
+    },
+    {
+      "name": "24-escenarios-completos",
+      "pass": true
+    },
+    {
+      "name": "16-casos-tecnicos",
+      "pass": true
+    },
+    {
+      "name": "31-requisitos-en-matriz",
+      "pass": true
+    },
+    {
+      "name": "FR-SC-y-escenarios-no-redefinidos",
+      "pass": true
+    },
+    {
+      "name": "solo-T001-T004-completadas",
+      "pass": true
+    },
+    {
+      "name": "indice-vigente",
+      "pass": true
+    },
+    {
+      "name": "unitarias-API-y-web",
+      "pass": true
+    }
+  ],
+  "validationPassed": true,
+  "limits": [
+    "No hay módulo funcional, migración 0010 o fixtures de clases",
+    "Sin pruebas PG/HTTP/socket de permisos o E2E de clases todavía",
+    "Sin video real, consentimiento 005, D10/D13 o aceptación académica inventados",
+    "Sin infraestructura contratada, despliegue, emisión o specs/ramas 006/007"
+  ],
+  "nextBlock": [
+    "T005",
+    "T006"
+  ],
+  "sourceHashesCanonicalLF": {
+    "apps/api/package.json": "d77f1626f50340129e9e7a05d9863d3903ca9c7704df5d848fc2c9dba4f0aa65",
+    "apps/web/package.json": "f66cc35c407b76ef82494fe490bc6cdb64a5107aba63548d92ea89150c8955d0",
+    "package-lock.json": "1c7f5dc86e82ab36d1104853ba4496d0bfa54b01859e492faed5b305440cc2e8",
+    "ops/docker/prepare-classes-harness.mjs": "a62fd16913341929650b3a91175c6faea42467a6d568f8279fdcbe3a67ab4826",
+    "ops/docker/check-classes-dependencies.mjs": "fe2402322289adad950678dd56b86df08db85b4cfb013313d5a0cd8a1794ded6",
+    "ops/specs/update-005-coverage.mjs": "f12b14d61b0c00c8834eaaed8c36a95496a50c49e8b7496eab3039644441dd1c",
+    "specs/005-clases-chat/tasks.md": "eca3922a6084fd984133c2159cd9359d607964f0b9333719bfcbe57a941c61fb",
+    "specs/005-clases-chat/verification.md": "ded16353b1f88b595de532734b97e4039af9ee5381b041c492029ecd0c3bf082",
+    "specs/005-clases-chat/evidence/implementation-environment.md": "6920b1e82bffba75cde6bd9de7777b91b2f70b38003e0bcec8f512ea4c3874b3",
+    "specs/005-clases-chat/evidence/dependencies.md": "f4a9c0c16b5e8033b83c17620815c7f0c3c251030989d14dd195423cfb6ced1b"
+  }
+}

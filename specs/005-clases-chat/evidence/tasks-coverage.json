@@ -2,9 +2,9 @@
   "date": "2026-11-17",
   "timezone": "America/Lima",
   "baseline": "2486034d6be22fd60aad3cc740f7b4599a15aa9b",
-  "status": "INDICE_ACTUAL_V05_APROBADA",
+  "status": "SEGUIMIENTO_DE_IMPLEMENTACION",
   "totalTasks": 86,
-  "completedTasks": 0,
+  "completedTasks": 4,
   "scope": {
     "stories": 4,
     "scenarios": 24,
@@ -1232,7 +1232,7 @@
   },
   "restoredAssociationCount": 197,
   "historicalIndexPreserved": "specs/005-clases-chat/evidence/tasks-generation-results.json",
-  "tasksSha256": "59d10df6f505d7971e9ceb61067813435ddcb38653662007c56ade858846bde0",
+  "tasksSha256": "eca3922a6084fd984133c2159cd9359d607964f0b9333719bfcbe57a941c61fb",
   "hashNormalization": "UTF-8 con LF; CRLF normalizado",
-  "generator": "node ops/specs/validate-005-tasks.mjs --write"
+  "generator": "node ops/specs/update-005-coverage.mjs --write"
 }

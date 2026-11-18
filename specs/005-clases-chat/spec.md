@@ -7,8 +7,9 @@ merge del PR #5. La especificación inicial se redactó en
 **Created**: 2026-11-17, America/Lima.
 
 **Status**: Alcance del ensayo MVP aprobado por el responsable el 2026-11-17,
-constitución 2.0.0. Diseño y tareas sincronizados, sin implementación o pruebas
-de reproducción nuevas. Validación académica pendiente si afecta evaluación.
+constitución 2.0.0. Preparación T001–T004 verificada; implementación funcional y
+reproducción real pendientes. [Resultados](evidence/t001-t004-results.json).
+Validación académica pendiente si afecta evaluación.
 
 **Aprobación V05**: «entoces la apruebo», sobre la propuesta concreta de YouTube
 como ensayo con referencia compartible y Cloudflare fuera del MVP. El
@@ -16,7 +17,7 @@ como ensayo con referencia compartible y Cloudflare fuera del MVP. El
 impacto y límites. Se mantienen cuatro historias, 24 escenarios, 23 FR y ocho SC.
 
 [Plan](plan.md), [contrato audiovisual](contracts/video.md) y [tareas](tasks.md)
-describen trabajo futuro. [G-V005](video-gate.md) exige prueba real del ensayo;
+describen el trabajo y su progreso. [G-V005](video-gate.md) exige prueba real del ensayo;
 la protección multimedia completa pertenece a un incremento posterior.
 Los checkpoints anteriores describen su revisión histórica y no se reescriben.
 

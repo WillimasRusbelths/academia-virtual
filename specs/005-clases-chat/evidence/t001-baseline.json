@@ -1,0 +1,1687 @@
+{
+  "date": "2026-11-17",
+  "timezone": "America/Lima",
+  "task": "T001",
+  "head": "cf01666c86c1a5cd56d9cbf9e6634f85d9a6a3b4",
+  "branch": "feat/005-clases-chat",
+  "feature": {
+    "feature_directory": "specs/005-clases-chat"
+  },
+  "gitStatusBeforeEdits": "",
+  "configHashesOnly": [
+    {
+      "path": ".env",
+      "sha256": "5ffe778cb78294ee428c3016977a3cc726e06367c996ad6a4c8f97b866389159"
+    },
+    {
+      "path": ".env.test",
+      "sha256": "874b51d2c99eb2d66518ffe01893ee892ed6f925847626e38e0a42a7bfcb2c6f"
+    },
+    {
+      "path": "compose.override.yml",
+      "sha256": "4517064ac54dcd5468860653d7130799b17d4cff64c36a18f6a76e05231be357"
+    },
+    {
+      "path": ".specify/feature.json",
+      "sha256": "af2145831bca4c0d0ecfaa4d567635022a54aae8c0fb790c113ec5803433d864"
+    },
+    {
+      "path": "compose.yml",
+      "sha256": "be5d31518626ac915885cf7b0163004c7f4c537de2be2fcca2349a433c63868e"
+    },
+    {
+      "path": ".npmrc",
+      "sha256": "883254a2f3a789b3c3f10c7ad1d4593a9827872864a03a7cac3d6a65be819cfc"
+    },
+    {
+      "path": "package.json",
+      "sha256": "e2d826847218232a7cd72e715ca2028f58891abe1cf70a078060041264e9c20e"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "6f2c05e1f0f7fa2e0f084ac7977f4360e9260814728e0590db82bced925a6292"
+    },
+    {
+      "path": "apps/api/package.json",
+      "sha256": "dec85d38a17c1e225237e676360ba87f5daee432d8d01ed2639c502a68ba50e3"
+    },
+    {
+      "path": "apps/web/package.json",
+      "sha256": "5a350229f83738db5140b505cbea26afa5a1a81c48d515727f0460dcad501ffc"
+    }
+  ],
+  "priorSpecs": [
+    {
+      "spec": "001-identidad-acceso-roles",
+      "tasksFile": "specs/001-identidad-acceso-roles/tasks.md",
+      "completed": 106,
+      "pending": [
+        {
+          "id": "T104",
+          "description": "MANUAL — Observar con 10 personas usando cuentas ficticias los flujos registro+verificación y recuperación: al menos 9/10 sin ayuda y <3 min de interacción activa por flujo, espera correo separada; usar Mailpit y no registrar contraseñas/datos personales en `specs/001-identidad-acceso-roles/evidence/usability.md`. Si faltan participantes, mantener SC-001/010 pendientes. Dep.: T094."
+        },
+        {
+          "id": "T108",
+          "description": "Revisar matriz FR/SC/V y cumplimiento constitucional con evidencia en `specs/001-identidad-acceso-roles/evidence/acceptance.md` y actualizar solo estados demostrados en `specs/001-identidad-acceso-roles/tasks.md`; registrar incumplimientos, D10/rúbrica y D13 pendientes sin declararlos aprobados. Ninguna casilla ejecutada sin resultado válido permite presentar identidad terminada. Dep.: T104, T107."
+        }
+      ]
+    },
+    {
+      "spec": "002-oferta-academica",
+      "tasksFile": "specs/002-oferta-academica/tasks.md",
+      "completed": 72,
+      "pending": [
+        {
+          "id": "T073",
+          "description": "Realizar observación humana con responsable y alumno, registrar resultado real en `specs/002-oferta-academica/evidence/human-acceptance.md`. Si no hay participante, mantener esta tarea sin marcar y SC-002 pendiente, identificando esa dependencia; el agente o Playwright no sustituyen al alumno (SC-002)."
+        },
+        {
+          "id": "T074",
+          "description": "Elaborar cierre en `specs/002-oferta-academica/evidence/acceptance.md`: matriz FR/SC, cuatro checkpoints, constitución I/II/IV/IX/X/XI, resultados automáticos y humanos separados, cambios/configuración conservados y riesgos heredados. Si T073 u otra puerta falta, declarar aceptación parcial y mantener esta tarea pendiente; cero afirmaciones de 1000 concurrentes, sin despliegue implícito (FR-016; SC-001–006)."
+        }
+      ]
+    },
+    {
+      "spec": "003-reservas-ordenes-matricula",
+      "tasksFile": "specs/003-reservas-ordenes-matricula/tasks.md",
+      "completed": 84,
+      "pending": [
+        {
+          "id": "T056",
+          "description": "[US2] Resolver y documentar contrato real D02 en specs/003-reservas-ordenes-matricula/evidence/provider-contract.md y actualizar solo precisión técnica de contracts/payments.md tras evidencia oficial de modalidad Izipay. **Dep.**: T055. **Fin**: Acceso autorizado a sandbox, comercio/entorno, autenticidad, referencias, dinero, estados, consulta/idempotencia de inciertos, acuses/reintentos/SDK/límites acreditados. Si falta capacidad imprescindible, bloqueo explícito; no adivinarla. **Traza**: FR-007, FR-024. **Puerta**: D02."
+        },
+        {
+          "id": "T057",
+          "description": "[US2] Preparar pruebas reales del adaptador en apps/api/tests/integration/enrollment-provider.spec.ts y guía sandbox separada en specs/003-reservas-ordenes-matricula/evidence/provider-sandbox.md, antes de T058. **Dep.**: T056. **Fin**: Casos válidos/inválidos/no confirmados, duplicados y recuperación externa con expectativas del contrato acreditado; runner aislado y secretos fuera de evidencia. No someter pasarela a carga. **Traza**: FR-007, FR-011, FR-024. **Puerta**: D02."
+        },
+        {
+          "id": "T058",
+          "description": "[US2] Implementar adaptador apps/api/src/modules/enrollment/infrastructure/payment-gateway.ts y entrada técnica específica bajo entrypoints/http solo según D02; conectar producción con configuración explícita y pruebas primero. **Dep.**: T057. **Fin**: Autenticidad real/IDs/dinero y recuperación segura; excepción de transporte estrecha, sin CSRF global relajado, SDK ficticio o capacidad de aprobación manual. Mantener cobros reales deshabilitados por RA-04. **Traza**: FR-007, FR-011, FR-015, FR-016, FR-024. **Puerta**: D02."
+        },
+        {
+          "id": "T059",
+          "description": "[US2] Ejecutar sandbox separado PV29 y regresión del adaptador/recorrido autorizado en specs/003-reservas-ordenes-matricula/evidence/provider-sandbox.md y specs/003-reservas-ordenes-matricula/evidence/us2.md. **Dep.**: T058. **Fin**: Resultados y fallos reales del proveedor; USER no activa matrícula por retorno y callbacks duplicados no duplican efectos. US2 externa solo completa con evidencia; no aprueba economía ni cobros reales. **Traza**: FR-007, FR-008, FR-011, FR-024. **Puerta**: D02."
+        },
+        {
+          "id": "T089",
+          "description": "Completar aceptación humana integrada de cuatro historias en specs/003-reservas-ordenes-matricula/evidence/human-acceptance.md y specs/003-reservas-ordenes-matricula/evidence/acceptance.md, incluyendo US2/US3. **Dep.**: T042, T059, T069, T083, T084. **Fin**: Participantes/resultados reales separados de automatización y sandbox, teclado/móvil/escritorio y vacío/error/incierto; sin cerrar T073/T074/T104/T108 por estos resultados. **Traza**: FR-017, FR-018, FR-022. **Puerta**: HUMANA_D02."
+        },
+        {
+          "id": "T090",
+          "description": "Preparar y ejecutar ensayo operacional autorizado de24h y puertas D13 en specs/003-reservas-ordenes-matricula/evidence/operation.md, coordinado con VP004 y ops/recovery/README.md. **Dep.**: T059, T086. **Fin**: Plazo real86400s, salud de reloj/recuperación/recursos, incidencias sin pérdida; custodia/retención/RPO/RTO acordados antes de demo persistente. Reloj controlado/smoke no sustituye24h físicas. **Traza**: FR-004, FR-009, FR-013, FR-018, FR-022. **Puerta**: D13_AUTORIZACION."
+        },
+        {
+          "id": "T091",
+          "description": "Acordar escenario/rúbrica D10 y métricas separadas en verification.md y docs/planificacion/vps-evaluacion.md, trazado a VP001/VP002/VP003. **Dep.**: T084. **Fin**: ≥15000 cuentas, ventana/mezcla/duración de2500 activos, RPS/en vuelo/tasa reservas, recursos/costo≤S/300 y criterios expresamente aprobados; sin umbrales inventados o contratación. **Traza**: FR-023, FR-024. **Puerta**: D10."
+        },
+        {
+          "id": "T092",
+          "description": "Preparar cliente futuro load-tests/enrollment/ y preflight en docs/planificacion/evidence/vps-preflight.md, coordinado con VP005/VP006 y destino autorizado. **Dep.**: T091. **Fin**: k6 en otro equipo físico, allowlist HTTPS/CSRF/seguridad, datos ficticios/pagos simulados; recursos del generador y VPS separados, no alterar perfiles históricos o relajar cuotas. **Traza**: FR-023, FR-024. **Puerta**: D10_VP004_VP006."
+        },
+        {
+          "id": "T093",
+          "description": "Solo en etapa autorizada VP007/VP008, ejecutar carga y evaluar evidencia en specs/003-reservas-ordenes-matricula/evidence/load-vps.md y docs/planificacion/vps-evaluacion.md. **Dep.**: T059, T085, T086, T088, T090, T092. **Fin**: Autorización de entorno/ejecución y presupuesto previas; comparar D10 con errores/latencia/recursos/inventario finales y población; fallo conserva objetivo pendiente. No contratar, ejecutar carga completa o adoptar AWS al llegar automáticamente a esta tarea. **Traza**: FR-023, FR-024. **Puerta**: AUTORIZACION_VPS_D10_D13."
+        },
+        {
+          "id": "T094",
+          "description": "Cerrar aceptación del incremento en specs/003-reservas-ordenes-matricula/evidence/acceptance.md, verification.md y tasks.md solo con trazas de todas las puertas pertinentes. **Dep.**: T085, T086, T087, T088, T089, T090, T093. **Fin**: Diferenciar checkpoint técnico, sandbox, humanos, economía fuera de alcance y capacidad; pendientes reales impiden aprobación integral. Política económica no se implementa aquí y cobros reales siguen deshabilitados hasta aprobación propia. **Traza**: FR-022, FR-023, FR-024. **Puerta**: ACEPTACION_INTEGRAL."
+        }
+      ]
+    },
+    {
+      "spec": "004-materiales-estudio",
+      "tasksFile": "specs/004-materiales-estudio/tasks.md",
+      "completed": 65,
+      "pending": [
+        {
+          "id": "T065",
+          "description": "Incorporar materiales al procedimiento operativo en `specs/004-materiales-estudio/operation.md` y obtener acuerdos D13 de custodio/destino cifrado/retención/recuperación y espacio antes de demo persistente/publicación; sin purga, compra o despliegue implícitos. Tras T062–T063; pendiente hasta acuerdos/evidencia reales."
+        },
+        {
+          "id": "T066",
+          "description": "Incorporar volumen/tráfico de materiales al escenario D10 y sus criterios acordados en `specs/004-materiales-estudio/capacity.md`; medir desde generador separado hacia infraestructura autorizada y registrar mezcla/duración/latencia/errores/recursos/costo, distinguir 15 000 cuentas/2500 activos/solicitudes en vuelo. Tras T063 y rúbrica/infraestructura disponibles; no marcar completo por un smoke o solo redactar plan."
+        },
+        {
+          "id": "T068",
+          "description": "Revisar todos los FR/SC/escenarios, hashes y tareas con resultados reales en `specs/004-materiales-estudio/evidence/final-acceptance.md`; cerrar integralmente solo tras T001–T067, aceptación humana y puertas aplicables, sin usar generación de documentos como prueba funcional. D02/pendientes de otros specs se conservan con su alcance propio."
+        }
+      ]
+    }
+  ],
+  "existingFiles": [
+    {
+      "path": ".specify/memory/constitution.md",
+      "sha256": "d97bcf3835978e8dee18ef85ab82a363abdd883d020a0a9f7026894a5e9337e6"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/checklists/requirements.md",
+      "sha256": "aa6f76214855353a2f721291617ac87c364b2aa77558ceea4c8b9ed15b98d038"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/contracts/api.md",
+      "sha256": "39bf76bfa713a42490ff993d245cbc909dcc60b73cb0e5f2d9d3f853c2fe8f13"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/contracts/ui.md",
+      "sha256": "dbc8e170d2fe8a656ab56eea4ce5a6151dba5d78f6fdc03aee25de889c5370a2"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/data-model.md",
+      "sha256": "f1277fc6148bb53147f22691b8e2e7c8f9f8d3789c9ede1c815cdd163295a585"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/acceptance.md",
+      "sha256": "15fb5845caa9d03d4dea7940d7526341c46b625f9872a90aa91c4e0b8b90615c"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/adaptadores-correo.md",
+      "sha256": "6781fc828ec8fb8fbbb22f97dbcab9f7c8e8995b02289132c566dda032c6b991"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/auditoria-privacidad.md",
+      "sha256": "38027afc253f75aa3f49539d2bd67f35f36d2292828f59ec405e1197a2cd9bf3"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/auditoria-seguimiento.md",
+      "sha256": "a2909fc58328c2af96da641dd53981e70ed9537d1f3b7819d084f00cf24b44ca"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/bootstrap-atomico.md",
+      "sha256": "cd60cff59d59592a3dbda427e704b05b353142f615ac8adb7b7cb53359378153"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/entregas-persistidas.md",
+      "sha256": "fbd60f33a4af117e6d41faab0ab51de15958b3eb4d42e8737bc4659cb73c7e05"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/enumeration.md",
+      "sha256": "4bbdfde1673c55ff17b2ebdea35e8b0097035e81ab6d9cd1da5d6393d46c9996"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/fixtures-seguros.md",
+      "sha256": "4ba9a112ea19f362c337fd77793915d9b12664a869390ac94cde3e347ac48938"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/fundamentos-datos.md",
+      "sha256": "260136433550d5ea15db8b88912612e629761bd0b153755a5b6f7d8385655b4d"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load-environment.md",
+      "sha256": "41408a52a27cbe68d268aa58d7afb3b3031ffe3a92d45db7ead975c9f51e18ff"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load-followup.md",
+      "sha256": "1b26fde9bbc46b0f57a5a5acb22b3f4112716a485bd9fb5eb5923c8a2c376a77"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load-import.md",
+      "sha256": "411159b924808d4f20265d0996a78bed409f8182a882788022cce766d2fdc411"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load-investigation.md",
+      "sha256": "b4a70dae820162a14cefe9881fcc9a86c938a40c2ce7d5bb0b642bbef775dc00"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load-preparation.md",
+      "sha256": "9e63145fcf5c7f0c1d69e5b91810c9e8a4ca7546c4d8baee98a8fb87d32e4067"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load-resources.md",
+      "sha256": "fbf9f9c71ca3b00614957cf855a799bd6c5d660b22d5f6e708a838abade62a79"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/load.md",
+      "sha256": "11b5366a93dd904a48648bf8444adbd9a0c89ae54bb301516b02ccc2c00b568c"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/login-timing.md",
+      "sha256": "2767817bad26f68d06587cb6bf108f419f7e1ea043207d56197f09b1d102f733"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/recovery.md",
+      "sha256": "b47714efb56a0236ffdf74e6e9975d22e3e6623e33a904fa1c1c9d3c5e391484"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/reglas-credenciales-limites.md",
+      "sha256": "68e372e82090f145ea38e0413e424c7a6854ac9a756df725cd83243ddb534e2d"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/regression.md",
+      "sha256": "340605a5e848688e932f5a3b8404c9d3a49d5ed14c2bf7aef52d125118cf5866"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/restored-state.md",
+      "sha256": "99bf5f41886aca55a8edf652900831b30889717eb949a8ce9d15ba50e4a4e467"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/retention.md",
+      "sha256": "86fc09711fa43e7786d3a35f9c4c01237e7d08fc760798e6cafee2455cace5f1"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/sesiones-autorizacion-http.md",
+      "sha256": "ab0dc7d976705adc00a4d9bc5b375ee0aca6d29441cbccc65e4ff1f275998b96"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/transporte-ui.md",
+      "sha256": "8108391f40aaebbe3d00e731ee0d667e15a4e06182963dee0e4735b85468231e"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us1-implementacion.md",
+      "sha256": "0a0ce7dc7c8a73670e758d52711f3e6f6bc8c38b9575f25c79c398d4b8edf394"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us1-pruebas.md",
+      "sha256": "d253c5b13adb22f71b271e027c04dd092ed29c6d9b3aa2e69f01bdfda2fdc137"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us1.md",
+      "sha256": "95b3a7e8a85c99418c4bfd1179d20731172305475954ff2f7784351204d73b9d"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us2-implementacion.md",
+      "sha256": "aa04a04434d09b97c7c028fedf2657dc12daad2409160bde4951278047e49867"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us2-pruebas.md",
+      "sha256": "50e24e40318159229ad9289f15fed72655affff2b0216c1b22813e49ea2525b4"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us2.md",
+      "sha256": "f2f79f47dfdf14fce775e806f99e74537f6ecd2d5c3d8ac3bb0432963276beb4"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us3-implementacion.md",
+      "sha256": "57bcb9e131bdb7775437b91dc24586701b304e2a8a6372a2e412f1e3d7503cc3"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us3-pruebas.md",
+      "sha256": "c37c895ae081e4ab91fc43bccd5e75b5fad594d6a0e7d7fb40534b0fcfe70ab5"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us3.md",
+      "sha256": "e0a2c98916dccb72308f249d82f59fea4493ba548f051cfa755ebed7b172ff93"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us4-cambios-acceso.md",
+      "sha256": "0631bb720bc51214eb1b2a92927139a530b10f95dce95acb8a3e26c5b1f5c8c5"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us4-implementacion.md",
+      "sha256": "b536b5e3ac3cec706190669f8f4fe6cd280052a5ea6a67d7ffbab23a134d8224"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us4-pruebas.md",
+      "sha256": "a040f03d1dfc860ea4397f1dc335b43cabdb730878b336583b09f94b57031dfe"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us4-ui.md",
+      "sha256": "cda3c6f2f85c3a790da20c90c13db78b46804461ce1ec57c6f6cbbb63eb8b21a"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us4.md",
+      "sha256": "35ad1b6c03ecc30a8d1db8835f1ad9c35a1d73c830cbd326eb79d577ebfb4613"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us5-integracion.md",
+      "sha256": "d28a4e82888fd1a042b0ce511de23094f9772c61e36903c2d0c58627eb048ef9"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us5-pruebas.md",
+      "sha256": "794273d68dcdfcbd65a9c5693ac88972849e78b6a278942e65faf152398eeb47"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us5.md",
+      "sha256": "2c489757e0d957030950a1627fd4d667bedc0e5f6faecf7784ce6c646150aa7b"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us6-implementacion.md",
+      "sha256": "6b28f6f3f51e135d776187dc9ca3e07d86992b3bed2e78b26665b1d89bfd005e"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us6-pruebas.md",
+      "sha256": "05f0629a3527f0999459be66f2b3084d19bcf39efcaab22c2e912bf2e6055e11"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us6.md",
+      "sha256": "cf56f76ea4b7be21e8ed9ee03d6bd49b2613ca38d5f8b1d1ee357ce3a8406160"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us7-implementacion.md",
+      "sha256": "b48651b23819248d20c076d811d3461da8d3d7a5ebc90eec4e5a1e90f6be0ae4"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us7-pruebas.md",
+      "sha256": "2928dc0a4a585ae438feec7b3f3c2e8c7f4f89385e511c08130e69efc31692bf"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/us7.md",
+      "sha256": "f7e6ea874b45242f9c76e5b2e0fd7541642f7ba8692e2305a7efdd77b3626f46"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/evidence/usability.md",
+      "sha256": "bf6c2d702bf8976cfa8855233a4bee573cea9428b26381b85aaead5cd6302e64"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/plan.md",
+      "sha256": "6cf68324db3f48a5d092cfb5a71cca929fed5beb28b4e1830a82437b44f1f1db"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/quickstart.md",
+      "sha256": "9d8f7202abe67de958d5e54a7b106eda662e2df2b47a568454de92e2e71104d9"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/research.md",
+      "sha256": "7749370938172097fb4fcf65dcd017ebc54b041a79d8eeb20ebf327cae0fa7fb"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/spec.md",
+      "sha256": "d927072f0164086fb83f3547e73118cadeca83e0b6620a1fdd1861b8d9b16328"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/tasks.md",
+      "sha256": "ea40918842c5a6ba379cb3320723b6c35847459d9f8b8d42f0018b9a4059485c"
+    },
+    {
+      "path": "specs/001-identidad-acceso-roles/verification.md",
+      "sha256": "b8211b7e955b107ae3836f4ff93dd8a054402cfe4ebfca54c1c9facffe7b6143"
+    },
+    {
+      "path": "specs/002-oferta-academica/checklists/requirements.md",
+      "sha256": "57130545640fa955077275bba08793dd9d0a4416907985332c880cc635874511"
+    },
+    {
+      "path": "specs/002-oferta-academica/contracts/api.md",
+      "sha256": "3396290a32e310167a9345333e1c3b4cee3cd01d3dd1375456401c1e59f935b2"
+    },
+    {
+      "path": "specs/002-oferta-academica/contracts/integration.md",
+      "sha256": "aa029b7f51566ef15f9b2e7953d56d9d8dba66ac812ac2e915a56d0bb7c06e20"
+    },
+    {
+      "path": "specs/002-oferta-academica/contracts/ui.md",
+      "sha256": "cf65b321722abcc17480a6346d727e85bf6203b16446ffabc9ea807020a98839"
+    },
+    {
+      "path": "specs/002-oferta-academica/data-model.md",
+      "sha256": "a65c3c39f6dafb3b2a434464fccc6c842f72bbdadb5b8829d76b6ee8889b7a92"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/acceptance-review-results.json",
+      "sha256": "a17978eb2c26c585a5c75aa482a1cc158e56664e2a49296e17e3f8ac55e52fca"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/acceptance.md",
+      "sha256": "4bd3409ba372a84a08c2bb4e86a2a1446bc0111c6ab913c224ef3b2fbfa2d514"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/automated-results.json",
+      "sha256": "10bc2f623d5946ea46f84be601d2f94819c2a213e0ad4bcb452a3453aad09f6c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/automated.md",
+      "sha256": "8dbcd4b6789fb57c1f34da984d6152cfb035ccea87efbdb61fa28dd7f86f6ae5"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/baseline.md",
+      "sha256": "5d7091dcac83efca83bdeecf77dce0c44a2999d348b22ba088f1df2c917afe3c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/environment.md",
+      "sha256": "13e43e0f193653a4a1d9d242e27ca64aa4a927dd97f44d9680c33fb532f67659"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/foundations-results.json",
+      "sha256": "52d300b970585a9d9908e593cb62e8e1a94ff22b8d30c170969c6f0e5107e07d"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/foundations.md",
+      "sha256": "e2b2d5c2f6137438c4aff934b6d7f1ff372a4f3940871e642f816ba18e38aea7"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/h-cap-01-results.json",
+      "sha256": "627458131ceb2aca437bff7919e8576e1f0e179ae2728dfe4614575a375d9c21"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/h-cap-01.md",
+      "sha256": "b983df6be6c9f4eb88d166b547ed34ddb5013ab20e3f904f418741021049e958"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/human-acceptance.md",
+      "sha256": "6fa5e06237428970922d2cb3983b9899fbeb85461e65e439ff936431b66d03d7"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/identity-regression-results.json",
+      "sha256": "37649e8511f76322882068ac0f897255f876b5144df96e1810592eaa43513886"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/identity-regression.md",
+      "sha256": "32c2e669c72c05232e481762b858c4e10e51045b790d58c58f29fc979deee50b"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/recovery-results.json",
+      "sha256": "de2aabbf3b62bad037aaaeee873d0e7b41785b01db7c4683100a57375fd90040"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/recovery.md",
+      "sha256": "b5e52c1d89656ef49f2fd11203e45c5a59916b671145505ec8065e1c33b0466f"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t005-t006-results.json",
+      "sha256": "c582804dc7a36b29d30b2c50d5407d1c2b4e6888f07d09c1ed6df75bb8ee157d"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t005-t006.md",
+      "sha256": "1d46c50efcb45f870da4760575fd218248d680f9a38508a69cd64054b664e6a3"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t007-t008-results.json",
+      "sha256": "72d5e862ee29adb472e96caa635ae6f2f94aeac87145b61560bfaecfc5beb859"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t007-t008.md",
+      "sha256": "3563f6854796bf7aaed1497ee96f6bac7662063b47a49e73312997a073afea3c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t009-t010-results.json",
+      "sha256": "134af42da44f7504bffd456867f55aaa4504a5cfc02dc927ff12783598e5b361"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t009-t010.md",
+      "sha256": "61fd01fe4babc766e390ffd477ebbc68bc68955e4ddd5165c776cbb065def530"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t011-t012-results.json",
+      "sha256": "ffbd4afddf9a74eb33245b070fc4056818c6729693e26d507ada72c05082c243"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t011-t012.md",
+      "sha256": "e056bc5a6a47a9006b294408360bfcd24c186dcaa52b1e89a8111018191f30e8"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t013-results.json",
+      "sha256": "2986750f9b03528e12ba954471df566a2621546cad4a95d7bf8521b45821aebd"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t013.md",
+      "sha256": "2043c7cbde92a65a243b7e037162a2c8895bd967ac17b8fc390e4bbd49786a5d"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t014-results.json",
+      "sha256": "6eeaddc7c37cdb85a644d859d14e6a61e1863d37e77d51ff25753013827e4510"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t014.md",
+      "sha256": "c2953939aca008bcdb1121adeccebec53f9f8ba0d46336c8b2e3f450825e7fbe"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t015-t017-results.json",
+      "sha256": "92519c4591699cd61bd93f117b708944f5595ee761f0938850e6249b9ac775e1"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t015-t017.md",
+      "sha256": "b75aa294703eb9602ed5ffa937cdb7d6289670de682cfbccc0fce61b2a8018c4"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t019-t020-results.json",
+      "sha256": "9ad2bc5d7511322345e3b3b4b98c466601caac545dba6f036df092f65f2a923b"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t019-t020.md",
+      "sha256": "e127c71d2a8966884511db19298f3af0f73044f5e56a9a8da3230bd10adfff3c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t021-t022-results.json",
+      "sha256": "b3c287aa80d51dbfc0e8dca38be581da47157380b93da003f2cbc3384b00169b"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t021-t022.md",
+      "sha256": "8d61c8a59c7b7556677b591bd72f4b95d1b4fa4c074b9797f68ecdf76a1b5d7e"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t023-results.json",
+      "sha256": "432129bd07cf08e181ef61c79c42be5d3bb28c487215662ef592254077f14ffd"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t023.md",
+      "sha256": "bfb659e2ac164f24e604b039f8407d2ba914e1b60c643a3dd018898802dfaf9c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t024-t025-results.json",
+      "sha256": "2704366ef50f283053ff513cb277199aba1dcbf66b41a1998fe57530e9340bba"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t024-t025.md",
+      "sha256": "000cd8d76e8c7d4bb9f565a64647dc65776b5b6564cba713378e6488508ef017"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t026-t027-results.json",
+      "sha256": "e439142aa59cf9b7c1dcba98daaf6f213fe77e510c01ec34ca97a328f3a54561"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t026-t027.md",
+      "sha256": "e27450cf4b6dc7ca61025b6e78cdfe2ff6156c36938b4dffb1b04e3df2faae64"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t028-t029-results.json",
+      "sha256": "1e8571275f5e1ce4035ab7c4868a60dad49a4bccef7af0f16c97fefa04180bfe"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t028-t029.md",
+      "sha256": "70b65d60e55a222210d75065bfc93a23f1784899efabf821737142be2158bfd4"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t031-t032-results.json",
+      "sha256": "c6465a8e461d98c6a03927a4b740929d3a097be10eb91677ca509f4d336421ee"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t031-t032.md",
+      "sha256": "c8a933b4f74fd42e3cef7508b77ee619e56ce0458f6609b0b7ee7cbf5fc02521"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t033-t035-results.json",
+      "sha256": "46258c7117d6de5c98f4af6f16ffd483e46a6ed8779071ef8c0137c66d8df87a"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t033-t035.md",
+      "sha256": "e79a3c1faab0e17881b82c7248d5a5c55dc124189d502bd63c9f8eb0e293e98c"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t036-results.json",
+      "sha256": "4c891b939471e75919d7574fe1479c8915d8e8c340b2c181fe7e35c1a874d55e"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t036.md",
+      "sha256": "b091eb6dd756a25f959355d394dd785c17392defe7a53916ded18ac2a37fa9d1"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t037-results.json",
+      "sha256": "c011ccce876ac9b7b6ddb8371d9c0f8d1030dc0206461acbfc3a524adfa4d455"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t037.md",
+      "sha256": "11ffc76bf0b6ebc3632ceb95633b1d2030655093a11a607577849a3e03811656"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t038-results.json",
+      "sha256": "bf949722f91517c9019158c0026114527b962888043cfeb4d7290b5456598163"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t038.md",
+      "sha256": "f05d6c1fb38734bd07147b81eec28d816e45d44f0d1a213d35c029b13eade442"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t039-t041-results.json",
+      "sha256": "2a5c437f5a9bae86a1501c6f515cb941eb0f90c8567faade4aa25981feeb442f"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t039-t041.md",
+      "sha256": "a637b06713f3cda823c66845f465602456d5eb6e5fe64521573b664b5157aa14"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t043-t047-results.json",
+      "sha256": "3448fe53036c6b50a3931032af2d46cff30b469c326d21721afa0324d0fe82cf"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t043-t047.md",
+      "sha256": "c6f70d1da1b81c2513e579a09c278baafec7532b2a2c2a959154cfde557472e5"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t048-results.json",
+      "sha256": "5872cfabe323b192d5d430dc2693a3290458f23ce3ae20d5efb333b0af32deaa"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t048.md",
+      "sha256": "17cd93d9f042449c2b2be3b36ea030ccad94ad4b3ff5ae30104495eda7d30c48"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t049-results.json",
+      "sha256": "1a9425a2c13428b84e854df6a3ef791c0fd1b2a8aad2adb311215e50cbae7099"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t049.md",
+      "sha256": "31dbe208eb34c4f527dcc9ad0a242ada84d4b64e45812054790f4890f60b05a3"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t050-t051-results.json",
+      "sha256": "3e89cf4f99a4e2e48dce40713f4607b810dc1fa4a1db637ff6311b120a14fcf2"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t050-t051.md",
+      "sha256": "7c5adb367842db20649b93116d3c37fcd2d2749f5da6efa9d4fb96a765161297"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t052-results.json",
+      "sha256": "a5454ff79b5168458575113f807f6f12a3ca80a5dde8d208a79b6aa59eac3029"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t052.md",
+      "sha256": "4c300af1fb030ab9960cfc8452c779e66082344c98b40fd9670200f97974bdb9"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t055-t057-results.json",
+      "sha256": "4fc1d15a21de8c272441f79e6521fa140d24fc8a1dfcedc77c7b8bb5a213bc57"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t055-t057.md",
+      "sha256": "db9caecc9d4aeba91c059f489c7844970bc0169cecd53008d705934f70cee97b"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t058-t059-results.json",
+      "sha256": "211940594912b1ff530e3fa31bd3328a6dbd62ba20ffaec7de14242048ef746a"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t058-t059.md",
+      "sha256": "166113afbb68e96c803d6fd6dca9f318367d26ab6d464583b6729a13795296ed"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t060-t061-results.json",
+      "sha256": "3348679a81695a9875619295c4feba761de8cf542c2e13f616c92f6a01f3d1ea"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t060-t061.md",
+      "sha256": "98473ddc2f725d0c2401103ad2c3117f236275f253e2bdfa8a0052e3deb08786"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t062-t064-results.json",
+      "sha256": "5f24a0257dd89832c676f195d4825ee8ea60f7a58c9d3e8d244274559c947f16"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t062-t064.md",
+      "sha256": "333b4ea7341715bb560b1ce110aaa8c646b8bb9ad002b0dc36c3ef53a20dd957"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t067.md",
+      "sha256": "dc7ca696aa89920ba8127d1fdb71c76186fd333f6f50ee5166525fbcc976a5ed"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t070-t072-results.json",
+      "sha256": "ba8605ad1cad4fd9b789f224f26efae77e39571afb91b924a04f1e9569c00fb2"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/t070-t072.md",
+      "sha256": "afe053e8386d5212b1ce8991f1dc5ff18e4114638f078818c952ec7c60033187"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us1-results.json",
+      "sha256": "e10c9168cc8cf85876e4b48e743628630e2f99f9e99a83069fc83148f920c76a"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us1.md",
+      "sha256": "02ee7c004e9b5bd5a5edce0eb3c3d29f0cf3ae8f44309a52246b909b41d66b1d"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us2-results.json",
+      "sha256": "c81178a258dac0a9675383fc4cd9504beb38b196b7e640aaf64e04f6aeccaf58"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us2.md",
+      "sha256": "3fd1ec9d8632b4b042ea94f9a72cd21939418838f434d08f22ac54689838daaa"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us3-results.json",
+      "sha256": "11006e18446ea9163b9db3fcaaa6b9a969b0d1abce53119ea40325794d1d20ef"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us3.md",
+      "sha256": "8454e209770dbe1dc4f01f8f811d754ec051857f959844b358daff91470cb9d7"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us4-authorization-matrix.md",
+      "sha256": "ff3c01d039de70d115096f5023748485b99e37afe04a63779d96129f3c922150"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us4-results.json",
+      "sha256": "259f3ce5bd314667b4873801db3e34f3aa45a296775e2d667e5fb4a0b1679603"
+    },
+    {
+      "path": "specs/002-oferta-academica/evidence/us4.md",
+      "sha256": "4dc149425f7db5eb8498e359f9ce6a2e92f86ab57acf6b10175178b4a551abe1"
+    },
+    {
+      "path": "specs/002-oferta-academica/plan.md",
+      "sha256": "2ffc85635b3a5dbefae6ee97b508700e65d2f2958ed65bb930af481652773855"
+    },
+    {
+      "path": "specs/002-oferta-academica/quickstart.md",
+      "sha256": "15bb888f26d70fde074afc7f4b8d79a387b225bee22347baf44a03534f4d15b3"
+    },
+    {
+      "path": "specs/002-oferta-academica/research.md",
+      "sha256": "8c04b8d90c4e59a63102f5d19479685740abe12fba7913d572a942fc1a7caf00"
+    },
+    {
+      "path": "specs/002-oferta-academica/spec.md",
+      "sha256": "38ac3e76389e4701d7216e611c8e3bd09780fd99ea719546b02c74342f985742"
+    },
+    {
+      "path": "specs/002-oferta-academica/tasks.md",
+      "sha256": "4d346f4eac72ee4576f722c560c5e02c9bee60b34bba0e003b235f9135a53f26"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/checklists/requirements.md",
+      "sha256": "53a1a711aadc13abf742f45787c5c05d1d16cc32f6959cf6860c41adfd61f3fd"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/api.md",
+      "sha256": "39602d91362509c7b0f2ac0f8256cb0da516a39af948d571885c289c0736b504"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/integration.md",
+      "sha256": "77bd715bf66188d27c1898823894d2984723fe576356e2d39a3d3e0d8d8264b1"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/payments.md",
+      "sha256": "fe135c48716de0383e677c152812ad8eeb1146403eae5c31c069f4329d0f2bd6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/time.md",
+      "sha256": "c722e5d5e83ca7a9118cc55218c708a03c700b3e7028fda5a37561ae00dd85c2"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/contracts/ui.md",
+      "sha256": "b18e1483d363fdb6e4249f6879864a7d660382eb38681f7ae49a7cd559be9de3"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/data-model.md",
+      "sha256": "bc34303402301caee53a2a3ece9592db6e8dde95ce7d44c177e307552bf6a5ca"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/acceptance.md",
+      "sha256": "eb41c4bdab4148f5a35c620e3cae86ff35391b2c8c593577cdc0fbb2cdd2c643"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/environment.md",
+      "sha256": "3b990752575be4525a0ab38715383de09bb0171a2ea9731a8626f1aa1446d1b6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/human-acceptance.md",
+      "sha256": "7631bf268a18270271f868ab0bcf1ed356ac700ecc68481e7438dd9093d5e411"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/human-integrated-guide.md",
+      "sha256": "0223345c4a866148331fdf7b9d89751a3d709f66beacbfaf7ac953ebaa5682a3"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/inventory-check.mjs",
+      "sha256": "783258bc7aab9820c1e040bb08d0e871ca0907c1e3fcc47ef8db216f079fc3e6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/inventory.json",
+      "sha256": "38fab3970eccd5dafb13dc0299281246ce4b62381a0f394cfa1db9eaed8b887e"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/migration.md",
+      "sha256": "ee28a4cabe1fd8feeb1c5752499f5302485058755f3eea26e3020ed5912e5c47"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/operation.md",
+      "sha256": "d574138f185932968a312f13940824123d7b643b9a20de360999323f345825d2"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/preparation.md",
+      "sha256": "8ff966107f0afca60bc594986c2909eec7167cc3922f0d4203081db1f52eb350"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/recovery-results.json",
+      "sha256": "4082763ac12255403d540babdaf206e49b531842ad381fa737afa87deda0cae4"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/recovery.md",
+      "sha256": "004e6e61e777edaedcd2c90f802390146801def28e5f3224f228a88a52262d7c"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp001-results.json",
+      "sha256": "acd13fdbc30e04347dd8b80e9d75ca69622ff1c6e9a48a4617303ea1ac9a1829"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp002-results.json",
+      "sha256": "7eb734ff76fa42ea992c04299cd508983cac7a3f0ef235ce6c5e7bb0619d3d15"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp003-results.json",
+      "sha256": "cd61d184666b10c13640e496a17f74133020a490946bdf7ac7ca003f7de6d6fc"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp003-round2-results.json",
+      "sha256": "5045407b24e54b0f79a6196cc5b080ef430a034d3cb127cc03990754fbf75269"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp003-round3-results.json",
+      "sha256": "249c43394e3d04d6c2ec1a6dd66bc81893db23383acd0d45c572411d289aeef9"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp004-results.json",
+      "sha256": "78c7d99d03cd12fe3f0afd6a4ed4a92fd5bbec2f33e6eafcaa30282b3e468a15"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp005-results.json",
+      "sha256": "b8dd8307866c869bd951409ad3d8604a2674efb53c38a5ff13ed7c32b6ebfa90"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rp006-results.json",
+      "sha256": "051437b5095cd82c02231ef787c1cf49c8aaf62743d1f23b89844699ecdbfe77"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/rv001-rp007-results.json",
+      "sha256": "752ab7871cbcd06cbf1b9dc05b81880a1c05e2f70653d959a4a011833b41dfe3"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/security-review-results.json",
+      "sha256": "e3177cee3c5fa7cc3a1d06fb36d3d2601d59d35072d8c98c89f1ddb8cfb811c2"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/security-review.md",
+      "sha256": "1c7c9d0b54b72ef3f31b1f5010e0af2a66293eae7ad8a92440fd1558bf491c85"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t002-t004-results.json",
+      "sha256": "104b0968a387e257815c221ab6684cf19693d85a3e8a1c2a99686adf1fc9fb53"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t005-t006-results.json",
+      "sha256": "60dc50e024607445d13881b789d8be229fc78290f89a443d4adaf11fcfc079f3"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t005-t006.md",
+      "sha256": "210d0fa59b983a580ea6d8d6e2b71e1cd222ef01344d2aebdf13543deff9dd05"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t007-t008-results.json",
+      "sha256": "1d187009c6c2d927109d5ef7a85e1cc5584e1cad58152b525df188c6ef15212a"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t009-t010-results.json",
+      "sha256": "95804347e76cd853f200c532026c770450a574f887d0e25ce313181722af8c56"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t009-t010.md",
+      "sha256": "ddbb9585d7d0fcb102397e13acca01c0a060084ff2a72e74b7ae71b6ed57be67"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t011-t012-results.json",
+      "sha256": "bf1c3eea5a2cde2de3daa179c1ce57984a24f531ed5bf68226ae81dc86ded398"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t011-t012.md",
+      "sha256": "32d86a757d8fe487cc00a4ac4f40ac2e252a8f24793f5bc71a8bfb059c971904"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t013-t014-results.json",
+      "sha256": "e780b945939b36ece6015a12928ba140eac61b702d36d7c1b019276ff6e9a55a"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t013-t014.md",
+      "sha256": "8cf14c1a3bb5c453edd1a6478fca95b34db891a19dee1458ac7a4c940b3ed32b"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t015-t016-results.json",
+      "sha256": "66905aa581497538f3a1433e375f467d374ae7847e00cfed05f284eff38758cd"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t015-t016.md",
+      "sha256": "80858f8132691a0ab36ec6cb040e0413039d01cd45e5628e43a4e8a96a085470"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t017-t018-results.json",
+      "sha256": "af3eaa4bbd928418ac19f3f1fdb971a0ca949e0666ed5d8ecc86aef91c1d3fcb"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t017-t018.md",
+      "sha256": "1a2349c75ff69eae486c45f4684ea1e50d7f348842e4caa744e8c547307fdfe5"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t019-t020-results.json",
+      "sha256": "6524014b10e9129a5cf10efd6d3ca506ff49be63bd799e1f1aa8d6ca8d93aa2b"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t019-t020.md",
+      "sha256": "46abc87e5d269826e048426b1300e0ec40201637149bbb531f3a6e94ff896bb4"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t021-t022-results.json",
+      "sha256": "519a79a86535c649bca39c02660f43e47510b195e67d99f9f6765249d3d809da"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t021-t022.md",
+      "sha256": "3a81086dea2b3caaf42e86ca190547cf066c0f69c8dd4e1e31d0abf19a89a596"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t023-t024-results.json",
+      "sha256": "2f970969fcb8ed0d57500b56094c78e6e9748c39e572c8d055482a58fbe9f5fd"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t023-t024.md",
+      "sha256": "4b858b32756992bef220fe7afd0540a665282eb5785f185a89260cb03374ad18"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t025-t026-results.json",
+      "sha256": "5d88315d607a0548485121f99264279f693f6b88a2fde5613e81aa4743ce9ff7"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t025-t026.md",
+      "sha256": "9765757dca3ce28a45331fc1811803164cbae93e9fdd53ce530f7b4c4d939b68"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t027-t028-results.json",
+      "sha256": "744d1b393caaeee354690e420474c9dc276112228a8dbc16b5339025066c4d08"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t027-t028.md",
+      "sha256": "ce2b335b001b3e9b2821e4900cf7e42960b4cfdb04416676181b1108aae3d061"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t029-t030-results.json",
+      "sha256": "7e5fb89efaf9e592b2a3b8c35e308113efc9f520b79afb62ae4776faf6c6c675"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t029-t030.md",
+      "sha256": "872d69e0322d71319c7fc8d8bfcd4220863ed72a5aa4602118ffc4776af7ec72"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t031-t032-results.json",
+      "sha256": "f16af88263683f8eb081f9a348fa38ce1e61fd4f0f611856067a8313c850cb84"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t031-t032.md",
+      "sha256": "dd875633be5351b17ac6e8ea03f00e36e75f7ecec03664c93350da82d93c2d9a"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t033-t034-results.json",
+      "sha256": "6e3351e1c6bcac25f1bf1da45a00fdced65db735fc49b9b184baf4061fc82c38"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t033-t034.md",
+      "sha256": "777fab938277f367f61f9ce52ca03e32ce22b17e479b142d298f98e7e060b360"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t035-t036-results.json",
+      "sha256": "73996b31ffb4d6d91a50effea7ac09b94d7e2c56627d2c5f474605ca45774492"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t035-t036.md",
+      "sha256": "0588e62a6b5a56781f1ce5b8ae815d0d74040c397d39d4b67356cedd58579feb"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t037-t038-results.json",
+      "sha256": "5d3aa02c370be6baa0c349e76a12698314336907208a6cb209dbecb0227f52d2"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t037-t038.md",
+      "sha256": "a021f1e107e483bc3cfbc1bd45f296bcc858c335d2b6b51408cd992387582e2a"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t041-results.json",
+      "sha256": "a660975aff18139c0f008ad22409b080a11edaabb46e6a00440753c4ed9d54aa"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t043-t044-results.json",
+      "sha256": "8544817234c9ad19b844df953627994537a7da8f32ac74c422afc6ed00fe9b14"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t043-t044.md",
+      "sha256": "b7a4d2f1832b26c550884e2afd938c315c6d5b7dc6def0d3238765e303347b23"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t045-t046-results.json",
+      "sha256": "e886f3597b2661e247d4029274868a348c6d1dbbecdb7e1599de2fe31feeecd8"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t045-t046.md",
+      "sha256": "c3a3b4b3ef9abd6ff037910666e0fe1215f3ce0d737c9de05d2c51885f274396"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t047-t048-results.json",
+      "sha256": "569e27e134a610c0781c413f72629d8b8b8080ed6eab0387b32d50bfd641262c"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t047-t048.md",
+      "sha256": "10746d781d849a3113b0f564bbe527fabd7d410e4a64f37ad04605d42d841170"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t049-t050-results.json",
+      "sha256": "48ef229dd975601f216c587b74714e83d0450beef6efd1b82dd9fcd50bc3840f"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t049-t050.md",
+      "sha256": "f65367b58cfd9d7d3e10175af45a11fe3d931020f9427bf695325e59a3a33528"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t051-t052-results.json",
+      "sha256": "41ef5a9ab7449754b40c0009792c8887e2c0b71c9f8410c05507e01fc902b2b0"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t051-t052.md",
+      "sha256": "18c307f56915739ca54fcce62464660ba300969c18e4109b0a2a9f3c7143f280"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t053-t054-results.json",
+      "sha256": "f8998408e2449971621af2f9569125a5a5898c85605e13886ba9820d1f3df848"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t053-t054.md",
+      "sha256": "60715b91de994cc0b9ad3853134ebe9b28d5946d17124dfd38de341ecf6e71a6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t060-t062-results.json",
+      "sha256": "a9e435c83151a4a4fa475f7865dc974417197c02d8f29bc6ee62908c2529cbb1"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t060-t062.md",
+      "sha256": "f8973d5189fe597f880989a3a5957c89ef1a402e0994967273ff607f033f24da"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t063-t064-results.json",
+      "sha256": "0111a667a66a5021faee27089691e2fee5bc265712f11824f71ac57c40b53a0c"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t063-t064.md",
+      "sha256": "c803006d59290aec06c6120fc3715913409ee77cee4df5b1a880f95c18f957d4"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t065-t066-results.json",
+      "sha256": "dc1baadae66febb437f60d1b3a287bfe67e9dd4e72c9da8721d56a4720134a85"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t065-t066.md",
+      "sha256": "12b08f3ba4ed367c9ab1a21deff70c717f1b6e57eb8840f180cacf3d052ce3e8"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t070-t072-results.json",
+      "sha256": "a00995a939c16135c3d3e0c593d5194d2c969856040d32408f57ef07ac7b207c"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t070-t072.md",
+      "sha256": "cc99abcf8ec38860f40263766f5733e2734fa773aace186aa90649b7616158b9"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t073-t074-results.json",
+      "sha256": "8a043174e6eb5eaa3de9c092f036380f9e0f089e6b9361d78c189249d8ac2bca"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t073-t074.md",
+      "sha256": "fbe2e08243e7258d6ee133a48f7f126fde20f03feea02e7044b675f8b254c725"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t075-t076-results.json",
+      "sha256": "cbe4483a087a5424e0132887390ef0c8f7cd63c0656fd1cddcaa6271c7d2d751"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t075-t076.md",
+      "sha256": "45ed366e10dae438a309f66b73667afffb174586e35f9b62115b684f1bf7821e"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t077-t078-results.json",
+      "sha256": "6329edd047ee4c2f5118a5751ec9cb027953bf056adb79835ef361e0282b1296"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t077-t078.md",
+      "sha256": "60f750de6f92537fff20cfc18d120efa092775d2afa7630f96edd65a4988528e"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t079-t080-results.json",
+      "sha256": "bfefb75c95b9ea02464630305df89522037a828a009204465c05d303c2879c6d"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t079-t080.md",
+      "sha256": "9413ae0726681e51f7f91c1773675d1222a7f190212eca7ff6dbf4ddb4e8406d"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t083-guide.md",
+      "sha256": "00b77bba4af6a434ea9feb1adf42de54423fd1e2e20e508a591c00655fade72b"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t083-human-results.json",
+      "sha256": "fc45fb2f259afd971f78cd51ce0c33e88952482ba512223dd8c5bd64d0ac9303"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t085-results.json",
+      "sha256": "a8f7dafda7cab312624636fea573cc09c5af21a3d7f17d2121a6653f91ac335e"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t085.md",
+      "sha256": "5e6f1c42bcb2d4ec70a27acf9002bc23211b5884becec18f30b2639cfbe6962d"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t087-results.json",
+      "sha256": "6147a5bb8bcf245caa781dea7054a94326fdb9ebab1d9eb926218336a1be2f33"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/t089-t090-preparation-results.json",
+      "sha256": "2d3aa99fe22c6ddb3eac32094fe749a6b0ae37e7f15600bb47b2cfa8b0119823"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us1-results.json",
+      "sha256": "4f19e69d02b7aa322f106bd5a47a7ec8a49107c25b2a3e161bae1df1cffa95a6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us1.md",
+      "sha256": "36f2a14dc1c837c8c7b40fc44530b6b11f7e0be1b429b064e5b076839ec363f6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us2-results.json",
+      "sha256": "fad00916e625f36fa2167bdeafb32e924cab50189c04e2b98481050560171645"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us2.md",
+      "sha256": "85e3a63c8abf7c8dbaa532fbbb7d8e81a336ec93b1bff815696b7d55311bd0ca"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us3-results.json",
+      "sha256": "aaa8cddd2e07e1ca4a31c134a913ebcb55c5a7e7f1bc775307e361326e6b867e"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us3.md",
+      "sha256": "c8463359b3789ef066a264246a4f6408dd4276771339ead1ba35ab757099e218"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us4-results.json",
+      "sha256": "db79ac1591233f7a71c86f7fba9439bfe3037e85bf2cb77306caf2c8d556301a"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/us4.md",
+      "sha256": "68f8d2a2bb35fdae40a8b665c0e8465a566498df531b0d341a477a3a43c29ce6"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/evidence/verification-results.json",
+      "sha256": "256aa3a56e0becf9b24dd5c86c15c2fe54e0b28575aba4535a321d2245aafa4f"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/payment-verification.md",
+      "sha256": "0cf794a87d651db80707af212de37be0c8d9ca18fd1f943cbc9d08c7af7c9caf"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/plan.md",
+      "sha256": "394b89cfaa85a0cf44869b8b8cc46541032db7d9914ed05a4a95a42851557556"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/quickstart.md",
+      "sha256": "3fc07d36ffebe65f0c255889abace81846d0bcaf9cb3b2e2976074028181b6b8"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/research-rp004.md",
+      "sha256": "a5bf8f1c20b997aceed314bd68ed49d92f9a4ddada7c049473e694fad82fc693"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/research.md",
+      "sha256": "05d1deac06cae81a33fb21bb22358cd6b415daf9403a550fc1a444eac54bcd3c"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/spec.md",
+      "sha256": "a43d766e1b7c3534f67429568ac3ed3939e01e4c4784f59ec6fce462294b3d77"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/tasks.md",
+      "sha256": "d59a92980033928131701699f519104c1f787b8df47213a8e0810bd2d888eba4"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/temporal-verification.md",
+      "sha256": "ebd1c32457e5d9b1b0435fd6bb562f2f540ad3686738f84e61bb1693448eed52"
+    },
+    {
+      "path": "specs/003-reservas-ordenes-matricula/verification.md",
+      "sha256": "d72ec6cf1bb6f1681337ab578f242fbb04d6357ea3da043bd712c1c4525ff5f3"
+    },
+    {
+      "path": "specs/004-materiales-estudio/capacity.md",
+      "sha256": "34b0caa50051bf2afb192c92688f813410ae230945fc0873c3557d2cb7f58fd7"
+    },
+    {
+      "path": "specs/004-materiales-estudio/checklists/requirements.md",
+      "sha256": "9272e319392d99c892f0c44a6c541935f9a67f306ea786b24c226c16b837d7e9"
+    },
+    {
+      "path": "specs/004-materiales-estudio/contracts/api.md",
+      "sha256": "877d41fc18b4b8b675850d3fc835b2431f217897bb88343aa537d1476f12fe3a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/contracts/integration.md",
+      "sha256": "deee8cd07a3f97f177b3cd0c5e3babd6ea6819e7f0c24173c2c532c0b3a493c2"
+    },
+    {
+      "path": "specs/004-materiales-estudio/contracts/ui.md",
+      "sha256": "53efc645f1580c16e33050ed337e96d2d11e5bb93ae994a6e4c4d09e38007084"
+    },
+    {
+      "path": "specs/004-materiales-estudio/data-model.md",
+      "sha256": "f28dfaa3d3996a0382c460b5f0172800c2446727151900055ca36024757ec412"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/automated.md",
+      "sha256": "91a0d6c68123a9ced7873372f5b4808050e731a0dc6e7d3928e6de257cbabff0"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/closure-decisions-proposal.md",
+      "sha256": "e070d60d6ae719fe6963170144d5e9ee7f118431d042751c576fa5544e279480"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/closure-followup.md",
+      "sha256": "e7a7f3baf18d132756c22764189a494b0325ac8c53ec297e19c0027248ae9448"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/closure-readiness-results.json",
+      "sha256": "7930f4e5c0aacf2c682ed70c00ade3c5fe1cefa1c16237b5b85d4e4e4e056a65"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/final-acceptance.md",
+      "sha256": "a07e6886e6ef3b34bea2ec6937081b295e061b167db41188a7b797292fe4eb0a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/human-acceptance.md",
+      "sha256": "a37299ef66e2d3a18044b9ace07d178deabca2568c35918e677c1ffe82b6da5f"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/human-session-ready.md",
+      "sha256": "640e9dc3d8c3580f29129293cfa60f5a3c5de639649cd46e4b16ecc6753588bb"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/implementation-environment.md",
+      "sha256": "db502cee69cb98ca36e9c66d3ff98dcc90eea6a0bec530f412664112836306f6"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/local-resources.md",
+      "sha256": "383bfff53c59ec7f73bdc43157a29aa798e48fafd21d3ef761ecf1441ba32c15"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/pdf-diagnostic.md",
+      "sha256": "20d05944047e70a936db80430c9709878f9fdf249e9f1849580b38f38e8944ba"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/pdf-fix-results.json",
+      "sha256": "d373102bce7e85ec79089f8dae35c0ddfadecdd747c1b0a2d65680228c71dd16"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/pdf-fix.md",
+      "sha256": "f7d7b1b3f8e146df4e6727be4b53100321fa81113e002bcf3cdf8ef1751d7f0c"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/planning-review.json",
+      "sha256": "448a7d3d5ce29ea63389a5ac89ff6126866dc748f47945c8ef2614772689924a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/preparation-checkpoint.md",
+      "sha256": "0dbc66d4278966fea7bf2c362aab95b460ab3a281e4f7d6cdced06dd5518d782"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/preparation-results.json",
+      "sha256": "47577a8eb314b020e727634721a7c686030e5e7c4e2fe8eaa816eb999c828e64"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/recovery.md",
+      "sha256": "074d01325a63b4875841c13fed92ef00a6996a0eb60d8f34f00a0372a002cc6a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/specification-review.json",
+      "sha256": "051b8f3148427bf9dcaaebd8c3a18e3cb587983049df6260e9ce38ae4f8b1e19"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t001-baseline.json",
+      "sha256": "f9d6286c065988a6308dde38cbf17cc60e02d26fcf10ba50af7eccfe4aa6d052"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t004-corpus.json",
+      "sha256": "a821579822bf035cd918497ff803578ccb746e27fcff0ce8f80d830e39e766e4"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t005-t008-results.json",
+      "sha256": "638bfc50b4e1b33393d0a9b780a97e3fcaccce3d2b1a0e80deb3ada95def1578"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t005-t008.md",
+      "sha256": "268f1e7ba11b4a846b337b2c45baafa7012f9b48b71a32b16f0624b98f58975d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t009-t016-results.json",
+      "sha256": "7fff3a39c64f69e6db5ae7dc1b6442540fb5a47d2513b887880a72dca697f28f"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t009-t016.md",
+      "sha256": "56c3d3fd0af92adeadb3fcf724af4bd7a4b98e6c6994005458150c828b88136b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t017-t019-results.json",
+      "sha256": "ae0866a5e9e86aaeeb1b2201156a48311b1cf27df9c2c46751adfa78dd17f87a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t017-t019.md",
+      "sha256": "0d725022564f4193c6c783c9e4a4b5e666915e0c1d89b6c79c39a91394b4d017"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t020-results.json",
+      "sha256": "1b248cc05182b101e9d1acf889d2137ad6503a851558c4e9cc8e86b15f9e622d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t020.md",
+      "sha256": "da20e0dc082f125b7ad8aa2119ea9d02e49260497d57ed5978fa91a0b09ea055"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t021-results.json",
+      "sha256": "77300d9032c75d57b4bf518886df927e11210d19a9b6c6e4892f123b9a91b660"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t021.md",
+      "sha256": "7d55796166c6ecb98b33b7cb821433dfd4e7339dec1b2b09b5abaada8876d3b5"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t022-results.json",
+      "sha256": "8592260ff8e79d094752f0c8c4000f269394029a38e1365af78c8aca196f7d8e"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t022.md",
+      "sha256": "d668d58b10c68c8ecde0646ac484f270b19e0e31b4522716ce89c08930d72e67"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t023-t024-results.json",
+      "sha256": "505a22028c03b04590998cfbbd68b25cef5f8f0bf73c2b6a95c936a2e0dc9c38"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t023-t024.md",
+      "sha256": "d02be380e343d5a7eb92d63283b8c8b2736c37df2dac2409b9b5ec75e0182052"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t025-t026-results.json",
+      "sha256": "113f2bc93f41a92a8f7c9e9175c697d192e096cfc6606b9f6d3b4ba941e7156a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t025-t026.md",
+      "sha256": "b513cd4ce086d71f79e2325c37cbc30e2f1311fed20eb7f2464e765ccc24a086"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t027-t029-results.json",
+      "sha256": "63199b64369291a726e2b4e4653208192825e13a09c68f2f410df692695a304d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t027-t029.md",
+      "sha256": "7d287493751a1dbf737e1b527de90bee0d5dfa2153edea9c9a1093b65760adc4"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t030-t032-results.json",
+      "sha256": "a094a5b58c9c1db1d313cba2962c283d5cbbff1175a7cc60f4b65e32eee035ed"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t030-t032.md",
+      "sha256": "cf3f41f4cf22b86d788539eb2754c2245fc4d6c74e601cdb48a717982356eb38"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t033-t034-results.json",
+      "sha256": "39efe9eab19e52880acbb85034a6d1c469f331e165519ae90589dd408d8cfde6"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t035-t036-results.json",
+      "sha256": "3cc1e88ef13edaaf661a51fed53caaf48c078cc8050cfec87d3e3deaf2409d30"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t035-t036.md",
+      "sha256": "a3bd88d6d546720bd9caaba49dbd512ba1cb9361f11edd86e91cddf695f918ce"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t037-t038-results.json",
+      "sha256": "599d0d445cb2fa48d12dadc0944875d8f024948428f7216c1c12718584f0c480"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t037-t038.md",
+      "sha256": "acc38667ccbdfa8e0da531d3773220d5b7ee79a7e65ee0b07d72086be928c9ae"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t039-t040-results.json",
+      "sha256": "477e8bce6245361bd089caf663b2cc261379dc7bbcd1946907db3af2339b8eeb"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t039-t040.md",
+      "sha256": "375444f4d443d9422ca52dec694f077d74e331d8439a0144b9ac397b287d624b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t041-t042-results.json",
+      "sha256": "39035658f20dfd567bf9d51c9c2a0917a468e34f390ef3c605e119233c67ff9a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t041-t042.md",
+      "sha256": "330628e1faba99b9b85fee7e6659591d1b4dcd3129b1b616e5546aecfcfc3f2d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t043-t044-results.json",
+      "sha256": "d6acea1dff1457bd95339b3b0a715185fd392ba011b34fb1cfb220f2d71342a7"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t043-t044.md",
+      "sha256": "1475b82f1874b58db40bcd93296bd01bb57de72262c98d8378d22b8a705cca69"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t045-t047-results.json",
+      "sha256": "d02632a7e11c29b84e00c1ede57247c97ea6f1043b9c3fd9403dbab26a16d63b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t048-t050-results.json",
+      "sha256": "41069c87773eef76bce63c1b35e63881e17083eca15a30bcc02abaf2c236a11b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t048-t050.md",
+      "sha256": "cb46848bb5898a74a2eda057e51eb3acd26d1d8a501b2b4205b6936cb611623c"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t051-t053-results.json",
+      "sha256": "49a8c34a786f4a3818b2d4e22a7ba7548adc98e3e6e2dcb9066d267b84dee235"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t051-t053.md",
+      "sha256": "9e2f49827c8bb2c64152d1aa562b6ed1ada8571f72a05afe73c4edd07cdfbe9d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t054-t056-results.json",
+      "sha256": "bd63a0c2f8fb6032d3cfe350194f2ffa12cfee7d4a05df6af83839ab4d7b3a4a"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t054-t056.md",
+      "sha256": "236e88d7216fc229c97878b673cdc62785cc27799d634ab4048fc26089e131c7"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t057-t059-results.json",
+      "sha256": "61e5b6cfd2486d87a735a2e94a9c39975749d6ccb123affb21ab4f07aeb5a03c"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t060-results.json",
+      "sha256": "dd74568a1c5115bb928e41a2a3124b0052155fad74d1da6d1826702b686f2a3c"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t061-t062-results.json",
+      "sha256": "4e09490f2451dfc544af36d6f65995826a1fcd9236ab2755829f48e231de7c99"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t063-t064-report.md",
+      "sha256": "fdcb099da0d059f0c288495c560820a97fe2da4fe32e038f7e70ee6c77943de3"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t063-t064-results.json",
+      "sha256": "d66a9df95f1aca4fe995e2cd218f70b084197eca81d1c329608e69de31ad0c24"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t064-session-ready-results.json",
+      "sha256": "0fd998a825fa322fe08da0d6b88295059aeb1192699b33510194f757624665a3"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t064-t067-report.md",
+      "sha256": "40ec451efdab033e00b8c265347b087f65f7752002711746afbe8adbbe171ca6"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t064-t067-results.json",
+      "sha256": "1e6ccc7eae1cf8ac129c0e8f34eb11e4fdb357ec3dc42ebe8cd8129e1ff75e28"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t065-t066-report.md",
+      "sha256": "3e936b1e146fbc26474c12301ad8f01427bd4688a4403a45a80ca27b0c9182c9"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t065-t066-results.json",
+      "sha256": "17feb496939372d884d9ac8f6847f0d8a83f1e4d8079936bba69ed8726428b2d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t067-t068-report.md",
+      "sha256": "cc8e95b1c690c3f6b194dcc603773f04c5ef99a7e38f63eca0bd432a761ee7ee"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/t067-t068-results.json",
+      "sha256": "0b0fabdd43c52d15fb6d277073992666d3d032fe47b5385f73f5f848b16f8711"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/tasks-generation.json",
+      "sha256": "e0648936adc0a6677ae93d179ea810a2d61512c1beecb5102fef5b157d98de5f"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/upload-limits.md",
+      "sha256": "22893f1bf93ac400b543a5a1be5211f08c5d443382dd5be1962327104faefd26"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/us1-checkpoint.md",
+      "sha256": "39bc215d62882914a5fd09eee28e0525ba2270a5365a98729a12dd2a5c08913e"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/us2-checkpoint.md",
+      "sha256": "8372088cc8549d2c0f04740161d76854aaed2ca73e5015ce27b25c3766d234b0"
+    },
+    {
+      "path": "specs/004-materiales-estudio/evidence/us3-checkpoint.md",
+      "sha256": "6df15a452422350564e8eefc2dd4cea4442aa4e66b6daf56eb746cd47a9e207f"
+    },
+    {
+      "path": "specs/004-materiales-estudio/operation.md",
+      "sha256": "c74c22dbd8e3514c21833f54c6335da9e735218bdd5abcca30c1e4fae8148130"
+    },
+    {
+      "path": "specs/004-materiales-estudio/plan.md",
+      "sha256": "aeb4f525d8cbd8e8fb6a370491ee0d107f977ad285c3c2036d53c5ed0d812332"
+    },
+    {
+      "path": "specs/004-materiales-estudio/quickstart.md",
+      "sha256": "558ddf1e7d02f77efd71b8fa3048474bae12d6d7dc8153ec3b83f8fa8e3a9e8b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/research.md",
+      "sha256": "34df450020e39624a10e453f5e25dcfede31937d4a6b7024a1b81692f4498e1b"
+    },
+    {
+      "path": "specs/004-materiales-estudio/spec.md",
+      "sha256": "68044a322dfa47294ad447e9b62d6e1f0053c324e60c8c56ccc117f3a889d09d"
+    },
+    {
+      "path": "specs/004-materiales-estudio/tasks.md",
+      "sha256": "7f8c319a7b44e78fefe14e48c58d59738fcb92adf87b598b6d2a9d2aa3d3a29f"
+    },
+    {
+      "path": "specs/004-materiales-estudio/verification.md",
+      "sha256": "24cb78e84ab455233e8f19570d9f3b1e0074f56cb6fc0b67b462070da0f180fa"
+    },
+    {
+      "path": "specs/005-clases-chat/checklists/requirements.md",
+      "sha256": "22c2908da56e1104b4fd006d915d418f89ac878d07eca8e4a13c500ce916033d"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/api.md",
+      "sha256": "0175c80f6b42a51c06d4c2c9e5512cbb2292faedd439a4b433a434d4f441bafd"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/integration.md",
+      "sha256": "ef589f31bf2afdfafeba42eb293aded4774fc6255741d35a4d7d5d0fea561217"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/realtime.md",
+      "sha256": "92bc4d2aab271fdd9290c33bdd244e2ed9ff1dec39dd4f7fb1d06423767c5584"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/ui.md",
+      "sha256": "8ec8dfad818cc376cdfad689a5f10bae1afb094bb443a8f4481b0910070933ed"
+    },
+    {
+      "path": "specs/005-clases-chat/contracts/video.md",
+      "sha256": "f42bfe5c7968bbc9024831d5f9320da998154b89b468c6304d868afd9fde5d25"
+    },
+    {
+      "path": "specs/005-clases-chat/data-model.md",
+      "sha256": "771eb425aab2cbf822c140767abe064ad2f045299705631e98715809aadf9e49"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/planning-review.json",
+      "sha256": "1cf39d6721c5bca7b2688a81b94f46c132400931111e5c1fcc1ed1a3e0f447d6"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/planning-review.md",
+      "sha256": "40623e94278cba16077d4bf9f448e341061cc2a055be719d5988ce84ccb7f5b3"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/scope-roadmap-report.md",
+      "sha256": "c5f4c3c08d6fd6f1731ad53ad9d8392e0e0dd7aac0f880d9c2f1ca6ccc3d4d2b"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/scope-roadmap-results.json",
+      "sha256": "5536b4ce1d2464a9038110789b580588102fcbfec14ffa0af11da7cd643aa545"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/specification-report.md",
+      "sha256": "0a38d4a3497722e05d81bf93749a08e6dd48ac9953f8815e77f8d9374c98d7c6"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/specification-results.json",
+      "sha256": "f29204d18238090447ccb61f4c7bcb95c198a494c322b4dbdda519f9458ff39e"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/tasks-corrections-report.md",
+      "sha256": "dc224190c0629da075249f3d24dcdcab70a62b4d70119d2ff84ed19a6e3c1486"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/tasks-corrections-results.json",
+      "sha256": "2337e4e7aace66cfe9c9e4d636f7e3fb6cdc6a935e5641a3f76e9229b1c8d9ff"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/tasks-coverage.json",
+      "sha256": "20dda3ea7985e4c38ae35885bcfcd639395bbdd4dd5d46fd04aaad5703948ef0"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/tasks-generation-report.md",
+      "sha256": "dd596ad46ce5e4796fa3e91fc9239be02a59b98c4cf88bbc3905f15837f1ed2a"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/tasks-generation-results.json",
+      "sha256": "4d2f6330ed2bb71311e24249de8630330f9bf92d68044033954c3704cfb5c6c5"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/video-scope-adoption-results.json",
+      "sha256": "1d8fbdcacbc6d0cea2ca1a8c0a05c72e8a0479570a921ebb6d5031c2fc71ba47"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/video-scope-adoption.md",
+      "sha256": "33916f212003f9d99544cf10931fa6f4347390c401825bd9b6f2d022798ba473"
+    },
+    {
+      "path": "specs/005-clases-chat/evidence/video-scope-proposal.md",
+      "sha256": "f60ff8d73e27aa4bac6bc094ddd34ec06d5c67c5dd96dea39e8200d62015f4c2"
+    },
+    {
+      "path": "specs/005-clases-chat/plan.md",
+      "sha256": "ab738fa6f54bec1890b968ed41236e7d6886dd373b3e89efcfe36bc3d90e5a83"
+    },
+    {
+      "path": "specs/005-clases-chat/quickstart.md",
+      "sha256": "37068478af5389af4b50e2e5e67777dc5d9bcb6826b3183455639eefb5f4c30b"
+    },
+    {
+      "path": "specs/005-clases-chat/research.md",
+      "sha256": "4889725da1c1c5b09708e5ef451dca45b412a450ecdc1395b5669bb23a36f235"
+    },
+    {
+      "path": "specs/005-clases-chat/spec.md",
+      "sha256": "d42591490cd8bb5104cde8e3338fd4c21265e73030548abd9b42e7bde453de49"
+    },
+    {
+      "path": "specs/005-clases-chat/tasks.md",
+      "sha256": "59d10df6f505d7971e9ceb61067813435ddcb38653662007c56ade858846bde0"
+    },
+    {
+      "path": "specs/005-clases-chat/video-feasibility.md",
+      "sha256": "9797be0e3578481598eede442341514c5ae40baffdb0651a0ff83f562ad59fa6"
+    },
+    {
+      "path": "specs/005-clases-chat/video-gate.md",
+      "sha256": "260a25c31403d5e6af184812121c7dc154def6fc23ed1b941785384a2e5c936b"
+    }
+  ],
+  "initialDockerState": "Motor Linux no disponible; aún no se iniciaron servicios de ensayo",
+  "scope": "Baseline previo a T002–T004; sin datos, claves o contenido de configuración privada"
+}

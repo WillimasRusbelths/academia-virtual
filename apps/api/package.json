@@ -1,5 +1,7 @@
 {
-  "name": "@academia/api", "private": true, "type": "module",
+  "name": "@academia/api",
+  "private": true,
+  "type": "module",
   "scripts": {
     "lint": "eslint src tests eslint.config.js",
     "build": "tsc -p tsconfig.json",
@@ -18,9 +20,23 @@
     "admin:bootstrap": "node dist/src/cli/bootstrap-admin.js"
   },
   "dependencies": {
-    "@nestjs/common": "12.1.0", "@nestjs/core": "12.1.0", "@nestjs/platform-express": "12.1.0",
-    "@prisma/client": "7.10.0", "@prisma/adapter-pg": "7.10.0", "pg": "^8.0.0",
-    "reflect-metadata": "^0.2.0", "rxjs": "^7.0.0", "argon2": "0.45.1", "nodemailer": "10.0.11"
+    "@nestjs/common": "12.1.0",
+    "@nestjs/core": "12.1.0",
+    "@nestjs/platform-express": "12.1.0",
+    "@prisma/adapter-pg": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "argon2": "0.45.1",
+    "nodemailer": "10.0.11",
+    "pg": "^8.0.0",
+    "reflect-metadata": "^0.2.0",
+    "rxjs": "^7.0.0",
+    "socket.io": "4.8.4"
   },
-  "devDependencies": {"@nestjs/testing": "12.1.0", "@types/pg": "^8.0.0", "@types/nodemailer": "^7.0.0", "@types/express": "5.0.6"}
+  "devDependencies": {
+    "@nestjs/testing": "12.1.0",
+    "@types/express": "5.0.6",
+    "@types/nodemailer": "^7.0.0",
+    "@types/pg": "^8.0.0",
+    "socket.io-client": "4.8.4"
+  }
 }

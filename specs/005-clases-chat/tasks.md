@@ -1,7 +1,8 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado**: 0/86 completadas. Crear esta lista no implementa la aplicación.
+**Estado**: 4/86 completadas: T001–T004, preparación y dependencias verificadas.
+El comportamiento funcional de clases/chat y sus FR/SC permanece pendiente.
 IDs locales a 005. [Spec](spec.md), [plan](plan.md),
 [investigación](research.md), [modelo](data-model.md),
 [HTTP](contracts/api.md), [Socket.IO](contracts/realtime.md),
@@ -43,13 +44,16 @@ cadena independiente; no se declara terminada su historia o el spec.
 
 Objetivo: baseline y ensayo reproducible sin cambiar el entorno manual.
 
-- [ ] T001 Registrar HEAD/rama/puntero 005, hashes de configuración sin contenido, archivos previos y pendientes 001–004 en `specs/005-clases-chat/evidence/t001-baseline.json`; comprobar estado Git antes de editar y preservar los checkpoints históricos. FR-023. Sin dependencias.
-- [ ] T002 Documentar configuración privada y comandos del harness en `specs/005-clases-chat/evidence/implementation-environment.md`, reutilizando `ops/docker/test-harness.md`; APP_ENV=test, owner/runtime separados, proyecto/BD/volumen de ensayo, sin publicar puertos o alterar `.env` manual; migraciones antes de API. FR-022/023. Tras T001.
-- [ ] T003 [P] Crear `specs/005-clases-chat/verification.md` con 24 escenarios y Q01–Q16 de quickstart, matriz de roles/propiedad/estado/sesión/vigencia, FR-001–FR-023 y SC-001–SC-008; separar pruebas propias, reproducción real, límites externos, humanos, validación académica si aplica y D10/D13. Tras T001–T002.
-- [ ] T004 [P] Verificar versiones oficiales compatibles y fijar Socket.IO 4.x y cliente en `apps/api/package.json`, `apps/web/package.json` y `package-lock.json`; registrar versión/licencia/compatibilidad en `specs/005-clases-chat/evidence/dependencies.md`, sin añadir Redis/gateway Nest u otro servicio; comprobar instalación reproducible en harness. FR-014/023. Tras T001–T002.
+- [x] T001 Registrar HEAD/rama/puntero 005, hashes de configuración sin contenido, archivos previos y pendientes 001–004 en `specs/005-clases-chat/evidence/t001-baseline.json`; comprobar estado Git antes de editar y preservar los checkpoints históricos. FR-023. Sin dependencias.
+- [x] T002 Documentar configuración privada y comandos del harness en `specs/005-clases-chat/evidence/implementation-environment.md`, reutilizando `ops/docker/test-harness.md`; APP_ENV=test, owner/runtime separados, proyecto/BD/volumen de ensayo, sin publicar puertos o alterar `.env` manual; migraciones antes de API. FR-022/023. Tras T001.
+- [x] T003 [P] Crear `specs/005-clases-chat/verification.md` con 24 escenarios y Q01–Q16 de quickstart, matriz de roles/propiedad/estado/sesión/vigencia, FR-001–FR-023 y SC-001–SC-008; separar pruebas propias, reproducción real, límites externos, humanos, validación académica si aplica y D10/D13. Tras T001–T002.
+- [x] T004 [P] Verificar versiones oficiales compatibles y fijar Socket.IO 4.x y cliente en `apps/api/package.json`, `apps/web/package.json` y `package-lock.json`; registrar versión/licencia/compatibilidad en `specs/005-clases-chat/evidence/dependencies.md`, sin añadir Redis/gateway Nest u otro servicio; comprobar instalación reproducible en harness. FR-014/023. Tras T001–T002.
 
-**Primer bloque recomendado**: T001–T004. Preparación y dependencias no entregan
-clases o chat; registrar sus resultados antes de continuar.
+**Primer bloque completado**: T001–T004. [Resultados](evidence/t001-t004-results.json).
+Preparación y dependencias no entregan clases o chat. Siguiente bloque: T005–T006
+(contratos públicos/puertos y pruebas SQL antes de la migración T007).
+Actualizar el índice vigente con `node ops/specs/update-005-coverage.mjs --write`;
+el validador de adopción anterior conserva su checkpoint de cero tareas ejecutadas.
 
 ## Fase 2 — Fundamentos compartidos (T005–T017)
 
