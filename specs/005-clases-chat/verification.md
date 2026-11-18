@@ -13,6 +13,11 @@ de schema/migraciones (33 de clases) aprobadas. SQL/upgrade son parciales de Q01
 Q06/Q09/Q10/Q14/Q15/Q16; no completan permisos, servicios, carreras HTTP o restore.
 Las 24 filas de aceptación y los FR/SC conservan su estado pendiente.
 
+Avance T008–T009: fixtures aisladas verificadas y suite de autoridad escrita.
+[Evidencia](evidence/t008-t009.md) distingue las comprobaciones de datos de ensayo
+de los casos aún sin coordinador/composición real (T014/T017). Ninguna fila
+de permisos/carreras o FR/SC se aprueba por escribir esas pruebas.
+
 ## Estados y evidencia
 
 Cada fila empieza PENDIENTE. Cambiar a PROBADO solo con commit, configuración

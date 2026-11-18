@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-18",
+  "timezone": "America/Lima",
+  "base": "ccd25c63494855a63a05a64f67b02baaece92731",
+  "branch": "feat/005-clases-chat",
+  "tasks": {
+    "total": 86,
+    "completed": 9,
+    "block": [
+      "T008",
+      "T009"
+    ],
+    "completionMeaning": "Fixtures verified; authority tests written, not behavior approved"
+  },
+  "environment": {
+    "harness": "isolated Compose",
+    "appEnv": "test",
+    "publishedPorts": 0,
+    "schemas": "random t_classes_fixture_*",
+    "syntheticPaymentsOnly": true,
+    "sourceMounts": "read-only"
+  },
+  "checks": {
+    "prismaGenerate": "PASS",
+    "apiLint": "PASS",
+    "apiBuild": "PASS",
+    "testTypes": "PASS"
+  },
+  "fixturesAndSchema": {
+    "total": 42,
+    "passed": 42,
+    "failed": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "file": "apps/api/tests/integration/classes-fixtures.spec.ts",
+        "passed": 9
+      },
+      {
+        "file": "apps/api/tests/integration/classes-schema.spec.ts",
+        "passed": 33
+      }
+    ],
+    "reportSha256": "f5b07f05e805e913bcb35fe7112e4bf3e68ee3b78873c1cd7860b497c70b0d52"
+  },
+  "authority": {
+    "status": "RED_IMPLEMENTATION_ABSENT",
+    "total": 40,
+    "failed": 40,
+    "passed": 0,
+    "skipped": 0,
+    "reason": "createClassesFoundation is not implemented (T014/T017). Not a passing authorization test or accepted functional red.",
+    "nextExecution": [
+      "T014",
+      "T017"
+    ],
+    "cases": [
+      "T009 — matriz de autoridad vigente ADMIN y docente actual acceden; autor anterior y docente ajeno no heredan acceso",
+      "T009 — matriz de autoridad vigente dos alumnos distintos acceden con su propia matrícula y permiso",
+      "T009 — matriz de autoridad vigente otherStudent no obtiene contenido ni callback de otro derecho",
+      "T009 — matriz de autoridad vigente unEnrolledStudent no obtiene contenido ni callback de otro derecho",
+      "T009 — matriz de autoridad vigente reservationStudent no obtiene contenido ni callback de otro derecho",
+      "T009 — matriz de autoridad vigente pendingStudent no obtiene contenido ni callback de otro derecho",
+      "T009 — matriz de autoridad vigente incidentStudent no obtiene contenido ni callback de otro derecho",
+      "T009 — matriz de autoridad vigente historicalStudent no obtiene contenido ni callback de otro derecho",
+      "T009 — matriz de autoridad vigente disabledStudent pierde autoridad aunque la matrícula exista",
+      "T009 — matriz de autoridad vigente revokedStudent pierde autoridad aunque la matrícula exista",
+      "T009 — matriz de autoridad vigente rol declarado o permiso desconocido no otorgan autoridad",
+      "T009 — matriz de autoridad vigente una referencia inexistente es indistinguible de una clase ajena",
+      "T009 — matriz de autoridad vigente retirar oferta conserva derecho original; cancelar impide contenido nuevo",
+      "T009 — matriz de autoridad vigente historial FINISHED mantiene el derecho del alumno mientras su matrícula sea vigente",
+      "T009 — matriz de autoridad vigente deshabilitar al docente no elimina el derecho propio del alumno",
+      "T009 — matriz de autoridad vigente silencio valida alumno objetivo del grupo, no una cuenta arbitraria",
+      "T009 — orden de locks y topología cambiante dos cuentas distintas serializan escrituras con COMMIT efectivo",
+      "T009 — orden de locks y topología cambiante READ bloquea cuentas UUID → sesión → curso → grupo → clase sin promoción",
+      "T009 — orden de locks y topología cambiante WRITE bloquea cuentas UUID → sesión → curso → grupo → clase sin promoción",
+      "T009 — orden de locks y topología cambiante objetivo de moderación se bloquea con las cuentas desde el comienzo",
+      "T009 — orden de locks y topología cambiante alumno no necesita bloquear la cuenta del docente",
+      "T009 — orden de locks y topología cambiante assignment confirmada tras descubrir se observa antes del callback",
+      "T009 — orden de locks y topología cambiante revocation confirmada tras descubrir se observa antes del callback",
+      "T009 — orden de locks y topología cambiante cancellation confirmada tras descubrir se observa antes del callback",
+      "T009 — orden de locks y topología cambiante withdrawal confirmada tras descubrir se observa antes del callback",
+      "T009 — orden de locks y topología cambiante ADMIN redescubre nueva cuenta responsable tras rollback, sin locks tardíos",
+      "T009 — orden de locks y topología cambiante sesión se revalida antes de terminar el callback",
+      "T009 — orden de locks y topología cambiante callback fallido revierte sus efectos de clase",
+      "T009 — orden de locks y topología cambiante BD indisponible deniega sin entregar contenido o ejecutar callback",
+      "T009 — token exacto y derecho original retroceso temporal frente a hechos de clase no autoriza",
+      "T009 — token exacto y derecho original la matrícula del objetivo de silencio también vence en el instante exacto",
+      "T009 — token exacto y derecho original fin %+s μs se decide sin redondeo",
+      "T009 — token exacto y derecho original fin %+s μs se decide sin redondeo",
+      "T009 — token exacto y derecho original fin %+s μs se decide sin redondeo",
+      "T009 — token exacto y derecho original comienzo %+s μs es inclusivo",
+      "T009 — token exacto y derecho original comienzo %+s μs es inclusivo",
+      "T009 — token exacto y derecho original comienzo %+s μs es inclusivo",
+      "T009 — token exacto y derecho original el token se emite después de locks, no en descubrimiento",
+      "T009 — token exacto y derecho original cambiar período actual no prolonga la matrícula original",
+      "T009 — token exacto y derecho original decisión capturada no habilita usar puertos después de terminar la transacción"
+    ],
+    "reportSha256": "6775a47a90ed6990fe734b9e6fec93decf3548743f1ef83ad037f50e2b9d3a4a"
+  },
+  "sourceSha256": {
+    "apps/api/tests/support/classes.ts": "3ada628cd8533c452ffd7f9f0785c6b0ae6f56c3a2ba30a7a79056c2a9b65b9b",
+    "apps/api/tests/support/classes-temporal.ts": "af25d9301eaf011b9cb335c42852e8d8856787d02595964c6c35966d45abbadd",
+    "apps/api/tests/support/classes-foundation.ts": "ff43c2d266197ce1b87a04ae6f652770b573d6849d729fc4b792d6687a1205bc",
+    "apps/api/tests/integration/classes-fixtures.spec.ts": "4aedec1adba8bb55a959062b29ff39e2b26d17a7277262b12b5f7cd3fabdf81b",
+    "apps/api/tests/integration/classes-authority.spec.ts": "6b5abd5b337e78828f41b2ccd2f8a472b67649b0fd17afb3733ce0a03b3b9258"
+  },
+  "preserved": {
+    "productCode": true,
+    "migrations": true,
+    "closedSpecs001to004": true,
+    "previousEvidence": true,
+    "manualEnvironmentNotUsed": true
+  },
+  "integrationCi": "Not green until authority implementation. No tests excluded, no remote push or merge at this checkpoint.",
+  "acceptance": "FR/SC and stories remain pending; no HTTP/chat/video/UI or production deployment claimed"
+}

@@ -4,7 +4,9 @@
 **Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: T001–T007 completadas; contratos/persistencia implementados.**
+**Estado: T001–T009 completadas; contratos/persistencia y fixtures implementados.**
+Pruebas de autoridad escritas, pendientes de ejecución funcional con T014/T017.
+[Evidencia T008–T009](evidence/t008-t009.md).
 Gestión/chat y transporte funcional pendientes. [Evidencia T005–T007](evidence/t005-t007.md).
 La preparación conserva su [checkpoint](evidence/t001-t004-results.json). El responsable
 aprobó V05 y la enmienda 2.0.0. YouTube Live + OBS se usa para probar emisión y
@@ -96,8 +98,8 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-La lista [tasks.md](tasks.md) organiza T001–T086: siete tareas
-completadas, 79 pendientes. [Matriz](verification.md) creada en T003; todavía no
+La lista [tasks.md](tasks.md) organiza T001–T086: nueve tareas
+completadas, 77 pendientes. [Matriz](verification.md) creada en T003; todavía no
 acredita aceptación funcional. G-V005 exige ensayo real del alcance aprobado.
 
 ### Source Code (repository root)

@@ -3,6 +3,9 @@
 2026-11-17. **Guía de pruebas futuras, no evidencia de ejecución.** Alcance V05 y diseño
 del ensayo sincronizados; [G-V005](video-gate.md) exige evidencia real, no protección
 multimedia externa. [Adopción](evidence/video-scope-adoption.md).
+T008–T009 añaden fixtures y pruebas de autoridad previas al coordinador;
+[evidencia y límites](evidence/t008-t009.md). La autoridad aún no está verificada.
+
 T001–T004 prepararon entorno/dependencias y [matriz](verification.md).
 T005–T007 implementan contratos/puertos, pruebas SQL y migración 0010:
 [evidencia](evidence/t005-t007.md). Aún no hay gestión/chat, fixtures compartidas

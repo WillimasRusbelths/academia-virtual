@@ -1,7 +1,8 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado**: 7/86 completadas: T001–T007, preparación, contratos y persistencia verificados.
+**Estado**: 9/86 completadas: T001–T009; fixtures verificadas y pruebas de autoridad escritas.
+T009 es escritura previa al coordinador: su ejecución funcional sigue pendiente en T014/T017.
 El comportamiento funcional de clases/chat y sus FR/SC permanece pendiente.
 IDs locales a 005. [Spec](spec.md), [plan](plan.md),
 [investigación](research.md), [modelo](data-model.md),
@@ -51,8 +52,10 @@ Objetivo: baseline y ensayo reproducible sin cambiar el entorno manual.
 
 **Primer bloque completado**: T001–T004. [Resultados](evidence/t001-t004-results.json).
 T005–T007 también completadas: [contratos, pruebas SQL y migración](evidence/t005-t007.md).
-Todavía no se entregan gestión de clases o chat. Siguiente bloque: T008–T009
-(fixtures y pruebas de autoridad antes de implementar permisos/coordinador).
+T008–T009: [fixtures y pruebas de autoridad](evidence/t008-t009.md). La matriz
+de autoridad escrita aún no está aprobada; requiere el coordinador/composición real.
+Todavía no se entregan gestión de clases o chat. Siguiente bloque: T010–T013
+(permisos y participantes); después T014–T017 ejecuta y completa los fundamentos.
 Actualizar el índice vigente con `node ops/specs/update-005-coverage.mjs --write`;
 el validador de adopción anterior conserva su checkpoint de cero tareas ejecutadas.
 
@@ -63,8 +66,8 @@ Bloquea historias hasta comprobar almacenamiento, contratos y autoridad.
 - [x] T005 Definir DTO y puertos sin SQL/Nest/Socket en `apps/api/src/modules/classes/public/classes.ts`, `apps/api/src/modules/classes/application/ports.ts` y `apps/api/src/modules/classes/public/errors.ts`: estados «PREPARED / LIVE / FINISHED / CANCELLED», «bigint positivo como decimal string en JSON, nunca number», decisión temporal «timestamptz(6)» y resultados APPLIED/NO_CHANGE/NOT_CONFIRMED; añadir referencia YOUTUBE_DEMO con CONFIGURED/NOT_CONFIGURED/CLASS_NOT_LIVE, revisión 0 ausente o positiva persistida; tipar viewVersion desde el último evento que afectó cada recurso (mensaje SEND/HIDE, textos/estado de sesión o restricción), distinguiéndola de revisión de gestión y cursor global. FR-001–FR-003/013/018/019. Tras T003–T004.
 - [x] T006 Escribir pruebas SQL de restricciones/rollback e índices en `apps/api/tests/integration/classes-schema.spec.ts`: identidad inmutable, FK RESTRICT, estados/fechas, LIVE único por grupo, referencia con provider/ID/revisión válidos y FK de clase, duplicados de mensajes/comandos/eventos y ocultación coherente; verificar fallo por ausencia del comportamiento antes de T007. FR-001/003/012/013/016/017/022. Tras T005.
 - [x] T007 Añadir modelo y migración aditiva `apps/api/prisma/schema.prisma` y `apps/api/prisma/migrations/0010_classes_chat/migration.sql`: ClassSession «PK y grupo único inmutable, FK AcademicGroup», «Título trim 1–160; descripción null o ≤2000», revision «≥1», lastEventSeq «≥0», creador inmutable y fechas coherentes/monotónicas; mensaje «Texto trim 1–1000, original interno inmutable», «UNIQUE(classId,messageSeq)», hiddenAt/hiddenBy/hiddenEventSeq «Nulos o terna completa»; restricción PK(classId,studentId), revisión inicial 1; comando PK(actorId,commandId), digest SHA-256, referencias sin DTO; cambio PK(classId,eventSeq), eventSeq>0; auditoría atribuible; índices/constraints/triggers y timestamps nulos según `specs/005-clases-chat/data-model.md`, runtime DML, sin editar 0001–0009 ni almacenar credenciales de video; ClassVideoReference PK classId/FK RESTRICT, provider YOUTUBE_DEMO, videoId null o 11 ASCII [A-Za-z0-9_-], revision≥1, updatedBy y updatedAt, evento VIDEO_REFERENCE_CHANGED sin ID en deltas de alumno. FR-001/003/012/013/016–FR-020/022. Tras T006.
-- [ ] T008 Crear fixtures aisladas en `apps/api/tests/support/classes.ts` y `apps/api/tests/support/classes-temporal.ts`: grupos propio/ajeno/cancelado/retirado, docentes actual/anterior/deshabilitado, alumnos con matrícula original y fin±1 μs, clases/mensajes ficticios; reutilizar dueños de datos y pagos simulados sin modificar reglas 003. FR-005–FR-007/022. Tras T007.
-- [ ] T009 Escribir pruebas de matriz, orden de locks, topología cambiante y vigencia exacta en `apps/api/tests/integration/classes-authority.spec.ts`; incluir dos actores con cuentas distintas, actor objetivo de moderación, revocación/asignación/cancelación/retirada y BD indisponible. FR-002/005–FR-007/017/018/019. Tras T008.
+- [x] T008 Crear fixtures aisladas en `apps/api/tests/support/classes.ts` y `apps/api/tests/support/classes-temporal.ts`: grupos propio/ajeno/cancelado/retirado, docentes actual/anterior/deshabilitado, alumnos con matrícula original y fin±1 μs, clases/mensajes ficticios; reutilizar dueños de datos y pagos simulados sin modificar reglas 003. FR-005–FR-007/022. Tras T007.
+- [x] T009 Escribir pruebas de matriz, orden de locks, topología cambiante y vigencia exacta en `apps/api/tests/integration/classes-authority.spec.ts`; incluir dos actores con cuentas distintas, actor objetivo de moderación, revocación/asignación/cancelación/retirada y BD indisponible. FR-002/005–FR-007/017/018/019. Tras T008.
 - [ ] T010 [P] Extender matriz cerrada y políticas en `apps/api/src/modules/authorization/domain/permissions.ts`, `apps/api/src/modules/authorization/public/session.ts` y `apps/api/src/modules/authorization/application/session-lookup.ts`, con sus pruebas: ADMIN manage-all, TEACHER manage-own, STUDENT participate-enrolled; tuplas CLASSES explícitas, permiso desconocido denegado y políticas previas intactas. FR-002/005/006/010. Tras T009.
 - [ ] T011 [P] Añadir participante público de oferta en `apps/api/src/modules/academic-offering/public/classes-access.ts` y `apps/api/src/modules/academic-offering/infrastructure/classes-participant.ts`: grupo/curso/estado/docente/elegibilidad actuales, referencias de gestión, misma conexión y sin BEGIN; retirada de oferta no equivale a cancelación. FR-002/005–FR-007. Tras T009.
 - [ ] T012 [P] Añadir participante público de matrícula en `apps/api/src/modules/enrollment/public/classes-access.ts` y `apps/api/src/modules/enrollment/infrastructure/classes-participant.ts`: descubrimiento propio no autoriza; hasAccess/groups y alumno objetivo al token exacto «confirmedAt ≤ t < validUntil» original; sin precios/pagos/terceros o mutaciones. FR-005–FR-007/017. Tras T009.
