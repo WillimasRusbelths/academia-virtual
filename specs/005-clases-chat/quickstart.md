@@ -11,6 +11,11 @@ T010–T013 implementan permisos y participantes de oferta, matrícula y autores
 [último bloque](evidence/t014-t017.md). Aún faltan handlers y autorización por operación,
 además de recorridos de gestión/chat y transporte.
 
+T018–T019 escribe las suites de dominio y HTTP: [informe](evidence/t018-t019.md).
+Se ejecutan con el comando normal de unitarias/integración y fallan explícitamente
+por T020/T023 pendientes. La suite HTTP exige primero una ruta real positiva;
+ningún 404 por falta de handler cuenta como denegación de permisos probada.
+
 T001–T004 prepararon entorno/dependencias y [matriz](verification.md).
 T005–T007 implementan contratos/puertos, pruebas SQL y migración 0010:
 [evidencia](evidence/t005-t007.md). Las fixtures compartidas están verificadas; aún no hay gestión/chat

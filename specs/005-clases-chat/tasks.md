@@ -1,7 +1,8 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado**: 17/86 completadas: T001–T017; fundamentos y matriz de autoridad verificados.
+**Estado**: 19/86 completadas: T001–T019; fundamentos verificados y pruebas US1 escritas.
+T018–T019 están en rojo por las implementaciones pendientes T020–T023; no acreditan comportamiento funcional.
 La matriz T009 ya fue ejecutada con el coordinador/composición de T014–T017; no se completan todavía historias o FR/SC.
 El comportamiento funcional de clases/chat y sus FR/SC permanece pendiente.
 IDs locales a 005. [Spec](spec.md), [plan](plan.md),
@@ -56,8 +57,9 @@ T008–T009: [fixtures y pruebas de autoridad](evidence/t008-t009.md). La matriz
 de autoridad se escribió en ese checkpoint y ahora pasa con el coordinador/composición real de T014–T017.
 T010–T013: [permisos y participantes verificados](evidence/t010-t013.md).
 T014–T017: [coordinador, ledger y composición verificados](evidence/t014-t017.md).
-Todavía no se entregan gestión de clases o chat. Siguiente bloque: **T018–T019**,
-pruebas de dominio y HTTP de gestión manual antes de sus implementaciones.
+T018–T019: [pruebas de dominio y HTTP escritas, validación funcional pendiente](evidence/t018-t019.md).
+Todavía no se entregan gestión de clases o chat. Siguiente bloque: **T020–T023**,
+reglas puras, persistencia, casos de uso y rutas de gestión; hacer pasar T018–T019.
 Actualizar el índice vigente con `node ops/specs/update-005-coverage.mjs --write`;
 el validador de adopción anterior conserva su checkpoint de cero tareas ejecutadas.
 
@@ -87,8 +89,8 @@ infraestructura ajena o relajar guards. Las historias parten de T017.
 Objetivo: gestión manual completa sin necesitar señal. Prueba independiente:
 preparar/iniciar/finalizar con docente propio/admin; dos inicios dejan una LIVE.
 
-- [ ] T018 [P] [US1] Escribir pruebas de texto/estados/revisión en `apps/api/src/modules/classes/domain/class-session.test.ts`: Unicode/trim, «Título trim 1–160; descripción null o ≤2000», PREPARED→LIVE→FINISHED o PREPARED→CANCELLED, terminales sin reapertura y edición de textos sin cambiar identidad/estado. FR-001–FR-004/018; US1.1–US1.4/US1.6. Tras T017.
-- [ ] T019 [P] [US1] Escribir pruebas HTTP de creación/edición/transiciones y replay en `apps/api/tests/integration/classes-management-http.spec.ts`, incluyendo campos extra, CSRF/origen, permisos perdidos, revisión obsoleta y consulta de commands propia/no confirmada. FR-002/003/013/018/019; US1.5–US1.6. Tras T017.
+- [x] T018 [P] [US1] Escribir pruebas de texto/estados/revisión en `apps/api/src/modules/classes/domain/class-session.test.ts`: Unicode/trim, «Título trim 1–160; descripción null o ≤2000», PREPARED→LIVE→FINISHED o PREPARED→CANCELLED, terminales sin reapertura y edición de textos sin cambiar identidad/estado. FR-001–FR-004/018; US1.1–US1.4/US1.6. Tras T017.
+- [x] T019 [P] [US1] Escribir pruebas HTTP de creación/edición/transiciones y replay en `apps/api/tests/integration/classes-management-http.spec.ts`, incluyendo campos extra, CSRF/origen, permisos perdidos, revisión obsoleta y consulta de commands propia/no confirmada. FR-002/003/013/018/019; US1.5–US1.6. Tras T017.
 - [ ] T020 [US1] Implementar reglas puras en `apps/api/src/modules/classes/domain/class-session.ts`; mantener grupo/creador, fechas y revisiones según T018; iniciar no confirma señal ni disponibilidad, no automatizar por horario/reinicio. FR-001–FR-004. Tras T018–T019.
 - [ ] T021 [US1] Implementar persistencia de creación/textos/estados en `apps/api/src/modules/classes/infrastructure/class-store.ts`: grupo UPDATE al competir inicios, índice LIVE como segunda defensa, evento/receipt/auditoría atómicos y contador de cambios bajo clase UPDATE. FR-003/012/013/018/020. Tras T020.
 - [ ] T022 [US1] Implementar casos de uso en `apps/api/src/modules/classes/application/commands.ts`: autoridad actual antes de ledger, revisión esperada, NO_CHANGE, terminales y COMMIT incierto sin repetir efectos. FR-002/003/013/018. Tras T021.

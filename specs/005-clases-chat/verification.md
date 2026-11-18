@@ -32,6 +32,13 @@ pasiva. Q03/Q04/Q14 tienen comprobaciones fundacionales; HTTP/chat, sus operacio
 sockets/UI y recorridos por historia aún faltan. Las 24 aceptaciones y FR/SC
 conservan PENDIENTE; no se elevan por una regresión técnica aprobada.
 
+Avance T018–T019: [99 pruebas de dominio/HTTP escritas](evidence/t018-t019.md).
+Los 44 casos de dominio carecen de funciones T020 y los 55 HTTP se detienen en
+la comprobación positiva de rutas T023. Son dependencias pendientes, sin imports
+rotos ni skips; no prueban aún rechazo funcional, permisos o replay HTTP.
+Los fundamentos anteriores mantienen su regresión; las 24 aceptaciones y FR/SC
+conservan PENDIENTE. Siguiente implementación: T020–T023.
+
 ## Estados y evidencia
 
 Cada fila empieza PENDIENTE. Cambiar a PROBADO solo con commit, configuración

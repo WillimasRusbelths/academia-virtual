@@ -4,9 +4,10 @@
 **Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: T001–T017 completadas; fundamentos y matriz de autoridad verificados.**
+**Estado: T001–T019 completadas; fundamentos verificados y pruebas US1 escritas.**
+[T018–T019](evidence/t018-t019.md) conserva 99 casos en rojo por T020–T023 pendientes; no se acredita gestión funcional ni CI verde.
 [Evidencia T014–T017](evidence/t014-t017.md). Gestión/chat/HTTP y pantallas siguen pendientes.
-[Evidencia T010–T013](evidence/t010-t013.md). Los participantes se integran ahora en T014–T017.
+[Evidencia T010–T013](evidence/t010-t013.md). Los participantes ya se integraron en T014–T017.
 Las 40 pruebas de autoridad T009 ya pasan con el coordinador real; no completan la aceptación de las historias.
 [Evidencia T008–T009](evidence/t008-t009.md).
 Gestión/chat y transporte funcional pendientes. [Evidencia T005–T007](evidence/t005-t007.md).
@@ -100,8 +101,8 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-La lista [tasks.md](tasks.md) organiza T001–T086: diecisiete tareas
-completadas, 69 pendientes. [Matriz](verification.md) creada en T003; todavía no
+La lista [tasks.md](tasks.md) organiza T001–T086: diecinueve tareas
+completadas, 67 pendientes. T018–T019 completan la escritura de pruebas, con aceptación pendiente. [Matriz](verification.md) creada en T003; todavía no
 acredita aceptación funcional. G-V005 exige ensayo real del alcance aprobado.
 
 ### Source Code (repository root)

@@ -11,7 +11,8 @@ constitución 2.0.0. T001–T017 completadas: contratos, persistencia, fixtures,
 ([evidencia T010–T013](evidence/t010-t013.md));
 la matriz de autoridad T009 ya pasa con el coordinador/composición real
 ([evidencia T014–T017](evidence/t014-t017.md));
-gestión/chat y reproducción real pendientes. [Evidencia](evidence/t005-t007.md).
+T018–T019 añaden [pruebas US1 previas a la implementación](evidence/t018-t019.md), en rojo explícito.
+El índice alcanza 19/86 tareas escritas/completadas; gestión/chat y reproducción real pendientes. [Evidencia](evidence/t005-t007.md).
 Validación académica pendiente si afecta evaluación.
 
 **Aprobación V05**: «entoces la apruebo», sobre la propuesta concreta de YouTube

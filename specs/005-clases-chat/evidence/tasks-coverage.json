@@ -4,7 +4,7 @@
   "baseline": "2486034d6be22fd60aad3cc740f7b4599a15aa9b",
   "status": "SEGUIMIENTO_DE_IMPLEMENTACION",
   "totalTasks": 86,
-  "completedTasks": 17,
+  "completedTasks": 19,
   "scope": {
     "stories": 4,
     "scenarios": 24,
@@ -1232,7 +1232,7 @@
   },
   "restoredAssociationCount": 197,
   "historicalIndexPreserved": "specs/005-clases-chat/evidence/tasks-generation-results.json",
-  "tasksSha256": "82377d2f4d1179992cf824abf04bff641edbdadecd05352e8f4430a9541bed73",
+  "tasksSha256": "762fdb085af62c0f0c5e6c58a3dc432c691926ed242f7992406e7b5589f92f41",
   "hashNormalization": "UTF-8 con LF; CRLF normalizado",
   "generator": "node ops/specs/update-005-coverage.mjs --write"
 }
