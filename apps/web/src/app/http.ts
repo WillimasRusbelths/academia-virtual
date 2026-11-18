@@ -2,10 +2,12 @@ import { ApiFailure, RequestCancelled } from '../shared/api-client';
 import type { ApiClient, ApiCode, ApiField, ApiRequest, BinaryUploadClient, BinaryDownloadClient, BinaryDownload } from '../shared/api-client';
 import { createEnrollmentApi,createEnrollmentAdminApi } from '../features/enrollment/api';
 import { createMaterialsApi } from '../features/materials/api';
+import { createClassesApi } from '../features/classes/api';
 
 export const enrollmentApi=(client:ApiClient)=>createEnrollmentApi(client);
 export const enrollmentAdminApi=(client:ApiClient)=>createEnrollmentAdminApi(client);
 export const materialsApi=(client:ApiClient)=>createMaterialsApi(client);
+export const classesApi=(client:ApiClient)=>createClassesApi(client);
 
 const codes:Readonly<Record<number,readonly ApiCode[]>> = {
   400:['VALIDATION_ERROR','INVALID_ACTION_LINK'],401:['INVALID_CREDENTIALS','AUTH_REQUIRED'],
@@ -13,6 +15,9 @@ const codes:Readonly<Record<number,readonly ApiCode[]>> = {
   413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE'],
 };
 const messages:Readonly<Record<ApiCode,string>> = {
+  CLASS_VERSION_CONFLICT:'La clase cambió. Consulta y compara antes de confirmar otra acción.',
+  CLASS_STATE_CONFLICT:'El estado de la clase no permite esta acción.',
+  CLASS_ALREADY_LIVE:'El grupo ya tiene una clase en curso. Consulta sus clases antes de iniciar otra.',
   MATERIAL_VERSION_CONFLICT:'El material cambió. Consulta su estado y compara antes de confirmar otra acción.',
   MATERIAL_STATE_CONFLICT:'El estado actual no permite esta acción.',
   VALIDATION_ERROR:'Revisa los campos indicados.',INVALID_ACTION_LINK:'El enlace no permite completar esta acción.',
@@ -82,7 +87,23 @@ function materialsContract(path:string,method:string):EnrollmentContract|undefin
   if(method==='PATCH'&&matches('items/'+uuid))return entry(['commandId','expectedRevision','title','description'],['IDEMPOTENCY_CONFLICT','MATERIAL_STATE_CONFLICT','MATERIAL_VERSION_CONFLICT']);
   return undefined;
 }
+const classesFamily=(path:string)=>/^\/classes(?:\/|$)/i.test(path);
+function classesContract(path:string,method:string):EnrollmentContract|undefined {
+  const matches=(suffix:string)=>new RegExp('^/classes/'+suffix+'$','i').test(path);
+  const entry=(fields:readonly ApiField[]=[],conflicts:readonly ApiCode[]=[]):EnrollmentContract=>({fields,conflicts});
+  if(method==='GET') {
+    if(path==='/classes/groups')return entry(['page','pageSize']);
+    if(matches('groups/'+uuid+'/sessions'))return entry(['page','pageSize','state']);
+    if(matches('(?:groups|sessions|commands)/'+uuid))return entry();
+  }
+  if(method==='POST'&&matches('groups/'+uuid+'/sessions'))return entry(['commandId','title','description'],['CLASS_STATE_CONFLICT','IDEMPOTENCY_CONFLICT']);
+  if(method==='PATCH'&&matches('sessions/'+uuid))return entry(['commandId','expectedRevision','title','description'],['CLASS_VERSION_CONFLICT','CLASS_STATE_CONFLICT','IDEMPOTENCY_CONFLICT']);
+  if(method==='POST'&&matches('sessions/'+uuid+'/(?:start|finish|cancel)'))return entry(['commandId','expectedRevision'],
+    ['CLASS_VERSION_CONFLICT','CLASS_STATE_CONFLICT','IDEMPOTENCY_CONFLICT',...(path.endsWith('/start')?['CLASS_ALREADY_LIVE' as const]:[])]);
+  return undefined;
+}
 function queryFields(path:string):readonly string[] {
+  const classes=classesContract(path,'GET');if(classes)return classes.fields;
   const materials=materialsContract(path,'GET');if(materials)return materials.fields;
   const financial=enrollmentContract(path,'GET');if(financial)return financial.fields;
   if(path==='/admin/users')return ['q','role','status','page','pageSize'];
@@ -94,7 +115,7 @@ function queryFields(path:string):readonly string[] {
   return [];
 }
 const unconfirmed='No se pudo confirmar el resultado. Consúltalo antes de reintentar manualmente.';
-function unavailable(path?:string) { return new ApiFailure(503,'TEMPORARILY_UNAVAILABLE',path&&(enrollmentFamily(path)||materialsFamily(path))?unconfirmed:messages.TEMPORARILY_UNAVAILABLE); }
+function unavailable(path?:string) { return new ApiFailure(503,'TEMPORARILY_UNAVAILABLE',path&&(enrollmentFamily(path)||materialsFamily(path)||classesFamily(path))?unconfirmed:messages.TEMPORARILY_UNAVAILABLE); }
 function object(value:unknown):Record<string,unknown>|null {
   return value!==null && typeof value==='object' && !Array.isArray(value)?value as Record<string,unknown>:null;
 }
@@ -106,7 +127,9 @@ async function failure(response:Response,path:string,method:string):Promise<ApiF
   const adminAcademic=academicPath.test(path);const academic=adminAcademic||catalogPath.test(path)||teachingPath.test(path);
   const financial=enrollmentFamily(path),contract=enrollmentContract(path,method);
   const materials=materialsFamily(path),materialContract=materialsContract(path,method);
-  const allowedCodes:readonly string[]|undefined=materials?response.status===409?materialContract?.conflicts:
+  const classes=classesFamily(path),classContract=classesContract(path,method);
+  const allowedCodes:readonly string[]|undefined=classes?response.status===409?classContract?.conflicts:
+    ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[response.status]:materials?response.status===409?materialContract?.conflicts:
     ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[response.status]:financial?response.status===409?contract?.conflicts:
     ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[response.status]:adminAcademic&&response.status===409?academicConflicts:
     academic&&response.status===400?['VALIDATION_ERROR']:
@@ -114,14 +137,14 @@ async function failure(response:Response,path:string,method:string):Promise<ApiF
   if (typeof code!=='string' || !allowedCodes?.includes(code as ApiCode)) return unavailable(path);
   const retry = response.status===429?response.headers.get('Retry-After'):null;
   const seconds = retry && /^\d+$/.test(retry) && Number.isSafeInteger(Number(retry))?Number(retry):undefined;
-  const allowedFields:readonly string[]=materials?(response.status===400&&code==='VALIDATION_ERROR'?materialContract?.fields??[]:[]):financial?(response.status===400&&code==='VALIDATION_ERROR'?contract?.fields??[]:[]):academic?(code==='VALIDATION_ERROR'?(adminAcademic?academicFields:queryFields(path)):adminAcademic&&code==='TEACHER_NOT_ELIGIBLE'?['teacherUserId']:[]):fieldNames;
+  const allowedFields:readonly string[]=classes?(response.status===400&&code==='VALIDATION_ERROR'?classContract?.fields??[]:[]):materials?(response.status===400&&code==='VALIDATION_ERROR'?materialContract?.fields??[]:[]):financial?(response.status===400&&code==='VALIDATION_ERROR'?contract?.fields??[]:[]):academic?(code==='VALIDATION_ERROR'?(adminAcademic?academicFields:queryFields(path)):adminAcademic&&code==='TEACHER_NOT_ELIGIBLE'?['teacherUserId']:[]):fieldNames;
   const fields = Array.isArray(error?.fields)?error.fields.flatMap(value => {
     const field = object(value)?.field;
     return typeof field==='string' && allowedFields.includes(field as ApiField)?[field as ApiField]:[];
   }):[];
   const conflicts=adminAcademic&&response.status===409&&['TEACHER_SCHEDULE_CONFLICT','COURSE_PUBLICATION_BLOCKED'].includes(code)
     &&Array.isArray(error?.conflictingGroupIds)?error.conflictingGroupIds.filter((id):id is string=>typeof id==='string'&&uuidPattern.test(id)).map(id=>id.toLowerCase()):[];
-  return new ApiFailure(response.status,code as ApiCode,(financial||materials)&&code==='TEMPORARILY_UNAVAILABLE'?unconfirmed:messages[code as ApiCode],seconds,[...new Set(fields)],Object.freeze([...new Set(conflicts)]));
+  return new ApiFailure(response.status,code as ApiCode,(financial||materials||classes)&&code==='TEMPORARILY_UNAVAILABLE'?unconfirmed:messages[code as ApiCode],seconds,[...new Set(fields)],Object.freeze([...new Set(conflicts)]));
 }
 
 /** Sin caché, almacenamiento de secretos ni replay. El navegador gestiona la cookie HttpOnly. */
@@ -133,6 +156,7 @@ export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch 
       if (!/^\/[A-Za-z0-9/_-]+$/.test(path) || path.includes('//')) throw unavailable(path);
       const method=options.method??'GET',material=materialsFamily(path),contract=materialsContract(path,method);
       if(material&&!contract)throw unavailable(path);
+      const classes=classesFamily(path);if(classes&&!classesContract(path,method))throw unavailable(path);
       const binaryPath=new RegExp('^/materials/uploads/'+uuid+'/content$','i').test(path);
       const downloadPath=new RegExp('^/materials/items/'+uuid+'/content$','i').test(path);
       if(download!==downloadPath||download&&method!=='GET')throw unavailable(path);
@@ -175,12 +199,20 @@ export function createApiClient(onAuthRequired:()=>void, transport:typeof fetch 
           return {blob,downloadName:metadata.downloadName} as T;
         }
         if (response.status===204 || response.status===202) {
-          if(enrollmentFamily(path)||material)throw unavailable(path);
+          if(enrollmentFamily(path)||material||classes)throw unavailable(path);
           return undefined;
         }
         const body = object(await response.json());
         if (controller.signal.aborted || generation!==started) throw new RequestCancelled();
-        if (!body || !Object.hasOwn(body,'data') || (enrollmentFamily(path)||material)&&Object.keys(body).length!==1) throw unavailable(path);
+        if (!body || !Object.hasOwn(body,'data') || (enrollmentFamily(path)||material||classes)&&Object.keys(body).length!==1) throw unavailable(path);
+        if(classes) {
+          const creation=method==='POST'&&/\/groups\//.test(path);
+          if(!creation&&response.status!==200||creation&&![200,201].includes(response.status))throw unavailable(path);
+          if(creation) {
+            const replayed=object(object(body.data)?.command)?.replayed;
+            if(typeof replayed!=='boolean'||response.status!==(replayed?200:201))throw unavailable(path);
+          }
+        }
         if(material) {
           const creation=binaryPath||method==='POST'&&path.endsWith('/uploads');
           if(!creation&&response.status!==200||creation&&![200,201].includes(response.status))throw unavailable(path);

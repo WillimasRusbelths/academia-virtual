@@ -5,7 +5,8 @@ export type ApiCode = 'VALIDATION_ERROR' | 'INVALID_ACTION_LINK' | 'INVALID_CRED
   | 'TEACHER_SCHEDULE_CONFLICT' | 'COURSE_PUBLICATION_BLOCKED' | 'GROUP_COMMITMENTS_BLOCK_OPERATION' | 'IDEMPOTENCY_CONFLICT'
   | 'ENROLLMENT_VERSION_CONFLICT' | 'ACTIVE_ORDER_EXISTS' | 'COURSE_COMMITMENT_EXISTS' | 'OFFERING_NOT_RESERVABLE'
   | 'CAPACITY_UNAVAILABLE' | 'STUDENT_SCHEDULE_CONFLICT' | 'RESERVATION_EXPIRED' | 'PAYMENT_NOT_ALLOWED'
-  | 'MATERIAL_VERSION_CONFLICT' | 'MATERIAL_STATE_CONFLICT';
+  | 'MATERIAL_VERSION_CONFLICT' | 'MATERIAL_STATE_CONFLICT'
+  | 'CLASS_VERSION_CONFLICT' | 'CLASS_STATE_CONFLICT' | 'CLASS_ALREADY_LIVE';
 export type ApiField = 'name' | 'email' | 'password' | 'provisionalPassword' | 'newPassword' | 'role' | 'status' | 'token'
   | 'description' | 'periodStart' | 'periodEnd' | 'timeZone' | 'capacity' | 'teacherUserId' | 'schedule'
   | 'cancellationReason' | 'expectedRevision' | 'commandId' | 'q' | 'state' | 'page' | 'pageSize'

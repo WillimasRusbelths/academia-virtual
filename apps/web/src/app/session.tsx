@@ -8,6 +8,7 @@ import type { UserView } from '../shared/user-view';
 import type { ApiClient } from '../shared/api-client';
 
 interface Session {
+  readonly generation:number;
   api:ApiClient;
   user:UserView|null;loading:boolean;error:ApiFailure|undefined;notice:string|undefined;
   login(email:string,password:string):Promise<void>;logout():Promise<void>;refresh():Promise<void>;
@@ -50,7 +51,7 @@ export function SessionProvider({children}:{readonly children:ReactNode}) {
     if(isProtectedPath(path)&&current.current===null)void refreshRef.current();
     // La hidratación se inicia por navegación, no por cambios de error ni reintentos automáticos.
   },[path]);
-  return <SessionContext.Provider value={{api,user,loading,error,notice,login,logout,refresh}}>{children}</SessionContext.Provider>;
+  return <SessionContext.Provider value={{api,user,loading,error,notice,login,logout,refresh,generation:generation.current}}>{children}</SessionContext.Provider>;
 }
 export function useSession():Session {
   const session=useContext(SessionContext);if(!session)throw new Error('Sesión de aplicación no disponible.');return session;

@@ -10,7 +10,8 @@ T010–T013 implementan permisos y participantes de oferta, matrícula y autores
 [evidencia](evidence/t010-t013.md). T014–T017 ya verifica el coordinador y T009:
 [fundamentos](evidence/t014-t017.md). T020–T023 verifica la gestión manual en API:
 [gestión](evidence/t020-t023.md). T030–T031 verifica las consultas autorizadas:
-[último bloque](evidence/t030-t031.md). Faltan cliente/UI, aula del alumno y chat.
+[lecturas](evidence/t030-t031.md). T024–T026 implementa cliente/UI de gestión:
+[último bloque](evidence/t024-t026.md). Faltan E2E real, aula del alumno y chat.
 
 T018–T019 escribe las suites de dominio y HTTP: [informe](evidence/t018-t019.md).
 El checkpoint previo conserva su rojo; ahora pasan con T020–T023 mediante los

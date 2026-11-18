@@ -9,10 +9,10 @@ permanece en 005; esta hoja no sustituye specify/plan/tasks de los futuros specs
 Actualización de implementación (2026-11-18): T001–T017 de 005 completadas
 (base, contratos/persistencia, fixtures, permisos/participantes y fundamentos).
 T018–T019 conserva el checkpoint de escritura; sus suites ya pasan con T020–T023.
-El índice alcanza 25/86: gestión y consultas autorizadas de grupos/clases en API
-verificadas, con interfaz, aula/chat y recorridos completos pendientes.
-T030–T031 aporta las lecturas compartidas; sigue T024–T026, cliente y gestión web.
-[Último bloque](../../specs/005-clases-chat/evidence/t030-t031.md). [Resultados](../../specs/005-clases-chat/evidence/t005-t007.md).
+El índice alcanza 28/86: API y gestión web por rol implementadas.
+T024–T026 verifica cliente/UI con unitarias y navegador con API simulada; E2E real,
+carreras, aula/chat y recorridos completos siguen pendientes. Sigue T027–T029.
+[Último bloque](../../specs/005-clases-chat/evidence/t024-t026.md). [Resultados](../../specs/005-clases-chat/evidence/t005-t007.md).
 Clases/chat y su aceptación siguen pendientes; no se inició 006/007.
 
 ## Secuencia y dependencias
@@ -28,7 +28,7 @@ pendientes de evidencia real. Validación académica pendiente si afecta evaluac
 
 | Incremento | Alcance y salida exigida | Qué puede avanzar sin esperar otras brechas |
 | --- | --- | --- |
-| 005 — Clases en vivo y chat por grupo | [Spec, plan y tareas preparados](../../specs/005-clases-chat/spec.md); T001–T023 y T030–T031 completadas; gestión y lecturas autorizadas en API verificadas; interfaz, aula y chat pendientes | Gestión/chat pueden avanzar sin cuenta/señal de ensayo YouTube; el enlace externo compartible no se presenta como video protegido |
+| 005 — Clases en vivo y chat por grupo | [Spec, plan y tareas preparados](../../specs/005-clases-chat/spec.md); T001–T026 y T030–T031 completadas; API y gestión web implementadas; E2E real, aula y chat pendientes | Gestión/chat pueden avanzar sin cuenta/señal de ensayo YouTube; el enlace externo compartible no se presenta como video protegido |
 | 006 — Pulido de la aplicación | Revisión de paneles por rol, clasificación de consultas y brechas; alcance final acotado, diseño coherente y regresión de pantallas anteriores/005 operativas | Pulir pantallas existentes y componentes comunes aunque una tarjeta de clases o función nueva siga pendiente |
 | 007 — Despliegue y validación del MVP | Spec separado para entorno de pruebas, seguridad/configuración, migración/recuperación, costo, recorridos e integraciones y volumen/carga | Preparar documentación y pruebas aisladas; no contratar/publicar ni acreditar el MVP completo con funciones o puertas sin validar |
 

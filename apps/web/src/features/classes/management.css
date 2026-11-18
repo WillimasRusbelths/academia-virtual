@@ -1,0 +1,11 @@
+.classes-page { max-width: 60rem; }
+.classes-page fieldset { margin: 1rem 0; padding: 1rem; }
+.classes-page input, .classes-page textarea { width: 100%; }
+.classes-page li { margin: .75rem 0; }
+.class-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1rem 0; }
+.classes-page button, .class-actions button { min-height: 2.75rem; }
+.classes-page [tabindex="-1"]:focus { outline: 3px solid #2457a6; outline-offset: 3px; }
+@media (max-width: 30rem) {
+  .classes-page fieldset { padding: .65rem; }
+  .class-actions { flex-direction: column; align-items: stretch; }
+}

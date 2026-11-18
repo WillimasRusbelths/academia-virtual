@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { AppRouter,navigate } from './router';
-import { createApiClient, enrollmentApi,enrollmentAdminApi,materialsApi } from './http';
+import { createApiClient, enrollmentApi,enrollmentAdminApi,materialsApi,classesApi } from './http';
+import { classesRoutes,classesGroupHref } from './classes-routes';
 import { materialsRoutes,materialsGroupHref } from './materials-routes';
 import { enrollmentRoutes,enrollmentAdminRoutes } from './enrollment-routes';
 import { academicOfferingApi } from '../features/academic-offering/api';
@@ -33,6 +34,7 @@ function SessionRoutes() {
   const enrollment=useMemo(()=>enrollmentApi(session.api),[session.api]);
   const enrollmentAdmin=useMemo(()=>enrollmentAdminApi(session.api),[session.api]);
   const materials=useMemo(()=>materialsApi(session.api),[session.api]);
+  const classes=useMemo(()=>classesApi(session.api),[session.api]);
   const courseCatalog=useMemo<CourseCatalog>(()=>({async courses(input,signal){const page=await academicOfferingApi(session.api).courses(input,signal);return {page:page.page,pageSize:page.pageSize,total:page.total,items:page.items.map(course=>({id:course.id,name:course.name}))};}}),[session.api]);
   const reservationHref=session.user?.role==='STUDENT'?'/reservar':undefined;
   const [publicApi]=useState(()=>createApiClient(()=>navigate('/login',true)));
@@ -52,14 +54,15 @@ function SessionRoutes() {
     {path:'/admin/cuentas/:id',access:'admin',render:params=><AccountDetailPage api={session.api} id={params.id}/>},
     {path:'/admin/oferta',access:'admin',element:<AdminCoursesPage api={session.api} navigate={navigate}/>},
     {path:'/admin/oferta/cursos/:id',access:'admin',render:params=><AdminCoursePage api={session.api} id={params.id} navigate={navigate}/>},
-    {path:'/admin/oferta/grupos/:id',access:'admin',render:params=><AdminGroupPage api={session.api} id={params.id} navigate={navigate} materialsHref={materialsGroupHref(params.id)}/>},
+    {path:'/admin/oferta/grupos/:id',access:'admin',render:params=><AdminGroupPage api={session.api} id={params.id} navigate={navigate} materialsHref={materialsGroupHref(params.id)} classesHref={classesGroupHref(params.id)}/>},
     {path:'/oferta',access:'student',element:<CatalogPage api={session.api} reservationHref={reservationHref}/>},
     {path:'/oferta/cursos/:id',access:'student',render:params=><CoursePage api={session.api} id={params.id} reservationHref={reservationHref}/>},
     {path:'/oferta/cursos/:courseId/grupos/:id',access:'student',render:params=><GroupPage api={session.api} courseId={params.courseId} id={params.id} reservationHref={reservationHref}/>},
     ...enrollmentRoutes(enrollment,materialsGroupHref,session.user?.id),
     ...materialsRoutes(materials,session.user?.id,session.user?.role),
+    ...classesRoutes(classes,`${session.user?.id??'session'}:${session.generation}`,!session.loading&&!!session.user),
     ...enrollmentAdminRoutes(enrollmentAdmin,courseCatalog),
     {path:'/mis-grupos',access:'teacher',element:<TeachingGroupsPage api={session.api}/>},
-    {path:'/mis-grupos/:id',access:'teacher',render:params=><TeachingGroupPage api={session.api} id={params.id} materialsHref={materialsGroupHref(params.id)}/>},
+    {path:'/mis-grupos/:id',access:'teacher',render:params=><TeachingGroupPage api={session.api} id={params.id} materialsHref={materialsGroupHref(params.id)} classesHref={classesGroupHref(params.id)}/>},
   ]}/>;
 }

@@ -4,11 +4,12 @@
 **Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: T001–T023 y T030–T031 completadas; gestión y consultas autorizadas en API verificadas.**
+**Estado: T001–T026 y T030–T031 completadas (28/86); API y gestión web implementadas.**
+[Gestión web T024–T026](evidence/t024-t026.md): cliente cerrado, confirmaciones, recuperación y navegación por rol.
 [Lecturas T030–T031](evidence/t030-t031.md): grupos, listas, detalle y video deshabilitado, sin reproducción real.
 [Evidencia T020–T023](evidence/t020-t023.md): dominio, persistencia, casos de uso y seis rutas reales.
 Las 44 pruebas puras y 55 HTTP de T018–T019 ya pasan; su [checkpoint previo](evidence/t018-t019.md) se conserva.
-Faltan interfaz/cliente de gestión, aula del alumno, chat, sockets y reproducción real; US1 y FR/SC completos siguen pendientes.
+Faltan E2E con API real/carreras de gestión, aula del alumno, chat, sockets y reproducción real; US1 y FR/SC completos siguen pendientes.
 Orden corregido sin ampliar alcance: T030–T031 tras T023 aporta las consultas
 compartidas que necesita T024–T026. Se conservan sus IDs y clasificación US2;
 T032 espera T029 y T031. [Dependencias](tasks.md).
@@ -104,8 +105,8 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-La lista [tasks.md](tasks.md) organiza T001–T086: veinticinco tareas
-completadas, 61 pendientes. Gestión y consultas en API verificadas; aceptación completa pendiente. [Matriz](verification.md) creada en T003; todavía no
+La lista [tasks.md](tasks.md) organiza T001–T086: veintiocho tareas
+completadas, 58 pendientes. Gestión/consultas en API y gestión web implementadas; aceptación completa pendiente. [Matriz](verification.md) creada en T003; todavía no
 acredita aceptación funcional. G-V005 exige ensayo real del alcance aprobado.
 
 ### Source Code (repository root)
@@ -114,7 +115,7 @@ Contratos/persistencia, fixtures, permisos y participantes de oferta/matrícula/
 ya implementados en T005–T013. T014–T017 añade coordinador, ledger, video no
 configurado y composición. T020–T023 añade dominio/store/casos de uso y seis
 entrypoints de gestión. T030–T031 añade class-queries y cinco lecturas HTTP;
-interfaz de aula, chat y sus handlers aún pendientes:
+T024–T026 añade gestión web y sus rutas por rol. Interfaz de aula, chat y sus handlers aún pendientes:
 
 ```text
 apps/api/src/modules/classes/

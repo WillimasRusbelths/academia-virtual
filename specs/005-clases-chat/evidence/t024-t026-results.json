@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-18",
+  "timezone": "America/Lima",
+  "base": "9e6926247b88f494c0dd1b2da0be9d9789471788",
+  "branch": "feat/005-clases-chat",
+  "block": [
+    "T024",
+    "T025",
+    "T026"
+  ],
+  "completedTasks": 28,
+  "totalTasks": 86,
+  "checks": {
+    "webLint": "PASS",
+    "webTypecheckAndBuild": "PASS",
+    "initialClientRed": {
+      "name": "t024-red",
+      "sha256": "1c722b044e4af3b30247a6dcd52ee6fe293f616634984674516aabea9f05b49e",
+      "success": false,
+      "total": 23,
+      "passed": 0,
+      "failed": 23,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/web/src/app/classes-client.test.ts",
+          "passed": 0,
+          "failed": 23
+        }
+      ]
+    },
+    "initialManagementRed": {
+      "name": "t025-red",
+      "sha256": "5def0714bc336e8c507207de044bcf6c2ad937e5cfbdcb315daa56b5b1fd3947",
+      "success": false,
+      "total": 19,
+      "passed": 0,
+      "failed": 19,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/web/src/features/classes/management-page.test.tsx",
+          "passed": 0,
+          "failed": 19
+        }
+      ]
+    },
+    "webUnit": {
+      "name": "t024-t026-final2-unit",
+      "sha256": "e44501dad8dff5d6cf451b03e0bd5c94b2396e0618ae563f59454ef0f86c038f",
+      "success": true,
+      "total": 664,
+      "passed": 664,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/web/src/app/academic-catalog-api.test.ts",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/academic-offering-api.test.ts",
+          "passed": 45,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/academic-offering-routes.test.tsx",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/academic-teaching-api.test.ts",
+          "passed": 17,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/classes-client.test.ts",
+          "passed": 23,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/classes-routes.test.tsx",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/enrollment-admin-client.test.ts",
+          "passed": 33,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/enrollment-api.test.ts",
+          "passed": 43,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/enrollment-client.test.ts",
+          "passed": 19,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/enrollment-routes.test.tsx",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/http.test.ts",
+          "passed": 38,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/materials-actions-client.test.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/materials-client.test.ts",
+          "passed": 34,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/materials-download-security.test.ts",
+          "passed": 24,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/materials-navigation.test.tsx",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/materials-routes.test.tsx",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/app/runtime.test.tsx",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/shared/user-view.test.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/academic-offering/api.test.ts",
+          "passed": 19,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/academic-offering/protected-maintenance.test.tsx",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/academic-offering/validation.test.ts",
+          "passed": 31,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/admin-users/api.test.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/classes/management-page.test.tsx",
+          "passed": 21,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/auth/action-link.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/admin-controllers.test.tsx",
+          "passed": 19,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/api.test.tsx",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/controllers.test.tsx",
+          "passed": 24,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/enrollments-page.test.tsx",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/expiration-ux.test.tsx",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/incidents-page.test.tsx",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/order-page.test.tsx",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/own-navigation.test.tsx",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/payment.test.tsx",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/prices-page.test.tsx",
+          "passed": 14,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/reservation-page.test.tsx",
+          "passed": 14,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/enrollment/student-payments.test.tsx",
+          "passed": 14,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/materials/management-flow.test.tsx",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/materials/management-page.test.tsx",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/materials/material-actions.test.tsx",
+          "passed": 16,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/materials/student-flow.test.tsx",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/web/src/features/materials/student-page.test.tsx",
+          "passed": 11,
+          "failed": 0
+        }
+      ]
+    },
+    "browser": {
+      "success": true,
+      "results": [
+        {
+          "role": "TEACHER",
+          "width": 1280,
+          "passed": true,
+          "simulatedApi": true,
+          "keyboardConfirmation": true,
+          "reflow": true,
+          "writes": 4,
+          "uncertainLookupWithoutReplay": true
+        },
+        {
+          "role": "ADMIN",
+          "width": 360,
+          "passed": true,
+          "simulatedApi": true,
+          "keyboardConfirmation": true,
+          "reflow": true,
+          "writes": 4,
+          "uncertainLookupWithoutReplay": true
+        },
+        {
+          "role": "STUDENT",
+          "passed": true,
+          "simulatedApi": true,
+          "managementDenied": true
+        }
+      ],
+      "limits": "Simulated API only; real API E2E T027 remains pending.",
+      "sha256": "539ed0bf14850bb91e44d1f008da349a32883289e6d0dfbbb1aa9cf9e8413cb1"
+    },
+    "lintLogSha256": "1efb901021e5c2142d05161c4e6ef24d856603ef8af051c6682f79bc1adf0110",
+    "buildLogSha256": "9b6631071f75c7916f14d5157af8481f0b99be96f78edd68e42a77c15469c76c"
+  },
+  "sources": [
+    {
+      "file": "apps/web/src/app/App.tsx",
+      "sha256": "3a0e4b7896727ef1466b5407aeb04299430a1fb62d11628dd7bd8abfe6bfea89"
+    },
+    {
+      "file": "apps/web/src/app/classes-client.test.ts",
+      "sha256": "a919b0f6bb0d60e4028f975dc6b1e351395109f465c613d87457c58265b24e0c"
+    },
+    {
+      "file": "apps/web/src/app/classes-routes.test.tsx",
+      "sha256": "7ed596f7e58321a5e3e39cf750c38e76bf3f57f396772fcf28b44cb805773520"
+    },
+    {
+      "file": "apps/web/src/app/classes-routes.tsx",
+      "sha256": "b703441c2ea57a11e2813fd8a4c96309fb72b121841ba1b48f67bf5da832c328"
+    },
+    {
+      "file": "apps/web/src/app/http.ts",
+      "sha256": "57ca4c740a18d31c7de9822036b5626b128ca860ef1e3c835fdef8528d5367a0"
+    },
+    {
+      "file": "apps/web/src/app/router.tsx",
+      "sha256": "5ad13c00e6766c031effaef3e66b94543f95365a814ebef24fe5f75df3aa7ee8"
+    },
+    {
+      "file": "apps/web/src/app/session.tsx",
+      "sha256": "7e1d41ac4deb0240ff4ac5d388a122a523036776fa5c03e88563ed69e53cb14d"
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/admin-group-page.tsx",
+      "sha256": "da86399be8d4ee7863ccd553a18f936cecf8a1ec48022a72e82eb6de64194eb5"
+    },
+    {
+      "file": "apps/web/src/features/academic-offering/teaching-group-page.tsx",
+      "sha256": "5af1c89cf3104fb280e77adb6b37298e2f6f89971a1d7b619344afe16b3d2cdf"
+    },
+    {
+      "file": "apps/web/src/features/classes/api.ts",
+      "sha256": "ef682ad609839f23f15af4513e1cff3a291e382ad568409241059b9953c6e589"
+    },
+    {
+      "file": "apps/web/src/features/classes/management-page.test.tsx",
+      "sha256": "3faa77c661785e1181696d88e3ee00c0254b0daec7df2870d4aecfdf5eb78bc1"
+    },
+    {
+      "file": "apps/web/src/features/classes/management-page.tsx",
+      "sha256": "70162c6d73083cbd6b6d900ce5bdb4c65b20288e9dde10beecb4930d8c8279de"
+    },
+    {
+      "file": "apps/web/src/features/classes/management.css",
+      "sha256": "d339a60502d1551f2797fe293cbd0333979fef5acd9d4e1c295a38815dcafb65"
+    },
+    {
+      "file": "apps/web/src/features/profile/home-page.tsx",
+      "sha256": "eed7cf701e1768bae7cbbd7419a0a0667ba4e59702717640d3547ddc57b1d5c6"
+    },
+    {
+      "file": "apps/web/src/shared/api-client.ts",
+      "sha256": "0198b0135e0d1aaba799eaf8e10bfdfc565a7865b8f670c3aefe5d24270cc473"
+    },
+    {
+      "file": "ops/specs/check-005-management-ui.mjs",
+      "sha256": "edf629ff3488224ee6f19c26ba661359a95a7104096ada77e50ff91aaa93f0ce"
+    }
+  ],
+  "limits": [
+    "API simulated in Chromium; T027 real API E2E remains pending",
+    "No API regression repeated; no API source changed",
+    "No human observation, real video, chat or deployment",
+    "All 24 acceptance scenarios and FR/SC remain pending"
+  ],
+  "next": [
+    "T027",
+    "T028",
+    "T029"
+  ]
+}

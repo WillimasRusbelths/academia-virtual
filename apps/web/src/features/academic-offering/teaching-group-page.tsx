@@ -4,7 +4,7 @@ import { academicOfferingApi } from './api';
 import { LoadingState, useOfferingResource } from './offering-state';
 import { TeachingLayout, TeachingSummary } from './teaching-groups-page';
 
-export function TeachingGroupPage({ api, id, materialsHref }: { api: ApiClient; id: string; materialsHref?:string }) {
+export function TeachingGroupPage({ api, id, materialsHref, classesHref }: { api: ApiClient; id: string; materialsHref?:string; classesHref?:string }) {
   const client = useMemo(() => academicOfferingApi(api), [api]);
   const load = useCallback((signal: AbortSignal) => client.teachingGroup(id, signal), [client, id]);
   const resource = useOfferingResource(load);
@@ -13,6 +13,7 @@ export function TeachingGroupPage({ api, id, materialsHref }: { api: ApiClient; 
       : <LoadingState loading={resource.loading} error={resource.error} retry={resource.reload}/>}
     {resource.data && <><h2>{resource.data.name}</h2><p>{resource.data.course.name}</p>
       {materialsHref&&<p><a href={materialsHref}>Gestionar materiales del grupo</a></p>}
+      {classesHref&&<p><a href={classesHref}>Gestionar clases del grupo</a></p>}
       <p>{resource.data.course.description ?? 'Sin configurar'}</p><TeachingSummary group={resource.data}/></>}
   </TeachingLayout>;
 }

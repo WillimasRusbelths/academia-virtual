@@ -1,10 +1,10 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado**: 25/86 completadas: T001–T023 y T030–T031; gestión y consultas autorizadas de clases en API verificadas.
+**Estado**: 28/86 completadas: T001–T026 y T030–T031; API y gestión web implementadas. Recorridos reales T027–T029 pendientes.
 Las 44 pruebas de dominio y 55 HTTP de T018–T019 ya pasan con T020–T023; su checkpoint previo se conserva.
 La matriz T009 ya fue ejecutada con el coordinador/composición de T014–T017; no se completan todavía historias o FR/SC.
-El recorrido completo con interfaz, chat y sus FR/SC permanece pendiente; gestión de backend verificada.
+La gestión web tiene cliente cerrado y comprobaciones unitarias/navegador con API simulada; los recorridos con API real, chat y FR/SC completos permanecen pendientes.
 IDs locales a 005. [Spec](spec.md), [plan](plan.md),
 [investigación](research.md), [modelo](data-model.md),
 [HTTP](contracts/api.md), [Socket.IO](contracts/realtime.md),
@@ -60,8 +60,9 @@ T014–T017: [coordinador, ledger y composición verificados](evidence/t014-t017
 T018–T019 conservan su [checkpoint previo de pruebas escritas](evidence/t018-t019.md).
 T020–T023: [gestión manual en API verificada](evidence/t020-t023.md), incluidas esas suites.
 T030–T031: [consultas autorizadas de grupos y clases verificadas](evidence/t030-t031.md).
-Siguiente bloque: **T024–T026**, cliente, pantalla de gestión y navegación por rol.
-Todavía faltan interfaz, recorridos completos, aula y chat.
+T024–T026: [cliente, gestión web y navegación por rol](evidence/t024-t026.md).
+Siguiente bloque: **T027–T029**, E2E real, carreras y checkpoint US1.
+Todavía faltan recorridos reales, aula del alumno y chat.
 Actualizar el índice vigente con `node ops/specs/update-005-coverage.mjs --write`;
 el validador de adopción anterior conserva su checkpoint de cero tareas ejecutadas.
 
@@ -104,9 +105,9 @@ preparar/iniciar/finalizar con docente propio/admin; dos inicios dejan una LIVE.
 - [x] T021 [US1] Implementar persistencia de creación/textos/estados en `apps/api/src/modules/classes/infrastructure/class-store.ts`: grupo UPDATE al competir inicios, índice LIVE como segunda defensa, evento/receipt/auditoría atómicos y contador de cambios bajo clase UPDATE. FR-003/012/013/018/020. Tras T020.
 - [x] T022 [US1] Implementar casos de uso en `apps/api/src/modules/classes/application/commands.ts`: autoridad actual antes de ledger, revisión esperada, NO_CHANGE, terminales y COMMIT incierto sin repetir efectos. FR-002/003/013/018. Tras T021.
 - [x] T023 [US1] Exponer solo rutas de gestión definidas en `apps/api/src/modules/classes/entrypoints/http/classes.controller.ts` y `apps/api/src/modules/classes/classes.module.ts`; crear/editar/start/finish/cancel y GET commands, envelopes/errores por familia e inventario `apps/api/tests/architecture/endpoint-policies.spec.ts`; ejecutar T019. FR-001–FR-004/013/018–FR-020. Tras T022.
-- [ ] T024 [US1] Añadir DTO/cliente cerrado de gestión en `apps/web/src/features/classes/api.ts` y allowlists específicas en `apps/web/src/app/http.ts` y `apps/web/src/shared/api-client.ts`; campos/códigos de clases no amplían contratos anteriores, mismo commandId al consultar/reintentar resultado incierto. FR-013/018/019/021. Tras T031.
-- [ ] T025 [US1] Crear gestión en `apps/web/src/features/classes/management-page.tsx`: preparar/corregir, confirmación explícita de transiciones, conflictos comparables, estado separado de señal, vacío/carga/error y foco accesible. FR-001–FR-004/018/021. Tras T024.
-- [ ] T026 [US1] Integrar rutas/enlace de gestor por rol en `apps/web/src/app/classes-routes.tsx`, `apps/web/src/app/router.tsx`, `apps/web/src/app/App.tsx` y `apps/web/src/features/profile/home-page.tsx`, sin crear dashboard global ni importar lateralmente features. FR-002/021. Tras T025.
+- [x] T024 [US1] Añadir DTO/cliente cerrado de gestión en `apps/web/src/features/classes/api.ts` y allowlists específicas en `apps/web/src/app/http.ts` y `apps/web/src/shared/api-client.ts`; campos/códigos de clases no amplían contratos anteriores, mismo commandId al consultar/reintentar resultado incierto. FR-013/018/019/021. Tras T031.
+- [x] T025 [US1] Crear gestión en `apps/web/src/features/classes/management-page.tsx`: preparar/corregir, confirmación explícita de transiciones, conflictos comparables, estado separado de señal, vacío/carga/error y foco accesible. FR-001–FR-004/018/021. Tras T024.
+- [x] T026 [US1] Integrar rutas/enlace de gestor por rol en `apps/web/src/app/classes-routes.tsx`, `apps/web/src/app/router.tsx`, `apps/web/src/app/App.tsx` y `apps/web/src/features/profile/home-page.tsx`, sin crear dashboard global ni importar lateralmente features. FR-002/021. Tras T025.
 - [ ] T027 [US1] Crear fixture/configuración y E2E en `apps/web/tests/support/classes-fixture.ts`, `apps/web/playwright.classes.config.ts` y `apps/web/tests/e2e/classes-management.spec.ts`: desktop/móvil, teclado, docente/admin/ajeno, conflicto/replay y terminales, sin necesitar emisión real. FR-001–FR-004/013/018/021; SC-001 y parte de SC-002/007. Tras T026.
 - [ ] T028 [US1] Ejecutar carreras con barreras de dos inicios, edición/finalización y pérdida de autoridad en `apps/api/tests/integration/classes-management-races.spec.ts`; verificar estado final persistido, rollback y no eventos de intentos rechazados. FR-002/003/013/018/020; SC-001/002. Tras T027.
 - [ ] T029 [US1] Registrar resultados y límites de entrega US1 en `specs/005-clases-chat/evidence/us1-checkpoint.md` y actualizar `specs/005-clases-chat/verification.md`; no atribuir reproducción o cierre de SC-007 al recorrido de gestión. FR-023; SC-001/002. Tras T028.

@@ -59,6 +59,13 @@ seleccionadas y 6 de redacción de secretos después de clases. No es una
 pasada global, CI de GitHub, E2E web o reproducción real. Las 24 aceptaciones
 y FR/SC conservan PENDIENTE. Sigue T024–T026.
 
+Avance T024–T026: [gestión web por rol](evidence/t024-t026.md). Cliente cerrado,
+formularios, confirmación de transiciones, comparación de conflictos y consulta
+manual de resultados inciertos. Pasan **664 pruebas unitarias web** (50 nuevas)
+y **3 escenarios Chromium con API simulada**, a 360/1280 px, con foco y reflow.
+No acredita E2E con API real, carreras T028, observación humana o reproducción.
+Las 24 aceptaciones y FR/SC conservan PENDIENTE. Sigue T027–T029.
+
 ## Estados y evidencia
 
 Cada fila empieza PENDIENTE. Cambiar a PROBADO solo con commit, configuración

@@ -1,6 +1,8 @@
 # Contrato de interfaz propuesto — 005
 
-2026-11-17. Pantallas no implementadas. Pulido global/paneles quedan en 006;
+2026-11-18. Gestión para docente/admin implementada en T024–T026:
+[pruebas unitarias y navegador con API simulada](../evidence/t024-t026.md).
+E2E con API real T027, aula del alumno y chat siguen pendientes. Pulido global/paneles quedan en 006;
 estas pantallas sí requieren teclado, móvil y estados accesibles al entregarse.
 
 ## Navegación por rol
@@ -26,6 +28,13 @@ mostrar revisión actual y conflicto recuperable, sin sobrescribir automáticame
 Una clase en curso no demuestra señal disponible. Terminales no muestran reinicio.
 Resultado incierto conserva intención y ofrece consultar; nunca crea otro commandId
 solo por timeout. Recurso actualizado no pierde atribución original.
+
+Las rutas actuales exigen classes-manager (docente/admin); alumno se incorpora
+en T032. Inicio y grupos de oferta/asignación enlazan a gestión por composición.
+La generación de sesión forma parte de la identidad del render; consulta de sesión
+o logout desmonta/aborta la gestión, sin transferir borradores a otro contexto.
+Una escritura confirmada refresca solo la lista, sin repetir comandos; una
+intención incierta bloquea cambios hasta consultar y decidir un reintento manual.
 
 ## Aula y video
 
