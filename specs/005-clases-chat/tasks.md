@@ -1,8 +1,8 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado**: 13/86 completadas: T001–T013; permisos y participantes verificados por separado.
-T009 es escritura previa al coordinador: su ejecución funcional sigue pendiente en T014/T017.
+**Estado**: 17/86 completadas: T001–T017; fundamentos y matriz de autoridad verificados.
+La matriz T009 ya fue ejecutada con el coordinador/composición de T014–T017; no se completan todavía historias o FR/SC.
 El comportamiento funcional de clases/chat y sus FR/SC permanece pendiente.
 IDs locales a 005. [Spec](spec.md), [plan](plan.md),
 [investigación](research.md), [modelo](data-model.md),
@@ -53,10 +53,11 @@ Objetivo: baseline y ensayo reproducible sin cambiar el entorno manual.
 **Primer bloque completado**: T001–T004. [Resultados](evidence/t001-t004-results.json).
 T005–T007 también completadas: [contratos, pruebas SQL y migración](evidence/t005-t007.md).
 T008–T009: [fixtures y pruebas de autoridad](evidence/t008-t009.md). La matriz
-de autoridad escrita aún no está aprobada; requiere el coordinador/composición real.
+de autoridad se escribió en ese checkpoint y ahora pasa con el coordinador/composición real de T014–T017.
 T010–T013: [permisos y participantes verificados](evidence/t010-t013.md).
-Todavía no se entregan gestión de clases o chat. Siguiente bloque: **T014–T017**,
-coordinador, ledger, video no configurado y composición; ejecutar la matriz T009.
+T014–T017: [coordinador, ledger y composición verificados](evidence/t014-t017.md).
+Todavía no se entregan gestión de clases o chat. Siguiente bloque: **T018–T019**,
+pruebas de dominio y HTTP de gestión manual antes de sus implementaciones.
 Actualizar el índice vigente con `node ops/specs/update-005-coverage.mjs --write`;
 el validador de adopción anterior conserva su checkpoint de cero tareas ejecutadas.
 
@@ -73,10 +74,10 @@ Bloquea historias hasta comprobar almacenamiento, contratos y autoridad.
 - [x] T011 [P] Añadir participante público de oferta en `apps/api/src/modules/academic-offering/public/classes-access.ts` y `apps/api/src/modules/academic-offering/infrastructure/classes-participant.ts`: grupo/curso/estado/docente/elegibilidad actuales, referencias de gestión, misma conexión y sin BEGIN; retirada de oferta no equivale a cancelación. FR-002/005–FR-007. Tras T009.
 - [x] T012 [P] Añadir participante público de matrícula en `apps/api/src/modules/enrollment/public/classes-access.ts` y `apps/api/src/modules/enrollment/infrastructure/classes-participant.ts`: descubrimiento propio no autoriza; hasAccess/groups y alumno objetivo al token exacto «confirmedAt ≤ t < validUntil» original; sin precios/pagos/terceros o mutaciones. FR-005–FR-007/017. Tras T009.
 - [x] T013 [P] Crear proyección pública mínima de autores en `apps/api/src/modules/users/public/class-authors.ts` y `apps/api/src/modules/users/infrastructure/class-authors.ts`, con `apps/api/tests/integration/classes-author-projection.spec.ts`: solo id/name/role actuales por referencias autorizadas, sin UserView/correo/estado privado o roster global. FR-019. Tras T009.
-- [ ] T014 Implementar coordinador `apps/api/src/infrastructure/database/classes-transaction.ts`: accountTransaction con un presupuesto, cuentas UUID→sesión→curso→grupo→clase→filas subordinadas/ledger, SHARE al leer y clase UPDATE desde el comienzo al escribir; recheck topología, token μs tras locks y revalidación final; no locks financieros o transacción durante espera de red. Ejecutar T009. FR-006/007/013/018. Tras T010–T013.
-- [ ] T015 Implementar ledger/digest y errores seguros en `apps/api/src/modules/classes/infrastructure/command-store.ts`, `apps/api/src/http/error.filter.ts` y `apps/api/src/infrastructure/logging/security-events.ts`: autoridad antes del receipt, resultado único sin DTO original, COMMIT incierto sin retry automático, NO_CHANGE sin evento nuevo, rechazos atribuibles sin registrar cuerpos/secretos. FR-012/013/018–FR-020. Tras T014.
-- [ ] T016 Implementar `apps/api/src/modules/classes/infrastructure/video-disabled.ts` y prueba `apps/api/src/modules/classes/infrastructure/video-disabled.test.ts`: tras autorización responde NOT_CONFIGURED, sin URL/token/streamKey; doble de prueba no habilita reproducción protegida ni servicio externo. FR-008/009/023. Tras T015.
-- [ ] T017 Componer la fundación en `apps/api/src/app.module.ts` y políticas/adaptación de AcceptedSessionInterceptor en `apps/api/src/modules/authorization/entrypoints/http/access.guard.ts`. GET changes, GET video y POST socket-tickets nunca renuevan actividad, sin flag cliente ni cambio de expiración absoluta; ampliar `apps/api/tests/architecture/import-boundaries.spec.ts` y pruebas de sesión antes de handlers públicos. FR-006/019/021. Tras T016.
+- [x] T014 Implementar coordinador `apps/api/src/infrastructure/database/classes-transaction.ts`: accountTransaction con un presupuesto, cuentas UUID→sesión→curso→grupo→clase→filas subordinadas/ledger, SHARE al leer y clase UPDATE desde el comienzo al escribir; recheck topología, token μs tras locks y revalidación final; no locks financieros o transacción durante espera de red. Ejecutar T009. FR-006/007/013/018. Tras T010–T013.
+- [x] T015 Implementar ledger/digest y errores seguros en `apps/api/src/modules/classes/infrastructure/command-store.ts`, `apps/api/src/http/error.filter.ts` y `apps/api/src/infrastructure/logging/security-events.ts`: autoridad antes del receipt, resultado único sin DTO original, COMMIT incierto sin retry automático, NO_CHANGE sin evento nuevo, rechazos atribuibles sin registrar cuerpos/secretos. FR-012/013/018–FR-020. Tras T014.
+- [x] T016 Implementar `apps/api/src/modules/classes/infrastructure/video-disabled.ts` y prueba `apps/api/src/modules/classes/infrastructure/video-disabled.test.ts`: tras autorización responde NOT_CONFIGURED, sin URL/token/streamKey; doble de prueba no habilita reproducción protegida ni servicio externo. FR-008/009/023. Tras T015.
+- [x] T017 Componer la fundación en `apps/api/src/app.module.ts` y políticas/adaptación de AcceptedSessionInterceptor en `apps/api/src/modules/authorization/entrypoints/http/access.guard.ts`. GET changes, GET video y POST socket-tickets nunca renuevan actividad, sin flag cliente ni cambio de expiración absoluta; ampliar `apps/api/tests/architecture/import-boundaries.spec.ts` y pruebas de sesión antes de handlers públicos. FR-006/019/021. Tras T016.
 
 Checkpoint: T006/T009/T013 y regresión de permisos aprobados, sin importar
 infraestructura ajena o relajar guards. Las historias parten de T017.

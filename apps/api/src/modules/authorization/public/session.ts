@@ -10,6 +10,15 @@ export const CLASSES_PARTICIPATION_POLICY = Object.freeze([...CLASSES_MANAGEMENT
 export type SessionPermission = Permission | typeof MATERIALS_MANAGEMENT_POLICY | typeof MATERIALS_READ_POLICY
   | typeof CLASSES_MANAGEMENT_POLICY | typeof CLASSES_PARTICIPATION_POLICY;
 
+/** Only server route metadata may select passive activity. Never URL, headers,
+ * query flags or a socket heartbeat. This does not waive authorization. */
+export function passiveClassesRequest(method: string, routeTemplate: unknown): boolean {
+  if (typeof routeTemplate !== 'string') return false;
+  const route = routeTemplate.replace(/^\/api\/v1(?=\/)/, '');
+  return method === 'GET' && ['/classes/sessions/:classId/changes', '/classes/sessions/:classId/video'].includes(route)
+    || method === 'POST' && route === '/classes/sessions/:classId/socket-tickets';
+}
+
 /** Datos internos de autorización, nunca una vista pública ni una credencial del cliente. */
 export interface SessionActor {
   readonly sessionId: string;

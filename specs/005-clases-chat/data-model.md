@@ -2,7 +2,8 @@
 
 2026-11-17. Contratos y persistencia T005–T007 implementados; migración 0010
 probada en esquemas aislados de ensayo. [Evidencia](evidence/t005-t007.md).
-Gestión/chat, autorización por recurso y transporte todavía pendientes.
+Coordinador/ledger fundacionales probados en [T014–T017](evidence/t014-t017.md).
+Gestión/chat y transporte todavía pendientes; la persistencia no cambia en este bloque.
 Referencias User/Session/AcademicGroup/AcademicCourse/Enrollment pertenecen a sus
 propietarios. Clases no modifica esas entidades. [Consistencia](contracts/integration.md).
 

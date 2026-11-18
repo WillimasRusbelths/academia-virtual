@@ -4,9 +4,10 @@
 **Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: T001–T013 completadas; permisos y participantes implementados y verificados.**
-[Evidencia T010–T013](evidence/t010-t013.md). La autoridad por recurso aún espera T014/T017.
-Pruebas de autoridad escritas, pendientes de ejecución funcional con T014/T017.
+**Estado: T001–T017 completadas; fundamentos y matriz de autoridad verificados.**
+[Evidencia T014–T017](evidence/t014-t017.md). Gestión/chat/HTTP y pantallas siguen pendientes.
+[Evidencia T010–T013](evidence/t010-t013.md). Los participantes se integran ahora en T014–T017.
+Las 40 pruebas de autoridad T009 ya pasan con el coordinador real; no completan la aceptación de las historias.
 [Evidencia T008–T009](evidence/t008-t009.md).
 Gestión/chat y transporte funcional pendientes. [Evidencia T005–T007](evidence/t005-t007.md).
 La preparación conserva su [checkpoint](evidence/t001-t004-results.json). El responsable
@@ -68,11 +69,11 @@ Revisión del diseño frente a la constitución 2.0.0 adoptada en V05:
 
 | Principio | Diseño y evidencia requerida | Resultado |
 | --- | --- | --- |
-| I. Incrementos | V01–V05; tareas/análisis antes del código | Contratos y persistencia implementados; gestión/chat pendientes |
-| II. Backend | Cuenta/sesión/rol y grupo/matrícula actuales en cada operación | Diseñado; matriz/carreras por probar |
+| I. Incrementos | V01–V05; tareas/análisis antes del código | Fundamentos T001–T017 probados; gestión/chat pendientes |
+| II. Backend | Cuenta/sesión/rol y grupo/matrícula actuales en cada operación | Coordinador probado en 40 casos; operaciones/HTTP/chat por verificar |
 | III–VII. Finanzas | Solo leer derecho original de 003 por contrato público | Sin cambios financieros ni aceptación de Izipay |
 | VIII. Video | Ensayo YouTube, permisos propios y límite externo explícito | Alcance aprobado; reproducción real y evidencia pendientes |
-| IX. Entornos | Harness aislado y datos ficticios, sin tocar `.env`/BD manual | BD/Mailpit de ensayo comprobados; API/web no iniciados |
+| IX. Entornos | Harness aislado y datos ficticios, sin tocar `.env`/BD manual | API/PG de prueba verificados; entorno manual sin iniciar |
 | X. Recuperación | Dump conjunto, restore aislado, accesos invalidados | Ensayo futuro; D13 operativo pendiente |
 | XI. Capacidad | Separar cuentas/activos/conexiones/mensajes/video | No medida ni aprobada; D10 pendiente |
 | Arquitectura/costo | Un proceso/pool, fronteras públicas | Compatible para el alcance independiente |
@@ -99,14 +100,15 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-La lista [tasks.md](tasks.md) organiza T001–T086: trece tareas
-completadas, 73 pendientes. [Matriz](verification.md) creada en T003; todavía no
+La lista [tasks.md](tasks.md) organiza T001–T086: diecisiete tareas
+completadas, 69 pendientes. [Matriz](verification.md) creada en T003; todavía no
 acredita aceptación funcional. G-V005 exige ensayo real del alcance aprobado.
 
 ### Source Code (repository root)
 
 Contratos/persistencia, fixtures, permisos y participantes de oferta/matrícula/autores
-ya implementados en T005–T013. Coordinador, stores y entrypoints aún pendientes:
+ya implementados en T005–T013. T014–T017 añade coordinador, ledger, video no
+configurado y composición. Stores de casos de uso y entrypoints aún pendientes:
 
 ```text
 apps/api/src/modules/classes/

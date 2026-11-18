@@ -15,15 +15,22 @@ Las 24 filas de aceptación y los FR/SC conservan su estado pendiente.
 
 Avance T008–T009: fixtures aisladas verificadas y suite de autoridad escrita.
 [Evidencia](evidence/t008-t009.md) distingue las comprobaciones de datos de ensayo
-de los casos aún sin coordinador/composición real (T014/T017). Ninguna fila
+de los casos que entonces carecían de coordinador/composición real. Ninguna fila
 de permisos/carreras o FR/SC se aprueba por escribir esas pruebas.
 
 Avance T010–T013: matriz cerrada de permisos, sesiones PostgreSQL y participantes
 de oferta/matrícula/autores verificados de forma aislada. [Evidencia](evidence/t010-t013.md).
 La vigencia del participante usa el token del titular de la transacción de ensayo;
-no sustituye la matriz de autoridad integral del coordinador pendiente. Autores
+no sustituye la matriz del coordinador, verificada después en T014–T017. Autores
 solo proyecta referencias autorizadas, sin roster o endpoint global nuevo.
 Las 24 filas de aceptación y sus FR/SC no se completan por este bloque.
+
+Avance T014–T017: coordinador, ledger, errores, video no configurado y composición
+verificados; [evidencia](evidence/t014-t017.md). T009 aprueba 40 casos reales y los
+ensayos nuevos cubren NO_CHANGE/replay, rollback/COMMIT incierto simulado y sesión
+pasiva. Q03/Q04/Q14 tienen comprobaciones fundacionales; HTTP/chat, sus operaciones,
+sockets/UI y recorridos por historia aún faltan. Las 24 aceptaciones y FR/SC
+conservan PENDIENTE; no se elevan por una regresión técnica aprobada.
 
 ## Estados y evidencia
 

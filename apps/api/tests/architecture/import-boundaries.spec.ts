@@ -13,6 +13,18 @@ function messages(code: string, filename: string, rule: 'api-layers' | 'web-laye
 }
 
 describe('límites del monolito modular', () => {
+  test('T017 classes keeps core pure and owner infrastructure behind public contracts', () => {
+    for (const layer of ['application', 'domain', 'public']) {
+      const file = `apps/api/src/modules/classes/${layer}/contract.ts`;
+      for (const dependency of ['pg', '@nestjs/common', 'socket.io']) expect(messages(`import '${dependency}';`, file, 'api-layers')[0]?.messageId).toBe('external');
+      expect(messages("import '../../../infrastructure/database/classes-transaction.js';", file, 'api-layers')[0]?.messageId).toBe('escape');
+    }
+    const file = 'apps/api/src/modules/classes/infrastructure/command-store.ts';
+    for (const owner of ['users', 'identity', 'authorization', 'academic-offering', 'enrollment']) {
+      expect(messages(`import '../../${owner}/infrastructure/store.js';`, file, 'api-layers')[0]?.messageId).toBe('module');
+      expect(messages(`import '../../${owner}/public/contract.js';`, file, 'api-layers')).toHaveLength(0);
+    }
+  });
   test('T016 materials keeps IO in infrastructure and consumes only public owner contracts', () => {
     for (const layer of ['application', 'domain', 'public']) {
       const file = `apps/api/src/modules/materials/${layer}/contract.ts`;

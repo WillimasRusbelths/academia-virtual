@@ -4,11 +4,12 @@
 del ensayo sincronizados; [G-V005](video-gate.md) exige evidencia real, no protección
 multimedia externa. [Adopción](evidence/video-scope-adoption.md).
 T008–T009 añaden fixtures y pruebas de autoridad previas al coordinador;
-[evidencia y límites](evidence/t008-t009.md). La autoridad aún no está verificada.
+[checkpoint](evidence/t008-t009.md). Su matriz se verifica después en T014–T017.
 
 T010–T013 implementan permisos y participantes de oferta, matrícula y autores:
-[evidencia](evidence/t010-t013.md). Aún falta la autorización completa por recurso
-y su matriz T009, que se ejecutará con T014/T017.
+[evidencia](evidence/t010-t013.md). T014–T017 ya verifica el coordinador y T009:
+[último bloque](evidence/t014-t017.md). Aún faltan handlers y autorización por operación,
+además de recorridos de gestión/chat y transporte.
 
 T001–T004 prepararon entorno/dependencias y [matriz](verification.md).
 T005–T007 implementan contratos/puertos, pruebas SQL y migración 0010:

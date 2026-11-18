@@ -6,10 +6,10 @@ dos incrementos siguientes.** No se crean ramas ni implementaciones de 006/007,
 se contrata infraestructura o se publica en producción. El puntero de Spec Kit
 permanece en 005; esta hoja no sustituye specify/plan/tasks de los futuros specs.
 
-Actualización de implementación (2026-11-18): T001–T013 de 005 completadas
-(base, entorno, matriz, dependencias, contratos, persistencia, fixtures, pruebas,
-permisos y participantes). La autoridad integral espera T014/T017.
-[Último bloque](../../specs/005-clases-chat/evidence/t010-t013.md). [Resultados](../../specs/005-clases-chat/evidence/t005-t007.md).
+Actualización de implementación (2026-11-18): T001–T017 de 005 completadas
+(base, contratos/persistencia, fixtures, permisos/participantes y fundamentos).
+La matriz del coordinador pasa; faltan operaciones, transporte y recorridos completos.
+[Último bloque](../../specs/005-clases-chat/evidence/t014-t017.md). [Resultados](../../specs/005-clases-chat/evidence/t005-t007.md).
 Clases/chat y su aceptación siguen pendientes; no se inició 006/007.
 
 ## Secuencia y dependencias
@@ -25,7 +25,7 @@ pendientes de evidencia real. Validación académica pendiente si afecta evaluac
 
 | Incremento | Alcance y salida exigida | Qué puede avanzar sin esperar otras brechas |
 | --- | --- | --- |
-| 005 — Clases en vivo y chat por grupo | [Spec, plan y tareas preparados](../../specs/005-clases-chat/spec.md); T001–T013 completadas; autoridad integral por verificar y gestión manual/acceso/chat/moderación pendientes | Gestión/chat pueden avanzar sin cuenta/señal de ensayo YouTube; el enlace externo compartible no se presenta como video protegido |
+| 005 — Clases en vivo y chat por grupo | [Spec, plan y tareas preparados](../../specs/005-clases-chat/spec.md); T001–T017 completadas; fundamentos verificados y gestión manual/acceso/chat/moderación pendientes | Gestión/chat pueden avanzar sin cuenta/señal de ensayo YouTube; el enlace externo compartible no se presenta como video protegido |
 | 006 — Pulido de la aplicación | Revisión de paneles por rol, clasificación de consultas y brechas; alcance final acotado, diseño coherente y regresión de pantallas anteriores/005 operativas | Pulir pantallas existentes y componentes comunes aunque una tarjeta de clases o función nueva siga pendiente |
 | 007 — Despliegue y validación del MVP | Spec separado para entorno de pruebas, seguridad/configuración, migración/recuperación, costo, recorridos e integraciones y volumen/carga | Preparar documentación y pruebas aisladas; no contratar/publicar ni acreditar el MVP completo con funciones o puertas sin validar |
 

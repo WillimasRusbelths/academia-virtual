@@ -60,6 +60,45 @@ import { createContentReceiver } from './modules/materials/entrypoints/http/cont
 import { binaryMaterialUploadId } from './infrastructure/http/materials-contract.js';
 import { MaterialsModule } from './modules/materials/materials.module.js';
 import { createMaterialsContentStore } from './modules/materials/infrastructure/content-store.js';
+import { createClassesTransaction } from './infrastructure/database/classes-transaction.js';
+import type { ClassesCoordinator, ClassesCapabilities } from './modules/classes/application/ports.js';
+import { createClassesGroupParticipant } from './modules/academic-offering/infrastructure/classes-participant.js';
+import { createClassesEnrollmentParticipant } from './modules/enrollment/infrastructure/classes-participant.js';
+import { createClassAuthors } from './modules/users/infrastructure/class-authors.js';
+import { createClassCommandStore } from './modules/classes/infrastructure/command-store.js';
+import { createDisabledClassVideo } from './modules/classes/infrastructure/video-disabled.js';
+import { ClassError } from './modules/classes/public/errors.js';
+
+export const CLASSES_FOUNDATION = 'CLASSES_FOUNDATION';
+/** Authorized foundation only. Application use cases/handlers arrive in later
+ * tasks; their unavailable capabilities fail closed instead of faking success. */
+export function createClassesFoundation(_environment: Environment, pool: Parameters<typeof createClassesTransaction>[0]) {
+  const sessions = new PostgresSessionStore(pool);
+  const transaction = createClassesTransaction(pool, {
+    revalidateInTransaction: sessions.revalidateInTransaction.bind(sessions),
+    offering: client => createClassesGroupParticipant(client, new PostgresTeachingDirectory(client)),
+    enrollment: createClassesEnrollmentParticipant,
+    authors: (client, assertActive, ids) => createClassAuthors(client, {
+      assertReferences(requested) { assertActive(); if (requested.some(id => !ids.includes(id))) throw new ClassError('FORBIDDEN'); },
+      async use(operation) { assertActive(); const result = await operation(); assertActive(); return result; },
+    }),
+  });
+  const run: ClassesCoordinator['run'] = (actor, permission, target, mode, apply) => transaction(actor, permission, target, mode, async context => {
+    const unavailable = async (): Promise<never> => { context.assertActive(); throw new ClassError('TEMPORARILY_UNAVAILABLE'); };
+    const capabilities: ClassesCapabilities = Object.freeze({ decision: context.decision,
+      queries: Object.freeze({ groups: unavailable, group: unavailable, sessions: unavailable, session: unavailable, command: unavailable }),
+      commands: Object.freeze({ create: unavailable, edit: unavailable, start: unavailable, finish: unavailable, cancel: unavailable }),
+      chat: Object.freeze({ send: unavailable, history: unavailable, changes: unavailable }),
+      moderation: Object.freeze({ hide: unavailable, mute: unavailable, unmute: unavailable }),
+      video: Object.freeze({ reference: unavailable, setReference: unavailable, async access(classId: string) {
+        context.assertActive();
+        if (classId !== context.classId || context.groups[0].state === 'CANCELLED') throw new ClassError('NOT_FOUND');
+        return createDisabledClassVideo(context).access();
+      } }), audit: createClassCommandStore(context).audit });
+    return apply(capabilities);
+  });
+  return Object.freeze({ run, transaction });
+}
 
 export const MATERIALS_FOUNDATION = 'MATERIALS_FOUNDATION';
 /** Real materials capabilities, shared by the HTTP module and infrastructure probes. */
@@ -94,6 +133,7 @@ export class AppModule {
     const deliveries = new DeliverPending(new PostgresDeliveryStore(database.pool, rates),
       new PostgresDeliveryEligibility(database.pool), cipher, createSmtpTransport(environment));
     const materials = createMaterialsFoundation(environment, database.pool);
+    const classes = createClassesFoundation(environment, database.pool);
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(sessions,cookie),
         MaterialsModule.forRoot(materials, materials.receiveContent, materials.readContent),
@@ -118,6 +158,7 @@ export class AppModule {
         })],
       controllers: [HealthController], providers: [
         { provide: MATERIALS_FOUNDATION, useValue: materials },
+        { provide: CLASSES_FOUNDATION, useValue: classes },
         { provide: 'SECURITY_LOG_LIFECYCLE', useValue: securityEvents },
         { provide: 'MAIL_DELIVERY_SCHEDULER', useValue: new DeliveryScheduler(deliveries) },
         { provide: RESERVATION_DISPATCH_LIFECYCLE, useValue: {

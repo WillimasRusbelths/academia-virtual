@@ -21,6 +21,8 @@ import { EnrollmentError, ENROLLMENT_ERROR_MESSAGES } from '../modules/enrollmen
 import { enrollmentRoute, enrollmentFamily, enrollmentConflictCodes } from '../infrastructure/http/enrollment-contract.js';
 import { MaterialError, MATERIAL_ERROR_MESSAGES } from '../modules/materials/public/errors.js';
 import { materialsRoute, materialsFamily } from '../infrastructure/http/materials-contract.js';
+import { ClassError, CLASS_ERROR_MESSAGES } from '../modules/classes/public/errors.js';
+import { classesRoute, classesFamily } from '../infrastructure/http/classes-contract.js';
 
 export class TransportFailure extends Error {
   constructor(readonly status: number, readonly code: string,
@@ -99,7 +101,23 @@ export class SafeErrorFilter implements ExceptionFilter {
     const financialAudience = enrollment !== undefined && request.actor?.role === enrollment.role;
     const material = materialsRoute(request.method, template), materialFamily = materialsFamily(template);
     const materialManager = request.actor?.role === 'ADMIN' || request.actor?.role === 'TEACHER';
-    if (error instanceof MaterialError) {
+    const classRoute = classesRoute(request.method, template), classFamily = classesFamily(template);
+    const classManager = request.actor?.role === 'ADMIN' || request.actor?.role === 'TEACHER';
+    const classAudience = classManager || request.actor?.role === 'STUDENT'
+      && ['POST /classes/sessions/:classId/messages', 'GET /classes/sessions/:classId/changes'].includes(`${request.method} ${template}`);
+    if (error instanceof ClassError) {
+      if (classFamily) {
+        code = error.code;
+        status = code === 'VALIDATION_ERROR' ? error.status ?? 400 : code === 'AUTH_REQUIRED' ? 401
+          : code === 'FORBIDDEN' || code === 'REQUEST_NOT_ALLOWED' ? 403 : code === 'NOT_FOUND' ? 404
+          : code === 'UNSUPPORTED_MEDIA_TYPE' ? 415 : code === 'RATE_LIMITED' ? 429
+          : classRoute?.conflicts.includes(code) ? 409 : 503;
+        if (code === 'CHAT_MUTED' && request.actor?.role !== 'STUDENT') { status = 503; code = 'TEMPORARILY_UNAVAILABLE'; }
+        if (code === 'VALIDATION_ERROR' && Array.isArray(error.fields)) fields = error.fields.map(field => ({ field, message: 'Campo inválido.' }));
+        if ([429, 503].includes(status) && Number.isSafeInteger(error.retryAfterSeconds)
+          && error.retryAfterSeconds! > 0 && error.retryAfterSeconds! <= 3600) response.setHeader('Retry-After', String(error.retryAfterSeconds));
+      }
+    } else if (error instanceof MaterialError) {
       if (materialFamily) {
         code = error.code;
         status = code === 'VALIDATION_ERROR' ? error.status ?? 400 : code === 'AUTH_REQUIRED' ? 401
@@ -153,14 +171,23 @@ export class SafeErrorFilter implements ExceptionFilter {
     } else if (error instanceof HttpException && error.getStatus() === 404) {
       status = 404; code = 'NOT_FOUND';
     }
-    const permitted:readonly string[]|undefined = materialFamily ? status === 409 && materialManager ? material?.conflicts :
+    const permitted:readonly string[]|undefined = classFamily ? status === 409 && classAudience ? classRoute?.conflicts :
+      ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],
+        413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[status]
+      : materialFamily ? status === 409 && materialManager ? material?.conflicts :
       ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],
         413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[status]
       : financial ? status===409 && financialAudience ? enrollment.conflicts :
       ({400:['VALIDATION_ERROR'],401:['AUTH_REQUIRED'],403:['FORBIDDEN','REQUEST_NOT_ALLOWED'],404:['NOT_FOUND'],
         413:['VALIDATION_ERROR'],415:['UNSUPPORTED_MEDIA_TYPE'],429:['RATE_LIMITED'],503:['TEMPORARILY_UNAVAILABLE']} as Record<number,readonly string[]>)[status] : codes[status];
     if (!permitted?.includes(code)) { status=503;code='TEMPORARILY_UNAVAILABLE'; }
-    if (materialFamily) {
+    if (classFamily) {
+      const allowed = status === 400 && code === 'VALIDATION_ERROR' ? classRoute?.fields ?? [] : [];
+      const names = Array.isArray(fields) ? [...new Set(fields.flatMap(value => value && typeof value.field === 'string'
+        && allowed.includes(value.field) ? [value.field] : []))] : [];
+      fields = names.length ? names.map(field => ({ field, message: 'Campo inválido.' })) : undefined;
+      conflictingGroupIds = undefined;
+    } else if (materialFamily) {
       const allowed = status === 400 && code === 'VALIDATION_ERROR' ? material?.fields ?? [] : [];
       const names = Array.isArray(fields) ? [...new Set(fields.flatMap(value => value && typeof value.field === 'string'
         && allowed.includes(value.field) ? [value.field] : []))] : [];
@@ -178,26 +205,28 @@ export class SafeErrorFilter implements ExceptionFilter {
     const requestId = typeof request.requestId==='string'
       && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(request.requestId)
       ?request.requestId:randomUUID();
-    if ([401,403,429,503].includes(status) || status===409) {
+    if ([401,403,429,503].includes(status) || status===409 || classRoute?.command && request.actor && [400,404].includes(status)) {
       const authentication = status===401 && code==='INVALID_CREDENTIALS';
       try {
         this.logs.record({category:status===503?'OPERATION':'SECURITY',
-          action:status===503?'RUNTIME_FAILURE':status===409?materialFamily?'MATERIAL_COMMAND_REJECTED':financial?'ENROLLMENT_COMMAND_REJECTED':'ADMIN_COMMAND_REJECTED':authentication?'AUTHENTICATION_FAILED':'ACCESS_DENIED',
+          action:status===503?'RUNTIME_FAILURE':classFamily && classRoute && request.actor && [400,404,409].includes(status)?classRoute.command?'CLASS_COMMAND_REJECTED':'ACCESS_DENIED':status===409?materialFamily?'MATERIAL_COMMAND_REJECTED':financial?'ENROLLMENT_COMMAND_REJECTED':'ADMIN_COMMAND_REJECTED':authentication?'AUTHENTICATION_FAILED':'ACCESS_DENIED',
           result:status===503?'FAILED':'DENIED',reasonCode:code,
           actorKind:request.actor && !authentication?'ACCOUNT':'ANONYMOUS',
           ...(request.actor && !authentication?{actorUserId:request.actor.userId}:{}),
-          targetKind:materialFamily?material?.kind??'NONE':financial?enrollment?.targetKind??'NONE':route?.kind ?? (!academic && request.params?.id!==undefined?'USER_REFERENCE':'NONE'),
-          ...(materialFamily?material?.param && request.params?.[material.param] !== undefined ? {requestedTargetId:request.params[material.param]} : {} :
+          targetKind:classFamily?classRoute?.kind??'NONE':materialFamily?material?.kind??'NONE':financial?enrollment?.targetKind??'NONE':route?.kind ?? (!academic && request.params?.id!==undefined?'USER_REFERENCE':'NONE'),
+          ...(classFamily?classRoute?.param && request.params?.[classRoute.param] !== undefined ? {requestedTargetId:request.params[classRoute.param]} : {} :
+            materialFamily?material?.param && request.params?.[material.param] !== undefined ? {requestedTargetId:request.params[material.param]} : {} :
             financial?enrollment?.param&&request.params?.[enrollment.param]!==undefined?{requestedTargetId:request.params[enrollment.param]}:{}:
             route?.param && request.params?.[route.param]!==undefined?{requestedTargetId:request.params[route.param]}
               :!academic && request.params?.id!==undefined?{requestedTargetId:request.params.id}:{}),
-          ...(materialFamily?material?{routeTemplate:template}:{}:financial?enrollment?{routeTemplate:template}:{}:route?{routeTemplate:template}:{}),
-          ...((materialFamily?material?.command&&materialManager:financial?enrollment?.command&&financialAudience:academic) && request.actor && typeof request.commandId==='string' && uuid.test(request.commandId)?{commandId:request.commandId}:{})},requestId);
+          ...(classFamily?classRoute?{routeTemplate:template}:{}:materialFamily?material?{routeTemplate:template}:{}:financial?enrollment?{routeTemplate:template}:{}:route?{routeTemplate:template}:{}),
+          ...((classFamily?classRoute?.command:materialFamily?material?.command&&materialManager:financial?enrollment?.command&&financialAudience:academic) && request.actor && typeof request.commandId==='string' && uuid.test(request.commandId)?{commandId:request.commandId}:{})},requestId);
       } catch { /* El canal privado nunca cambia la respuesta pública. */ }
     }
     response.setHeader('Cache-Control', 'no-store');
     response.setHeader('Referrer-Policy', 'no-referrer');
-    const message = materialFamily && Object.hasOwn(MATERIAL_ERROR_MESSAGES, code)
+    const message = classFamily && Object.hasOwn(CLASS_ERROR_MESSAGES, code) ? CLASS_ERROR_MESSAGES[code as keyof typeof CLASS_ERROR_MESSAGES]
+      : materialFamily && Object.hasOwn(MATERIAL_ERROR_MESSAGES, code)
       ? MATERIAL_ERROR_MESSAGES[code as keyof typeof MATERIAL_ERROR_MESSAGES] : financial && Object.hasOwn(ENROLLMENT_ERROR_MESSAGES,code)
       ? ENROLLMENT_ERROR_MESSAGES[code as keyof typeof ENROLLMENT_ERROR_MESSAGES] : academic && Object.hasOwn(OFFERING_ERROR_MESSAGES,code)
       ? OFFERING_ERROR_MESSAGES[code as keyof typeof OFFERING_ERROR_MESSAGES] : messages[status] ?? 'Solicitud no aceptada.';

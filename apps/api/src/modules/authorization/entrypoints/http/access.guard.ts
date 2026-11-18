@@ -3,7 +3,7 @@ import type { CanActivate, ExecutionContext, NestInterceptor, CallHandler } from
 import { Reflector } from '@nestjs/core';
 import { concatMap } from 'rxjs';
 import { SESSION_LOOKUP, type SessionLookup } from '../../application/session-lookup.js';
-import { ACCESS_POLICY, AuthorizationFailure, type SessionPermission, type SessionActor } from '../../public/session.js';
+import { ACCESS_POLICY, AuthorizationFailure, passiveClassesRequest, type SessionPermission, type SessionActor } from '../../public/session.js';
 import { SessionCookie } from '../../../../http/session-cookie.js';
 import type { HttpRequest, HttpResponse } from '../../../../http/error.filter.js';
 import { TransportFailure } from '../../../../http/error.filter.js';
@@ -41,6 +41,7 @@ export class AcceptedSessionInterceptor implements NestInterceptor {
     return next.handle().pipe(concatMap(async (body: unknown) => {
       if (isBinaryResponse(body)) {
         try {
+          if (passiveClassesRequest(request.method, request.route?.path)) throw new TransportFailure(503, 'TEMPORARILY_UNAVAILABLE');
           if (!request.actor || response.statusCode !== 200 || response.headersSent || response.destroyed) throw new TransportFailure(503, 'TEMPORARILY_UNAVAILABLE');
           await this.sessions.accepted(request.actor);
           return prepareBinaryResponse(body, request, response);
@@ -49,7 +50,8 @@ export class AcceptedSessionInterceptor implements NestInterceptor {
       if (Buffer.isBuffer(body) || body instanceof StreamableFile) throw new TransportFailure(503, 'TEMPORARILY_UNAVAILABLE');
       // Un resultado no serializable también es un fallo HTTP, no actividad aceptada.
       if (body !== undefined && response.statusCode !== 204) JSON.stringify(body);
-      if (request.actor && response.statusCode >= 200 && response.statusCode < 300) {
+      if (request.actor && response.statusCode >= 200 && response.statusCode < 300
+        && !passiveClassesRequest(request.method, request.route?.path)) {
         await this.sessions.accepted(request.actor);
       }
       return body;
