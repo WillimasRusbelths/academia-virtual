@@ -9,6 +9,13 @@ ni cambia de rama. El directorio 005 identifica este incremento.
 plan, tareas, implementación y verificación. Viabilidad del video protegido
 D07/D08 pendiente; esta especificación no acredita reproducción o protección.
 
+**Cierre de specify — 2026-11-17**: alcance documental de 005 terminado en esta
+pasada: cuatro historias, 24 escenarios, 23 FR y ocho SC. Se conserva V01–V03 y
+el alcance funcional ya acordado. La secuencia posterior queda en la
+[hoja de ruta 005 → 006 → 007](../../docs/planificacion/hoja-ruta-005-007.md),
+con [revisión de paneles por rol](../../docs/planificacion/revision-paneles-006.md).
+No se crean ramas, planes, tareas o implementaciones de 006/007 en esta pasada.
+
 **Input**: el responsable aceptó iniciar el siguiente spec de clases en vivo y
 chat por grupo y confirmó V01–V03 en esta conversación.
 
@@ -394,3 +401,28 @@ o publicación. No se contrata VPS, se inicia emisión pública ni se opera con
 cuentas personales mediante esta especificación. El siguiente paso es el plan
 técnico con la investigación/prueba temprana, seguido de tareas y análisis previo
 a implementar. No quedan preguntas de alcance sin respuesta en V01–V03.
+
+### Frontera con los siguientes incrementos
+
+005 entrega sesiones, acceso a clase, chat e historial y moderación de sus cuatro
+historias, con recuperación y comprobaciones propias. No incorpora un rediseño
+global de pantallas, paneles agregados de todos los módulos ni despliegue del MVP.
+La protección real del video sigue siendo requisito de 005; no se traslada su
+incumplimiento a 007 para declarar completa la reproducción mediante un enlace oculto.
+
+006 será **Pulido de la aplicación**: navegación por rol, presentación coherente,
+escritorio/móvil, accesibilidad y estados en pantallas anteriores y las de 005
+que estén implementadas. Antes de fijar sus paneles debe contrastar datos,
+operaciones y permisos con código y pruebas. Puede ordenar/enlazar lo existente
+y evaluar consultas pequeñas explícitas bajo permisos actuales, con sus pruebas.
+Funciones sustanciales o permisos nuevos se documentan y derivan al spec dueño;
+no bloquean el pulido independiente de pantallas ya operativas.
+
+007 será un spec separado de **Despliegue y validación del MVP**: entorno de
+pruebas, configuración, HTTPS, secretos, migración, copia/recuperación, costo y
+recorridos reales por rol. Su aceptación de volumen/carga usará al menos 15.000
+cuentas registradas y meta de 2.500 usuarios concurrentes activos, con escenarios
+y límites definidos en la hoja de ruta y contrastados con la rúbrica D10 antes
+de aceptación. El tráfico de la academia se mide separado del video externo.
+Nada de ello se presenta como alcanzado por cerrar este documento ni modifica
+retroactivamente especificaciones o resultados anteriores.

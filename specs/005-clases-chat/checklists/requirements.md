@@ -47,3 +47,13 @@ o obligación constitucional. La planificación debe tratar expresamente esa lim
 No se crean plan/tareas ni se implementa código. Se mantiene la rama actual, se
 actualiza el puntero local de Spec Kit a 005 y se preservan estados/evidencias de
 001–004; materiales permanece 65/68, con T065/T066/T068 pendientes.
+
+Revisión de cierre de specify (2026-11-17): se mantiene el mismo alcance de cuatro
+historias/24 escenarios/23 FR/ocho SC y 16/16 criterios documentales. Se añaden
+fronteras con 006/007 y la [hoja de ruta](../../../docs/planificacion/hoja-ruta-005-007.md)
+con revisión de datos/permisos/pruebas para paneles, consultas pequeñas evaluables,
+brechas derivadas y escenarios de volumen/carga verificables. 006/007 siguen como
+secuencia futura; no hay nuevas ramas, código, infraestructura o producción.
+La protección real de video no se retira de 005. El siguiente paso propio de 005
+es planificar, investigar la viabilidad de video y generar/analizar tareas antes
+de implementar; terminar specify no equivale a terminar la funcionalidad.
