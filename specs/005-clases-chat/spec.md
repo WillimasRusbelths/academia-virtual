@@ -10,7 +10,8 @@ merge del PR #5. La especificación inicial se redactó en
 constitución 2.0.0. T001–T023 completadas: fundamentos y gestión manual en API
 ([evidencia T020–T023](evidence/t020-t023.md)); las 44 pruebas puras y 55 HTTP de
 T018–T019 ya pasan, conservando su [checkpoint anterior](evidence/t018-t019.md).
-Índice: 23/86. La interfaz y aceptación completa de US1, consultas de aula, chat,
+T030–T031 añade [lecturas autorizadas de grupos y clases](evidence/t030-t031.md).
+Índice: 25/86. La interfaz y aceptación completa de US1, aula del alumno, chat,
 Socket.IO y reproducción real permanecen pendientes. No se completan FR/SC por
 esta regresión técnica de backend.
 Validación académica pendiente si afecta evaluación.

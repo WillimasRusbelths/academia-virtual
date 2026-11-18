@@ -3,10 +3,13 @@ import type { DynamicModule } from '@nestjs/common';
 import { CLASSES_MANAGEMENT } from './application/commands.js';
 import type { ClassesManagement } from './application/commands.js';
 import { ClassesController } from './entrypoints/http/classes.controller.js';
+import { CLASSES_READ } from './application/queries.js';
+import type { ClassesReadQueries } from './application/queries.js';
 
 @Module({})
 export class ClassesModule {
-  static forRoot(management: ClassesManagement): DynamicModule {
-    return { module: ClassesModule, controllers: [ClassesController], providers: [{ provide: CLASSES_MANAGEMENT, useValue: management }] };
+  static forRoot(management: ClassesManagement, queries: ClassesReadQueries): DynamicModule {
+    return { module: ClassesModule, controllers: [ClassesController], providers: [
+      { provide: CLASSES_MANAGEMENT, useValue: management }, { provide: CLASSES_READ, useValue: queries }] };
   }
 }

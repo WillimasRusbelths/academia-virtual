@@ -1,7 +1,7 @@
 # Tareas: clases en vivo y chat por grupo — 005
 
 **Fecha**: 2026-11-17, America/Lima. **Rama**: `feat/005-clases-chat`.
-**Estado**: 23/86 completadas: T001–T023; fundamentos y gestión manual de clases en API verificados.
+**Estado**: 25/86 completadas: T001–T023 y T030–T031; gestión y consultas autorizadas de clases en API verificadas.
 Las 44 pruebas de dominio y 55 HTTP de T018–T019 ya pasan con T020–T023; su checkpoint previo se conserva.
 La matriz T009 ya fue ejecutada con el coordinador/composición de T014–T017; no se completan todavía historias o FR/SC.
 El recorrido completo con interfaz, chat y sus FR/SC permanece pendiente; gestión de backend verificada.
@@ -59,8 +59,8 @@ T010–T013: [permisos y participantes verificados](evidence/t010-t013.md).
 T014–T017: [coordinador, ledger y composición verificados](evidence/t014-t017.md).
 T018–T019 conservan su [checkpoint previo de pruebas escritas](evidence/t018-t019.md).
 T020–T023: [gestión manual en API verificada](evidence/t020-t023.md), incluidas esas suites.
-Siguiente bloque: **T030–T031**, consultas compartidas que requiere la gestión;
-después **T024–T026**, cliente, pantalla y navegación por rol.
+T030–T031: [consultas autorizadas de grupos y clases verificadas](evidence/t030-t031.md).
+Siguiente bloque: **T024–T026**, cliente, pantalla de gestión y navegación por rol.
 Todavía faltan interfaz, recorridos completos, aula y chat.
 Actualizar el índice vigente con `node ops/specs/update-005-coverage.mjs --write`;
 el validador de adopción anterior conserva su checkpoint de cero tareas ejecutadas.
@@ -117,8 +117,8 @@ Entrega independiente disponible: encontrar sesiones autorizadas y distinguir
 reproducción no habilitada. **US2 completa no está resuelta** por esa entrega.
 YouTube real es un ensayo del MVP; Cloudflare queda fuera. G-V005 exige prueba real y límites externos conforme a constitución 2.0.0.
 
-- [ ] T030 [P] [US2] Escribir matriz PG/HTTP de grupos/sesiones/video deshabilitado en `apps/api/tests/integration/classes-access.spec.ts`: visitante/propio/ajeno/fin±1 μs, sesión revocada, oferta retirada/docente cambiado, grupo cancelado y referencias indistinguibles. FR-005–FR-009/019; US2.1/US2.3–US2.6; SC-002 parcial. Tras T023.
-- [ ] T031 [US2] Implementar grupos/contexto/listas/detalle en `apps/api/src/modules/classes/infrastructure/class-queries.ts` y lecturas HTTP en `apps/api/src/modules/classes/entrypoints/http/classes.controller.ts`: autorizar antes de total, page≥1/pageSize 1–50 (20 defecto), grupos name/id y sesiones createdAt DESC,id DESC; alumno excluye canceladas y no depende de oferta visible/docente habilitado. FR-005–FR-007/019. Tras T030.
+- [x] T030 [P] [US2] Escribir matriz PG/HTTP de grupos/sesiones/video deshabilitado en `apps/api/tests/integration/classes-access.spec.ts`: visitante/propio/ajeno/fin±1 μs, sesión revocada, oferta retirada/docente cambiado, grupo cancelado y referencias indistinguibles. FR-005–FR-009/019; US2.1/US2.3–US2.6; SC-002 parcial. Tras T023.
+- [x] T031 [US2] Implementar grupos/contexto/listas/detalle en `apps/api/src/modules/classes/infrastructure/class-queries.ts` y lecturas HTTP en `apps/api/src/modules/classes/entrypoints/http/classes.controller.ts`: autorizar antes de total, page≥1/pageSize 1–50 (20 defecto), grupos name/id y sesiones createdAt DESC,id DESC; alumno excluye canceladas y no depende de oferta visible/docente habilitado. FR-005–FR-007/019. Tras T030.
 - [ ] T032 [US2] Implementar navegación y aula mínima del alumno en `apps/web/src/features/classes/student-page.tsx`, `apps/web/src/features/classes/classroom.tsx` y `apps/web/src/app/classes-routes.tsx`; distinguir PREPARED/LIVE/FINISHED y señal aún no habilitada, referencias ajenas/permiso perdido, sin iframe supuesto como protegido. FR-004–FR-007/021. Tras T029 y T031.
 - [ ] T033 [US2] Verificar GET video NOT_CONFIGURED con permiso actual, sin URL/secretos, y pruebas UI en `apps/api/tests/integration/classes-video-disabled.spec.ts` y `apps/web/src/features/classes/classroom.test.tsx`; cerrar evidencia de consulta parcial en `specs/005-clases-chat/evidence/us2-access.md`. No cerrar SC-003. FR-008/009/023. Tras T032.
 - [ ] T034 [P] [US2] Verificar el registro de aprobación V05 y enmienda 2.0.0 en `specs/005-clases-chat/evidence/video-scope-adoption.md` contra la matriz T003: alcance propio/externo, FR-005/006/008/009/021/023, SC-002/003/007 y profesor si afecta evaluación; preservar borrador/checkpoints previos, sin atribuir aceptación académica o reproducción real. FR-008/009/023. Tras T003; compatible con continuar T041.

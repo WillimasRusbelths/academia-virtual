@@ -16,6 +16,7 @@ export interface ClassesTopology {
   readonly classIds: readonly UUID[];
 }
 export type ClassesTarget = { readonly kind: 'GROUP' | 'CLASS'; readonly id: UUID }
+  | { readonly kind: 'GROUPS' }
   | { readonly kind: 'COMMAND'; readonly id: UUID }
   | { readonly kind: 'STUDENT'; readonly classId: UUID; readonly studentId: UUID };
 export interface ClassesQueries {

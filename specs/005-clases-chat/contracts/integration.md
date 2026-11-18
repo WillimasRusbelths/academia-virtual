@@ -5,7 +5,10 @@ probadas en T010–T013 ([evidencia](../evidence/t010-t013.md)). Coordinador, le
 composición fundacional verificados en [T014–T017](../evidence/t014-t017.md).
 T020–T023 verifica efectos y seis rutas de gestión ([evidencia](../evidence/t020-t023.md));
 COMMAND descubre referencias propias, revalida topología/autoridad bajo locks y
-solo después lee receipts. Aula/chat y su transporte siguen en tareas posteriores.
+solo después lee receipts. T030–T031 añade GROUPS con descubrimiento público,
+locks canónicos y filtrado de derechos antes de contar/paginar; las lecturas de
+clase comparten la conexión y proyección de gestión. [Evidencia](../evidence/t030-t031.md).
+Aula web/chat y su transporte siguen en tareas posteriores.
 
 ## Fronteras públicas
 

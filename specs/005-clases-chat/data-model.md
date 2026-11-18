@@ -4,6 +4,7 @@
 probada en esquemas aislados de ensayo. [Evidencia](evidence/t005-t007.md).
 Coordinador/ledger fundacionales probados en [T014–T017](evidence/t014-t017.md).
 T020–T023 verifica la gestión manual y su persistencia atómica ([evidencia](evidence/t020-t023.md)).
+T030–T031 verifica proyecciones autorizadas de grupos/sesiones y precisión temporal.
 Chat y sus consultas/transporte siguen pendientes; no se modifica la migración 0010.
 Referencias User/Session/AcademicGroup/AcademicCourse/Enrollment pertenecen a sus
 propietarios. Clases no modifica esas entidades. [Consistencia](contracts/integration.md).

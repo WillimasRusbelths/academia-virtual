@@ -11,8 +11,10 @@ import { CLASSES_MANAGEMENT_POLICY, CLASSES_PARTICIPATION_POLICY } from '../../s
 
 const classesRoutes = ['POST /api/v1/classes/groups/:groupId/sessions', 'PATCH /api/v1/classes/sessions/:classId',
   'POST /api/v1/classes/sessions/:classId/start', 'POST /api/v1/classes/sessions/:classId/finish',
-  'POST /api/v1/classes/sessions/:classId/cancel', 'GET /api/v1/classes/commands/:commandId'];
-const classesPolicy = (route: string) => route === 'GET /api/v1/classes/commands/:commandId'
+  'POST /api/v1/classes/sessions/:classId/cancel', 'GET /api/v1/classes/commands/:commandId',
+  'GET /api/v1/classes/groups', 'GET /api/v1/classes/groups/:groupId', 'GET /api/v1/classes/groups/:groupId/sessions',
+  'GET /api/v1/classes/sessions/:classId', 'GET /api/v1/classes/sessions/:classId/video'];
+const classesPolicy = (route: string) => route.startsWith('GET ')
   ? CLASSES_PARTICIPATION_POLICY : CLASSES_MANAGEMENT_POLICY;
 
 const materialsRoutes = ['GET /api/v1/materials/groups', 'GET /api/v1/materials/groups/:groupId',
@@ -184,7 +186,7 @@ test('T023 classes management routes require their exact closed policy and futur
     for (const policy of [undefined, 'public', 'profile:read', [], ['classes:manage-all'], opposite,
       ['classes:manage-all', 'classes:manage-own', 'profile:read'], new Array(2)]) expect(validPolicy(route, policy)).toBe(false);
   }
-  for (const route of ['GET /api/v1/classes/sessions/:classId/messages', 'GET /api/v1/classes/sessions/:classId/video',
+  for (const route of ['GET /api/v1/classes/sessions/:classId/messages', 'GET /api/v1/classes/sessions/:classId/video-reference',
     'POST /api/v1/classes/sessions/:classId/reopen', 'DELETE /api/v1/classes/sessions/:classId'])
     for (const policy of [CLASSES_MANAGEMENT_POLICY, CLASSES_PARTICIPATION_POLICY]) expect(validPolicy(route, policy)).toBe(false);
 });

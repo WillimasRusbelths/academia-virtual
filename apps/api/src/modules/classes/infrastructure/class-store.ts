@@ -135,6 +135,11 @@ export function createClassSessionStore(context: ClassesTransactionContext) {
     }, edit: mutate('EDIT'), start: mutate('START'), finish: mutate('FINISH'), cancel: mutate('CANCEL'),
   });
   return Object.freeze({ commands,
+    async session(id: string) {
+      context.assertActive();
+      if (id !== context.classId) throw new ClassError('NOT_FOUND');
+      return view(id);
+    },
     async command(id: string): Promise<ClassCommandLookup> {
       context.assertActive();
       if (!isAccountId(id) || context.commandId && context.commandId !== id) throw new ClassError('NOT_FOUND');

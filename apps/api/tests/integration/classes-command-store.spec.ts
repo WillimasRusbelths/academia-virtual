@@ -19,7 +19,9 @@ test('foundation composes authorized unconfigured video and keeps future handler
   await foundation().run(admin, 'classes:manage-all', { kind: 'CLASS', id: f.live.id }, 'READ', async capability => {
     expect(await capability.video.access(f.live.id)).toEqual({ status: 'NOT_CONFIGURED' });
     await expect(capability.video.access(f.otherLive.id)).rejects.toMatchObject({ code: 'NOT_FOUND' });
-    await expect(capability.queries.session(f.live.id)).rejects.toMatchObject({ code: 'TEMPORARILY_UNAVAILABLE' });
+    expect(await capability.queries.session(f.live.id)).toMatchObject({ id: f.live.id, state: 'LIVE' });
+    await expect(capability.queries.session(f.otherLive.id)).rejects.toMatchObject({ code: 'NOT_FOUND' });
+    await expect(capability.chat.history(f.live.id, { limit: 20 })).rejects.toMatchObject({ code: 'TEMPORARILY_UNAVAILABLE' });
   });
 });
 function input(commandId = randomUUID()): ClassCommandAppend {

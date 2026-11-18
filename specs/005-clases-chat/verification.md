@@ -51,6 +51,14 @@ global tras ese cambio exclusivo de fixture. No sustituye E2E, carreras T028
 o US1 completa. Las 24 aceptaciones y FR/SC conservan PENDIENTE. Sigue T030–T031
 como soporte de lectura antes de T024–T026.
 
+Avance T030–T031: [lecturas autorizadas de grupos y clases](evidence/t030-t031.md).
+Matriz PG/HTTP con límites originales ±1 μs, permisos por rol, revocación, oferta
+retirada/reasignación, grupos cancelados, paginación y DTO mínimo. Video sigue
+deshabilitado y su GET es pasivo. Pasan 887 unitarias, 299 integraciones
+seleccionadas y 6 de redacción de secretos después de clases. No es una
+pasada global, CI de GitHub, E2E web o reproducción real. Las 24 aceptaciones
+y FR/SC conservan PENDIENTE. Sigue T024–T026.
+
 ## Estados y evidencia
 
 Cada fila empieza PENDIENTE. Cambiar a PROBADO solo con commit, configuración

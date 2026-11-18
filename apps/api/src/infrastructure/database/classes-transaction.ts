@@ -2,7 +2,7 @@ import type { Pool, PoolClient } from 'pg';
 import { AuthorizationFailure, permits } from '../../modules/authorization/public/session.js';
 import type { Permission, SessionActor } from '../../modules/authorization/public/session.js';
 import type { ClassesGroupAccess, ClassesGroupSnapshot } from '../../modules/academic-offering/public/classes-access.js';
-import type { ClassesEnrollmentAccess, ClassesEnrollmentScope } from '../../modules/enrollment/public/classes-access.js';
+import type { ClassesEnrollmentAccess, ClassesEnrollmentScope, ClassesEnrollmentDiscovery } from '../../modules/enrollment/public/classes-access.js';
 import type { ClassAuthors } from '../../modules/users/public/class-authors.js';
 import type { ClassDecision } from '../../modules/classes/public/classes.js';
 import type { ClassesPermission, ClassesTarget, ClassesTopology } from '../../modules/classes/application/ports.js';
@@ -27,13 +27,15 @@ export interface ClassesTransactionDependencies {
   revalidateInTransaction(client: PoolClient, actor: SessionActor, permission: Permission): Promise<void>;
   offering(client: PoolClient): ClassesGroupAccess;
   enrollment(client: PoolClient, scope: ClassesEnrollmentScope): ClassesEnrollmentAccess;
+  enrollmentDiscovery(client: PoolClient): ClassesEnrollmentDiscovery;
   authors(client: PoolClient, assertActive: () => void, ids: readonly string[]): ClassAuthors;
 }
 export type ClassesTransaction = <T>(actor: SessionActor, permission: ClassesPermission, target: ClassesTarget,
   mode: 'READ' | 'WRITE', apply: (context: ClassesTransactionContext) => Promise<T>) => Promise<T>;
 class TopologyChanged extends Error { readonly transactionAborted = true; }
 const keys = ['accountIds', 'courseIds', 'groupIds', 'classIds'] as const;
-async function discover(client: PoolClient, offering: ClassesGroupAccess, actor: SessionActor, target: ClassesTarget): Promise<ClassesTopology> {
+async function discover(client: PoolClient, offering: ClassesGroupAccess, actor: SessionActor, target: ClassesTarget,
+  dependencies: ClassesTransactionDependencies): Promise<ClassesTopology> {
   // Discovery exposes references only, not a receipt or stored payload. Re-read
   // after actor/resource locks before any result is projected.
   const classId = target.kind === 'CLASS' ? target.id : target.kind === 'STUDENT' ? target.classId
@@ -41,7 +43,9 @@ async function discover(client: PoolClient, offering: ClassesGroupAccess, actor:
       'SELECT "classId" FROM "ClassCommand" WHERE "actorId"=$1 AND "commandId"=$2', [actor.userId, target.id])).rows[0]?.classId : null;
   const groupId = target.kind === 'GROUP' ? target.id :
     (await client.query<{ groupId: string }>('SELECT "groupId" FROM "ClassSession" WHERE id=$1', [classId])).rows[0]?.groupId;
-  const groups = await offering.discover(groupId ? [groupId] : []);
+  const groups = target.kind !== 'GROUPS' ? await offering.discover(groupId ? [groupId] : [])
+    : actor.role === 'STUDENT' ? await offering.discover((await dependencies.enrollmentDiscovery(client).references(actor.userId)).map(g => g.groupId))
+      : await offering.managedReferences(actor.userId, actor.role as 'ADMIN' | 'TEACHER');
   return Object.freeze({
     accountIds: canonicalLockIds([actor.userId, ...(actor.role === 'STUDENT' ? [] : groups.flatMap(g => g.teacherUserId ? [g.teacherUserId] : [])),
       ...(target.kind === 'STUDENT' ? [target.studentId] : [])]),
@@ -57,18 +61,18 @@ export function createClassesTransaction(pool: Pool, dependencies: ClassesTransa
   return async (actor, permission, input, mode, apply) => {
     if (!permits(actor.role, permission) || !['classes:manage-all', 'classes:manage-own', 'classes:participate-enrolled'].includes(permission))
       throw new AuthorizationFailure('FORBIDDEN');
-    if (!['READ', 'WRITE'].includes(mode) || !['GROUP', 'CLASS', 'STUDENT', 'COMMAND'].includes(input.kind)
-      || input.kind === 'COMMAND' && mode !== 'READ') throw new ClassError('FORBIDDEN');
+    if (!['READ', 'WRITE'].includes(mode) || !['GROUPS', 'GROUP', 'CLASS', 'STUDENT', 'COMMAND'].includes(input.kind)
+      || (input.kind === 'COMMAND' || input.kind === 'GROUPS') && mode !== 'READ') throw new ClassError('FORBIDDEN');
     if (input.kind === 'STUDENT' && actor.role === 'STUDENT' || input.kind === 'GROUP' && actor.role === 'STUDENT' && mode === 'WRITE')
       throw new ClassError('FORBIDDEN');
-    const ids = input.kind === 'STUDENT' ? [input.classId, input.studentId] : [input.id];
+    const ids = input.kind === 'GROUPS' ? [] : input.kind === 'STUDENT' ? [input.classId, input.studentId] : [input.id];
     if (!ids.every(isAccountId)) throw new ClassError('NOT_FOUND');
-    const target: ClassesTarget = input.kind === 'STUDENT' ? Object.freeze({ kind: 'STUDENT', classId: input.classId.toLowerCase(), studentId: input.studentId.toLowerCase() })
+    const target: ClassesTarget = input.kind === 'GROUPS' ? Object.freeze({ kind: 'GROUPS' }) : input.kind === 'STUDENT' ? Object.freeze({ kind: 'STUDENT', classId: input.classId.toLowerCase(), studentId: input.studentId.toLowerCase() })
       : Object.freeze({ kind: input.kind, id: input.id.toLowerCase() });
     let callbackError: unknown;
     return accountTransaction(pool, async client => {
       await client.query('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
-      const offering = dependencies.offering(client), found = await discover(client, offering, actor, target);
+      const offering = dependencies.offering(client), found = await discover(client, offering, actor, target, dependencies);
       await lockAccounts(client, found.accountIds);
       await dependencies.revalidateInTransaction(client, actor, permission);
       const suffix = mode === 'READ' ? 'SHARE' : 'UPDATE';
@@ -77,7 +81,7 @@ export function createClassesTransaction(pool: Pool, dependencies: ClassesTransa
         const result = await client.query(`SELECT id FROM "${table}" WHERE id=ANY($1::uuid[]) ORDER BY id FOR ${suffix}`, [values]);
         if (result.rowCount !== values.length) throw new TopologyChanged();
       }
-      const current = await discover(client, offering, actor, target);
+      const current = await discover(client, offering, actor, target, dependencies);
       if (!keys.every(key => found[key].length === current[key].length && found[key].every((id, i) => id === current[key][i]))) throw new TopologyChanged();
       const at = (await client.query<{ at: string }>('SELECT (extract(epoch FROM clock_timestamp())*1000000)::numeric(30,0)::text AS at')).rows[0].at;
       if (!/^-?\d+$/.test(at)) throw new ClassError('TEMPORARILY_UNAVAILABLE');
@@ -92,11 +96,16 @@ export function createClassesTransaction(pool: Pool, dependencies: ClassesTransa
         },
       });
       try {
-        const groups = await offering.snapshots(found.groupIds, actor.role === 'STUDENT' ? 'STUDENT' : undefined);
-        if (groups.length !== 1 && !(target.kind === 'COMMAND' && groups.length === 0 && found.classIds.length === 0)) throw new ClassError('NOT_FOUND');
-        const group = groups[0], enrollment = dependencies.enrollment(client, scope);
-        if (group && actor.role === 'TEACHER' && (group.teacherUserId !== actor.userId || !group.teacherEligible || group.state === 'CANCELLED')) throw new ClassError('NOT_FOUND');
-        if (group && actor.role === 'STUDENT' && (group.state === 'CANCELLED' || !await enrollment.hasAccess(actor.userId, group.groupId, decision))) throw new ClassError('NOT_FOUND');
+        const enrollment = dependencies.enrollment(client, scope);
+        const rights = actor.role === 'STUDENT' ? new Set((await enrollment.groups(actor.userId, decision)).map(g => g.groupId)) : null;
+        const groups = (await offering.snapshots(found.groupIds, actor.role === 'STUDENT' ? 'STUDENT' : undefined))
+          .filter(g => actor.role === 'ADMIN' || (actor.role === 'TEACHER'
+            ? g.teacherUserId === actor.userId && g.teacherEligible && g.state !== 'CANCELLED'
+            : g.state !== 'CANCELLED' && rights!.has(g.groupId)));
+        if (target.kind !== 'GROUPS' && groups.length !== 1 && !(target.kind === 'COMMAND' && groups.length === 0 && found.classIds.length === 0)) throw new ClassError('NOT_FOUND');
+        const group = groups[0];
+        if (actor.role === 'STUDENT' && found.classIds.length && (await client.query<{ state: string }>(
+          'SELECT state FROM "ClassSession" WHERE id=$1', [found.classIds[0]])).rows[0]?.state === 'CANCELLED') throw new ClassError('NOT_FOUND');
         if (target.kind === 'STUDENT') {
           const students = await dependencies.authors(client, assertActive, [target.studentId]).byIds([target.studentId]);
           if (students[0]?.role !== 'STUDENT' || !await enrollment.hasAccess(target.studentId, group.groupId, decision)) throw new ClassError('NOT_FOUND');

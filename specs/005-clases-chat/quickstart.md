@@ -9,7 +9,8 @@ T008–T009 añaden fixtures y pruebas de autoridad previas al coordinador;
 T010–T013 implementan permisos y participantes de oferta, matrícula y autores:
 [evidencia](evidence/t010-t013.md). T014–T017 ya verifica el coordinador y T009:
 [fundamentos](evidence/t014-t017.md). T020–T023 verifica la gestión manual en API:
-[último bloque](evidence/t020-t023.md). Faltan cliente/UI, consultas de aula y chat.
+[gestión](evidence/t020-t023.md). T030–T031 verifica las consultas autorizadas:
+[último bloque](evidence/t030-t031.md). Faltan cliente/UI, aula del alumno y chat.
 
 T018–T019 escribe las suites de dominio y HTTP: [informe](evidence/t018-t019.md).
 El checkpoint previo conserva su rojo; ahora pasan con T020–T023 mediante los
@@ -19,7 +20,7 @@ ningún 404 por falta de handler cuenta como denegación de permisos probada.
 T001–T004 prepararon entorno/dependencias y [matriz](verification.md).
 T005–T007 implementan contratos/puertos, pruebas SQL y migración 0010:
 [evidencia](evidence/t005-t007.md). Las fixtures compartidas y la gestión de API
-están verificadas; chat, consultas de aula y transporte de esos recursos aún pendientes. La persistencia no acredita reproducción real.
+están verificadas, junto con las lecturas de grupos/sesiones; chat y su transporte aún pendientes. La persistencia no acredita reproducción real.
 
 ## Preparación segura
 

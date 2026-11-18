@@ -63,24 +63,25 @@ import { createMaterialsContentStore } from './modules/materials/infrastructure/
 import { createClassesTransaction } from './infrastructure/database/classes-transaction.js';
 import type { ClassesCoordinator, ClassesCapabilities } from './modules/classes/application/ports.js';
 import { createClassesGroupParticipant } from './modules/academic-offering/infrastructure/classes-participant.js';
-import { createClassesEnrollmentParticipant } from './modules/enrollment/infrastructure/classes-participant.js';
+import { createClassesEnrollmentParticipant, createClassesEnrollmentDiscovery } from './modules/enrollment/infrastructure/classes-participant.js';
 import { createClassAuthors } from './modules/users/infrastructure/class-authors.js';
 import { createClassCommandStore } from './modules/classes/infrastructure/command-store.js';
-import { createDisabledClassVideo } from './modules/classes/infrastructure/video-disabled.js';
+import { createClassesQueries, createScopedClassQueries } from './modules/classes/infrastructure/class-queries.js';
 import { ClassError } from './modules/classes/public/errors.js';
 import { createClassesCommands } from './modules/classes/application/commands.js';
 import { createClassesManagementStore, createClassSessionStore } from './modules/classes/infrastructure/class-store.js';
 import { ClassesModule } from './modules/classes/classes.module.js';
 
 export const CLASSES_FOUNDATION = 'CLASSES_FOUNDATION';
-/** Shared transaction and management capabilities. Future read/chat/video
- * handlers remain unavailable until their dedicated implementation tasks. */
+/** Shared transaction, management and authorized metadata reads. Chat and
+ * configured video remain unavailable until their dedicated tasks. */
 export function createClassesFoundation(_environment: Environment, pool: Parameters<typeof createClassesTransaction>[0]) {
   const sessions = new PostgresSessionStore(pool);
   const transaction = createClassesTransaction(pool, {
     revalidateInTransaction: sessions.revalidateInTransaction.bind(sessions),
     offering: client => createClassesGroupParticipant(client, new PostgresTeachingDirectory(client)),
     enrollment: createClassesEnrollmentParticipant,
+    enrollmentDiscovery: createClassesEnrollmentDiscovery,
     authors: (client, assertActive, ids) => createClassAuthors(client, {
       assertReferences(requested) { assertActive(); if (requested.some(id => !ids.includes(id))) throw new ClassError('FORBIDDEN'); },
       async use(operation) { assertActive(); const result = await operation(); assertActive(); return result; },
@@ -89,19 +90,16 @@ export function createClassesFoundation(_environment: Environment, pool: Paramet
   const run: ClassesCoordinator['run'] = (actor, permission, target, mode, apply) => transaction(actor, permission, target, mode, async context => {
     const unavailable = async (): Promise<never> => { context.assertActive(); throw new ClassError('TEMPORARILY_UNAVAILABLE'); };
     const store = createClassSessionStore(context);
+    const queries = createScopedClassQueries(context);
     const capabilities: ClassesCapabilities = Object.freeze({ decision: context.decision,
-      queries: Object.freeze({ groups: unavailable, group: unavailable, sessions: unavailable, session: unavailable, command: store.command }),
+      queries: Object.freeze({ groups: queries.groups, group: queries.group, sessions: queries.sessions, session: queries.session, command: store.command }),
       commands: store.commands,
       chat: Object.freeze({ send: unavailable, history: unavailable, changes: unavailable }),
       moderation: Object.freeze({ hide: unavailable, mute: unavailable, unmute: unavailable }),
-      video: Object.freeze({ reference: unavailable, setReference: unavailable, async access(classId: string) {
-        context.assertActive();
-        if (classId !== context.classId || context.groups[0].state === 'CANCELLED') throw new ClassError('NOT_FOUND');
-        return createDisabledClassVideo(context).access();
-      } }), audit: createClassCommandStore(context).audit });
+      video: Object.freeze({ reference: unavailable, setReference: unavailable, access: queries.video }), audit: createClassCommandStore(context).audit });
     return apply(capabilities);
   });
-  return Object.freeze({ run, transaction, management: createClassesCommands(createClassesManagementStore(transaction)) });
+  return Object.freeze({ run, transaction, queries: createClassesQueries(transaction), management: createClassesCommands(createClassesManagementStore(transaction)) });
 }
 
 export const MATERIALS_FOUNDATION = 'MATERIALS_FOUNDATION';
@@ -140,7 +138,7 @@ export class AppModule {
     const classes = createClassesFoundation(environment, database.pool);
     return { module: AppModule,
       imports: [AuthorizationModule.forRoot(sessions,cookie),
-        ClassesModule.forRoot(classes.management),
+        ClassesModule.forRoot(classes.management, classes.queries),
         MaterialsModule.forRoot(materials, materials.receiveContent, materials.readContent),
         EnrollmentModule.forRoot(new EnrollmentPrices(createEnrollmentPriceStore(database.pool,academicAuthorization,createCourseReferenceParticipant)),
           createEnrollmentQueries(database.pool,academicAuthorization,createReservationOfferingParticipant),createReservationAdmission(database.pool,academicAuthorization),

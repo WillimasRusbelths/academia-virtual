@@ -1,0 +1,457 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-18",
+  "timezone": "America/Lima",
+  "branch": "feat/005-clases-chat",
+  "base": "bf0fc845a7ff9c671405a2292e2f82b549618ab5",
+  "block": [
+    "T030",
+    "T031"
+  ],
+  "completedTasks": 25,
+  "totalTasks": 86,
+  "environment": {
+    "appEnv": "test",
+    "harness": "isolated Linux Compose",
+    "publishedPorts": 0,
+    "separateOwnerRuntime": true,
+    "randomSchemas": true,
+    "sourceMounts": "read-only",
+    "syntheticPaymentsOnly": true,
+    "manualEnvironment": "not used or changed"
+  },
+  "checks": {
+    "prismaGenerate": "PASS",
+    "apiLint": "PASS",
+    "apiBuild": "PASS",
+    "strictIntegrationTypes": "PASS",
+    "initialRed": {
+      "name": "t030-red",
+      "sha256": "36f169afb5eddcf65df4dcfaad576f76157aff3affb33bdd1e3275ded69a6b3e",
+      "total": 35,
+      "passed": 0,
+      "failed": 35,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/api/tests/integration/classes-access.spec.ts",
+          "passed": 0,
+          "failed": 35
+        }
+      ]
+    },
+    "initialFocused": {
+      "name": "t030-check-focused",
+      "sha256": "cba710ec73fac48a44e9a30104b5a3b24b4b7f60e3a5752909b067fcf77055eb",
+      "total": 130,
+      "passed": 130,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/api/tests/integration/classes-access.spec.ts",
+          "passed": 35,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-authority.spec.ts",
+          "passed": 40,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-management-http.spec.ts",
+          "passed": 55,
+          "failed": 0
+        }
+      ]
+    },
+    "unit": {
+      "name": "t030-verify-unit",
+      "sha256": "25dd6e3f87c84a33ec77a108605f0bf86d7c02f31f859a72a4a1dfa8e15fca46",
+      "total": 887,
+      "passed": 887,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+          "passed": 25,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/architecture/import-boundaries.spec.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/architecture/layers.spec.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/course.test.ts",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/group.test.ts",
+          "passed": 39,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/lifecycle.test.ts",
+          "passed": 27,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/rules-regression.test.ts",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/schedule.test.ts",
+          "passed": 91,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/domain/visibility.test.ts",
+          "passed": 42,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/academic-offering/public/offer.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/classes-permissions.test.ts",
+          "passed": 31,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/authorization/domain/permissions.test.ts",
+          "passed": 121,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/classes/domain/class-session.test.ts",
+          "passed": 44,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/classes/infrastructure/video-disabled.test.ts",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/calendar.test.ts",
+          "passed": 22,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/commitments.test.ts",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/compatibility.test.ts",
+          "passed": 22,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/exact-values.test.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/instant.test.ts",
+          "passed": 39,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/money.test.ts",
+          "passed": 23,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/order.test.ts",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-invariants.test.ts",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/payment-verification.test.ts",
+          "passed": 38,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/domain/reservation.test.ts",
+          "passed": 86,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/expire-reservations.test.ts",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/application/follow-up.test.ts",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler-health.test.ts",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/enrollment/infrastructure/expiration-scheduler.test.ts",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/bootstrap-admin.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/issue-action-link.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/application/reset-password.test.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/access.test.ts",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/account-administration.test.ts",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/limits.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/login.test.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/domain/operator.test.ts",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/identity/infrastructure/action-transaction.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/mail/domain/delivery-policy.test.ts",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/material.test.ts",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/materials/domain/transitions.test.ts",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/src/modules/users/domain/account.test.ts",
+          "passed": 4,
+          "failed": 0
+        }
+      ]
+    },
+    "selectedIntegration": {
+      "name": "t030-verify-focused",
+      "sha256": "5537586ace2f892024fd9b62a777fd13b32be2578e28764a4517f0f4745f023a",
+      "total": 299,
+      "passed": 299,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/api/tests/compatibility/postgres.spec.ts",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/compatibility/runtime.spec.ts",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-access.spec.ts",
+          "passed": 38,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-author-projection.spec.ts",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-authority.spec.ts",
+          "passed": 40,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-command-store.spec.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-fixtures.spec.ts",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-http-errors.spec.ts",
+          "passed": 16,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-management-http.spec.ts",
+          "passed": 55,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-management-store.spec.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-participants.spec.ts",
+          "passed": 23,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-schema.spec.ts",
+          "passed": 33,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/classes-session-activity.spec.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-authority.spec.ts",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-queries.spec.ts",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/materials-student-queries.spec.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/session-lifecycle.spec.ts",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "file": "apps/api/tests/integration/session-store.spec.ts",
+          "passed": 20,
+          "failed": 0
+        }
+      ]
+    },
+    "redactionAfterClasses": {
+      "name": "t030-verify-redaction",
+      "sha256": "0aeb5e18c441996ef7c44d49eccc97f2bb4a77f2aa03775861535bc63a0aa7bc",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "apps/api/tests/integration/secret-redaction.spec.ts",
+          "passed": 6,
+          "failed": 0
+        }
+      ]
+    }
+  },
+  "interruption": "t030-final interrupted when Docker stopped; incomplete results are not counted as PASS. t030-verify is the completed rerun.",
+  "limits": [
+    "No full integration rerun or GitHub Actions result",
+    "No web UI/E2E, chat, sockets, configured video or real reproduction",
+    "No production deployment, capacity claim or spec006/007 implementation",
+    "FR/SC and all 24 acceptance scenarios remain pending"
+  ],
+  "next": [
+    "T024",
+    "T025",
+    "T026"
+  ],
+  "sources": [
+    {
+      "path": "apps/api/src/app.module.ts",
+      "sha256": "34774fac7f60a9fc11d24819d224224c43c1ff8606ab00c361299d4818c520da"
+    },
+    {
+      "path": "apps/api/src/infrastructure/database/classes-transaction.ts",
+      "sha256": "2fb1bd55c11990e332f205d3aa5782a430406822083fab8f63017c795bfcca94"
+    },
+    {
+      "path": "apps/api/src/modules/classes/application/ports.ts",
+      "sha256": "c5d23e832cbdfcca700ef170dac6d3a71f52bcbd09d0f2a2239fae8941e370f3"
+    },
+    {
+      "path": "apps/api/src/modules/classes/application/queries.ts",
+      "sha256": "fa2594c79ab030f604e019b182be0d6d10d4f9123df2ac405f6c4406ecf02ea6"
+    },
+    {
+      "path": "apps/api/src/modules/classes/classes.module.ts",
+      "sha256": "cc918f3210d83d1696603ab1c1de274fa113992850b84f4eeb9899bea92ef606"
+    },
+    {
+      "path": "apps/api/src/modules/classes/entrypoints/http/classes.controller.ts",
+      "sha256": "a9ed24d36ab2c0d77a9246f8d3d9f51d96736f71631e5d6884db4fcddb49bd1d"
+    },
+    {
+      "path": "apps/api/src/modules/classes/infrastructure/class-store.ts",
+      "sha256": "7e175534f9c949fb6dc45d3c2156b4d9ebc9e3a2989f00509794717d76c7e539"
+    },
+    {
+      "path": "apps/api/src/modules/classes/infrastructure/class-queries.ts",
+      "sha256": "e3983f5422b695851f180c0f3ff87e4824e180dd9adf13e91bf4086da4334592"
+    },
+    {
+      "path": "apps/api/tests/architecture/endpoint-policies.spec.ts",
+      "sha256": "daaf9810427b4d7e3cfaf62c39e999d71f8a32448b1e2bed28dcc68264257946"
+    },
+    {
+      "path": "apps/api/tests/integration/classes-command-store.spec.ts",
+      "sha256": "c2c470356c596b8e3233be46a0f80c2dd86575ecc4aadfef896238b92ddcc445"
+    },
+    {
+      "path": "apps/api/tests/integration/classes-access.spec.ts",
+      "sha256": "04d76cc18e15c3f008cc232775d35fb932ff456806383ec687bbe05a22c5a708"
+    }
+  ]
+}
