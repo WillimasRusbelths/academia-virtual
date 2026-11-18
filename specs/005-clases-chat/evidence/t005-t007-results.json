@@ -1,0 +1,244 @@
+{
+  "date": "2026-11-17",
+  "timezone": "America/Lima",
+  "baseCommit": "7fda48083ed4e87627c9c7cdddf60da8d6b100ae",
+  "branch": "feat/005-clases-chat",
+  "status": "T005_T006_T007_COMPLETADAS_ACEPTACION_FUNCIONAL_PENDIENTE",
+  "tasksCompleted": [
+    "T005",
+    "T006",
+    "T007"
+  ],
+  "completedTasks": 7,
+  "totalTasks": 86,
+  "harness": {
+    "project": "classes-140bf3835fae",
+    "imageId": "sha256:2ae3236b3bf4b4fb7e8b7af1d66823eec4f57e27c33dd061cbe15c1a945101c3",
+    "source": "src/tests/prisma actuales montados read-only sobre imagen de preparación T004",
+    "network": "interna 10.254.5.0/24",
+    "publishedPorts": 0,
+    "appEnv": "test",
+    "database": "academia_v00_test, esquemas t_ por suite",
+    "ownerRuntimeSeparated": true,
+    "manualDatabaseChanged": false,
+    "servicesFinal": "BD/Mailpit detenidos y volumen conservado; API/web no iniciados"
+  },
+  "red": {
+    "executed": 1,
+    "expectedFailures": 1,
+    "reason": "to_regclass nulo antes de añadir 0010; sin fallo de imports/config",
+    "filteredOut": 29
+  },
+  "firstGreen": {
+    "files": 1,
+    "success": true,
+    "total": 30,
+    "passed": 30,
+    "failed": 0,
+    "pending": 0
+  },
+  "finalSchemaTests": 33,
+  "checksExecuted": {
+    "prismaGenerate": true,
+    "apiLint": true,
+    "apiBuild": true,
+    "sqlTestTypecheck": true,
+    "apiUnit": {
+      "files": 38,
+      "success": true,
+      "total": 809,
+      "passed": 809,
+      "failed": 0,
+      "pending": 0
+    },
+    "apiIntegration": {
+      "files": 133,
+      "success": true,
+      "total": 3182,
+      "passed": 3182,
+      "failed": 0,
+      "pending": 0,
+      "variant": "Antes del ajuste puntual NO_CHANGE",
+      "migrationSha256Raw": "c41638733a4b95921aeb1d58b9dc44cc304eb0e4bed07b33da225c19b12be579"
+    },
+    "noChangeRed": {
+      "executed": 2,
+      "expectedFailures": 2,
+      "reason": "ClassCommand_target_check prohibía receipt NO_CHANGE sin revisión persistida"
+    },
+    "finalFocused": {
+      "files": 2,
+      "success": true,
+      "total": 44,
+      "passed": 44,
+      "failed": 0,
+      "pending": 0,
+      "variant": "SQL final; schema y migraciones",
+      "migrationSha256Raw": "9955e2a70a49ae8e1a2074a643eda38d256211424a7043c754961d53874fb0fc"
+    },
+    "migrationInventories": "diez migraciones y cuarenta tablas; listas/checksums/datos/permisos conservados"
+  },
+  "previousMigrationHashes": [
+    {
+      "sha256": "2aae97237b026bfad595e65cdbd40cfe97be23a2c279e2b0ad8d951f5db5142a",
+      "path": "apps/api/prisma/migrations/0001_identity_users/migration.sql"
+    },
+    {
+      "sha256": "bcbdc080a15bf98a21faf8acb0c17c43e7626d3d80d46121f7c39ba0921d9bfd",
+      "path": "apps/api/prisma/migrations/0002_identity_access/migration.sql"
+    },
+    {
+      "sha256": "856249e8f919c9880600a0d056f3d23a6d5a76ed1954c8c76166a8f771ee95cc",
+      "path": "apps/api/prisma/migrations/0003_identity_mail_limits/migration.sql"
+    },
+    {
+      "sha256": "6124e9c21d9c639fbf32edf330b745ea9d0227e1b3697107599ceaa03cebd73e",
+      "path": "apps/api/prisma/migrations/0004_identity_argon2_format/migration.sql"
+    },
+    {
+      "sha256": "deef3e283d56e40a1fa30343b05b70137df35471763275fdf31126a4c5e36e21",
+      "path": "apps/api/prisma/migrations/0005_academic_offering/migration.sql"
+    },
+    {
+      "sha256": "edbfd6e606fc132443a5ee687623d1c99a2a94393de7d6fadb05efe3a2477a3f",
+      "path": "apps/api/prisma/migrations/0006_enrollment/migration.sql"
+    },
+    {
+      "sha256": "a6efbde08682eea6a30906eca41092c1b7f555b1037ca489a257cc3ee34b220a",
+      "path": "apps/api/prisma/migrations/0007_payment_reconciliation/migration.sql"
+    },
+    {
+      "sha256": "b32db328c3974d9adfa4f530afb3cc084f750d07701d0250faea0ec5bac49e92",
+      "path": "apps/api/prisma/migrations/0008_materials/migration.sql"
+    },
+    {
+      "sha256": "30d23230d4308a14aa4c68498becbbff7f7bb93ec69d2f1945c363198345ea1b",
+      "path": "apps/api/prisma/migrations/0009_material_upload_admission/migration.sql"
+    }
+  ],
+  "configurationHashesOnly": [
+    {
+      "sha256": "5ffe778cb78294ee428c3016977a3cc726e06367c996ad6a4c8f97b866389159",
+      "path": ".env"
+    },
+    {
+      "sha256": "874b51d2c99eb2d66518ffe01893ee892ed6f925847626e38e0a42a7bfcb2c6f",
+      "path": ".env.test"
+    },
+    {
+      "sha256": "4517064ac54dcd5468860653d7130799b17d4cff64c36a18f6a76e05231be357",
+      "path": "compose.override.yml"
+    },
+    {
+      "sha256": "d97bcf3835978e8dee18ef85ab82a363abdd883d020a0a9f7026894a5e9337e6",
+      "path": ".specify/memory/constitution.md"
+    },
+    {
+      "sha256": "011c7c4d6f9114240c3fe1b24dcdcae96a8a63b6fc4722870d549883ac899aae",
+      "path": "package-lock.json"
+    },
+    {
+      "sha256": "a9c55161b04e8244496c08535aba7b5b9776b2f954a80f8594b0a3838c727aa6",
+      "path": "apps/api/package.json"
+    },
+    {
+      "sha256": "947c223f83da4190b620f4479ad8217cd81d2df800bcdb3db35aac4f4b6647b9",
+      "path": "apps/web/package.json"
+    }
+  ],
+  "checks": [
+    {
+      "name": "rama-005",
+      "pass": true
+    },
+    {
+      "name": "configuracion-y-dependencias-intactas",
+      "pass": true
+    },
+    {
+      "name": "nueve-migraciones-previas-intactas",
+      "pass": true
+    },
+    {
+      "name": "specs-cerrados-sin-cambios",
+      "pass": true
+    },
+    {
+      "name": "checkpoints-anteriores-sin-cambios",
+      "pass": true
+    },
+    {
+      "name": "alcance-FR-SC-escenarios-preservado",
+      "pass": true
+    },
+    {
+      "name": "rojo-funcional-antes-de-migracion",
+      "pass": true
+    },
+    {
+      "name": "primera-pasada-verde-30",
+      "pass": true
+    },
+    {
+      "name": "regresion-unitaria-integracion",
+      "pass": true
+    },
+    {
+      "name": "31-pruebas-schema-en-regresion-previa",
+      "pass": true
+    },
+    {
+      "name": "dos-rojos-NO_CHANGE-por-constraint-esperado",
+      "pass": true
+    },
+    {
+      "name": "schema-y-migraciones-tras-ajuste-final",
+      "pass": true
+    },
+    {
+      "name": "inventarios-anteriores-se-verifican",
+      "pass": true
+    },
+    {
+      "name": "solo-primeras-siete-tareas-completadas",
+      "pass": true
+    },
+    {
+      "name": "indice-actual-coherente",
+      "pass": true
+    },
+    {
+      "name": "siete-tablas-sin-cambios-en-esquemas-ajenos",
+      "pass": true
+    }
+  ],
+  "validationPassed": true,
+  "acceptance": {
+    "scenarios": 24,
+    "status": "PENDIENTE; SQL no entrega historias",
+    "videoReal": false,
+    "resourcesAuthorization": false,
+    "httpSocketUi": false,
+    "D10": "PENDIENTE",
+    "D13": "PENDIENTE"
+  },
+  "nextBlock": [
+    "T008",
+    "T009"
+  ],
+  "sourceHashesCanonicalLF": {
+    "apps/api/prisma/migrations/0010_classes_chat/migration.sql": "9955e2a70a49ae8e1a2074a643eda38d256211424a7043c754961d53874fb0fc",
+    "apps/api/prisma/schema.prisma": "cc8776f645b2ac939df616ae5f434607cedd2000d8ce41143c499bcda4ad419b",
+    "apps/api/src/modules/classes/public/classes.ts": "bd262c0660e7c16cf1837be76dbd6fef7da2b5467b54baa86b4be4ab3a3c4aab",
+    "apps/api/src/modules/classes/public/errors.ts": "c9a20586ba5b446fb6212ffbf31d8fd448f2533ea400bc478e13c2e3629d6e95",
+    "apps/api/src/modules/classes/application/ports.ts": "834ea519c1f87c94bb67e59771bf32466d8c8953aa006ad44fee544a98b7b17e",
+    "apps/api/tests/integration/classes-schema.spec.ts": "92d58f92254ed83867cd3948ce1b66cc8e96e12c8568a82f72bfa9ea1a5c4bff",
+    "apps/api/tests/integration/migrations.spec.ts": "e2d313be24f4e47b4c5d099a82fcae05b5f9b15ad3df678525ce19eb2453f6b7",
+    "apps/api/tests/integration/enrollment-migration.spec.ts": "b44a466343135194f586e14e3c8e9dd69aaa6b97dce4c9b868a66d8ced8bb194",
+    "apps/api/tests/integration/academic-offering-preparation.spec.ts": "578b16296f4860c796f375c97b661ffa867bf3ca4a2e233884a843b426ac5e2f",
+    "apps/api/tests/integration/academic-offering-publication.spec.ts": "04b71b1d7c32004a5b769785f7c3b6653550b04db81e0a0e021bab12c05b4563",
+    "specs/005-clases-chat/tasks.md": "702805f206c9233986cc22d2b9c71abf7a5f41dbfa7a762d1819f2054afabea8",
+    "specs/005-clases-chat/data-model.md": "f98d33a19f56fd38879ff33cb98f0a2197f9c6e7cb9a031d968e8326ed100a76",
+    "specs/005-clases-chat/evidence/t005-t007.md": "f365b0c4eac66b5b3da63429ec6023dde6821f47a5956bccf34a4312cdfe075d"
+  }
+}

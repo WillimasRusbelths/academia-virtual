@@ -3,9 +3,10 @@
 2026-11-17. **Guía de pruebas futuras, no evidencia de ejecución.** Alcance V05 y diseño
 del ensayo sincronizados; [G-V005](video-gate.md) exige evidencia real, no protección
 multimedia externa. [Adopción](evidence/video-scope-adoption.md).
-T001–T004 ya prepararon el entorno, dependencias y [matriz](verification.md):
-[resultados](evidence/t001-t004-results.json). Aún no hay módulo funcional,
-migración 0010 o fixtures de clases. Este bloque no acredita reproducción real.
+T001–T004 prepararon entorno/dependencias y [matriz](verification.md).
+T005–T007 implementan contratos/puertos, pruebas SQL y migración 0010:
+[evidencia](evidence/t005-t007.md). Aún no hay gestión/chat, fixtures compartidas
+o transporte de clases. La persistencia no acredita reproducción real.
 
 ## Preparación segura
 
@@ -20,7 +21,7 @@ grupos propios/ajenos, sin matrícula, vencida y de límite exacto. Dos grupos c
 sesiones preparadas, clases LIVE separadas y mensajes ficticios. Matrícula activa
 desde fixtures autorizadas de 003 con pagos **simulados**; no confirma Izipay.
 
-Con configuración privada solo del harness y tras implementar 0010, aplicar
+Con configuración privada solo del harness y la migración 0010 versionada, aplicar
 primero compatibilidad, comprobar permisos y migraciones antes de iniciar API:
 
 ```powershell

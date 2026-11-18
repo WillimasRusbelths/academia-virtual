@@ -4,8 +4,9 @@
 **Entrada**: [spec.md](spec.md), V01–V05; constitución 2.0.0.
 **Base**: `c24dcdbe0cac72d85fc17585615240188c8dee96`, merge del PR #5.
 
-**Estado: preparación T001–T004 completada; implementación funcional pendiente.**
-Resultados en [evidencia del bloque](evidence/t001-t004-results.json). El responsable
+**Estado: T001–T007 completadas; contratos/persistencia implementados.**
+Gestión/chat y transporte funcional pendientes. [Evidencia T005–T007](evidence/t005-t007.md).
+La preparación conserva su [checkpoint](evidence/t001-t004-results.json). El responsable
 aprobó V05 y la enmienda 2.0.0. YouTube Live + OBS se usa para probar emisión y
 reproducción, con permisos propios de aula/referencia/chat y límite externo explícito.
 Cloudflare queda fuera del MVP. [Adopción](evidence/video-scope-adoption.md).
@@ -64,11 +65,11 @@ Revisión del diseño frente a la constitución 2.0.0 adoptada en V05:
 
 | Principio | Diseño y evidencia requerida | Resultado |
 | --- | --- | --- |
-| I. Incrementos | V01–V05; tareas/análisis antes del código | Diseño de sesiones/chat/ensayo sincronizado; implementación pendiente |
+| I. Incrementos | V01–V05; tareas/análisis antes del código | Contratos y persistencia implementados; gestión/chat pendientes |
 | II. Backend | Cuenta/sesión/rol y grupo/matrícula actuales en cada operación | Diseñado; matriz/carreras por probar |
 | III–VII. Finanzas | Solo leer derecho original de 003 por contrato público | Sin cambios financieros ni aceptación de Izipay |
 | VIII. Video | Ensayo YouTube, permisos propios y límite externo explícito | Alcance aprobado; reproducción real y evidencia pendientes |
-| IX. Entornos | Harness aislado y datos ficticios, sin tocar `.env`/BD manual | Diseñado; sin servicios iniciados |
+| IX. Entornos | Harness aislado y datos ficticios, sin tocar `.env`/BD manual | BD/Mailpit de ensayo comprobados; API/web no iniciados |
 | X. Recuperación | Dump conjunto, restore aislado, accesos invalidados | Ensayo futuro; D13 operativo pendiente |
 | XI. Capacidad | Separar cuentas/activos/conexiones/mensajes/video | No medida ni aprobada; D10 pendiente |
 | Arquitectura/costo | Un proceso/pool, fronteras públicas | Compatible para el alcance independiente |
@@ -95,13 +96,14 @@ specs/005-clases-chat/
   evidence/planning-review.{md,json}
 ```
 
-La lista [tasks.md](tasks.md) organiza T001–T086: cuatro tareas de preparación
-completadas, 82 pendientes. [Matriz](verification.md) creada en T003; todavía no
+La lista [tasks.md](tasks.md) organiza T001–T086: siete tareas
+completadas, 79 pendientes. [Matriz](verification.md) creada en T003; todavía no
 acredita aceptación funcional. G-V005 exige ensayo real del alcance aprobado.
 
 ### Source Code (repository root)
 
-Rutas propuestas, todavía sin crear:
+Rutas de destino: contratos públicos/puertos y migración ya creados en T005–T007;
+el resto sigue propuesto, sin entrypoints o stores funcionales:
 
 ```text
 apps/api/src/modules/classes/

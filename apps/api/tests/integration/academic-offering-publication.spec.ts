@@ -79,7 +79,7 @@ describe('T032 controles reales y proyecciones existentes; NO publicación aprob
     const a = (await http.database.pool.query('SELECT current_schema() AS schema,pg_backend_pid() AS pid')).rows[0];
     const b = (await pool().query('SELECT current_schema() AS schema,pg_backend_pid() AS pid')).rows[0];
     expect(a.schema).toBe(data.context.isolated.schema); expect(b.schema).toBe(a.schema); expect(b.pid).not.toBe(a.pid);
-    expect((await pool().query('SELECT 1 FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(9);
+    expect((await pool().query('SELECT 1 FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(10);
     expect((await http.get('/me', admin())).status).toBe(200);
   });
   test('I02 SQL de fixture preparado no fabrica comandos ni auditoría; directorio mínimo', async () => {

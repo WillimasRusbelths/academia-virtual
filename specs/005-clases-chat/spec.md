@@ -7,8 +7,8 @@ merge del PR #5. La especificación inicial se redactó en
 **Created**: 2026-11-17, America/Lima.
 
 **Status**: Alcance del ensayo MVP aprobado por el responsable el 2026-11-17,
-constitución 2.0.0. Preparación T001–T004 verificada; implementación funcional y
-reproducción real pendientes. [Resultados](evidence/t001-t004-results.json).
+constitución 2.0.0. T001–T007 completadas: contratos y persistencia verificados;
+gestión/chat y reproducción real pendientes. [Evidencia](evidence/t005-t007.md).
 Validación académica pendiente si afecta evaluación.
 
 **Aprobación V05**: «entoces la apruebo», sobre la propuesta concreta de YouTube

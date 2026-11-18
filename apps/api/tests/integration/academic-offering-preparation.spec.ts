@@ -55,7 +55,7 @@ describe('T021 controles de infraestructura, NO aceptación académica', () => {
     const observer = await pool().query<{ schema: string; pid: number }>('SELECT current_schema() AS schema,pg_backend_pid() AS pid');
     expect(observer.rows[0].schema).toBe(data.context.isolated.schema);
     expect(observer.rows[0].schema).toBe(appDb.rows[0].schema); expect(observer.rows[0].pid).not.toBe(appDb.rows[0].pid);
-    expect((await pool().query('SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(9);
+    expect((await pool().query('SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL')).rowCount).toBe(10);
     expect((await fetch(`${http.url}/health/ready`)).status).toBe(200);
     for (const role of ['ADMIN','STUDENT','TEACHER'] as const) {
       const account = data.account(role); const response = await http.get('/me', account.sessions[0].secret);

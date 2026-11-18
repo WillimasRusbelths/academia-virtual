@@ -255,7 +255,7 @@ test('EM-deploy upgrade 0005 con Prisma, checksums reales y datos anteriores pre
     expect(await legacyFingerprint(context.database.pool) === before).toBe(true);
     const history = await context.database.pool.query<{ migration_name: string; checksum: string }>(
       'SELECT migration_name,checksum FROM "_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name');
-    expect(history.rows.map(row => row.migration_name)).toEqual([...baselineMigrations, '0006_enrollment', '0007_payment_reconciliation', '0008_materials', '0009_material_upload_admission']);
+    expect(history.rows.map(row => row.migration_name)).toEqual([...baselineMigrations, '0006_enrollment', '0007_payment_reconciliation', '0008_materials', '0009_material_upload_admission', '0010_classes_chat']);
     for (const row of history.rows) {
       const bytes = readFileSync(path.join(repositoryRoot(), 'apps/api/prisma/migrations', row.migration_name, 'migration.sql'));
       expect(row.checksum).toBe(createHash('sha256').update(bytes).digest('hex'));
@@ -266,11 +266,11 @@ test('EM-deploy upgrade 0005 con Prisma, checksums reales y datos anteriores pre
   } finally { await context.cleanup(); }
 }, 120000);
 
-test('EM-deploy instalación nueva con nueve migraciones y cliente generado utilizable', async () => {
+test('EM-deploy instalación nueva con diez migraciones y cliente generado utilizable', async () => {
   const context = await identityDatabase('enrollment_deploy');
   try {
     const history = await context.database.pool.query('SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name');
-    expect(history.rows.map(row => row.migration_name)).toEqual([...baselineMigrations, '0006_enrollment', '0007_payment_reconciliation', '0008_materials', '0009_material_upload_admission']);
+    expect(history.rows.map(row => row.migration_name)).toEqual([...baselineMigrations, '0006_enrollment', '0007_payment_reconciliation', '0008_materials', '0009_material_upload_admission', '0010_classes_chat']);
     expect(await context.database.prisma.admissionSequence.findUnique({ where: { id: 1 } })).toEqual({ id: 1, nextSequence: 1n });
     expect(await context.database.prisma.dispatchState.findUnique({ where: { id: 1 } })).toEqual({ id: 1 });
     expect(await context.database.prisma.enrollment.count()).toBe(0);

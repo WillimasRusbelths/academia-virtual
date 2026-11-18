@@ -1,6 +1,8 @@
-# Modelo de datos propuesto — 005
+# Modelo de datos — 005
 
-2026-11-17. Diseño de sesiones/chat; ninguna tabla o migración aplicada.
+2026-11-17. Contratos y persistencia T005–T007 implementados; migración 0010
+probada en esquemas aislados de ensayo. [Evidencia](evidence/t005-t007.md).
+Gestión/chat, autorización por recurso y transporte todavía pendientes.
 Referencias User/Session/AcademicGroup/AcademicCourse/Enrollment pertenecen a sus
 propietarios. Clases no modifica esas entidades. [Consistencia](contracts/integration.md).
 
@@ -109,7 +111,7 @@ mapa máximo 3.000 entradas y 4 pendientes por sesión; sin renovación automát
 Rechazar admisión al alcanzar límite; eliminar expirados/consumidos. El ticket
 no sobrevive reinicio/restore ni autoriza contenido por sí mismo.
 
-## ClassVideoReference — referencia de ensayo aprobada, todavía sin implementar
+## ClassVideoReference — persistencia implementada; API/player pendientes
 
 PK classId, FK RESTRICT a ClassSession. provider constante YOUTUBE_DEMO;
 videoId null o 11 caracteres ASCII `[A-Za-z0-9_-]`, sin URL/HTML/secretos;
@@ -122,7 +124,8 @@ ledger/auditoría atómicos. Añadir el tipo al log ClassChange, con referencia/
 sin ID multimedia en deltas a alumnos cuando no puedan obtener reproducción. El
 delta invalida el player; el ID se pide de nuevo por consulta autorizada LIVE.
 Gestor actual edita solo PREPARED/LIVE de grupo no cancelado; no hereda secretos
-de una cuenta emisora. La migración 0010 propuesta incluye esta tabla, aún no aplicada.
+de una cuenta emisora. La migración 0010 incluye esta tabla; su prueba aislada no
+implementa la API, player, permisos o emisión del proveedor.
 
 VideoAccess devuelve CONFIGURED/NOT_CONFIGURED/CLASS_NOT_LIVE bajo permiso actual,
 según [contrato](contracts/video.md). CONFIGURED no acredita señal o protección.
@@ -138,3 +141,28 @@ restaurados antes de reabrir. Descartar tickets, sockets y cualquier autorizaci�
 efímera. No reemitir avisos como nuevos mensajes ni iniciar señal audiovisual.
 Comparar decisiones posteriores al backup y conservar pérdidas como pendientes
 de revisión humana; no inventarlas desde una copia anterior. D13 sigue abierto.
+
+## Concreción de persistencia T007
+
+`0010_classes_chat` añade siete tablas y cuatro enums propios. ClassCommand
+conserva actorId/commandId, classId/groupId, operation, payloadDigest de 32 bytes,
+messageId/targetStudentId cuando corresponde, appliedRevision/appliedEventSeq,
+result APPLIED/NO_CHANGE y appliedAt. NOT_CONFIRMED es una consulta sin receipt,
+nunca un resultado persistido. La creación ya conoce la clase al guardar su receipt.
+UNMUTE o retirada de referencia sin fila previa pueden conservar NO_CHANGE con
+appliedRevision/appliedEventSeq null: no se crea una restricción/referencia/evento
+para representar la ausencia. La vista virtual mantiene revisión 0. Un efecto
+APPLIED sigue exigiendo su revisión/evento aplicables.
+ClassAuditEvent admite APPLIED/NO_CHANGE/REJECTED; commandId/revisión/evento pueden
+ser null según resultado. No serializa cuerpos, referencias YouTube o credenciales.
+
+FKs compuestas vinculan clase/grupo y mensaje/clase para impedir referencias
+cruzadas. Guards conservan identidades, originales, hechos terminales y tiempos
+monotónicos; las revisiones cambian solo con su recurso y NO_CHANGE no las aumenta.
+El contador inicial de clase es 0 y no retrocede; su aumento no modifica la revisión
+de gestión. Los logs de comando/cambio/auditoría son append-only; ocultaciones no
+se revierten, restricciones/referencias no se borran. No se implementó una purga.
+
+Las restricciones SQL no sustituyen autoridad vigente, cuota, asignación de
+secuencias o transacciones completas de las tareas siguientes. El original ocultado
+permanece interno; omitirlo en cada proyección autorizada es trabajo posterior.

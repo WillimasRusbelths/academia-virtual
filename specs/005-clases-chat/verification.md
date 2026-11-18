@@ -6,6 +6,13 @@ Fuente de requisitos: [spec](spec.md), constitución 2.0.0, V01–V05.
 El [índice de tareas](evidence/tasks-coverage.json) es asociación documental,
 no cobertura de código, pruebas aprobadas o capacidad alcanzada.
 
+Avance T005–T007: DTOs/puertos y persistencia implementados. [Evidencia](evidence/t005-t007.md)
+separa el rojo previo a 0010, 30 casos SQL iniciales, regresión de 809 unitarias y
+3.182 pruebas de integración, y el ajuste posterior NO_CHANGE con 44 pruebas enfocadas
+de schema/migraciones (33 de clases) aprobadas. SQL/upgrade son parciales de Q01/Q02/
+Q06/Q09/Q10/Q14/Q15/Q16; no completan permisos, servicios, carreras HTTP o restore.
+Las 24 filas de aceptación y los FR/SC conservan su estado pendiente.
+
 ## Estados y evidencia
 
 Cada fila empieza PENDIENTE. Cambiar a PROBADO solo con commit, configuración

@@ -110,6 +110,18 @@ model User {
   materialUploads         MaterialUpload[]
   materialCommands        MaterialCommand[]
   materialAuditEvents     MaterialAuditEvent[]
+  classesCreated          ClassSession[] @relation("ClassCreator")
+  classesUpdated          ClassSession[] @relation("ClassUpdater")
+  classMessages           ClassMessage[] @relation("ClassMessageAuthor")
+  classMessagesHidden     ClassMessage[] @relation("ClassMessageHider")
+  classRestrictions       ClassStudentRestriction[] @relation("ClassRestrictedStudent")
+  classRestrictionsUpdated ClassStudentRestriction[] @relation("ClassRestrictionUpdater")
+  classCommands           ClassCommand[] @relation("ClassCommandActor")
+  classCommandTargets     ClassCommand[] @relation("ClassCommandStudent")
+  classChanges            ClassChange[] @relation("ClassChangeActor")
+  classChangeTargets      ClassChange[] @relation("ClassChangeStudent")
+  classAuditEvents        ClassAuditEvent[]
+  classVideoReferences    ClassVideoReference[]
 }
 
 model Session {
@@ -263,6 +275,7 @@ model AcademicGroup {
   materials                          Material[]
   materialUploads                    MaterialUpload[]
   materialAuditEvents                MaterialAuditEvent[]
+  classSessions                      ClassSession[]
   name                               String
   description                        String?
   state                              AcademicGroupState @default(DRAFT)
@@ -720,3 +733,161 @@ model MaterialAuditEvent {
 
 // 0008_materials adds text/size/hash CHECKs, deferred content completeness,
 // immutable file/group/creator/intention and append-only command/audit history.
+
+enum ClassState {
+  PREPARED
+  LIVE
+  FINISHED
+  CANCELLED
+}
+enum ClassOperation {
+  CREATE
+  EDIT
+  START
+  FINISH
+  CANCEL
+  SEND
+  HIDE
+  MUTE
+  UNMUTE
+  VIDEO_REFERENCE_SET
+}
+enum ClassChangeType {
+  CREATED
+  EDITED
+  STARTED
+  FINISHED
+  CANCELLED
+  MESSAGE_SENT
+  MESSAGE_HIDDEN
+  STUDENT_MUTED
+  STUDENT_UNMUTED
+  VIDEO_REFERENCE_CHANGED
+}
+enum ClassAuditResult {
+  APPLIED
+  NO_CHANGE
+  REJECTED
+}
+model ClassSession {
+  id           String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  groupId      String @db.Uuid
+  group        AcademicGroup @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  title        String
+  description  String?
+  state        ClassState @default(PREPARED)
+  revision     BigInt @default(1)
+  lastEventSeq BigInt @default(0)
+  createdBy    String @db.Uuid
+  creator      User @relation("ClassCreator", fields: [createdBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  updatedBy    String @db.Uuid
+  updater      User @relation("ClassUpdater", fields: [updatedBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  createdAt    DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime @default(now()) @db.Timestamptz(6)
+  startedAt    DateTime? @db.Timestamptz(6)
+  finishedAt   DateTime? @db.Timestamptz(6)
+  cancelledAt  DateTime? @db.Timestamptz(6)
+  messages     ClassMessage[]
+  restrictions ClassStudentRestriction[]
+  commands     ClassCommand[]
+  changes      ClassChange[]
+  auditEvents  ClassAuditEvent[]
+  video        ClassVideoReference?
+  @@unique([id, groupId])
+  @@index([groupId, createdAt, id])
+  // UNIQUE LIVE parcial y guards de identidad/tiempos/revisiones en 0010.
+}
+model ClassMessage {
+  id             String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  classId        String @db.Uuid
+  session        ClassSession @relation(fields: [classId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  authorId       String @db.Uuid
+  author         User @relation("ClassMessageAuthor", fields: [authorId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  messageSeq     BigInt
+  text           String
+  acceptedAt     DateTime @db.Timestamptz(6)
+  hiddenAt       DateTime? @db.Timestamptz(6)
+  hiddenBy       String? @db.Uuid
+  hider          User? @relation("ClassMessageHider", fields: [hiddenBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  hiddenEventSeq BigInt?
+  commands       ClassCommand[]
+  changes        ClassChange[]
+  @@unique([classId, messageSeq])
+  @@unique([id, classId])
+  @@index([classId, authorId, acceptedAt])
+}
+model ClassStudentRestriction {
+  classId      String @db.Uuid
+  session      ClassSession @relation(fields: [classId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  studentId    String @db.Uuid
+  student      User @relation("ClassRestrictedStudent", fields: [studentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  muted        Boolean
+  revision     BigInt @default(1)
+  updatedBy    String @db.Uuid
+  updater      User @relation("ClassRestrictionUpdater", fields: [updatedBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  updatedAt    DateTime @db.Timestamptz(6)
+  lastEventSeq BigInt
+  @@id([classId, studentId])
+}
+model ClassCommand {
+  actorId         String @db.Uuid
+  actor           User @relation("ClassCommandActor", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  commandId       String @db.Uuid
+  classId         String @db.Uuid
+  groupId         String @db.Uuid
+  session         ClassSession @relation(fields: [classId, groupId], references: [id, groupId], onDelete: Restrict, onUpdate: Restrict)
+  operation       ClassOperation
+  payloadDigest   Bytes
+  messageId       String? @db.Uuid
+  message         ClassMessage? @relation(fields: [messageId, classId], references: [id, classId], onDelete: Restrict, onUpdate: Restrict)
+  targetStudentId String? @db.Uuid
+  targetStudent   User? @relation("ClassCommandStudent", fields: [targetStudentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  appliedRevision BigInt?
+  appliedEventSeq BigInt?
+  result          AuditResult
+  appliedAt       DateTime @db.Timestamptz(6)
+  @@id([actorId, commandId])
+  @@index([classId])
+}
+model ClassChange {
+  classId         String @db.Uuid
+  session         ClassSession @relation(fields: [classId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  eventSeq        BigInt
+  type            ClassChangeType
+  actorId         String @db.Uuid
+  actor           User @relation("ClassChangeActor", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  occurredAt      DateTime @db.Timestamptz(6)
+  messageId       String? @db.Uuid
+  message         ClassMessage? @relation(fields: [messageId, classId], references: [id, classId], onDelete: Restrict, onUpdate: Restrict)
+  targetStudentId String? @db.Uuid
+  targetStudent   User? @relation("ClassChangeStudent", fields: [targetStudentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  revision        BigInt?
+  @@id([classId, eventSeq])
+}
+model ClassAuditEvent {
+  id         String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorId    String @db.Uuid
+  actor      User @relation(fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  classId    String @db.Uuid
+  groupId    String @db.Uuid
+  session    ClassSession @relation(fields: [classId, groupId], references: [id, groupId], onDelete: Restrict, onUpdate: Restrict)
+  operation  ClassOperation
+  commandId  String? @db.Uuid
+  result     ClassAuditResult
+  revision   BigInt?
+  eventSeq   BigInt?
+  occurredAt DateTime @db.Timestamptz(6)
+  @@index([classId, occurredAt, id])
+}
+model ClassVideoReference {
+  classId   String @id @db.Uuid
+  session   ClassSession @relation(fields: [classId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  provider  String @default("YOUTUBE_DEMO")
+  videoId   String?
+  revision  BigInt @default(1)
+  updatedBy String @db.Uuid
+  updater   User @relation(fields: [updatedBy], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  updatedAt DateTime @db.Timestamptz(6)
+}
+// 0010 añade CHECKs, FKs RESTRICT, revisiones monotónicas, originales inmutables
+// y logs append-only. No existe tabla de ticket, URL/clave de emisión o payload JSON.
